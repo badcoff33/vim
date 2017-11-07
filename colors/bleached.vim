@@ -13,25 +13,25 @@ hi clear
 set background=light
 let g:colors_name = "bleached"
 
-highlight Normal        guifg=grey25  guibg=white
-highlight NonText       guifg=cyan3   guibg=bg
-highlight Visual                      guibg=snow2
+highlight Normal        guifg=grey25      guibg=snow1
+highlight NonText       guifg=cyan3       guibg=bg
+highlight Visual                          guibg=azure2
 
 " cursor
-highlight Cursor        guifg=white   guibg=cornflowerblue
-highlight CursorLineNr  guibg=lightcyan1  guifg=cornflowerblue  gui=bold
-highlight CursorLine    guibg=lightcyan1
+highlight Cursor        guifg=white           guibg=slateblue4
+highlight CursorLineNr  guifg=cornflowerblue  guibg=snow2   gui=bold
+highlight CursorLine                          guibg=snow2
 
 " decorations
-highlight StatusLine    gui=bold    guibg=paleturquoise4 guifg=paleturquoise1
-highlight User1         gui=bold    guibg=paleturquoise4 guifg=paleturquoise1
-highlight User2         gui=italic  guibg=paleturquoise4 guifg=paleturquoise1
-highlight StatusLineNC  gui=none    guibg=paleturquoise3 guifg=white
-highlight VertSplit     guibg=bg    guifg=grey85          gui=none
-highlight LineNr        guibg=bg    guifg=lightblue2      gui=bold
-highlight FoldColumn    guifg=skyblue4 guibg=bg
-highlight Folded        guifg=grey60   guibg=grey95
-highlight SignColumn    guifg=skyblue4 guibg=bg
+highlight StatusLine    guifg=white           guibg=turquoise3      gui=bold
+highlight User1         guifg=white           guibg=turquoise3      gui=bold
+highlight User2         guifg=white           guibg=turquoise3      gui=italic
+highlight StatusLineNC  guifg=turquoise4      guibg=paleturquoise2  gui=none
+highlight VertSplit     guifg=paleturquoise3  guibg=bg              gui=none
+highlight LineNr        guifg=lightblue2      guibg=bg              gui=bold
+highlight FoldColumn    guifg=skyblue4        guibg=bg
+highlight Folded        guifg=grey60          guibg=grey95
+highlight SignColumn    guifg=skyblue4        guibg=bg
 
 highlight! link WildMenu      PmenuSel
 highlight! link TabLineFill   Normal
@@ -71,9 +71,10 @@ highlight WarningMsg  guifg=goldenrod guibg=bg
 highlight ModeMsg     guifg=fg        guibg=bg gui=bold
 highlight Question    guifg=goldenrod guibg=bg
 
-highlight qfLineNr    guifg=skyblue2
-highlight qfFileName  guifg=skyblue4  gui=underline
-highlight qfSeparator guifg=grey30
+highlight qfLineNr     guifg=skyblue2
+highlight qfFileName   guifg=skyblue4  gui=underline
+highlight qfSeparator  guifg=grey30
+highlight QuickFixLine gui=bold
 
 " Tune Doxygen highlighting
 highlight doxygenComment            guifg=steelblue4   gui=none
@@ -83,10 +84,10 @@ highlight doxygenParam              guifg=skyblue1     gui=none
 highlight doxygenSpecial            guifg=skyblue3 gui=none
 highlight doxygenSpecialOnelineDesc guifg=skyblue3
 
-highlight DiffChange guifg=black guibg=bg         gui=none
-highlight DiffAdd    guifg=black guibg=grey85     gui=bold
-highlight DiffDelete guifg=pink1 guibg=pink1      gui=none
-highlight DiffText   guifg=black guibg=grey85     gui=bold
+highlight DiffChange             guibg=grey96
+highlight DiffAdd                guibg=grey89
+highlight DiffDelete guifg=pink1 guibg=pink1
+highlight DiffText               guibg=grey89
 
 highlight diffOldFile     guifg=red
 highlight diffNewFile     guifg=dodgerblue4 guibg=bg
@@ -105,10 +106,15 @@ highlight diffAdded       guifg=turquoise3
 highlight diffSubname     guifg=fg
 highlight diffComment     guifg=grey50
 
+" netrw
 highlight netrwMarkFile gui=inverse
 
-" html
+" filetype html
 highlight htmlH1 guifg=skyblue1  gui=bold
 highlight htmlH2 guifg=skyblue3  gui=none
 highlight htmlH3 guifg=skyblue3  gui=none
+
+" markdown
+highlight! link markdownCode String
+highlight! link markdownCodeBlock Comment
 

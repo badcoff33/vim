@@ -1,15 +1,26 @@
 " Vim autoload file
 "
-" Description: Run a diff session and close it again.
+
+" Description: Run a diff of current buffer content and file content.
+" Taken from Vims help file diff.txt:
+function! vimdiff#UnsavedChanges()
+  vert new
+  set bt=nofile
+  r ++edit #
+  0d_
+  diffthis
+  wincmd p
+  diffthis
+endfunction
 
 " Description: Set up a Vimdiff view in a new tab with 2 files
 function! vimdiff#OpenTab(file_list)
 
   if len(a:file_list) == 2
-  
+
     let l:file_a = a:file_list[0]
     let l:file_b = a:file_list[1]
-  
+
     if filereadable(l:file_a) && filereadable(l:file_b)
       execute "tabedit ". l:file_a
       execute "diffsplit " . l:file_b
@@ -29,21 +40,21 @@ endfunction
 " If diff was run in unified put put (switch '-u'), this function opens a new
 " tab and runs Vimdiff with the files in cursors diff file context.
 function! vimdiff#FileContext()
-  
+
   if &filetype != "diff"
     return
   endif
-  
+
   let l:find_unified_diff_head = '^\(=== diff\|diff\).*$'
   let l:find_unified_diff_filea = '^--- \(\S\+\).*$'
   let l:find_unified_diff_fileb = '^+++ \(\S\+\).*$'
   let l:diff_files = []
-  
+
   if search(l:find_unified_diff_head, "cb") == 0
     echohl ErrorMsg | echo '-- No unified diff format found ---' | echohl None
     return []
   endif
-  
+
   +1
   call add(l:diff_files, substitute(getline("."), l:find_unified_diff_filea, '\1', ''))
   +1

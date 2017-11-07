@@ -64,7 +64,7 @@ endfunction
 function! whitespace#Cleanup()
   if &modifiable
     let l:savedView = winsaveview()
-    set expandtab
+    setlocal expandtab
     retab
     %s/\s\+$//e
     %s/\r//e

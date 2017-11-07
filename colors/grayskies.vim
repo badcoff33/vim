@@ -74,7 +74,7 @@ highlight qfLineNr    guifg=#9090c0     guibg=bg    gui=none
 highlight qfFileName  guifg=#b0b0b0     guibg=bg    gui=underline
 highlight qfSeparator guifg=#909090     guibg=bg    gui=none
 
-" Filetype C
+" C
 highlight cCppOut guibg=#f0f0f0 guifg=#909090
 highlight cCppOutIf2 guibg=#e3e3e3
 highlight cParen guifg=deepskyblue3
@@ -93,7 +93,7 @@ highlight doxygenRefWord            guifg=#505080 gui=underline
 highlight! link doxygenParamName doxygenRefWord
 highlight! link doxygenHeaderLine doxygenBrief
 
-" Highlight VimDiffs
+" VimDiff
 highlight DiffChange    guifg=#000000 guibg=bg      gui=none
 highlight DiffAdd       guifg=#000000 guibg=#e0f8f8 gui=none
 highlight DiffDelete    guifg=bg      guibg=bg     gui=none
@@ -111,9 +111,18 @@ highlight diffOnly      guifg=#404070   guibg=bg gui=none
 highlight diffIdentical guifg=#606090   guibg=bg gui=none
 highlight diffDiffer    guifg=#101040   guibg=bg gui=none
 
-" Filetype vim
+"  vim
 hi vimHiAttrib          guifg=#406040 guibg=bg gui=none
 
-" Special Stuff
-highlight Tag guifg=#305090 gui=bold
+" netrw
 highlight netrwMarkFile gui=inverse
+
+" html
+highlight htmlH1 guifg=skyblue1  gui=bold
+highlight htmlH2 guifg=skyblue3  gui=none
+highlight htmlH3 guifg=skyblue3  gui=none
+
+" markdown
+highlight! link markdownCode String
+highlight! link markdownCodeBlock Comment
+

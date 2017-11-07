@@ -11,8 +11,8 @@ let g:colors_name = "breeze"
 " basics
 highlight Normal  guifg=grey30 guibg=white
 highlight NonText guifg=cyan4  guibg=bg
-highlight Visual  guifg=white  guibg=cornflowerblue
-highlight Cursor  guifg=white  guibg=orange1
+highlight Visual  guifg=white  guibg=green3
+highlight Cursor  guifg=white  guibg=red3
 
 " window decoration
 highlight StatusLine   guifg=white  guibg=cornflowerblue gui=none
@@ -44,7 +44,7 @@ highlight PmenuThumb  guifg=white
 
 " search
 highlight IncSearch   guifg=white  guibg=dodgerblue3  gui=none
-highlight Search      guifg=azure4 guibg=azure2       gui=none
+highlight Search      guifg=deeppink3 guibg=azure2       gui=none
 highlight MatchParen  guifg=fg     guibg=bg           gui=underline
 
 " code
@@ -106,5 +106,16 @@ highlight diffLine      guifg=grey50
 highlight diffSubname   guifg=fg
 highlight diffComment   guifg=grey50
 
+" netrw
 highlight netrwMarkFile     gui=inverse
-highlight AutoPreviewTagHl  guibg=yellow
+
+" html
+highlight htmlH1 guifg=dodgerblue1  gui=bold
+highlight htmlH2 guifg=dodgerblue3  gui=none
+highlight htmlH3 guifg=dodgerblue3  gui=none
+
+" markdown
+highlight! link markdownCode String
+highlight! link markdownCodeBlock Comment
+
+

@@ -2,15 +2,11 @@
 " Description:   Some support functions and mappings for C code files.
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
-if exists("b:did_ftplugin_after")
-    finish
-endif
-
-command! -nargs=0 ShowFunctions           call cfunctions#HighlightTaggedFunctions()
-command! -nargs=0 ShowTypes               call cfunctions#HighlightTaggedTypes()
-command! -nargs=0 ToggleAutoPreviewTag    call cfunctions#ToggleAutoPreviewTag()
-command! -nargs=0 ToggleSourceHeaderFile  call cfunctions#ToggleSourceHeaderFile()
-command! -nargs=0 PrettifyCode            call cfunctions#CodeCleanup()
+command! -buffer -nargs=0 ShowFunctions           call cfunctions#HighlightTaggedFunctions()
+command! -buffer -nargs=0 ShowTypes               call cfunctions#HighlightTaggedTypes()
+command! -buffer -nargs=0 ToggleAutoPreviewTag    call cfunctions#ToggleAutoPreviewTag()
+command! -buffer -nargs=0 ToggleSourceHeaderFile  call cfunctions#ToggleSourceHeaderFile()
+command! -buffer -nargs=0 PrettifyCode            call cfunctions#CodeCleanup()
 
 nnoremap <buffer> <LocalLeader><TAB> :ToggleSourceHeaderFile<CR>
 nnoremap <buffer> <LocalLeader>p :ToggleAutoPreviewTag<CR>
@@ -21,8 +17,10 @@ let c_comment_strings = 1
 let c_space_errors = 1
 
 setlocal noshowfulltag
-setlocal textwidth=100
+setlocal textwidth=80
+setlocal expandtab
 setlocal foldmethod=indent
+setlocal foldnestmax=2
 setlocal tabstop=4
 setlocal shiftwidth=4
 
@@ -48,8 +46,6 @@ iabbrev <buffer> xif     if ()<Left><C-f>
 iabbrev <buffer> xelse   else<C-f><CR>{<C-f><CR><CR>}<CR><Up><Up><C-f>
 iabbrev <buffer> xinc    #include ".h"<Left><Left><Left>
 iabbrev <buffer> xdef    #define<Space>
-iabbrev <buffer> xbrf    /** \brief */<Left><Left><Left>
+iabbrev <buffer> xc      /** \brief */<Left><Left><Left>
+iabbrev <buffer> xcc     /**<CR>\brief<CR><BS>/<Up><End>
 iabbrev <buffer> xdbg    #warning DEBUG CHANGE STARTS HERE<CR><CR>#warning DEBUG CHANGE ENDS HERE<CR>
-
-let b:did_ftplugin_after = 1
-

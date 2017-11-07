@@ -1,4 +1,4 @@
-" Neovim resource file
+" Vim resource file
 "
 " Maintainer: Markus Prepens (markus dot prepens at googlemail dot com)
 
@@ -15,7 +15,13 @@ set expandtab
 set history=200
 set novisualbell
 set noerrorbells
-set viminfo='50,<1000,s100,:50
+set viminfo='50,<1000,s100,:100
+
+" Read changed files automatically if they are changed in the background
+set autoread
+
+" Allow modified files to flip in background, without a write.
+set hidden
 
 " keep cursor line away from the upper and lower window border
 set scrolloff=3
@@ -33,7 +39,6 @@ set noequalalways
 
 " folding
 set foldmethod=indent
-set foldcolumn=2
 set foldnestmax=1
 set nofoldenable
 
@@ -47,6 +52,7 @@ set backspace=eol,start,indent
 
 " Search: Some configuration for the search behavior.
 set incsearch
+set inccommand=split
 set magic
 set gdefault
 set hlsearch
@@ -64,7 +70,7 @@ for d in s
     set backup
     execute 'set backupdir=' . d . '/backup'
     break
-endif
+  endif
 endfor
 
 for d in s
@@ -72,7 +78,7 @@ for d in s
     set undofile
     execute 'set undodir=' . d . '/undo'
     break
-endif
+  endif
 endfor
 
 " Configured content and style of the statusline
@@ -83,7 +89,7 @@ set showmatch matchtime=1
 
 " Insert mode completion
 set complete=.,w,b
-set completeopt=menu,longest
+set completeopt=menu
 set pumheight=10
 
 " Command line completion
@@ -107,6 +113,43 @@ set diffopt=context:3,vertical,iwhite,filler
 
 " functions {{{
 
+" Description: Make the actual window more obvious.
+" Active 'cursorline' option in diff buffers overrules highlighting of
+" differences. Buffers with 'diff' option shall not use 'cursorline'.
+" Note: 'cursorline' may delay cursor movement in buffer with filetype 'c'.
+" This behavior may be caused by Doxygen syntax highlighting.
+function! s:TurnCursorLineOn()
+
+  if g:use_sticky_cursorline !=0 && &diff == 0 && &buftype == ""
+    set cursorline
+  endif
+
+endfunction
+
+function! ToggleStickyCursorLine()
+
+  if !exists("g:use_sticky_cursorline")
+    let g:use_sticky_cursorline = 0
+  endif
+
+  if g:use_sticky_cursorline == 0
+    let g:use_sticky_cursorline = 1
+    set cursorline
+    augroup ToggleStickyCursorline
+      au!
+      autocmd WinLeave * set nocursorline
+      autocmd BufEnter,BufWinEnter,WinEnter * call s:TurnCursorLineOn()
+    augroup END
+  else
+    let g:use_sticky_cursorline = 0
+    set nocursorline
+    augroup ToggleStickyCursorline
+      au!
+    augroup END
+  endif
+
+endfunction
+
 " Description: Jump to last location. Check out :help line(). Function checks
 " if the '" marker is valid. Jump to the mark, but don't change the jumplist
 " when jumping within the current buffer (:help g').
@@ -124,11 +167,13 @@ function! FastForwardAndRewind(direction)
   if a:direction == "fastforward"
 
     if &diff
-      normal ]c
+      normal ]czz
     elseif &filetype == "diff"
       execute search('^\(diff\|@@\)','W')
     elseif &filetype == "help"
       execute search('^[0-9\.]\+\s\+[A-Z]\+.*\*[a-z-]\+\*','W')
+		elseif &filetype == "markdown"
+			execute search('^#\+\s\+','W')
     else
       normal ]]
     endif
@@ -136,11 +181,13 @@ function! FastForwardAndRewind(direction)
   elseif a:direction == "rewind"
 
     if &diff
-      normal [c
+      normal [czz
     elseif &filetype == "diff"
       execute search('^\(diff\|@@\)','bW')
     elseif &filetype == "help"
       execute search('^[0-9\.]\+\s\+[A-Z]\+.*\*[a-z-]\+\*','bW')
+		elseif &filetype == "markdown"
+			execute search('^#\+\s\+','bW')
     else
       normal [[
     endif
@@ -157,12 +204,12 @@ function! HiName()
 
 endfunction
 
-function! Hello()
+function! Welcome()
 
-  let l:hello_text_file = '~/Documents/hello.txt'
+  let l:welcome_text_file = '~/Documents/welcome.txt'
 
-  if filereadable(expand(l:hello_text_file))
-    execute 'edit ' . l:hello_text_file
+  if filereadable(expand(l:welcome_text_file))
+    execute 'edit ' . l:welcome_text_file
     nmap <buffer> <CR> 0y$:<C-r>"<CR>
   endif
 
@@ -176,7 +223,7 @@ function! HighlightWord(word)
   echo s:thisHighlightWord
   if a:word != s:thisHighlightWord
     let s:thisHighlightWord = a:word
-    execute ":match MyMatchGroup /\\<" . a:word . "\\>/"
+    execute ":match HighlightWordGroup /\\<" . a:word . "\\>/"
   else
     let s:thisHighlightWord = ""
     match none
@@ -196,22 +243,28 @@ let g:netrw_liststyle = 1
 
 " commands {{{
 
-command! -nargs=0 Hello call Hello()
-command! -nargs=0 ShowHiName call HiName()
-command! -nargs=0 WhitespaceCleanup call whitespace#Cleanup()
-command! -nargs=0 WhitespaceMelt call whitespace#Melt()
-command! -nargs=0 ShowUnsavedChanges call vimdiff#UnsavedChanges()
-command! -nargs=0 ToggleVimdiff call vimdiff#Toggle()
-command! -nargs=0 VimdiffFileContext call vimdiff#FileContext()
+command! -nargs=0 Welcome                call Welcome()
+command! -nargs=1 UseWorkspace           execute "source $LOCALAPPDATA\\nvim\\templates\\" . <f-args> . ".workspace.vim"
+command! -nargs=0 ShowHiName             call HiName()
+command! -nargs=0 ToggleStickyCursorline call ToggleStickyCursorLine()
+
+
+command! -nargs=0 WhitespaceCleanup   call whitespace#Cleanup()
+command! -nargs=0 WhitespaceMelt      call whitespace#Melt()
+
+command! -nargs=0 ShowUnsavedChanges  call vimdiff#UnsavedChanges()
+command! -nargs=0 ToggleVimdiff       call vimdiff#Toggle()
+command! -nargs=0 VimdiffFileContext  call vimdiff#FileContext()
+
 command! -complete=file -nargs=+ SCRun call shellcommand#Run([<f-args>])
-command! -nargs=0 SCBuffer call shellcommand#ShowBuffer()
+command! -nargs=0 SCBuffer             call shellcommand#ShowBuffer()
 
 " }}}
 
 " autocommands {{{
 
-augroup Init
-
+augroup init
+  " clear group in case file sourced several times
   autocmd!
 
   " How to handle multiple windows?
@@ -222,13 +275,12 @@ augroup Init
   autocmd BufWritePre *.c,*.h :WhitespaceCleanup
   autocmd BufWritePre *.py    :WhitespaceCleanup
 
-  autocmd VimEnter,ColorScheme *  highlight MyMatchGroup gui=underline
+  autocmd VimEnter,ColorScheme * highlight HighlightWordGroup gui=underline
 
   " read file templates (according to :help template)
-  autocmd BufNewFile  workspace.vim   0r ~/vimfiles/templates/workspace.vim
-  autocmd BufNewFile  *.c             0r ~/vimfiles/templates/file.c
-  autocmd BufNewFile  *.h             0r ~/vimfiles/templates/file.h
-
+  autocmd BufNewFile  workspace.vim  0r $LOCALAPPDATA/nvim/templates/workspace.vim
+  autocmd BufNewFile  *.c            0r $LOCALAPPDATA/nvim/templates/file.c
+  autocmd BufNewFile  *.h            0r $LOCALAPPDATA/nvim/templates/file.h
 augroup END
 
 " }}}
@@ -242,15 +294,17 @@ let maplocalleader="-"
 " surround visual selection with ", ', (, [
 vnoremap <Leader>" c"<C-R>-"<Esc>
 vnoremap <Leader>' c'<C-R>-'<Esc>
+vnoremap <Leader>` c`<C-R>-`<Esc>
 vnoremap <Leader>( c(<C-R>-)<Esc>
 vnoremap <Leader>[ c[<C-R>-]<Esc>
 
-" Try this! Use <C-V><Tab> to insert a real tab
-inoremap <Tab> <Esc>
+" remove overwritten mapping 
+if exists("win32") || exists("win64")
+  silent! vunmap <C-X>
+endif
 
-" Mappings for fast quickfix access
-nnoremap <A-n> :cnext<CR>
-nnoremap <A-N> :cprev<CR>
+" Try this! Use <C-V><Tab> to insert a real tab
+inoremap <C-Space> <Esc>
 
 " extend abbreviation
 inoremap <C-Tab> <C-]>
@@ -259,31 +313,34 @@ inoremap <C-Tab> <C-]>
 nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
 nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 
-nnoremap <Leader>c :clist<cr>
-nnoremap <Leader>g :silent grep <C-r><C-w><CR>
-nnoremap <Leader>G :silent grep <C-r><C-w>
+nnoremap <Leader>c :botright copen<cr>
+nnoremap <Leader>C :cclose<cr>
 nnoremap <Leader>h :call HighlightWord("<C-r><C-w>")<CR>
-nnoremap <Leader>t :tjump <C-r><C-w><CR>
-nnoremap <Leader>T :tjump <C-r><C-w>
+nnoremap <Leader>tn :$tabnew<CR>
+nnoremap <Leader>tc :tabclose<CR>
 
 nnoremap <Leader>dt :ToggleVimdiff<CR>
+nnoremap <Leader>du :wa <BAR> diffupdate<CR>
 nnoremap <Leader>do :VimdiffFileContext<CR>
 nnoremap <Leader>db :ShowUnsavedChanges<CR>
 
 nnoremap <Leader><Space> :WhitespaceMelt<CR>
 
-nnoremap <silent> <C-up>   :call FastForwardAndRewind("rewind")<cr>
-nnoremap <silent> <C-down> :call FastForwardAndRewind("fastforward")<cr>
+nnoremap <Leader>n :enew <bar> setfiletype markdown <bar> setlocal spell spelllang=en_us <CR>
 
 " Mappings for the forgotten Umlaute keys
 " use command :ascii or 'ga' on the character you like to find the code
 
 nnoremap <char-252> :set invhlsearch<CR>
 nnoremap <char-220> :set invrelativenumber<CR>
-nnoremap <char-196> ?
-nnoremap <char-228> /
-nnoremap <char-246> :cnext<CR>
-nnoremap <char-214> :cprev<CR>
+nnoremap <char-246> [ 
+nnoremap <char-214> [[
+nnoremap <char-228> ]
+nnoremap <char-196> ]]
+
+nnoremap <silent> <A-left> :call FastForwardAndRewind("rewind")<cr>
+nnoremap <silent> <A-right> :call FastForwardAndRewind("fastforward")<cr>
+
 
 " jump to previous window
 nnoremap <BS> <C-w>w
@@ -292,15 +349,25 @@ nnoremap <S-BS> <C-w>W
 nnoremap <F1>   :edit %:p:h<CR>
 nnoremap <F2>   :find<Space>
 nnoremap <F3>   :buffer<Space>
-nnoremap <F4>   :stjump <C-r><C-w>
+nnoremap <F4>   :tjump /
 nnoremap <F5>   :SCRun<Space>
+nnoremap <F6>   :Welcome<CR>
 nnoremap <S-F5> :SCBuffer<CR>
-nnoremap <F6>   :$tabnew<CR>
-nnoremap <S-F6> :tabclose<CR>
+
 nnoremap <F7>   :silent make<space><up><CR>
 nnoremap <C-F7> :silent make<space><up>
-nnoremap <f8>   :Hello<CR>
-nnoremap <F12>  :TagbarOpenAutoClose<CR>
+
+nnoremap <f8>   :silent grep <C-r><C-w>
+nnoremap <Leader>g   :silent grep <C-r><C-w>
+
+nnoremap <F11>  :TagbarOpen<CR>
+" Mappings for fast quickfix access
+nnoremap <F12> :cnext<CR>zz
+nnoremap <A-j> :cnext<CR>zz
+nnoremap <S-F12> :cprev<CR>zz
+nnoremap <A-k> :cprev<CR>zz
+nnoremap <C-F12> :cfirst<CR>
+
 
 " check my spelling
 nnoremap <Leader>se :setlocal spell spelllang=en_us<CR>
@@ -312,21 +379,30 @@ nnoremap <Leader>1 :wall<CR> :vimgrep //j <C-r>=simplify(fnameescape(expand("%:p
 nnoremap <Leader>2 :wall<CR> :vimgrep //j <C-r>=simplify(fnameescape(expand("%:p:h")) . "\\..\\**\\*." . &filetype)<CR><C-b><C-Right><Right><Right>
 
 if has("win32") || has("win64")
-  nnoremap <Leader>x :silent execute "!start explorer " . expand ("%:p:h")<CR>
+  nnoremap <Leader>x :silent execute "!start explorer  " . expand ("%:p:h")<CR>
   nnoremap <Leader>X :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
 endif
 
-cabbrev xd <C-r>=expand("%:p:h")<CR>
+cnoremap <C-Tab> <C-r>=expand("%:p:h")<CR>
 
 " }}}
+
+
+" Save when losing focus
+augroup ginit
+  " clear group in case file sourced several times
+  autocmd!
+  " write all buffers when lossing focus
+  autocmd FocusLost * :silent! wall
+augroup END
+
+colorscheme bleached
+syntax on
 
 " environment {{{
 
 " English, please
 let $LANG="en_US"
-
-" Make Vim's own binaries the first match
-let $PATH = $VIMRUNTIME . ";" . $PATH
 
 " }}}
 

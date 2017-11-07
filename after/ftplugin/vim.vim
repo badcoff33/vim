@@ -18,7 +18,7 @@ nnoremap <buffer> <localleader>h :verbose highlight <C-r><C-w><CR>
 nnoremap <special> <buffer> <LocalLeader>e :w<bar>source%<CR>
 
 " Execute current line (and clear annoying ^M)
-nnoremap <special> <buffer> <LocalLeader>E yy:<C-r>0<BS><CR>
+nnoremap <special> <buffer> <LocalLeader>E yy:<C-r>0<CR>
 
 " Execute visual region
 vnoremap <special> <buffer> <LocalLeader>E :write! $TEMP\sourced_lines.vim<CR> :source $TEMP\sourced_lines.vim<CR>

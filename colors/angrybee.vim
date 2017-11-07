@@ -11,20 +11,21 @@ set background=dark
 let g:colors_name = "angrybee"
 
 " basics
-highlight Normal    guifg=#e8e8e8  guibg=#202020 gui=none
+highlight Normal    guifg=#e8e8e8  guibg=#18242e gui=none
 highlight NonText   guifg=#4285F4  guibg=bg      gui=none
 highlight Cursor    guifg=#000000  guibg=#ffffff gui=none
 highlight Visual    guifg=#c0d8d8  guibg=#255560 gui=none
 
 " Decoration
-highlight StatusLine    guifg=#202020   guibg=#c0c0d0  gui=none
-highlight User1         guifg=#202020   guibg=#c0c0d0  gui=bold
-highlight User2         guifg=#202020   guibg=#c0c0d0  gui=none
-highlight StatusLineNC  guifg=#a0a0b0   guibg=#303030  gui=none
+highlight StatusLine    guifg=#ffffff   guibg=#70aacf  gui=none
+highlight User1         guifg=#ffffff   guibg=#70aacf  gui=none
+highlight User2         guifg=#ffffff   guibg=#70aacf  gui=none
+highlight StatusLineNC  guifg=#a0a0a0   guibg=#2e3e48  gui=none
 highlight VertSplit     guifg=#606060   guibg=bg       gui=none
 highlight LineNr        guifg=#405060   guibg=bg       gui=none
 highlight CursorLineNr  guifg=#455565   guibg=#353535  gui=bold
-highlight CursorLine                    guibg=#303030
+highlight CursorLine                    guibg=#1e2e38
+highlight QuickFixLine                  guibg=bg       gui=bold
 highlight FoldColumn    guifg=#405060   guibg=bg       gui=none
 highlight Folded        guifg=fg        guibg=bg       gui=none
 highlight SignColumn    guifg=#e0e0e0   guibg=bg       gui=none
@@ -40,8 +41,8 @@ highlight! link TabLine      StatusLineNC
 highlight! link TabLineSel   StatusLine
 
 " Search
-highlight IncSearch     guifg=#202020  guibg=#c0c0d0 gui=none
-highlight Search        guifg=#d0e8e8  guibg=#307a8a gui=none
+highlight IncSearch     guifg=#eb60cf  guibg=#601050 gui=underline
+highlight Search        guifg=#40b0cf  guibg=#204860 gui=none
 highlight MatchParen    guifg=#40e0e0  guibg=bg      gui=underline
 
 " Structure
@@ -102,8 +103,8 @@ highlight! link doxygenHeaderLine doxygenBrief
 
 " Vimdiff
 highlight DiffChange    guifg=#f0f0f0 guibg=bg      gui=none
-highlight DiffText      guifg=#c0c000 guibg=#303030 gui=none
-highlight DiffAdd       guifg=#00c000 guibg=#383838 gui=none
+highlight DiffText      guifg=#c0c000 guibg=#2e3e48 gui=none
+highlight DiffAdd       guifg=#00c000 guibg=#2e3e48 gui=none
 highlight DiffDelete    guifg=bg      guibg=bg      gui=none
 
 " Diff buffer
@@ -124,7 +125,15 @@ highlight diffLine      guifg=yellow1
 highlight diffSubname   guifg=fg
 highlight diffComment   guifg=fg
 
-" Plugins
+" netrw
 highlight netrwMarkFile                     gui=inverse
-highlight TagListTitle  guifg=fg guibg=bg   gui=bold,none
+
+" filetype html
+highlight htmlH1 guifg=skyblue1  gui=bold
+highlight htmlH2 guifg=skyblue3  gui=none
+highlight htmlH3 guifg=skyblue3  gui=none
+
+" markdown
+highlight! link markdownCode String
+highlight! link markdownCodeBlock Comment
 

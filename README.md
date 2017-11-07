@@ -12,10 +12,10 @@ http://learnvimscriptthehardway.stevelosh.com
 
 A plain installation works surprisingly well for me. I tried really a lot of optional Vim plugins, but removed most of them, becausse all I need comes with Vim "out of the box". But some plugins may help in certain situations. This is my short list of noteable Vim plugins:
 
-- Per file tags navigation with *Tagbar*: https://github.com/majutsushi/tagbar.git 
+- Per file tags navigation with *Tagbar*: https://github.com/majutsushi/tagbar.git
 - Buffer overview with *Bufexplorer*: https://github.com/jlanzarotta/bufexplorer.git
 
-Install plugins as recommended by Vim's manual `:help packages` 
+Install plugins as recommended by Vim's manual `:help packages`
 
 ### Custom Command Completion
 
@@ -43,6 +43,42 @@ Here is a Vim script to show custom completion of a new command:
 ## Run shell commands
 
 To run any shell command you can use :! {cmd}. Characters with a special meaning for Vim, line "%", gets expanded, befor the shell executes the command line. To avoid Vims character expansion, use  quotes: "%"
+
+## Run shell commands 2
+
+Here is an approach to use asynchronous processes:
+
+    if !has('job') || !has('channel') || !has('quickfix') finish endif
+
+    function! s:JobHandler(handler)
+      let l:cbufnr = bufnr("make.io")
+      if l:cbufnr < 0
+        echoerr "make.io does not exist."
+        return
+      endif
+      execute "cbuffer " . l:cbufnr
+      echomsg "closed " . a:handler
+    endfunction
+
+    function! RunMake(commandString)
+      let l:opts = {
+            \ 'close_cb':       function('s:JobHandler'),
+            \ 'out_io':         'buffer',
+            \ 'out_name':       "make.io",
+            \ 'out_modifiable': 0,
+            \ 'out_msg':        0,
+            \ 'err_io':         'buffer',
+            \ 'err_name':       "make.io",
+            \ 'err_modifiable': 0,
+            \ 'in_io':          'null'
+            \ }
+      if bufnr("make.io") >= 0
+        bwipeout make.io
+      endif
+      let g:job = job_start("cmd /C " . a:commandString, l:opts)
+    endfunction
+
+    command! -nargs=+  MakeJob :call RunMake(<q-args>)
 
 ## Show unsaved buffers
 
@@ -103,55 +139,6 @@ Press CTRL-^ or CTRL-6 to have a quick way to toggle between two files.
 
 Vim defines a WORD as a set of consecutive characters. The normal mode command `dW` will delete A/path/like/this assuming cursors positions is on the A character. Using normal mode command `dw` (cursors position is on A character) will delete only the A.
 
-## Building Neovim with MSYS2/MinGW
+## Build Vim with MS Visual Studio
 
-Neovim can be build using MinGW. However getting all the necessary dependencies is not easy. 
-Using something like MSYS2 to get all the tools and libraries makes things a lot faster.
-
-These instructions use MSYS2 to get the some of the necessary dependencies, but the build itself takes
-does not use the MSYS2 shell.
-
-#### System dependencies
-
-Install these packages with pacman.
-
-- mingw-w64-x86_64-gcc
-- mingw-w64-x86_64-libtool
-- mingw-w64-x86_64-cmake
-- mingw-w64-x86_64-perl
-- mingw-w64-x86_64-python2
-
-Replace with x86_64 with i686 for 32bit builds. 
-
-#### Before starting
-
-Now from a real windows console (cmd.exe) setup the PATH to point to the msys environment. This is necessary
-because we want the tools installed inside the MSYS environment, but not the MSYS2 shell itself.
-
-```
-set PATH=%PATH%;c:\msys64\mingw64\bin
-```
-
-Again adjust accordingly if you want 32bit builds.
-
-**Know issue:** In MinGW builds, sh.exe MUST NOT be in the PATH, you might have to adjust the path to address this.
-For example Git for Windows has an sh.exe in the PATH.
-
-#### Build third party dependencies
-
-```
-mkdir .deps
-cd .deps
-cmake  -G "MinGW Makefiles" ..\third-party\
-mingw32-make
-cd ..
-```
-
-#### Build Neovim
-
-```
-mkdir build
-cd build
-cmake -G "MinGW Makefiles" ..
-mingw32-make nvim
-```
+Use the scripts in vimfiles/build.
