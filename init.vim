@@ -383,7 +383,7 @@ if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
 endif
 
-cnoremap <C-Tab> <C-r>=expand("%:p:h")<CR>
+cabbrev <expr> \\ expand("%:p:h")
 
 " }}}
 
