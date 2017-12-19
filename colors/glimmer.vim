@@ -13,14 +13,14 @@ set background=dark
 let g:colors_name = "glimmer"
 
 " very basic things
-highlight Normal  guifg=lightblue2  guibg=grey13 ctermbg=black
+highlight Normal  guifg=grey85      guibg=grey13          ctermbg=black
 highlight NonText guifg=dodgerblue1 guibg=bg              gui=none
 highlight Visual  guifg=white       guibg=dodgerblue3
 
 " where is the cursor?
 highlight LineNr        guifg=grey38    guibg=bg          gui=none
 highlight Cursor        guifg=black     guibg=powderblue
-highlight CursorLineNr  guifg=grey38     guibg=grey17      gui=bold
+highlight CursorLineNr  guifg=grey38    guibg=grey17      gui=bold
 highlight QuickFixLine                  guibg=bg          gui=bold
 highlight CursorLine                    guibg=grey19
 highlight! link CursorColumn CursorLine
@@ -37,7 +37,7 @@ highlight SignColumn   guifg=skyblue4   guibg=bg
 
 " search
 highlight IncSearch  guifg=white        guibg=dodgerblue3 gui=bold
-highlight Search     guifg=cyan2        guibg=grey27      gui=none
+highlight Search     guifg=cyan1        guibg=bg          gui=underline
 highlight MatchParen guifg=deepskyblue2 guibg=bg          gui=underline
 
 " popup Menu
@@ -56,7 +56,7 @@ highlight! link TabLineSel StatusLine
 highlight Statement     guifg=yellow2         gui=bold
 highlight Conditional   guifg=yellow2         gui=bold
 highlight PreProc       guifg=green3          gui=bold
-highlight Comment       guifg=slategray
+highlight Comment       guifg=grey45
 highlight Type          guifg=deepskyblue1    gui=none
 highlight StorageClass  guifg=green2          gui=none
 highlight Function      guifg=green1          gui=bold
@@ -96,8 +96,8 @@ highlight cBlock      guifg=deepskyblue4
 
 " Doxygen 
 highlight doxygenComment    guifg=deepskyblue3  gui=none
-highlight doxygenBrief      guifg=lightblue3    gui=none
-highlight doxygenParam      guifg=slategray     gui=none
+highlight doxygenBrief      guifg=deepskyblue1  gui=none
+highlight doxygenParam      guifg=grey38        gui=none
 highlight doxygenOtherTODO  guifg=maroon3       gui=bold,underline
 highlight doxygenOtherWARN  guifg=maroon3       gui=bold,underline
 highlight! link doxygenSpecialOnelineDesc doxygenBrief
@@ -136,6 +136,8 @@ highlight! link asciidocTitleUnderline Type
 highlight htmlH1 guifg=slateblue1 gui=bold
 highlight htmlH2 guifg=slateblue1
 highlight htmlH3 guifg=slateblue2
+highlight htmlBold                gui=bold
+highlight htmlItalic              gui=italic
 
 " markdown
 highlight! markdownCode guifg=green3 gui=italic
