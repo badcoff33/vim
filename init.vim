@@ -95,6 +95,7 @@ set pumheight=10
 " Command line completion
 set nowildmenu wildmode=list:full
 set wildignore=*.*~
+set wildignorecase
 
 set showtabline=1
 set sessionoptions=buffers,curdir,tabpages
