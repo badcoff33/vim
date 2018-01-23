@@ -9,22 +9,16 @@ setlocal shiftwidth=4
 setlocal nocindent
 setlocal nonumber relativenumber
 
-<<<<<<< working copy
-command! -buffer PandocHtml :execute 'sil !pandoc -f markdown -t html -o ' . expand('%:r') . '.html ' . expand('%')
-command! -buffer PandocDocx :execute 'sil !pandoc -f markdown -t docx -o ' . expand('%:r') . '.docx ' . expand('%')
-
-nnoremap <buffer> <C-F7> :silent !start <C-r>%<C-w>html<CR>
-=======
-function! PandocExportMarkdown()
-  let l:format = inputlist(['1 -- Docx', '2 -- Html'])
-  if l:format == 1
-    execute '!pandoc -f markdown -t docx -o ' . expand ('%:r') . '.docx ' . expand('%')
-  elseif l:format == 2
-    execute '!pandoc -f markdown -t html -o ' . expand ('%:r') . '.html ' . expand('%')
+function! EvalStringPandocExportMarkdown(format)
+  if a:format == 1
+    let l:pandoc_call = 'pandoc -f markdown -t docx -o ' . expand ('%:r') . '.docx ' . expand('%')
+  elseif a:format == 2
+    let l:pandoc_call = 'pandoc -f markdown -t html -o ' . expand ('%:r') . '.html ' . expand('%')
   endif
+  return l:pandoc_call
 endfunction
-nnoremap <buffer> <F7> :call PandocExportMarkdown()<CR>
-nnoremap <buffer> <localleader>s :silent !start <C-r>%<C-w>html<CR>
->>>>>>> merge rev
+nnoremap <buffer> <F7> :make<CR>
+
+execute 'setlocal makeprg=' . escape(EvalStringPandocExportMarkdown(1), ' ')
 
 let b:did_ftplugin_after = 1
