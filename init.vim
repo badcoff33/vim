@@ -52,7 +52,9 @@ set backspace=eol,start,indent
 
 " Search: Some configuration for the search behavior.
 set incsearch
-set inccommand=split
+if has('nvim')
+  set inccommand=split
+endif
 set magic
 set gdefault
 set hlsearch
@@ -94,8 +96,8 @@ set pumheight=10
 
 " Command line completion
 set nowildmenu wildmode=list:full
-set wildignore=*.*~
 set wildignorecase
+set wildignore=*.*~
 
 set showtabline=1
 set sessionoptions=buffers,curdir,tabpages
@@ -275,13 +277,13 @@ augroup init
 
   autocmd BufWritePre *.c,*.h :WhitespaceCleanup
   autocmd BufWritePre *.py    :WhitespaceCleanup
-
   autocmd VimEnter,ColorScheme * highlight HighlightWordGroup gui=underline
 
   " read file templates (according to :help template)
   autocmd BufNewFile  workspace.vim  0r $LOCALAPPDATA/nvim/templates/workspace.vim
   autocmd BufNewFile  *.c            0r $LOCALAPPDATA/nvim/templates/file.c
   autocmd BufNewFile  *.h            0r $LOCALAPPDATA/nvim/templates/file.h
+
 augroup END
 
 " }}}
@@ -299,7 +301,9 @@ vnoremap <Leader>` c`<C-R>-`<Esc>
 vnoremap <Leader>( c(<C-R>-)<Esc>
 vnoremap <Leader>[ c[<C-R>-]<Esc>
 
-" remove overwritten mapping 
+nnoremap <BS> <C-w>c 
+
+" remove overwritten mapping
 if exists("win32") || exists("win64")
   silent! vunmap <C-X>
 endif
@@ -334,54 +338,62 @@ nnoremap <Leader>n :enew <bar> setfiletype markdown <bar> setlocal spell spellla
 
 nnoremap <char-252> :set invhlsearch<CR>
 nnoremap <char-220> :set invrelativenumber<CR>
-nnoremap <char-246> [ 
-nnoremap <char-214> [[
+nnoremap <char-246> [
 nnoremap <char-228> ]
+nnoremap <char-214> [[
 nnoremap <char-196> ]]
+vnoremap <char-246> [
+vnoremap <char-228> ]
 
 nnoremap <silent> <A-left> :call FastForwardAndRewind("rewind")<cr>
 nnoremap <silent> <A-right> :call FastForwardAndRewind("fastforward")<cr>
+if has('nvim')
+  nnoremap <silent> <A-.> :tj <C-r><C-w><CR>
+  nnoremap <silent> <A-,> :pop<CR>
+  inoremap <C-Tab> <C-x><C-]>
+endif
 
 
-" jump to previous window
-nnoremap <BS> <C-w>w
-nnoremap <S-BS> <C-w>W
+nnoremap <A-k> {
+vnoremap <A-k> {
+nnoremap <A-j> }
+vnoremap <A-j> }
 
-nnoremap <F1>   :edit %:p:h<CR>
-nnoremap <F2>   :find<Space>
-nnoremap <F3>   :buffer<Space>
-nnoremap <F4>   :tjump /
-nnoremap <F5>   :SCRun<Space>
-nnoremap <F6>   :Welcome<CR>
-nnoremap <S-F5> :SCBuffer<CR>
+nnoremap <F1>    :edit %:p:h<CR>
+nnoremap <F2>    :find<Space>
+nnoremap <F3>    :buffer<Space>
+nnoremap <F4>    :cnext<CR>zz
+nnoremap <S-F4>  :cprev<CR>zz
+nnoremap <C-F4>  :cfirst<CR>
+nnoremap <F12>   :tjump <C-r><C-w><CR>zz
+nnoremap <S-F12> :tjump /
+nnoremap <F5>    :SCRun<Space>
+nnoremap <F6>    :Welcome<CR>
+nnoremap <S-F5>  :SCBuffer<CR>
 
-nnoremap <F7>   :silent make<space><up><CR>
-nnoremap <C-F7> :silent make<space><up>
+nnoremap <F7>      :silent make<space><up><CR>
+nnoremap <C-F7>    :silent make<space><up>
+nnoremap <Leader>m :silent make<space><up><CR>
+nnoremap <Leader>M :silent make<space><up>
 
-nnoremap <f8>   :silent grep <C-r><C-w>
-nnoremap <Leader>g   :silent grep <C-r><C-w>
+nnoremap <f8>       :silent grep <C-r><C-w><CR>
+nnoremap <Leader>g  :silent grep <C-r><C-w>
+nnoremap <Leader>G  :silent grep<Space>
 
 nnoremap <F11>  :TagbarOpen<CR>
-" Mappings for fast quickfix access
-nnoremap <F12> :cnext<CR>zz
-nnoremap <A-j> :cnext<CR>zz
-nnoremap <S-F12> :cprev<CR>zz
-nnoremap <A-k> :cprev<CR>zz
-nnoremap <C-F12> :cfirst<CR>
-
 
 " check my spelling
 nnoremap <Leader>se :setlocal spell spelllang=en_us<CR>
 nnoremap <Leader>sg :setlocal spell spelllang=de_de<CR>
-nnoremap <Leader>sn :setlocal nospell<CR>
+nnoremap <Leader>so :setlocal nospell<CR>
 
 " run Vims own grep on files directories
 nnoremap <Leader>1 :wall<CR> :vimgrep //j <C-r>=simplify(fnameescape(expand("%:p:h")) . "\\*." . &filetype)<CR><C-b><C-Right><Right><Right>
 nnoremap <Leader>2 :wall<CR> :vimgrep //j <C-r>=simplify(fnameescape(expand("%:p:h")) . "\\..\\**\\*." . &filetype)<CR><C-b><C-Right><Right><Right>
 
 if has("win32") || has("win64")
-  nnoremap <Leader>x :silent execute "!start explorer  " . expand ("%:p:h")<CR>
-  nnoremap <Leader>X :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
+  nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
+  nnoremap <Leader>x :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
 endif
 
 cabbrev <expr> \\ expand("%:p:h")
@@ -393,18 +405,13 @@ cabbrev <expr> \\ expand("%:p:h")
 augroup ginit
   " clear group in case file sourced several times
   autocmd!
-  " write all buffers when lossing focus
+  " write all buffers when loosing focus
   autocmd FocusLost * :silent! wall
+  " Reload changed buffers. Command rely on option 'autoread'
+  autocmd FocusGained * :checktime
 augroup END
 
-colorscheme bleached
+colorscheme breeze
 syntax on
-
-" environment {{{
-
-" English, please
-let $LANG="en_US"
-
-" }}}
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker
