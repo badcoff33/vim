@@ -301,7 +301,8 @@ vnoremap <Leader>` c`<C-R>-`<Esc>
 vnoremap <Leader>( c(<C-R>-)<Esc>
 vnoremap <Leader>[ c[<C-R>-]<Esc>
 
-nnoremap <BS> <C-w>c 
+nnoremap <BS> :<C-f>i
+vnoremap <BS> :
 
 " remove overwritten mapping
 if exists("win32") || exists("win64")
@@ -319,7 +320,7 @@ nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
 nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 
 nnoremap <Leader>c :botright copen<cr>
-nnoremap <Leader>C :cclose<cr>
+nnoremap <Leader>C :if &bt=='quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
 nnoremap <Leader>h :call HighlightWord("<C-r><C-w>")<CR>
 nnoremap <Leader>tn :$tabnew<CR>
 nnoremap <Leader>tc :tabclose<CR>
@@ -339,32 +340,29 @@ nnoremap <Leader>n :enew <bar> setfiletype markdown <bar> setlocal spell spellla
 nnoremap <char-252> :set invhlsearch<CR>
 nnoremap <char-220> :set invrelativenumber<CR>
 nnoremap <char-246> [
-nnoremap <char-228> ]
-nnoremap <char-214> [[
-nnoremap <char-196> ]]
 vnoremap <char-246> [
+nnoremap <char-228> ]
 vnoremap <char-228> ]
+nnoremap <char-214> ?
+nnoremap <char-196> /
 
 nnoremap <silent> <A-left> :call FastForwardAndRewind("rewind")<cr>
 nnoremap <silent> <A-right> :call FastForwardAndRewind("fastforward")<cr>
 if has('nvim')
   nnoremap <silent> <A-.> :tj <C-r><C-w><CR>
   nnoremap <silent> <A-,> :pop<CR>
-  inoremap <C-Tab> <C-x><C-]>
 endif
+inoremap <C-Tab> <C-x><C-]>
+nnoremap <C-Insert> "*yiw
 
-
-nnoremap <A-k> {
-vnoremap <A-k> {
-nnoremap <A-j> }
-vnoremap <A-j> }
+nnoremap <A-k> :cprevious<CR>zz
+nnoremap <A-j> :cnext<CR>zz
 
 nnoremap <F1>    :edit %:p:h<CR>
 nnoremap <F2>    :find<Space>
 nnoremap <F3>    :buffer<Space>
 nnoremap <F4>    :cnext<CR>zz
 nnoremap <S-F4>  :cprev<CR>zz
-nnoremap <C-F4>  :cfirst<CR>
 nnoremap <F12>   :tjump <C-r><C-w><CR>zz
 nnoremap <S-F12> :tjump /
 nnoremap <F5>    :SCRun<Space>
@@ -397,6 +395,7 @@ if has("win32") || has("win64")
 endif
 
 cabbrev <expr> \\ expand("%:p:h")
+cnoremap <A-.> <C-r>=expand("%:p:h")<CR>
 
 " }}}
 
