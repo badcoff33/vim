@@ -13,7 +13,7 @@ set background=dark
 let g:colors_name = "glimmer"
 
 " very basic things
-highlight Normal  guifg=grey85      guibg=grey13          ctermbg=black
+highlight Normal  guifg=grey85      guibg=grey17          ctermbg=black
 highlight NonText guifg=dodgerblue1 guibg=bg              gui=none
 highlight Visual  guifg=white       guibg=dodgerblue3
 
@@ -140,5 +140,5 @@ highlight htmlBold                gui=bold
 highlight htmlItalic              gui=italic
 
 " markdown
-highlight! markdownCode guifg=green3 gui=italic
+highlight! markdownCode guifg=green3 
 highlight! link markdownCodeBlock Comment
