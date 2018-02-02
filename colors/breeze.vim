@@ -11,8 +11,15 @@ let g:colors_name = "breeze"
 " basics
 highlight Normal  guifg=grey30 guibg=white
 highlight NonText guifg=cyan4  guibg=bg
-highlight Visual  guifg=white  guibg=green3
+highlight Visual               guibg=lightblue1
 highlight Cursor  guifg=white  guibg=red3
+
+" used if Nvim's option 'winhighlight' exists (Nvim)
+if has ('nvim')
+  highlight NormalFocus   guibg=white
+  highlight NormalNoFocus guibg=grey96
+  set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
+endif
 
 " window decoration
 highlight StatusLine   guifg=white  guibg=cornflowerblue gui=none
@@ -43,9 +50,9 @@ highlight PmenuSbar   guibg=grey50
 highlight PmenuThumb  guifg=white
 
 " search
-highlight IncSearch   guifg=white  guibg=dodgerblue3  gui=none
-highlight Search      guifg=deeppink3 guibg=azure2       gui=none
-highlight MatchParen  guifg=fg     guibg=bg           gui=underline
+highlight IncSearch   guifg=white guibg=dodgerblue3  gui=none
+highlight Search                  guibg=yellow       gui=none
+highlight MatchParen  guifg=fg    guibg=bg           gui=underline
 
 " code
 highlight Statement     guifg=maroon3     gui=none
@@ -113,9 +120,9 @@ highlight netrwMarkFile     gui=inverse
 highlight htmlH1 guifg=dodgerblue1  gui=bold
 highlight htmlH2 guifg=dodgerblue3  gui=none
 highlight htmlH3 guifg=dodgerblue3  gui=none
+highlight htmlBold                  gui=bold
+highlight htmlItalic                gui=italic
 
 " markdown
 highlight! link markdownCode String
 highlight! link markdownCodeBlock Comment
-
-
