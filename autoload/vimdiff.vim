@@ -79,3 +79,17 @@ function! vimdiff#Toggle()
   endif
 
 endfunction
+
+function! vimdiff#TwoDirDiff()
+  let l:a = input("diff directory A: ", expand("%:p:h"), "dir")
+  let l:b = input("diff directory B: ", expand("%:p:h"), "dir")
+  let l:a = fnamemodify(l:a, ":p:h")
+  let l:b = fnamemodify(l:b, ":p:h")
+  enew
+  setlocal buftype=nofile 
+  execute 'read !diff -rq ' . l:a . " " . l:b 
+  %s/^Files\s//e
+  %s/\sand\s/\r/e
+  %s/\sdiffer/\r/e
+  nnoremap <buffer> <CR> {j0"ay$j0"by$:tabedit <C-r>a<CR>:diffsplit <C-r>b<CR>
+endfunction
