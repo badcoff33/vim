@@ -258,6 +258,7 @@ command! -nargs=0 WhitespaceMelt      call whitespace#Melt()
 command! -nargs=0 ShowUnsavedChanges  call vimdiff#UnsavedChanges()
 command! -nargs=0 ToggleVimdiff       call vimdiff#Toggle()
 command! -nargs=0 VimdiffFileContext  call vimdiff#FileContext()
+command! -nargs=0 TwoDirDiff          call vimdiff#TwoDirDiff()
 
 command! -complete=file -nargs=+ SCRun call shellcommand#Run([<f-args>])
 command! -nargs=0 SCBuffer             call shellcommand#ShowBuffer()
@@ -319,8 +320,6 @@ inoremap <C-Tab> <C-]>
 nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
 nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 
-nnoremap <Leader>c :botright copen<cr>
-nnoremap <Leader>C :if &bt=='quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
 nnoremap <Leader>h :call HighlightWord("<C-r><C-w>")<CR>
 nnoremap <Leader>tn :$tabnew<CR>
 nnoremap <Leader>tc :tabclose<CR>
@@ -358,13 +357,12 @@ nnoremap <C-Insert> "*yiw
 nnoremap <A-k> :cprevious<CR>zz
 nnoremap <A-j> :cnext<CR>zz
 
-nnoremap <F1>    :edit %:p:h<CR>
-nnoremap <F2>    :find<Space>
+nnoremap <F1>    :botright copen<cr>
+nnoremap <F2>    :if &bt=='quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
 nnoremap <F3>    :buffer<Space>
 nnoremap <F4>    :cnext<CR>zz
 nnoremap <S-F4>  :cprev<CR>zz
-nnoremap <F12>   :tjump <C-r><C-w><CR>zz
-nnoremap <S-F12> :tjump /
+nnoremap <F12>   :tjump /
 nnoremap <F5>    :SCRun<Space>
 nnoremap <F6>    :Welcome<CR>
 nnoremap <S-F5>  :SCBuffer<CR>
