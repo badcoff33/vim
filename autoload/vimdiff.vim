@@ -83,13 +83,24 @@ endfunction
 function! vimdiff#TwoDirDiff()
   let l:a = input("diff directory A: ", expand("%:p:h"), "dir")
   let l:b = input("diff directory B: ", expand("%:p:h"), "dir")
+  " remove trailing backslash (added by dir completion)
   let l:a = fnamemodify(l:a, ":p:h")
   let l:b = fnamemodify(l:b, ":p:h")
+  " create a fresh out buffer
   enew
   setlocal buftype=nofile 
-  execute 'read !diff -rq ' . l:a . " " . l:b 
-  %s/^Files\s//e
-  %s/\sand\s/\r/e
-  %s/\sdiffer/\r/e
+  insert
+" Diff run with -rq options
+" Optinal diff paramter can be added by valiable 'g:two_dir_diff_option'
+" Press <CR> on the set of files that differ.
+.
+  " run the recursive diff
+  silent execute 'read !diff -rq ' . l:a . " " . l:b 
+  " reformat diffs --brief output format
+  silent %s/^Only\s/\rOnly /e
+  silent %s/^Files\s/\r/e 
+  silent %s/\sand\s/\r/e 
+  silent %s/\sdiffer//e 
   nnoremap <buffer> <CR> {j0"ay$j0"by$:tabedit <C-r>a<CR>:diffsplit <C-r>b<CR>
 endfunction
+
