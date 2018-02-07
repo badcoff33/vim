@@ -38,4 +38,7 @@ setlocal nofoldenable
 setlocal nonumber
 setlocal norelativenumber
 
+nnoremap <buffer> j :cnext<CR>zz<C-w>p
+nnoremap <buffer> k :cprev<CR>zz<C-w>p
+
 let b:did_ftplugin_after = 1
