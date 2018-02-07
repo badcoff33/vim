@@ -13,9 +13,16 @@ set background=dark
 let g:colors_name = "glimmer"
 
 " very basic things
-highlight Normal  guifg=grey85      guibg=grey17          ctermbg=black
+highlight Normal  guifg=grey85      guibg=grey11          ctermbg=black
 highlight NonText guifg=dodgerblue1 guibg=bg              gui=none
 highlight Visual  guifg=white       guibg=dodgerblue3
+
+" used if Nvim's option 'winhighlight' exists (Nvim)
+if has ('nvim')
+  highlight NormalFocus   guibg=grey11
+  highlight NormalNoFocus guibg=grey14
+  set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
+endif
 
 " where is the cursor?
 highlight LineNr        guifg=grey38    guibg=bg          gui=none
