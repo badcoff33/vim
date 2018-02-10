@@ -26,7 +26,7 @@ function! shellcommand#Run(cmdLine)
     normal ggdG
   else
     " No ShellCommand buffer
-    execute "new " . s:outputBuffer
+    execute "edit " . s:outputBuffer
     setlocal noswapfile nowrap
   endif
 
