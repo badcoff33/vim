@@ -109,11 +109,7 @@ set grepprg=rg
 
 command! -nargs=0 UpdateCtags :silent !start /MIN cmd /C ctags -R .
 command! -nargs=0 UpdateGlobal :silent !start /MIN cmd /C global --update
-command! -nargs=0 Gen4ListOfCmdhStates :tjump cmdhState_t
-command! -nargs=0 Gen4ListWBusErrorCodes :tjump wtcmInternalErrorToWbusErrorCodeTable
 command! -nargs=1 Gen4GrepAutosar :vimgrep /<args>/ C_AUTOSAR\AUTOSAR_tresos\workspace\Application\output\generated\**\*.[ch]
-command! -nargs=0 HereAgainstPsa :SCRun diff -rub . c:\daten\TTEVO_GEN4\S_PSA_LIN_Trunk\Comp
-command! -nargs=* Astyle :SCRun astyle --type=bsd -P
 
 " }}}
 
