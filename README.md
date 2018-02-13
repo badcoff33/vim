@@ -139,6 +139,38 @@ Press CTRL-^ or CTRL-6 to have a quick way to toggle between two files.
 
 Vim defines a WORD as a set of consecutive characters. The normal mode command `dW` will delete A/path/like/this assuming cursors positions is on the A character. Using normal mode command `dw` (cursors position is on A character) will delete only the A.
 
-## Build Vim with MS Visual Studio
+## Grep, Grep Grep
 
-Use the scripts in vimfiles/build.
+It is very easy to configure any type of grep backend in Vim. This are the most
+common grep tools that is use in the past.
+
+### Ripgrep
+
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+    set grepprg=rg
+            \\ --vimgrep
+            \\ -t\ c
+            \\ -g\ !C_AUTOSAR
+            \\ -g\ !TLSim
+            \\ -g\ !TLProj
+            \\ -g\ !_sfprj
+
+### Grep (The Original)
+
+    set grepprg=grep\ -Hn\ -r\ --include='*.[ch]'
+                \\ --exclude-dir=TLProj
+                \\ --exclude-dir=TLSim
+                \\ --exclude-dir=Doc
+                \\ --exclude-dir=C_AUTOSAR
+    
+### GNU Global
+
+    set grepprg=global\ --result=grep\ --grep
+    set grepformat=%f:%l:%m
+    set cscopeprg=gtags-cscope
+
+### Windows findstr
+
+    if has("win32") || has("win64")
+      set grepprg=findstr\ /N\ /F:.index
+    endif
