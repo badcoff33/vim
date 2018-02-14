@@ -1,49 +1,18 @@
-" A Workspace File
-"
-" Create a .vim directory on the same level as the project root.
-" Session files, undo files and backups go there.
-
-" #############################################################################
-" prepare workspace {{{
-" #############################################################################
-
-" fresh start in workspace: wipe out all loaded buffers
-%bwipeout
+" A Workspace File (Example)
 
 augroup Workspace
   " Forget the old Workspace autocmd's
   au!
-  " Well, this is a little bit tricky for GEN4: When :make is entered
-  " (pre-make) Push to uild directory. Vim runs make command.  (post-make 1)
-  " Pop back to projects root dir of sources.  (post-make 2) Run the ctags
-  " update.
-  autocmd QuickFixCmdPre  make :UpdateTags
-  autocmd QuickFixCmdPre  make :cd C_Application/Build
-  autocmd QuickFixCmdPost make :cd ../..
+
+  autocmd QuickFixCmdPre make cd C_Application/Build
+
+  autocmd QuickFixCmdPost make cd ../..
+  autocmd QuickFixCmdPost botright cwindow
+  autocmd QuickFixCmdPost make UpdateCtags
 
   " Create a session file while leaving Vim
-  autocmd VimLeavePre * mksession! .vim/session.vim
+  autocmd VimLeavePre * execute "mksession! " . g:workspace_session_file
 augroup END
-
-set undofile                      " enable undo history
-set backup                        " enable backups
-
-set undodir=.vim/undo/       " undo files
-set backupdir=.vim/backup/   " backups
-
-" Make those folders automatically if they don't already exist.
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-endif
-if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
-endif
-
-" }}}
-
-" #############################################################################
-" workspace specific stuff {{{
-" #############################################################################
 
 " Highlight custom types of syntax file after/syntax/c.vim
 let g:syntax_custom_c_types = 1
@@ -53,10 +22,22 @@ set wildoptions=
 
 " plugins
 let g:tagbar_left = 1
+nmap <Leader>T :TagbarToggle<CR>
+
 packadd tagbar
 
-set path=.
-set path+=C_HeaterCore/HeaterCore/**
+iabbrev x16 (uint16)
+iabbrev x8  (uint8)
+
+set tags=TAGS
+set tagcase=match
+set foldcolumn=1
+
+set title 
+set titlestring=%{getcwd()}\ -\ Vim
+set titlelen=70
+
+set path=C_HeaterCore/HeaterCore/**
 set path+=C_HeaterCore/HeaterCore
 set path+=C_CDD/**
 set path+=C_CDD
@@ -73,6 +54,8 @@ set path+=C_CmdHandler
 set path+=C_WBusCoreServices/**
 set path+=,
 
+" }}}
+
 " #############################################################################
 " tools {{{
 " #############################################################################
@@ -81,13 +64,29 @@ set path+=,
 compiler! greenhills
 
 """ Ripgrep
-set grepformat=%f:%l:%c:%m
-set grepprg=rg\ -tc\ --vimgrep
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+set grepprg=rg
+            \\ --vimgrep
+            \\ -t\ c
+            \\ -g\ !TLSim
+            \\ -g\ !TLProj
+            \\ -g\ !_sfprj
+nnoremap <f8>       :silent grep -g !C_AUTOSAR <C-r><C-w><CR>
+nnoremap <Leader>g  :silent grep -g !C_AUTOSAR <C-r><C-w>
+nnoremap <Leader>G  :silent grep -g !C_AUTOSAR<Space>
+
+""" set grepprg=grep\ -Hn\ -r\ --include='*.[ch]'
+"""             \\ --exclude-dir=TLProj
+"""             \\ --exclude-dir=TLSim
+"""             \\ --exclude-dir=Doc
+"""             \\ --exclude-dir=C_AUTOSAR
 
 """ GNU Global
 """ set grepprg=global\ --result=grep\ --grep
 """ set grepformat=%f:%l:%m
 """ set cscopeprg=gtags-cscope
+""" cscope kill 0
+""" cscope add GTAGS
 
 " Windows findstr
 """" if has("win32") || has("win64")
@@ -100,34 +99,12 @@ set grepprg=rg\ -tc\ --vimgrep
 " commands {{{
 " #############################################################################
 
-command! -nargs=0 UpdateCtags :silent !start /MIN cmd /C ctags
+command! -nargs=0 ExportChangelogHtml silent !start /MIN pandoc -f markdown -t html -o S:\C\Users\prepensm\Downloads\ChangeLog.html C_HeaterCore\ChangeLog.txt
+command! -nargs=0 ExportChangelogDoc silent !start /MIN pandoc -f markdown -t docx -o S:\C\Users\prepensm\Downloads\ChangeLog.docx C_HeaterCore\ChangeLog.txt
+command! -nargs=0 UpdateCtags :silent !start /MIN cmd /C ctags -R .
 command! -nargs=0 UpdateGlobal :silent !start /MIN cmd /C global --update
-command! -nargs=0 Gen4ListOfCmdhStates :tjump cmdhState_t
-command! -nargs=0 Gen4ListWBusErrorCodes :tjump wtcmInternalErrorToWbusErrorCodeTable
-command! -nargs=1 Gen4GrepAutosar :vimgrep /<args>/ C_AUTOSAR\AUTOSAR_tresos\workspace\Application\output\generated\**\*.[ch]
-command! -nargs=0 HereAgainstPsa :SCRun diff -rub . c:\daten\TTEVO_GEN4\S_PSA_LIN_Trunk\Comp
-
-" }}}
-
-" #############################################################################
-" source last session? {{{
-" #############################################################################
-
-if filereadable(".vim/session.vim")
-  while 1
-    let answer = tolower(input("load last session [yes|no]? " ,"yes"))
-    if answer == "yes"
-      source .vim/session.vim
-      break
-    elseif answer == "no"
-      break
-    endif
-  endwhile
-else
-  echomsg "no session file found."
-endif
+command! -nargs=1 GrepAutosar :vimgrep /<args>/ C_AUTOSAR\AUTOSAR_tresos\workspace\Application\output\generated\**\*.[ch]
 
 " }}}
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker
-
