@@ -11,15 +11,22 @@ set background=dark
 let g:colors_name = "angrybee"
 
 " basics
-highlight Normal    guifg=#e8e8e8  guibg=#18242e gui=none
+highlight Normal    guifg=#d8d8d8  guibg=#18242e gui=none
 highlight NonText   guifg=#4285F4  guibg=bg      gui=none
 highlight Cursor    guifg=#000000  guibg=#ffffff gui=none
 highlight Visual    guifg=#c0d8d8  guibg=#255560 gui=none
 
+" used if Nvim's option 'winhighlight' exists (Nvim)
+if has ('nvim')
+  highlight NormalFocus   guibg=#102025
+  highlight NormalNoFocus guibg=#18242e
+  set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
+endif
+
 " Decoration
-highlight StatusLine    guifg=#ffffff   guibg=#70aacf  gui=none
-highlight User1         guifg=#ffffff   guibg=#70aacf  gui=none
-highlight User2         guifg=#ffffff   guibg=#70aacf  gui=none
+highlight StatusLine    guifg=#ffffff   guibg=#708ac0  gui=none
+highlight User1         guifg=#ffffff   guibg=#708ac0  gui=none
+highlight User2         guifg=#ffffff   guibg=#708ac0  gui=none
 highlight StatusLineNC  guifg=#a0a0a0   guibg=#2e3e48  gui=none
 highlight VertSplit     guifg=#606060   guibg=bg       gui=none
 highlight LineNr        guifg=#405060   guibg=bg       gui=none
@@ -41,14 +48,14 @@ highlight! link TabLine      StatusLineNC
 highlight! link TabLineSel   StatusLine
 
 " Search
-highlight IncSearch     guifg=#eb60cf  guibg=#601050 gui=underline
+highlight IncSearch     guifg=#202020  guibg=#d0d0d0 gui=none
 highlight Search        guifg=#40b0cf  guibg=#204860 gui=none
 highlight MatchParen    guifg=#40e0e0  guibg=bg      gui=underline
 
 " Structure
 highlight Statement     guifg=#e0c040   guibg=bg      gui=bold
 highlight Conditional   guifg=#c0c000   guibg=bg      gui=bold
-highlight Type          guifg=#80c0c0   guibg=bg      gui=none
+highlight Type          guifg=#70d0d0   guibg=bg      gui=none
 highlight Structure     guifg=#808080   guibg=bg      gui=none
 highlight StorageClass  guifg=#b0d040   guibg=bg      gui=none
 highlight PreProc       guifg=#d0d040   guibg=bg      gui=none
@@ -56,8 +63,8 @@ highlight PreCondit     guifg=#d0d040   guibg=bg      gui=bold
 highlight Comment       guifg=#409090   guibg=bg      gui=none
 highlight Function      guifg=#f8f8f8   guibg=bg      gui=bold
 highlight Identifier    guifg=#00c8d8   guibg=bg      gui=none
-highlight Special       guifg=fg        guibg=bg      gui=none
-highlight Constant      guifg=#b8f0f0   guibg=bg      gui=none
+highlight Special       guifg=#c0c040   guibg=bg      gui=none
+highlight Constant      guifg=#88e0e0   guibg=bg      gui=none
 highlight Number        guifg=#e0e060   guibg=bg      gui=none
 
 highlight Title         guifg=fg        guibg=bg      gui=bold
@@ -118,22 +125,23 @@ highlight diffBDiffer   guifg=fg
 highlight diffIsA       guifg=fg
 highlight diffNoEOL     guifg=fg
 highlight diffCommon    guifg=fg
-highlight diffRemoved   guifg=fg gui=italic
+highlight diffRemoved   guifg=fg      gui=italic
 highlight diffChanged   guifg=fg
-highlight diffAdded     guifg=white gui=bold
+highlight diffAdded     guifg=white   gui=bold
 highlight diffLine      guifg=yellow1
 highlight diffSubname   guifg=fg
 highlight diffComment   guifg=fg
 
 " netrw
-highlight netrwMarkFile                     gui=inverse
+highlight netrwMarkFile          gui=inverse
 
 " filetype html
 highlight htmlH1 guifg=skyblue1  gui=bold
 highlight htmlH2 guifg=skyblue3  gui=none
 highlight htmlH3 guifg=skyblue3  gui=none
+highlight htmlBold               gui=bold
+highlight htmlItalic             gui=italic
 
 " markdown
 highlight! link markdownCode String
 highlight! link markdownCodeBlock Comment
-
