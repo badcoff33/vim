@@ -13,14 +13,14 @@ set background=dark
 let g:colors_name = "glimmer"
 
 " very basic things
-highlight Normal  guifg=grey85      guibg=grey11          ctermbg=black
+highlight Normal  guifg=grey85      guibg=grey16          ctermbg=black
 highlight NonText guifg=dodgerblue1 guibg=bg              gui=none
 highlight Visual  guifg=white       guibg=dodgerblue3
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
-  highlight NormalFocus   guibg=grey11
-  highlight NormalNoFocus guibg=grey14
+  highlight NormalFocus   guibg=grey13
+  highlight NormalNoFocus guibg=grey16
   set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
 endif
 
@@ -44,7 +44,7 @@ highlight SignColumn   guifg=skyblue4   guibg=bg
 
 " search
 highlight IncSearch  guifg=white        guibg=dodgerblue3 gui=bold
-highlight Search     guifg=cyan1        guibg=bg          gui=underline
+highlight Search     guifg=fg           guibg=grey35      gui=bold
 highlight MatchParen guifg=deepskyblue2 guibg=bg          gui=underline
 
 " popup Menu
@@ -60,16 +60,16 @@ highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 
 " code
-highlight Statement     guifg=yellow2         gui=bold
-highlight Conditional   guifg=yellow2         gui=bold
-highlight PreProc       guifg=green3          gui=bold
-highlight Comment       guifg=grey45
+highlight Statement     guifg=yellow2         gui=none
+highlight Conditional   guifg=yellow2         gui=none
+highlight PreProc       guifg=green3          gui=none
+highlight Comment       guifg=lightblue3
 highlight Type          guifg=deepskyblue1    gui=none
 highlight StorageClass  guifg=green2          gui=none
 highlight Function      guifg=green1          gui=bold
 highlight Identifier    guifg=violetred1
-highlight Special       guifg=magenta2
-highlight Constant      guifg=cornflowerblue
+highlight Special       guifg=cyan
+highlight Constant      guifg=cyan
 highlight! link SpecialKey Special
 
 highlight Title         guifg=goldenrod                   gui=none
@@ -93,7 +93,7 @@ highlight qfError     guifg=grey60
 
 " Vim script
 highlight vimCommentTitle guifg=grey90      gui=bold
-highlight vimGroupName    guifg=cornflowerblue
+highlight vimGroupName    guifg=lightblue
 
 " C code
 highlight cCppOut     guifg=#6060e0       guibg=#333340
@@ -104,7 +104,7 @@ highlight cBlock      guifg=deepskyblue4
 " Doxygen 
 highlight doxygenComment    guifg=deepskyblue3  gui=none
 highlight doxygenBrief      guifg=deepskyblue1  gui=none
-highlight doxygenParam      guifg=grey38        gui=none
+highlight doxygenParam      guifg=skyblue1      gui=none
 highlight doxygenOtherTODO  guifg=maroon3       gui=bold,underline
 highlight doxygenOtherWARN  guifg=maroon3       gui=bold,underline
 highlight! link doxygenSpecialOnelineDesc doxygenBrief
@@ -140,9 +140,9 @@ highlight netrwMarkFile gui=inverse
 highlight! link asciidocTitleUnderline Type
 
 " html
-highlight htmlH1 guifg=slateblue1 gui=bold
-highlight htmlH2 guifg=slateblue1
-highlight htmlH3 guifg=slateblue2
+highlight htmlH1 guifg=gold1 gui=bold
+highlight htmlH2 guifg=gold1
+highlight htmlH3 guifg=gold2
 highlight htmlBold                gui=bold
 highlight htmlItalic              gui=italic
 
