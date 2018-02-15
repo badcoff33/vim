@@ -16,6 +16,7 @@ set history=200
 set novisualbell
 set noerrorbells
 set viminfo='50,<1000,s100,:100
+set spellsuggest=best,10
 
 " Read changed files automatically if they are changed in the background
 set autoread
@@ -331,8 +332,6 @@ nnoremap <Leader>db :ShowUnsavedChanges<CR>
 
 nnoremap <Leader><Space> :WhitespaceMelt<CR>
 
-nnoremap <Leader>n :enew <bar> setfiletype markdown <bar> setlocal spell spelllang=en_us <CR>
-
 " Mappings for the forgotten Umlaute keys
 " use command :ascii or 'ga' on the character you like to find the code
 
@@ -358,8 +357,8 @@ nnoremap <A-k> :cprevious<CR>zz
 nnoremap <A-j> :cnext<CR>zz
 
 nnoremap <F1>    :execute "botright copen " . max([ &lines/2, 10 ])<CR>
-nnoremap <F2>    :if &bt=='quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
-nnoremap <F3>    :buffer<Space>
+nnoremap <F2>    :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
+nnoremap <F3>    :find<Space>
 nnoremap <F4>    :cnext<CR>zz
 nnoremap <S-F4>  :cprev<CR>zz
 nnoremap <F12>   :tjump /
