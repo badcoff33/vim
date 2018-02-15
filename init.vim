@@ -357,7 +357,7 @@ nnoremap <C-Insert> "*yiw
 nnoremap <A-k> :cprevious<CR>zz
 nnoremap <A-j> :cnext<CR>zz
 
-nnoremap <F1>    :execute "botright copen " . max([ &line/2, 10 ])<CR> 
+nnoremap <F1>    :execute "botright copen " . max([ &lines/2, 10 ])<CR>
 nnoremap <F2>    :if &bt=='quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
 nnoremap <F3>    :buffer<Space>
 nnoremap <F4>    :cnext<CR>zz
