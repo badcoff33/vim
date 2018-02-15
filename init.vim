@@ -247,7 +247,7 @@ let g:netrw_liststyle = 1
 " commands {{{
 
 command! -nargs=0 Welcome                call Welcome()
-command! -nargs=1 SwitchWorkspace        call workspace#Switch()
+command! -nargs=0 SwitchWorkspace        call workspace#Switch()
 command! -nargs=0 ShowHiName             call HiName()
 command! -nargs=0 ToggleStickyCursorline call ToggleStickyCursorLine()
 
