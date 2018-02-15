@@ -17,6 +17,12 @@ A plain installation works surprisingly well for me. I tried really a lot of opt
 
 Install plugins as recommended by Vim's manual `:help packages`
 
+### Vim Knowledge
+
+*Vim Tips* -- http://vim.wikia.com/wiki/Vim_Tips_Wiki
+
+*Vim Galore* -- https://github.com/mhinz/vim-galore
+
 ### Custom Command Completion
 
 Here is a Vim script to show custom completion of a new command:
