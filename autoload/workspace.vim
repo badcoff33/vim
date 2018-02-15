@@ -6,8 +6,13 @@ function! workspace#Switch()
   let g:workspace_session_file = $TEMP. "/" . sha256(getcwd()) . ".vim"
 
   if filereadable("../workspace.vim")
+    " Source the top (project-family-like) workspace file
     source ../workspace.vim
-  elseif filereadable("workspace.vim")
+  endif
+  
+  if filereadable("workspace.vim")
+    " Source the local workspace file. Options set by top workspace file 
+    " can be overwritten.
     source workspace.vim
   endif
 
