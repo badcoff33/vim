@@ -16,6 +16,8 @@ set history=200
 set novisualbell
 set noerrorbells
 set viminfo='50,<1000,s100,:100
+
+" limit numer of suggestions of z=
 set spellsuggest=best,10
 
 " Read changed files automatically if they are changed in the background
