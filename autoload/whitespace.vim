@@ -23,15 +23,15 @@ endfunction
 " Description: Delete empty lines around cursor.
 function! s:OneBlankLine()
   while line('.') > 1 && empty(getline(line('.') - 1))
-    normal kdd
+    normal k"_dd
   endwhile
   while line('.') < line('$') && empty(getline(line('.'))) && empty(getline(line('.') + 1))
-    normal dd
+    normal "_dd
   endwhile
   " Top and last lines needs special treatment.
   if line('.') == 1 || line('.') == line('$')
     if empty(getline('.'))
-      normal dd
+      normal "_dd
     endif
   endif
 endfunction
@@ -40,10 +40,10 @@ endfunction
 function! s:OneSpace()
   if s:CharUnderCursor("curr") == " "
     while s:CharUnderCursor("prev") == " " && getcurpos()[2] > 1
-      normal hx
+      normal h"_x
     endwhile
     while s:CharUnderCursor("next") == " "
-      normal x
+      normal "_x
     endwhile
   endif
 endfunction

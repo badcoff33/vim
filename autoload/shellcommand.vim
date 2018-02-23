@@ -9,7 +9,7 @@
 function! shellcommand#Run(cmdLine)
 
   if !exists("s:outputBuffer")
-    let s:outputBuffer = tempname()
+    let s:outputBuffer = "[SCRun]"
   endif
 
   let winnr = bufwinnr(s:outputBuffer)
@@ -27,7 +27,7 @@ function! shellcommand#Run(cmdLine)
   else
     " No ShellCommand buffer
     execute "edit " . s:outputBuffer
-    setlocal noswapfile nowrap
+    setlocal noswapfile nowrap buftype=nofile
   endif
 
   let cmdRun = ""

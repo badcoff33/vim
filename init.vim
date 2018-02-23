@@ -96,7 +96,7 @@ set completeopt=menu
 set pumheight=10
 
 " Command line completion
-set nowildmenu wildmode=list:full
+set nowildmenu wildmode=list:longest
 set wildignorecase
 set wildignore=*.*~
 
@@ -123,19 +123,15 @@ set diffopt=context:3,vertical,iwhite,filler
 " Note: 'cursorline' may delay cursor movement in buffer with filetype 'c'.
 " This behavior may be caused by Doxygen syntax highlighting.
 function! s:TurnCursorLineOn()
-
   if g:use_sticky_cursorline !=0 && &diff == 0 && &buftype == ""
     set cursorline
   endif
-
 endfunction
 
 function! ToggleStickyCursorLine()
-
   if !exists("g:use_sticky_cursorline")
     let g:use_sticky_cursorline = 0
   endif
-
   if g:use_sticky_cursorline == 0
     let g:use_sticky_cursorline = 1
     set cursorline
@@ -151,25 +147,20 @@ function! ToggleStickyCursorLine()
       au!
     augroup END
   endif
-
 endfunction
 
 " Description: Jump to last location. Check out :help line(). Function checks
 " if the '" marker is valid. Jump to the mark, but don't change the jumplist
 " when jumping within the current buffer (:help g').
 function! RestoreCursor ()
-
   if line("'\"") > 1 && line("'\"") <= line("$")
     exe "normal! g'\""
   endif
-
 endfunction
 
 " Description: A context sensitve file movement function.
 function! FastForwardAndRewind(direction)
-
   if a:direction == "fastforward"
-
     if &diff
       normal ]czz
     elseif &filetype == "diff"
@@ -181,9 +172,7 @@ function! FastForwardAndRewind(direction)
     else
       normal ]]
     endif
-
   elseif a:direction == "rewind"
-
     if &diff
       normal [czz
     elseif &filetype == "diff"
@@ -195,32 +184,38 @@ function! FastForwardAndRewind(direction)
     else
       normal [[
     endif
-
   endif
-
 endfunction
 
 function! HiName()
-
   let synid = synID(line("."), col("."), 0)
   let synidtrans = synIDtrans(synid)
   echo synIDattr(synidtrans, "name")
-
 endfunction
 
+" Description: My splash screen (with one-liner Vim script in it)
 function! Welcome()
-
   let l:welcome_text_file = '~/Documents/welcome.txt'
-
   if filereadable(expand(l:welcome_text_file))
     execute 'edit ' . l:welcome_text_file
     nmap <buffer> <CR> 0y$:<C-r>"<CR>
   endif
+endfunction
 
+" Description: Create or move to buffer ClipboardTxt, start to write text,
+" switch to another application and copy the clipboard, filled with
+" ClipboardTxt.
+function! ClipboardBuffer()
+  if bufexists("ClipboardTxt")
+    buffer ClipboardTxt
+  else
+    edit ClipboardTxt
+    setlocal buftype=nofile
+    autocmd FocusLost clipboard.txt  normal gg"*yG
+  endif
 endfunction
 
 function! HighlightWord(word)
-
   if !exists("s:thisHighlightWord")
     let s:thisHighlightWord = ""
   endif
@@ -232,7 +227,6 @@ function! HighlightWord(word)
     let s:thisHighlightWord = ""
     match none
   endif
-
 endfunction
 
 " }}}
@@ -251,7 +245,6 @@ command! -nargs=0 Welcome                call Welcome()
 command! -nargs=0 SwitchWorkspace        call workspace#Switch()
 command! -nargs=0 ShowHiName             call HiName()
 command! -nargs=0 ToggleStickyCursorline call ToggleStickyCursorLine()
-
 
 command! -nargs=0 WhitespaceCleanup   call whitespace#Cleanup()
 command! -nargs=0 WhitespaceMelt      call whitespace#Melt()
@@ -325,6 +318,7 @@ nnoremap <Leader>h :call HighlightWord("<C-r><C-w>")<CR>
 nnoremap <Leader>tn :$tabnew<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
+nnoremap <Leader>c  :call ClipboardBuffer()<CR>
 nnoremap <Leader>dt :ToggleVimdiff<CR>
 nnoremap <Leader>du :wa <BAR> diffupdate<CR>
 nnoremap <Leader>do :VimdiffFileContext<CR>
@@ -396,8 +390,7 @@ cnoremap <A-.> <C-r>=expand("%:p:h")<CR>
 
 " }}}
 
-
-" Save when losing focus
+" Save when Neovim's losing or gaining focus
 augroup ginit
   " clear group in case file sourced several times
   autocmd!
