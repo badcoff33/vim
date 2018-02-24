@@ -7,7 +7,7 @@ function! s:WhatHiGroupName()
 endfunction
 
 " Description: Adjust spaces in C code files.
-function! cfunctions#CodeCleanup()
+function! c#CodeCleanup()
   normal m5gg
   " Rule "Put one space after each keyword"
   while search('\<\(switch\|if\|while\)(', 'W') > 0
@@ -35,7 +35,7 @@ function! cfunctions#CodeCleanup()
   normal '5
 endfunction
 
-function! cfunctions#ToggleSourceHeaderFile()
+function! c#ToggleSourceHeaderFile()
   let l:file_pairs = {
         \ 'c': ['.h', 'Port.h'],
         \ 'h': ['.c'] }
@@ -58,7 +58,7 @@ endfunction
 
 " Description: scan trough current TAG file, find the function symbols and
 " highlight them as keyword.
-function! cfunctions#HighlightTaggedFunctions()
+function! c#HighlightTaggedFunctions()
   for l:tagsfile in tagfiles()
     for l:line in readfile(l:tagsfile)
       if match(l:line, '\<f\>') > 0
@@ -71,7 +71,7 @@ endfunction
 
 " Description: scan trough current TAG file, find the type symbols and
 " highlight them as keyword.
-function! cfunctions#HighlightTaggedTypes()
+function! c#HighlightTaggedTypes()
   for l:tagsfile in tagfiles()
     for l:line in readfile(l:tagsfile)
       if match(l:line, '\<t\>') > 0
@@ -89,7 +89,7 @@ if !exists("g:c_use_simple_tag_preview")
   let g:c_use_simple_tag_preview = 1
 endif
 
-function! cfunctions#ToggleAutoPreviewTag()
+function! c#ToggleAutoPreviewTag()
   if !exists("#ToggleAutoPreviewTag:CursorHold")
     let s:savePreviewHeight=&previewheight
     let s:saveUpdateTime=&updatetime
