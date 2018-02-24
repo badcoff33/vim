@@ -117,121 +117,6 @@ set autowrite
 " Tune the diff feature for my needs.
 set diffopt=context:3,vertical,iwhite,filler
 
-" functions {{{
-
-" Description: Make the actual window more obvious.
-" Active 'cursorline' option in diff buffers overrules highlighting of
-" differences. Buffers with 'diff' option shall not use 'cursorline'.
-" Note: 'cursorline' may delay cursor movement in buffer with filetype 'c'.
-" This behavior may be caused by Doxygen syntax highlighting.
-function! s:TurnCursorLineOn()
-  if g:use_sticky_cursorline !=0 && &diff == 0 && &buftype == ""
-    set cursorline
-  endif
-endfunction
-
-function! ToggleStickyCursorLine()
-  if !exists("g:use_sticky_cursorline")
-    let g:use_sticky_cursorline = 0
-  endif
-  if g:use_sticky_cursorline == 0
-    let g:use_sticky_cursorline = 1
-    set cursorline
-    augroup ToggleStickyCursorline
-      au!
-      autocmd WinLeave * set nocursorline
-      autocmd BufEnter,BufWinEnter,WinEnter * call s:TurnCursorLineOn()
-    augroup END
-  else
-    let g:use_sticky_cursorline = 0
-    set nocursorline
-    augroup ToggleStickyCursorline
-      au!
-    augroup END
-  endif
-endfunction
-
-" Description: Jump to last location. Check out :help line(). Function checks
-" if the '" marker is valid. Jump to the mark, but don't change the jumplist
-" when jumping within the current buffer (:help g').
-function! RestoreCursor ()
-  if line("'\"") > 1 && line("'\"") <= line("$")
-    exe "normal! g'\""
-  endif
-endfunction
-
-" Description: A context sensitve file movement function.
-function! FastForwardAndRewind(direction)
-  if a:direction == "fastforward"
-    if &diff
-      normal ]czz
-    elseif &filetype == "diff"
-      execute search('^\(diff\|@@\)','W')
-    elseif &filetype == "help"
-      execute search('^[0-9\.]\+\s\+[A-Z]\+.*\*[a-z-]\+\*','W')
-		elseif &filetype == "markdown"
-			execute search('^#\+\s\+','W')
-    else
-      normal ]]
-    endif
-  elseif a:direction == "rewind"
-    if &diff
-      normal [czz
-    elseif &filetype == "diff"
-      execute search('^\(diff\|@@\)','bW')
-    elseif &filetype == "help"
-      execute search('^[0-9\.]\+\s\+[A-Z]\+.*\*[a-z-]\+\*','bW')
-		elseif &filetype == "markdown"
-			execute search('^#\+\s\+','bW')
-    else
-      normal [[
-    endif
-  endif
-endfunction
-
-function! HiName()
-  let synid = synID(line("."), col("."), 0)
-  let synidtrans = synIDtrans(synid)
-  echo synIDattr(synidtrans, "name")
-endfunction
-
-" Description: My splash screen (with one-liner Vim script in it)
-function! Welcome()
-  let l:welcome_text_file = '~/Documents/welcome.txt'
-  if filereadable(expand(l:welcome_text_file))
-    execute 'edit ' . l:welcome_text_file
-    nmap <buffer> <CR> 0y$:<C-r>"<CR>
-  endif
-endfunction
-
-" Description: Create or move to buffer ClipboardTxt, start to write text,
-" switch to another application and copy the clipboard, filled with
-" ClipboardTxt.
-function! ClipboardBuffer()
-  if bufexists("ClipboardTxt")
-    buffer ClipboardTxt
-  else
-    edit ClipboardTxt
-    setlocal buftype=nofile
-    autocmd FocusLost clipboard.txt  normal gg"*yG
-  endif
-endfunction
-
-function! HighlightWord(word)
-  if !exists("s:thisHighlightWord")
-    let s:thisHighlightWord = ""
-  endif
-  echo s:thisHighlightWord
-  if a:word != s:thisHighlightWord
-    let s:thisHighlightWord = a:word
-    execute ":match HighlightWordGroup /\\<" . a:word . "\\>/"
-  else
-    let s:thisHighlightWord = ""
-    match none
-  endif
-endfunction
-
-" }}}
 
 " plugin variables {{{
 
@@ -243,10 +128,13 @@ let g:netrw_liststyle = 1
 
 " commands {{{
 
-command! -nargs=0 Welcome                call Welcome()
+command! -nargs=0 Welcome                call init#Welcome()
+command! -nargs=0 ShowHiName             call init#HiName()
+command! -nargs=0 ToggleStickyCursorline call init#ToggleStickyCursorLine()
+command! -nargs=0 ClipboardBuffer        call init#ClipboardBuffer()
+command! -nargs=1 HighlightWord          call init#HighlightWord("<args>")
+
 command! -nargs=0 SwitchWorkspace        call workspace#Switch()
-command! -nargs=0 ShowHiName             call HiName()
-command! -nargs=0 ToggleStickyCursorline call ToggleStickyCursorLine()
 
 command! -nargs=0 WhitespaceCleanup   call whitespace#Cleanup()
 command! -nargs=0 WhitespaceMelt      call whitespace#Melt()
@@ -259,7 +147,7 @@ command! -nargs=0 TwoDirDiff          call vimdiff#TwoDirDiff()
 command! -complete=file -nargs=+ SCRun call shellcommand#Run([<f-args>])
 command! -nargs=0 SCBuffer             call shellcommand#ShowBuffer()
 
-" }}}
+" }}} commands
 
 " autocommands {{{
 
@@ -270,7 +158,7 @@ augroup init
   " How to handle multiple windows?
   autocmd VimResized * wincmd =
 
-  autocmd BufReadPost * call RestoreCursor()
+  autocmd BufReadPost * call init#RestoreCursor()
 
   autocmd BufWritePre *.c,*.h :WhitespaceCleanup
   autocmd BufWritePre *.py    :WhitespaceCleanup
@@ -283,7 +171,17 @@ augroup init
 
 augroup END
 
-" }}}
+" Save when Neovim's losing or gaining focus
+augroup ginit
+  " clear group in case file sourced several times
+  autocmd!
+  " write all buffers when loosing focus
+  autocmd FocusLost * :silent! wall
+  " Reload changed buffers. Command rely on option 'autoread'
+  autocmd FocusGained * :checktime
+augroup END
+
+" }}} autocommands
 
 " mappings {{{
 
@@ -316,11 +214,11 @@ inoremap <C-Tab> <C-]>
 nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
 nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 
-nnoremap <Leader>h :call HighlightWord("<C-r><C-w>")<CR>
 nnoremap <Leader>tn :$tabnew<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
-nnoremap <Leader>c  :call ClipboardBuffer()<CR>
+nnoremap <Leader>h  :HighlightWord <C-r><C-w><CR>
+nnoremap <Leader>c  :ClipboardBuffer<CR>
 nnoremap <Leader>dt :ToggleVimdiff<CR>
 nnoremap <Leader>du :wa <BAR> diffupdate<CR>
 nnoremap <Leader>do :VimdiffFileContext<CR>
@@ -371,7 +269,7 @@ nnoremap <f8>       :silent grep <C-r><C-w><CR>
 nnoremap <Leader>g  :silent grep <C-r><C-w>
 nnoremap <Leader>G  :silent grep<Space>
 
-nnoremap <F11>  :TagbarOpen<CR>
+nnoremap <F11>  :TagbarToggle<CR>
 
 " check my spelling
 nnoremap <Leader>se :setlocal spell spelllang=en_us<CR>
@@ -390,17 +288,7 @@ endif
 cabbrev <expr> \\ expand("%:p:h")
 cnoremap <A-.> <C-r>=expand("%:p:h")<CR>
 
-" }}}
-
-" Save when Neovim's losing or gaining focus
-augroup ginit
-  " clear group in case file sourced several times
-  autocmd!
-  " write all buffers when loosing focus
-  autocmd FocusLost * :silent! wall
-  " Reload changed buffers. Command rely on option 'autoread'
-  autocmd FocusGained * :checktime
-augroup END
+" }}} mappings
 
 colorscheme breeze
 syntax on
