@@ -162,12 +162,16 @@ augroup init
 
   autocmd BufWritePre *.c,*.h :WhitespaceCleanup
   autocmd BufWritePre *.py    :WhitespaceCleanup
+
   autocmd VimEnter,ColorScheme * highlight HighlightWordGroup gui=underline
 
   " read file templates (according to :help template)
   autocmd BufNewFile  workspace.vim  0r $LOCALAPPDATA/nvim/templates/workspace.vim
   autocmd BufNewFile  *.c            0r $LOCALAPPDATA/nvim/templates/file.c
   autocmd BufNewFile  *.h            0r $LOCALAPPDATA/nvim/templates/file.h
+  
+  " display file info
+  autocmd WinEnter *.* file
 
 augroup END
 
@@ -229,8 +233,8 @@ nnoremap <Leader><Space> :WhitespaceMelt<CR>
 " Mappings for the forgotten Umlaute keys
 " use command :ascii or 'ga' on the character you like to find the code
 
-nnoremap <char-252> :set invhlsearch<CR>
-nnoremap <char-220> :set invrelativenumber<CR>
+nnoremap <char-252> :set nonumber invrelativenumber<CR>
+nnoremap <char-220> :set invhlsearch<CR>
 nnoremap <char-246> [
 vnoremap <char-246> [
 nnoremap <char-228> ]
