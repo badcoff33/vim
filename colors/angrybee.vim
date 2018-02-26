@@ -24,10 +24,10 @@ if has ('nvim')
 endif
 
 " Decoration
-highlight StatusLine    guifg=#ffffff   guibg=#708ac0  gui=none
-highlight User1         guifg=#ffffff   guibg=#708ac0  gui=none
-highlight User2         guifg=#ffffff   guibg=#708ac0  gui=none
 highlight StatusLineNC  guifg=#a0a0a0   guibg=#2e3e48  gui=none
+highlight StatusLine    guifg=#40eeee   guibg=#405880  gui=none
+highlight User1         guifg=#40eeee   guibg=#405880  gui=none
+highlight User2         guifg=#40eeee   guibg=#405880  gui=none
 highlight VertSplit     guifg=#606060   guibg=bg       gui=none
 highlight LineNr        guifg=#405060   guibg=bg       gui=none
 highlight CursorLineNr  guifg=#455565   guibg=#353535  gui=bold
@@ -49,7 +49,7 @@ highlight! link TabLineSel   StatusLine
 
 " Search
 highlight IncSearch     guifg=#202020  guibg=#d0d0d0 gui=none
-highlight Search        guifg=#40b0cf  guibg=#204860 gui=none
+highlight Search        guifg=#40c0ef  guibg=#204860 gui=none
 highlight MatchParen    guifg=#40e0e0  guibg=bg      gui=underline
 
 " Structure
@@ -137,11 +137,12 @@ highlight netrwMarkFile          gui=inverse
 
 " filetype html
 highlight htmlH1 guifg=skyblue1  gui=bold
-highlight htmlH2 guifg=skyblue3  gui=none
-highlight htmlH3 guifg=skyblue3  gui=none
+highlight htmlH2 guifg=skyblue3  gui=bold
+highlight htmlH3 guifg=skyblue3  gui=bold
 highlight htmlBold               gui=bold
 highlight htmlItalic             gui=italic
 
 " markdown
 highlight! link markdownCode String
 highlight! link markdownCodeBlock Comment
+
