@@ -22,10 +22,10 @@ if has ('nvim')
 endif
 
 " window decoration
-highlight StatusLine   guifg=white  guibg=cornflowerblue gui=none
-highlight User1        guifg=white  guibg=cornflowerblue gui=bold
-highlight User2        guifg=white  guibg=cornflowerblue gui=none
-highlight StatusLineNC guifg=grey50 guibg=grey85         gui=none
+highlight StatusLine   guifg=white  guibg=dodgerblue   gui=none
+highlight User1        guifg=white  guibg=dodgerblue   gui=bold
+highlight User2        guifg=white  guibg=dodgerblue   gui=none
+highlight StatusLineNC guifg=grey50 guibg=dodgergrey85 gui=none
 highlight VertSplit    guifg=grey85 guibg=grey85
 highlight! link WildMenu IncSearch
 
@@ -55,10 +55,10 @@ highlight Search                  guibg=yellow       gui=none
 highlight MatchParen  guifg=fg    guibg=bg           gui=underline
 
 " code
-highlight Statement     guifg=maroon3     gui=none
-highlight Conditional   guifg=maroon3     gui=none
-highlight Type          guifg=skyblue3    gui=none
-highlight StorageClass  guifg=blue4       gui=none
+highlight Statement     guifg=maroon3     gui=bold
+highlight Conditional   guifg=maroon3     gui=bold
+highlight Type          guifg=dodgerblue2 gui=none
+highlight StorageClass  guifg=grey50  gui=bold
 highlight PreProc       guifg=dodgerblue2 gui=none
 highlight Comment       guifg=forestgreen
 highlight Identifier    guifg=aquamarine4
@@ -84,11 +84,11 @@ highlight qfLineNr    guifg=dodgerblue4
 highlight qfSeparator guifg=dodgerblue4
 
 " Doxygen highlighting
-highlight doxygenComment            guifg=darkseagreen4 gui=none
-highlight doxygenBrief              guifg=seagreen4     gui=bold
-highlight doxygenParam              guifg=seagreen3     gui=none
-highlight doxygenSpecial            guifg=darkseagreen3 gui=none
-highlight doxygenSpecialOnelineDesc guifg=darkseagreen3
+highlight doxygenComment            guifg=darkseagreen3        gui=none
+highlight doxygenBrief              guifg=darkseagreen4        gui=bold
+highlight doxygenParam              guifg=darkseagreen3        gui=italic
+highlight doxygenSpecial            guifg=darkseagreen4        gui=none
+highlight doxygenSpecialOnelineDesc guifg=darkseagreen4
 
 " Diff highlighting
 highlight DiffChange  guifg=black       guibg=yellow2     gui=none
@@ -126,3 +126,5 @@ highlight htmlItalic                gui=italic
 " markdown
 highlight! link markdownCode String
 highlight! link markdownCodeBlock Comment
+
+
