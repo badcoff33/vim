@@ -190,8 +190,8 @@ augroup END
 " mappings {{{
 
 " Set leader and localleader keys, that works best for me
-let mapleader=" "
-let maplocalleader="-"
+let mapleader = " "
+let maplocalleader = "\\"
 
 " surround visual selection with ", ', (, [
 vnoremap <Leader>" c"<C-R>-"<Esc>
@@ -251,12 +251,14 @@ endif
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
 
-nnoremap <A-k> :cprevious<CR>zz
-nnoremap <A-j> :cnext<CR>zz
+nnoremap - :cprevious<CR>zz
+nnoremap + :cnext<CR>zz
+nnoremap <Leader>c :execute "botright copen " . max([ &lines/2, 10 ])<CR>
+nnoremap <Leader><Leader>c :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
 
-nnoremap <F1>    :execute "botright copen " . max([ &lines/2, 10 ])<CR>
-nnoremap <F2>    :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
-nnoremap <F3>    :find<Space>
+nnoremap <Leader>f    :find<Space>
+nnoremap <Leader>b    :buffer<Space>
+
 nnoremap <F4>    :cnext<CR>zz
 nnoremap <S-F4>  :cprev<CR>zz
 nnoremap <F12>   :tjump /
@@ -278,7 +280,7 @@ nnoremap <F11>  :TagbarToggle<CR>
 " check my spelling
 nnoremap <Leader>se :setlocal spell spelllang=en_us<CR>
 nnoremap <Leader>sg :setlocal spell spelllang=de_de<CR>
-nnoremap <Leader>so :setlocal nospell<CR>
+nnoremap <Leader><Leader>s :setlocal nospell<CR>
 
 " run Vims own grep on files directories
 nnoremap <Leader>1 :wall<CR> :vimgrep //j <C-r>=simplify(fnameescape(expand("%:p:h")) . "\\*." . &filetype)<CR><C-b><C-Right><Right><Right>
@@ -293,6 +295,8 @@ cabbrev <expr> \\ expand("%:p:h")
 cnoremap <A-.> <C-r>=expand("%:p:h")<CR>
 
 " }}} mappings
+
+packadd quickname
 
 colorscheme breeze
 syntax on
