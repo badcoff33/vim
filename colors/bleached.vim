@@ -4,7 +4,6 @@
 " Description:  This color theme uses color names, defined by X11 file
 " 'rgb.txt'. Once you get used to the color names, it is quit easy to start or
 " change a color theme file. IMO, more easier than hex numbers.
-" TODO 
 
 if exists("syntax_on")
   syntax reset
@@ -16,10 +15,16 @@ let g:colors_name = "bleached"
 
 highlight Normal        guifg=grey25      guibg=snow1
 highlight NonText       guifg=cyan3       guibg=bg
-highlight Visual                          guibg=azure2
+highlight Visual                          guibg=lightcyan2
+
+" used if option 'winhl' exists (Nvim)
+if has ('nvim')
+  highlight NormalFocus   guibg=white
+  highlight NormalNoFocus guibg=snow1
+endif
 
 " cursor
-highlight Cursor        guifg=white           guibg=slateblue4
+highlight Cursor        guifg=white           guibg=slateblue4 gui=none
 highlight CursorLineNr  guifg=cornflowerblue  guibg=snow2   gui=bold
 highlight CursorLine                          guibg=snow2
 
@@ -48,13 +53,13 @@ highlight  PmenuThumb guifg=white
 
 highlight Search guifg=cyan4 guibg=lightcyan2 gui=bold
 highlight IncSearch guifg=hotpink4 guibg=pink1 gui=bold
-highlight MatchParen guibg=bg gui=underline
+highlight MatchParen guibg=bg gui=underline,bold
 
 highlight Statement     guifg=hotpink3 gui=bold
 highlight Conditional   guifg=hotpink2 gui=bold
 highlight Function      guifg=hotpink4 gui=bold
 highlight Type          guifg=steelblue3 gui=none
-highlight StorageClass  guifg=maroon2 gui=none
+highlight StorageClass  guifg=maroon2 gui=bold
 highlight PreProc       guifg=steelblue4 gui=none
 highlight Comment       guifg=slategray
 highlight Identifier    guifg=aquamarine4
@@ -80,7 +85,7 @@ highlight QuickFixLine gui=bold
 " Tune Doxygen highlighting
 highlight doxygenComment            guifg=steelblue4   gui=none
 highlight doxygenBody               guifg=deepskyblue3 gui=none
-highlight doxygenBrief              guifg=dodgerblue4  gui=none
+highlight doxygenBrief              guifg=dodgerblue4  gui=bold
 highlight doxygenParam              guifg=skyblue1     gui=none
 highlight doxygenSpecial            guifg=skyblue3 gui=none
 highlight doxygenSpecialOnelineDesc guifg=skyblue3
@@ -114,6 +119,8 @@ highlight netrwMarkFile gui=inverse
 highlight htmlH1 guifg=skyblue1  gui=bold
 highlight htmlH2 guifg=skyblue3  gui=none
 highlight htmlH3 guifg=skyblue3  gui=none
+highlight htmlBold               gui=bold
+highlight htmlItalic             gui=italic
 
 " markdown
 highlight! link markdownCode String
