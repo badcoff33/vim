@@ -94,7 +94,7 @@ function! init#ClipboardBuffer()
   else
     edit ClipboardTxt
     setlocal buftype=nofile
-    autocmd FocusLost clipboard.txt  normal gg"*yG
+    autocmd FocusLost ClipboardTxt  normal gg"*yG
   endif
 endfunction
 
