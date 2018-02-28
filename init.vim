@@ -144,9 +144,6 @@ command! -nargs=0 ToggleVimdiff       call vimdiff#Toggle()
 command! -nargs=0 VimdiffFileContext  call vimdiff#FileContext()
 command! -nargs=0 TwoDirDiff          call vimdiff#TwoDirDiff()
 
-command! -complete=file -nargs=+ SCRun call shellcommand#Run([<f-args>])
-command! -nargs=0 SCBuffer             call shellcommand#ShowBuffer()
-
 " }}} commands
 
 " autocommands {{{
