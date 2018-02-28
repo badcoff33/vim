@@ -93,12 +93,12 @@ set showcmd
 set showmatch matchtime=1
 
 " Insert mode completion
-set complete=.,w,b
+set complete=.,w
 set completeopt=menu
 set pumheight=10
 
 " Command line completion
-set nowildmenu wildmode=list:longest
+set nowildmenu wildmode=list:longest,full
 set wildignorecase
 set wildignore=*.*~
 
@@ -200,14 +200,6 @@ vnoremap <Leader>` c`<C-R>-`<Esc>
 vnoremap <Leader>( c(<C-R>-)<Esc>
 vnoremap <Leader>[ c[<C-R>-]<Esc>
 
-nnoremap <BS> :<C-f>i
-vnoremap <BS> :
-
-" remove overwritten mapping
-if exists("win32") || exists("win64")
-  silent! vunmap <C-X>
-endif
-
 " Try this! Use <C-V><Tab> to insert a real tab
 inoremap <C-Space> <Esc>
 
@@ -239,8 +231,10 @@ nnoremap <char-246> [
 vnoremap <char-246> [
 nnoremap <char-228> ]
 vnoremap <char-228> ]
-nnoremap <char-214> ?
-nnoremap <char-196> /
+nnoremap <char-214> {
+vnoremap <char-214> {
+nnoremap <char-196> }
+vnoremap <char-196> }
 
 nnoremap <silent> <A-left> :call FastForwardAndRewind("rewind")<cr>
 nnoremap <silent> <A-right> :call FastForwardAndRewind("fastforward")<cr>
@@ -295,8 +289,6 @@ cabbrev <expr> \\ expand("%:p:h")
 cnoremap <A-.> <C-r>=expand("%:p:h")<CR>
 
 " }}} mappings
-
-packadd quickname
 
 colorscheme breeze
 syntax on
