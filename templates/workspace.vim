@@ -20,12 +20,6 @@ let g:syntax_custom_c_types = 1
 " no tag info while useing tag completion in cmd line
 set wildoptions=
 
-" plugins
-let g:tagbar_left = 1
-nmap <Leader>T :TagbarToggle<CR>
-
-packadd tagbar
-
 iabbrev x16 (uint16)
 iabbrev x8  (uint8)
 

@@ -120,29 +120,33 @@ set diffopt=context:3,vertical,iwhite,filler
 
 " plugin variables {{{
 
-" customize Netrw
+" Netrw
 let g:netrw_use_errorwindow = 0
 let g:netrw_liststyle = 1
+
+" Tagbar
+let g:tagbar_left = 1
+packadd! tagbar
 
 " }}}
 
 " commands {{{
 
-command! -nargs=0 Welcome                call init#Welcome()
-command! -nargs=0 ShowHiName             call init#HiName()
+command! -nargs=0 Welcome call init#Welcome()
+command! -nargs=0 ShowHiName call init#HiName()
 command! -nargs=0 ToggleStickyCursorline call init#ToggleStickyCursorLine()
-command! -nargs=0 ClipboardBuffer        call init#ClipboardBuffer()
-command! -nargs=1 HighlightWord          call init#HighlightWord("<args>")
+command! -nargs=0 ClipboardBuffer call init#ClipboardBuffer()
+command! -nargs=1 HighlightWord call init#HighlightWord("<args>")
 
-command! -nargs=0 SwitchWorkspace        call workspace#Switch()
+command! -nargs=0 SwitchWorkspace call workspace#Switch()
 
-command! -nargs=0 WhitespaceCleanup   call whitespace#Cleanup()
-command! -nargs=0 WhitespaceMelt      call whitespace#Melt()
+command! -nargs=0 WhitespaceCleanup call whitespace#Cleanup()
+command! -nargs=0 WhitespaceMelt call whitespace#Melt()
 
-command! -nargs=0 ShowUnsavedChanges  call vimdiff#UnsavedChanges()
-command! -nargs=0 ToggleVimdiff       call vimdiff#Toggle()
-command! -nargs=0 VimdiffFileContext  call vimdiff#FileContext()
-command! -nargs=0 TwoDirDiff          call vimdiff#TwoDirDiff()
+command! -nargs=0 ShowUnsavedChanges call vimdiff#UnsavedChanges()
+command! -nargs=0 ToggleVimdiff call vimdiff#Toggle()
+command! -nargs=0 VimdiffFileContext call vimdiff#FileContext()
+command! -nargs=0 TwoDirDiff call vimdiff#TwoDirDiff()
 
 " }}} commands
 
@@ -219,52 +223,39 @@ nnoremap <Leader>db :ShowUnsavedChanges<CR>
 
 nnoremap <Leader><Space> :WhitespaceMelt<CR>
 
-" Mappings for the forgotten Umlaute keys
-" use command :ascii or 'ga' on the character you like to find the code
-
-nnoremap <char-252> :set nonumber invrelativenumber<CR>
-nnoremap <char-220> :set invhlsearch<CR>
-nnoremap <char-246> [
-vnoremap <char-246> [
-nnoremap <char-228> ]
-vnoremap <char-228> ]
-nnoremap <char-214> {
-vnoremap <char-214> {
-nnoremap <char-196> }
-vnoremap <char-196> }
-
+nnoremap <A-k> :cprevious<CR>zz
+nnoremap <A-k> :cnext<CR>zz
 nnoremap <silent> <A-left> :call FastForwardAndRewind("rewind")<cr>
 nnoremap <silent> <A-right> :call FastForwardAndRewind("fastforward")<cr>
 if has('nvim')
   nnoremap <silent> <A-.> :tj <C-r><C-w><CR>
   nnoremap <silent> <A-,> :pop<CR>
 endif
+
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
 
-nnoremap - :cprevious<CR>zz
-nnoremap + :cnext<CR>zz
 nnoremap <Leader>c :execute "botright copen " . max([ &lines/2, 10 ])<CR>
 nnoremap <Leader><Leader>c :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
 
-nnoremap <Leader>f    :find<Space>
-nnoremap <Leader>b    :buffer<Space>
+nnoremap <Leader>f :find<Space>
+nnoremap <Leader>b :buffer<Space>
+nnoremap <F1> :echomsg "shifted US num keys: 1=! 2=@ 3=# 4=$ 5=% 6=^ 7=& 8=* 9=( 0=)"<CR>
 
-nnoremap <F4>    :cnext<CR>zz
-nnoremap <S-F4>  :cprev<CR>zz
-nnoremap <F12>   :tjump /
-nnoremap <F5>    :SCRun<Space>
-nnoremap <F6>    :Welcome<CR>
-nnoremap <S-F5>  :SCBuffer<CR>
+nnoremap <F4> :cnext<CR>zz
+nnoremap <S-F4> :cprev<CR>zz
+nnoremap <F12> :tjump /
+nnoremap <C-F12> :tjump <C-r><C-w><CR>
+nnoremap <F6> :Welcome<CR>
 
-nnoremap <F7>      :silent make<space><up><CR>
-nnoremap <C-F7>    :silent make<space><up>
+nnoremap <F7> :silent make<space><up><CR>
+nnoremap <C-F7> :silent make<space><up>
 nnoremap <Leader>m :silent make<space><up><CR>
 nnoremap <Leader>M :silent make<space><up>
 
-nnoremap <f8>       :silent grep <C-r><C-w><CR>
-nnoremap <Leader>g  :silent grep <C-r><C-w>
-nnoremap <Leader>G  :silent grep<Space>
+nnoremap <f8> :silent grep <C-r><C-w><CR>
+nnoremap <Leader>g :silent grep <C-r><C-w>
+nnoremap <Leader>G :silent grep<Space>
 
 nnoremap <F11>  :TagbarToggle<CR>
 
