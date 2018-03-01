@@ -120,13 +120,9 @@ set diffopt=context:3,vertical,iwhite,filler
 
 " plugin variables {{{
 
-" Netrw
 let g:netrw_use_errorwindow = 0
 let g:netrw_liststyle = 1
-
-" Tagbar
 let g:tagbar_left = 1
-packadd! tagbar
 
 " }}}
 
