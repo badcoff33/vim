@@ -136,6 +136,8 @@ command! -nargs=1 HighlightWord call init#HighlightWord("<args>")
 
 command! -nargs=0 SwitchWorkspace call workspace#Switch()
 
+command! -nargs=+  Make :call async#RunMake(<q-args>)
+
 command! -nargs=0 WhitespaceCleanup call whitespace#Cleanup()
 command! -nargs=0 WhitespaceMelt call whitespace#Melt()
 
