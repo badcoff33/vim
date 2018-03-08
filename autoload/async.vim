@@ -2,11 +2,15 @@
 
 function! s:JobHandler(job_id, data, event) 
   if a:event == 'stdout'
-    caddexpr a:data
+    for l in a:data
+      caddexpr substitute(l, '\r', '', '')
+    endfor
   elseif a:event == 'stderr'
-    caddexpr a:data
-  else
-    echomsg 'exited'
+    for l in a:data
+      caddexpr substitute(l, '\r', '', '')
+    endfor
+    elseif a:event == 'exit'
+    clist   
   endif
 endfunction
 
@@ -15,10 +19,9 @@ function! async#RunMake(commandString)
         \ 'on_stdout': function('s:JobHandler'),
         \ 'on_stderr': function('s:JobHandler'),
         \ 'on_exit': function('s:JobHandler'),
-        \ 'cwd': getcwd()
         \ }
   cexpr []
+  doautocmd QuickFixCmdPre make
   let g:job = jobstart(a:commandString, l:opts)
+  doautocmd QuickFixCmdPost make
 endfunction
-
-
