@@ -2,7 +2,14 @@
 
 function! workspace#Switch()
 
-  %bwipeout
+  try
+    %bwipeout
+  catch /E89/
+    ls +
+    echomsg "Check your changed buffers. Want to save them?"
+    return
+  endtry
+
   let g:workspace_session_file = $TEMP. "/" . sha256(getcwd()) . ".vim"
 
   let l:workspace_path = "workspace.vim"
