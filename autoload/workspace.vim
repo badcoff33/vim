@@ -5,16 +5,19 @@ function! workspace#Switch()
   %bwipeout
   let g:workspace_session_file = $TEMP. "/" . sha256(getcwd()) . ".vim"
 
-  if filereadable("../workspace.vim")
-    " Source the top (project-family-like) workspace file
-    source ../workspace.vim
-  endif
-  
-  if filereadable("workspace.vim")
-    " Source the local workspace file. Options set by top workspace file 
-    " can be overwritten.
-    source workspace.vim
-  endif
+  let l:workspace_path = "workspace.vim"
+  for i in range(4)
+    if filereadable(l:workspace_path)
+      if i == 0 
+        echomsg "found workspace file " . simplify(expand(l:workspace_path, ":p:h"))
+      else
+        echomsg "found workspace file " . simplify(expand(l:workspace_path, ":p:h"))
+      endif
+      execute "source " . l:workspace_path
+      break
+    endif
+    let l:workspace_path = "../" . l:workspace_path
+  endfor
 
   echomsg "looking for session " . fnamemodify(g:workspace_session_file, ":t:r")
   if filereadable(g:workspace_session_file)
