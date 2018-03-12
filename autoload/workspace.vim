@@ -1,7 +1,20 @@
 " Vim autoload file
 
-function! workspace#Switch()
+augroup WorkspaceSession
+  autocmd!
+  autocmd VimLeavePre * call WriteWorkspaceSession()
+augroup END
 
+function! WriteWorkspaceSession()
+  if exists("g:workspace_session_file")
+    execute "mksession! " . g:workspace_session_file
+  endif
+endfunction
+
+function! workspace#Switch()
+  
+  " save the session you want to leave
+  doautocmd WorkspaceSession VimLeavePre * 
   try
     %bwipeout
   catch /E89/
@@ -10,16 +23,12 @@ function! workspace#Switch()
     return
   endtry
 
-  let g:workspace_session_file = $TEMP. "/" . sha256(getcwd()) . ".vim"
+  let g:workspace_session_file = $TEMP . "/" . sha256(getcwd()) . ".vim"
 
   let l:workspace_path = "workspace.vim"
   for i in range(4)
     if filereadable(l:workspace_path)
-      if i == 0 
-        echomsg "found workspace file " . simplify(expand(l:workspace_path, ":p:h"))
-      else
-        echomsg "found workspace file " . simplify(expand(l:workspace_path, ":p:h"))
-      endif
+      echomsg "found workspace file " . simplify(expand(l:workspace_path, ":p:h"))
       execute "source " . l:workspace_path
       break
     endif
