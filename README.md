@@ -10,7 +10,7 @@ http://learnvimscriptthehardway.stevelosh.com
 
 ### Open the commandline window
 
-Sure, you can do `:` followed by a `<C-f>`. Or, sometimes more convinient, just press in normal mode`q:` for the command line or `q/` or `q?` to enter the search window. The advantage to open one of thiese windows is that normal mode commands can be used.
+Sure, you can do `:` followed by a `<C-f>`. Or, sometimes more convinient, just press in normal mode `q:` for the command line or `q/` or `q?` to enter the search window. The advantage to open one of these windows is that normal mode commands can be used.
 
 ### Plugins
 
