@@ -238,39 +238,33 @@ nnoremap <Leader><Leader>c :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar
 
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
-nnoremap <F1> :echomsg "shifted US num keys: 1=! 2=@ 3=# 4=$ 5=% 6=^ 7=& 8=* 9=( 0=)"<CR>
-
-nnoremap <F4> :cnext<CR>zz
-nnoremap <S-F4> :cprev<CR>zz
-nnoremap <F12> :tjump /
-nnoremap <C-F12> :tjump <C-r><C-w><CR>
-nnoremap <F6> :Welcome<CR>
-
-nnoremap <F7> :silent make<space><up><CR>
-nnoremap <C-F7> :silent make<space><up>
 nnoremap <Leader>m :silent make<space><up><CR>
 nnoremap <Leader>M :silent make<space><up>
-
-nnoremap <f8> :silent grep <C-r><C-w><CR>
 nnoremap <Leader>g :silent grep <C-r><C-w>
 nnoremap <Leader>G :silent grep<Space>
 
+nnoremap <F1> :echomsg "shifted US num keys: 1=! 2=@ 3=# 4=$ 5=% 6=^ 7=& 8=* 9=( 0=)"<CR>
+nnoremap <F4> :cnext<CR>zz
+nnoremap <S-F4> :cprev<CR>zz
+nnoremap <f5> :cexpr []<CR> :bufdo vimgrepadd /<C-r><C-w>/j %<CR>
+nnoremap <F6> :Welcome<CR>
+nnoremap <F7> :silent make<space><up><CR>
+nnoremap <C-F7> :silent make<space><up>
+nnoremap <f8> :silent grep <C-r><C-w><CR>
 nnoremap <F11>  :TagbarToggle<CR>
+nnoremap <F12> :tjump /
+nnoremap <C-F12> :tjump <C-r><C-w><CR>
 
 " check my spelling
 nnoremap <Leader>se :setlocal spell spelllang=en_us<CR>
 nnoremap <Leader>sg :setlocal spell spelllang=de_de<CR>
 nnoremap <Leader><Leader>s :setlocal nospell<CR>
 
-" run Vims own grep on files directories
-nnoremap <Leader>1 :cexpr []<CR> :bufdo vimgrepadd /<C-r><C-w>/j %<CR>
-
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
   nnoremap <Leader>x :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
 endif
 
-cabbrev <expr> \\ expand("%:p:h")
 cnoremap <A-.> <C-r>=expand("%:p:h")<CR>
 
 " }}} mappings
