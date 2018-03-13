@@ -10,8 +10,6 @@ augroup Workspace
   autocmd QuickFixCmdPost botright cwindow
   autocmd QuickFixCmdPost make UpdateCtags
 
-  " Create a session file while leaving Vim
-  autocmd VimLeavePre * execute "mksession! " . g:workspace_session_file
 augroup END
 
 " Highlight custom types of syntax file after/syntax/c.vim
@@ -31,7 +29,8 @@ set title
 set titlestring=%{getcwd()}\ -\ Vim
 set titlelen=70
 
-set path=C_HeaterCore/HeaterCore/**
+set path=.
+set path+=C_HeaterCore/HeaterCore/**
 set path+=C_HeaterCore/HeaterCore
 set path+=C_CDD/**
 set path+=C_CDD
@@ -65,9 +64,6 @@ set grepprg=rg
             \\ -g\ !TLSim
             \\ -g\ !TLProj
             \\ -g\ !_sfprj
-nnoremap <f8>       :silent grep -g !C_AUTOSAR <C-r><C-w><CR>
-nnoremap <Leader>g  :silent grep -g !C_AUTOSAR <C-r><C-w>
-nnoremap <Leader>G  :silent grep -g !C_AUTOSAR<Space>
 
 """ set grepprg=grep\ -Hn\ -r\ --include='*.[ch]'
 """             \\ --exclude-dir=TLProj

@@ -263,8 +263,7 @@ nnoremap <Leader>sg :setlocal spell spelllang=de_de<CR>
 nnoremap <Leader><Leader>s :setlocal nospell<CR>
 
 " run Vims own grep on files directories
-nnoremap <Leader>1 :wall<CR> :vimgrep //j <C-r>=simplify(fnameescape(expand("%:p:h")) . "\\*." . &filetype)<CR><C-b><C-Right><Right><Right>
-nnoremap <Leader>2 :wall<CR> :vimgrep //j <C-r>=simplify(fnameescape(expand("%:p:h")) . "\\..\\**\\*." . &filetype)<CR><C-b><C-Right><Right><Right>
+nnoremap <Leader>1 :cexpr []<CR> :bufdo vimgrepadd /<C-r><C-w>/j %<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
@@ -275,8 +274,5 @@ cabbrev <expr> \\ expand("%:p:h")
 cnoremap <A-.> <C-r>=expand("%:p:h")<CR>
 
 " }}} mappings
-
-colorscheme breeze
-syntax on
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker
