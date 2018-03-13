@@ -8,6 +8,10 @@ The web has a load of good Vim tutorials, covering how to use Vim and scripting
 tips.Here is a link to a very comprehensive online book:
 http://learnvimscriptthehardway.stevelosh.com
 
+### Open the commandline window
+
+Sure, you can do `:` followed by a `<C-f>`. Or, sometimes more convinient, just press in normal mode`q:` for the command line or `q/` or `q?` to enter the search window. The advantage to open one of thiese windows is that normal mode commands can be used.
+
 ### Plugins
 
 A plain installation works surprisingly well for me. I tried really a lot of optional Vim plugins, but removed most of them, becausse all I need comes with Vim "out of the box". But some plugins may help in certain situations. This is my short list of noteable Vim plugins:
