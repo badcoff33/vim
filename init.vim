@@ -134,6 +134,7 @@ command! -nargs=0 ToggleStickyCursorline call init#ToggleStickyCursorLine()
 command! -nargs=0 ClipboardBuffer call init#ClipboardBuffer()
 command! -nargs=1 HighlightWord call init#HighlightWord("<args>")
 
+command! -nargs=1 FindInBuffer silent g/<args>/cadde expand("%") . ":" . line(".") .  ":" . getline(".")
 command! -nargs=0 SwitchWorkspace call workspace#Switch()
 
 command! -nargs=+  Make :call async#RunMake(<q-args>)
@@ -246,7 +247,7 @@ nnoremap <Leader>G :silent grep<Space>
 nnoremap <F1> :echomsg "shifted US num keys: 1=! 2=@ 3=# 4=$ 5=% 6=^ 7=& 8=* 9=( 0=)"<CR>
 nnoremap <F4> :cnext<CR>zz
 nnoremap <S-F4> :cprev<CR>zz
-nnoremap <f5> :cexpr []<CR> :sil bufdo g/<C-r><C-w>/cadde expand("%") . ":" . line(".") .  ":" . getline(".")<CR>
+nnoremap <f5> :cexpr [] <bar> FindInBuffer <C-r><C-w><CR>
 nnoremap <F6> :Welcome<CR>
 nnoremap <F7> :silent make<space><up><CR>
 nnoremap <C-F7> :silent make<space><up>
