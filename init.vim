@@ -246,12 +246,12 @@ nnoremap <Leader>G :silent grep<Space>
 nnoremap <F1> :echomsg "shifted US num keys: 1=! 2=@ 3=# 4=$ 5=% 6=^ 7=& 8=* 9=( 0=)"<CR>
 nnoremap <F4> :cnext<CR>zz
 nnoremap <S-F4> :cprev<CR>zz
-nnoremap <f5> :cexpr []<CR> :bufdo vimgrepadd /<C-r><C-w>/j %<CR>
+nnoremap <f5> :cexpr []<CR> :sil bufdo g/<C-r><C-w>/cadde expand("%") . ":" . line(".") .  ":" . getline(".")<CR>
 nnoremap <F6> :Welcome<CR>
 nnoremap <F7> :silent make<space><up><CR>
 nnoremap <C-F7> :silent make<space><up>
 nnoremap <f8> :silent grep <C-r><C-w><CR>
-nnoremap <F11>  :TagbarToggle<CR>
+nnoremap <F11> :TagbarToggle<CR>
 nnoremap <F12> :tjump /
 nnoremap <C-F12> :tjump <C-r><C-w><CR>
 
