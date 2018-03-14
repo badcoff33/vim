@@ -112,4 +112,15 @@ function! init#HighlightWord(word)
   endif
 endfunction
 
+function! init#FindInBuffers(word)
+  let g:t = []
+  cexpr []
+  bufdo if empty(&buftype) | call add(g:t,bufnr("%")) | endif
+  for i in g:t
+    execute "buffer " . i
+    silent execute 'g/' . a:word . '/cadde expand("%") . ":" . line(".") .  ":" . getline(".")'
+  endfor
+  cfirst
+endfunction
+
 " vim:sw=2:tw=0:nocindent:foldmethod=marker
