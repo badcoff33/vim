@@ -200,7 +200,8 @@ vnoremap <Leader>` c`<C-R>-`<Esc>
 vnoremap <Leader>( c(<C-R>-)<Esc>
 vnoremap <Leader>[ c[<C-R>-]<Esc>
 
-" Try this! Use <C-V><Tab> to insert a real tab
+" Try this! 
+inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 
 " extend abbreviation
