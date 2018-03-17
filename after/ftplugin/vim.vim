@@ -9,7 +9,7 @@ setlocal shiftwidth=2
 setlocal nocindent
 
 " statusline with cursors scope info
-setlocal statusline=%1*%t%m%r%y%w\ %2*\ %{scope#ScopeParserVim()}\ %0*%=%l,%c%V\ %P
+setlocal statusline=%1*%t%m%r%y%w\ %2*\ %{scope#ScopeParserVim()}\ %3*\ %{runjob#GetStatus()}\ %0*%=%l,%c%V\ %P
 
 nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 nnoremap <buffer> <localleader>h :verbose highlight <C-r><C-w><CR>

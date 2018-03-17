@@ -32,6 +32,7 @@ highlight CursorLine guibg=snow2
 highlight StatusLine guifg=white guibg=turquoise3 gui=bold
 highlight User1 guifg=white guibg=turquoise3 gui=bold
 highlight User2 guifg=white guibg=turquoise3 gui=italic
+highlight User3 guifg=white guibg=turquoise3 gui=italic
 highlight StatusLineNC guifg=turquoise4 guibg=paleturquoise2 gui=none
 highlight VertSplit guifg=paleturquoise3 guibg=bg gui=none
 highlight LineNr guifg=lightblue2 guibg=bg gui=bold

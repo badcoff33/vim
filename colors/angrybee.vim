@@ -28,6 +28,7 @@ highlight StatusLineNC  guifg=#a0a0a0   guibg=#2e3e48  gui=none
 highlight StatusLine    guifg=#40eeee   guibg=#405880  gui=none
 highlight User1         guifg=#40eeee   guibg=#405880  gui=none
 highlight User2         guifg=#40eeee   guibg=#405880  gui=none
+highlight User3         guifg=#40eeee   guibg=#405880  gui=none
 highlight VertSplit     guifg=#606060   guibg=bg       gui=none
 highlight LineNr        guifg=#405060   guibg=bg       gui=none
 highlight CursorLineNr  guifg=#455565   guibg=#353535  gui=bold

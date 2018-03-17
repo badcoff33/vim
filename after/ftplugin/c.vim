@@ -29,7 +29,7 @@ setlocal list
 setlocal listchars=tab:>-,trail:.,extends:#
 
 " statusline with cursors scope info
-setlocal statusline=%1*%t%m%r%y%w\ %2*\ %{scope#ScopeParserC()}\ %0*%=%l,%c%V\ %P
+setlocal statusline=%1*%t%m%r%y%w\ %2*\ %{scope#ScopeParserC()}\ %3*\ %{runjob#GetStatus()}\ %0*%=%l,%c%V\ %P
 
 " Customize the c indent style
 setlocal cinoptions=(0

@@ -21,6 +21,7 @@ highlight  Visual       gui=none    guifg=fg        guibg=#b9b9b9
 highlight StatusLine    guifg=#f0f0f0   guibg=#505050  gui=none
 highlight User1         guifg=#f0f0f0   guibg=#505050  gui=bold
 highlight User2         guifg=#f0f0f0   guibg=#505050  gui=italic
+highlight User3         guifg=#f0f0f0   guibg=#505050  gui=italic
 highlight StatusLineNC  guifg=#f8f8f8   guibg=#b9b9c0  gui=none
 highlight VertSplit     guifg=#a8a8a8   guibg=bg       gui=none
 highlight WildMenu      guifg=#000000   guibg=#80c0ff  gui=none

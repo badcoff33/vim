@@ -38,6 +38,7 @@ highlight StatusLineNC guifg=grey48     guibg=grey20 gui=none
 highlight StatusLine   guifg=white      guibg=grey30 gui=none
 highlight User1        guifg=white      guibg=grey30 gui=bold cterm=inverse
 highlight User2        guifg=white      guibg=grey30 gui=none cterm=inverse
+highlight User3        guifg=white      guibg=grey30 gui=none cterm=inverse
 highlight FoldColumn   guifg=cyan3      guibg=bg     gui=none ctermbg=bg
 highlight Folded       guifg=cyan3      guibg=bg     gui=NONE
 highlight SignColumn   guifg=skyblue4   guibg=bg
