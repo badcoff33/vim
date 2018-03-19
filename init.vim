@@ -137,7 +137,8 @@ command! -nargs=1 HighlightWord call init#HighlightWord("<args>")
 command! -nargs=1 FindInBuffers call init#FindInBuffers("<args>")
 command! -nargs=0 SwitchWorkspace call workspace#Switch()
 
-command! -nargs=+  -complete=file Run :call runjob#StartJob(<q-args>)
+command! -nargs=+  -complete=file Job :call runjob#StartJob(<q-args>)
+command! -nargs=1  -complete=dir JobCwd :call runjob#SetCwd(<q-args>)
 
 command! -nargs=0 WhitespaceCleanup call whitespace#Cleanup()
 command! -nargs=0 WhitespaceMelt call whitespace#Melt()
