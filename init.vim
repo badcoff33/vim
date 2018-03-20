@@ -246,11 +246,10 @@ nnoremap <Leader>M :silent make<space><up>
 nnoremap <Leader>g :silent grep <C-r><C-w>
 nnoremap <Leader>G :silent grep<Space>
 
-nnoremap <F1> :echomsg "shifted US num keys: 1=! 2=@ 3=# 4=$ 5=% 6=^ 7=& 8=* 9=( 0=)"<CR>
+nnoremap <F1> :Welcome<CR>
 nnoremap <F4> :cnext<CR>zz
 nnoremap <S-F4> :cprev<CR>zz
 nnoremap <f5> :FindInBuffers <C-r><C-w><CR>
-nnoremap <F6> :Welcome<CR>
 nnoremap <F7> :silent make<space><up><CR>
 nnoremap <C-F7> :silent make<space><up>
 nnoremap <f8> :silent grep <C-r><C-w><CR>
