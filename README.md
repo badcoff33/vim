@@ -2,6 +2,17 @@
 
 ## Vim Scripts
 
+### US Keyboard
+
+Vim/Neovim works best with US keyboard layout! Even when you are used to a
+German keyboard layout, in some situations it might be useful switch to this
+keyboard layout.  Especially when you spend a lot of time in Vim. 
+
+Here is a short list of shifted keys: 
+```
+1=!  2=@  3=#  4=$  5=%  6=^  7=& 8=*  9=( 0=)
+```
+
 ### Books
 
 The web has a load of good Vim tutorials, covering how to use Vim and scripting
