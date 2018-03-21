@@ -117,7 +117,7 @@ function! init#FindInBuffers(word, regexp)
   %argdelete
   for b in range(0, bufnr('$'))
     if bufloaded(b)
-      if len(matchstr(bufname(b), a:regexp)) > 0
+      if bufname(b) =~ a:regexp
         execute "argadd " . bufname(b)
       endif
     endif
