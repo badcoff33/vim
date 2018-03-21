@@ -112,19 +112,17 @@ function! init#HighlightWord(word)
   endif
 endfunction
 
-function! init#FindInBuffers(word)
-  let g:hit = []
-  cexpr []
+function! init#FindInBuffers(word, regexp)
+  let l:hit = []
+  %argdelete
   for b in range(0, bufnr('$'))
     if bufloaded(b)
-      call add(g:hit, bufname(b))
+      if len(matchstr(bufname(b), a:regexp)) > 0
+        execute "argadd " . bufname(b)
+      endif
     endif
   endfor
-  call filter(g:hit, "!empty(matchstr(v:val, \'.*\.vim$\'))")
-  for i in g:hit
-    execute "buffer " . i
-    silent execute 'g/' . a:word . '/cadde expand("%") . ":" . line(".") .  ":" . getline(".")'
-  endfor
+  execute "silent vimgrep /" . a:word . "/ ##"
 endfunction
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker
