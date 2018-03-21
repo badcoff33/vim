@@ -38,6 +38,11 @@ Install plugins as recommended by Vim's manual `:help packages`
 
 *Vim Galore* -- https://github.com/mhinz/vim-galore
 
+### Wipe out a set of buffers
+
+Want to wipe out buffers in current session containing `snap` in its name?
+Use this `:bufdo if expand("%") =~ '.*snap.*' | bw | endif`.
+
 ### Custom Command Completion
 
 Here is a Vim script to show custom completion of a new command:
