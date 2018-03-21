@@ -134,7 +134,7 @@ command! -nargs=0 ToggleStickyCursorline call init#ToggleStickyCursorLine()
 command! -nargs=0 ClipboardBuffer call init#ClipboardBuffer()
 command! -nargs=1 HighlightWord call init#HighlightWord("<args>")
 
-command! -nargs=1 FindInBuffers call init#FindInBuffers("<args>")
+command! -nargs=1 FindInBuffers call init#FindInBuffers("<args>", '.*\.[ch]$')
 command! -nargs=0 SwitchWorkspace call workspace#Switch()
 
 command! -nargs=+  -complete=file Job :call runjob#StartJob(<q-args>)
