@@ -137,8 +137,8 @@ command! -nargs=1 HighlightWord call init#HighlightWord("<args>")
 command! -nargs=1 FindInBuffers call init#FindInBuffers("<args>", '.*\.[ch]$')
 command! -nargs=0 SwitchWorkspace call workspace#Switch()
 
-command! -nargs=+  -complete=file Job :call runjob#StartJob(<q-args>)
-command! -nargs=1  -complete=dir JobCwd :call runjob#SetCwd(<q-args>)
+command! -nargs=+ -complete=file Job :call runjob#StartJob(<q-args>)
+command! -nargs=1 -complete=dir JobCwd :call runjob#SetCwd(<q-args>)
 
 command! -nargs=0 WhitespaceCleanup call whitespace#Cleanup()
 command! -nargs=0 WhitespaceMelt call whitespace#Melt()
@@ -226,8 +226,8 @@ nnoremap <Leader><Space> :WhitespaceMelt<CR>
 
 nnoremap <A-k> :cprevious<CR>zz
 nnoremap <A-j> :cnext<CR>zz
-nnoremap <silent> <A-left> :call FastForwardAndRewind("rewind")<cr>
-nnoremap <silent> <A-right> :call FastForwardAndRewind("fastforward")<cr>
+nnoremap <silent> <A-left> :call init#FastForwardAndRewind("rewind")<cr>
+nnoremap <silent> <A-right> :call init#FastForwardAndRewind("fastforward")<cr>
 if has('nvim')
   nnoremap <silent> <A-.> :tj <C-r><C-w><CR>
   nnoremap <silent> <A-,> :pop<CR>
