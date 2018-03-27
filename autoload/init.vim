@@ -125,4 +125,18 @@ function! init#FindInBuffers(word, regexp)
   execute "silent vimgrep /" . a:word . "/ ##"
 endfunction
 
+function! init#OneMoreThing()
+  let l:at_line=line(".")
+  let l:in_buffer = bufname("%")
+  let l:comment = input({
+        \"prompt": "Hmm ... ", 
+        \"default": "todo", 
+        \"completion":"tag", 
+        \"cancelreturn":"todo"})
+  let l:new_item =[]
+  call add(l:new_item, printf('- "%s" @%d -- %s', l:in_buffer, l:at_line, l:comment))
+  call writefile(l:new_item, 'omt.md', 'a')
+  checktime
+endfunction
+
 " vim:sw=2:tw=0:nocindent:foldmethod=marker

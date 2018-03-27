@@ -148,6 +148,8 @@ command! -nargs=0 ToggleVimdiff call vimdiff#Toggle()
 command! -nargs=0 VimdiffFileContext call vimdiff#FileContext()
 command! -nargs=0 TwoDirDiff call vimdiff#TwoDirDiff()
 
+command! -nargs=0 OneMoreThing call init#OneMoreThing()
+
 " }}} commands
 
 " autocommands {{{
@@ -204,7 +206,8 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 " Try this! 
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
-
+nnoremap <BS> <C-w>w
+nnoremap <S-BS> <C-w>W
 " extend abbreviation
 inoremap <C-Tab> <C-]>
 
@@ -217,6 +220,7 @@ nnoremap <Leader>tc :tabclose<CR>
 
 nnoremap <Leader>h  :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c  :ClipboardBuffer<CR>
+nnoremap <Leader>o  :OneMoreThing<CR>
 nnoremap <Leader>dt :ToggleVimdiff<CR>
 nnoremap <Leader>du :wa <BAR> diffupdate<CR>
 nnoremap <Leader>do :VimdiffFileContext<CR>
@@ -228,10 +232,6 @@ nnoremap <A-k> :cprevious<CR>zz
 nnoremap <A-j> :cnext<CR>zz
 nnoremap <silent> <A-left> :call FastForwardAndRewind("rewind")<cr>
 nnoremap <silent> <A-right> :call FastForwardAndRewind("fastforward")<cr>
-if has('nvim')
-  nnoremap <silent> <A-.> :tj <C-r><C-w><CR>
-  nnoremap <silent> <A-,> :pop<CR>
-endif
 
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
