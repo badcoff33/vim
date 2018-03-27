@@ -8,24 +8,27 @@ Vim/Neovim works best with US keyboard layout! Even when you are used to a
 German keyboard layout, in some situations it might be useful switch to this
 keyboard layout.  Especially when you spend a lot of time in Vim. 
 
-Here is a short list of shifted keys: 
-```
-1=!  2=@  3=#  4=$  5=%  6=^  7=& 8=*  9=( 0=)
-```
+Here is a short list of shifted
+keys: `1=!`  `2=@`  `3=#`  `4=$`  `5=%`  `6=^`  `7=&` `8=*`  `9=(` `0=)`
 
 ### Books
-
 The web has a load of good Vim tutorials, covering how to use Vim and scripting
 tips.Here is a link to a very comprehensive online book:
 http://learnvimscriptthehardway.stevelosh.com
 
 ### Open the commandline window
 
-Sure, you can do `:` followed by a `<C-f>`. Or, sometimes more convinient, just press in normal mode `q:` for the command line or `q/` or `q?` to enter the search window. The advantage to open one of these windows is that normal mode commands can be used.
+Sure, you can do `:` followed by a `<C-f>`. Or, sometimes more convinient, just
+press in normal mode `q:` for the command line or `q/` or `q?` to enter the
+search window. The advantage to open one of these windows is that normal mode
+commands can be used.
 
 ### Plugins
 
-A plain installation works surprisingly well for me. I tried really a lot of optional Vim plugins, but removed most of them, becausse all I need comes with Vim "out of the box". But some plugins may help in certain situations. This is my short list of noteable Vim plugins:
+A plain installation works surprisingly well for me. I tried really a lot of
+optional Vim plugins, but removed most of them, becausse all I need comes with
+Vim "out of the box". But some plugins may help in certain situations. This is
+my short list of noteable Vim plugins:
 
 - Per file tags navigation with *Tagbar*: https://github.com/majutsushi/tagbar.git
 - Buffer overview with *Bufexplorer*: https://github.com/jlanzarotta/bufexplorer.git
@@ -40,7 +43,7 @@ Install plugins as recommended by Vim's manual `:help packages`
 
 ### Wipe out a set of buffers
 
-Want to wipe out buffers in current session containing `snap` in its name?
+Want to wipe aout all buffers in current session containing `snap` in its name:
 Use this `:bufdo if expand("%") =~ '.*snap.*' | bw | endif`.
 
 ### Custom Command Completion
@@ -68,7 +71,9 @@ Here is a Vim script to show custom completion of a new command:
 
 ## Run shell commands
 
-To run any shell command you can use :! {cmd}. Characters with a special meaning for Vim, line "%", gets expanded, befor the shell executes the command line. To avoid Vims character expansion, use  quotes: "%"
+To run any shell command you can use :! {cmd}. Characters with a special meaning
+for Vim, line "%", gets expanded, befor the shell executes the command line. To
+avoid Vims character expansion, use  quotes: "%"
 
 ## Run shell commands 2
 
@@ -124,12 +129,13 @@ would recommend to use this flag from scripts.
 
 ## Relative Line Numbers
 
-To start using relative numbers, I recommend to put the following combination of settings into your `vimrc`:
+To start using relative numbers, I recommend to put the following combination of
+settings into your `vimrc`:
 
-    set number
-    set relativenumber
+    set number set relativenumber
 
-Together, they make Vim show the absolute number for the current line, and relative numbers for other lines.
+Together, they make Vim show the absolute number for the current line, and
+relative numbers for other lines.
 
 ## Netrw
 
@@ -163,7 +169,10 @@ Press CTRL-^ or CTRL-6 to have a quick way to toggle between two files.
 
 ## WORDS and words
 
-Vim defines a WORD as a set of consecutive characters. The normal mode command `dW` will delete A/path/like/this assuming cursors positions is on the A character. Using normal mode command `dw` (cursors position is on A character) will delete only the A.
+Vim defines a WORD as a set of consecutive characters. The normal mode command
+`dW` will delete A/path/like/this assuming cursors positions is on the A
+character. Using normal mode command `dw` (cursors position is on A character)
+will delete only the A.
 
 ## Grep, Grep Grep
 
