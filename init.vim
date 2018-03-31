@@ -232,8 +232,8 @@ nnoremap <Leader><Space> :WhitespaceMelt<CR>
 
 nnoremap <A-k> :cprevious<CR>zz
 nnoremap <A-j> :cnext<CR>zz
-nnoremap <silent> <A-left> :call FastForwardAndRewind("rewind")<cr>
-nnoremap <silent> <A-right> :call FastForwardAndRewind("fastforward")<cr>
+nnoremap <silent> <A-left> :call init#FastForwardAndRewind("rewind")<cr>
+nnoremap <silent> <A-right> :call init#FastForwardAndRewind("fastforward")<cr>
 
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
