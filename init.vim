@@ -197,6 +197,10 @@ augroup END
 let mapleader = " "
 let maplocalleader = "\\"
 
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
+
 " surround visual selection with ", ', (, [
 vnoremap <Leader>" c"<C-R>-"<Esc>
 vnoremap <Leader>' c'<C-R>-'<Esc>
