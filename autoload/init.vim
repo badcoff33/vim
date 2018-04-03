@@ -130,7 +130,7 @@ if !exists("g:one_more_thing_file")
 endif
 
 function! init#ShowOneMoreThing()
-  if filereadable(g:one_more_thing_file)
+  if filereadable(expand(g:one_more_thing_file, ":p:h"))
     execute "edit " . g:one_more_thing_file 
   else
     echomsg "No OneMoreThing?"
