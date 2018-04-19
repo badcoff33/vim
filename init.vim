@@ -173,7 +173,7 @@ augroup init
   autocmd BufNewFile  workspace.vim  0r $LOCALAPPDATA/nvim/templates/workspace.vim
   autocmd BufNewFile  *.c            0r $LOCALAPPDATA/nvim/templates/file.c
   autocmd BufNewFile  *.h            0r $LOCALAPPDATA/nvim/templates/file.h
-  
+
   " display file info
   autocmd WinEnter *.* file
 
@@ -208,7 +208,7 @@ vnoremap <Leader>` c`<C-R>-`<Esc>
 vnoremap <Leader>( c(<C-R>-)<Esc>
 vnoremap <Leader>[ c[<C-R>-]<Esc>
 
-" Try this! 
+" Try this!
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 nnoremap <BS> <C-w>w
@@ -231,8 +231,7 @@ nnoremap <Leader>dt :ToggleVimdiff<CR>
 nnoremap <Leader>du :wa <BAR> diffupdate<CR>
 nnoremap <Leader>do :VimdiffFileContext<CR>
 nnoremap <Leader>db :ShowUnsavedChanges<CR>
-
-nnoremap <Leader><Space> :WhitespaceMelt<CR>
+nnoremap <Leader>w :WhitespaceMelt<CR>
 
 nnoremap <A-k> :cprevious<CR>zz
 nnoremap <A-j> :cnext<CR>zz
