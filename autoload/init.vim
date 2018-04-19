@@ -1,5 +1,11 @@
 " Vim autload file
 
+if !exists("g:welcome_text_file")
+  let g:welcome_text_file = '~/Documents/welcome.txt'
+endif
+
+autocmd BufRead welcome.txt nmap <buffer> <CR> 1y$:<C-r>"<CR>
+
 " Description: Make the actual window more obvious.
 " Active 'cursorline' option in diff buffers overrules highlighting of
 " differences. Buffers with 'diff' option shall not use 'cursorline'.
@@ -78,11 +84,7 @@ endfunction
 
 " Description: My splash screen (with one-liner Vim script in it)
 function! init#Welcome()
-  let l:welcome_text_file = '~/Documents/welcome.txt'
-  if filereadable(expand(l:welcome_text_file))
-    execute 'edit ' . l:welcome_text_file
-    nmap <buffer> <CR> 0y$:<C-r>"<CR>
-  endif
+  execute 'edit ' . g:welcome_text_file
 endfunction
 
 " Description: Create or move to buffer ClipboardTxt, start to write text,
