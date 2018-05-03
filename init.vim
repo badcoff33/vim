@@ -151,6 +151,8 @@ command! -nargs=0 TwoDirDiff call vimdiff#TwoDirDiff()
 command! -nargs=0 OneMoreThing call init#OneMoreThing()
 command! -nargs=0 ShowOneMoreThing call init#ShowOneMoreThing()
 
+command! -nargs=1 Wipe bufdo if expand("%") =~ '.*<args>.*' | bw | endif | bprevious
+
 " }}} commands
 
 " autocommands {{{
@@ -241,9 +243,6 @@ nnoremap <silent> <A-right> :call init#FastForwardAndRewind("fastforward")<cr>
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
 
-nnoremap <Leader>c :execute "botright copen " . max([ &lines/2, 10 ])<CR>
-nnoremap <Leader><Leader>c :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
-
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>m :silent make<space><up><CR>
@@ -252,15 +251,16 @@ nnoremap <Leader>g :silent grep <C-r><C-w>
 nnoremap <Leader>G :silent grep<Space>
 
 nnoremap <F1> :Welcome<CR>
+nnoremap <F2> :execute "botright copen " . max([ &lines/5, 4 ])<CR>
+nnoremap <S-F2> :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
 nnoremap <F4> :cnext<CR>zz
 nnoremap <S-F4> :cprev<CR>zz
 nnoremap <f5> :FindInBuffers <C-r><C-w><CR>
 nnoremap <F7> :silent make<space><up><CR>
-nnoremap <C-F7> :silent make<space><up>
 nnoremap <f8> :silent grep <C-r><C-w><CR>
 nnoremap <F11> :TagbarToggle<CR>
-nnoremap <F12> :tjump /
-nnoremap <C-F12> :tjump <C-r><C-w><CR>
+nnoremap <F12> :tjump <C-r><C-w><CR>zz
+nnoremap <C-F12> :tjump /
 
 " check my spelling
 nnoremap <Leader>se :setlocal spell spelllang=en_us<CR>
