@@ -90,28 +90,30 @@ if !exists("g:c_use_simple_tag_preview")
 endif
 
 function! c#ToggleAutoPreviewTag()
-  if !exists("#ToggleAutoPreviewTag:CursorHold")
+  if exists("#c#CursorHold") == 1
+    augroup c
+      autocmd!
+    augroup END
+    let &previewwindow = s:savePreviewHeight
+    let &updatetime = s:saveUpdateTime
+    if g:c_use_simple_tag_preview == 0
+      wincmd z
+    endif
+  else
     let s:savePreviewHeight=&previewheight
     let s:saveUpdateTime=&updatetime
     set previewheight=5
     set updatetime=500
     if g:c_use_simple_tag_preview == 1
-      augroup ToggleAutoPreviewTag
+      augroup c
         autocmd!
         autocmd CursorHold *.c*,*.h* call s:Autocmd_AutoShowTag(expand("<cword>"))
       augroup END
     else
-      augroup ToggleAutoPreviewTag
+      augroup c
         autocmd!
         autocmd CursorHold *.c*,*.h* call s:Autocmd_AutoPreviewTag(expand("<cword>"))
       augroup END
-    endif
-  else
-    autocmd! ToggleAutoPreviewTag
-    let &previewwindow = s:savePreviewHeight
-    let &updatetime = s:saveUpdateTime
-    if g:c_use_simple_tag_preview == 0
-      wincmd z
     endif
   endif
 endfunction
