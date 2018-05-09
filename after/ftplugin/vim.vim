@@ -14,14 +14,17 @@ setlocal statusline=%1*%t%m%r%y%w\ %2*\ %{scope#ScopeParserVim()}\ %3*\ %{runjob
 nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 nnoremap <buffer> <localleader>h :verbose highlight <C-r><C-w><CR>
 
-" Execute whole Vim file
-nnoremap <special> <buffer> <LocalLeader>e :w<bar>source%<CR>
-
-" Execute current line (and clear annoying ^M)
-nnoremap <special> <buffer> <LocalLeader>E yy:<C-r>0<CR>
-
-" Execute visual region
-vnoremap <special> <buffer> <LocalLeader>E :write! $TEMP\sourced_lines.vim<CR> :source $TEMP\sourced_lines.vim<CR>
-vnoremap <special> <buffer> <LocalLeader>e :write! $TEMP\sourced_lines.vim<CR> :source $TEMP\sourced_lines.vim<CR>
+if empty(matchstr(expand("%:p"), "color"))
+  " Execute whole Vim file
+  nnoremap <special> <buffer> <LocalLeader>e :w<bar>source%<CR>
+  " Execute current line (and clear annoying ^M)
+  nnoremap <special> <buffer> <LocalLeader>E yy:<C-r>0<CR>
+  " Execute visual region
+  vnoremap <special> <buffer> <LocalLeader>E :write! $TEMP\sourced_lines.vim<CR> :source $TEMP\sourced_lines.vim<CR>
+  vnoremap <special> <buffer> <LocalLeader>e :write! $TEMP\sourced_lines.vim<CR> :source $TEMP\sourced_lines.vim<CR>
+else
+  " Execute Vim color theme
+  nnoremap <special> <buffer> <LocalLeader>e :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
+endif
 
 let b:did_ftplugin_after = 1
