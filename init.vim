@@ -60,7 +60,7 @@ if has('nvim')
 endif
 set magic
 set gdefault
-set hlsearch
+set nohlsearch
 
 " Optional config: if 'smartcase' is active a case sensitive search with
 " /\C<text> can be used on demand.
@@ -226,6 +226,7 @@ nnoremap <Leader>tn :$tabnew<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
 nnoremap <Leader>h  :HighlightWord <C-r><C-w><CR>
+nnoremap <Leader>H  :set invhlsearch<CR>
 nnoremap <Leader>c  :ClipboardBuffer<CR>
 nnoremap <Leader>o  :OneMoreThing<CR>
 nnoremap <Leader>O  :ShowOneMoreThing<CR>
