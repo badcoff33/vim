@@ -114,19 +114,6 @@ function! init#HighlightWord(word)
   endif
 endfunction
 
-function! init#FindInBuffers(word, regexp)
-  let l:hit = []
-  %argdelete
-  for b in range(0, bufnr('$'))
-    if bufloaded(b)
-      if bufname(b) =~ a:regexp
-        execute "argadd " . bufname(b)
-      endif
-    endif
-  endfor
-  execute "silent vimgrep /" . a:word . "/ ##"
-endfunction
-
 if !exists("g:one_more_thing_file")
   let g:one_more_thing_file = '~/Documents/omt.md'
 endif
@@ -145,11 +132,10 @@ endfunction
 function! init#OneMoreThing()
   let l:at_line=line(".")
   let l:in_buffer = bufname("%")
-  let l:comment = input({
-        \"prompt": "Hmm ... ", 
-        \"default": "todo", 
-        \"completion":"tag", 
-        \"cancelreturn":"todo"})
+  let l:comment = input(
+        \ "Hmm ... ", 
+        \ "well", 
+        \ "tag")
   let l:new_item =[]
   call add(l:new_item, printf('- "%s" @%d -- %s', l:in_buffer, l:at_line, l:comment))
   if !filereadable(expand(g:one_more_thing_file, ":p:h"))
