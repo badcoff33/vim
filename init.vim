@@ -1,6 +1,6 @@
 " Vim resource file
 "
-" Maintainer: Markus Prepens (markus dot prepens at googlemail dot com)
+" Maintainer: Markus Prepens (markus dot prepens at gmail dot com)
 
 filetype plugin on
 filetype indent on
@@ -241,7 +241,7 @@ nnoremap <silent> <A-right> :call init#FastForwardAndRewind("fastforward")<cr>
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
 
-nnoremap <Leader>s :setlocal invspell 
+nnoremap <Leader>s :setlocal invspell<CR>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <silent> <Leader>m :make<space><up><CR>
