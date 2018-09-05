@@ -17,8 +17,9 @@ set novisualbell
 set noerrorbells
 set viminfo='50,<1000,s100,:100
 
-" limit numer of suggestions of z=
+" limit number of suggestions of z=
 set spellsuggest=best,10
+set spelllang=en_us,de
 
 " Read changed files automatically if they are changed in the background
 set autoread
@@ -60,7 +61,7 @@ if has('nvim')
 endif
 set magic
 set gdefault
-set nohlsearch
+set hlsearch
 
 " Optional config: if 'smartcase' is active a case sensitive search with
 " /\C<text> can be used on demand.
@@ -134,7 +135,6 @@ command! -nargs=0 ToggleStickyCursorline call init#ToggleStickyCursorLine()
 command! -nargs=0 ClipboardBuffer call init#ClipboardBuffer()
 command! -nargs=1 HighlightWord call init#HighlightWord("<args>")
 
-command! -nargs=1 FindInBuffers call init#FindInBuffers("<args>", '.*\.[ch]$')
 command! -nargs=0 SwitchWorkspace call workspace#Switch()
 
 command! -nargs=+ -complete=file Job :call runjob#StartJob(<q-args>)
@@ -175,9 +175,6 @@ augroup init
   autocmd BufNewFile  workspace.vim  0r $LOCALAPPDATA/nvim/templates/workspace.vim
   autocmd BufNewFile  *.c            0r $LOCALAPPDATA/nvim/templates/file.c
   autocmd BufNewFile  *.h            0r $LOCALAPPDATA/nvim/templates/file.h
-
-  " display file info
-  autocmd WinEnter *.* file
 
 augroup END
 
@@ -236,37 +233,33 @@ nnoremap <Leader>do :VimdiffFileContext<CR>
 nnoremap <Leader>db :ShowUnsavedChanges<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
 
-nnoremap <A-k> :cprevious<CR>zz
-nnoremap <A-j> :cnext<CR>zz
+nnoremap <A-k> :cprevious<CR>
+nnoremap <A-j> :cnext<CR>
 nnoremap <silent> <A-left> :call init#FastForwardAndRewind("rewind")<cr>
 nnoremap <silent> <A-right> :call init#FastForwardAndRewind("fastforward")<cr>
 
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
 
+nnoremap <Leader>s :setlocal invspell 
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>m :silent make<space><up><CR>
-nnoremap <Leader>M :silent make<space><up>
-nnoremap <Leader>g :silent grep <C-r><C-w>
-nnoremap <Leader>G :silent grep<Space>
+nnoremap <silent> <Leader>m :make<space><up><CR>
+nnoremap <silent> <Leader>M :make<space><up>
+nnoremap <silent> <Leader>g :grep <C-r><C-w>
+nnoremap <silent> <Leader>G :grep<Space>
+nnoremap <Leader>q :clist<CR>
+nnoremap <Leader>Q :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
 
 nnoremap <F1> :Welcome<CR>
-nnoremap <F2> :execute "botright copen " . max([ &lines/5, 4 ])<CR>
-nnoremap <S-F2> :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
-nnoremap <F4> :cnext<CR>zz
-nnoremap <S-F4> :cprev<CR>zz
-nnoremap <f5> :FindInBuffers <C-r><C-w><CR>
+nnoremap <F4> :cnext<CR>
+nnoremap <S-F4> :cprev<CR>
 nnoremap <F7> :silent make<space><up><CR>
 nnoremap <f8> :silent grep <C-r><C-w><CR>
-nnoremap <F11> :TagbarToggle<CR>
-nnoremap <F12> :tjump <C-r><C-w><CR>zz
+nnoremap <F11> :ptjump <C-r><C-w><CR>
+nnoremap <F12> :tjump <C-r><C-w><CR>
 nnoremap <C-F12> :tjump /
-
-" check my spelling
-nnoremap <Leader>se :setlocal spell spelllang=en_us<CR>
-nnoremap <Leader>sg :setlocal spell spelllang=de_de<CR>
-nnoremap <Leader><Leader>s :setlocal nospell<CR>
+nnoremap <S-F12> :ToggleAutoPreviewTag<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
