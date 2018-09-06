@@ -128,7 +128,6 @@ endfunction
 
 " Description: Enter one-more-thing and store the text with file and line info
 " in a file. This file/line info can be opend with a 'gF' command.
-" Restriction: Supports Neovim only. Watch out for the used function input().
 function! init#OneMoreThing()
   let l:at_line=line(".")
   let l:in_buffer = bufname("%")
@@ -137,7 +136,7 @@ function! init#OneMoreThing()
         \ "well", 
         \ "tag")
   let l:new_item =[]
-  call add(l:new_item, printf('- "%s" @%d -- %s', l:in_buffer, l:at_line, l:comment))
+  call add(l:new_item, printf('- "%s" %d -- %s', l:in_buffer, l:at_line, l:comment))
   if !filereadable(expand(g:one_more_thing_file, ":p:h"))
     enew
     put='# One More Thing'
