@@ -29,6 +29,8 @@ highlight User3        guifg=white  guibg=dodgerblue3  gui=none
 highlight StatusLineNC guifg=white  guibg=dodgerblue   gui=none
 highlight VertSplit    guifg=grey85 guibg=grey85
 highlight! link WildMenu IncSearch
+highlight! link StatusLineTerm StatusLine
+highlight! link StatusLineTermNC StatusLineNC
 
 " line numbers / side decorations
 highlight LineNr        guifg=azure3    guibg=bg      gui=bold,italic
