@@ -1,4 +1,4 @@
-" Vim color theme
+"Vimcolortheme
 
 if exists("syntax_on")
   syntax reset
@@ -9,7 +9,7 @@ set background=light
 let g:colors_name = "breeze"
 
 " basics
-highlight Normal  guifg=grey30 guibg=white
+highlight Normal  guifg=grey50 guibg=white
 highlight NonText guifg=cyan4  guibg=bg
 highlight Visual               guibg=lightblue1
 highlight Cursor  guifg=white  guibg=red3
@@ -26,14 +26,14 @@ highlight StatusLine   guifg=white  guibg=dodgerblue3  gui=none
 highlight User1        guifg=white  guibg=dodgerblue3  gui=bold
 highlight User2        guifg=white  guibg=dodgerblue3  gui=none
 highlight User3        guifg=white  guibg=dodgerblue3  gui=none
-highlight StatusLineNC guifg=lightblue1 guibg=dodgerblue   gui=none
+highlight StatusLineNC guifg=white  guibg=dodgerblue   gui=none
 highlight VertSplit    guifg=grey85 guibg=grey85
 highlight! link WildMenu IncSearch
 
 " line numbers / side decorations
 highlight LineNr        guifg=azure3    guibg=bg      gui=bold,italic
-highlight CursorLine                    guibg=grey96
-highlight CursorColumn                  guibg=grey96
+highlight CursorLine    guibg=grey96
+highlight CursorColumn  guibg=grey96
 highlight CursorLineNr  guifg=azure3    guibg=grey96  gui=bold,italic
 highlight SignColumn    guifg=skyblue4  guibg=bg
 highlight FoldColumn    guifg=skyblue4  guibg=bg
@@ -51,13 +51,13 @@ highlight PmenuSbar   guibg=grey50
 highlight PmenuThumb  guifg=white
 
 " search
-highlight IncSearch   guifg=white guibg=dodgerblue3  gui=none
-highlight Search                  guibg=yellow       gui=none
-highlight MatchParen  guifg=fg    guibg=bg           gui=underline
+highlight IncSearch   guifg=white guibg=dodgerblue3 gui=none
+highlight Search      guibg=yellow gui=none
+highlight MatchParen  guifg=fg guibg=bg gui=underline
 
 " code
-highlight Statement     guifg=maroon3     gui=bold
-highlight Conditional   guifg=maroon3     gui=bold
+highlight Statement     guifg=maroon3 gui=bold
+highlight Conditional   guifg=maroon3 gui=bold
 highlight Type          guifg=dodgerblue2 gui=none
 highlight StorageClass  guifg=grey50  gui=bold
 highlight PreProc       guifg=dodgerblue2 gui=none
@@ -70,8 +70,8 @@ highlight Constant      guifg=goldenrod4
 highlight Title     guifg=steelblue2
 highlight Subtitle  guifg=steelblue3
 highlight todo      guifg=darkseagreen4 guibg=darkseagreen1
-highlight Error     guifg=deeppink3     guibg=pink1 gui=none
-highlight Directory guifg=steelblue3                gui=underline
+highlight Error     guifg=deeppink3 guibg=pink1 gui=none
+highlight Directory guifg=steelblue3 gui=underline
 
 " messages
 highlight  WarningMsg guifg=forestgreen guibg=bg  gui=none
@@ -119,10 +119,10 @@ highlight netrwMarkFile     gui=inverse
 
 " html
 highlight htmlH1 guifg=dodgerblue1  gui=bold
-highlight htmlH2 guifg=dodgerblue3  gui=none
+highlight htmlH2 guifg=dodgerblue3  gui=bold
 highlight htmlH3 guifg=dodgerblue3  gui=none
 highlight htmlBold                  gui=bold
-highlight htmlItalic                gui=italic
+highlight htmlItalic                gui=italic,bold
 
 " markdown
 highlight! link markdownCode String
