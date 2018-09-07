@@ -129,14 +129,19 @@ endfunction
 " Description: Enter one-more-thing and store the text with file and line info
 " in a file. This file/line info can be opend with a 'gF' command.
 function! init#OneMoreThing()
-  let l:at_line=line(".")
-  let l:in_buffer = bufname("%")
+  let l:reference = input(
+        \ "Where? ", 
+        \ printf('"%s" %d', bufname("%"), line(".")),
+        \ "file")
   let l:comment = input(
-        \ "Hmm ... ", 
-        \ "well", 
+        \ "What? ", 
+        \ "", 
         \ "tag")
-  let l:new_item =[]
-  call add(l:new_item, printf('- "%s" %d -- %s', l:in_buffer, l:at_line, l:comment))
+  if empty(l:reference)
+    let l:new_item = printf('- %s', l:comment)
+  else
+    let l:new_item = printf('- %s -- %s', l:reference, l:comment)
+  endif
   if !filereadable(expand(g:one_more_thing_file, ":p:h"))
     enew
     put='# One More Thing'
