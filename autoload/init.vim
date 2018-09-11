@@ -59,7 +59,7 @@ function! init#FastForwardAndRewind(direction)
 		elseif &filetype == "markdown"
 			execute search('^#\+\s\+','W')
     else
-      normal ]]
+      silent! cnext
     endif
   elseif a:direction == "rewind"
     if &diff
@@ -71,7 +71,7 @@ function! init#FastForwardAndRewind(direction)
 		elseif &filetype == "markdown"
 			execute search('^#\+\s\+','bW')
     else
-      normal [[
+      silent! cprevious
     endif
   endif
 endfunction
