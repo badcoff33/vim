@@ -104,7 +104,7 @@ set wildignorecase
 set wildignore=*.*~
 
 set showtabline=1
-set sessionoptions=buffers,curdir,tabpages
+set sessionoptions=buffers,curdir,winsize,tabpages
 
 " Use this ':help' to have quick access to the Vim documentation.
 set keywordprg=:help
@@ -233,14 +233,13 @@ nnoremap <Leader>do :VimdiffFileContext<CR>
 nnoremap <Leader>db :ShowUnsavedChanges<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
 
-nnoremap <A-k> :cprevious<CR>
-nnoremap <A-j> :cnext<CR>
-nnoremap <silent> <A-left> :call init#FastForwardAndRewind("rewind")<cr>
-nnoremap <silent> <A-right> :call init#FastForwardAndRewind("fastforward")<cr>
+nnoremap <silent> <A-k> :call init#FastForwardAndRewind("rewind")<cr>
+nnoremap <silent> <A-j> ::call init#FastForwardAndRewind("fastforward")<cr>
 
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
 
+nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
