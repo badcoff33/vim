@@ -3,6 +3,7 @@
 " Description:  This color theme uses color names, defined by X11 file
 " 'rgb.txt'. Once you get used to the color names, it is quit easy to start or
 " change a color theme file. IMO, more easier than hex numbers.
+" Here is a nice list of colors: 'https://en.wikipedia.org/wiki/X11_color_names'
 
 if exists("syntax_on")
   syntax reset
