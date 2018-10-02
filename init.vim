@@ -243,11 +243,12 @@ nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
-nnoremap <silent> <Leader>m :make<space><up><CR>
-nnoremap <silent> <Leader>M :make<space><up>
-nnoremap <silent> <Leader>g :grep <C-r><C-w>
-nnoremap <silent> <Leader>G :grep<Space>
-nnoremap <Leader>q :clist<CR>
+nnoremap <Leader>m :silent make<space><up><CR>
+nnoremap <Leader>M :silent make<space><up>
+nnoremap <Leader>g :silent grep <C-r><C-w>
+nnoremap <Leader>G :silent grep<Space>
+nnoremap <Leader>q :copen<CR>
+
 nnoremap <Leader>Q :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
 
 nnoremap <F1> :Welcome<CR>
