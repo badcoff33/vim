@@ -104,7 +104,7 @@ set wildignorecase
 set wildignore=*.*~
 
 set showtabline=1
-set sessionoptions=buffers,curdir,winsize,tabpages
+set sessionoptions=buffers,tabpages,winsize,resize
 
 " Use this ':help' to have quick access to the Vim documentation.
 set keywordprg=:help
@@ -219,8 +219,7 @@ inoremap <C-Tab> <C-]>
 nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
 nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 
-nnoremap <Leader>tn :$tabnew<CR>
-nnoremap <Leader>tc :tabclose<CR>
+nnoremap <Leader>t :tjump /
 
 nnoremap <Leader>h  :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>H  :set invhlsearch<CR>
@@ -247,26 +246,23 @@ nnoremap <Leader>m :silent make<space><up><CR>
 nnoremap <Leader>M :silent make<space><up>
 nnoremap <Leader>g :silent grep <C-r><C-w>
 nnoremap <Leader>G :silent grep<Space>
-nnoremap <Leader>q :copen<CR>
 
-nnoremap <Leader>Q :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
+nnoremap <M-1> :copen<CR>
+nnoremap <silent> <M-2> :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
+
+nnoremap + :cnext<CR>
+nnoremap - :cprev<CR>
 
 nnoremap <F1> :Welcome<CR>
-nnoremap <F4> :cnext<CR>
-nnoremap <S-F4> :cprev<CR>
-nnoremap <F7> :silent make<space><up><CR>
-nnoremap <f8> :silent grep <C-r><C-w><CR>
-nnoremap <F11> :ptjump <C-r><C-w><CR>
-nnoremap <F12> :tjump <C-r><C-w><CR>
-nnoremap <C-F12> :tjump /
-nnoremap <S-F12> :ToggleAutoPreviewTag<CR>
+nnoremap <F4> :ptjump <C-r><C-w><CR>
+nnoremap <S-F4> :wincmd z<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
   nnoremap <Leader>x :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
 endif
 
-cnoremap <A-.> <C-r>=expand("%:p:h")<CR>
+cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>\
 
 " }}} mappings
 
