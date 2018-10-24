@@ -43,8 +43,11 @@ Install plugins as recommended by Vim's manual `:help packages`
 
 ### Wipe out a set of buffers
 
-Want to wipe aout all buffers in current session containing `snap` in its name:
-Use this `:bufdo if expand("%") =~ '.*snap.*' | bw | endif`.
+Want to wipe out all buffers in current session containing `snap` in its name?
+Just type `:bw *snap<TAB><C-a><CR>`. The `<TAB>` is required for take a quick 
+look which buffers will be wiped-out. Another solution might be this:
+
+    :bufdo if expand("%") =~ '.*snap.*' | bw | endif
 
 ### Custom Command Completion
 
@@ -115,13 +118,6 @@ Here is an approach to use asynchronous processes:
 
 Simply enter `:ls +` to get a filtered view of unsaved buffers. The unfiltered
 output of the `:ls` command indicates those buffers with the plus sign.
-
-## Clean up session
-
-Just type `:bw *snap<TAB><C-a><CR>`. The `<TAB>` is required for take a quick 
-look which buffers will be wiped-out. Another solution might be this:
-
-    :bufdo if expand("%") =~ '.*snap.*' | bw | endif
 
 ## View last messages
 
