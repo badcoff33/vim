@@ -116,6 +116,13 @@ Here is an approach to use asynchronous processes:
 Simply enter `:ls +` to get a filtered view of unsaved buffers. The unfiltered
 output of the `:ls` command indicates those buffers with the plus sign.
 
+## Clean up session
+
+Just type `:bw *snap<TAB><C-a><CR>`. The `<TAB>` is required for take a quick 
+look which buffers will be wiped-out. Another solution might be this:
+
+    :bufdo if expand("%") =~ '.*snap.*' | bw | endif
+
 ## View last messages
 
 The `g<` command can be used to see the last page of previous command output.
