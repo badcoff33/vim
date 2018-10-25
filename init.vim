@@ -210,8 +210,6 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 " Try this!
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
-nnoremap <BS> <C-w>w
-nnoremap <S-BS> <C-w>W
 " extend abbreviation
 inoremap <C-Tab> <C-]>
 
@@ -247,8 +245,7 @@ nnoremap <Leader>M :silent make<space><up>
 nnoremap <Leader>g :silent grep <C-r><C-w>
 nnoremap <Leader>G :silent grep<Space>
 
-nnoremap <M-1> :copen<CR>
-nnoremap <silent> <M-2> :if &bt == 'quickfix' <bar> wincmd p <bar> endif <bar> cclose<cr>
+nnoremap <BS> :call init#ToggleQuickfix()<CR>
 
 nnoremap + :cnext<CR>
 nnoremap - :cprev<CR>
