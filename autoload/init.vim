@@ -157,4 +157,19 @@ function! init#OneMoreThing()
   write
 endfunction
 
+
+function! init#ToggleQuickfix()
+  let l:save_win = win_getid()
+  let l:qfIsOpen = 0
+  windo if &buftype == 'quickfix' | let l:qfIsOpen = 1 | endif
+  if l:qfIsOpen == 0
+    botright copen
+  else
+    cclose
+  endif
+  if win_gotoid(l:save_win) == 0 
+    wincmd p 
+  endif 
+endfunction
+
 " vim:sw=2:tw=0:nocindent:foldmethod=marker
