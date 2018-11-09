@@ -40,5 +40,6 @@ setlocal norelativenumber
 
 nnoremap <buffer> j :cnext<CR>zz<C-w>p
 nnoremap <buffer> k :cprev<CR>zz<C-w>p
+nnoremap <buffer> <Esc> :cclose<CR>
 
 let b:did_ftplugin_after = 1
