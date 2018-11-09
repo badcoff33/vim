@@ -9,7 +9,7 @@ set background=light
 let g:colors_name = "breeze"
 
 " basics
-highlight Normal  guifg=grey50 guibg=white
+highlight Normal  guifg=grey30 guibg=white
 highlight NonText guifg=cyan4  guibg=bg
 highlight Visual               guibg=lightblue1
 highlight Cursor  guifg=white  guibg=red3
@@ -22,12 +22,12 @@ if has ('nvim')
 endif
 
 " window decoration
-highlight StatusLine   guifg=white  guibg=dodgerblue3  gui=none
-highlight User1        guifg=white  guibg=dodgerblue3  gui=bold
-highlight User2        guifg=white  guibg=dodgerblue3  gui=none
-highlight User3        guifg=white  guibg=dodgerblue3  gui=none
-highlight StatusLineNC guifg=white  guibg=dodgerblue   gui=none
-highlight VertSplit    guifg=grey85 guibg=grey85
+highlight StatusLine   guifg=white  guibg=lightblue4 gui=none
+highlight User1        guifg=white  guibg=lightblue4 gui=bold
+highlight User2        guifg=white  guibg=lightblue4 gui=none
+highlight User3        guifg=white  guibg=lightblue4 gui=none
+highlight StatusLineNC guifg=white  guibg=lightblue   gui=none
+highlight VertSplit    guifg=grey85 guibg=bg          gui=none
 highlight! link WildMenu IncSearch
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
@@ -43,7 +43,7 @@ highlight Folded        guifg=fg        guibg=bg      gui=NONE
 
 " tabs
 highlight! link TabLineFill Normal
-highlight! link TabLine StatusLineNC
+highlight! link TabLine Normal
 highlight! link TabLineSel StatusLine
 
 " popup Menu
@@ -129,5 +129,3 @@ highlight htmlItalic                gui=italic,bold
 " markdown
 highlight! link markdownCode String
 highlight! link markdownCodeBlock Comment
-
-
