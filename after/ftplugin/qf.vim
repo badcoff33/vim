@@ -31,12 +31,11 @@ if exists("b:did_ftplugin_after")
 endif
 
 let b:undo_ftplugin = b:undo_ftplugin
-      \ . " | setlocal foldenable< number< relativenumber<"
 
-" save window space
+setlocal foldlevel=0
+setlocal foldmethod=expr
+setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
 setlocal nofoldenable
-setlocal nonumber
-setlocal norelativenumber
 
 nnoremap <buffer> j :cnext<CR>zz<C-w>p
 nnoremap <buffer> k :cprev<CR>zz<C-w>p
