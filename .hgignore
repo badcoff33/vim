@@ -1,0 +1,14 @@
+syntax: glob
+ginit.vim
+
+pack
+
+.netrwhist
+
+.netrwbook
+
+spell
+
+*.swo
+
+*.swp
