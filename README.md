@@ -12,7 +12,7 @@ Here is a short list of shifted
 keys: `1=!`  `2=@`  `3=#`  `4=$`  `5=%`  `6=^`  `7=&` `8=*`  `9=(` `0=)`
 
 A differnt approach: Drop this line in your startup code to make better use of
-the umlaute keys `set langmap=Ãœ?,Ã¼/,Ã¶[,Ã¤],Ã–{,Ã„}`.
+the umlaute keys `set langmap=Ü?,ü/,ö[,ä],Ö{,Ä}`.
 
 ### Books
 The web has a load of good Vim tutorials, covering how to use Vim and scripting
