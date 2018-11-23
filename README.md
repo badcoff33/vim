@@ -40,9 +40,8 @@ Install plugins as recommended by Vim's manual `:help packages`
 
 ### Vim Knowledge
 
-*Vim Tips* -- http://vim.wikia.com/wiki/Vim_Tips_Wiki
-
-*Vim Galore* -- https://github.com/mhinz/vim-galore
+- [Vim wiki](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
+- [Vim Galore](https://github.com/mhinz/vim-galore)
 
 ### Wipe out a set of buffers
 
