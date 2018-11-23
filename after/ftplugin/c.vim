@@ -4,12 +4,10 @@
 
 command! -buffer -nargs=0 ShowFunctions           call c#HighlightTaggedFunctions()
 command! -buffer -nargs=0 ShowTypes               call c#HighlightTaggedTypes()
-command! -buffer -nargs=0 ToggleAutoPreviewTag    call c#ToggleAutoPreviewTag()
 command! -buffer -nargs=0 ToggleSourceHeaderFile  call c#ToggleSourceHeaderFile()
 command! -buffer -nargs=0 PrettifyCode            call c#CodeCleanup()
 
 nnoremap <buffer> <LocalLeader><TAB> :ToggleSourceHeaderFile<CR>
-nnoremap <buffer> <LocalLeader>p :ToggleAutoPreviewTag<CR>
 
 let b:load_doxygen_syntax=1
 let c_no_comment_fold = 1

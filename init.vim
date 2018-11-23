@@ -36,7 +36,7 @@ set sidescroll=8
 set sidescrolloff=3
 
 " window behavior
-set switchbuf=useopen
+set switchbuf=usetab
 set nosplitbelow
 set splitright
 set noequalalways
@@ -104,7 +104,7 @@ set wildignorecase
 set wildignore=*.*~
 
 set showtabline=1
-set sessionoptions=buffers,tabpages,winsize,resize
+set sessionoptions=buffers,tabpages,winsize
 
 " Use this ':help' to have quick access to the Vim documentation.
 set keywordprg=:help
@@ -218,9 +218,9 @@ nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
 nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 
 nnoremap <Leader>t :tjump /
-
+" open a preview window with current symbol highlighted
+nnoremap <Leader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
 nnoremap <Leader>h  :HighlightWord <C-r><C-w><CR>
-nnoremap <Leader>H  :set invhlsearch<CR>
 nnoremap <Leader>c  :ClipboardBuffer<CR>
 nnoremap <Leader>o  :OneMoreThing<CR>
 nnoremap <Leader>O  :ShowOneMoreThing<CR>
@@ -236,7 +236,7 @@ nnoremap <silent> <A-j> ::call init#FastForwardAndRewind("fastforward")<cr>
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
 
-nnoremap <Leader>n :nohlsearch<CR>
+nnoremap <Leader>n :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
