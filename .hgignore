@@ -1,4 +1,5 @@
 syntax: glob
+vimrc
 ginit.vim
 
 pack
