@@ -21,6 +21,9 @@ set viminfo='50,<1000,s100,:100
 set spellsuggest=best,10
 set spelllang=en_us,de
 
+" Use Umlaut keys in normal mode 
+set langmap=üÜöÖäÄ;/?[{]}
+
 " Read changed files automatically if they are changed in the background
 set autoread
 
@@ -263,4 +266,4 @@ cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>\
 
 " }}} mappings
 
-" vim:sw=2:tw=0:nocindent:foldmethod=marker
+" vim:sw=2:tw=0:nocindent:foldmethod=marker:fenc=latin1

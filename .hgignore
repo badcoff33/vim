@@ -1,15 +1,7 @@
 syntax: glob
-vimrc
-ginit.vim
-
 pack
-
 .netrwhist
-
 .netrwbook
-
 spell
-
 *.swo
-
 *.swp
