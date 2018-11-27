@@ -19,10 +19,10 @@ set viminfo='50,<1000,s100,:100
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
-set spelllang=en_us,de
+set spelllang=en_us
 
 " Use Umlaut keys in normal mode 
-set langmap=üÜöÖäÄ;/?[{]}
+set langmap=üÜöÖäÄß;/?[{]}=
 
 " Read changed files automatically if they are changed in the background
 set autoread
@@ -102,7 +102,7 @@ set completeopt=menu
 set pumheight=10
 
 " Command line completion
-set nowildmenu wildmode=list,full
+set nowildmenu wildmode=list:full
 set wildignorecase
 set wildignore=*.*~
 
@@ -201,6 +201,8 @@ let maplocalleader = "\\"
 
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
+else
+  tnoremap <Esc> <C-w>N
 endif
 
 " surround visual selection with ", ', (, [
