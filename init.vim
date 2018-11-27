@@ -19,7 +19,7 @@ set viminfo='50,<1000,s100,:100
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
-set spelllang=en_us,de
+set spelllang=en_us
 
 " Use Umlaut keys in normal mode 
 set langmap=üÜöÖäÄß;/?[{]}=
