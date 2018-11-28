@@ -40,6 +40,8 @@ highlight FoldColumn guifg=skyblue4 guibg=bg
 highlight Folded guifg=grey60 guibg=grey95
 highlight SignColumn guifg=skyblue4 guibg=bg
 
+highlight! link StatusLineTerm StatusLine
+highlight! link StatusLineTermNC StatusLineNC
 highlight! link WildMenu PmenuSel
 highlight! link TabLineFill Normal
 highlight! link TabLine StatusLineNC

@@ -43,6 +43,8 @@ highlight User3        guifg=white      guibg=grey30 gui=none cterm=inverse
 highlight FoldColumn   guifg=cyan3      guibg=bg     gui=none ctermbg=bg
 highlight Folded       guifg=cyan3      guibg=bg     gui=NONE
 highlight SignColumn   guifg=skyblue4   guibg=bg
+highlight! link StatusLineTerm StatusLine
+highlight! link StatusLineTermNC StatusLineNC
 
 " search
 highlight IncSearch  guifg=white        guibg=dodgerblue3 gui=bold

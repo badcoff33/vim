@@ -42,6 +42,8 @@ highlight Pmenu         guifg=#000000   guibg=#40a0a0  gui=none
 highlight PmenuSbar     guifg=#ffffff   guibg=#6090f8  gui=none
 highlight PmenuThumb    guifg=#ffffff   guibg=#2050c0  gui=none
 
+highlight! link StatusLineTerm StatusLine
+highlight! link StatusLineTermNC StatusLineNC
 highlight! link CursorColumn CursorLine
 highlight! link WildMenu     PmenuSel
 highlight! link TabLineFill  Normal
