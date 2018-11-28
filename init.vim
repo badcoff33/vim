@@ -22,7 +22,7 @@ set spellsuggest=best,10
 set spelllang=en_us
 
 " Use Umlaut keys in normal mode 
-set langmap=üÜöÖäÄß;/?[{]}=
+set langmap=ö[,ä],Ö{,Ä},ü/,Ü?,ß=
 
 " Read changed files automatically if they are changed in the background
 set autoread
