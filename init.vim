@@ -102,7 +102,7 @@ set completeopt=menu
 set pumheight=10
 
 " Command line completion
-set nowildmenu wildmode=list:full
+set nowildmenu wildmode=list:longest,full
 set wildignorecase
 set wildignore=*.*~
 
