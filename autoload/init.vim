@@ -148,6 +148,9 @@ function! init#OneMoreThing()
     execute "buffer " . g:one_more_thing_file
   endif
   normal G
+  if len(getline('.')) > 0
+    put=''
+  endif
   if empty(l:reference)
     put=printf('## %s', l:comment)
   else
