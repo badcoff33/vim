@@ -130,18 +130,13 @@ endfunction
 " in a file. This file/line info can be opend with a 'gF' command.
 function! init#OneMoreThing()
   let l:reference = input(
-        \ "Where? ", 
+        \ "Drop comment here: ", 
         \ printf('"%s" %d', bufname("%"), line(".")),
         \ "file")
   let l:comment = input(
-        \ "What? ", 
+        \ "Comment: ", 
         \ "", 
         \ "tag")
-  if empty(l:reference)
-    let l:new_item = printf('- %s', l:comment)
-  else
-    let l:new_item = printf('- %s -- %s', l:reference, l:comment)
-  endif
   if !filereadable(expand(g:one_more_thing_file, ":p:h"))
     enew
     put='# One More Thing'
@@ -153,7 +148,12 @@ function! init#OneMoreThing()
     execute "buffer " . g:one_more_thing_file
   endif
   normal G
-  put=l:new_item
+  if empty(l:reference)
+    put=printf('- %s', l:comment)
+  else
+    put=printf('- %s', l:comment)
+    put=printf('    %s', l:reference)
+  endif
   write
 endfunction
 
