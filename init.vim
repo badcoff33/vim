@@ -17,12 +17,12 @@ set novisualbell
 set noerrorbells
 set viminfo='50,<1000,s100,:100
 
-" limit number of suggestions of z=
+" limit number of suggestions of z= 
 set spellsuggest=best,10
 set spelllang=en_us
 
 " Use Umlaut keys in normal mode 
-set langmap=ö[,ä],Ö{,Ä},ü/,Ü?,ß=
+set langmap=üÜöÖäÄß;/?[{]}=
 
 " Read changed files automatically if they are changed in the background
 set autoread
@@ -222,9 +222,13 @@ inoremap <C-Tab> <C-]>
 nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
 nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 
-nnoremap <Leader>t :tjump /
-" open a preview window with current symbol highlighted
-nnoremap <Leader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
+nnoremap <F1> :Welcome<CR>
+nnoremap <f2> :edit <C-r>=expand("%:p:h")<CR>\
+nnoremap <f3> :buffer<Space>
+
+" A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
+nnoremap <Leader> p yiw<C-w>g}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
+
 nnoremap <Leader>h  :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c  :ClipboardBuffer<CR>
 nnoremap <Leader>o  :OneMoreThing<CR>
@@ -243,21 +247,12 @@ nnoremap <C-Insert> "*yiw
 
 nnoremap <Leader>n :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
-nnoremap <Leader>f :find<Space>
-nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>m :silent make<space><up><CR>
-nnoremap <Leader>M :silent make<space><up>
-nnoremap <Leader>g :silent grep <C-r><C-w>
-nnoremap <Leader>G :silent grep<Space>
 
-nnoremap <BS> :call init#ToggleQuickfix()<CR>
+nnoremap <BS>   :call init#ToggleQuickfix()<CR>
+nnoremap <C-BS> <C-w>w
 
 nnoremap + :cnext<CR>
 nnoremap - :cprev<CR>
-
-nnoremap <F1> :Welcome<CR>
-nnoremap <F4> :ptjump <C-r><C-w><CR>
-nnoremap <S-F4> :wincmd z<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
