@@ -102,7 +102,7 @@ set completeopt=menu
 set pumheight=10
 
 " Command line completion
-set nowildmenu wildmode=list:longest,full
+set nowildmenu wildmode=list,full
 set wildignorecase
 set wildignore=*.*~
 
@@ -227,10 +227,10 @@ nnoremap <f3> :buffer<Space>
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
 nnoremap <Leader> p yiw<C-w>g}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
 
-nnoremap <Leader>h  :HighlightWord <C-r><C-w><CR>
-nnoremap <Leader>c  :ClipboardBuffer<CR>
-nnoremap <Leader>o  :OneMoreThing<CR>
-nnoremap <Leader>O  :ShowOneMoreThing<CR>
+nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
+nnoremap <Leader>c :ClipboardBuffer<CR>
+nnoremap <Leader>o :OneMoreThing<CR>
+nnoremap <Leader>O :ShowOneMoreThing<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
 
 inoremap <C-Tab> <C-x><C-]>
