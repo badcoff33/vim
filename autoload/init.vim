@@ -1,4 +1,4 @@
-" Vim autload file
+" Vim autoload file
 
 if !exists("g:welcome_text_file")
   let g:welcome_text_file = '~/Documents/welcome.txt'
