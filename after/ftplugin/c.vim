@@ -2,10 +2,9 @@
 " Description:   Some support functions and mappings for C code files.
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
-command! -buffer -nargs=0 ShowFunctions           call c#HighlightTaggedFunctions()
-command! -buffer -nargs=0 ShowTypes               call c#HighlightTaggedTypes()
-command! -buffer -nargs=0 ToggleSourceHeaderFile  call c#ToggleSourceHeaderFile()
-command! -buffer -nargs=0 PrettifyCode            call c#CodeCleanup()
+command! -buffer -nargs=0 ShowTags               call c#HighlightTaggedFunctions()
+command! -buffer -nargs=0 ToggleSourceHeaderFile call c#ToggleSourceHeaderFile()
+command! -buffer -nargs=0 PrettifyCode           call c#CodeCleanup()
 
 nnoremap <buffer> <LocalLeader><TAB> :ToggleSourceHeaderFile<CR>
 
