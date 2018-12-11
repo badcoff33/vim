@@ -149,8 +149,8 @@ command! -nargs=0 WhitespaceMelt call whitespace#Melt()
 command! -nargs=0 ShowUnsavedChanges call vimdiff#UnsavedChanges()
 command! -nargs=0 TwoDirDiff call vimdiff#TwoDirDiff()
 
-command! -nargs=0 OneMoreThing call init#OneMoreThing()
-command! -nargs=0 ShowOneMoreThing call init#ShowOneMoreThing()
+command! -nargs=0 OneMoreThing call onemorething#NewEntry()
+command! -nargs=0 ShowOneMoreThing call onemorething#ShowFile()
 
 command! -nargs=1 Wipe bufdo if expand("%") =~ '.*<args>.*' | bw | endif | bprevious
 

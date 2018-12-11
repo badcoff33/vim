@@ -1,4 +1,5 @@
 " Vim autoload file
+" Description: very basic functions called from init.vim
 
 if !exists("g:welcome_text_file")
   let g:welcome_text_file = '~/Documents/welcome.txt'
@@ -113,57 +114,6 @@ function! init#HighlightWord(word)
     match none
   endif
 endfunction
-
-if !exists("g:one_more_thing_file")
-  let g:one_more_thing_file = '~/Documents/omt.md'
-endif
-
-function! init#ShowOneMoreThing()
-  if filereadable(expand(g:one_more_thing_file, ":p:h"))
-    execute "edit " . g:one_more_thing_file 
-  else
-    echomsg "No OneMoreThing?"
-  endif
-endfunction
-
-" Description: Enter one-more-thing and store the text with file and line info
-" in a file. This file/line info can be opend with a 'gF' command.
-function! init#OneMoreThing()
-  let l:reference = input(
-        \ "Drop comment here: ", 
-        \ printf('"%s" %d', bufname("%"), line(".")),
-        \ "file")
-  let l:comment = input(
-        \ "Comment: ", 
-        \ "", 
-        \ "tag")
-  if !filereadable(expand(g:one_more_thing_file, ":p:h"))
-    enew
-    put='# One More Thing'
-    put='------------------------------------------------------------------------------'
-    put='  vim:ft=markdown'
-    execute 'w! ' . g:one_more_thing_file
-  endif
-  if !bufexists(g:one_more_thing_file)
-    execute "edit " . g:one_more_thing_file
-  else
-    execute "buffer " . g:one_more_thing_file
-  endif
-  normal gg
-  while search('^#.*$', 'eW') > 0
-  endwhile
-  normal }
-  if empty(l:reference)
-    put=printf('## %s', l:comment)
-    put=''
-  else
-    put=printf('## %s', l:comment)
-    put=printf('    %s', l:reference)
-    put=''
-  endif
-  write
-endfunction
-
 
 function! init#ToggleQuickfix()
   let l:save_win = win_getid()
