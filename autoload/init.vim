@@ -48,35 +48,6 @@ function! init#RestoreCursor ()
   endif
 endfunction
 
-" Description: A context sensitve file movement function.
-function! init#FastForwardAndRewind(direction)
-  if a:direction == "fastforward"
-    if &diff
-      normal ]czz
-    elseif &filetype == "diff"
-      execute search('^\(diff\|@@\)','W')
-    elseif &filetype == "help"
-      execute search('^[0-9\.]\+\s\+[A-Z]\+.*\*[a-z-]\+\*','W')
-		elseif &filetype == "markdown"
-			execute search('^#\+\s\+','W')
-    else
-      silent! cnext
-    endif
-  elseif a:direction == "rewind"
-    if &diff
-      normal [czz
-    elseif &filetype == "diff"
-      execute search('^\(diff\|@@\)','bW')
-    elseif &filetype == "help"
-      execute search('^[0-9\.]\+\s\+[A-Z]\+.*\*[a-z-]\+\*','bW')
-		elseif &filetype == "markdown"
-			execute search('^#\+\s\+','bW')
-    else
-      silent! cprevious
-    endif
-  endif
-endfunction
-
 function! init#HiName()
   let synid = synID(line("."), col("."), 0)
   let synidtrans = synIDtrans(synid)

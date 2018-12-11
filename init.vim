@@ -233,9 +233,6 @@ nnoremap <Leader>o  :OneMoreThing<CR>
 nnoremap <Leader>O  :ShowOneMoreThing<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
 
-nnoremap <silent> <A-k> :call init#FastForwardAndRewind("rewind")<cr>
-nnoremap <silent> <A-j> ::call init#FastForwardAndRewind("fastforward")<cr>
-
 inoremap <C-Tab> <C-x><C-]>
 nnoremap <C-Insert> "*yiw
 
