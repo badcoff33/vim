@@ -147,8 +147,6 @@ command! -nargs=0 WhitespaceCleanup call whitespace#Cleanup()
 command! -nargs=0 WhitespaceMelt call whitespace#Melt()
 
 command! -nargs=0 ShowUnsavedChanges call vimdiff#UnsavedChanges()
-command! -nargs=0 ToggleVimdiff call vimdiff#Toggle()
-command! -nargs=0 VimdiffFileContext call vimdiff#FileContext()
 command! -nargs=0 TwoDirDiff call vimdiff#TwoDirDiff()
 
 command! -nargs=0 OneMoreThing call init#OneMoreThing()
@@ -233,10 +231,6 @@ nnoremap <Leader>h  :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c  :ClipboardBuffer<CR>
 nnoremap <Leader>o  :OneMoreThing<CR>
 nnoremap <Leader>O  :ShowOneMoreThing<CR>
-nnoremap <Leader>dt :ToggleVimdiff<CR>
-nnoremap <Leader>du :wa <BAR> diffupdate<CR>
-nnoremap <Leader>do :VimdiffFileContext<CR>
-nnoremap <Leader>db :ShowUnsavedChanges<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
 
 nnoremap <silent> <A-k> :call init#FastForwardAndRewind("rewind")<cr>
