@@ -1,8 +1,8 @@
 " File type plugin for C
+"
 " Description:   Some support functions and mappings for C code files.
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
-command! -buffer -nargs=0 ShowTags               call c#HighlightTaggedFunctions()
 command! -buffer -nargs=0 ToggleSourceHeaderFile call c#ToggleSourceHeaderFile()
 command! -buffer -nargs=0 PrettifyCode           call c#CodeCleanup()
 

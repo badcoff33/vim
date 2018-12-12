@@ -111,6 +111,7 @@ highlight doxygenBrief      guifg=deepskyblue1  gui=none
 highlight doxygenParam      guifg=skyblue1      gui=none
 highlight doxygenOtherTODO  guifg=maroon3       gui=bold,underline
 highlight doxygenOtherWARN  guifg=maroon3       gui=bold,underline
+highlight! link DoxygenBody Comment 
 highlight! link doxygenSpecialOnelineDesc doxygenBrief
 
 " vimdiff

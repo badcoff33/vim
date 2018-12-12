@@ -55,22 +55,3 @@ function! c#ToggleSourceHeaderFile()
     endfor
   endfor
 endfunction
-
-" Description: scan trough current TAG file, find the type and function symbols
-" and highlight them as keyword.
-function! c#HighlightTags()
-  let g:tagged_files = []
-  for l:tagsfile in tagfiles()
-    for l:line in readfile(l:tagsfile)
-      let l:line_split = split(l:line, '\s\+');
-      if match(l:line, '\<t\>') > 0
-        execute "syntax keyword cType l:line_split[0]"
-        call insert(g:tagged_files, line_split[1])
-      elseif match(l:line, '\<f\>') > 0
-        execute "syntax keyword Function l:line_split[0]"
-        call insert(g:tagged_files, line_split[1])
-      endif
-    endfor
-    call uniq(sort(g:tagged_files))
-  endfor
-endfunction

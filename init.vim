@@ -126,7 +126,9 @@ set diffopt=context:3,vertical,iwhite,filler
 
 let g:netrw_use_errorwindow = 0
 let g:netrw_liststyle = 1
-let g:tagbar_left = 1
+let g:tagbar_left = 0
+let g:tagbar_foldlevel = 1
+let g:tagbar_width=60
 
 " }}}
 
@@ -213,8 +215,6 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 " Try this!
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
-" extend abbreviation
-inoremap <C-Tab> <C-]>
 
 " Indent and re-select visual block
 nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
@@ -225,7 +225,9 @@ nnoremap <f2> :edit <C-r>=expand("%:p:h")<CR>\
 nnoremap <f3> :buffer<Space>
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
-nnoremap <Leader> p yiw<C-w>g}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
+nnoremap <Leader>p yiw<C-w>g}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
+
+nnoremap <A-+> tjump /<C-r><C-w>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
@@ -233,14 +235,13 @@ nnoremap <Leader>o :OneMoreThing<CR>
 nnoremap <Leader>O :ShowOneMoreThing<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
 
-inoremap <C-Tab> <C-x><C-]>
+" put current word in register '*' 
 nnoremap <C-Insert> "*yiw
 
 nnoremap <Leader>n :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
 nnoremap <BS>   :call init#ToggleQuickfix()<CR>
-nnoremap <C-BS> <C-w>w
 
 nnoremap + :cnext<CR>
 nnoremap - :cprev<CR>

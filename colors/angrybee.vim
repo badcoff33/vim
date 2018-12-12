@@ -31,9 +31,9 @@ highlight User2         guifg=#40eeee   guibg=#405880  gui=none
 highlight User3         guifg=#40eeee   guibg=#405880  gui=none
 highlight VertSplit     guifg=#606060   guibg=bg       gui=none
 highlight LineNr        guifg=#405060   guibg=bg       gui=none
-highlight CursorLineNr  guifg=#455565   guibg=#353535  gui=bold
-highlight CursorLine                    guibg=#1e2e38
-highlight QuickFixLine                  guibg=bg       gui=bold
+highlight CursorLineNr  guifg=#506575   guibg=#303540  gui=bold
+highlight CursorLine                    guibg=#203035
+highlight QuickFixLine  guifg=#e0c040   guibg=bg       gui=bold
 highlight FoldColumn    guifg=#405060   guibg=bg       gui=none
 highlight Folded        guifg=fg        guibg=bg       gui=none
 highlight SignColumn    guifg=#e0e0e0   guibg=bg       gui=none
@@ -63,12 +63,12 @@ highlight Structure     guifg=#808080   guibg=bg      gui=none
 highlight StorageClass  guifg=#b0d040   guibg=bg      gui=none
 highlight PreProc       guifg=#d0d040   guibg=bg      gui=none
 highlight PreCondit     guifg=#d0d040   guibg=bg      gui=bold
-highlight Comment       guifg=#409090   guibg=bg      gui=none
+highlight Comment       guifg=#6090b0   guibg=bg      gui=none
 highlight Function      guifg=#f8f8f8   guibg=bg      gui=bold
 highlight Identifier    guifg=#00c8d8   guibg=bg      gui=none
 highlight Special       guifg=#c0c040   guibg=bg      gui=none
 highlight Constant      guifg=#88e0e0   guibg=bg      gui=none
-highlight Number        guifg=#e0e060   guibg=bg      gui=none
+highlight Number        guifg=#f0c070   guibg=bg      gui=none
 
 highlight Title         guifg=fg        guibg=bg      gui=bold
 highlight Subtitle      guifg=fg        guibg=bg      gui=bold,underline
@@ -112,10 +112,10 @@ highlight! link doxygenParamName doxygenRefWord
 highlight! link doxygenHeaderLine doxygenBrief
 
 " Vimdiff
-highlight DiffChange    guifg=#f0f0f0 guibg=bg      gui=none
-highlight DiffText      guifg=#c0c000 guibg=#2e3e48 gui=none
-highlight DiffAdd       guifg=#00c000 guibg=#2e3e48 gui=none
-highlight DiffDelete    guifg=bg      guibg=bg      gui=none
+highlight DiffChange    guifg=#f0f0f0 guibg=#1e2e38 gui=none
+highlight DiffText      guifg=#c0c090 guibg=#2e4040 gui=none
+highlight DiffAdd       guifg=#90c090 guibg=#2e3e48 gui=none
+highlight DiffDelete    guifg=#481e2e guibg=#481e2e gui=none
 
 " Diff buffer
 highlight diffOldFile   guifg=fg

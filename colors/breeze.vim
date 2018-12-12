@@ -11,7 +11,7 @@ let g:colors_name = "breeze"
 " basics
 highlight Normal  guifg=grey30 guibg=white
 highlight NonText guifg=cyan4  guibg=bg
-highlight Visual               guibg=lightblue1
+highlight Visual               guibg=gold
 highlight Cursor  guifg=white  guibg=red3
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
@@ -22,11 +22,11 @@ if has ('nvim')
 endif
 
 " window decoration
-highlight StatusLine   guifg=white  guibg=lightblue4 gui=none
-highlight User1        guifg=white  guibg=lightblue4 gui=bold
-highlight User2        guifg=white  guibg=lightblue4 gui=none
-highlight User3        guifg=white  guibg=lightblue4 gui=none
-highlight StatusLineNC guifg=white  guibg=lightblue   gui=none
+highlight StatusLine   guifg=white   guibg=royalblue3 gui=none
+highlight User1        guifg=white   guibg=royalblue3 gui=bold
+highlight User2        guifg=white   guibg=royalblue3 gui=none
+highlight User3        guifg=white   guibg=royalblue3 gui=none
+highlight StatusLineNC guifg=grey30  guibg=grey90     gui=none
 highlight VertSplit    guifg=grey85 guibg=bg          gui=none
 highlight! link WildMenu IncSearch
 highlight! link StatusLineTerm StatusLine
@@ -43,7 +43,7 @@ highlight Folded        guifg=fg        guibg=bg      gui=NONE
 
 " tabs
 highlight! link TabLineFill Normal
-highlight! link TabLine Normal
+highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 
 " popup Menu
@@ -90,6 +90,7 @@ highlight qfSeparator guifg=dodgerblue4
 highlight doxygenComment            guifg=darkseagreen3        gui=none
 highlight doxygenBrief              guifg=darkseagreen4        gui=bold
 highlight doxygenParam              guifg=darkseagreen3        gui=italic
+highlight doxygenRefWord            guifg=skyblue3             gui=underline
 highlight doxygenSpecial            guifg=darkseagreen4        gui=none
 highlight doxygenSpecialOnelineDesc guifg=darkseagreen4
 
