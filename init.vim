@@ -216,23 +216,32 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 
-" Indent and re-select visual block
-nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
-nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
-
-nnoremap <F1> :Welcome<CR>
-nnoremap <f2> :edit <C-r>=expand("%:p:h")<CR>\
-nnoremap <f3> :buffer<Space>
-nnoremap <f4> :tjump /
+nnoremap + :cnext<CR>
+nnoremap - :cprevious<CR>
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
 nnoremap <Leader>p yiw<C-w>g}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
-nnoremap <Leader>o :OneMoreThing<CR>
-nnoremap <Leader>O :ShowOneMoreThing<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
+
+nnoremap <Leader>e    :edit <C-r>=expand("%:p:h")<CR>\
+nnoremap <Leader>b    :buffer<Space>
+
+nnoremap <Leader>o    :OneMoreThing<CR>
+nnoremap <Leader>O    :ShowOneMoreThing<CR>
+
+nnoremap <Leader>m    :sil make
+nnoremap <Leader>g    :sil grep
+nnoremap <Leader>t    :sil TagbarToggle<CR>
+
+nnoremap <Leader><C-]> :tjump /
+
+" Indent and re-select visual block
+nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
+nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
+
 
 " put current word in register '*' 
 nnoremap <C-Insert> "*yiw
@@ -240,10 +249,7 @@ nnoremap <C-Insert> "*yiw
 nnoremap <Leader>n :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
-nnoremap <A-.> :cnext<CR>
-nnoremap <A-,> :cprevious<CR>
-
-nnoremap <BS>   :call init#ToggleQuickfix()<CR>
+nnoremap <Leader>q   :call init#ToggleQuickfix()<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
@@ -255,3 +261,4 @@ cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>\
 " }}} mappings
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker:fenc=latin1
+
