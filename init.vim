@@ -223,11 +223,10 @@ nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 nnoremap <F1> :Welcome<CR>
 nnoremap <f2> :edit <C-r>=expand("%:p:h")<CR>\
 nnoremap <f3> :buffer<Space>
+nnoremap <f4> :tjump /
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
 nnoremap <Leader>p yiw<C-w>g}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
-
-nnoremap <A-+> tjump /<C-r><C-w>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
@@ -241,10 +240,10 @@ nnoremap <C-Insert> "*yiw
 nnoremap <Leader>n :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
-nnoremap <BS>   :call init#ToggleQuickfix()<CR>
+nnoremap <A-.> :cnext<CR>
+nnoremap <A-,> :cprevious<CR>
 
-nnoremap + :cnext<CR>
-nnoremap - :cprev<CR>
+nnoremap <BS>   :call init#ToggleQuickfix()<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
