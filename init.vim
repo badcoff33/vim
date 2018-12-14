@@ -216,6 +216,7 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 
+cnoremap <f1> <C-f>i
 inoremap <f1> <Esc>q:i
 nnoremap <f1> q:i
 
