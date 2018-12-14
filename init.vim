@@ -149,7 +149,7 @@ command! -nargs=0 WhitespaceCleanup call whitespace#Cleanup()
 command! -nargs=0 WhitespaceMelt call whitespace#Melt()
 
 command! -nargs=0 ShowUnsavedChanges call vimdiff#UnsavedChanges()
-command! -nargs=0 TwoDirDiff call vimdiff#TwoDirDiff()
+command! -nargs=* -complete=dir TwoDirDiff call vimdiff#TwoDirDiff(<f-args>)
 
 command! -nargs=0 OneMoreThing call onemorething#NewEntry()
 command! -nargs=0 ShowOneMoreThing call onemorething#ShowFile()
@@ -215,6 +215,9 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 " Try this!
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
+
+inoremap <f1> <Esc>q:i
+nnoremap <f1> q:i
 
 nnoremap + :cnext<CR>
 nnoremap - :cprevious<CR>
