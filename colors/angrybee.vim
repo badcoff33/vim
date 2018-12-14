@@ -14,7 +14,7 @@ let g:colors_name = "angrybee"
 highlight Normal    guifg=#d8d8d8  guibg=#18242e gui=none
 highlight NonText   guifg=#4285F4  guibg=bg      gui=none
 highlight Cursor    guifg=#000000  guibg=#ffffff gui=none
-highlight Visual    guifg=#c0d8d8  guibg=#255560 gui=none
+highlight Visual    guifg=#c0d8e0  guibg=#255560 gui=none
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
@@ -26,7 +26,7 @@ endif
 " Decoration
 highlight StatusLineNC  guifg=#a0a0a0   guibg=#2e3e48  gui=none
 highlight StatusLine    guifg=#40eeee   guibg=#405880  gui=none
-highlight User1         guifg=#40eeee   guibg=#405880  gui=none
+highlight User1         guifg=#ddeeff   guibg=#405880  gui=none
 highlight User2         guifg=#40eeee   guibg=#405880  gui=none
 highlight User3         guifg=#40eeee   guibg=#405880  gui=none
 highlight VertSplit     guifg=#606060   guibg=bg       gui=none
@@ -52,7 +52,7 @@ highlight! link TabLineSel   StatusLine
 
 " Search
 highlight IncSearch     guifg=#202020  guibg=#d0d0d0 gui=none
-highlight Search        guifg=#40c0ef  guibg=#204860 gui=none
+highlight Search        guifg=#ccaacc  guibg=#503848 gui=none
 highlight MatchParen    guifg=#40e0e0  guibg=bg      gui=underline
 
 " Structure
@@ -148,4 +148,3 @@ highlight htmlItalic             gui=italic
 " markdown
 highlight! link markdownCode String
 highlight! link markdownCodeBlock Comment
-
