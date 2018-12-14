@@ -16,10 +16,18 @@ endfunction
 " Description: Run recursive diff between two directories.  Diff's output get
 " reformatted. Press <CR> on a set of two files that differ and Vimdiff gets
 " opened.
-function! vimdiff#TwoDirDiff()
+function! vimdiff#TwoDirDiff(...)
+  if !exists('a:1')
   let l:a = input("diff directory A: ", expand("%:p:h"), "dir")
+  else
+    let l:a = a:1
+  endif
+  if !exists('a:2')
   let l:b = input("diff directory B: ", expand("%:p:h"), "dir")
-  " remove trailing backslash (added by dir completion)
+  else
+    let l:b = a:2
+  endif
+  " remove trailing backslash (added by dir completion) and expand '~'
   let l:a = fnamemodify(l:a, ":p:h")
   let l:b = fnamemodify(l:b, ":p:h")
   " create a fresh out buffer
