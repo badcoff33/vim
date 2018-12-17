@@ -197,7 +197,7 @@ augroup END
 
 " Set leader and localleader keys, that works best for me
 let mapleader = " "
-let maplocalleader = "\\"
+let maplocalleader = "+"
 
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -217,8 +217,8 @@ inoremap <Ins> <Esc>
 inoremap <S-Space> <Esc>
 inoremap <C-Space> <Esc>
 
-nnoremap + :cnext<CR>
-nnoremap - :cprevious<CR>
+nnoremap <BS> :cnext<CR>
+nnoremap <S-BS> :cprevious<CR>
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
 nnoremap <Leader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
