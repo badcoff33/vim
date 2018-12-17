@@ -19,9 +19,8 @@ if empty(matchstr(expand("%:p"), "color"))
   nnoremap <special> <buffer> <LocalLeader>e :w<bar>source%<CR>
   " Execute current line (and clear annoying ^M)
   nnoremap <special> <buffer> <LocalLeader>E yy:<C-r>0<CR>
-  " Execute visual region
-  vnoremap <special> <buffer> <LocalLeader>E :write! $TEMP\sourced_lines.vim<CR> :source $TEMP\sourced_lines.vim<CR>
-  vnoremap <special> <buffer> <LocalLeader>e :write! $TEMP\sourced_lines.vim<CR> :source $TEMP\sourced_lines.vim<CR>
+  " Execute visual region -- use register @v
+  vnoremap <special> <buffer> <LocalLeader>e "vyQexecute @v<CR>visual<CR>
 else
   " Execute Vim color theme
   nnoremap <special> <buffer> <LocalLeader>e :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
