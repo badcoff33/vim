@@ -7,6 +7,6 @@ if exists("b:did_ftplugin_after")
 endif
 
 " Show value of 'option' under cursor
-nnoremap <buffer> <LocalLeader>o  :execute "echo &" . substitute(expand("<cword>"), "'", "", "g")<CR>
+nnoremap <buffer> <LocalLeader>o :set <C-r>=substitute(expand("<cword>"), "'", "", "g")<CR>?<CR>
 
 let b:did_ftplugin_after = 1
