@@ -214,17 +214,14 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 
 " Try this!
 inoremap <Ins> <Esc>
+inoremap <S-Space> <Esc>
 inoremap <C-Space> <Esc>
-
-cnoremap <f1> <C-f>i
-inoremap <f1> <Esc>q:i
-nnoremap <f1> q:i
 
 nnoremap + :cnext<CR>
 nnoremap - :cprevious<CR>
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
-nnoremap <Leader>p yiw<C-w>g}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
+nnoremap <Leader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
@@ -250,10 +247,10 @@ nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 " put current word in register '*' 
 nnoremap <C-Insert> "*yiw
 
-nnoremap <Leader>n :set invhlsearch<CR>
+nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
-nnoremap <Leader>q   :call init#ToggleQuickfix()<CR>
+nnoremap <C-Tab>   :call init#ToggleQuickfix()<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
@@ -264,5 +261,5 @@ cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>\
 
 " }}} mappings
 
-" vim:sw=2:tw=0:nocindent:foldmethod=marker:fenc=latin1
+" vim:sw=2:tw=0:nocindent:foldmethod=marker:fenc=latin1:fen:
 
