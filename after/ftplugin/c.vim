@@ -16,6 +16,7 @@ let c_space_errors = 1
 setlocal noshowfulltag
 setlocal textwidth=80
 setlocal expandtab
+setlocal formatoptions+=j
 setlocal foldmethod=indent
 setlocal foldnestmax=2
 setlocal tabstop=4
