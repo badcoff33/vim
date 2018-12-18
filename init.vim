@@ -136,9 +136,10 @@ let g:tagbar_width=60
 
 command! -nargs=0 Welcome call init#Welcome()
 command! -nargs=0 ShowHiName call init#HiName()
-command! -nargs=0 ToggleStickyCursorline call init#ToggleStickyCursorLine()
 command! -nargs=0 ClipboardBuffer call init#ClipboardBuffer()
 command! -nargs=1 HighlightWord call init#HighlightWord("<args>")
+command! -nargs=0 ToggleStickyCursorline call init#ToggleStickyCursorLine()
+command! -nargs=0 ToggleStatusline call init#ToggleStatusline()
 
 command! -nargs=0 SwitchWorkspace call workspace#Switch()
 
@@ -214,7 +215,6 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 
 " Try this!
 inoremap <Ins> <Esc>
-inoremap <S-Space> <Esc>
 inoremap <C-Space> <Esc>
 
 nnoremap <BS> :cnext<CR>
@@ -232,6 +232,7 @@ nnoremap <Leader>b    :buffer<Space>
 
 nnoremap <Leader>o    :OneMoreThing<CR>
 nnoremap <Leader>O    :ShowOneMoreThing<CR>
+nnoremap <Leader>l    :ToggleStatusline<CR>
 
 nnoremap <Leader>m    :sil make
 nnoremap <Leader>g    :sil grep
@@ -262,4 +263,3 @@ cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>\
 " }}} mappings
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker:fenc=latin1:fen:
-
