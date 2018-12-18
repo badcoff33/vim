@@ -100,4 +100,14 @@ function! init#ToggleQuickfix()
   endif 
 endfunction
 
-" vim:sw=2:tw=0:nocindent:foldmethod=marker
+function! init#ToggleStatusline()
+  if !exists("b:saved_statusline")
+    let b:saved_statusline = &statusline
+    setlocal statusline=%1*%F\ %0*%=%l,%c%V\ %P
+  else
+    execute "setlocal statusline=" . escape(b:saved_statusline, ' ')
+    unlet b:saved_statusline
+  endif
+endfunction
+
+" vim:sw=2:tw=0:nocindent
