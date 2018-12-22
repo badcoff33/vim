@@ -134,12 +134,13 @@ let g:tagbar_width=60
 
 " commands {{{
 
-command! -nargs=0 Welcome call init#Welcome()
-command! -nargs=0 ShowHiName call init#HiName()
-command! -nargs=0 ClipboardBuffer call init#ClipboardBuffer()
-command! -nargs=1 HighlightWord call init#HighlightWord("<args>")
-command! -nargs=0 ToggleStickyCursorline call init#ToggleStickyCursorLine()
-command! -nargs=0 ToggleStatusline call init#ToggleStatusline()
+command! -nargs=0 Welcome call welcome#open()
+
+command! -nargs=0 ShowHiName call basic#HiName()
+command! -nargs=0 ClipboardBuffer call basic#ClipboardBuffer()
+command! -nargs=1 HighlightWord call basic#HighlightWord("<args>")
+command! -nargs=0 ToggleStickyCursorline call basic#ToggleStickyCursorLine()
+command! -nargs=0 ToggleStatusline call basic#ToggleStatusline()
 
 command! -nargs=0 SwitchWorkspace call workspace#Switch()
 
@@ -168,7 +169,7 @@ augroup init
   " How to handle multiple windows?
   autocmd VimResized * wincmd =
 
-  autocmd BufReadPost * call init#RestoreCursor()
+  autocmd BufReadPost * call basic#RestoreCursor()
 
   autocmd BufWritePre *.c,*.h :WhitespaceCleanup
   autocmd BufWritePre *.py    :WhitespaceCleanup
@@ -251,7 +252,7 @@ nnoremap <C-Insert> "*yiw
 nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
-nnoremap <C-Tab>   :call init#ToggleQuickfix()<CR>
+nnoremap <C-Tab>   :call basic#ToggleQuickfix()<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
