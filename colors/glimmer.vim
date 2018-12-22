@@ -47,13 +47,13 @@ highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
 
 " search
-highlight IncSearch  guifg=white        guibg=hotpink2 gui=bold
-highlight Search     guifg=fg           guibg=grey35      gui=bold
-highlight MatchParen guifg=deepskyblue2 guibg=bg          gui=underline
+highlight IncSearch  guifg=white  guibg=hotpink2 gui=bold
+highlight Search     guifg=fg     guibg=grey35   gui=bold
+highlight MatchParen guifg=cyan2  guibg=bg       gui=underline
 
 " popup Menu
-highlight Pmenu      guifg=white  guibg=grey33         gui=none
-highlight PmenuSel   guifg=white  guibg=cornflowerblue gui=bold
+highlight Pmenu      guifg=white  guibg=grey33     gui=none
+highlight PmenuSel   guifg=white  guibg=lightblue3 gui=bold
 highlight PmenuSbar               guibg=grey50
 highlight PmenuThumb guifg=white
 highlight! link WildMenu IncSearch
@@ -64,40 +64,40 @@ highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 
 " code
-highlight Statement     guifg=lemonchiffon2      gui=none
-highlight Conditional   guifg=lemonchiffon2      gui=none
-highlight PreProc       guifg=lightcyan3   gui=bold
-highlight Comment       guifg=lightcyan4
-highlight Type          guifg=lightcyan3   gui=none
+highlight Statement     guifg=lightblue4     gui=bold
+highlight Conditional   guifg=lightblue4     gui=none
+highlight PreProc       guifg=paleturquoise3 gui=bold
+highlight Comment       guifg=lightblue2
+highlight Type          guifg=hotpink3       gui=none
 highlight StorageClass  guifg=hotpink2       gui=none
 highlight Function      guifg=hotpink1       gui=bold
 highlight Identifier    guifg=hotpink2
 highlight Special       guifg=hotpink3
-highlight Constant      guifg=hotpink3
+highlight Constant      guifg=lightyellow3
 highlight! link SpecialKey Special
 
-highlight Title         guifg=goldenrod                   gui=none
-highlight Subtitle      guifg=darkgoldenrod
-highlight ToDo          guifg=cyan2      		guibg=black   gui=bold
-highlight Error         guifg=white         guibg=tomato3
-highlight Directory     guifg=skyblue2                    gui=underline
+highlight Title     guifg=goldenrod                   gui=none
+highlight Subtitle  guifg=goldenrod
+highlight ToDo      guifg=cyan2      		guibg=black   gui=bold
+highlight Error     guifg=white         guibg=tomato3
+highlight Directory guifg=skyblue2                    gui=underline
 
 " messages
-highlight ErrorMsg    gui=none guifg=coral2 guibg=bg
-highlight WarningMsg  gui=none guifg=coral2 guibg=bg
-highlight ModeMsg     gui=none guifg=coral2 guibg=bg
-highlight Question    gui=none guifg=coral2 guibg=bg
-highlight MoreMsg     gui=none guifg=coral2 guibg=bg
+highlight ErrorMsg   guifg=coral2 guibg=bg gui=none
+highlight WarningMsg guifg=coral2 guibg=bg gui=none
+highlight ModeMsg    guifg=coral2 guibg=bg gui=none
+highlight Question   guifg=coral2 guibg=bg gui=none
+highlight MoreMsg    guifg=coral2 guibg=bg gui=none
 
 " quickfix
-highlight qfLineNr    guifg=lightcyan2
-highlight qfFileName  guifg=lightcyan3 gui=underline
+highlight qfLineNr    guifg=lightblue2
+highlight qfFileName  guifg=lightblue3 gui=underline
 highlight qfSeparator guifg=fg
 highlight qfError     guifg=grey60
 
 " Vim script
 highlight vimCommentTitle guifg=grey90      gui=bold
-highlight vimGroupName    guifg=lightcyan
+highlight vimGroupName    guifg=lightblue
 
 " C code
 highlight cCppOut     guifg=#6060e0       guibg=#333340
