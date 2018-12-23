@@ -37,8 +37,6 @@ setlocal foldmethod=expr
 setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
 setlocal nofoldenable
 
-nnoremap <buffer> j :cnext<CR>zz<C-w>p
-nnoremap <buffer> k :cprev<CR>zz<C-w>p
 nnoremap <buffer> <Esc> :cclose<CR>
 
 let b:did_ftplugin_after = 1
