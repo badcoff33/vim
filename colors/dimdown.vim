@@ -11,7 +11,7 @@ endif
 
 highlight clear
 set background=dark
-let g:colors_name = "glimmer"
+let g:colors_name = "dimdown"
 
 " very basic things
 highlight Normal  guifg=grey85      guibg=grey16          ctermbg=black
@@ -37,11 +37,11 @@ highlight! link CursorColumn CursorLine
 highlight VertSplit    guifg=grey27         guibg=bg     gui=none
 highlight StatusLineNC guifg=grey48         guibg=grey20 gui=none
 highlight StatusLine   guifg=white          guibg=grey30 gui=none
-highlight User1        guifg=paleturquoise2 guibg=grey30 gui=bold cterm=inverse
+highlight User1        guifg=cadetblue2 guibg=grey30 gui=bold cterm=inverse
 highlight User2        guifg=white          guibg=grey30 gui=none cterm=inverse
 highlight User3        guifg=white          guibg=grey30 gui=none cterm=inverse
-highlight FoldColumn   guifg=paleturquoise3 guibg=bg     gui=none ctermbg=bg
-highlight Folded       guifg=paleturquoise3 guibg=bg     gui=NONE
+highlight FoldColumn   guifg=cadetblue3 guibg=bg     gui=none ctermbg=bg
+highlight Folded       guifg=cadetblue3 guibg=bg     gui=NONE
 highlight SignColumn   guifg=skyblue4   guibg=bg
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
@@ -66,14 +66,14 @@ highlight! link TabLineSel StatusLine
 " code
 highlight Statement     guifg=lightblue4     gui=bold
 highlight Conditional   guifg=lightblue4     gui=none
-highlight PreProc       guifg=paleturquoise3 gui=bold
+highlight PreProc       guifg=cadetblue3 gui=bold
 highlight Comment       guifg=lightblue2
-highlight Type          guifg=hotpink3       gui=none
-highlight StorageClass  guifg=hotpink2       gui=none
+highlight Type          guifg=hotpink2       gui=none
+highlight StorageClass  guifg=hotpink3       gui=none
 highlight Function      guifg=hotpink1       gui=bold
 highlight Identifier    guifg=hotpink2
 highlight Special       guifg=hotpink3
-highlight Constant      guifg=lightyellow3
+highlight Constant      guifg=peachpuff
 highlight! link SpecialKey Special
 
 highlight Title     guifg=goldenrod                   gui=none
@@ -144,9 +144,9 @@ highlight netrwMarkFile gui=inverse
 highlight! link asciidocTitleUnderline Type
 
 " html
-highlight htmlH1 guifg=lightyellow1 gui=bold
-highlight htmlH2 guifg=lightyellow1
-highlight htmlH3 guifg=lightyellow2
+highlight htmlH1 guifg=peachpuff gui=bold
+highlight htmlH2 guifg=peachpuff
+highlight htmlH3 guifg=peachpuff
 highlight htmlBold                gui=bold
 highlight htmlItalic              gui=italic
 
