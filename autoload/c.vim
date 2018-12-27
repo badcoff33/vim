@@ -7,32 +7,34 @@ function! s:WhatHiGroupName()
 endfunction
 
 " Description: Adjust spaces in C code files.
-function! c#CodeCleanup()
-  normal m5gg
+function! c#CodeCleanup() range
+  execute "normal " . a:firstline . "G0"
   " Rule "Put one space after each keyword"
   while search('\<\(switch\|if\|while\)(', 'W') > 0
-    let l:whatHiGroupName = s:WhatHiGroupName()
-    if (l:whatHiGroupName == "Conditional") || (l:whatHiGroupName == "Repeat")
+    if line('.') > a:lastline | break | endif
+    let a:whatHiGroupName = s:WhatHiGroupName()
+    if (a:whatHiGroupName == "Conditional") || (a:whatHiGroupName == "Repeat")
       execute "normal ea "
     endif
   endwhile
-  normal gg
+  execute "normal " . a:firstline . "G0"
   " Rule "No space after opening bracket"
   while search('(\s\+', 'W') > 0
-    let l:whatHiGroupName = s:WhatHiGroupName()
-    if (l:whatHiGroupName == "cParen")
+    if line('.') > a:lastline | break | endif
+    let a:whatHiGroupName = s:WhatHiGroupName()
+    if (a:whatHiGroupName == "cParen")
       execute "normal wdT(_"
     endif
   endwhile
-  normal gg
+  execute "normal " . a:firstline . "G0"
   " Rule "No leading space at closing bracket"
   while search('\s\+)', 'W') > 0
-    let l:whatHiGroupName = s:WhatHiGroupName()
-    if (l:whatHiGroupName == "cParen")
+    if line('.') > a:lastline | break | endif
+    let a:whatHiGroupName = s:WhatHiGroupName()
+    if (a:whatHiGroupName == "cParen")
       execute "normal dt)_"
     endif
   endwhile
-  normal '5
 endfunction
 
 function! c#ToggleSourceHeaderFile()
