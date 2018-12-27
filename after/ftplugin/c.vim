@@ -8,6 +8,9 @@ command! -buffer -range -nargs=0 CodeCleanup <line1>,<line2>call c#CodeCleanup()
 
 nnoremap <buffer> <LocalLeader><TAB> :ToggleSourceHeaderFile<CR>
 
+nnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
+vnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
+
 let b:load_doxygen_syntax=1
 let c_no_comment_fold = 1
 let c_comment_strings = 1
