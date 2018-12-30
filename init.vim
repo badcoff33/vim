@@ -218,8 +218,8 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 
-nnoremap <BS> :cnext<CR>
-nnoremap <S-BS> :cprevious<CR>
+nnoremap <A-j> :cnext<CR>
+nnoremap <A-k> :cprevious<CR>
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
 nnoremap <Leader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
@@ -252,7 +252,7 @@ nnoremap <C-Insert> "*yiw
 nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
-nnoremap <C-Tab>   :call basic#ToggleQuickfix()<CR>
+nnoremap <BS> :call basic#ToggleQuickfix()<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
