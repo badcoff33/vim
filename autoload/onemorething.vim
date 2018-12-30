@@ -20,17 +20,15 @@ endfunction
 " Description: Enter one-more-thing and store the text with file and line info
 " in a file. This file/line info can be opend with a 'gF' command.
 function! onemorething#NewEntry()
-  let l:reference = input(
-        \ "Drop comment here: ", 
-        \ printf('"%s" %d', bufname("%"), line(".")),
-        \ "file")
+  let l:reference = printf('"%s" %d', bufname("%"), line("."))
   let l:comment = input(
-        \ "Comment: ", 
+        \ printf("Comment on\n  file %s\n  line %d\n==> ", bufname("%"), line(".")), 
         \ "", 
         \ "tag")
   if !filereadable(expand(g:one_more_thing_file, ":p:h"))
     enew
     put='# One More Thing'
+    put=''
     put='------------------------------------------------------------------------------'
     put='  vim:ft=markdown'
     execute 'w! ' . g:one_more_thing_file
@@ -44,14 +42,9 @@ function! onemorething#NewEntry()
   while search('^#.*$', 'eW') > 0
   endwhile
   normal }
-  if empty(l:reference)
-    put=printf('## %s', l:comment)
-    put=''
-  else
-    put=printf('## %s', l:comment)
-    put=printf('    %s', l:reference)
-    put=''
-  endif
+  put=printf('## %s', l:comment)
+  put=printf('    %s', l:reference)
+  put=''
   write
 endfunction
 
