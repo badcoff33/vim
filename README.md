@@ -15,28 +15,29 @@ A differnt approach: Drop this line in your startup code to make better use of
 the umlaute keys `set langmap=Ü?,ü/,ö[,ä],Ö{,Ä}`.
 
 ### Books
-The web has a load of good Vim tutorials, covering how to use Vim and scripting
-tips.Here is a link to a very comprehensive online book:
+
+The web has a load of good Vim tutorials, covering how to use Vim and
+scripting tips.Here is a link to a very comprehensive online book:
 http://learnvimscriptthehardway.stevelosh.com
 
 ### Open the commandline window
 
-Sure, you can do `:` followed by a `<C-f>`. Or, sometimes more convinient, just
-press in normal mode `q:` for the command line or `q/` or `q?` to enter the
-search window. The advantage to open one of these windows is that normal mode
-commands can be used.
+Sure, you can do `:` followed by a `<C-f>`. Or, sometimes more convinient,
+just press in normal mode `q:` for the command line or `q/` or `q?` to enter
+the search window. The advantage to open one of these windows is that normal
+mode commands can be used.
 
 ### Plugins
 
 A plain installation works surprisingly well for me. I tried really a lot of
-optional Vim plugins, but removed most of them, becausse all I need comes with
+optional Vim plugins, but removed most of them, because all I need comes with
 Vim "out of the box". But some plugins may help in certain situations. This is
-my short list of noteable Vim plugins:
+my short list of notable Vim plugins:
 
-- Per file tags navigation with *Tagbar*: https://github.com/majutsushi/tagbar.git
-- Buffer overview with *Bufexplorer*: https://github.com/jlanzarotta/bufexplorer.git
+- Per file tags navigation with [Tagbar](https://github.com/majutsushi/tagbar.git)
+- Buffer overview with [Bufexplorer](https://github.com/jlanzarotta/bufexplorer.git)
 
-Install plugins as recommended by Vim's manual `:help packages`
+Install those plugins as recommended by Vim's manual `:help packages`. 
 
 ### Vim Knowledge
 
@@ -49,30 +50,34 @@ Want to wipe out all buffers in current session containing `snap` in its name?
 Just type `:bw *snap<TAB><C-a><CR>`. The `<TAB>` is required for take a quick 
 look which buffers will be wiped-out. Another solution might be this:
 
-    :bufdo if expand("%") =~ '.*snap.*' | bw | endif
+```
+:bufdo if expand("%") =~ '.*snap.*' | bw | endif
+```
 
 ### Custom Command Completion
 
 Here is a Vim script to show custom completion of a new command:
 
-    function! CompleteFavPath(arg_lead, cmd_line, cur_pos)
-      let l:matchingKeys = ""
-      for k in sort(keys(g:workspacePathDict))
-        if match(k, a:arg_lead) >= 0
-          let l:matchingKeys .=  k . "\n"
-        endif
-      endfor
-      return l:matchingKeys
-    endfunction
+```
+function! CompleteFavPath(arg_lead, cmd_line, cur_pos)
+  let l:matchingKeys = ""
+  for k in sort(keys(g:workspacePathDict))
+    if match(k, a:arg_lead) >= 0
+      let l:matchingKeys .=  k . "\n"
+    endif
+  endfor
+  return l:matchingKeys
+endfunction
 
-    function! GotoFavPath(pathKey)
-      if has_key(g:workspacePathDict, a:pathKey)
-        exe "cd " . g:workspacePathDict[a:pathKey]
-      endif
-    endfunction
+function! GotoFavPath(pathKey)
+  if has_key(g:workspacePathDict, a:pathKey)
+    exe "cd " . g:workspacePathDict[a:pathKey]
+  endif
+endfunction
 
-    let g:workspacePathDict = {"vim": "~\\vimfiles", "emacs": "~\\.emacs.d"}
-    command! -nargs=1 -complete=custom,CompleteFavPath WorkspacePath call GotoFavPath('<args>')
+let g:workspacePathDict = {"vim": "~\\vimfiles", "emacs": "~\\.emacs.d"}
+command! -nargs=1 -complete=custom,CompleteFavPath WorkspacePath call GotoFavPath('<args>')
+```
 
 ## Run shell commands
 
@@ -84,37 +89,39 @@ avoid Vims character expansion, use  quotes: "%"
 
 Here is an approach to use asynchronous processes:
 
-    if !has('job') || !has('channel') || !has('quickfix') finish endif
+```
+if !has('job') || !has('channel') || !has('quickfix') finish endif
 
-    function! s:JobHandler(handler)
-      let l:cbufnr = bufnr("make.io")
-      if l:cbufnr < 0
-        echoerr "make.io does not exist."
-        return
-      endif
-      execute "cbuffer " . l:cbufnr
-      echomsg "closed " . a:handler
-    endfunction
+function! s:JobHandler(handler)
+let l:cbufnr = bufnr("make.io")
+if l:cbufnr < 0
+echoerr "make.io does not exist."
+return
+endif
+execute "cbuffer " . l:cbufnr
+echomsg "closed " . a:handler
+endfunction
 
-    function! RunMake(commandString)
-      let l:opts = {
-            \ 'close_cb':       function('s:JobHandler'),
-            \ 'out_io':         'buffer',
-            \ 'out_name':       "make.io",
-            \ 'out_modifiable': 0,
-            \ 'out_msg':        0,
-            \ 'err_io':         'buffer',
-            \ 'err_name':       "make.io",
-            \ 'err_modifiable': 0,
-            \ 'in_io':          'null'
+function! RunMake(commandString)
+    let l:opts = {
+        \ 'close_cb':       function('s:JobHandler'),
+        \ 'out_io':         'buffer',
+        \ 'out_name':       "make.io",
+        \ 'out_modifiable': 0,
+        \ 'out_msg':        0,
+        \ 'err_io':         'buffer',
+        \ 'err_name':       "make.io",
+        \ 'err_modifiable': 0,
+        \ 'in_io':          'null'
             \ }
-      if bufnr("make.io") >= 0
-        bwipeout make.io
-      endif
-      let g:job = job_start("cmd /C " . a:commandString, l:opts)
-    endfunction
+            if bufnr("make.io") >= 0
+            bwipeout make.io
+            endif
+            let g:job = job_start("cmd /C " . a:commandString, l:opts)
+            endfunction
 
-    command! -nargs=+  MakeJob :call RunMake(<q-args>)
+            command! -nargs=+  MakeJob :call RunMake(<q-args>)
+            ```
 
 ## Show unsaved buffers
 
@@ -186,31 +193,39 @@ common grep tools that is use in the past.
 
 ### Ripgrep
 
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
-    set grepprg=rg
-            \\ --vimgrep
-            \\ -t\ c
-            \\ -g\ !C_AUTOSAR
-            \\ -g\ !TLSim
-            \\ -g\ !TLProj
-            \\ -g\ !_sfprj
+```
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+set grepprg=rg
+        \ --vimgrep
+        \ -t\ c
+        \ -g\ !C_AUTOSAR
+        \ -g\ !TLSim
+        \ -g\ !TLProj
+        \ -g\ !_sfprj
+```
 
 ### Grep (The Original)
 
-    set grepprg=grep\ -Hn\ -r\ --include='*.[ch]'
-                \\ --exclude-dir=TLProj
-                \\ --exclude-dir=TLSim
-                \\ --exclude-dir=Doc
-                \\ --exclude-dir=C_AUTOSAR
+```
+set grepprg=grep\ -Hn\ -r\ --include='*.[ch]'
+            \ --exclude-dir=TLProj
+            \ --exclude-dir=TLSim
+            \ --exclude-dir=Doc
+            \ --exclude-dir=C_AUTOSAR
+```
     
 ### GNU Global
 
+```
     set grepprg=global\ --result=grep\ --grep
     set grepformat=%f:%l:%m
     set cscopeprg=gtags-cscope
+```
 
 ### Windows findstr
 
-    if has("win32") || has("win64")
-      set grepprg=findstr\ /N\ /F:.index
-    endif
+```
+if has("win32") || has("win64")
+  set grepprg=findstr\ /N\ /F:.index
+endif
+```
