@@ -93,13 +93,13 @@ Here is an approach to use asynchronous processes:
 if !has('job') || !has('channel') || !has('quickfix') finish endif
 
 function! s:JobHandler(handler)
-let l:cbufnr = bufnr("make.io")
-if l:cbufnr < 0
-echoerr "make.io does not exist."
-return
-endif
-execute "cbuffer " . l:cbufnr
-echomsg "closed " . a:handler
+    let l:cbufnr = bufnr("make.io")
+    if l:cbufnr < 0
+        echoerr "make.io does not exist."
+        return
+    endif
+    execute "cbuffer " . l:cbufnr
+    echomsg "closed " . a:handler
 endfunction
 
 function! RunMake(commandString)
@@ -114,14 +114,14 @@ function! RunMake(commandString)
         \ 'err_modifiable': 0,
         \ 'in_io':          'null'
             \ }
-            if bufnr("make.io") >= 0
-            bwipeout make.io
-            endif
-            let g:job = job_start("cmd /C " . a:commandString, l:opts)
-            endfunction
+    if bufnr("make.io") >= 0
+        bwipeout make.io
+    endif
+    let g:job = job_start("cmd /C " . a:commandString, l:opts)
+endfunction
 
-            command! -nargs=+  MakeJob :call RunMake(<q-args>)
-            ```
+command! -nargs=+  MakeJob :call RunMake(<q-args>)
+```
 
 ## Show unsaved buffers
 
@@ -144,7 +144,9 @@ would recommend to use this flag from scripts.
 To start using relative numbers, I recommend to put the following combination of
 settings into your `vimrc`:
 
-    set number set relativenumber
+```
+set number set relativenumber
+```
 
 Together, they make Vim show the absolute number for the current line, and
 relative numbers for other lines.
@@ -155,9 +157,10 @@ Netrw comes as a prepacked plugin in Vims standard installation. To start Netrw,
 type `:Explore`. The new Netrw buffer that will show up can be customized to
 match your needs. This may be a good start:
 
-    let g:netrw_use_errorwindow = 0
-    let g:netrw_liststyle = 1
-
+```
+let g:netrw_use_errorwindow = 0
+let g:netrw_liststyle = 1
+```
 Navigation is supported by the bookmark feature. Netrw stores bookmarks
 permanently in file .netrwbook, located in Vims home directory. To store a new
 bookmark press `mb`. To remove it, press `mB`. A preceding bookmark number is
