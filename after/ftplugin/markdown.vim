@@ -17,7 +17,9 @@ function! EvalStringPandocExportMarkdown(format)
   endif
   return l:pandoc_call
 endfunction
-nnoremap <buffer> <F7> :make<CR>
+
+nmap <buffer> ]]  :call search('^#\{1,\}\s',"W")<CR>
+nmap <buffer> [[  :call search('^#\{1,\}\s',"bW")<CR>
 
 execute 'setlocal makeprg=' . escape(EvalStringPandocExportMarkdown(1), ' ')
 
