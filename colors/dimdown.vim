@@ -16,7 +16,7 @@ let g:colors_name = "dimdown"
 " very basic things
 highlight Normal  guifg=grey85      guibg=grey16          ctermbg=black
 highlight NonText guifg=dodgerblue1 guibg=bg              gui=none
-highlight Visual  guifg=white       guibg=grey30
+highlight Visual  guifg=cadetblue1  guibg=grey30
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
@@ -27,19 +27,19 @@ endif
 
 " where is the cursor?
 highlight LineNr        guifg=grey38    guibg=bg          gui=none
-highlight Cursor        guifg=black     guibg=powderblue
+highlight Cursor        guifg=black     guibg=cadetblue1
 highlight CursorLineNr  guifg=grey38    guibg=grey17      gui=bold
 highlight QuickFixLine                  guibg=bg          gui=bold
 highlight CursorLine                    guibg=grey19
 highlight! link CursorColumn CursorLine
 
 " decorations
-highlight VertSplit    guifg=grey27         guibg=bg     gui=none
-highlight StatusLineNC guifg=grey48         guibg=grey20 gui=none
-highlight StatusLine   guifg=white          guibg=grey30 gui=none
+highlight VertSplit    guifg=grey27     guibg=bg     gui=none
+highlight StatusLineNC guifg=grey48     guibg=grey20 gui=none
+highlight StatusLine   guifg=white      guibg=grey30 gui=none
 highlight User1        guifg=cadetblue2 guibg=grey30 gui=bold cterm=inverse
-highlight User2        guifg=white          guibg=grey30 gui=none cterm=inverse
-highlight User3        guifg=white          guibg=grey30 gui=none cterm=inverse
+highlight User2        guifg=white      guibg=grey30 gui=none cterm=inverse
+highlight User3        guifg=white      guibg=grey30 gui=none cterm=inverse
 highlight FoldColumn   guifg=cadetblue3 guibg=bg     gui=none ctermbg=bg
 highlight Folded       guifg=cadetblue3 guibg=bg     gui=NONE
 highlight SignColumn   guifg=skyblue4   guibg=bg
@@ -52,10 +52,10 @@ highlight Search     guifg=fg     guibg=grey35   gui=bold
 highlight MatchParen guifg=cyan2  guibg=bg       gui=underline
 
 " popup Menu
-highlight Pmenu      guifg=white  guibg=grey33     gui=none
-highlight PmenuSel   guifg=white  guibg=lightblue3 gui=bold
-highlight PmenuSbar               guibg=grey50
-highlight PmenuThumb guifg=white
+highlight Pmenu      guifg=white guibg=peachpuff3 gui=none 
+highlight PmenuSel   guifg=white guibg=peachpuff4 gui=bold 
+highlight PmenuSbar              guibg=lightblue4
+highlight PmenuThumb guifg=white guibg=lightblue4
 highlight! link WildMenu IncSearch
 
 " tab line
@@ -76,11 +76,11 @@ highlight Special       guifg=hotpink3
 highlight Constant      guifg=peachpuff
 highlight! link SpecialKey Special
 
-highlight Title     guifg=goldenrod                   gui=none
-highlight Subtitle  guifg=goldenrod
-highlight ToDo      guifg=cyan2      		guibg=black   gui=bold
-highlight Error     guifg=white         guibg=tomato3
-highlight Directory guifg=skyblue2                    gui=underline
+highlight Title     guifg=cadetblue1 gui=none
+highlight Subtitle  guifg=cadetblue1
+highlight ToDo      guifg=cadetblue2 guibg=bg gui=bold
+highlight Error     guifg=white      guibg=tomato3
+highlight Directory guifg=skyblue2   gui=underline
 
 " messages
 highlight ErrorMsg   guifg=coral2 guibg=bg gui=none
