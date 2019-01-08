@@ -1,8 +1,6 @@
 # Vim Tips
 
-## Vim Scripts
-
-### US Keyboard
+## US Keyboard
 
 Vim/Neovim works best with US keyboard layout. Even when you are used to a
 German keyboard layout, in some situations it might be useful to switch to this
@@ -14,20 +12,20 @@ keys: `1=!`  `2=@`  `3=#`  `4=$`  `5=%`  `6=^`  `7=&` `8=*`  `9=(` `0=)`
 A differnt approach: Drop this line in your startup code to make better use of
 the umlaute keys `set langmap=Ü?,ü/,ö[,ä],Ö{,Ä}`.
 
-### Books
+## Books
 
 The web has a load of good Vim tutorials, covering how to use Vim and
 scripting tips.Here is a link to a very comprehensive online book:
 http://learnvimscriptthehardway.stevelosh.com
 
-### Open the commandline window
+## Open the commandline window
 
 Sure, you can do `:` followed by a `<C-f>`. Or, sometimes more convinient,
 just press in normal mode `q:` for the command line or `q/` or `q?` to enter
 the search window. The advantage to open one of these windows is that normal
 mode commands can be used.
 
-### Plugins
+## Plugins
 
 A plain installation works surprisingly well for me. I tried really a lot of
 optional Vim plugins, but removed most of them, because all I need comes with
@@ -39,13 +37,13 @@ my short list of notable Vim plugins:
 
 Install those plugins as recommended by Vim's manual `:help packages`. 
 
-### Vim Knowledge
+## Vim Knowledge in the WWW
 
 - [Vim wiki](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
 - [Vim Galore](https://github.com/mhinz/vim-galore)
 - [reedit](https://www.reddit.com/r/vim/)
 
-### Wipe out a set of buffers
+## Wipe out a set of buffers
 
 Want to wipe out all buffers in current session containing `snap` in its name?
 Just type `:bw *snap<TAB><C-a><CR>`. The `<TAB>` is required for take a quick 
@@ -55,7 +53,7 @@ look which buffers will be wiped-out. Another solution might be this:
 :bufdo if expand("%") =~ '.*snap.*' | bw | endif
 ```
 
-### Custom Command Completion
+## Custom Command Completion
 
 Here is a Vim script to show custom completion of a new command:
 
@@ -79,6 +77,7 @@ endfunction
 let g:workspacePathDict = {"vim": "~\\vimfiles", "emacs": "~\\.emacs.d"}
 command! -nargs=1 -complete=custom,CompleteFavPath WorkspacePath call GotoFavPath('<args>')
 ```
+
 ## How to replace a word in lines im interested in?
 
 For example, replace 'foo' to 'hey' if a line contains 'hi'. 
