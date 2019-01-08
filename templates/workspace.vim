@@ -93,6 +93,16 @@ nnoremap <Leader>M :let g:workspace_make_str = input("Make command? ", g:workspa
 """"   set grepprg=findstr\ /N\ /F:.index
 """" endif
 
+function! EvalStringPandocExportMarkdown(format)
+  if a:format == 1
+    let l:pandoc_call = 'pandoc -f markdown -t docx -o ' . expand ('%:r') . '.docx ' . expand('%')
+  elseif a:format == 2
+    let l:pandoc_call = 'pandoc -f markdown -t html -o ' . expand ('%:r') . '.html ' . expand('%')
+  endif
+  return l:pandoc_call
+endfunction
+au FileType markdown execute 'setlocal makeprg=' . escape(EvalStringPandocExportMarkdown(2), ' ')
+
 " }}}
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker
