@@ -79,6 +79,14 @@ let g:workspacePathDict = {"vim": "~\\vimfiles", "emacs": "~\\.emacs.d"}
 command! -nargs=1 -complete=custom,CompleteFavPath WorkspacePath call GotoFavPath('<args>')
 ```
 
+## Run :grep with highlighting
+
+Quite nice to run `:grep` with the current word under cursor that is highlighted.
+
+```
+nnoremap <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w> . <CR> :cfirst<CR>
+```
+
 ## Run shell commands
 
 To run any shell command you can use :! {cmd}. Characters with a special meaning
