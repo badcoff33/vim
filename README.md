@@ -43,6 +43,7 @@ Install those plugins as recommended by Vim's manual `:help packages`.
 
 - [Vim wiki](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
 - [Vim Galore](https://github.com/mhinz/vim-galore)
+- [reedit](https://www.reddit.com/r/vim/)
 
 ### Wipe out a set of buffers
 
@@ -78,6 +79,10 @@ endfunction
 let g:workspacePathDict = {"vim": "~\\vimfiles", "emacs": "~\\.emacs.d"}
 command! -nargs=1 -complete=custom,CompleteFavPath WorkspacePath call GotoFavPath('<args>')
 ```
+## How to replace a word in lines im interested in?
+
+For example, replace 'foo' to 'hey' if a line contains 'hi'. 
+This line does the trick: `:g/hi/ s/foo/hey/g`
 
 ## Run :grep with highlighting
 
@@ -97,19 +102,9 @@ avoid Vims character expansion, use  quotes: "%"
 
 Here is an approach to use asynchronous processes:
 
+### Start the Job
+
 ```
-if !has('job') || !has('channel') || !has('quickfix') finish endif
-
-function! s:JobHandler(handler)
-    let l:cbufnr = bufnr("make.io")
-    if l:cbufnr < 0
-        echoerr "make.io does not exist."
-        return
-    endif
-    execute "cbuffer " . l:cbufnr
-    echomsg "closed " . a:handler
-endfunction
-
 function! RunMake(commandString)
     let l:opts = {
         \ 'close_cb':       function('s:JobHandler'),
@@ -127,7 +122,25 @@ function! RunMake(commandString)
     endif
     let g:job = job_start("cmd /C " . a:commandString, l:opts)
 endfunction
+```
 
+### The Callback Function
+
+```
+function! s:JobHandler(handler)
+    let l:cbufnr = bufnr("make.io")
+    if l:cbufnr < 0
+        echoerr "make.io does not exist."
+        return
+    endif
+    execute "cbuffer " . l:cbufnr
+    echomsg "closed " . a:handler
+endfunction
+```
+
+### The Interface
+
+```
 command! -nargs=+  MakeJob :call RunMake(<q-args>)
 ```
 
@@ -169,6 +182,7 @@ match your needs. This may be a good start:
 let g:netrw_use_errorwindow = 0
 let g:netrw_liststyle = 1
 ```
+
 Navigation is supported by the bookmark feature. Netrw stores bookmarks
 permanently in file .netrwbook, located in Vims home directory. To store a new
 bookmark press `mb`. To remove it, press `mB`. A preceding bookmark number is
