@@ -217,7 +217,8 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 " Try this!
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
-
+inoremap <F1> <Esc>:
+nnoremap <F1> :
 nnoremap <A-j> :cnext<CR>
 nnoremap <A-k> :cprevious<CR>
 
