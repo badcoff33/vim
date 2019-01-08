@@ -46,7 +46,7 @@ function! workspace#Switch()
 
   let g:workspace_session_file = expand($TEMP . "/" . sha256(getcwd()) . ".vim", "%")
 
-  let l:workspace_path = "workspace.vim"
+  let l:workspace_path = ".workspace.vim"
   for i in range(4)
     if filereadable(l:workspace_path)
       echomsg "found workspace file " . simplify(expand(l:workspace_path, ":p:h"))
