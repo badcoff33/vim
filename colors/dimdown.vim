@@ -47,13 +47,13 @@ highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
 
 " search
-highlight IncSearch  guifg=white  guibg=hotpink2 gui=bold
+highlight IncSearch  guifg=white  guibg=palevioletred2 gui=bold
 highlight Search     guifg=fg     guibg=grey35   gui=bold
 highlight MatchParen guifg=cyan2  guibg=bg       gui=underline
 
 " popup Menu
-highlight Pmenu      guifg=white guibg=peachpuff3 gui=none 
-highlight PmenuSel   guifg=white guibg=peachpuff4 gui=bold 
+highlight Pmenu      guifg=white guibg=cornsilk3 gui=none 
+highlight PmenuSel   guifg=white guibg=cornsilk4 gui=bold 
 highlight PmenuSbar              guibg=lightblue4
 highlight PmenuThumb guifg=white guibg=lightblue4
 highlight! link WildMenu IncSearch
@@ -67,13 +67,13 @@ highlight! link TabLineSel StatusLine
 highlight Statement     guifg=lightblue4     gui=bold
 highlight Conditional   guifg=lightblue4     gui=none
 highlight PreProc       guifg=cadetblue3 gui=bold
-highlight Comment       guifg=lightblue2
-highlight Type          guifg=hotpink2       gui=none
-highlight StorageClass  guifg=hotpink3       gui=none
-highlight Function      guifg=hotpink1       gui=bold
-highlight Identifier    guifg=hotpink2
-highlight Special       guifg=hotpink3
-highlight Constant      guifg=peachpuff
+highlight Comment       guifg=grey50
+highlight Type          guifg=palevioletred2       gui=none
+highlight StorageClass  guifg=palevioletred3       gui=none
+highlight Function      guifg=palevioletred1       gui=bold
+highlight Identifier    guifg=palevioletred2
+highlight Special       guifg=palevioletred3
+highlight Constant      guifg=cornsilk3
 highlight! link SpecialKey Special
 
 highlight Title     guifg=cadetblue1 gui=none
@@ -106,18 +106,18 @@ highlight cParen      guifg=deepskyblue3
 highlight cBlock      guifg=deepskyblue4
 
 " Doxygen 
-highlight doxygenComment    guifg=cornsilk4  gui=none
-highlight doxygenBrief      guifg=cornsilk2  gui=none
-highlight doxygenParam      guifg=cornsilk2  gui=none
-highlight doxygenOtherTODO  guifg=hotpink3   gui=bold,underline
-highlight doxygenOtherWARN  guifg=hotpink3   gui=bold,underline
+highlight doxygenComment    guifg=grey55  gui=none
+highlight doxygenBrief      guifg=grey66  gui=none
+highlight doxygenParam      guifg=grey40  gui=none
+highlight doxygenOtherTODO  guifg=palevioletred3   gui=bold,underline
+highlight doxygenOtherWARN  guifg=palevioletred3   gui=bold,underline
 highlight! link DoxygenBody Comment 
 highlight! link doxygenSpecialOnelineDesc doxygenBrief
 
 highlight DiffChange    guifg=cyan4 guibg=lightcyan3 gui=none
 highlight DiffText      guifg=lightcyan1 guibg=lightcyan4 gui=none
 highlight DiffAdd       guifg=lightcyan1 guibg=lightcyan4 gui=none
-highlight DiffDelete    guifg=hotpink4   guibg=hotpink4   gui=none
+highlight DiffDelete    guifg=palevioletred4   guibg=palevioletred4   gui=none
 
 " diff buffer
 highlight diffOldFile   guifg=fg
@@ -144,9 +144,9 @@ highlight netrwMarkFile gui=inverse
 highlight! link asciidocTitleUnderline Type
 
 " html
-highlight htmlH1 guifg=peachpuff gui=bold
-highlight htmlH2 guifg=peachpuff
-highlight htmlH3 guifg=peachpuff
+highlight htmlH1 guifg=cornsilk gui=bold
+highlight htmlH2 guifg=cornsilk
+highlight htmlH3 guifg=cornsilk
 highlight htmlBold                gui=bold
 highlight htmlItalic              gui=italic
 
