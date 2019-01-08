@@ -151,5 +151,5 @@ highlight htmlBold                gui=bold
 highlight htmlItalic              gui=italic
 
 " markdown
-highlight! markdownCode guifg=green3 
+highlight! markdownCode guifg=darkseagreen3 
 highlight! link markdownCodeBlock Comment
