@@ -13,7 +13,7 @@ let g:colors_name = "breeze"
 " basics
 highlight Normal guifg=grey30 guibg=white
 highlight NonText guifg=cyan4 guibg=bg
-highlight Visual guibg=gold
+highlight Visual guifg=white guibg=royalblue3
 highlight Cursor guifg=white guibg=red3
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
@@ -24,11 +24,11 @@ if has ('nvim')
 endif
 
 " window decoration
-highlight StatusLine guifg=white guibg=royalblue3 gui=none
-highlight User1 guifg=white guibg=royalblue3 gui=bold
-highlight User2 guifg=white guibg=royalblue3 gui=none
-highlight User3 guifg=white guibg=royalblue3 gui=none
-highlight StatusLineNC guifg=grey30 guibg=grey90 gui=none
+highlight StatusLine guifg=grey44 guibg=azure3 gui=none
+highlight User1 guifg=white guibg=azure4 gui=bold
+highlight User2 guifg=grey44 guibg=azure3 gui=none
+highlight User3 guifg=grey44 guibg=azure3 gui=none
+highlight StatusLineNC guifg=azure4 guibg=azure2 gui=none
 highlight VertSplit guifg=grey85 guibg=bg gui=none
 highlight QuickFixLine guifg=deepskyblue3 guibg=ghostwhite gui=bold
 highlight! link WildMenu IncSearch
