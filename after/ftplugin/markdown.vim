@@ -12,4 +12,11 @@ setlocal nonumber relativenumber
 nmap <buffer> ]]  :call search('^#\{1,\}\s',"W")<CR>
 nmap <buffer> [[  :call search('^#\{1,\}\s',"bW")<CR>
 
+" iabbrev did not work when 'cpoptions' has '>'
+if match(&cpoptions, '>') >= 0
+  finish
+endif
+
+iabbrev <buffer> xlink []()
+
 let b:did_ftplugin_after = 1
