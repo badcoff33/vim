@@ -217,10 +217,13 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 " Try this!
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
-inoremap <F1> <Esc>:
-nnoremap <F1> :
-nnoremap <A-j> :cnext<CR>
-nnoremap <A-k> :cprevious<CR>
+inoremap <f1> <Esc>:
+nnoremap <f1> :
+
+nnoremap <f2> :edit <C-r>=expand("%:p:h")<CR>\
+nnoremap <f3> :buffer<Space>
+nnoremap <f4> :cnext<CR>
+nnoremap <S-f4> :cprevious<CR>
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
 nnoremap <Leader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
@@ -229,16 +232,13 @@ nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
 
-nnoremap <Leader>e    :edit <C-r>=expand("%:p:h")<CR>\
-nnoremap <Leader>b    :buffer<Space>
-
 nnoremap <Leader>o    :OneMoreThing<CR>
 nnoremap <Leader>O    :ShowOneMoreThing<CR>
 nnoremap <Leader>l    :ToggleStatusline<CR>
 
 nnoremap <Leader>m    :sil make
 nnoremap <Leader>g    :sil grep
-nnoremap <Leader>t    :sil TagbarToggle<CR>
+nnoremap <Leader>t    <C-w>o:sil TagbarToggle<CR>
 
 nnoremap <Leader><C-]> :tjump /
 
