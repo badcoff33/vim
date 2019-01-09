@@ -125,7 +125,7 @@ set diffopt=context:3,vertical,iwhite,filler
 " plugin variables {{{
 
 let g:netrw_use_errorwindow = 0
-let g:netrw_liststyle = 1
+let g:netrw_liststyle = 0
 let g:tagbar_left = 0
 let g:tagbar_foldlevel = 1
 let g:tagbar_width=60
@@ -219,6 +219,7 @@ inoremap <f1> <Esc>:
 nnoremap <f1> :
 
 nnoremap <f2> :edit <C-r>=expand("%:p:h")<CR>\
+nnoremap <S-f2> :Vexplore <C-r>=expand("%:p:h")<CR><CR>20<C-w><bar>
 nnoremap <f3> :buffer<Space>
 nnoremap <f4> :cnext<CR>
 nnoremap <S-f4> :cprevious<CR>
