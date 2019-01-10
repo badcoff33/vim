@@ -245,7 +245,7 @@ nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
 " put current word in register '*' 
 nnoremap <C-Insert> "*yiw
 
-nnoremap <Leader>n :nohlsearch<CR>
+nnoremap <Leader>n :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
 nnoremap <BS> :call basic#ToggleQuickfix()<CR>
