@@ -64,14 +64,13 @@ if has('nvim')
 endif
 set magic
 set gdefault
-set hlsearch
 
 " Optional config: if 'smartcase' is active a case sensitive search with
 " /\C<text> can be used on demand.
 set ignorecase smartcase
 "set noignorecase nosmartcase
 
-set noswapfile                    " it's 2017, Vim.
+set noswapfile
 
 let s = split(&runtimepath, ',')
 for d in s
@@ -223,9 +222,6 @@ nnoremap <S-f2> :Vexplore <C-r>=expand("%:p:h")<CR><CR>20<C-w><bar>
 nnoremap <f3> :buffer<Space>
 nnoremap <f4> :cnext<CR>
 nnoremap <S-f4> :cprevious<CR>
-
-" A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
-nnoremap <Leader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
