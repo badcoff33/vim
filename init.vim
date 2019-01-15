@@ -233,7 +233,7 @@ nnoremap <Leader>l    :ToggleStatusline<CR>
 
 nnoremap <Leader>m    :sil make
 nnoremap <Leader>g    :sil grep
-nnoremap <Leader>t    <C-w>o:sil TagbarToggle<CR>
+nnoremap <Leader>t    :sil TagbarToggle<CR>
 
 nnoremap <Leader><C-]> :tjump /
 
