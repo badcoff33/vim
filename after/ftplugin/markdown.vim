@@ -4,7 +4,7 @@ if exists("b:did_ftplugin_after")
   finish
 endif
 
-setlocal textwidth=80
+setlocal textwidth=78
 setlocal shiftwidth=4
 setlocal nocindent
 setlocal nonumber relativenumber
