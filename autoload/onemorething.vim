@@ -40,7 +40,10 @@ function! onemorething#NewEntry()
   endif
   normal gg
   if search('^#\+\s\+One More Thing', 'eW') == 0
-    echoerr "missing chapter '# One More Thing'
+    echohl ErrorMsg
+    echo "missing chapter '# One More Thing' in file" g:one_more_thing_file
+    echohl None
+    return
   endif
   let l:level = len(split(getline("."), " ")[0])
   if search('^#\{' . l:level . '\}\s\+', 'eW') > 0
