@@ -56,7 +56,6 @@ function! workspace#Switch()
     let l:workspace_path = "../" . l:workspace_path
   endfor
 
-  echomsg "looking for session file"
   if filereadable(g:workspace_session_file)
     while 1
       let answer = tolower(input("load last session [yes|no]? " ,"yes"))

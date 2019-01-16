@@ -9,7 +9,10 @@ command! -buffer -range -nargs=0 CodeCleanup <line1>,<line2>call c#CodeCleanup()
 nnoremap <buffer> <LocalLeader><TAB> :ToggleSourceHeaderFile<CR>
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
-nnoremap <Leader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
+nnoremap <buffer> <LocalLeader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
+
+" Toggle automatic code formatting
+nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
 
 nnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
 vnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
