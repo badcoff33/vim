@@ -39,10 +39,20 @@ function! onemorething#NewEntry()
     execute "buffer " . g:one_more_thing_file
   endif
   normal gg
-  while search('^#.*$', 'eW') > 0
-  endwhile
-  normal }
-  put=printf('## %s', l:comment)
+  if search('^#\+\s\+One More Thing', 'eW') == 0
+    echoerr "missing chapter '# One More Thing'
+  endif
+  let l:level = len(split(getline("."), " ")[0])
+  if search('^#\{' . l:level . '\}\s\+', 'eW') > 0
+    normal {
+  else
+    normal G{
+  endif
+  let l:head = ''
+  for i in range(0, l:level)
+    let l:head = l:head . '#'
+  endfor
+  put=printf(l:head . ' %s', l:comment)
   put=printf('    %s', l:reference)
   put=''
   write
