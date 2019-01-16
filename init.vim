@@ -222,6 +222,8 @@ nnoremap <S-f2> :Vexplore <C-r>=expand("%:p:h")<CR><CR>20<C-w><bar>
 nnoremap <f3> :buffer<Space>
 nnoremap <f4> :cnext<CR>
 nnoremap <S-f4> :cprevious<CR>
+nnoremap <f6> :bprevious<CR>
+nnoremap <S-f6> :bnext<CR>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
