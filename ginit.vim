@@ -1,4 +1,4 @@
-colorscheme dimdown
+colorscheme breeze
 syntax on
 
 if has("nvim")
