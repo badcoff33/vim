@@ -10,7 +10,7 @@ setlocal nocindent
 setlocal nonumber relativenumber
 
 " Toggle automatic code formatting
-nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endi
+nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif <CR>
 
 nmap <buffer> ]]  :call search('^#\{1,\}\s',"W")<CR>
 nmap <buffer> [[  :call search('^#\{1,\}\s',"bW")<CR>
