@@ -20,6 +20,6 @@ if match(&cpoptions, '>') >= 0
   finish
 endif
 
-iabbrev <buffer> xlink []()
+iabbrev <buffer> xlink []()<Esc>3hi
 
 let b:did_ftplugin_after = 1
