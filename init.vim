@@ -239,10 +239,8 @@ nnoremap <Leader>t    :sil TagbarToggle<CR>
 
 nnoremap <Leader><C-]> :tjump /
 
-" Indent and re-select visual block
-nnoremap <Leader>R :%s/<C-r><C-w>//c<Left><Left>
-nnoremap <Leader>r :.,$s/<C-r><C-w>//c<Left><Left>
-
+nnoremap <Leader>R :%s/\<<C-r><C-w>\>//c<Left><Left>
+nnoremap <Leader>r :.,$s/\<<C-r><C-w>\>//c<Left><Left>
 
 " put current word in register '*' 
 nnoremap <C-Insert> "*yiw
