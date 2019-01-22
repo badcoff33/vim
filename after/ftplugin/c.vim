@@ -17,6 +17,10 @@ nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <b
 nnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
 vnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
 
+" run LLVM's clang-format
+nmap <buffer> <LocalLeader>f ggVG!clang-format<CR>
+vmap <buffer> <LocalLeader>f !clang-format<CR>
+
 let b:load_doxygen_syntax=1
 let c_no_comment_fold = 1
 let c_comment_strings = 1
