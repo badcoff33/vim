@@ -101,15 +101,13 @@ set completeopt=menu
 set pumheight=10
 
 " Command line completion
-set nowildmenu wildmode=list,full
+set wildmenu wildmode=full
+"set nowildmenu wildmode=list,full
 set wildignorecase
 set wildignore=*.*~
 
 set showtabline=1
 set sessionoptions=buffers,tabpages,winsize
-
-" Use this ':help' to have quick access to the Vim documentation.
-set keywordprg=:help
 
 " Customize cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-
@@ -230,9 +228,9 @@ nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
 
-nnoremap <Leader>o    :OneMoreThing<CR>
-nnoremap <Leader>O    :ShowOneMoreThing<CR>
-nnoremap <Leader>l    :ToggleStatusline<CR>
+nnoremap <Leader>o :OneMoreThing<CR>
+nnoremap <Leader>O :ShowOneMoreThing<CR>
+nnoremap <Leader>l :ToggleStatusline<CR>
 
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>\
 nnoremap <Leader>E :Vexplore <C-r>=expand("%:p:h")<CR><CR>20<C-w><bar>
