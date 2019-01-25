@@ -22,7 +22,7 @@ set spellsuggest=best,10
 set spelllang=en_us
 
 " Use Umlaut keys in normal mode 
-set langmap=ö[,ä],Ö{,Ä},ü/,Ü?,ß=
+set langmap=Ã¶[,Ã¤],Ã–{,Ã„},Ã¼/,Ãœ?,ÃŸ=
 
 " Read changed files automatically if they are changed in the background
 set autoread
@@ -218,16 +218,13 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 " Try this!
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
+
 inoremap <f1> <Esc>:
 nnoremap <f1> :
-
-nnoremap <f2> :edit <C-r>=expand("%:p:h")<CR>\
-nnoremap <S-f2> :Vexplore <C-r>=expand("%:p:h")<CR><CR>20<C-w><bar>
-nnoremap <f3> :buffer<Space>
 nnoremap <f4> :cnext<CR>
-nnoremap <S-f4> :cprevious<CR>
+nnoremap <f4> :cprevious<CR>
 nnoremap <f6> :bprevious<CR>
-nnoremap <S-f6> :bnext<CR>
+nnoremap <f6> :bnext<CR>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
@@ -237,9 +234,12 @@ nnoremap <Leader>o    :OneMoreThing<CR>
 nnoremap <Leader>O    :ShowOneMoreThing<CR>
 nnoremap <Leader>l    :ToggleStatusline<CR>
 
-nnoremap <Leader>m    :sil make
-nnoremap <Leader>g    :sil grep
-nnoremap <Leader>t    :sil TagbarToggle<CR>
+nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>\
+nnoremap <Leader>E :Vexplore <C-r>=expand("%:p:h")<CR><CR>20<C-w><bar>
+nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader>m :sil make
+nnoremap <Leader>g :sil grep
+nnoremap <Leader>t :sil TagbarToggle<CR>
 
 nnoremap <Leader><C-]> :tjump /
 
@@ -266,4 +266,4 @@ cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>\
 " load local site file for machine dependent configs
 runtime site.vim
 
-" vim:sw=2:tw=78:nocindent:foldmethod=marker:fenc=latin1:nofen:
+" vim:sw=2:tw=78:nocindent:foldmethod=marker:fenc=utf-8:nofen:
