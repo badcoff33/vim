@@ -22,7 +22,9 @@ set spellsuggest=best,10
 set spelllang=en_us
 
 " Use Umlaut keys in normal mode 
-set langmap=ö[,ä],Ö{,Ä},ü/,Ü?,ß=
+scriptencoding utf-8
+set langmap=ö[,ä],Ö{,Ä},ü/,Ü?
+scriptencoding 
 
 " Read changed files automatically if they are changed in the background
 set autoread
@@ -219,10 +221,10 @@ inoremap <C-Space> <Esc>
 
 inoremap <f1> <Esc>:
 nnoremap <f1> :
-nnoremap <f4> :cnext<CR>
-nnoremap <f4> :cprevious<CR>
+nnoremap <f4> :cnext<CR>   Ã¶Ã¤ Ã¤
+nnoremap <S-f4> :cprevious<CR>
 nnoremap <f6> :bprevious<CR>
-nnoremap <f6> :bnext<CR>
+nnoremap <S-f6> :bnext<CR>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
