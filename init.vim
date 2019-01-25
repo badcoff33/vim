@@ -120,6 +120,10 @@ set autowrite
 " Tune the diff feature for my needs.
 set diffopt=context:3,vertical,iwhite,filler
 
+" If available, use GNU grep niceties for searching
+if system('grep --version') =~# '^grep (GNU grep)'
+  set grepprg=grep\ -HnRs\ --exclude='.git*'
+endif
 
 " plugin variables {{{
 
@@ -259,4 +263,7 @@ cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>\
 
 " }}} mappings
 
-" vim:sw=2:tw=0:nocindent:foldmethod=marker:fenc=latin1:fen:
+" load local site file for machine dependent configs
+runtime site.vim
+
+" vim:sw=2:tw=78:nocindent:foldmethod=marker:fenc=latin1:nofen:
