@@ -12,8 +12,8 @@ let g:colors_name = "breeze"
 
 " basics
 highlight Normal guifg=grey30 guibg=white
-highlight NonText guifg=cyan4 guibg=bg
-highlight Visual guifg=white guibg=royalblue3
+highlight NonText guifg=lightblue guibg=bg
+highlight Visual guifg=white guibg=cornflowerblue
 highlight Cursor guifg=white guibg=red3
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
@@ -56,8 +56,8 @@ highlight PmenuSbar guibg=grey50
 highlight PmenuThumb guifg=white
 
 " search
-highlight IncSearch guifg=white guibg=dodgerblue3 gui=none
-highlight Search guibg=yellow gui=none
+highlight IncSearch guifg=white guibg=orangered gui=none
+highlight Search guifg=grey25 guibg=grey95 gui=none
 highlight MatchParen guifg=fg guibg=bg gui=underline
 
 " code

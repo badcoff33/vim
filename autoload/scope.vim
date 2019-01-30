@@ -36,8 +36,12 @@ endfun
 
 " Description: A simple scope parser for Python files.
 function! scope#ScopeParserPython()
-    let l:fNum = search('^\s*\(class\|def\)\s\+.*:$', 'bnW')
-    return substitute(getline(l:fNum), '^.*\s\(\w\+\).*$', '\1', '')[:30]
+    let l:fNum = search('^\s*\(class\|def\)\s\+.*:$', 'bnWe')
+    if l:fNum > 0
+      return substitute(getline(l:fNum), '^\s*\(class\|def\)\s\+\(\w\+\).*$', '\1 \2', '')[:30]
+    else
+      return ""
+    endif
 endfun
 
 " Description: A scope parser for Vim files.
