@@ -115,7 +115,7 @@ highlight! link doxygenHeaderLine doxygenBrief
 highlight DiffChange    guifg=#f0f0f0 guibg=#1e2e38 gui=none
 highlight DiffText      guifg=#c0c090 guibg=#2e4040 gui=none
 highlight DiffAdd       guifg=#90c090 guibg=#2e3e48 gui=none
-highlight DiffDelete    guifg=#481e2e guibg=#481e2e gui=none
+highlight DiffDelete    guifg=#981e2e guibg=bg gui=none
 
 " Diff buffer
 highlight diffOldFile   guifg=fg
