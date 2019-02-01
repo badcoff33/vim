@@ -21,11 +21,6 @@ set viminfo='50,<1000,s100,:100
 set spellsuggest=best,10
 set spelllang=en_us
 
-" Use Umlaut keys in normal mode 
-scriptencoding utf-8
-set langmap=ö[,ä],Ö{,Ä},ü/,Ü?
-scriptencoding 
-
 " Read changed files automatically if they are changed in the background
 set autoread
 
@@ -271,4 +266,4 @@ cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>\
 " load local site file for machine dependent configs
 runtime site.vim
 
-" vim:sw=2:tw=78:nocindent:foldmethod=marker:fenc=utf-8:nofen:
+" vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
