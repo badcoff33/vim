@@ -221,10 +221,13 @@ inoremap <C-Space> <Esc>
 
 inoremap <f1> <Esc>:
 nnoremap <f1> :
-nnoremap <f4> :cnext<CR>
-nnoremap <S-f4> :cprevious<CR>
+nnoremap <f4> :tabnew<CR>
+nnoremap <C-f4> :tabclose<CR>
 nnoremap <f6> :bprevious<CR>
 nnoremap <S-f6> :bnext<CR>
+
+nnoremap <A-j> :cnext<CR>
+nnoremap <A-k> :cprevious<CR>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
