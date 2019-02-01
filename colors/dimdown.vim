@@ -27,7 +27,7 @@ endif
 
 " where is the cursor?
 highlight LineNr        guifg=grey38    guibg=bg          gui=none
-highlight Cursor        guifg=black     guibg=cadetblue1
+highlight Cursor        guifg=black     guibg=orangered
 highlight CursorLineNr  guifg=grey38    guibg=grey17      gui=bold
 highlight QuickFixLine                  guibg=bg          gui=bold
 highlight CursorLine                    guibg=grey19
@@ -52,8 +52,8 @@ highlight Search     guifg=fg     guibg=grey35   gui=bold
 highlight MatchParen guifg=cyan2  guibg=bg       gui=underline
 
 " popup Menu
-highlight Pmenu      guifg=white guibg=cornsilk3 gui=none 
-highlight PmenuSel   guifg=white guibg=cornsilk4 gui=bold 
+highlight Pmenu      guifg=white guibg=palegreen3 gui=none 
+highlight PmenuSel   guifg=white guibg=palegreen4 gui=bold 
 highlight PmenuSbar              guibg=lightblue4
 highlight PmenuThumb guifg=white guibg=lightblue4
 highlight! link WildMenu IncSearch
@@ -73,7 +73,7 @@ highlight StorageClass  guifg=palevioletred3       gui=none
 highlight Function      guifg=palevioletred1       gui=bold
 highlight Identifier    guifg=palevioletred2
 highlight Special       guifg=palevioletred3
-highlight Constant      guifg=cornsilk3
+highlight Constant      guifg=palegreen3
 highlight! link SpecialKey Special
 
 highlight Title     guifg=cadetblue1 gui=none
@@ -90,7 +90,7 @@ highlight Question   guifg=coral2 guibg=bg gui=none
 highlight MoreMsg    guifg=coral2 guibg=bg gui=none
 
 " quickfix
-highlight qfLineNr    guifg=lightblue2
+highlight! link qfLineNr LineNr 
 highlight qfFileName  guifg=lightblue3 gui=underline
 highlight qfSeparator guifg=fg
 highlight qfError     guifg=grey60
@@ -117,7 +117,7 @@ highlight! link doxygenSpecialOnelineDesc doxygenBrief
 highlight DiffChange    guifg=cyan4 guibg=lightcyan3 gui=none
 highlight DiffText      guifg=lightcyan1 guibg=lightcyan4 gui=none
 highlight DiffAdd       guifg=lightcyan1 guibg=lightcyan4 gui=none
-highlight DiffDelete    guifg=palevioletred4   guibg=palevioletred4   gui=none
+highlight DiffDelete    guifg=palevioletred4   guibg=bg   gui=none
 
 " diff buffer
 highlight diffOldFile   guifg=fg
@@ -144,12 +144,12 @@ highlight netrwMarkFile gui=inverse
 highlight! link asciidocTitleUnderline Type
 
 " html
-highlight htmlH1 guifg=cornsilk gui=bold
-highlight htmlH2 guifg=cornsilk
-highlight htmlH3 guifg=cornsilk
+highlight htmlH1 guifg=palegreen1 gui=bold
+highlight htmlH2 guifg=palegreen2
+highlight htmlH3 guifg=palegreen3
 highlight htmlBold                gui=bold
 highlight htmlItalic              gui=italic
 
 " markdown
-highlight! markdownCode guifg=darkseagreen3 
+highlight! markdownCode guifg=palegreen3 
 highlight! link markdownCodeBlock Comment
