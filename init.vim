@@ -221,7 +221,7 @@ inoremap <C-Space> <Esc>
 
 inoremap <f1> <Esc>:
 nnoremap <f1> :
-nnoremap <f4> :cnext<CR>   Ã¶Ã¤ Ã¤
+nnoremap <f4> :cnext<CR>
 nnoremap <S-f4> :cprevious<CR>
 nnoremap <f6> :bprevious<CR>
 nnoremap <S-f6> :bnext<CR>
