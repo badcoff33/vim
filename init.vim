@@ -23,7 +23,7 @@ set spelllang=en_us
 
 " Use Umlaut keys in normal mode 
 scriptencoding utf-8
-set langmap=ö[,ä],Ö{,Ä},ü/,Ü?
+set langmap=Ã¶[,Ã¤],Ã{,Ã},Ã¼/,Ã?
 scriptencoding 
 
 " Read changed files automatically if they are changed in the background
@@ -226,7 +226,7 @@ inoremap <C-Space> <Esc>
 
 inoremap <f1> <Esc>:
 nnoremap <f1> :
-nnoremap <f4> :cnext<CR>   Ã¶Ã¤ Ã¤
+nnoremap <f4> :cnext<CR>   ÃÂ¶ÃÂ¤ ÃÂ¤
 nnoremap <S-f4> :cprevious<CR>
 nnoremap <f6> :bprevious<CR>
 nnoremap <S-f6> :bnext<CR>
@@ -248,8 +248,8 @@ nnoremap <Leader>t :sil TagbarToggle<CR>
 
 nnoremap <Leader><C-]> :tjump /
 
-nnoremap <Leader>R :%s/\<<C-r><C-w>\>//c<Left><Left>
-nnoremap <Leader>r :.,$s/\<<C-r><C-w>\>//c<Left><Left>
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
+vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
 
 " put current word in register '*' 
 nnoremap <C-Insert> "*yiw
