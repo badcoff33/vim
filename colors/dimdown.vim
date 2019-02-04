@@ -27,7 +27,7 @@ endif
 
 " where is the cursor?
 highlight LineNr        guifg=grey38    guibg=bg          gui=none
-highlight Cursor        guifg=white     guibg=dimgray
+highlight Cursor        guifg=white     guibg=goldenrod4
 highlight CursorLineNr  guifg=grey38    guibg=grey17      gui=bold
 highlight QuickFixLine                  guibg=bg          gui=bold
 highlight CursorLine                    guibg=grey19

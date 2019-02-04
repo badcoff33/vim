@@ -197,11 +197,6 @@ augroup END
 let mapleader = " "
 let maplocalleader = "+"
 
-nnoremap <up> <C-w>k
-nnoremap <down> <C-w>j
-nnoremap <left> <C-w>h
-nnoremap <right> <C-w>l
-
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 else
