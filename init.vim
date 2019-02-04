@@ -226,7 +226,7 @@ nnoremap <C-f4> :tabclose<CR>
 nnoremap <f6> :bprevious<CR>
 nnoremap <S-f6> :bnext<CR>
 
-nnoremap <A-j> :cnext<CR>
+nnoremap <A-j> :cnext<CR> 
 nnoremap <A-k> :cprevious<CR>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
@@ -240,8 +240,8 @@ nnoremap <Leader>l :ToggleStatusline<CR>
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>\
 nnoremap <Leader>E :Vexplore <C-r>=expand("%:p:h")<CR><CR>20<C-w><bar>
 nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>m :sil make
-nnoremap <Leader>g :sil grep
+nnoremap <Leader>m :sil make<Space><Up>
+nnoremap <Leader>g :sil grep<Space><Up>
 nnoremap <Leader>t :sil TagbarToggle<CR>
 
 nnoremap <Leader><C-]> :tjump /
