@@ -238,8 +238,8 @@ nnoremap <Leader>l :ToggleStatusline<CR>
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>\
 nnoremap <Leader>E :Vexplore <C-r>=expand("%:p:h")<CR><CR>20<C-w><bar>
 nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>m :sil make
-nnoremap <Leader>g :sil grep
+nnoremap <Leader>m :sil make<Space><Up>
+nnoremap <Leader>g :sil grep<Space><Up>
 nnoremap <Leader>t :sil TagbarToggle<CR>
 
 nnoremap <Leader><C-]> :tjump /
