@@ -43,7 +43,7 @@ setlocal listchars=tab:>-,trail:.,extends:#
 setlocal statusline=%1*%t%m%r%y%w\ %2*\ %{scope#ScopeParserC()}\ %3*\ %{runjob#GetStatus()}\ %0*%=%l,%c%V\ %P
 
 " Customize the c indent style
-setlocal cinoptions=(0
+setlocal cinoptions=(0,W4
 
 " iabbrev did not work when 'cpoptions' has '>'
 if match(&cpoptions, '>') >= 0
