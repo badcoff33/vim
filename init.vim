@@ -246,8 +246,8 @@ nnoremap <Leader>t :sil TagbarToggle<CR>
 
 nnoremap <Leader><C-]> :tjump /
 
-nnoremap <Leader>R :%s/\<<C-r><C-w>\>//c<Left><Left>
-nnoremap <Leader>r :.,$s/\<<C-r><C-w>\>//c<Left><Left>
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
+vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
 
 " put current word in register '*' 
 nnoremap <C-Insert> "*yiw
