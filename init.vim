@@ -169,8 +169,9 @@ augroup init
 
   autocmd BufReadPost * call basic#RestoreCursor()
 
-  autocmd BufWritePre *.c,*.h :WhitespaceCleanup
-  autocmd BufWritePre *.py    :WhitespaceCleanup
+  autocmd BufWritePre *.cpp,*.C :WhitespaceCleanup
+  autocmd BufWritePre *.c,*.h   :WhitespaceCleanup
+  autocmd BufWritePre *.py      :WhitespaceCleanup
 
   autocmd VimEnter,ColorScheme * highlight HighlightWordGroup gui=underline
 
