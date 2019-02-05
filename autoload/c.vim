@@ -39,6 +39,10 @@ endfunction
 
 function! c#ToggleSourceHeaderFile()
   let l:file_pairs = {
+        \ 'C': ['.H'],
+        \ 'H': ['.C'],
+        \ 'cc': ['.hh'],
+        \ 'hh': ['.cc'],
         \ 'c': ['.h', 'Port.h'],
         \ 'h': ['.c'] }
   let l:extension = expand("%:e")
