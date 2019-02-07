@@ -204,6 +204,11 @@ else
   tnoremap <Esc> <C-w>N
 endif
 
+if exists("win32") || exists("win64")
+  " decrement visual selected nummbers
+  silent! vunmap <C-x>
+endif
+
 " surround visual selection with ", ', (, [
 vnoremap <Leader>" c"<C-R>-"<Esc>
 vnoremap <Leader>' c'<C-R>-'<Esc>
