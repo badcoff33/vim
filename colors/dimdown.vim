@@ -16,7 +16,7 @@ let g:colors_name = "dimdown"
 " very basic things
 highlight Normal  guifg=grey85      guibg=grey16          ctermbg=black
 highlight NonText guifg=dodgerblue1 guibg=bg              gui=none
-highlight Visual  guifg=cadetblue1  guibg=grey30
+highlight Visual  guifg=palegreen1  guibg=palegreen4
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
@@ -27,7 +27,7 @@ endif
 
 " where is the cursor?
 highlight LineNr        guifg=grey38    guibg=bg          gui=none
-highlight Cursor        guifg=white     guibg=goldenrod4
+highlight Cursor        guifg=white     guibg=lightblue3
 highlight CursorLineNr  guifg=grey38    guibg=grey17      gui=bold
 highlight QuickFixLine                  guibg=bg          gui=bold
 highlight CursorLine                    guibg=grey19
@@ -38,8 +38,8 @@ highlight VertSplit    guifg=grey27     guibg=bg     gui=none
 highlight StatusLineNC guifg=grey48     guibg=grey20 gui=none
 highlight StatusLine   guifg=white      guibg=grey30 gui=none
 highlight User1        guifg=cadetblue2 guibg=grey30 gui=bold cterm=inverse
-highlight User2        guifg=white      guibg=grey30 gui=none cterm=inverse
-highlight User3        guifg=white      guibg=grey30 gui=none cterm=inverse
+highlight User2        guifg=cadetblue1 guibg=grey30 gui=none cterm=inverse
+highlight User3        guifg=cadetblue1 guibg=grey30 gui=none cterm=inverse
 highlight FoldColumn   guifg=cadetblue3 guibg=bg     gui=none ctermbg=bg
 highlight Folded       guifg=cadetblue3 guibg=bg     gui=NONE
 highlight SignColumn   guifg=skyblue4   guibg=bg
