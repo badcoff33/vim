@@ -19,7 +19,7 @@ vnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
 
 " run LLVM's clang-format
 nmap <buffer> <LocalLeader>f ggVG!clang-format<CR>
-vmap <buffer> <LocalLeader>f !clang-format<CR>
+vmap <buffer> <LocalLeader>f !clang-format<CR>gv=
 
 let b:load_doxygen_syntax=1
 let c_no_comment_fold = 1
