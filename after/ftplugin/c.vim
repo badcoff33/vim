@@ -17,9 +17,13 @@ nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <b
 nnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
 vnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
 
-" run LLVM's clang-format
-nmap <buffer> <LocalLeader>f ggVG!clang-format<CR>
-vmap <buffer> <LocalLeader>f !clang-format<CR>gv=
+" run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
+nmap <buffer> <LocalLeader>f ggVG!clang-format -style=file<CR>
+vmap <buffer> <LocalLeader>f !clang-format -style=file<CR>gv=
+
+" run Uncrustify -- https://github.com/uncrustify/uncrustify
+" nmap <buffer> <LocalLeader>f ggVG!uncrustify --frag -c .uncrustify -l C -q<CR>
+" vmap <buffer> <LocalLeader>f !uncrustify --frag -c .uncrustify -l C -q<CR>
 
 let b:load_doxygen_syntax=1
 let c_no_comment_fold = 1
