@@ -220,8 +220,6 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 
-inoremap <f1> <Esc>:
-nnoremap <f1> :
 nnoremap <f4> :tabnew<CR>
 nnoremap <C-f4> :tabclose<CR>
 nnoremap <f6> :bprevious<CR>
