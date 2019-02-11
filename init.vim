@@ -196,7 +196,7 @@ augroup END
 
 " Set leader and localleader keys, that works best for me
 let mapleader = " "
-let maplocalleader = "+"
+let maplocalleader = "\u00df"
 
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
