@@ -25,7 +25,7 @@ endif
 
 " window decoration
 highlight StatusLine guifg=white guibg=grey60 gui=none
-highlight User1 guifg=white  guibg=grey40 gui=bold
+highlight User1 guifg=white  guibg=grey20 gui=bold
 highlight User2 guifg=grey44 guibg=grey40 gui=none
 highlight User3 guifg=grey44 guibg=grey40 gui=none
 highlight StatusLineNC guifg=azure4 guibg=azure2 gui=none
