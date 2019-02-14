@@ -225,8 +225,8 @@ nnoremap <C-f4> :tabclose<CR>
 nnoremap <f6> :bprevious<CR>
 nnoremap <S-f6> :bnext<CR>
 
-nnoremap <A-j> :cnext<CR> 
-nnoremap <A-k> :cprevious<CR>
+nnoremap <f12> :cnext<CR> 
+nnoremap <f11> :cprevious<CR>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
