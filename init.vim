@@ -36,7 +36,6 @@ set sidescroll=8
 set sidescrolloff=3
 
 " window behavior
-set switchbuf=usetab
 set nosplitbelow
 set splitright
 set noequalalways
