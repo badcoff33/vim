@@ -219,13 +219,14 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 
+nnoremap <f1> :Welcome<CR>
 nnoremap <f4> :tabnew<CR>
 nnoremap <C-f4> :tabclose<CR>
 nnoremap <f6> :bprevious<CR>
 nnoremap <S-f6> :bnext<CR>
 
-nnoremap <f12> :cnext<CR> 
-nnoremap <f11> :cprevious<CR>
+nnoremap + :cnext<CR> 
+nnoremap - :cprevious<CR>
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
@@ -250,7 +251,8 @@ vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
 " put current word in register '*' 
 nnoremap <C-Insert> "*yiw
 
-nnoremap <Leader>n :set invhlsearch<CR>
+nnoremap <Leader>n :nohlsearch<CR>
+nnoremap <Leader>N :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
 nnoremap <BS> :call basic#ToggleQuickfix()<CR>
