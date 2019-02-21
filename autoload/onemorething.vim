@@ -20,11 +20,10 @@ endfunction
 " Description: Enter one-more-thing and store the text with file and line info
 " in a file. This file/line info can be opend with a 'gF' command.
 function! onemorething#NewEntry()
-  let l:markdown_head = ''
   let @r = printf('"%s" %d', expand("%:p"), line("."))
-  echo "file reference stored in \"r"
+  let l:markdown_head = ''
   let l:date = strftime("%Y %b %d %X")
-  let l:comment = input("Topic: ", "", "buffer")
+  let l:comment = input("Topic (cursor reference point in \"r): ", "", "buffer")
   if !filereadable(expand(g:one_more_thing_file, ":p:h"))
     enew
     put='# One More Thing'
