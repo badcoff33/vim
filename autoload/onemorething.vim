@@ -21,7 +21,8 @@ endfunction
 " in a file. This file/line info can be opend with a 'gF' command.
 function! onemorething#NewEntry()
   let l:markdown_head = ''
-  let l:reference = printf('"%s" %d', bufname("%"), line("."))
+  let @r = printf('"%s" %d', expand("%:p"), line("."))
+  echo "file reference stored in \"r"
   let l:date = strftime("%Y %b %d %X")
   let l:comment = input("Topic: ", "", "buffer")
   if !filereadable(expand(g:one_more_thing_file, ":p:h"))
@@ -56,6 +57,5 @@ function! onemorething#NewEntry()
   put=printf(l:markdown_head . ' %s -- %s ', l:date, l:comment)
   put=''
   write
-  echo "file reference stored in \"r"
 endfunction
 
