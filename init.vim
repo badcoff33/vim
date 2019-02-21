@@ -240,10 +240,13 @@ nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>\
 nnoremap <Leader>E :Vexplore <C-r>=expand("%:p:h")<CR><CR>20<C-w><bar>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>m :sil make<Space><Up>
+
 nnoremap <Leader>g :sil grep<Space><Up>
-nnoremap <Leader>t :sil TagbarToggle<CR>
+nnoremap <silent> <A-g> :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
+nnoremap <A-G> :silent grep<Space>
 
 nnoremap <Leader><C-]> :tjump /
+nnoremap <A-+> :tjump /
 
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
 vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
