@@ -240,12 +240,11 @@ nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>\
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>m :sil make<Space><Up>
 
-nnoremap <Leader>g :sil grep<Space><Up>
-nnoremap <silent> <A-g> :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
-nnoremap <A-G> :silent grep<Space>
+nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
+nnoremap <Leader>G :silent grep<Space>
 
-nnoremap <A-:> :tjump /
-nnoremap <A-.> :tjump <C-r><C-w><CR>
+nnoremap <Leader>t :tjump <C-r><C-w><CR>
+nnoremap <Leader>T :tjump /
 
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
 vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
