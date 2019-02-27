@@ -19,7 +19,7 @@ vnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
 
 " run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
 nmap <buffer> <LocalLeader>f ggVG!clang-format -style=file<CR>
-vmap <buffer> <LocalLeader>f !clang-format -style=file<CR>
+vmap <buffer> <LocalLeader>f !clang-format -style=file<CR>gv=
 
 " run Uncrustify -- https://github.com/uncrustify/uncrustify
 " nmap <buffer> <LocalLeader>f ggVG!uncrustify --frag -c .uncrustify -l C -q<CR>
