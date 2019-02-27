@@ -1,4 +1,4 @@
-colorscheme breeze
+colorscheme angrybee
 syntax on
 
 if has("nvim")

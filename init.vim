@@ -197,10 +197,12 @@ augroup END
 let mapleader = " "
 let maplocalleader = "\u00df"
 
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-else
-  tnoremap <Esc> <C-w>N
+if has('terminal')
+  if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+  else
+    tnoremap <Esc> <C-w>N
+  endif
 endif
 
 if exists("win32") || exists("win64")
@@ -236,7 +238,7 @@ nnoremap <Leader>o :OneMoreThing<CR>
 nnoremap <Leader>O :ShowOneMoreThing<CR>
 nnoremap <Leader>l :ToggleStatusline<CR>
 
-nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>\
+nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>m :sil make<Space><Up>
 
@@ -263,7 +265,7 @@ if has("win32") || has("win64")
   nnoremap <Leader>x :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
 endif
 
-cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>\
+cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>
 
 " }}} mappings
 
