@@ -116,7 +116,7 @@ set diffopt=context:3,vertical,iwhite,filler
 
 " If available, use GNU grep niceties for searching
 if system('grep --version') =~# '^grep (GNU grep)'
-  set grepprg=grep\ -HnRs\ --exclude='.git*'
+  set grepprg=grep\ -HnRs\ --include=*.[ch]
 endif
 
 " plugin variables {{{
