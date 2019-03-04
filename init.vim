@@ -105,9 +105,6 @@ set wildignore=*.*~
 set showtabline=1
 set sessionoptions=buffers,tabpages,winsize
 
-" Customize cscope
-set cscopequickfix=s-,c-,d-,i-,t-,e-
-
 " Write all files before any ':make' command
 set autowrite
 
@@ -197,12 +194,10 @@ augroup END
 let mapleader = " "
 let maplocalleader = "\u00df"
 
-if has('terminal')
-  if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-  else
-    tnoremap <Esc> <C-w>N
-  endif
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+elseif has('terminal')
+  tnoremap <Esc> <C-w>N
 endif
 
 if exists("win32") || exists("win64")
@@ -222,13 +217,14 @@ inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 
 nnoremap <f1> :Welcome<CR>
-nnoremap <f4> :tabnew<CR>
-nnoremap <C-f4> :tabclose<CR>
+nnoremap <f2> :tabnew<CR>
+nnoremap <f4>:cnext<CR> 
+nnoremap <S-f4> :cprevious<CR>
 nnoremap <f6> :bprevious<CR>
 nnoremap <S-f6> :bnext<CR>
-
-nnoremap + :cnext<CR> 
-nnoremap - :cprevious<CR>
+nnoremap <f7> :sil make<Space><Up>
+nnoremap <f12> :tjump <C-r><C-w><CR>
+nnoremap <C-f12> :tjump /
 
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
@@ -240,13 +236,9 @@ nnoremap <Leader>l :ToggleStatusline<CR>
 
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>
 nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>m :sil make<Space><Up>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w> .<CR>
 nnoremap <Leader>G :silent grep  .<Left><Left>
-
-nnoremap <Leader>t :tjump <C-r><C-w><CR>
-nnoremap <Leader>T :tjump /
 
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
 vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
