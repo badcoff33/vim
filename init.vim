@@ -218,6 +218,7 @@ inoremap <C-Space> <Esc>
 
 nnoremap <f1> :Welcome<CR>
 nnoremap <f2> :tabnew<CR>
+nnoremap <C-f2> :tabclose<CR>
 nnoremap <f3> :buffer<Space>
 
 nnoremap <f4> :cnext<CR> 
