@@ -52,7 +52,7 @@ highlight! link TabLineSel   StatusLine
 
 " Search
 highlight IncSearch     guifg=#202020  guibg=#d0d0d0 gui=none
-highlight Search        guifg=#ccaacc  guibg=#503848 gui=none
+highlight Search        guifg=#d0f0d0  guibg=#227722 gui=none
 highlight MatchParen    guifg=#40e0e0  guibg=bg      gui=underline
 
 " Structure
