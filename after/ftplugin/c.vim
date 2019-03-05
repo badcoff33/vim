@@ -3,8 +3,8 @@
 " Description:   Some support functions and mappings for C code files.
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
-command! -buffer -nargs=0 ToggleSourceHeaderFile call c#ToggleSourceHeaderFile()
-command! -buffer -range -nargs=0 CodeCleanup <line1>,<line2>call c#CodeCleanup()
+command! -buffer -nargs=0 ToggleSourceHeaderFile call filetype#c#ToggleSourceHeaderFile()
+command! -buffer -range -nargs=0 CodeCleanup <line1>,<line2>call filetype#c#CodeCleanup()
 
 nnoremap <buffer> <LocalLeader><TAB> :ToggleSourceHeaderFile<CR>
 
@@ -44,7 +44,7 @@ setlocal list
 setlocal listchars=tab:>-,trail:.,extends:#
 
 " statusline with cursors scope info
-setlocal statusline=%t%m%r%y%w\ %{c#ScopeParser()}%=%l,%c%V\ %P
+setlocal statusline=%t%m%r%y%w\ %{filetype#c#ScopeParser()}%=%l,%c%V\ %P
 
 " Customize the c indent style
 setlocal cinoptions=(0,W4

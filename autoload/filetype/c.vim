@@ -7,7 +7,7 @@ function! s:WhatHiGroupName()
 endfunction
 
 " Description: Adjust spaces in C code files.
-function! c#CodeCleanup() range
+function! filetype#c#CodeCleanup() range
   execute "normal " . a:firstline . "G0"
   " Rule "Put one space after each keyword"
   while search('\<\(switch\|if\|while\)(', 'W') > 0
@@ -37,7 +37,7 @@ function! c#CodeCleanup() range
   endwhile
 endfunction
 
-function! c#ToggleSourceHeaderFile()
+function! filetype#c#ToggleSourceHeaderFile()
   let l:file_pairs = {
         \ 'C': ['.H'],
         \ 'H': ['.C'],
@@ -64,7 +64,7 @@ endfunction
 
 " Description: A scope parser for C files. Added indication in which context
 " (scope) the cursor is.
-function c#ScopeParser()
+function filetype#c#ScopeParser()
 
   " Regular expressions to find head and bottom lines of a C function.
   let l:regexpFindFuncHead = '^\w\+.*)\s*\n*{'

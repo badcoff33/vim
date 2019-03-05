@@ -9,7 +9,7 @@ setlocal shiftwidth=2
 setlocal nocindent
 
 " statusline with cursors scope info
-setlocal statusline=%t%m%r%y%w\ %{vim#ScopeParser()}%=%l,%c%V\ %P
+setlocal statusline=%t%m%r%y%w\ %{filetype#vim#ScopeParser()}%=%l,%c%V\ %P
 
 nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 nnoremap <buffer> <localleader>h :verbose highlight <C-r><C-w><CR>
