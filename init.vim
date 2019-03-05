@@ -218,11 +218,16 @@ inoremap <C-Space> <Esc>
 
 nnoremap <f1> :Welcome<CR>
 nnoremap <f2> :tabnew<CR>
-nnoremap <f4>:cnext<CR> 
+nnoremap <f3> :buffer<Space>
+
+nnoremap <f4> :cnext<CR> 
 nnoremap <S-f4> :cprevious<CR>
+
 nnoremap <f6> :bprevious<CR>
 nnoremap <S-f6> :bnext<CR>
+
 nnoremap <f7> :sil make<Space><Up>
+
 nnoremap <f12> :tjump <C-r><C-w><CR>
 nnoremap <C-f12> :tjump /
 
