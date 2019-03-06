@@ -24,11 +24,11 @@ if has ('nvim')
 endif
 
 " window decoration
-highlight StatusLine guifg=white guibg=grey60 gui=none
+highlight StatusLine guifg=white guibg=grey40 gui=none
 highlight User1 guifg=white  guibg=grey20 gui=bold
 highlight User2 guifg=grey44 guibg=grey40 gui=none
 highlight User3 guifg=grey44 guibg=grey40 gui=none
-highlight StatusLineNC guifg=azure4 guibg=azure2 gui=none
+highlight StatusLineNC guifg=grey20 guibg=grey95 gui=none
 highlight VertSplit guifg=grey85 guibg=bg gui=none
 highlight QuickFixLine guifg=deepskyblue3 guibg=ghostwhite gui=bold
 highlight! link WildMenu IncSearch
