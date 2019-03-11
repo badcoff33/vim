@@ -20,14 +20,14 @@ function! SaveWorkspaceSession()
   endif
 endfunction
 
-function! EditWorkspaceSession()
-  if exists("g:workspace_session_file")
-    execute "edit " . g:workspace_session_file
+function! EditWorkspaceSourceFile()
+  if exists("g:workspace_source_file")
+    execute "edit " . g:workspace_source_file
   endif
 endfunction
 
 command! -nargs=0 SaveWorkspaceSession call SaveWorkspaceSession()
-command! -nargs=0 EditWorkspaceSession call EditWorkspaceSession()
+command! -nargs=0 EditWorkspaceSourceFile call EditWorkspaceSourceFile()
 command! -nargs=0 ClearWorkspaceSession call ClearWorkspaceSession()
 
 function! workspace#Switch()
@@ -51,6 +51,7 @@ function! workspace#Switch()
     if filereadable(l:workspace_path)
       echomsg "found workspace file " . simplify(expand(l:workspace_path, ":p:h"))
       execute "source " . l:workspace_path
+      let g:workspace_source_file = expand(l:workspace_path, ":p")
       break
     endif
     let l:workspace_path = "../" . l:workspace_path
