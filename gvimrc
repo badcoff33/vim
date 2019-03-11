@@ -1,8 +1,6 @@
 runtime ginit.vim
 
 set guioptions=!gt
-set guifont=Consolas,Noto\ Mono
-set linespace=3
 
 set guicursor=n-v:block-Cursor/lCursor-blinkon0
 set guicursor+=ve:ver35-Cursor-blinkon0

@@ -111,11 +111,6 @@ set autowrite
 " Tune the diff feature for my needs.
 set diffopt=context:3,vertical,iwhite,filler
 
-" If available, use GNU grep niceties for searching
-if system('grep --version') =~# '^grep (GNU grep)'
-  set grepprg=grep\ -HnRs\ --include=*.[ch]
-endif
-
 " plugin variables {{{
 
 let g:netrw_use_errorwindow = 0
