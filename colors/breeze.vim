@@ -30,7 +30,7 @@ highlight User2 guifg=grey44 guibg=grey40 gui=none
 highlight User3 guifg=grey44 guibg=grey40 gui=none
 highlight StatusLineNC guifg=grey20 guibg=grey95 gui=none
 highlight VertSplit guifg=grey85 guibg=bg gui=none
-highlight QuickFixLine guifg=deepskyblue3 guibg=ghostwhite gui=bold
+highlight QuickFixLine guifg=white guibg=lightcoral gui=bold
 highlight! link WildMenu IncSearch
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
