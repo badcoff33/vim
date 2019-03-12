@@ -216,8 +216,13 @@ nnoremap <f2> :tabnew<CR>
 nnoremap <C-f2> :tabclose<CR>
 nnoremap <f3> :buffer<Space>
 
+nnoremap + :cnext<CR> 
+nnoremap - :cprevious<CR>
+
 nnoremap <f4> :cnext<CR> 
 nnoremap <S-f4> :cprevious<CR>
+
+nnoremap <f5> :clist<CR>
 
 nnoremap <f6> :bprevious<CR>
 nnoremap <S-f6> :bnext<CR>
