@@ -218,10 +218,10 @@ nnoremap <f3> :buffer<Space>
 
 nnoremap + :cnext<CR> 
 nnoremap - :cprevious<CR>
+nnoremap <Leader><Leader> :clist<CR>
 
 nnoremap <f4> :cnext<CR> 
 nnoremap <S-f4> :cprevious<CR>
-
 nnoremap <f5> :clist<CR>
 
 nnoremap <f6> :bprevious<CR>
