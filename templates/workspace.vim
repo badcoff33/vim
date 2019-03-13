@@ -4,7 +4,6 @@ augroup Workspace
   " Forget the old Workspace autocmd's
   au!
  autocmd BufEnter *.c,*.h setlocal number foldcolumn=2
- autocmd BufEnter ChangeLog.txt execute 'setlocal makeprg=' . escape('pandoc -f markdown -t docx -t docx -o s:\c\Users\prepensm\Downloads\ChangeLog.docx C_HeaterCore\ChangeLog.txt', ' \')
 augroup END
 
 let g:c_use_simple_tag_preview=0
@@ -47,33 +46,8 @@ set path+=C_CmdHandler
 set path+=C_WBusCoreServices/**
 set path+=,
 
-"""""""""""
-" TOOLS {{{
-"""""""""""
-
 " Set compiler for project
 compiler! greenhills
-
-" Ripgrep
-set grepformat=%f:%l:%c:%m,%f:%l:%m
-set grepprg=rg
-            \\ --vimgrep
-            \\ -t\ c
-            \\ -g\ !TLSim
-            \\ -g\ !TLProj
-            \\ -g\ !_sfprj
-            \\ $*
-
-nnoremap <silent> <f11> :let @/="<C-r><C-w>"<CR>:silent grep -g !C_AUTOSAR <C-r><C-w> . <CR>
-nnoremap <silent> <f12> :cnext<CR>
-nnoremap <silent> <S-f12> :cprevious<CR>
-nnoremap <silent> <Leader>T : TagbarToggle<CR>
-nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep -g !C_AUTOSAR <C-r><C-w> . <CR>
-nnoremap <Leader>G :silent grep -g !C_AUTOSAR  .<left><left>
-
-let g:workspace_make_str = "Debug.gpj"
-nnoremap <Leader>m :cd C_Application/Build <CR>:sil make <C-r>=g:workspace_make_str<CR><CR>:cd ../..<CR> :clist<CR>
-nnoremap <Leader>M :let g:workspace_make_str = input("Make command? ", g:workspace_make_str)<CR>
 
 """ set grepprg=grep\ -Hn\ -r\ --include='*.[ch]'
 """             \\ --exclude-dir=TLProj
@@ -81,28 +55,9 @@ nnoremap <Leader>M :let g:workspace_make_str = input("Make command? ", g:workspa
 """             \\ --exclude-dir=Doc
 """             \\ --exclude-dir=C_AUTOSAR
 
-""" GNU Global
-""" set grepprg=global\ --result=grep\ --grep
-""" set grepformat=%f:%l:%m
-""" set cscopeprg=gtags-cscope
-""" cscope kill 0
-""" cscope add GTAGS
-
 " Windows findstr
 """" if has("win32") || has("win64")
 """"   set grepprg=findstr\ /N\ /F:.index
 """" endif
-
-function! EvalStringPandocExportMarkdown(format)
-  if a:format == 1
-    let l:pandoc_call = 'pandoc -f markdown -t docx -o ' . expand ('%:r') . '.docx ' . expand('%')
-  elseif a:format == 2
-    let l:pandoc_call = 'pandoc -f markdown -t html -o ' . expand ('%:r') . '.html ' . expand('%')
-  endif
-  return l:pandoc_call
-endfunction
-au FileType markdown execute 'setlocal makeprg=' . escape(EvalStringPandocExportMarkdown(2), ' ')
-
-" }}}
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker

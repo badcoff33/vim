@@ -14,7 +14,7 @@ let g:colors_name = "angrybee"
 highlight Normal    guifg=#d8d8d8  guibg=#18242e gui=none
 highlight NonText   guifg=#4285F4  guibg=bg      gui=none
 highlight Cursor    guifg=#000000  guibg=#ffffff gui=none
-highlight Visual    guifg=#c0d8e0  guibg=#255560 gui=none
+highlight Visual    guifg=#c0e8e0  guibg=#255050 gui=none
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
