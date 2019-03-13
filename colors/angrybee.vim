@@ -24,8 +24,8 @@ if has ('nvim')
 endif
 
 " Decoration
-highlight StatusLineNC  guifg=#a0a0a0   guibg=#2e3e48  gui=none
-highlight StatusLine    guifg=#40eeee   guibg=#405880  gui=none
+highlight StatusLineNC  guifg=#a0a000   guibg=#1f2836  gui=none
+highlight StatusLine    guifg=#eeee00   guibg=#303040  gui=none
 highlight User1         guifg=#ddeeff   guibg=#405880  gui=none
 highlight User2         guifg=#40eeee   guibg=#405880  gui=none
 highlight User3         guifg=#40eeee   guibg=#405880  gui=none
