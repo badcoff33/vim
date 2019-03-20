@@ -3,15 +3,14 @@
 
 if !exists("g:welcome_text_file")
   for wfile in ['~\Documents\welcome.txt', 
-        \ '~\..\..\Documents\welcome.txt',
-        \ '~\vimfiles\welcome.txt']
+        \ '~\welcome.txt']
     if filereadable(expand(wfile, ':p'))
       let g:welcome_text_file = wfile
       break
     endif
   endfor
   if !exists("g:welcome_text_file")
-    let g:welcome_text_file = '~\vimfiles\welcome.txt'
+    let g:welcome_text_file = '~\welcome.txt'
   endif
 endif
 
