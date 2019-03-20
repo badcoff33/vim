@@ -177,14 +177,10 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 
-nnoremap <f1> :Welcome<CR>
+nnoremap <f1> :clist +5<CR>
 nnoremap <f2> :tabnew<CR>
 nnoremap <C-f2> :tabclose<CR>
 nnoremap <f3> :buffer<Space>
-
-nnoremap + :cnext<CR> 
-nnoremap - :cprevious<CR>
-nnoremap <Leader><Leader> :clist +5<CR>
 
 nnoremap <f4> :cnext<CR> 
 nnoremap <S-f4> :cprevious<CR>
@@ -197,6 +193,9 @@ nnoremap <f7> :sil make<Space><Up>
 
 nnoremap <f12> :tjump <C-r><C-w><CR>
 nnoremap <C-f12> :tjump /
+
+nnoremap + :cnext<CR> 
+nnoremap - :cprevious<CR>
 
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>
 nnoremap <Leader>b :buffer<Space>

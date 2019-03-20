@@ -10,7 +10,6 @@ command! -nargs=1 HighlightWord          :call basic#HighlightWord("<args>")
 command! -nargs=0 ToggleStickyCursorline :call basic#ToggleStickyCursorLine()
 command! -nargs=0 ToggleStatusline       :call basic#ToggleStatusline()
 
-
 command! -nargs=0 SwitchWorkspace  :call workspace#Switch()
 
 command! -nargs=+ -complete=file Job    :call runjob#StartJob(<q-args>)
@@ -39,6 +38,7 @@ augroup plugin
 augroup END
 
 " key mappings
+nnoremap <Leader>W :Welcome<CR>
 nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>c :ClipboardBuffer<CR>
 nnoremap <Leader>w :WhitespaceMelt<CR>
