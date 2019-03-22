@@ -1,6 +1,6 @@
 " Vim color theme
 "
-" Description:  This color theme uses color names, defined by X11 file
+" Description: This color theme uses color names, defined by X11 file
 " 'rgb.txt'. Once you get used to the color names, it is quit easy to start or
 " change a color theme file. IMO, more easier than hex numbers.
 " Here is a nice list of colors: 'https://en.wikipedia.org/wiki/X11_color_names'
@@ -14,47 +14,47 @@ set background=dark
 let g:colors_name = "dimdown"
 
 " very basic things
-highlight Normal  guifg=grey85      guibg=grey16          ctermbg=black
-highlight NonText guifg=dodgerblue1 guibg=bg              gui=none
-highlight Visual  guifg=palegreen1  guibg=palegreen4
+highlight Normal guifg=grey85 guibg=grey16 ctermbg=black
+highlight NonText guifg=skyblue1 guibg=bg gui=none
+highlight Visual guifg=grey20 guibg=grey80
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
-  highlight NormalFocus   guibg=grey13
+  highlight NormalFocus guibg=grey13
   highlight NormalNoFocus guibg=grey16
   set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
 endif
 
 " where is the cursor?
-highlight LineNr        guifg=grey38    guibg=bg          gui=none
-highlight Cursor        guifg=white     guibg=lightblue3
-highlight CursorLineNr  guifg=grey38    guibg=grey17      gui=bold
-highlight QuickFixLine                  guibg=bg          gui=bold
-highlight CursorLine                    guibg=grey19
+highlight LineNr guifg=grey38 guibg=bg gui=none
+highlight Cursor guifg=white guibg=lightblue3
+highlight CursorLineNr guifg=grey38 guibg=grey17 gui=bold
+highlight QuickFixLine guibg=bg gui=bold
+highlight CursorLine guibg=grey19
 highlight! link CursorColumn CursorLine
 
 " decorations
-highlight VertSplit    guifg=grey27     guibg=bg     gui=none
-highlight StatusLineNC guifg=grey48     guibg=grey20 gui=none
-highlight StatusLine   guifg=white      guibg=grey30 gui=none
-highlight User1        guifg=cadetblue2 guibg=grey30 gui=bold cterm=inverse
-highlight User2        guifg=cadetblue1 guibg=grey30 gui=none cterm=inverse
-highlight User3        guifg=cadetblue1 guibg=grey30 gui=none cterm=inverse
-highlight FoldColumn   guifg=cadetblue3 guibg=bg     gui=none ctermbg=bg
-highlight Folded       guifg=cadetblue3 guibg=bg     gui=NONE
-highlight SignColumn   guifg=skyblue4   guibg=bg
+highlight VertSplit guifg=grey27 guibg=bg gui=none
+highlight StatusLineNC guifg=grey48 guibg=grey20 gui=none
+highlight StatusLine guifg=white guibg=grey30 gui=none
+highlight User1 guifg=skyblue2 guibg=grey30 gui=bold cterm=inverse
+highlight User2 guifg=skyblue1 guibg=grey30 gui=none cterm=inverse
+highlight User3 guifg=skyblue1 guibg=grey30 gui=none cterm=inverse
+highlight FoldColumn guifg=skyblue3 guibg=bg gui=none ctermbg=bg
+highlight Folded guifg=skyblue3 guibg=bg gui=NONE
+highlight SignColumn guifg=skyblue4 guibg=bg
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
 
 " search
-highlight IncSearch  guifg=white  guibg=palevioletred2 gui=bold
-highlight Search     guifg=fg     guibg=grey35   gui=bold
-highlight MatchParen guifg=cyan2  guibg=bg       gui=underline
+highlight IncSearch guifg=white guibg=indianred2 gui=bold
+highlight Search guifg=fg guibg=grey35 gui=bold
+highlight MatchParen guifg=cyan2 guibg=bg gui=underline
 
 " popup Menu
-highlight Pmenu      guifg=white guibg=palegreen3 gui=none 
-highlight PmenuSel   guifg=white guibg=palegreen4 gui=bold 
-highlight PmenuSbar              guibg=lightblue4
+highlight Pmenu guifg=white guibg=deepskyblue gui=none 
+highlight PmenuSel guifg=white guibg=deepskyblue gui=bold 
+highlight PmenuSbar guibg=lightblue4
 highlight PmenuThumb guifg=white guibg=lightblue4
 highlight! link WildMenu IncSearch
 
@@ -64,78 +64,78 @@ highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 
 " code
-highlight Statement     guifg=lightblue4     gui=bold
-highlight Conditional   guifg=lightblue4     gui=none
-highlight PreProc       guifg=cadetblue3 gui=bold
-highlight Comment       guifg=grey50
-highlight Type          guifg=palevioletred2       gui=none
-highlight StorageClass  guifg=palevioletred3       gui=none
-highlight Function      guifg=palevioletred1       gui=bold
-highlight Identifier    guifg=palevioletred2
-highlight Special       guifg=palevioletred3
-highlight Constant      guifg=palegreen3
+highlight Statement guifg=coral1 gui=none
+highlight Conditional guifg=indianred3 gui=none
+highlight PreProc guifg=skyblue1 gui=none
+highlight Comment guifg=lightblue
+highlight Type guifg=indianred3 gui=none
+highlight StorageClass guifg=indianred3 gui=none
+highlight Function guifg=coral1 gui=none
+highlight Identifier guifg=indianred2
+highlight Special guifg=indianred3
+highlight Constant guifg=deepskyblue
 highlight! link SpecialKey Special
 
-highlight Title     guifg=cadetblue1 gui=none
-highlight Subtitle  guifg=cadetblue1
-highlight ToDo      guifg=cadetblue2 guibg=bg gui=bold
-highlight Error     guifg=white      guibg=tomato3
-highlight Directory guifg=skyblue2   gui=underline
+highlight Title guifg=skyblue1 gui=none
+highlight Subtitle guifg=skyblue1
+highlight ToDo guifg=skyblue2 guibg=bg gui=bold
+highlight Error guifg=white guibg=tomato3
+highlight Directory guifg=skyblue1 gui=underline
 
 " messages
-highlight ErrorMsg   guifg=coral2 guibg=bg gui=none
-highlight WarningMsg guifg=coral2 guibg=bg gui=none
-highlight ModeMsg    guifg=coral2 guibg=bg gui=none
-highlight Question   guifg=coral2 guibg=bg gui=none
-highlight MoreMsg    guifg=coral2 guibg=bg gui=none
+highlight ErrorMsg guifg=yellow2 guibg=bg gui=none
+highlight WarningMsg guifg=yellow2 guibg=bg gui=none
+highlight ModeMsg guifg=yellow2 guibg=bg gui=none
+highlight Question guifg=yellow2 guibg=bg gui=none
+highlight MoreMsg guifg=yellow2 guibg=bg gui=none
 
 " quickfix
 highlight! link qfLineNr LineNr 
-highlight qfFileName  guifg=lightblue3 gui=underline
+highlight qfFileName guifg=lightblue2 gui=underline
 highlight qfSeparator guifg=fg
-highlight qfError     guifg=grey60
+highlight qfError guifg=grey60
 
 " Vim script
-highlight vimCommentTitle guifg=grey90      gui=bold
-highlight vimGroupName    guifg=lightblue
+highlight vimCommentTitle guifg=grey90 gui=bold
+highlight vimGroupName guifg=grey85
 
 " C code
-highlight cCppOut     guifg=#6060e0       guibg=#333340
-highlight cCppOutIf2  guifg=#c0c0e0       guibg=#333340
-highlight cParen      guifg=deepskyblue3
-highlight cBlock      guifg=deepskyblue4
+highlight cCppOut guifg=#6060e0 guibg=#333340
+highlight cCppOutIf2 guifg=#c0c0e0 guibg=#333340
+highlight cParen guifg=deepskyblue3
+highlight cBlock guifg=deepskyblue4
 
 " Doxygen 
-highlight doxygenComment    guifg=grey55  gui=none
-highlight doxygenBrief      guifg=grey66  gui=none
-highlight doxygenParam      guifg=grey40  gui=none
-highlight doxygenOtherTODO  guifg=palevioletred3   gui=bold,underline
-highlight doxygenOtherWARN  guifg=palevioletred3   gui=bold,underline
+highlight doxygenComment guifg=grey55 gui=none
+highlight doxygenBrief guifg=grey66 gui=none
+highlight doxygenParam guifg=grey40 gui=none
+highlight doxygenOtherTODO guifg=indianred3 gui=bold,underline
+highlight doxygenOtherWARN guifg=indianred3 gui=bold,underline
 highlight! link DoxygenBody Comment 
 highlight! link doxygenSpecialOnelineDesc doxygenBrief
 
-highlight DiffChange    guifg=cyan4 guibg=lightcyan3 gui=none
-highlight DiffText      guifg=lightcyan1 guibg=lightcyan4 gui=none
-highlight DiffAdd       guifg=lightcyan1 guibg=lightcyan4 gui=none
-highlight DiffDelete    guifg=palevioletred4   guibg=bg   gui=none
+highlight DiffChange guifg=cyan4 guibg=white gui=none
+highlight DiffText guifg=white guibg=white gui=none
+highlight DiffAdd guifg=white guibg=white gui=none
+highlight DiffDelete guifg=indianred4 guibg=bg gui=none
 
 " diff buffer
-highlight diffOldFile   guifg=fg
-highlight diffNewFile   guifg=yellow2
-highlight diffFile      guifg=yellow2
-highlight diffOnly      guifg=yellow2
+highlight diffOldFile guifg=fg
+highlight diffNewFile guifg=yellow2
+highlight diffFile guifg=yellow2
+highlight diffOnly guifg=yellow2
 highlight diffIdentical guifg=fg
-highlight diffDiffer    guifg=fg
-highlight diffBDiffer   guifg=fg
-highlight diffIsA       guifg=fg
-highlight diffNoEOL     guifg=fg
-highlight diffCommon    guifg=fg
-highlight diffRemoved   guifg=fg gui=italic
-highlight diffChanged   guifg=fg
-highlight diffAdded     guifg=white gui=bold
-highlight diffLine      guifg=yellow1
-highlight diffSubname   guifg=fg
-highlight diffComment   guifg=fg
+highlight diffDiffer guifg=fg
+highlight diffBDiffer guifg=fg
+highlight diffIsA guifg=fg
+highlight diffNoEOL guifg=fg
+highlight diffCommon guifg=fg
+highlight diffRemoved guifg=fg gui=italic
+highlight diffChanged guifg=fg
+highlight diffAdded guifg=white gui=bold
+highlight diffLine guifg=yellow1
+highlight diffSubname guifg=fg
+highlight diffComment guifg=fg
 
 " netrw
 highlight netrwMarkFile gui=inverse
@@ -144,12 +144,12 @@ highlight netrwMarkFile gui=inverse
 highlight! link asciidocTitleUnderline Type
 
 " html
-highlight htmlH1 guifg=palegreen1 gui=bold
-highlight htmlH2 guifg=palegreen2
-highlight htmlH3 guifg=palegreen3
-highlight htmlBold                gui=bold
-highlight htmlItalic              gui=italic
+highlight htmlH1 guifg=deepskyblue gui=bold
+highlight htmlH2 guifg=deepskyblue
+highlight htmlH3 guifg=deepskyblue
+highlight htmlBold gui=bold
+highlight htmlItalic gui=italic
 
 " markdown
-highlight! markdownCode guifg=palegreen3 
+highlight! link markdownCode Comment
 highlight! link markdownCodeBlock Comment
