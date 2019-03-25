@@ -95,10 +95,16 @@ set showmatch matchtime=1
 set complete=.,w
 set completeopt=menu
 set pumheight=10
+if has('nvim')
+  set pumblend=10
+endif
 
 " Command line completion
-set wildmenu wildmode=full
-"set nowildmenu wildmode=list,full
+if has ('nvim')
+  set wildmenu wildmode=full wildoptions=pum,tagfile
+else
+  set nowildmenu wildmode=list,full wildoptions=tagfile
+endif
 set wildignorecase
 set wildignore=*.*~
 
