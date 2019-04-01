@@ -13,6 +13,9 @@ set guicursor+=sm:block-Cursor-blinkon0
 set mousemodel=popup
 set mousefocus
 
-nmap <f10> :silent set guifont=*<cr>
+nmap <Leader>1 :set guifont=Consolas:h10.5<CR>
+nmap <Leader>2 :set guifont=Consolas:h11<CR>
+nmap <Leader>3 :set guifont=Consolas:h13<CR>
+nmap <Leader>0 :set guifont=*<CR>
 
 " vim:ft=vim
