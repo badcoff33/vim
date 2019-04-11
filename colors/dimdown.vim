@@ -79,7 +79,7 @@ highlight! link SpecialKey Special
 highlight Title guifg=skyblue1 gui=none
 highlight Subtitle guifg=skyblue1
 highlight ToDo guifg=skyblue2 guibg=bg gui=bold
-highlight Error guifg=white guibg=tomato3
+highlight Error guifg=tomato3 guibg=bg gui=undercurl
 highlight Directory guifg=skyblue1 gui=underline
 
 " messages
