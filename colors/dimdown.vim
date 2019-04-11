@@ -64,12 +64,12 @@ highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 
 " code
-highlight Statement guifg=coral1 gui=none
+highlight Statement guifg=coral3 gui=none
 highlight Conditional guifg=indianred3 gui=none
 highlight PreProc guifg=skyblue1 gui=none
 highlight Comment guifg=lightblue
 highlight Type guifg=indianred3 gui=none
-highlight StorageClass guifg=indianred3 gui=none
+highlight StorageClass guifg=coral3 gui=none
 highlight Function guifg=coral1 gui=none
 highlight Identifier guifg=indianred2
 highlight Special guifg=indianred3
