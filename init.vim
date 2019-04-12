@@ -181,7 +181,6 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 
 " Try this!
 inoremap <Ins> <Esc>
-inoremap <C-Space> <Esc>
 
 nnoremap <f1> :clist +5<CR>
 nnoremap <f2> :tabnew<CR>
