@@ -71,7 +71,7 @@ highlight Comment guifg=lightblue
 highlight Type guifg=indianred3 gui=none
 highlight StorageClass guifg=coral3 gui=none
 highlight Function guifg=coral1 gui=none
-highlight Identifier guifg=indianred2
+highlight Identifier guifg=skyblue2
 highlight Special guifg=indianred3
 highlight Constant guifg=deepskyblue
 highlight! link SpecialKey Special
