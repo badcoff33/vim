@@ -14,7 +14,7 @@ nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <b
 
 nmap <buffer> ]]  :call search('^#\{1,\}\s',"W")<CR>
 nmap <buffer> [[  :call search('^#\{1,\}\s',"bW")<CR>
-nmap <buffer> <LocalLeader>d i<C-r>=strftime("%Y/%m/%d")<CR><Esc>
+iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
 
 " iabbrev did not work when 'cpoptions' has '>'
 if match(&cpoptions, '>') >= 0
