@@ -22,7 +22,7 @@ endfunction
 function! onemorething#NewEntry()
   let @r = printf('"%s" %d', expand("%:p"), line("."))
   let l:markdown_head = ''
-  let l:date = strftime("%Y %b %d %X")
+  let l:date = strftime("%Y-%m-%d)")
   let l:comment = input("Topic (cursor reference point in \"r): ", "", "buffer")
   if !filereadable(expand(g:one_more_thing_file, ":p:h"))
     enew
