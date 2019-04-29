@@ -9,7 +9,7 @@ if !exists("g:one_more_thing_file")
 endif
 
 " Description: Pop the OneMortThing file to front.
-function! onemorething#ShowFile()
+function! onemorething#EditFile()
   if filereadable(expand(g:one_more_thing_file, ":p:h"))
     execute "edit " . g:one_more_thing_file 
   else
