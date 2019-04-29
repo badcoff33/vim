@@ -22,7 +22,7 @@ command! -nargs=0 ShowUnsavedChanges        :call vimdiff#UnsavedChanges()
 command! -nargs=* -complete=dir TwoDirDiff  :call vimdiff#TwoDirDiff(<f-args>)
 
 command! -nargs=0 OneMoreThing      :call onemorething#NewEntry()
-command! -nargs=0 ShowOneMoreThing  :call onemorething#ShowFile()
+command! -nargs=0 EditOneMoreThing  :call onemorething#EditFile()
 
 augroup plugin
   
