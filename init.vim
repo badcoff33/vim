@@ -211,8 +211,10 @@ nnoremap <Leader>G :silent grep<Space>
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
 vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
 
-" put current word in register '*' 
 nnoremap <C-Insert> "*yiw
+vnoremap <C-Del> "*x
+vnoremap <C-insert> "*y
+nnoremap <S-Insert> "*P
 
 nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
