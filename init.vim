@@ -121,9 +121,6 @@ set diffopt=context:3,vertical,iwhite,filler
 
 let g:netrw_use_errorwindow = 0
 let g:netrw_liststyle = 0
-let g:tagbar_left = 0
-let g:tagbar_foldlevel = 1
-let g:tagbar_width=60
 
 " commands
 
