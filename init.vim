@@ -201,6 +201,7 @@ nnoremap - :cprevious<CR>
 
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>
 nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader>f :find<Space>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
 nnoremap <Leader>G :silent grep<Space>
