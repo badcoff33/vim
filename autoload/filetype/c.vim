@@ -64,10 +64,10 @@ endfunction
 
 " Description: A scope parser for C files. Added indication in which context
 " (scope) the cursor is.
-function filetype#c#ScopeParser()
+function! filetype#c#ScopeParser()
 
   " Regular expressions to find head and bottom lines of a C function.
-  let l:regexpFindFuncHead = '^\w\+.*).*\n{'
+  let l:regexpFindFuncHead = '^\w\+.*('
   let l:regexpFindFuncBottom = '^}.*$'
 
   " Regular expression to find the function name. Group 1 holds the function
