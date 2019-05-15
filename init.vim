@@ -213,6 +213,10 @@ nnoremap <C-Insert> "*yiw
 vnoremap <C-Del> "*x
 vnoremap <C-insert> "*y
 nnoremap <S-Insert> "*P
+cnoremap <S-Insert> <C-r>*
+
+inoremap <expr><C-d> strcharpart(getline('.')[col('.') - 1:], 0, 1) == ' ' ? "\<C-o>d2w" : "\<C-o>dw"
+inoremap <C-BS> <C-o>db
 
 nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
