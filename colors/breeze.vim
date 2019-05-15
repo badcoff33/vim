@@ -19,7 +19,7 @@ highlight Cursor guifg=white guibg=red3
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
   highlight NormalFocus   guibg=white
-  highlight NormalNoFocus guibg=grey96
+  highlight NormalNoFocus guibg=grey98
   set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
 endif
 
@@ -66,9 +66,9 @@ highlight Conditional guifg=maroon3 gui=bold
 highlight Type guifg=dodgerblue2 gui=none
 highlight StorageClass guifg=grey50 gui=bold
 highlight PreProc guifg=dodgerblue2 gui=bold
-highlight Comment guifg=forestgreen
+highlight Comment guifg=azure4
 highlight Identifier guifg=aquamarine4
-highlight Special guifg=aquamarine4
+highlight Special guifg=dodgerblue3
 highlight Constant guifg=goldenrod4
 
 " misc
@@ -90,12 +90,12 @@ highlight qfLineNr guifg=dodgerblue4
 highlight qfSeparator guifg=dodgerblue4
 
 " Doxygen highlighting
-highlight doxygenComment guifg=darkseagreen3 gui=none
-highlight doxygenBrief guifg=darkseagreen4 gui=bold
-highlight doxygenParam guifg=darkseagreen3 gui=italic
+highlight doxygenComment guifg=azure3 gui=none
+highlight doxygenBrief guifg=azure4 gui=bold
+highlight doxygenParam guifg=azure3 gui=italic
 highlight doxygenRefWord guifg=skyblue3 gui=underline
-highlight doxygenSpecial guifg=darkseagreen4 gui=none
-highlight doxygenSpecialOnelineDesc guifg=darkseagreen4
+highlight doxygenSpecial guifg=azure4 gui=none
+highlight doxygenSpecialOnelineDesc guifg=azure4
 
 " Diff highlighting
 highlight DiffChange guifg=black guibg=yellow2 gui=none
@@ -124,9 +124,9 @@ highlight diffComment guifg=grey50
 highlight netrwMarkFile gui=inverse
 
 " html
-highlight htmlH1 guifg=dodgerblue1 gui=bold
-highlight htmlH2 guifg=dodgerblue3 gui=bold
-highlight htmlH3 guifg=dodgerblue3 gui=none
+highlight htmlH1 guifg=maroon1 gui=bold
+highlight htmlH2 guifg=maroon3 gui=bold
+highlight htmlH3 guifg=maroon3 gui=none
 highlight htmlBold gui=bold
 highlight htmlItalic gui=italic,bold
 
