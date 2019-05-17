@@ -179,25 +179,19 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 " Try this!
 inoremap <Ins> <Esc>
 
-nnoremap <f1> :clist +5<CR>
-nnoremap <f2> :tabnew<CR>
-nnoremap <C-f2> :tabclose<CR>
-nnoremap <f3> :buffer<Space>
+nnoremap <F4> :cnext<CR> 
+nnoremap <S-F4> :cprevious<CR>
 
-nnoremap <f4> :cnext<CR> 
-nnoremap <S-f4> :cprevious<CR>
-nnoremap <f5> :clist<CR>
+nnoremap <F7> :sil make<Space><Up>
 
-nnoremap <f6> :bprevious<CR>
-nnoremap <S-f6> :bnext<CR>
-
-nnoremap <f7> :sil make<Space><Up>
-
-nnoremap <f12> :tjump <C-r><C-w><CR>
-nnoremap <C-f12> :tjump /
+nnoremap <F12> :tjump <C-r><C-w><CR>
+nnoremap <C-F12> :tjump /
 
 nnoremap + :cnext<CR> 
 nnoremap - :cprevious<CR>
+
+nnoremap <Leader>t :tabnew<CR>
+nnoremap <Leader>T :tabclose<CR>
 
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>
 nnoremap <Leader>b :buffer<Space>
@@ -222,7 +216,7 @@ nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
-nnoremap <BS> :clist<CR>
+nnoremap <BS> :clist +5<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
