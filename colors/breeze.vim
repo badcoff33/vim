@@ -56,8 +56,8 @@ highlight PmenuThumb guifg=white
 highlight! link PmenuSel Visual
 
 " search
-highlight IncSearch guifg=white guibg=orangered gui=none
-highlight Search guifg=grey25 guibg=grey95 gui=none
+highlight IncSearch guifg=white guibg=coral1 gui=none
+highlight Search guifg=grey25 guibg=lightgoldenrod1 gui=none
 highlight MatchParen guifg=fg guibg=bg gui=underline
 
 " code
@@ -66,7 +66,7 @@ highlight Conditional guifg=maroon3 gui=bold
 highlight Type guifg=dodgerblue2 gui=none
 highlight StorageClass guifg=grey50 gui=bold
 highlight PreProc guifg=dodgerblue2 gui=bold
-highlight Comment guifg=azure4
+highlight Comment guifg=darkseagreen4
 highlight Identifier guifg=aquamarine4
 highlight Special guifg=dodgerblue3
 highlight Constant guifg=goldenrod4
@@ -90,12 +90,12 @@ highlight qfLineNr guifg=dodgerblue4
 highlight qfSeparator guifg=dodgerblue4
 
 " Doxygen highlighting
-highlight doxygenComment guifg=azure3 gui=none
-highlight doxygenBrief guifg=azure4 gui=bold
-highlight doxygenParam guifg=azure3 gui=italic
+highlight doxygenComment guifg=darkseagreen3 gui=none
+highlight doxygenBrief guifg=darkseagreen4 gui=bold
+highlight doxygenParam guifg=darkseagreen3 gui=italic
 highlight doxygenRefWord guifg=skyblue3 gui=underline
-highlight doxygenSpecial guifg=azure4 gui=none
-highlight doxygenSpecialOnelineDesc guifg=azure4
+highlight doxygenSpecial guifg=darkseagreen4 gui=none
+highlight doxygenSpecialOnelineDesc guifg=darkseagreen4
 
 " Diff highlighting
 highlight DiffChange guifg=black guibg=yellow2 gui=none
