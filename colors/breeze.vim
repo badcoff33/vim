@@ -51,9 +51,9 @@ highlight! link TabLineSel StatusLine
 
 " popup Menu
 highlight Pmenu guibg=grey90
-highlight PmenuSel guibg=grey70
 highlight PmenuSbar guibg=grey50
 highlight PmenuThumb guifg=white
+highlight! link PmenuSel Visual
 
 " search
 highlight IncSearch guifg=white guibg=orangered gui=none
