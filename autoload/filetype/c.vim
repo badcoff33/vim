@@ -67,7 +67,7 @@ endfunction
 function! filetype#c#ScopeParser()
 
   " Regular expressions to find head and bottom lines of a C function.
-  let l:regexpFindFuncHead = '^\w\+\s\+[A-Za-z0-9_]\+\s*('
+  let l:regexpFindFuncHead = '^\(static\|\w\+\)\s\+[_A-Za-z0-9\r s]\+\s*('
   let l:regexpFindFuncBottom = '^}.*$'
 
   " Regular expression to find the function name. Group 1 holds the function
