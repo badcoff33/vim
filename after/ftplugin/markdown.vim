@@ -24,5 +24,6 @@ endif
 
 iabbrev <buffer> xlink []()<Esc>2hi
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
+iabbrev <buffer> xx    <Esc>0i- [ ] 
 
 let b:did_ftplugin_after = 1
