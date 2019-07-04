@@ -216,7 +216,7 @@ nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
-nnoremap <BS> :clist +5<CR>
+nnoremap <Leader><Leader> :clist +5<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
