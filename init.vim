@@ -182,7 +182,8 @@ inoremap <Ins> <Esc>
 nnoremap <F4> :cnext<CR> 
 nnoremap <S-F4> :cprevious<CR>
 
-nnoremap <F7> :sil make<Space><Up>
+nnoremap <F7> :sil make<Space><Up><CR>
+nnoremap <C-F7> :sil make<Space><Up>
 
 nnoremap <F12> :tjump <C-r><C-w><CR>
 nnoremap <C-F12> :tjump /
