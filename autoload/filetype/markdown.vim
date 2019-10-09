@@ -1,4 +1,4 @@
-function! Markdown#ToggleTodo()
+function! filetype#markdown#ToggleTodo()
   if search('\[[ Xx]\]','b') > 0
     if strcharpart(getline('.')[col('.'):], 0, 1) == ' '
       normal lrX
