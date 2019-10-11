@@ -155,8 +155,8 @@ augroup END
 " mappings 
 
 " Set leader and localleader keys, that works best for me
-let mapleader = " "
-let maplocalleader = "\u00df"
+let mapleader = "s"
+let maplocalleader = "S"
 
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -180,8 +180,8 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 inoremap <Ins> <Esc>
 
 " Reminder for key mappings
-nnoremap <Leader><F1>b :verbose nmap <buffer><CR>
-nnoremap <Leader><F1>g :verbose nmap <CR>
+nnoremap <Leader>?m :verbose nmap <buffer><CR>
+nnoremap <Leader>?g :verbose nmap <CR>
 
 nnoremap <F4> :cnext<CR> 
 nnoremap <S-F4> :cprevious<CR>
