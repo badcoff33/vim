@@ -8,25 +8,16 @@ setlocal textwidth=78
 setlocal shiftwidth=4
 setlocal nocindent
 setlocal nonumber relativenumber
-setlocal foldexpr=MarkdownLevel()  
+setlocal foldexpr=MarkdownFold()  
 setlocal foldmethod=expr
-
-function! MarkdownLevel()
-  let h = matchstr(getline(v:lnum)), '^#\+ .*$') 
-  if empty(h) 
-    return "=" 
-  else 
-    return ">" . len(h) 
-  endif 
-endfunction
 
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif <CR>
 
 nnoremap <buffer> <f9> :sil call filetype#markdown#ToggleTodo()<CR>
 
-nmap <buffer> ]]  :call search('^#\{1,\}\s',"W")<CR>
-nmap <buffer> [[  :call search('^#\{1,\}\s',"bW")<CR>
+nmap <buffer> <C-f>  :call search('^#\{1,\}\s',"W")<CR>
+nmap <buffer> <C-b>  :call search('^#\{1,\}\s',"bW")<CR>
 
 nmap <buffer> <LocalLeader>d i<C-r>=strftime("%Y-%m-%d")<CR><Esc>
 
