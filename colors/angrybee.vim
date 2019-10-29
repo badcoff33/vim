@@ -11,28 +11,29 @@ set background=dark
 let g:colors_name = "angrybee"
 
 " basics
-highlight Normal    guifg=#d8d8d8  guibg=#18242e gui=none
-highlight NonText   guifg=#4285F4  guibg=bg      gui=none
+highlight Normal    guifg=#d8d8d8  guibg=#2d2d3a gui=none
+highlight NonText   guifg=#4285F4  guibg=#18242e gui=none
 highlight Cursor    guifg=#000000  guibg=#ffffff gui=none
-highlight Visual    guifg=#ffd8e8  guibg=#28343e gui=none
+highlight Visual    guifg=#2dd8e8  guibg=#434356 gui=none
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
-  highlight NormalFocus   guibg=#102025
+  highlight NormalFloat   guibg=#808080
+  highlight NormalFocus   guibg=#2d2d3a
   highlight NormalNoFocus guibg=#18242e
-  set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
+  "set winhighlight=Normal:Normal,NormalNC:NormalNoFocus
 endif
 
 " Decoration
 highlight StatusLineNC  guifg=#a0a000   guibg=#1f2836  gui=none
-highlight StatusLine    guifg=#eeee00   guibg=#303040  gui=none
+highlight StatusLine    guifg=#eeee00   guibg=#434356  gui=none
 highlight User1         guifg=#ddeeff   guibg=#405880  gui=none
 highlight User2         guifg=#40eeee   guibg=#405880  gui=none
 highlight User3         guifg=#40eeee   guibg=#405880  gui=none
 highlight VertSplit     guifg=#606060   guibg=bg       gui=none
 highlight LineNr        guifg=#405060   guibg=bg       gui=none
 highlight CursorLineNr  guifg=#506575   guibg=#303540  gui=bold
-highlight CursorLine                    guibg=#203035
+highlight CursorLine                    guibg=#202020
 highlight QuickFixLine  guifg=#e0c040   guibg=bg       gui=bold
 highlight FoldColumn    guifg=#405060   guibg=bg       gui=none
 highlight Folded        guifg=fg        guibg=bg       gui=none
