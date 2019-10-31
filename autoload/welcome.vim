@@ -14,11 +14,10 @@ if !exists("g:welcome_text_file")
   endif
 endif
 
-autocmd BufRead welcome.txt nmap <buffer> <CR> 0y$:<C-r>"<CR>
-
 " Description: My splash screen (with one-liner Vim script in it)
 function! welcome#open()
   execute 'edit ' . g:welcome_text_file
+  nmap <buffer> <CR> 0y$:<C-r>"<CR>
 endfunction
 
 " vim:sw=2:tw=0:nocindent
