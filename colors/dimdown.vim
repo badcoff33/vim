@@ -16,7 +16,7 @@ let g:colors_name = "dimdown"
 " very basic things
 highlight Normal guifg=grey85 guibg=grey16 ctermbg=black
 highlight NonText guifg=skyblue1 guibg=bg gui=none
-highlight Visual guifg=grey20 guibg=grey80
+highlight Visual guifg=white guibg=darkseagreen4
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
@@ -64,16 +64,16 @@ highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 
 " code
-highlight Statement guifg=coral3 gui=none
-highlight Conditional guifg=indianred3 gui=none
+highlight Statement guifg=seagreen3 gui=none
+highlight Conditional guifg=seagreen2 gui=none
 highlight PreProc guifg=skyblue1 gui=none
 highlight Comment guifg=lightblue
-highlight Type guifg=indianred3 gui=none
+highlight Type guifg=lightskyblue3 gui=none
 highlight StorageClass guifg=coral3 gui=none
 highlight Function guifg=coral1 gui=none
-highlight Identifier guifg=skyblue2
-highlight Special guifg=indianred3
-highlight Constant guifg=lightblue2
+highlight Identifier guifg=lightskyblue2
+highlight Special guifg=seagreen3
+highlight Constant guifg=lightskablue3
 highlight! link SpecialKey Special
 
 highlight Title guifg=skyblue1 gui=none
