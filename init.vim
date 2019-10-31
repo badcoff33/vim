@@ -178,10 +178,7 @@ vnoremap <Leader>[ c[<C-R>-]<Esc>
 
 " Try this!
 inoremap <Ins> <Esc>
-
-" Reminder for key mappings
-nnoremap <Leader>?m :verbose nmap <buffer><CR>
-nnoremap <Leader>?g :verbose nmap <CR>
+inoremap <C-Space> <Esc>
 
 nnoremap <F4> :cnext<CR> 
 nnoremap <S-F4> :cprevious<CR>
