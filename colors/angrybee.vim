@@ -18,7 +18,7 @@ highlight Visual    guifg=#a0f0c0  guibg=#435643 gui=none
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
-  highlight NormalFloat   guibg=#808080
+  highlight NormalFloat   guifg=#a0c0a0 guibg=#182d20 
   highlight NormalFocus   guibg=#2d2d3a
   highlight NormalNoFocus guibg=#18242e
   "set winhighlight=Normal:Normal,NormalNC:NormalNoFocus
@@ -53,7 +53,7 @@ highlight! link TabLineSel   StatusLine
 
 " Search
 highlight IncSearch     guifg=#202020  guibg=#d0d0d0 gui=none
-highlight Search        guifg=#d0f0d0  guibg=#227722 gui=none
+highlight Search        guifg=#d0e0d0  guibg=#506050 gui=none
 highlight MatchParen    guifg=#40e0e0  guibg=bg      gui=underline
 
 " Structure
