@@ -73,7 +73,7 @@ highlight StorageClass guifg=coral3 gui=none
 highlight Function guifg=coral1 gui=none
 highlight Identifier guifg=lightskyblue2
 highlight Special guifg=seagreen3
-highlight Constant guifg=lightskablue3
+highlight Constant guifg=lightskyblue3
 highlight! link SpecialKey Special
 
 highlight Title guifg=skyblue1 gui=none
