@@ -1,9 +1,5 @@
-syntax: glob
-site.vim
-pack
 bitmaps
 .netrwhist
 .netrwbook
 spell
 *.swo
-*.swp
