@@ -177,7 +177,7 @@ nnoremap <Leader>` bi`<Esc>ea`<Esc>
 nnoremap <Leader>( bi(<Esc>ea)<Esc>
 nnoremap <Leader>[ bi[<Esc>ea]<Esc>
 " Complete opening char
-imap <C-CR> <Esc>bbyle"0pli
+imap <C-CR> <Esc>bbyle"0pi<right>
 
 " Try this!
 inoremap <Ins> <Esc>
