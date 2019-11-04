@@ -171,17 +171,13 @@ endif
 
 " surround visual selection with double quote ("), quote ('), backtick (`),
 " parentheses (), braces {} and brackets []
-vnoremap <Leader>" c"<C-R>-"<Esc>
-vnoremap <Leader>' c'<C-R>-'<Esc>
-vnoremap <Leader>` c`<C-R>-`<Esc>
-vnoremap <Leader>( c(<C-R>-)<Esc>
-vnoremap <Leader>[ c[<C-R>-]<Esc>
-
 nnoremap <Leader>" bi"<Esc>ea"<Esc>
 nnoremap <Leader>' bi'<Esc>ea'<Esc>
 nnoremap <Leader>` bi`<Esc>ea`<Esc>
 nnoremap <Leader>( bi(<Esc>ea)<Esc>
 nnoremap <Leader>[ bi[<Esc>ea]<Esc>
+" Complete opening char
+imap <C-CR> <Esc>bbyle"0pli
 
 " Try this!
 inoremap <Ins> <Esc>
