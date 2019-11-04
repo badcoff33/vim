@@ -15,14 +15,14 @@ nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 nnoremap <buffer> <localleader>h :verbose highlight <C-r><C-w><CR>
 
 " Execute current visual region -- use register @v
-vnoremap <special> <buffer> <LocalLeader>e "vyQexecute @v<CR>visual
+vnoremap <special> <buffer> <CR> "vyQexecute @v<CR>visual<CR>
 
 if empty(matchstr(expand("%:p"), "color"))
   " Execute whole Vim file
-  nnoremap <special> <buffer> <LocalLeader>e :w<bar>source%<CR>
+  nnoremap <special> <buffer> <CR> :w<bar>source%<CR>
 else
   " Execute Vim color theme
-  nnoremap <special> <buffer> <LocalLeader>e :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
+  nnoremap <special> <buffer> <CR> :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
 endif
 
 let b:did_ftplugin_after = 1

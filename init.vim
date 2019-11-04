@@ -169,12 +169,19 @@ if exists("win32") || exists("win64")
   silent! vunmap <C-x>
 endif
 
-" surround visual selection with ", ', (, [
+" surround visual selection with double quote ("), quote ('), backtick (`),
+" parentheses (), braces {} and brackets []
 vnoremap <Leader>" c"<C-R>-"<Esc>
 vnoremap <Leader>' c'<C-R>-'<Esc>
 vnoremap <Leader>` c`<C-R>-`<Esc>
 vnoremap <Leader>( c(<C-R>-)<Esc>
 vnoremap <Leader>[ c[<C-R>-]<Esc>
+
+nnoremap <Leader>" bi"<Esc>ea"<Esc>
+nnoremap <Leader>' bi'<Esc>ea'<Esc>
+nnoremap <Leader>` bi`<Esc>ea`<Esc>
+nnoremap <Leader>( bi(<Esc>ea)<Esc>
+nnoremap <Leader>[ bi[<Esc>ea]<Esc>
 
 " Try this!
 inoremap <Ins> <Esc>
@@ -217,8 +224,6 @@ inoremap <C-BS> <C-o>db
 nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
-
-nnoremap <Leader><Leader> :clist +5<CR>
 
 if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
