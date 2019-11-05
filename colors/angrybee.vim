@@ -14,11 +14,11 @@ let g:colors_name = "angrybee"
 highlight Normal    guifg=#d8d8d8  guibg=#2d2d3a gui=none
 highlight NonText   guifg=#4285F4  guibg=#18242e gui=none
 highlight Cursor    guifg=#000000  guibg=#ffffff gui=none
-highlight Visual    guifg=#a0f0c0  guibg=#435643 gui=none
+highlight Visual    guifg=#bfbfca  guibg=#585863 gui=none
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
-  highlight NormalFloat   guifg=#a0c0a0 guibg=#182d20 
+  highlight NormalFloat   guifg=#aad0b8 guibg=#28202f 
   highlight NormalFocus   guibg=#2d2d3a
   highlight NormalNoFocus guibg=#18242e
   "set winhighlight=Normal:Normal,NormalNC:NormalNoFocus
@@ -53,7 +53,7 @@ highlight! link TabLineSel   StatusLine
 
 " Search
 highlight IncSearch     guifg=#202020  guibg=#d0d0d0 gui=none
-highlight Search        guifg=#d0e0d0  guibg=#506050 gui=none
+highlight Search        guifg=#d0e0e0  guibg=#204850 gui=underline
 highlight MatchParen    guifg=#40e0e0  guibg=bg      gui=underline
 
 " Structure
