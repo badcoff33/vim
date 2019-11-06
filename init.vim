@@ -179,9 +179,10 @@ nnoremap <Leader>[ bi[<Esc>ea]<Esc>
 " Complete opening char
 imap <C-CR> <Esc>bbyle"0pi<right>
 
-" Try this!
+" Switch Vim modes
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
+nnoremap <C-Space> :
 
 nnoremap <F4> :cnext<CR> 
 nnoremap <S-F4> :cprevious<CR>
