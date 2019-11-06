@@ -3,7 +3,7 @@
 " Maintainer: Markus Prepens (markus.prepens@gmail.com)
 
 set makeprg=python
-set errorformat=File\ \"%f\"\\,\ line\ %l:\ %m
+set errorformat=\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 
 function! CheckPythonSyntax()
