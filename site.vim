@@ -46,5 +46,6 @@ if has('gui')
   nmap <Leader>1 :set guifont=Courier\ New:h10<CR>
   nmap <Leader>2 :set guifont=Courier\ New:h11<CR>
   nmap <Leader>3 :set guifont=Courier\ New:h12<CR>
-#endif
+endif
+
 " vim:ft=vim:fenc=latin1
