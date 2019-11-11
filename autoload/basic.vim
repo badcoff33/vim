@@ -50,19 +50,6 @@ function! basic#HiName()
   echo synIDattr(synidtrans, "name")
 endfunction
 
-" Description: Create or move to buffer ClipboardTxt, start to write text,
-" switch to another application and copy the clipboard, filled with
-" ClipboardTxt.
-function! basic#ClipboardBuffer()
-  if bufexists("ClipboardTxt")
-    buffer ClipboardTxt
-  else
-    edit ClipboardTxt
-    setlocal buftype=nofile
-    autocmd FocusLost ClipboardTxt  normal gg"*yG
-  endif
-endfunction
-
 function! basic#HighlightWord(word)
   if !exists("s:thisHighlightWord")
     let s:thisHighlightWord = ""

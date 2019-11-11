@@ -5,7 +5,6 @@
 command! -nargs=0 Welcome call welcome#open()
 
 command! -nargs=0 ShowHiName             :call basic#HiName()
-command! -nargs=0 ClipboardBuffer        :call basic#ClipboardBuffer()
 command! -nargs=1 HighlightWord          :call basic#HighlightWord("<args>")
 command! -nargs=0 ToggleStickyCursorline :call basic#ToggleStickyCursorLine()
 command! -nargs=0 ToggleStatusline       :call basic#ToggleStatusline()
