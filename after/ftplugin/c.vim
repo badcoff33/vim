@@ -3,19 +3,11 @@
 " Description:   Some support functions and mappings for C code files.
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
-command! -buffer -nargs=0 ToggleSourceHeaderFile call filetype#c#ToggleSourceHeaderFile()
-command! -buffer -range -nargs=0 CodeCleanup <line1>,<line2>call filetype#c#CodeCleanup()
-
-nnoremap <buffer> <LocalLeader><TAB> :ToggleSourceHeaderFile<CR>
-
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
 nnoremap <buffer> <LocalLeader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
 
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
-
-nnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
-vnoremap <buffer> <LocalLeader>c :CodeCleanup<CR>
 
 " run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
 nmap <buffer> <LocalLeader>f ggVG!clang-format -style=file<CR>
@@ -41,9 +33,6 @@ setlocal shiftwidth=4
 setlocal list
 setlocal listchars=tab:>-,trail:.,extends:#
 
-" statusline with cursors scope info
-setlocal statusline=%t%m%r%y%w\ %{filetype#c#ScopeParser()}%=%l,%c%V\ %P
-
 " Customize the c indent style
 setlocal cinoptions=(0,W4
 
@@ -62,4 +51,5 @@ iabbrev <buffer> xdef    #define<Space>
 iabbrev <buffer> xc      /** \brief */<Left><Left><Left>
 iabbrev <buffer> xcc     /**<CR>\brief<CR><BS>/<Up><End>
 iabbrev <buffer> xdbg    #warning DEBUG CHANGE STARTS HERE<CR><CR>#warning DEBUG CHANGE ENDS HERE<CR>
+
 
