@@ -11,9 +11,6 @@ command! -nargs=0 ToggleStatusline       :call basic#ToggleStatusline()
 
 command! -nargs=0 SwitchWorkspace  :call workspace#Switch()
 
-command! -nargs=+ -complete=file Job    :call runjob#StartJob(<q-args>)
-command! -nargs=1 -complete=dir JobCwd  :call runjob#SetCwd(<q-args>)
-
 command! -nargs=0 WhitespaceCleanup :call whitespace#Cleanup()
 command! -nargs=0 WhitespaceMelt    :call whitespace#Melt()
 
