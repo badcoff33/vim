@@ -1,10 +1,7 @@
 " Neovim autoload file
 "
 " Description: Neovim flavored implementation of job handling. 
-
-if !exists("g:job_cwd")
-  let g:job_cwd = fnamemodify(".", ":p")
-endif
+let g:job_cwd = get(g:, 'job_cwd', fnamemodify(".", ":p"))
 
 function! s:JobHandler(job_id, data, event)
   if a:event == 'stdout' || a:event == 'stderr'
