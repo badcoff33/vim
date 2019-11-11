@@ -58,6 +58,10 @@ look which buffers will be wiped-out. Another solution might be this:
 :bufdo if expand("%") =~ '.*snap.*' | bw | endif
 ```
 
+## Use templates
+
+Want to start new files with a template. Read more here `:help template`.
+
 ## Custom Command Completion
 
 Here is a Vim script to show custom completion of a new command:

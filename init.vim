@@ -137,9 +137,6 @@ augroup init
 
   autocmd VimEnter,ColorScheme * highlight HighlightWordGroup gui=underline
 
-  " read file templates (according to :help template)
-  autocmd BufNewFile  .workspace.vim 0r ~/vimfiles/templates/workspace.vim
-
 augroup END
 
 " Save when Neovim's losing or gaining focus
