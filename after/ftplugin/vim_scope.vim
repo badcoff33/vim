@@ -1,8 +1,11 @@
 " Vim autoload files
 
+" statusline with cursors scope info
+setlocal statusline=%t%m%r%y%w\ %{ScopeParserVim()}%=%l,%c%V\ %P
+
 " Description: A scope parser for Vim files. Added indication in which context
 " (scope) the cursor is.
-function filetype#vim#ScopeParser()
+function! ScopeParserVim()
 
   " Regular expressions to find head and bottom lines of a Vim function.
   let l:regexpFindFuncHead = '^fun.*\s\+[A-Za-z0-9#:<>]\+\s*(.*)'

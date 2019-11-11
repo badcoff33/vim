@@ -20,9 +20,6 @@ setlocal keywordprg=pydoc
 " More syntax highlighting.
 let python_highlight_all = 1
 
-" statusline with cursors scope info
-setlocal statusline=%t%m%r%y%w\ %{filetype#python#ScopeParser()}%=%l,%c%V\ %P
-
 " Use :make % to check the script. (:cn and :cp to move around)
 setlocal makeprg=pylint\ --reports=no\ --output-format=parseable
 " Parse for errors with s 'errorformat'.
