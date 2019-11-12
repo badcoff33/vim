@@ -1,7 +1,8 @@
 " Vim compiler file
-" Compiler:		Pandoc for markdown
-" Maintainer:	Markus Prepens (prepensm@yahoo.de)
-" Last Change: 2019-10-09	
+" Compiler:   Markdown
+" Maintainer: Markus Prepens (markus.prepens@gmail.com)
+"
+" Description: Convert makrdown file to HTML file.
+" Use it like this :make <out_file> 
 
-set makeprg=pandoc\ -f\ markdown\ -t\ html5  
-set errorformat=%f:%l:\ %m
+set makeprg=markdown\ $*\ >\ %<.html
