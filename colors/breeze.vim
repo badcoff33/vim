@@ -20,7 +20,8 @@ highlight Cursor guifg=white guibg=red3
 if has ('nvim')
   highlight NormalFocus   guibg=white
   highlight NormalNoFocus guibg=grey98
-  set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
+  highlight NormalFloat   guifg=seagreen1 guibg=darkslategray
+  "set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
 endif
 
 " window decoration
@@ -50,10 +51,10 @@ highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 
 " popup Menu
-highlight Pmenu guibg=grey90
+highlight Pmenu guifg=grey20 guibg=grey90
 highlight PmenuSbar guibg=grey50
 highlight PmenuThumb guifg=white
-highlight! link PmenuSel Visual
+highlight PmenuSel guifg=white guibg=seagreen4 
 
 " search
 highlight IncSearch guifg=white guibg=coral1 gui=none
