@@ -29,6 +29,7 @@ endif
 iabbrev <buffer> xlink []()<Esc>2hi
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
 iabbrev <buffer> xx    [ ]
+iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
 
 function! s:ToggleTodo()
   if search('\[[ Xx]\]','b') > 0
