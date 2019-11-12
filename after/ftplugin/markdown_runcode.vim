@@ -7,7 +7,7 @@ function! s:RunCode()
     if &shellslash
       let l:psep = '/'
     else
-      let l:psep = '\\'
+      let l:psep = '\'
     endif
   endif
   " found head line of embedded code
