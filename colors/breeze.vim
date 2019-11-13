@@ -20,7 +20,7 @@ highlight Cursor guifg=white guibg=red3
 if has ('nvim')
   highlight NormalFocus   guibg=white
   highlight NormalNoFocus guibg=grey98
-  highlight NormalFloat   guifg=seagreen1 guibg=darkslategray
+  highlight NormalFloat   guifg=black guibg=darkseagreen1
   "set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
 endif
 
