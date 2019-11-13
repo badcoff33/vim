@@ -2,12 +2,11 @@
 "
 " Description: Vim file surced at the end of init.vim
 
-let g:welcome_text_file = '~\Documents\welcome.md'
-let g:one_more_thing_file = 'p:\Markdown\one-more-thing.md'
+colorscheme breeze
+let g:welcome_text_file = '~/Dokumente/welcome.md'
 
 " Use Umlaut keys in normal mode 
 scriptencoding utf-8
-set langmap=ö[,ä],Ö{,Ä},ü/,Ü?
 scriptencoding 
 set foldcolumn=2
 
@@ -17,7 +16,6 @@ nnoremap <S-F3> :CtrlPTag<CR>
 let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  
 
 if has ('nvim')
-  packadd vim-floaterm-master
   let g:floaterm_position='center'
   let g:floaterm_winblend=10
   noremap  <silent> <F5> :FloatermToggle<CR>i

@@ -3,7 +3,7 @@
 syntax on
 
 if exists('g:GtkGuiLoaded')
-  call rpcnotify(1, 'Gui', 'Font', 'Consolas 11')
+  call rpcnotify(1, 'Gui', 'Font', 'FreeMono 11')
   call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 1)
   call rpcnotify(1, 'Gui', 'Option', 'Tabline', 1)
   call rpcnotify(1, 'Gui', 'Option', 'Cmdline', 1)
