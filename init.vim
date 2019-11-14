@@ -13,7 +13,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set history=200
-set novisualbell
+set visualbell
 set noerrorbells
 set viminfo='50,<1000,s100,:100
 
