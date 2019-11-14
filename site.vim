@@ -8,7 +8,6 @@ let g:welcome_text_file = '~/Dokumente/welcome.md'
 " Use Umlaut keys in normal mode 
 scriptencoding utf-8
 scriptencoding 
-set foldcolumn=2
 
 nnoremap <F3> :CtrlPBuffer<CR>
 nnoremap <C-F3> :CtrlPMRUFiles<CR>
