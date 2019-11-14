@@ -101,6 +101,8 @@ function! basic#OpenFloatingWin(string)
   let buf = nvim_create_buf(v:false, v:true)
   let win = nvim_open_win(buf, v:true, opts)
 
+  call setwinvar(win, "&winblend", 50)
+
   setlocal
         \ buftype=nofile
         \ nobuflisted
