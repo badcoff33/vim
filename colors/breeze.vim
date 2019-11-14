@@ -31,7 +31,7 @@ highlight User2 guifg=grey44 guibg=grey40 gui=none
 highlight User3 guifg=grey44 guibg=grey40 gui=none
 highlight StatusLineNC guifg=grey20 guibg=grey95 gui=italic
 highlight VertSplit guifg=grey85 guibg=bg gui=none
-highlight QuickFixLine guifg=white guibg=lightcoral gui=bold
+highlight QuickFixLine guibg=mistyrose1 gui=bold
 highlight! link WildMenu IncSearch
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
@@ -86,7 +86,7 @@ highlight! link ModeMsg StatusLine
 highlight! link Question StatusLine
 
 " quickfix colors
-highlight qfFileName guifg=dodgerblue3 gui=underline
+highlight qfFileName guifg=dodgerblue3 gui=none
 highlight qfLineNr guifg=dodgerblue4
 highlight qfSeparator guifg=dodgerblue4
 
