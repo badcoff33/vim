@@ -7,7 +7,7 @@ endif
 setlocal textwidth=78
 setlocal shiftwidth=4
 setlocal nocindent
-setlocal nonumber relativenumber
+setlocal foldcolumn=4
 setlocal foldexpr=MarkdownFold()  
 setlocal foldmethod=expr
 
