@@ -89,30 +89,33 @@ function! basic#ToggleStatusline()
 endfunction
 
 function! basic#OpenFloatingWin(string)
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'anchor': 'NE',
-        \ 'row': 2,
-        \ 'col': &columns - 5,
-        \ 'width': &columns - 10,
-        \ 'height': 15
+  let l:opts = {
+        \ 'relative': 'cursor',
+        \ 'row': 1,
+        \ 'col': 1,
+        \ 'anchor': 'NW',
+        \ 'height': 10,
+        \ 'width': 40,
+        \ 'style': 'minimal'
         \ }
 
-  let buf = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(buf, v:true, opts)
+  let l:buf = nvim_create_buf(v:false, v:true)
+  let l:win = nvim_open_win(l:buf, v:true, l:opts)
 
-  call setwinvar(win, "&winblend", 50)
+  call setwinvar(l:win, "&winblend", 50)
 
   setlocal
         \ buftype=nofile
         \ nobuflisted
         \ bufhidden=hide
-        \ nonumber
-        \ norelativenumber
         \ signcolumn=no
   put =printf('%s', a:string)
+  normal gg
   autocmd BufLeave <buffer> bwipeout!
   nmap <buffer> <Esc> :bwipeout!<CR>
+  nmap <buffer> <CR>  :bwipeout!<CR>
 endfunction
+
+
 
 " vim:sw=2:tw=0:nocindent
