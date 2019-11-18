@@ -10,6 +10,18 @@ else {
 };
 fi
 
+if [ -d Github/start/tables ]; 
+then {
+  pushd Github/start/tables
+  git pull
+  popd
+};
+else {
+  mkdir -p Github/start/tables
+  git clone https://github.com/dhruvasagar/vim-table-mode.git Github/start/tables
+};
+fi
+
 if [ -d Github/start/tagbar ]; 
 then {
   pushd Github/start/tagbar
