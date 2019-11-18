@@ -102,7 +102,7 @@ function! basic#OpenFloatingWin(string)
   let l:buf = nvim_create_buf(v:false, v:true)
   let l:win = nvim_open_win(l:buf, v:true, l:opts)
 
-  call setwinvar(l:win, "&winblend", 50)
+  call setwinvar(l:win, "&winblend", 20)
 
   setlocal
         \ buftype=nofile
