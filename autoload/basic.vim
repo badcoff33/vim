@@ -89,6 +89,10 @@ function! basic#ToggleStatusline()
 endfunction
 
 function! basic#OpenFloatingWin(string)
+  if !has('nvim')
+    echo a:string
+    return
+  endif
   let l:opts = {
         \ 'relative': 'cursor',
         \ 'row': 1,
