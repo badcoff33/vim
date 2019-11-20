@@ -46,9 +46,9 @@ highlight FoldColumn guifg=skyblue4 guibg=bg
 highlight Folded guifg=fg guibg=bg gui=NONE
 
 " tabs
-highlight! link TabLineFill Normal
-highlight! link TabLine StatusLineNC
-highlight! link TabLineSel StatusLine
+highlight TabLineFill guifg=fg guibg=bg gui=NONE
+highlight TabLine guifg=fg guibg=bg gui=none
+highlight TabLineSel guifg=black guibg=bg gui=bold,underline
 
 " popup Menu
 highlight Pmenu guifg=grey20 guibg=grey90
