@@ -22,8 +22,6 @@ let python_highlight_all = 1
 
 " Use :make % to check the script. (:cn and :cp to move around)
 setlocal makeprg=pylint\ --reports=no\ --output-format=parseable
-" Parse for errors with s 'errorformat'.
-compiler gcc
 
 " How to display unprintable charcters
 setlocal list
