@@ -20,9 +20,6 @@ setlocal keywordprg=pydoc
 " More syntax highlighting.
 let python_highlight_all = 1
 
-" Use :make % to check the script. (:cn and :cp to move around)
-setlocal makeprg=pylint\ --reports=no\ --output-format=parseable
-
 " How to display unprintable charcters
 setlocal list
 setlocal listchars=tab:>-,trail:.,extends:#
