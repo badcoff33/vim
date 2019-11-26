@@ -14,7 +14,7 @@ set background=dark
 let g:colors_name = "dimdown"
 
 " very basic things
-highlight Normal guifg=grey85 guibg=grey16 ctermbg=black
+highlight Normal guifg=grey85 guibg=grey25 ctermbg=black
 highlight NonText guifg=skyblue1 guibg=bg gui=none
 highlight Visual guifg=white guibg=darkseagreen4
 
@@ -22,7 +22,6 @@ highlight Visual guifg=white guibg=darkseagreen4
 if has ('nvim')
   highlight NormalFocus guibg=grey13
   highlight NormalNoFocus guibg=grey16
-  set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
 endif
 
 " where is the cursor?
@@ -34,7 +33,7 @@ highlight CursorLine guibg=grey19
 highlight! link CursorColumn CursorLine
 
 " decorations
-highlight VertSplit guifg=grey27 guibg=bg gui=none
+highlight VertSplit guifg=grey38 guibg=bg gui=none
 highlight StatusLineNC guifg=grey48 guibg=grey20 gui=none
 highlight StatusLine guifg=white guibg=grey30 gui=none
 highlight User1 guifg=skyblue2 guibg=grey30 gui=bold cterm=inverse
@@ -73,7 +72,7 @@ highlight StorageClass guifg=coral3 gui=none
 highlight Function guifg=coral1 gui=none
 highlight Identifier guifg=lightskyblue2
 highlight Special guifg=seagreen3
-highlight Constant guifg=lightskyblue3
+highlight Constant guifg=darkseagreen3
 highlight! link SpecialKey Special
 
 highlight Title guifg=skyblue1 gui=none

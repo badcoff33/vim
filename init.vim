@@ -157,6 +157,7 @@ let maplocalleader = "s"
 
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-z> <C-\><C-n>
 elseif has('terminal')
   tnoremap <Esc> <C-w>N
 endif
