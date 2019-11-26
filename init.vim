@@ -155,13 +155,6 @@ augroup END
 let mapleader = " "
 let maplocalleader = "s"
 
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <C-z> <C-\><C-n>
-elseif has('terminal')
-  tnoremap <Esc> <C-w>N
-endif
-
 if exists("win32") || exists("win64")
   " decrement visual selected nummbers
   silent! vunmap <C-x>
@@ -181,6 +174,13 @@ imap <C-CR> <Esc>bbyle"0pi<right>
 inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 nnoremap <C-Space> :
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-Space> <C-\><C-n>
+elseif has('terminal')
+  tnoremap <Esc> <C-w>N
+  tnoremap <C-Space> <C-w>N
+endif
 
 nnoremap <F4> :cnext<CR> 
 nnoremap <S-F4> :cprevious<CR>
@@ -192,13 +192,10 @@ nnoremap <C-F7> :sil make<Space><Up>
 nnoremap <F12> :tjump <C-r><C-w><CR>
 nnoremap <C-F12> :tjump /
 
-nnoremap + :cnext<CR> 
-nnoremap - :cprevious<CR>
-
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>T :tabclose<CR>
 
-nnoremap <Leader>e :edit <C-r>=expand("%:p:h")<CR>
+nnoremap <Leader>e :edit <C-r>=expand("%:p:h").'/'<CR>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>f :find<Space>
 
