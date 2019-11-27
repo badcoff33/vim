@@ -2,6 +2,20 @@
 
 syntax on
 
+set title
+
+" Save when Neovim's losing or gaining focus
+augroup ginit
+  " clear group in case file sourced several times
+  autocmd!
+  " write all buffers when loosing focus
+  autocmd FocusLost * :silent! wall
+  " Reload changed buffers. Command rely on option 'autoread'
+  autocmd FocusGained * :checktime
+  " Option 'title' needs to be set for this
+  autocmd BufEnter * :set titlestring=%t\ %f\ %H:%M\ %{strftime('%c',getftime(expand('%')))}
+augroup END
+
 if exists('g:GtkGuiLoaded')
   call rpcnotify(1, 'Gui', 'Font', 'FreeMono 12')
   call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 1)
