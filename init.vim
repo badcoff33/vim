@@ -129,24 +129,9 @@ command! -nargs=1 Wipe bufdo if expand("%") =~ '.*<args>.*' | bw | endif | bprev
 " autocommands 
 
 augroup init
-  " clear group in case file sourced several times
   autocmd!
-
-  " How to handle multiple windows?
   autocmd VimResized * wincmd =
-
   autocmd VimEnter,ColorScheme * highlight HighlightWordGroup gui=underline
-
-augroup END
-
-" Save when Neovim's losing or gaining focus
-augroup ginit
-  " clear group in case file sourced several times
-  autocmd!
-  " write all buffers when loosing focus
-  autocmd FocusLost * :silent! wall
-  " Reload changed buffers. Command rely on option 'autoread'
-  autocmd FocusGained * :checktime
 augroup END
 
 " mappings 
