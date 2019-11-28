@@ -12,17 +12,17 @@ function! s:RunCode()
     endif
   endif
   " found head line of embedded code
-  let l:headline = search('^```\s\+\w\+.*$', 'cWb') 
+  let l:headline = search('^```\s*\w\+.*$', 'cWb') 
   if l:headline == 0
     echomsg "found no code in Mardown file"
     return
   endif
   let l:start = l:headline + 1
-  let l:matches = matchlist(getline('.'), '^```\s\+\(\w\+\)\s*\(.*\)$')
+  let l:matches = matchlist(getline('.'), '^```\s*\(\w\+\)\s*\(.*\)$')
   let l:parser = l:matches[1]
   let l:options = l:matches[2]
   let l:end = search('^```\s*$', 'cW') - 1
-  if l:end > l:start
+  if l:end >= l:start
     let l:codelines = getline(l:start, l:end)
     let l:filename = getcwd() . l:psep . "." . l:parser . ".tmp"
     call writefile(l:codelines, l:filename)
