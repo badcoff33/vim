@@ -156,7 +156,6 @@ nnoremap <Leader>[ bi[<Esc>ea]<Esc>
 imap <C-CR> <Esc>bbyle"0pi<right>
 
 " Switch Vim modes
-inoremap <Ins> <Esc>
 inoremap <C-Space> <Esc>
 nnoremap <C-Space> :
 if has('nvim')
@@ -167,22 +166,24 @@ elseif has('terminal')
   tnoremap <C-Space> <C-w>N
 endif
 
-nnoremap <F4> :cnext<CR> 
-nnoremap <S-F4> :cprevious<CR>
+xmap <F2> <Esc><F2>
+nnoremap <F2> :edit <C-r>=expand("%:p:h").'/'<CR>
+
+xmap <F3> <Esc><f3>
+nnoremap <F3> :buffer<Space>
+
+xmap <F4> <Esc><F4>
+nnoremap <F4> :find<Space>
 
 inoremap <F7> <Esc>:sil make<Space><Up><CR>
 nnoremap <F7> :sil make<Space><Up><CR>
 nnoremap <C-F7> :sil make<Space><Up>
 
-nnoremap <F12> :tjump <C-r><C-w><CR>
-nnoremap <C-F12> :tjump /
+nnoremap <F12> :cnext<CR> 
+nnoremap <S-F12> :cprevious<CR>
 
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>T :tabclose<CR>
-
-nnoremap <Leader>e :edit <C-r>=expand("%:p:h").'/'<CR>
-nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>f :find<Space>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
 nnoremap <Leader>G :silent grep<Space>
