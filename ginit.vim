@@ -13,7 +13,7 @@ augroup ginit
   " Reload changed buffers. Command rely on option 'autoread'
   autocmd FocusGained * :checktime
   " Option 'title' needs to be set for this
-  autocmd BufEnter * :set titlestring=%t\ %f\ %{strftime('%c',getftime(expand('%')))}
+  autocmd BufEnter * :set titlestring=%t\ %{expand('%:h')}\ %{strftime('%c',getftime(expand('%')))}
 augroup END
 
 if has('gui')
