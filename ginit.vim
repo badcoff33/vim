@@ -1,10 +1,9 @@
 " GUI startup script
 
 syntax on
-
 set title
 
-" Save when Neovim's losing or gaining focus
+" Save when Vim is losing or gaining focus
 augroup ginit
   " clear group in case file sourced several times
   autocmd!
@@ -17,9 +16,16 @@ augroup ginit
 augroup END
 
 if has('gui')
+  set guifont=Courier\ New:h11 linespace=3
   set guioptions=!gt
   set mousemodel=popup
-  set nomousefocus
+elseif has("nvim") && exists('g:GuiLoaded') 
+  if g:GuiLoaded == 1
+    GuiFont Courier\ New:h11
+    GuiLinespace 3
+    GuiTabline 0
+    GuiPopupmenu 0
+  endif
 endif
 
 " vim:ft=vim
