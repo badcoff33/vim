@@ -53,6 +53,7 @@ endfunction
 function! basic#HighlightWord(word)
   if !exists("s:thisHighlightWord")
     let s:thisHighlightWord = ""
+    autocmd VimEnter,ColorScheme * highlight HighlightWordGroup gui=underline
   endif
   echo s:thisHighlightWord
   if a:word != s:thisHighlightWord
