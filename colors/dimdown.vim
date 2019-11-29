@@ -52,7 +52,7 @@ highlight MatchParen guifg=cyan2 guibg=bg gui=underline
 
 " popup Menu
 highlight Pmenu guifg=white guibg=deepskyblue gui=none 
-highlight PmenuSel guifg=white guibg=deepskyblue gui=bold 
+highlight PmenuSel guifg=white guibg=deepskyblue gui=bold,underline
 highlight PmenuSbar guibg=lightblue4
 highlight PmenuThumb guifg=white guibg=lightblue4
 highlight! link WildMenu IncSearch
