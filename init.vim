@@ -131,7 +131,8 @@ command! -nargs=1 Wipe bufdo if expand("%") =~ '.*<args>.*' | bw | endif | bprev
 augroup init
   autocmd!
   autocmd VimResized * wincmd =
-  autocmd VimEnter,ColorScheme * highlight HighlightWordGroup gui=underline
+  " load local site file for machine dependent configs
+  autocmd VimEnter * runtime site.vim
 augroup END
 
 " mappings 
@@ -207,8 +208,5 @@ if has("win32") || has("win64")
 endif
 
 cnoremap <C-CR> <C-r>=expand("%:p:h")<CR>
-
-" load local site file for machine dependent configs
-runtime site.vim
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
