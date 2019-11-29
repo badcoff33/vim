@@ -10,15 +10,15 @@ else {
 };
 fi
 
-if [ -d Github/start/tables ]; 
+if [ -d Github/start/easy-align ]; 
 then {
-  pushd Github/start/tables
+  pushd Github/start/easy-align
   git pull
   popd
 };
 else {
-  mkdir -p Github/start/tables
-  git clone https://github.com/dhruvasagar/vim-table-mode.git Github/start/tables
+  mkdir -p Github/start/easy-align
+  git clone https://github.com/junegunn/vim-easy-align.git Github/start/easy-align
 };
 fi
 
