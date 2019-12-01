@@ -91,17 +91,18 @@ endfunction
 
 function! basic#OpenFloatingWin(string)
   if !has('nvim')
-    echo a:string
+    call popup_create(split(a:string, '\n'), #{ pos: 'topleft',
+      \ line: 'cursor+1', col: 'cursor', moved: 'WORD' })
     return
   endif
-  let l:opts = {
-        \ 'relative': 'cursor',
-        \ 'row': 1,
-        \ 'col': 1,
-        \ 'anchor': 'NW',
-        \ 'height': 10,
-        \ 'width': 40,
-        \ 'style': 'minimal'
+  let l:opts = #{
+        \ relative: 'cursor',
+        \ row: 1,
+        \ col: 1,
+        \ anchor: 'NW',
+        \ height: 10,
+        \ width: 40,
+        \ style: 'minimal'
         \ }
 
   let l:buf = nvim_create_buf(v:false, v:true)
