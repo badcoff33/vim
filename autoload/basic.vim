@@ -114,7 +114,7 @@ function! basic#OpenFloatingWin(string)
         \ nobuflisted
         \ bufhidden=hide
         \ signcolumn=no
-  put =printf('%s', a:string)
+  0put =printf('%s', a:string)
   normal gg
   autocmd BufLeave <buffer> bwipeout!
   nmap <buffer> <Esc> :bwipeout!<CR>
