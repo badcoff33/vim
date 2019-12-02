@@ -159,9 +159,14 @@ imap <C-CR> <Esc>bbyle"0pi<right>
 " Switch Vim modes
 inoremap <C-Space> <Esc>
 nnoremap <C-Space> :
+
+" Terminals
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-Space> <C-\><C-n>
+  tnoremap <C-w> <C-\><C-n><C-w>
+  autocmd BufEnter term://* startinsert
+  autocmd TermOpen term://* startinsert
 elseif has('terminal')
   tnoremap <Esc> <C-w>N
   tnoremap <C-Space> <C-w>N
