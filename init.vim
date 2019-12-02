@@ -5,7 +5,7 @@
 filetype plugin on
 filetype indent on
 
-" Even on on Windows, this works best
+" Even on Windows, this works best
 behave xterm
 
 set nowrap
@@ -141,7 +141,7 @@ augroup END
 let mapleader = " "
 let maplocalleader = "s"
 
-if exists("win32") || exists("win64")
+if has("win32") || has("win64")
   " decrement visual selected nummbers
   silent! vunmap <C-x>
 endif
