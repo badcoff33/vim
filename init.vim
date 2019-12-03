@@ -141,10 +141,9 @@ augroup END
 let mapleader = " "
 let maplocalleader = "s"
 
-if has("win32") || has("win64")
-  " decrement visual selected nummbers
-  silent! vunmap <C-x>
-endif
+" increment/decrement numbers blockwise 
+vnoremap <C-x> <C-x>gv
+vnoremap <C-a> <C-a>gv
 
 " surround visual selection with double quote ("), quote ('), backtick (`),
 " parentheses (), braces {} and brackets []
