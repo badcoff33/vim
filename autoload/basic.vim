@@ -68,11 +68,8 @@ function! basic#HiName()
 endfunction
 
 function! basic#HighlightWord(word)
-  if !exists("s:thisHighlightWord")
-    let s:thisHighlightWord = ""
-    autocmd VimEnter,ColorScheme * highlight HighlightWordGroup gui=underline
-  endif
-  echo s:thisHighlightWord
+  let s:thisHighlightWord = get(s:, 'thisHighlightWord', "")
+  highlight HighlightWordGroup gui=underline
   if a:word != s:thisHighlightWord
     let s:thisHighlightWord = a:word
     execute ":match HighlightWordGroup /\\<" . a:word . "\\>/"
