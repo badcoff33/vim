@@ -30,18 +30,6 @@ just press in normal mode `q:` for the command line or `q/` or `q?` to enter
 the search window. The advantage to open one of these windows is that normal
 mode commands can be used.
 
-## Plugins
-
-A plain installation works surprisingly well for me. I tried really a lot of
-optional Vim plugins, but removed most of them, because all I need comes with
-Vim "out of the box". But some plugins may help in certain situations. This is
-my short list of notable Vim plugins:
-
-- Per file tags navigation with [Tagbar](https://github.com/majutsushi/tagbar.git)
-- Buffer overview with [Bufexplorer](https://github.com/jlanzarotta/bufexplorer.git)
-
-Install those plugins as recommended by Vim's manual `:help packages`. 
-
 ## Vim Knowledge in the WWW
 
 - [Vim wiki](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
@@ -92,9 +80,19 @@ command! -nargs=1 -complete=custom,CompleteFavPath WorkspacePath call GotoFavPat
 For example, replace 'foo' to 'hey' if a line contains 'hi'. 
 This line does the trick: `:g/hi/ s/foo/hey/g`
 
-## Run :grep with highlighting
+## GREP
 
-Quite nice to run `:grep` with the current word under cursor that is highlighted.
+Under boring, old Windows this works quit good to run a grep on bigger code basis.
+It uses a kind of index-file with all C an H files. This file is used by Windows-standard program `findstr`. 
+Works quit fast!
+
+```
+call writefile(split(globpath('.', '**/*.[ch]')), "files")
+set gp=findstr\ /N\ /F:files 
+```
+
+A nice addition to spice up the `:grep` experience: Run `:grep` with the current word under cursor, 
+highlighted in the results. Needs option `hlsearch` to be set.
 
 ```
 nnoremap <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w> . <CR> :cfirst<CR>
