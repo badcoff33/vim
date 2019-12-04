@@ -33,9 +33,9 @@ highlight User3         guifg=#40eeee   guibg=#405880  gui=none
 highlight VertSplit     guifg=#606060   guibg=bg       gui=none
 highlight LineNr        guifg=#405060   guibg=bg       gui=none
 highlight CursorLineNr  guifg=#506575   guibg=#303540  gui=bold
-highlight CursorLine                    guibg=#202020
+highlight CursorLine                    guibg=#31313f
 highlight QuickFixLine  guifg=#e0c040   guibg=bg       gui=bold
-highlight FoldColumn    guifg=#405060   guibg=bg       gui=none
+highlight! link FoldColumn Normal
 highlight Folded        guifg=fg        guibg=bg       gui=none
 highlight SignColumn    guifg=#e0e0e0   guibg=bg       gui=none
 highlight PmenuSel      guifg=#000000   guibg=#80e0e0  gui=bold
@@ -52,8 +52,8 @@ highlight! link TabLine      StatusLineNC
 highlight! link TabLineSel   StatusLine
 
 " Search
-highlight IncSearch     guifg=#202020  guibg=#d0d0d0 gui=none
-highlight Search        guifg=#d0e0e0  guibg=#204850 gui=underline
+highlight IncSearch     guifg=#202020  guibg=#c0c0c0 gui=none
+highlight Search        guifg=#c0f0c0  guibg=#306060 gui=underline
 highlight MatchParen    guifg=#40e0e0  guibg=bg      gui=underline
 
 " Structure
