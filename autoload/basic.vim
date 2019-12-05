@@ -3,23 +3,6 @@
 " Description: very basic functions called from init.vim as autoload functions
 " to save startup time. 
 
-nnoremap <F2> :edit <C-r>=expand("%:p:h").basic#getPathSep()<CR>
-
-" Description: Return the platfrom dependent path seperator and create g:psep.
-" This global var can be used in config files.
-function! basic#getPathSep()
-  if exists('+shellslash')
-    if &shellslash
-      let g:psep = '/'
-    else
-      let g:psep = '\'
-    endif
-  else
-    let g:psep = '/'
-  endif
-  return g:psep
-endfunction
-
 " Description: Make the actual window more obvious.
 " Active 'cursorline' option in diff buffers overrules highlighting of
 " differences. Buffers with 'diff' option shall not use 'cursorline'.

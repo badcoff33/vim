@@ -117,6 +117,16 @@ set autowrite
 " Tune the diff feature for my needs.
 set diffopt=context:3,vertical,iwhite,filler
 
+if exists('+shellslash')
+  if &shellslash
+    let g:psep = '/'
+  else
+    let g:psep = '\'
+  endif
+else
+  let g:psep = '/'
+endif
+
 " plugin variables 
 
 let g:netrw_use_errorwindow = 0
@@ -172,8 +182,8 @@ elseif has('terminal')
 endif
 
 xmap <F2> <Esc><F2>
-nnoremap <F2> :edit <C-r>=expand("%:p:h").basic#getPathSep()<CR>
-cnoremap <F2> <C-r>=expand("%:p:h").basic#getPathSep()<CR>
+nnoremap <F2> :edit <C-r>=expand("%:p:h").g:psep<CR>
+cnoremap <F2> <C-r>=expand("%:p:h").g:psep<CR>
 
 xmap <F3> <Esc><f3>
 nnoremap <F3> :buffer<Space>
@@ -214,5 +224,6 @@ if has("win32") || has("win64")
   nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
   nnoremap <Leader>x :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
 endif
+
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
