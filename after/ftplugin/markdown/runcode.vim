@@ -17,7 +17,7 @@ function! s:RunCode()
   let l:end = search('^```\s*$', 'cW') - 1
   if l:end >= l:start
     let l:codelines = getline(l:start, l:end)
-    let l:filename = $TEMP . g:psep . "." . l:parser . ".tmp"
+    let l:filename = expand('%:h') . g:psep . ".runcode.tmp"
     call writefile(l:codelines, l:filename)
     if match(l:parser, 'vim') >= 0
       redir @v
@@ -26,11 +26,13 @@ function! s:RunCode()
       call basic#OpenFloatingWin(@v)
     else
       let l:syscall = l:parser . " " . l:options . " " . l:filename
+      echo l:syscall
       let l:output = system(l:syscall)
       call basic#OpenFloatingWin(l:output)
     endif
+    call delete(l:filename)
   endif
-  " let @v = l:save_reg_v
+  let @v = l:save_reg_v
 endfunction
 
 
