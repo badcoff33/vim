@@ -5,18 +5,15 @@
 if exists("b:did_ftplugin_after")
   finish
 endif
+
 " Jump to links with enter
 nmap <silent> <buffer> <CR> <C-]>
 
-" Jump back with backspace
-nmap <silent> <buffer> <BS> <C-T>
+" Close help again
+nmap <silent> <buffer> <Esc> :bd<CR>
 
-" q to quit
-nmap <silent> <buffer> q :quit<CR>
-
-" open help file in the left window
-" alternative: e.g. vert help syntax
-autocmd BufWinEnter <buffer> wincmd H
+" open help file in the left window (if there is enough room)
+autocmd BufWinEnter <buffer> if (winnr('$') == 2) && (&columns > 120) | wincmd H | endif
 
 " Show value of 'option' under cursor
 nnoremap <buffer> <LocalLeader>o :set <C-r>=substitute(expand("<cword>"), "[^a-z]", "", "g")<CR>?<CR>
