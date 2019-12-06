@@ -103,7 +103,7 @@ endif
 if has ('nvim')
   set wildmenu wildmode=full wildoptions=pum,tagfile
 else
-  set nowildmenu wildmode=list,full wildoptions=tagfile
+  set nowildmenu wildmode=list:lastused,full wildoptions=tagfile
 endif
 set wildignorecase
 set wildignore=*.*~
