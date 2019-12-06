@@ -13,7 +13,7 @@ nmap <silent> <buffer> <CR> <C-]>
 nmap <silent> <buffer> <Esc> :bd<CR>
 
 " open help file in the left window (if there is enough room)
-autocmd BufWinEnter <buffer> if (winnr('$') == 2) && (&columns > 120) | wincmd H | endif
+autocmd BufEnter <buffer> if (winnr('$') == 2) && (&columns > 164) | wincmd H | endif
 
 " Show value of 'option' under cursor
 nnoremap <buffer> <LocalLeader>o :set <C-r>=substitute(expand("<cword>"), "[^a-z]", "", "g")<CR>?<CR>
