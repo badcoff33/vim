@@ -16,8 +16,8 @@ augroup ginit
 augroup END
 
 if has('gui')
-  set guifont=Courier\ New:h11 linespace=3
-  set guioptions=!gt
+  set inespace=3
+  set guioptions=a
   set mousemodel=popup
 elseif has("nvim") && exists('g:GuiLoaded') 
   if g:GuiLoaded == 1
