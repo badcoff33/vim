@@ -16,7 +16,6 @@ augroup ginit
 augroup END
 
 if has('gui')
-  set inespace=3
   set guioptions=a
   set mousemodel=popup
 elseif has("nvim") && exists('g:GuiLoaded') 

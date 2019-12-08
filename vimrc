@@ -167,7 +167,7 @@ imap <C-CR> <Esc>bbyle"0pi<right>
 
 " Switch Vim modes
 inoremap <C-Space> <Esc>
-nnoremap <C-Space> :
+inoremap <Ins> <Esc>
 
 " Terminals
 if has('nvim')
