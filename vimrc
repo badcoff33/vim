@@ -27,6 +27,9 @@ set autoread
 " Allow modified files to flip in background, without a write.
 set hidden
 
+" Use open buffer when commands like ":cc", ":cn", "cp", etc. were used
+set switchbuf=useopen
+
 " keep cursor line away from the upper and lower window border
 set scrolloff=3
 set scrolljump=1
