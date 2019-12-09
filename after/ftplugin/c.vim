@@ -13,8 +13,6 @@ nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <b
 nmap <buffer> <LocalLeader>f ggVG!clang-format -style=file<CR>
 vmap <buffer> <LocalLeader>f !clang-format -style=file<CR>gv=
 
-nnoremap <buffer> K g<C-]>
-
 let b:load_doxygen_syntax=1
 let c_no_comment_fold = 1
 let c_comment_strings = 1
