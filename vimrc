@@ -210,8 +210,8 @@ nnoremap <Leader>G :silent grep<Space>
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
 vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
 
-nnoremap <A-.> :tjump <C-r><C-w><CR>
-nnoremap <A-,> :pop<CR>
+nnoremap K g<C-]>
+nnoremap <Leader>K :tjump<Space>
 
 nnoremap <C-Insert> "*yiw
 vnoremap <C-Del> "*x
