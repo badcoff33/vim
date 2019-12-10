@@ -147,8 +147,6 @@ command! -nargs=1 Wipe bufdo if expand("%") =~ '.*<args>.*' | bw | endif | bprev
 augroup init
   autocmd!
   autocmd VimResized * wincmd =
-  " load local site file for machine dependent configs
-  autocmd VimEnter * runtime site.vim
 augroup END
 
 " mappings 
@@ -213,8 +211,8 @@ nnoremap <Leader>G :silent grep<Space>
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
 vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
 
-nnoremap K g<C-]>
-nnoremap <Leader>K :tjump<Space>
+nnoremap <A-l> g<C-]>
+nnoremap <Leader><A-l> :tjump<Space>
 
 nnoremap <C-Insert> "*yiw
 vnoremap <C-Del> "*x
