@@ -30,7 +30,7 @@ highlight StatusLine    guifg=#eeee00   guibg=#434356  gui=none
 highlight User1         guifg=#ddeeff   guibg=#405880  gui=none
 highlight User2         guifg=#40eeee   guibg=#405880  gui=none
 highlight User3         guifg=#40eeee   guibg=#405880  gui=none
-highlight VertSplit     guifg=#606060   guibg=bg       gui=none
+highlight VertSplit     guifg=#1f2836   guibg=#1f2836  gui=none
 highlight LineNr        guifg=#405060   guibg=bg       gui=none
 highlight CursorLineNr  guifg=#506575   guibg=#303540  gui=bold
 highlight CursorLine                    guibg=#31313f
