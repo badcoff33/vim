@@ -117,9 +117,9 @@ highlight diffSubname guifg=grey30
 highlight diffComment guifg=grey30
 
 " Diff highlighting
-highlight! DiffChange diffChanged
-highlight! DiffAdd diffAdded
-highlight! DiffDelete diffRemoved
+highlight! link DiffChange diffChanged
+highlight! link DiffAdd diffAdded
+highlight! link DiffDelete diffRemoved
 highlight DiffText guifg=grey30 guibg=bg gui=none
 
 " netrw
