@@ -1,6 +1,6 @@
 " Vim color theme
 "
-" Description: A light color theme with very greyish tones. 
+" Description: A light one with fresh colors. 
 
 if exists("syntax_on")
   syntax reset
@@ -13,8 +13,8 @@ let g:colors_name = "gray_cat"
 " basics
 highlight Normal guifg=grey30 guibg=grey94
 highlight NonText guifg=grey30 guibg=bg
-highlight Visual guifg=grey10 guibg=yellow1
-highlight Cursor guifg=white guibg=orangered
+highlight Visual guifg=grey20 guibg=yellow1
+highlight Cursor guifg=white guibg=palevioletred3
 
 " used if Nvim's option 'winhighlight' exists (Nvim)
 if has ('nvim')
@@ -51,14 +51,14 @@ highlight TabLine guifg=grey30 guibg=bg gui=none
 highlight TabLineSel guifg=grey30 guibg=bg gui=bold,underline
 
 " popup Menu
-highlight Pmenu guifg=grey30 guibg=bg gui=none
-highlight PmenuSel guifg=grey30 guibg=bg gui=underline,bold
-highlight PmenuSbar guibg=bg
+highlight Pmenu guifg=black guibg=turquoise2 gui=none
+highlight PmenuSel guifg=white guibg=turquoise4 gui=bold
+highlight PmenuSbar guibg=fg
 highlight PmenuThumb guifg=grey30
 
 " search
-highlight IncSearch guifg=grey30 guibg=orange gui=bold
-highlight Search guifg=grey10 guibg=grey75 gui=none
+highlight IncSearch guifg=grey30 guibg=cyan2 gui=bold
+highlight Search guifg=grey10 guibg=palevioletred1 gui=none
 highlight MatchParen guifg=grey10 guibg=bg gui=underline
 
 " code
@@ -92,17 +92,12 @@ highlight qfSeparator guifg=grey50
 
 " Doxygen highlighting
 highlight doxygenComment guifg=grey40 gui=none
-highlight doxygenBrief guifg=grey50 gui=bold
+highlight doxygenBrief guifg=black gui=bold
 highlight doxygenParam guifg=grey60 gui=italic
 highlight doxygenRefWord guifg=grey40 gui=underline
 highlight doxygenSpecial guifg=grey50 gui=none
 highlight doxygenSpecialOnelineDesc guifg=grey30
 
-" Diff highlighting
-highlight DiffChange guifg=grey30 guibg=bg gui=none
-highlight DiffAdd guifg=grey30 guibg=bg gui=none
-highlight DiffDelete guifg=grey30 guibg=bg gui=none
-highlight DiffText guifg=grey30 guibg=bg gui=none
 
 highlight diffOldFile guifg=grey30
 highlight diffNewFile guifg=grey30
@@ -114,22 +109,28 @@ highlight diffBDiffer guifg=grey30
 highlight diffIsA guifg=grey30
 highlight diffNoEOL guifg=grey30
 highlight diffCommon guifg=grey30
-highlight diffRemoved guifg=grey30
-highlight diffChanged guifg=grey30
-highlight diffAdded guifg=grey30
+highlight diffRemoved guifg=firebrick2
+highlight diffChanged guifg=steelblue2
+highlight diffAdded guifg=green3
 highlight diffLine guifg=grey30
 highlight diffSubname guifg=grey30
 highlight diffComment guifg=grey30
+
+" Diff highlighting
+highlight! DiffChange diffChanged
+highlight! DiffAdd diffAdded
+highlight! DiffDelete diffRemoved
+highlight DiffText guifg=grey30 guibg=bg gui=none
 
 " netrw
 highlight netrwMarkFile gui=inverse
 
 " html
-highlight htmlH1 guifg=grey30 gui=bold
-highlight htmlH2 guifg=grey30 gui=bold
-highlight htmlH3 guifg=grey30 gui=none
+highlight htmlH1 guifg=black gui=bold
+highlight htmlH2 guifg=steelblue3 gui=bold
+highlight htmlH3 guifg=steelblue4 gui=none
 highlight htmlBold gui=bold
-highlight htmlItalic gui=italic,bold
+highlight htmlItalic gui=italic
 
 " markdown
 highlight! link markdownCode String
