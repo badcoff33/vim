@@ -58,7 +58,7 @@ highlight PmenuThumb guifg=grey30
 
 " search
 highlight IncSearch guifg=grey30 guibg=cyan2 gui=bold
-highlight Search guifg=grey10 guibg=palevioletred1 gui=none
+highlight Search guifg=grey10 guibg=gold1 gui=none
 highlight MatchParen guifg=grey10 guibg=bg gui=underline
 
 " code
