@@ -3,9 +3,11 @@
 augroup WorkspaceSession
   autocmd!
   autocmd VimLeavePre * call SaveWorkspaceSession()
+  autocmd DirChanged global call SaveWorkspaceSession()
 augroup END
 
-function! ClearWorkspaceSession()
+" vim:sw=2:tw=0:nocindent
+function! RemoveWorkspaceSession()
   if exists("g:workspace_session_file")
     execute "silent !del " . g:workspace_session_file
   endif
@@ -26,9 +28,10 @@ function! EditWorkspaceSourceFile()
   endif
 endfunction
 
-command! -nargs=0 SaveWorkspaceSession call SaveWorkspaceSession()
-command! -nargs=0 EditWorkspaceSourceFile call EditWorkspaceSourceFile()
-command! -nargs=0 ClearWorkspaceSession call ClearWorkspaceSession()
+command! -nargs=0 SaveWorkspace    call SaveWorkspaceSession()
+command! -nargs=0 EditWorkspace    call EditWorkspaceSourceFile()
+command! -nargs=0 RemoveWorkspace  call RemoveWorkspaceSession()
+command! -nargs=0 SwitchWorkspace  call workspace#Switch()
 
 function! workspace#Switch()
   
@@ -67,6 +70,13 @@ function! workspace#Switch()
     echomsg "no session file found."
   endif
 
+endfunction
+
+" Description: My workspace splash screen
+function! workspace#OpenListFile()
+  let g:workspace_list_file = get(g:, "workspace_list_file", "~/workspaces.txt")
+  execute 'edit ' . g:workspace_list_file
+  nmap <buffer> <CR> :cd <C-r><C-f><CR>:SwitchWorkspace<CR>
 endfunction
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker
