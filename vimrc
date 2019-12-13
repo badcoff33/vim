@@ -200,7 +200,9 @@ nnoremap <F7> :sil make<Space><Up><CR>
 nnoremap <C-F7> :sil make<Space><Up>
 
 nnoremap <F12> :cnext<CR> 
+inoremap <F12> <Esc>:cnext<CR> 
 nnoremap <S-F12> :cprevious<CR>
+inoremap <S-F12> <Esc>:cprevious<CR>
 
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>T :tabclose<CR>
@@ -208,17 +210,18 @@ nnoremap <Leader>T :tabclose<CR>
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
 nnoremap <Leader>G :silent grep<Space>
 
+nnoremap <Leader><Space> :clist<CR>
+
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
 vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
 
-nnoremap <A-l> g<C-]>
-nnoremap <Leader><A-l> :tjump<Space>
-
-nnoremap <C-Insert> "*yiw
-vnoremap <C-Del> "*x
-vnoremap <C-insert> "*y
-nnoremap <S-Insert> "*P
-cnoremap <S-Insert> <C-r>*
+if has('nvim')
+  noremap <C-Insert> "*yiw
+  vnoremap <C-Del> "*x
+  vnoremap <C-insert> "*y
+  nnoremap <S-Insert> "*P
+  cnoremap <S-Insert> <C-r>*
+endif
 
 nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
