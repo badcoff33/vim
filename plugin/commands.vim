@@ -2,14 +2,10 @@
 
 " commands
 
-command! -nargs=0 Welcome call welcome#open()
-
 command! -nargs=0 ShowHiName             :call basic#HiName()
 command! -nargs=1 HighlightWord          :call basic#HighlightWord("<args>")
 command! -nargs=0 ToggleStickyCursorline :call basic#ToggleStickyCursorLine()
 command! -nargs=0 ToggleStatusline       :call basic#ToggleStatusline()
-
-command! -nargs=0 SwitchWorkspace  :call workspace#Switch()
 
 command! -nargs=0 WhitespaceCleanup :call whitespace#Cleanup()
 command! -nargs=0 WhitespaceMelt    :call whitespace#Melt()
