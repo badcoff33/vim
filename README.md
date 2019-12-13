@@ -98,6 +98,8 @@ highlighted in the results. Needs option `hlsearch` to be set.
 nnoremap <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w> . <CR> :cfirst<CR>
 ```
 
+*Ripgrep* works very well on Windows. To setup Vim for `rg` use this `set gp=rg\ --vimgrep\ -tc gfm=%f:%l:%c:%m`.
+
 ## Run shell commands
 
 To run any shell command you can use :! {cmd}. Characters with a special meaning
