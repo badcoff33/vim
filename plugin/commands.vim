@@ -1,6 +1,6 @@
 " Vim plugin interface
 
-" commands
+command! -nargs=0 OpenWorkspaceList      :call workspace#OpenListFile()
 
 command! -nargs=0 ShowHiName             :call basic#HiName()
 command! -nargs=1 HighlightWord          :call basic#HighlightWord("<args>")
@@ -14,15 +14,9 @@ command! -nargs=0 ShowUnsavedChanges        :call vimdiff#UnsavedChanges()
 command! -nargs=* -complete=dir TwoDirDiff  :call vimdiff#TwoDirDiff(<f-args>)
 
 augroup plugin
-  
-  " clear group in case file sourced several times
   autocmd!
-
-  autocmd BufReadPost * call basic#RestoreCursor()
-
+  autocmd BufReadPost *         :call basic#RestoreCursor()
   autocmd BufWritePre *.cpp,*.C :WhitespaceCleanup
   autocmd BufWritePre *.c,*.h   :WhitespaceCleanup
   autocmd BufWritePre *.py      :WhitespaceCleanup
-
 augroup END
-
