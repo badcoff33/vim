@@ -120,14 +120,10 @@ set autowrite
 " Tune the diff feature for my needs.
 set diffopt=context:3,vertical,iwhite,filler
 
-if exists('+shellslash')
-  if &shellslash
-    let g:psep = '/'
-  else
-    let g:psep = '\'
-  endif
-else
+if has('unix')
   let g:psep = '/'
+else
+  let g:psep = '\'
 endif
 
 " Netrw variables 

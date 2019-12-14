@@ -68,9 +68,9 @@ highlight Type guifg=steelblue4 gui=none
 highlight StorageClass guifg=grey80 gui=bold
 highlight PreProc guifg=grey10 gui=bold
 highlight Comment guifg=grey60
-highlight Identifier guifg=grey30
+highlight Identifier guifg=dodgerblue2
 highlight Special guifg=grey30
-highlight Constant guifg=maroon3
+highlight Constant guifg=dodgerblue1
 
 " misc
 highlight Title guifg=grey30

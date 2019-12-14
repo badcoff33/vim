@@ -1,6 +1,6 @@
 " Vim plugin interface
 
-command! -nargs=0 OpenWorkspaceList      :call workspace#OpenListFile()
+command! -nargs=0 Workspaces             :call workspace#OpenListFile()
 
 command! -nargs=0 ShowHiName             :call basic#HiName()
 command! -nargs=1 HighlightWord          :call basic#HighlightWord("<args>")

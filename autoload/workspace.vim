@@ -47,7 +47,15 @@ function! workspace#Switch()
     return
   endtry
 
-  let g:workspace_session_file = expand($TEMP . "/" . sha256(getcwd()) . ".vim", "%")
+  if isdirectory('/tmp') 
+    let l:tempdir = '/tmp' . g:psep
+  elseif isdirectory($TEMP)
+    let l:tempdir = $TEMP . g:psep
+  else
+    let l:tempdir = '.' . g:psep
+  endif
+
+  let g:workspace_session_file = expand(l:tempdir . sha256(getcwd()) . ".vim", "%")
 
   let l:workspace_path = findfile(".vimrc", ".;")
   if filereadable(l:workspace_path)
