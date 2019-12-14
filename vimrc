@@ -195,10 +195,13 @@ inoremap <F7> <Esc>:sil make<Space><Up><CR>
 nnoremap <F7> :sil make<Space><Up><CR>
 nnoremap <C-F7> :sil make<Space><Up>
 
-nnoremap <F12> :cnext<CR> 
-inoremap <F12> <Esc>:cnext<CR> 
-nnoremap <S-F12> :cprevious<CR>
-inoremap <S-F12> <Esc>:cprevious<CR>
+nnoremap <F12> :tjump<C-r><C-w><CR> 
+inoremap <F12> <Esc>:tjump<C-r><C-w><CR> 
+nnoremap <C-F12> :tjump
+inoremap <C-F12> <Esc>:tjump
+
+nnoremap <C-j> :cnext<CR> 
+nnoremap <C-k> :cprevious<CR>
 
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>T :tabclose<CR>

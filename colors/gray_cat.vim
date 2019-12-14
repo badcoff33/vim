@@ -64,20 +64,20 @@ highlight MatchParen guifg=grey10 guibg=bg gui=underline
 " code
 highlight Statement guifg=grey10 gui=bold
 highlight Conditional guifg=grey20 gui=bold
-highlight Type guifg=steelblue4 gui=none
+highlight Type guifg=dodgerblue4 gui=none
 highlight StorageClass guifg=grey80 gui=bold
 highlight PreProc guifg=grey10 gui=bold
 highlight Comment guifg=grey60
-highlight Identifier guifg=dodgerblue2
+highlight Identifier guifg=grey50
 highlight Special guifg=grey30
-highlight Constant guifg=dodgerblue1
+highlight Constant guifg=palevioletred3
 
 " misc
 highlight Title guifg=grey30
 highlight Subtitle guifg=grey30
 highlight todo guifg=grey30 guibg=bg
-highlight Error guifg=orangered guibg=bg gui=undercurl
-highlight Directory guifg=steelblue gui=underline
+highlight Error guifg=palevioletred3 guibg=bg gui=undercurl
+highlight Directory guifg=dodgerblue3 gui=underline
 
 " messages
 highlight WarningMsg guifg=steelblue guibg=bg gui=none
@@ -86,7 +86,7 @@ highlight! link ModeMsg StatusLine
 highlight! link Question StatusLine
 
 " quickfix colors
-highlight qfFileName guifg=grey20 gui=none
+highlight qfFileName guifg=dodgerblue4 gui=none
 highlight qfLineNr guifg=grey40
 highlight qfSeparator guifg=grey50
 
