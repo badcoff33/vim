@@ -195,9 +195,12 @@ inoremap <F7> <Esc>:sil make<Space><Up><CR>
 nnoremap <F7> :sil make<Space><Up><CR>
 nnoremap <C-F7> :sil make<Space><Up>
 
-nnoremap <C-CR> :tjump <C-r><C-w><CR> 
-inoremap <C-CR> <Esc>:tjump <C-r><C-w><CR> 
-nnoremap <Leader><C-CR> :tjump
+nnoremap <A-.> :tjump<Space>
+inoremap <A-.> <Esc>:tjump<Space>
+nnoremap <C-.> g<C-]>
+inoremap <C-.> <Esc>g<C-]>
+nnoremap <C-,> <C-t>
+inoremap <C-,> <Esc><C-t>
 
 nnoremap <C-j> :cnext<CR> 
 nnoremap <C-k> :cprevious<CR>
@@ -214,11 +217,11 @@ nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
 vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
 
 if has('nvim')
-  noremap <C-Insert> "*yiw
-  vnoremap <C-Del> "*x
-  vnoremap <C-insert> "*y
-  nnoremap <S-Insert> "*P
-  cnoremap <S-Insert> <C-r>*
+  nnoremap <A-y> "*yiw
+  vnoremap <A-x> "*x
+  vnoremap <A-y> "*y
+  nnoremap <A-p> "*P
+  vnoremap <A-p> "*P
 endif
 
 nnoremap <Leader>n :nohlsearch<CR>
