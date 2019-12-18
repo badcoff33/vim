@@ -37,4 +37,3 @@ function! s:ToggleSourceHeaderFile()
   endfor
 endfunction
 
-let g:did_load_c_switch = 1
