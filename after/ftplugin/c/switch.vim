@@ -7,6 +7,13 @@ command! -buffer -nargs=0 ToggleSourceHeaderFile call <SID>ToggleSourceHeaderFil
 
 nnoremap <buffer> <LocalLeader><TAB> :ToggleSourceHeaderFile<CR>
 
+
+if exists("g:c_switch_loaded")
+  finish
+endif
+
+let g:c_switch_loaded = 1
+
 function! s:ToggleSourceHeaderFile()
   let l:file_pairs = {
         \ 'C': ['.H'],
