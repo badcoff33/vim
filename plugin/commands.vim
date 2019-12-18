@@ -15,8 +15,8 @@ command! -nargs=* -complete=dir TwoDirDiff  :call vimdiff#TwoDirDiff(<f-args>)
 
 augroup plugin
   autocmd!
-  autocmd BufReadPost *         :call basic#RestoreCursor()
-  autocmd BufWritePre *.cpp,*.C :WhitespaceCleanup
-  autocmd BufWritePre *.c,*.h   :WhitespaceCleanup
-  autocmd BufWritePre *.py      :WhitespaceCleanup
+  autocmd BufReadPost * :call basic#RestoreCursor()
+  autocmd BufWrite *.c,*.cpp,*.C,*.cc :WhitespaceCleanup
+  autocmd BufWrite *.h,*.hpp,*.H,*.hh :WhitespaceCleanup
+  autocmd BufWrite *.py :WhitespaceCleanup
 augroup END
