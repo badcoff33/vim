@@ -35,7 +35,7 @@ setlocal list
 setlocal listchars=tab:>-,trail:.,extends:#
 
 " Customize the c indent style
-setlocal cinoptions=(0,W4
+setlocal cinoptions=(0,W4,gN
 
 " iabbrev did not work when 'cpoptions' has '>'
 if match(&cpoptions, '>') >= 0
