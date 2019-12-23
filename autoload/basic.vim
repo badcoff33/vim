@@ -76,6 +76,23 @@ function! basic#ToggleQuickfix()
   endif 
 endfunction
 
+" Description: Move to terminal buffer if already visible on current tab page.
+" Otherwise bring terminal buffer to front if a "term.*" buffer exists.
+" Otherwise open a new terminal.
+function! basic#PopupTerminal()
+  let l:termBufNr = bufnr("^term:*")
+  if l:termBufNr < 0
+    terminal
+    return
+  endif
+  let l:termWinNr = win_findbuf(l:termBufNr)
+  if empty(l:termWinNr)
+    execute l:termBufNr . "buffer"
+  else
+    noautocmd call win_gotoid(l:termWinNr[0]) 
+  endif
+endfunction
+
 function! basic#ToggleStatusline()
   if !exists("b:saved_statusline")
     let b:saved_statusline = &statusline
