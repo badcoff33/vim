@@ -191,6 +191,9 @@ nnoremap <F3> :buffer<Space>
 xmap <F4> <Esc><F4>
 nnoremap <F4> :find<Space>
 
+nnoremap <F5> :buffer term<CR>
+inoremap <F5> <Esc>:buffer term<CR>
+
 inoremap <F7> <Esc>:sil make<Space><Up><CR>
 nnoremap <F7> :sil make<Space><Up><CR>
 nnoremap <C-F7> :sil make<Space><Up>
