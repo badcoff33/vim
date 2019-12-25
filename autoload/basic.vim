@@ -76,9 +76,9 @@ function! basic#ToggleQuickfix()
   endif 
 endfunction
 
-" Description: Move to terminal buffer if already visible on current tab page.
-" Otherwise bring terminal buffer to front if a "term.*" buffer exists.
-" Otherwise open a new terminal.
+" Description: Popup term buffer.
+" If no term buffer open, open a new one.
+" TODO: handle multiple term buffers.
 function! basic#PopupTerminal()
   let l:termBufNr = bufnr("^term:*")
   if l:termBufNr < 0
