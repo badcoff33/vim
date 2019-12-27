@@ -12,7 +12,7 @@ let g:colors_name = "gray_cat"
 
 " basics
 highlight Normal guifg=grey30 guibg=grey94
-highlight NonText guifg=grey30 guibg=bg
+highlight NonText guifg=grey80 guibg=grey91
 highlight Visual guifg=grey20 guibg=yellow1
 highlight Cursor guifg=white guibg=palevioletred3
 
