@@ -18,13 +18,18 @@ augroup END
 if has('gui')
   set guioptions=a
   set mousemodel=popup
-elseif has("nvim") && exists('g:GuiLoaded') 
-  if g:GuiLoaded == 1
-    GuiFont Courier\ New:h11
-    GuiLinespace 3
-    GuiTabline 0
-    GuiPopupmenu 0
+elseif has("nvim") 
+  if exists('g:GtkGuiLoaded')
+    call rpcnotify(1, 'Gui', 'Font', 'Courier 11')
+    call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
+    call rpcnotify(1, 'Gui', 'Option', 'Tabline', 1)
+    call rpcnotify(1, 'Gui', 'Option', 'Cmdline', 1)
+  elseif exists('g:GuiLoaded') 
+    if g:GuiLoaded == 1
+      GuiLinespace 3
+      GuiTabline 0
+      GuiPopupmenu 0
+    endif
   endif
 endif
-
 " vim:ft=vim
