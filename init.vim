@@ -155,6 +155,11 @@ let maplocalleader = "s"
 vnoremap <C-x> <C-x>gv
 vnoremap <C-a> <C-a>gv
 
+" Shift left/right highlighted lines/block [count] 'shiftwidth' and reselect
+" visual region
+vnoremap > >gv
+vnoremap < <gv
+
 " surround visual selection with double quote ("), quote ('), backtick (`),
 " parentheses (), braces {} and brackets []
 nnoremap <Leader>" bi"<Esc>ea"<Esc>
