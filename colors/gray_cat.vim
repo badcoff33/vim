@@ -16,13 +16,7 @@ highlight NonText guifg=grey80 guibg=grey91
 highlight Visual guifg=grey20 guibg=yellow1
 highlight Cursor guifg=white guibg=palevioletred3
 
-" used if Nvim's option 'winhighlight' exists (Nvim)
-if has ('nvim')
-  highlight NormalFocus   guibg=bg
-  highlight NormalNoFocus guibg=bg
-  highlight NormalFloat   guifg=grey30 guibg=bg 
-  "set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
-endif
+highlight! link NormalFloat  StatusLine 
 
 " window decoration
 highlight StatusLine guifg=grey90 guibg=grey30 gui=bold
@@ -57,8 +51,8 @@ highlight PmenuSbar guibg=fg
 highlight PmenuThumb guifg=grey30
 
 " search
-highlight IncSearch guifg=grey30 guibg=cyan2 gui=bold
-highlight Search guifg=grey10 guibg=gold1 gui=none
+highlight IncSearch guifg=grey30 guibg=orange gui=bold
+highlight Search guifg=black guibg=cyan2 gui=none
 highlight MatchParen guifg=grey10 guibg=bg gui=underline
 
 " code
