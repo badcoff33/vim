@@ -109,14 +109,14 @@ function! basic#OpenFloatingWin(string)
       \ line: 'cursor+1', col: 'cursor', moved: 'WORD' })
     return
   endif
-  let l:opts = #{
-        \ relative: 'cursor',
-        \ row: 1,
-        \ col: 1,
-        \ anchor: 'NW',
-        \ height: 10,
-        \ width: 40,
-        \ style: 'minimal'
+  let l:opts = {
+        \ 'relative': 'cursor',
+        \ 'row': 1,
+        \ 'col': 1,
+        \ 'anchor': 'NW',
+        \ 'height': 10,
+        \ 'width': 40,
+        \ 'style': 'minimal'
         \ }
 
   let l:buf = nvim_create_buf(v:false, v:true)
@@ -136,6 +136,19 @@ function! basic#OpenFloatingWin(string)
   nmap <buffer> <CR>  :bwipeout!<CR>
 endfunction
 
-
+function! basic#OpenCenteredFloatingWin()
+    let width = min([&columns - 4, max([80, &columns - 20])])
+    let height = min([&lines - 4, max([20, &lines - 10])])
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 
+          \'row': top, 
+          \'col': left, 
+          \'width': width, 
+          \'height': height, 
+          \'style': 'minimal'}
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_open_win(s:buf, v:true, opts)
+endfunction
 
 " vim:sw=2:tw=0:nocindent
