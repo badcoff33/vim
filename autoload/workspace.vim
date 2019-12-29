@@ -3,7 +3,7 @@
 augroup WorkspaceSession
   autocmd!
   autocmd VimLeavePre * call SaveWorkspaceSession()
-  autocmd DirChanged global call SaveWorkspaceSession()
+  autocmd DirChanged * call SaveWorkspaceSession()
 augroup END
 
 " vim:sw=2:tw=0:nocindent
@@ -19,6 +19,7 @@ function! SaveWorkspaceSession()
     set sessionoptions-=curdir
     execute "mksession! " . g:workspace_session_file
     let &sessionoptions = l:save_sessionoptions
+    unlet g:workspace_session_file
   endif
 endfunction
 
