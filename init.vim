@@ -134,16 +134,7 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
-" commands
-
-command! -nargs=1 Wipe bufdo if expand("%") =~ '.*<args>.*' | bw | endif | bprevious
-
 " autocommands 
-
-augroup init
-  autocmd!
-  autocmd VimResized * wincmd =
-augroup END
 
 " mappings 
 
@@ -240,5 +231,28 @@ if has("win32") || has("win64")
   nnoremap <Leader>x :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
 endif
 
+command! -nargs=0 Workspaces                :call workspace#OpenListFile()
+command! -nargs=0 ShowHiName                :call basic#HiName()
+command! -nargs=1 HighlightWord             :call basic#HighlightWord("<args>")
+command! -nargs=0 ToggleStickyCursorline    :call basic#ToggleStickyCursorLine()
+command! -nargs=0 ToggleStatusline          :call basic#ToggleStatusline()
+command! -nargs=0 ToggleQuickfix            :call basic#ToggleQuickfix()
+command! -nargs=0 WhitespaceMelt            :call whitespace#Melt()
+command! -nargs=0 ShowUnsavedChanges        :call vimdiff#UnsavedChanges()
+command! -nargs=* -complete=dir TwoDirDiff  :call vimdiff#TwoDirDiff(<f-args>)
+
+nnoremap <Leader>h   :HighlightWord <C-r><C-w><CR>
+nnoremap <Leader>w   :WhitespaceMelt<CR>
+nnoremap <Leader>l   :ToggleStatusline<CR>
+nnoremap <BS>        :ToggleQuickfix<CR>
+
+augroup init
+  autocmd!
+  autocmd VimResized  *         :wincmd =
+  autocmd BufReadPost *         :call basic#RestoreCursor()
+  autocmd BufWritePre *.cc,*.hh :call whitespace#Cleanup()
+  autocmd BufWritePre *.c,*.h   :call whitespace#Cleanup()
+  autocmd BufWritePre *.py      :call whitespace#Cleanup()
+augroup END
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
