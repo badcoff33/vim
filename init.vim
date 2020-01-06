@@ -238,6 +238,7 @@ command! -nargs=0 ToggleStickyCursorline    :call basic#ToggleStickyCursorLine()
 command! -nargs=0 ToggleStatusline          :call basic#ToggleStatusline()
 command! -nargs=0 ToggleQuickfix            :call basic#ToggleQuickfix()
 command! -nargs=0 WhitespaceMelt            :call whitespace#Melt()
+command! -nargs=0 WhitespaceClenup          :call whitespace#Cleanup()
 command! -nargs=0 ShowUnsavedChanges        :call vimdiff#UnsavedChanges()
 command! -nargs=* -complete=dir TwoDirDiff  :call vimdiff#TwoDirDiff(<f-args>)
 
