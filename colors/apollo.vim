@@ -10,20 +10,19 @@ hi clear
 set background=dark
 let g:colors_name = "apollo"
 
-highlight apolloPopLowKey     guifg=#E0f0E0 guibg=#186E42 ctermfg=237
-highlight apolloPopHighKey    guifg=#DFFFDF guibg=#28BE72 gui=bold ctermfg=237
-
-highlight apolloDeco0      guibg=#151E25 guifg=#C0C0F0 ctermfg=237
-highlight apolloDeco1      guibg=#181F28 guifg=#B0B0F0 ctermfg=239
-highlight apolloDeco1Blind guibg=#202830 guifg=#202830 ctermfg=239
-highlight apolloDeco2      guibg=#33383F guifg=#A0A3E4 ctermfg=239
-
 highlight apolloWhite       guifg=#FFFFFF
 highlight apolloWhiteBold   guifg=#FFFFFF gui=bold
 highlight apolloWhiteItalic guifg=#FFFFFF gui=italic
-highlight apolloBg          guibg=#18181B
-highlight apolloBg1         guibg=#20252B
-highlight apolloBg2         guibg=#18283f
+highlight apolloBg          guibg=#18181B guifg=#F0F0FF gui=none
+highlight apolloBg1         guibg=#18252B guifg=#F0F0FF gui=none
+highlight apolloBg2         guibg=#18283f guifg=#F0F0FF gui=none
+highlight apolloPopLowKey   guifg=#A0FFE0 guibg=#108E12 ctermfg=237
+highlight apolloPopHighKey  guifg=#DFFFDF guibg=#28BE72 gui=bold ctermfg=237
+highlight apolloDeco        guibg=#151E25 guifg=#C0C0F0 ctermfg=237
+highlight apolloDeco1       guibg=#282F38 guifg=#C0C0FF ctermfg=239
+highlight apolloDeco1Blind  guibg=#202830 guifg=#202830 ctermfg=239
+highlight apolloDeco2       guibg=#33383F guifg=#A0A3E4 ctermfg=239
+
 highlight apolloGray0       guifg=#40404C guibg=bg ctermfg=237
 highlight apolloGray1       guifg=#60606C guibg=bg ctermfg=239
 highlight apolloGray2       guifg=#80808C guibg=bg ctermfg=242
@@ -39,16 +38,16 @@ highlight apolloRed         guifg=#902020 guibg=bg ctermfg=1
 highlight apolloRed2        guifg=#C04040 guibg=bg ctermfg=196
 
 " (basics)
-highlight! link Normal       apolloBg1
-highlight! link NormalNC     apolloBg1
+highlight! link Normal       apolloBg
+highlight! link NormalNC     apolloBg
 highlight! link NormalFloat  apolloBg2
-highlight! link StatusLine   apolloDeco0
-highlight! link StatusLineNC apolloDeco1
+highlight! link StatusLine   apolloDeco1
+highlight! link StatusLineNC apolloDeco
 highlight! link VertSplit    apolloDeco1Blind
 highlight! link IncSearch    apolloPopHighKey
 highlight! link Search       apolloPopLowKey
-highlight! link MatchParen   apolloDeco1
-highlight! link QuickFixLine apolloDeco1
+highlight! link MatchParen   apolloWhiteBold
+highlight! link QuickFixLine apolloBg1
 
 highlight! link NonText apolloGray2
 highlight! link Visual apolloDeco2
@@ -57,7 +56,7 @@ highlight! link Visual apolloDeco2
 highlight! link LineNr       apolloBg1
 highlight! link CursorLineNr apolloBg
 highlight! link CursorLine   apolloBg
-highlight! link FoldColumn Normal
+highlight! link FoldColumn   apolloBg2
 highlight! link PmenuSel         apolloPopHighKey
 highlight! link Pmenu            apolloPopLowKey
 highlight! link PmenuSbar        apolloGreen
