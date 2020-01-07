@@ -14,8 +14,8 @@ highlight apolloWhite       guifg=#FFFFFF
 highlight apolloWhiteBold   guifg=#FFFFFF gui=bold
 highlight apolloWhiteItalic guifg=#FFFFFF gui=italic
 highlight apolloBg          guibg=#18181B guifg=#F0F0FF gui=none
-highlight apolloBg1         guibg=#18252B guifg=#F0F0FF gui=none
-highlight apolloBg2         guibg=#18283f guifg=#F0F0FF gui=none
+highlight apolloBg1         guibg=#18252B               gui=none
+highlight apolloBg2         guibg=#18283f               gui=none
 highlight apolloPopLowKey   guifg=#A0FFE0 guibg=#108E12 ctermfg=237
 highlight apolloPopHighKey  guifg=#DFFFDF guibg=#28BE72 gui=bold ctermfg=237
 highlight apolloDeco        guibg=#151E25 guifg=#C0C0F0 ctermfg=237
@@ -55,8 +55,8 @@ highlight! link Visual apolloDeco2
 " Decoration
 highlight! link LineNr       apolloBg1
 highlight! link CursorLineNr apolloBg
-highlight! link CursorLine   apolloBg
-highlight! link FoldColumn   apolloBg2
+highlight! link CursorLine   apolloBg1
+highlight! link FoldColumn   apolloBg
 highlight! link PmenuSel         apolloPopHighKey
 highlight! link Pmenu            apolloPopLowKey
 highlight! link PmenuSbar        apolloGreen
