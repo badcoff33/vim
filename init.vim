@@ -224,7 +224,7 @@ endif
 
 " Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
 " record a macro with those keys and make macro playback easy as possible.
-nnoremap <Leader><left> :let @x=input("Go back ('[[', '[s', '[d'): ", "[[")<CR>
+nnoremap <Leader><left> :let @x=input("Go back ('[[', '[s', '[d'): ", "][%")<CR>
 nnoremap <Leader><right> :let @y=input("Go forward (']]', ']s', ']d'): ", "]]")<CR>
 nnoremap <A-left> @x
 nnoremap <A-right> @y
