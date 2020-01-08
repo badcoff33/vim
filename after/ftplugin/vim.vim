@@ -14,7 +14,7 @@ nnoremap <buffer> <localleader>h :verbose highlight <C-r><C-w><CR>
 " Execute current visual region -- use register @v
 vnoremap <special> <buffer> <CR> "vyQexecute @v<CR>visual<CR>
 
-if bufname() != "[Command Line]"
+if bufname() != "[Command Line]" && empty(&buftype)
   if empty(matchstr(expand("%:p"), "color")) 
     " Execute whole Vim file
     nnoremap <special> <buffer> <CR> :w<bar>source%<CR>
