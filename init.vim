@@ -153,13 +153,13 @@ vnoremap < <gv
 
 " surround visual selection with double quote ("), quote ('), backtick (`),
 " parentheses (), braces {} and brackets []
-nnoremap <Leader>" bi"<Esc>ea"<Esc>
-nnoremap <Leader>' bi'<Esc>ea'<Esc>
-nnoremap <Leader>` bi`<Esc>ea`<Esc>
-nnoremap <Leader>( bi(<Esc>ea)<Esc>
-nnoremap <Leader>[ bi[<Esc>ea]<Esc>
-" Complete opening char
-imap <C-CR> <Esc>bbyle"0pi<right>
+vnoremap g" <Esc>i"<C-o>`<"<Esc>
+vnoremap g' <Esc>i'<C-o>`<'<Esc> 
+vnoremap g` <Esc>i`<C-o>`<`<Esc> 
+vnoremap g( <Esc>i)<C-o>`<(<Esc> 
+vnoremap g[ <Esc>i]<C-o>`<[<Esc> 
+vnoremap g{ <Esc>i}<C-o>`<{<Esc> 
+
 
 " Switch Vim modes
 inoremap <C-Space> <Esc>
@@ -234,11 +234,6 @@ let @y = "]}"
 nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
-
-if has("win32") || has("win64")
-  nnoremap <Leader>X :silent execute "!start explorer  " . expand ("%:p:h")<CR>
-  nnoremap <Leader>x :silent execute "!start cmd /k cd " . expand ("%:p:h")<CR>
-endif
 
 command! -nargs=0 Workspaces                :call workspace#OpenListFile()
 command! -nargs=0 ShowHiName                :call basic#HiName()
