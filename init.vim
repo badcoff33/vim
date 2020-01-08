@@ -151,16 +151,6 @@ vnoremap <C-a> <C-a>gv
 vnoremap > >gv
 vnoremap < <gv
 
-" surround visual selection with double quote ("), quote ('), backtick (`),
-" parentheses (), braces {} and brackets []
-vnoremap g" <Esc>i"<C-o>`<"<Esc>
-vnoremap g' <Esc>i'<C-o>`<'<Esc> 
-vnoremap g` <Esc>i`<C-o>`<`<Esc> 
-vnoremap g( <Esc>i)<C-o>`<(<Esc> 
-vnoremap g[ <Esc>i]<C-o>`<[<Esc> 
-vnoremap g{ <Esc>i}<C-o>`<{<Esc> 
-
-
 " Switch Vim modes
 inoremap <C-Space> <Esc>
 
@@ -245,6 +235,10 @@ command! -nargs=0 WhitespaceMelt            :call whitespace#Melt()
 command! -nargs=0 WhitespaceClenup          :call whitespace#Cleanup()
 command! -nargs=0 ShowUnsavedChanges        :call vimdiff#UnsavedChanges()
 command! -nargs=* -complete=dir TwoDirDiff  :call vimdiff#TwoDirDiff(<f-args>)
+
+" surround visual selection with double quote ("), quote ('), backtick (`),
+" parentheses (), braces {} and brackets []
+vnoremap <Leader>% :<C-u>call basic#SurroundSelection()<CR>
 
 nnoremap <Leader>h   :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>w   :WhitespaceMelt<CR>

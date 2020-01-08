@@ -103,6 +103,16 @@ function! basic#ToggleStatusline()
   endif
 endfunction
 
+function! basic#SurroundSelection()
+  echomsg "Press key to surround visual selection ..."
+  let l:nr = getchar()   
+  if (l:nr != "\<ESC>") && (l:nr != "\<C-c>")
+    let l:char = nr2char(l:nr)
+    call feedkeys('`<i' . l:char . "\<ESC>", "nx")
+    call feedkeys('`>la' . l:char . "\<ESC>", "nx")
+  endif
+endfunction
+
 function! basic#OpenFloatingWin(string)
   if !has('nvim')
     call popup_create(split(a:string, '\n'), #{ pos: 'topleft',
