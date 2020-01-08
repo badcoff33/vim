@@ -238,7 +238,7 @@ command! -nargs=* -complete=dir TwoDirDiff  :call vimdiff#TwoDirDiff(<f-args>)
 
 " surround visual selection with double quote ("), quote ('), backtick (`),
 " parentheses (), braces {} and brackets []
-vnoremap <Leader>% :<C-u>call basic#SurroundSelection()<CR>
+vnoremap <Leader>% <ESC>:call basic#SurroundSelection()<CR>
 
 nnoremap <Leader>h   :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>w   :WhitespaceMelt<CR>

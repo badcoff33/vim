@@ -104,12 +104,21 @@ function! basic#ToggleStatusline()
 endfunction
 
 function! basic#SurroundSelection()
-  echomsg "Press key to surround visual selection ..."
+  echomsg "Press key to surround visual selection ... "
   let l:nr = getchar()   
   if (l:nr != "\<ESC>") && (l:nr != "\<C-c>")
-    let l:char = nr2char(l:nr)
-    call feedkeys('`<i' . l:char . "\<ESC>", "nx")
-    call feedkeys('`>la' . l:char . "\<ESC>", "nx")
+    let l:ch = nr2char(l:nr)
+    if l:ch == "("
+      let l:ch2 = ")"
+    elseif l:ch == "{"
+      let l:ch2 = "}"
+    elseif l:ch == "["
+      let l:ch2 = "]"
+    else
+      let l:ch2 = l:ch
+    endif
+    call feedkeys('`>a' . l:ch2, "x")
+    call feedkeys('`<i' . l:ch, "x")
   endif
 endfunction
 
