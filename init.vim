@@ -228,6 +228,8 @@ nnoremap <Leader><left> :let @x=input("Go back ('[[', '[s', '[d'): ", "][%")<CR>
 nnoremap <Leader><right> :let @y=input("Go forward (']]', ']s', ']d'): ", "]]")<CR>
 nnoremap <A-left> @x
 nnoremap <A-right> @y
+let @x = "[{"
+let @y = "]}"
 
 nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
