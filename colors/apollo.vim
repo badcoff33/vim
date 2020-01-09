@@ -37,6 +37,8 @@ highlight apolloOrangeBold  guifg=#F86000 guibg=bg gui=bold ctermfg=202
 highlight apolloRed         guifg=#902020 guibg=bg ctermfg=1
 highlight apolloRed2        guifg=#C04040 guibg=bg ctermfg=196
 
+highlight Cursor            guifg=fg guibg=bg gui=inverse
+
 " (basics)
 highlight! link Normal       apolloBg
 highlight! link NormalNC     apolloBg
