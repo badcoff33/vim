@@ -107,18 +107,16 @@ function! basic#SurroundSelection()
   echomsg "Press key to surround visual selection ... "
   let l:nr = getchar()   
   if (l:nr != "\<ESC>") && (l:nr != "\<C-c>")
-    let l:ch = nr2char(l:nr)
-    if l:ch == "("
-      let l:ch2 = ")"
-    elseif l:ch == "{"
-      let l:ch2 = "}"
-    elseif l:ch == "["
-      let l:ch2 = "]"
-    else
-      let l:ch2 = l:ch
-    endif
-    call feedkeys('`>a' . l:ch2, "x")
-    call feedkeys('`<i' . l:ch, "x")
+    let l:opening_char = nr2char(l:nr)
+    let l:closing_char = l:opening_char
+    for pair in [ "()", "{}", "[]", "<>" ]
+      if l:opening_char == pair[1]
+        let l:closing_char = pair[0]
+        break
+      endif
+    endfor
+    call feedkeys('`>a' . l:closing_char, "x")
+    call feedkeys('`<i' . l:opening_char, "x")
   endif
 endfunction
 
