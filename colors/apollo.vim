@@ -13,7 +13,7 @@ let g:colors_name = "apollo"
 highlight apolloWhite       guifg=#FFFFFF
 highlight apolloWhiteBold   guifg=#FFFFFF gui=bold
 highlight apolloWhiteItalic guifg=#FFFFFF gui=italic
-highlight apolloBg          guibg=#111318 guifg=#F0F0FF gui=none
+highlight apolloBg          guibg=#201C23 guifg=#F0F0FF gui=none
 highlight apolloBg1         guibg=#18252B               gui=none
 highlight apolloBg2         guibg=#222F3f               gui=none
 highlight apolloPopLowKey   guifg=#A0FFE0 guibg=#108E12 ctermfg=237
@@ -72,7 +72,7 @@ highlight! link TabLineSel       StatusLine
 
 " Code
 highlight! link Statement    apolloGreen2Bold
-highlight! link Conditional  apolloGreenr2Bold
+highlight! link Conditional  apolloGreen2Bold
 highlight! link Type         apolloGray3
 highlight! link Structure    apolloGreen
 highlight! link StorageClass apolloBlue
@@ -109,8 +109,8 @@ highlight! link cParen     apolloGray3
 highlight! link cBlock     apolloGray3
 
 " filetype HTML
-highlight! link htmlH1     apolloWhite
-highlight! link htmlH2     apolloWhite
+highlight! link htmlH1     apolloWhiteBold
+highlight! link htmlH2     apolloWhiteBold
 highlight! link htmlH3     apolloWhite
 highlight! link htmlBold   apolloWhiteBold
 highlight! link htmlItalic apolloWhiteItalic
