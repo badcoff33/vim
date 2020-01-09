@@ -23,23 +23,21 @@ highlight apolloDeco1       guibg=#282F38 guifg=#C0C0FF ctermfg=239
 highlight apolloDeco1Blind  guibg=#202830 guifg=#202830 ctermfg=239
 highlight apolloDeco2       guibg=#33383F guifg=#A0A3E4 ctermfg=239
 
-highlight apolloGray0       guifg=#40404C guibg=bg ctermfg=237
-highlight apolloGray1       guifg=#60606C guibg=bg ctermfg=239
-highlight apolloGray2       guifg=#80808C guibg=bg ctermfg=242
-highlight apolloGray3       guifg=#A0A0AC guibg=bg ctermfg=249
-highlight apolloGreen       guifg=#379A17 guibg=bg ctermfg=71
-highlight apolloGreen2      guifg=#67CF47 guibg=bg ctermfg=71 
-highlight apolloGreenBold   guifg=#379A17 guibg=bg ctermfg=71 gui=bold
-highlight apolloGreen2Bold  guifg=#67CF47 guibg=bg ctermfg=71 gui=bold
-highlight apolloWhite       guifg=#F8F8F8 guibg=bg ctermfg=231
-highlight apolloBlue        guifg=#7080B0 guibg=bg ctermfg=110
-highlight apolloBlue2       guifg=#A0A8D0 guibg=bg ctermfg=111
-highlight apolloOrange      guifg=#F86000 guibg=bg ctermfg=202
-highlight apolloOrangeBold  guifg=#F86000 guibg=bg gui=bold ctermfg=202
-highlight apolloRed         guifg=#902020 guibg=bg ctermfg=1
-highlight apolloRed2        guifg=#C04040 guibg=bg ctermfg=196
+highlight apolloGray0      guifg=#40404C guibg=bg ctermfg=237
+highlight apolloGray1      guifg=#60606C guibg=bg ctermfg=239
+highlight apolloGray2      guifg=#80808C guibg=bg ctermfg=242
+highlight apolloGray3      guifg=#C0C0CF guibg=bg ctermfg=249
+highlight apolloGreen      guifg=#389A17 guibg=bg ctermfg=71
+highlight apolloGreen2     guifg=#68CF47 guibg=bg ctermfg=71
+highlight apolloGreenBold  guifg=#379A17 guibg=bg ctermfg=71 gui=bold
+highlight apolloGreen2Bold guifg=#67CF47 guibg=bg ctermfg=71 gui=bold
+highlight apolloWhite      guifg=#F8F8F8 guibg=bg ctermfg=231
+highlight apolloBlue       guifg=#7080B0 guibg=bg ctermfg=110
+highlight apolloBlue2      guifg=#A0A8D0 guibg=bg ctermfg=111
+highlight apolloRed        guifg=#902020 guibg=bg ctermfg=1
+highlight apolloRed2       guifg=#C04040 guibg=bg ctermfg=196
 
-highlight Cursor            guifg=fg guibg=bg gui=inverse
+highlight Cursor           guifg=fg guibg=bg gui=inverse
 
 " (basics)
 highlight! link Normal       apolloBg
@@ -53,13 +51,13 @@ highlight! link MatchParen   apolloWhiteBold
 highlight! link QuickFixLine apolloBg1
 
 highlight! link NonText apolloGray2
-highlight! link Visual apolloDeco2
+highlight! link Visual  apolloDeco2
 
 " Decoration
-highlight! link LineNr       apolloBg1
-highlight! link CursorLineNr apolloBg
-highlight! link CursorLine   apolloBg1
-highlight! link FoldColumn   apolloBg
+highlight! link LineNr           apolloBg1
+highlight! link CursorLineNr     apolloBg
+highlight! link CursorLine       apolloBg1
+highlight! link FoldColumn       apolloBg
 highlight! link PmenuSel         apolloPopHighKey
 highlight! link Pmenu            apolloPopLowKey
 highlight! link PmenuSbar        apolloGreen
@@ -74,14 +72,14 @@ highlight! link TabLineSel       StatusLine
 
 " Code
 highlight! link Statement    apolloGreen2Bold
-highlight! link Conditional  apolloGreenBold
-highlight! link Type         apolloGray4
-highlight! link Structure    apolloGreen2
+highlight! link Conditional  apolloGreenr2Bold
+highlight! link Type         apolloGray3
+highlight! link Structure    apolloGreen
 highlight! link StorageClass apolloBlue
 highlight! link PreProc      apolloWhiteBold
-highlight! link PreCondit    apolloGray2
-highlight! link Comment      apolloGray1
-highlight! link Function     apolloGreen
+highlight! link PreCondit    apolloWhiteBold
+highlight! link Comment      apolloGray2
+highlight! link Function     apolloGreen1
 highlight! link Identifier   apolloGray2
 highlight! link Special      apolloGray2
 highlight! link Constant     apolloBlue
