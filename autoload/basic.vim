@@ -138,8 +138,8 @@ function! basic#OpenFloatingWin(string)
 
   let l:buf = nvim_create_buf(v:false, v:true)
   let l:win = nvim_open_win(l:buf, v:true, l:opts)
-
-  call setwinvar(l:win, "&winblend", 20)
+  call nvim_win_set_option(win, 'winhl', 'Normal:NormalFloat')
+  call nvim_win_set_option(win, 'winblend', 20)
 
   setlocal
         \ buftype=nofile
@@ -165,7 +165,8 @@ function! basic#OpenCenteredFloatingWin()
           \'height': height, 
           \'style': 'minimal'}
     let s:buf = nvim_create_buf(v:false, v:true)
-    call nvim_open_win(s:buf, v:true, opts)
+    let l:win = nvim_open_win(s:buf, v:true, opts)
+    call nvim_win_set_option(win, 'winhl', 'Normal:NormalFloat')
 endfunction
 
 " vim:sw=2:tw=0:nocindent
