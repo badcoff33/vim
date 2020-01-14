@@ -253,6 +253,7 @@ augroup init
   autocmd BufWritePre *.cc,*.hh :call whitespace#Cleanup()
   autocmd BufWritePre *.c,*.h   :call whitespace#Cleanup()
   autocmd BufWritePre *.py      :call whitespace#Cleanup()
+  autocmd BufWritePre *.vim     :call whitespace#Cleanup()
 augroup END
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
