@@ -9,6 +9,10 @@ setlocal shiftwidth=4
 setlocal nocindent
 setlocal foldexpr=MarkdownFold()  
 setlocal foldmethod=expr
+if has("conceal")
+  setlocal conceallevel=2 concealcursor=nc
+endif
+
 
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif <CR>
