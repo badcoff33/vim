@@ -210,6 +210,7 @@ if has('nvim')
   vnoremap <A-y> "*y
   nnoremap <A-p> "*P
   vnoremap <A-p> "*P
+  cnoremap <A-p> <C-r>*
 endif
 
 " Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
