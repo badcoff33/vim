@@ -17,7 +17,7 @@ set visualbell
 set noerrorbells
 set viminfo='50,<1000,s100,:100
 
-" limit number of suggestions of z= 
+" limit number of suggestions of z=
 set spellsuggest=best,10
 set spelllang=en_us
 
@@ -126,7 +126,7 @@ else
   let g:psep = '\'
 endif
 
-" Netrw variables 
+" Netrw variables
 let g:netrw_use_errorwindow = 0
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -134,15 +134,11 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
-" autocommands 
-
-" mappings 
-
 " Set leader and localleader keys, that works best for me
 let mapleader = " "
 let maplocalleader = "s"
 
-" increment/decrement numbers blockwise 
+" increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
 vnoremap <C-a> <C-a>gv
 
@@ -183,6 +179,9 @@ inoremap <F7> <Esc>:sil make<Space><Up><CR>
 nnoremap <F7> :sil make<Space><Up><CR>
 nnoremap <C-F7> :sil make<Space><Up>
 
+imap <F8> <Esc><F8>
+nnoremap <F8> :sil vimgrep /\C<C-r><C-w>/j <C-a>
+
 nnoremap <A-.> :tjump<Space>
 inoremap <A-.> <Esc>:tjump<Space>
 nnoremap <C-.> g<C-]>
@@ -190,7 +189,14 @@ inoremap <C-.> <Esc>g<C-]>
 nnoremap <C-,> <C-t>
 inoremap <C-,> <Esc><C-t>
 
-nnoremap <C-j> :cnext<CR> 
+nnoremap <A-y> "*yiw
+vnoremap <A-x> "*x
+vnoremap <A-y> "*y
+nnoremap <A-p> "*P
+vnoremap <A-p> "*P
+cnoremap <A-p> <C-r>*
+
+nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 
 nnoremap <Leader>t :tabnew<CR>
@@ -203,15 +209,6 @@ nnoremap <Leader><Space> :clist<CR>
 
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
 vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
-
-if has('nvim')
-  nnoremap <A-y> "*yiw
-  vnoremap <A-x> "*x
-  vnoremap <A-y> "*y
-  nnoremap <A-p> "*P
-  vnoremap <A-p> "*P
-  cnoremap <A-p> <C-r>*
-endif
 
 " Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
 " record a macro with those keys and make macro playback easy as possible.
