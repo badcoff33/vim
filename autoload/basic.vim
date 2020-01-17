@@ -154,19 +154,23 @@ function! basic#OpenFloatingWin(string)
 endfunction
 
 function! basic#OpenCenteredFloatingWin()
-    let width = min([&columns - 4, max([80, &columns - 20])])
-    let height = min([&lines - 4, max([20, &lines - 10])])
-    let top = ((&lines - height) / 2) - 1
-    let left = (&columns - width) / 2
-    let opts = {'relative': 'editor', 
-          \'row': top, 
-          \'col': left, 
-          \'width': width, 
-          \'height': height, 
-          \'style': 'minimal'}
-    let s:buf = nvim_create_buf(v:false, v:true)
-    let l:win = nvim_open_win(s:buf, v:true, opts)
-    call nvim_win_set_option(win, 'winhl', 'Normal:NormalFloat')
+  if !has('nvim')
+    echo "sorry, nvim only."
+  endif
+  let width = min([&columns - 4, max([80, &columns - 20])])
+  let height = min([&lines - 4, max([20, &lines - 10])])
+  let top = ((&lines - height) / 2) - 1
+  let left = (&columns - width) / 2
+  let opts = {'relative': 'editor', 
+        \'row': top, 
+        \'col': left, 
+        \'width': width, 
+        \'height': height, 
+        \'style': 'minimal'}
+  let s:buf = nvim_create_buf(v:false, v:true)
+  let l:win = nvim_open_win(s:buf, v:true, opts)
+  call nvim_win_set_option(win, 'winhl', 'Normal:NormalFloat')
 endfunction
+
 
 " vim:sw=2:tw=0:nocindent
