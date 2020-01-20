@@ -180,12 +180,15 @@ nnoremap <F7> :sil make<Space><Up><CR>
 nnoremap <C-F7> :sil make<Space><Up>
 
 imap <F8> <Esc><F8>
-nnoremap <F8> :sil vimgrep /\C<C-r><C-w>/j <C-a>
+nnoremap <F8> :sil vimgrep /\C<C-r><C-w>/j <C-a><CR>
 
-xmap <F12> <Esc><F12>
-nnoremap <F12> :tabnew<CR>
-xmap <S-F12> <Esc><S-F12>
-nnoremap <S-F12> :tabclose<CR>
+imap <f11> <Esc><f11>
+nnoremap <f11> :tabnew<CR>
+imap <S-f11> <Esc><S-f11>
+nnoremap <S-f11> :tabclose<CR>
+
+imap <F12> <Esc><F12>
+nnoremap <F12> :ToggleQuickfix<CR>
 
 nnoremap <A-.> :tjump<Space>
 inoremap <A-.> <Esc>:tjump<Space>
@@ -223,7 +226,6 @@ vnoremap <A-right> @y
 let @x = "{"
 let @y = "}"
 
-
 nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
@@ -246,7 +248,6 @@ vnoremap <Leader>% <ESC>:call basic#SurroundSelection()<CR>
 nnoremap <Leader>h   :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>w   :WhitespaceMelt<CR>
 nnoremap <Leader>l   :ToggleStatusline<CR>
-nnoremap <BS>        :ToggleQuickfix<CR>
 
 augroup init
   autocmd!
