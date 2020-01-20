@@ -16,18 +16,18 @@ highlight apolloWhiteItalic guifg=#FFFFFF gui=italic
 highlight apolloBg          guibg=#201C23 guifg=#F0F0FF gui=none
 highlight apolloBg1         guibg=#18252B               gui=none
 highlight apolloBg2         guibg=#222F3f               gui=none
-highlight apolloPopLowKey   guifg=#A0FFE0 guibg=#108E12 ctermfg=237
-highlight apolloPopHighKey  guifg=#DFFFDF guibg=#28BE72 gui=bold ctermfg=237
+highlight apolloPopLowKey   guifg=#C0C0F0 guibg=#6068A0 ctermfg=237
+highlight apolloPopHighKey  guifg=#D0D0F8 guibg=#4040B0 gui=bold ctermfg=237
 highlight apolloDeco        guibg=#151E25 guifg=#C0C0F0 ctermfg=237
 highlight apolloDeco1       guibg=#282F38 guifg=#C0C0FF ctermfg=239
 highlight apolloDeco1Blind  guibg=#202830 guifg=#202830 ctermfg=239
-highlight apolloDeco2       guibg=#33383F guifg=#A0A3E4 ctermfg=239
+highlight apolloDeco2       guibg=#284330 guifg=#A0E8A8 ctermfg=239
 
 highlight apolloGray0      guifg=#40404C guibg=bg ctermfg=237
 highlight apolloGray1      guifg=#60606C guibg=bg ctermfg=239
 highlight apolloGray2      guifg=#80808C guibg=bg ctermfg=242
 highlight apolloGray3      guifg=#C0C0CF guibg=bg ctermfg=249
-highlight apolloGreen      guifg=#389A17 guibg=bg ctermfg=71
+highlight apolloGreen      guifg=#38AA27 guibg=bg ctermfg=71
 highlight apolloGreen2     guifg=#68CF47 guibg=bg ctermfg=71
 highlight apolloGreenBold  guifg=#379A17 guibg=bg ctermfg=71 gui=bold
 highlight apolloGreen2Bold guifg=#67CF47 guibg=bg ctermfg=71 gui=bold
@@ -80,8 +80,8 @@ highlight! link PreProc      apolloWhiteBold
 highlight! link PreCondit    apolloWhiteBold
 highlight! link Comment      apolloGray2
 highlight! link Function     apolloGreen1
-highlight! link Identifier   apolloGray2
-highlight! link Special      apolloGray2
+highlight! link Identifier   apolloGreen
+highlight! link Special      apolloGreen2
 highlight! link Constant     apolloBlue
 highlight! link Number       apolloBlue
 
@@ -90,10 +90,10 @@ highlight! link Todo         apolloGray2
 highlight! link Error        apolloRed2
 highlight! link Directory    apolloGray2
 
-highlight! link ErrorMsg     apolloGray2
+highlight! link ErrorMsg     apolloRed
 highlight! link WarningMsg   apolloGray2
 highlight! link ModeMsg      apolloGray2
-highlight! link Question     apolloGray2
+highlight! link Question     apolloGreen
 
 highlight! link qfFileName  apolloGray1
 highlight! link qfSeparator apolloGray1
@@ -118,3 +118,8 @@ highlight! link htmlItalic apolloWhiteItalic
 " markdown
 highlight! link markdownCode      String
 highlight! link markdownCodeBlock Comment
+
+" Diffs
+hi! link DiffChange apolloBg2
+hi! link DiffText   apolloDeco1
+hi! link DiffDelete apolloRed
