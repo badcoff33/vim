@@ -112,7 +112,7 @@ set wildignorecase
 set wildignore=*.*~
 
 set showtabline=1
-set sessionoptions=buffers,tabpages,winsize
+set sessionoptions=buffers,curdir,help,localoptions,globals,tabpages,winsize
 
 " Write all files before any ':make' command
 set autowrite
@@ -182,6 +182,11 @@ nnoremap <C-F7> :sil make<Space><Up>
 imap <F8> <Esc><F8>
 nnoremap <F8> :sil vimgrep /\C<C-r><C-w>/j <C-a>
 
+xmap <F12> <Esc><F12>
+nnoremap <F12> :tabnew<CR>
+xmap <S-F12> <Esc><S-F12>
+nnoremap <S-F12> :tabclose<CR>
+
 nnoremap <A-.> :tjump<Space>
 inoremap <A-.> <Esc>:tjump<Space>
 nnoremap <C-.> g<C-]>
@@ -198,9 +203,6 @@ cnoremap <A-p> <C-r>*
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
-
-nnoremap <Leader>t :tabnew<CR>
-nnoremap <Leader>T :tabclose<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
 nnoremap <Leader>G :silent grep<Space>
