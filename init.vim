@@ -180,7 +180,7 @@ nnoremap <F7> :sil make<Space><Up><CR>
 nnoremap <C-F7> :sil make<Space><Up>
 
 imap <F8> <Esc><F8>
-nnoremap <F8> :sil vimgrep /\C<C-r><C-w>/j <C-a><CR>
+nnoremap <F8> :sil vimgrep /\C<C-r><C-w>/j *.<C-r>=&filetype<CR>
 
 imap <f11> <Esc><f11>
 nnoremap <f11> :tabnew<CR>
