@@ -162,14 +162,17 @@ elseif has('terminal')
   tnoremap <C-Space> <C-w>N
 endif
 
-xmap <F2> <Esc><F2>
+imap <F1> <Esc><F1>
+nnoremap <F1> :Help help.txt<CR>
+
+imap <F2> <Esc><F2>
 nnoremap <F2> :edit <C-r>=expand("%:p:h").g:psep<CR>
 cnoremap <F2> <C-r>=expand("%:p:h").g:psep<CR>
 
-xmap <F3> <Esc><f3>
+imap <F3> <Esc><f3>
 nnoremap <F3> :buffer<Space>
 
-xmap <F4> <Esc><F4>
+imap <F4> <Esc><F4>
 nnoremap <F4> :find<Space>
 
 nnoremap <F5> :call basic#PopupTerminal()<CR>
@@ -240,6 +243,7 @@ command! -nargs=0 WhitespaceClenup         :call whitespace#Cleanup()
 command! -nargs=0 ShowUnsavedChanges       :call vimdiff#UnsavedChanges()
 command! -nargs=* -complete=dir TwoDirDiff :call vimdiff#TwoDirDiff(<f-args>)
 command! -nargs=1 -complete=dir Cd         :call spaces#Start(<q-args>)
+command! -nargs=1 -complete=help Help      :call basic#OpenFloatingHelp(<q-args>)
 
 " surround visual selection with double quote ("), quote ('), backtick (`),
 " parentheses (), braces {} and brackets []

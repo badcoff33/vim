@@ -1,7 +1,7 @@
 " Vim autoload file
 "
 " Description: very basic functions called from init.vim as autoload functions
-" to save startup time. 
+" to save startup time.
 
 " Description: Make the actual window more obvious.
 " Active 'cursorline' option in diff buffers overrules highlighting of
@@ -71,9 +71,9 @@ function! basic#ToggleQuickfix()
   else
     cclose
   endif
-  if win_gotoid(l:save_win) == 0 
-    wincmd p 
-  endif 
+  if win_gotoid(l:save_win) == 0
+    wincmd p
+  endif
 endfunction
 
 " Description: Popup term buffer.
@@ -89,7 +89,7 @@ function! basic#PopupTerminal()
   if empty(l:termWinNr)
     execute l:termBufNr . "buffer"
   else
-    noautocmd call win_gotoid(l:termWinNr[0]) 
+    noautocmd call win_gotoid(l:termWinNr[0])
   endif
 endfunction
 
@@ -105,7 +105,7 @@ endfunction
 
 function! basic#SurroundSelection()
   echomsg "Press key to surround visual selection ... "
-  let l:nr = getchar()   
+  let l:nr = getchar()
   if (l:nr != "\<ESC>") && (l:nr != "\<C-c>")
     let l:opening_char = nr2char(l:nr)
     let l:closing_char = l:opening_char
@@ -153,7 +153,7 @@ function! basic#OpenFloatingWin(string)
   nmap <buffer> <CR>  :bwipeout!<CR>
 endfunction
 
-function! basic#OpenCenteredFloatingWin()
+function! basic#OpenFloatingHelp(help_arg)
   if !has('nvim')
     echo "sorry, nvim only."
   endif
@@ -161,15 +161,17 @@ function! basic#OpenCenteredFloatingWin()
   let height = min([&lines - 4, max([20, &lines - 10])])
   let top = ((&lines - height) / 2) - 1
   let left = (&columns - width) / 2
-  let opts = {'relative': 'editor', 
-        \'row': top, 
-        \'col': left, 
-        \'width': width, 
-        \'height': height, 
+  let opts = {'relative': 'editor',
+        \'row': top,
+        \'col': left,
+        \'width': width,
+        \'height': height,
         \'style': 'minimal'}
   let s:buf = nvim_create_buf(v:false, v:true)
   let l:win = nvim_open_win(s:buf, v:true, opts)
   call nvim_win_set_option(win, 'winhl', 'Normal:NormalFloat')
+  setlocal nonumber norelativenumber buftype=help
+  exe "help " . a:help_arg
 endfunction
 
 
