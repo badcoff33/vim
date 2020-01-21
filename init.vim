@@ -237,10 +237,9 @@ command! -nargs=0 ToggleStatusline         :call basic#ToggleStatusline()
 command! -nargs=0 ToggleQuickfix           :call basic#ToggleQuickfix()
 command! -nargs=0 WhitespaceMelt           :call whitespace#Melt()
 command! -nargs=0 WhitespaceClenup         :call whitespace#Cleanup()
-command! -nargs=0 EnableSpaces             :call spaces#Enable()
-command! -nargs=0 DisableSpaces            :call spaces#Disable()
 command! -nargs=0 ShowUnsavedChanges       :call vimdiff#UnsavedChanges()
 command! -nargs=* -complete=dir TwoDirDiff :call vimdiff#TwoDirDiff(<f-args>)
+command! -nargs=1 -complete=dir Cd         :call spaces#Start(<q-args>)
 
 " surround visual selection with double quote ("), quote ('), backtick (`),
 " parentheses (), braces {} and brackets []
