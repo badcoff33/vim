@@ -150,6 +150,9 @@ vnoremap < <gv
 " Switch Vim modes
 inoremap <C-Space> <Esc>
 
+" Position where last change was made
+nnoremap <BS> ˋ.
+
 " Terminals
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
