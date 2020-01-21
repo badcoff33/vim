@@ -1,21 +1,20 @@
 " Vim autoload file
 
-function! spaces#Enable()
+function! s:StartFileTracking()
   if !exists("#Spaces")
-    " remove curdir, because it would trigger DirChanged and cause recursive
-    " call of funcition s:Change.
-    set sessionoptions-=curdir
-    call s:Change()
+    let g:spaces_wd = getcwd()
     augroup Spaces
       autocmd!
-      autocmd DirChanged  * :call s:Change()
-      autocmd BufAdd      * :mksession! .session
-      autocmd BufDelete   * :mksession! .session
+      autocmd BufAdd      * :if g:spaces_wd == getcwd() | mksession! .session | endif
+      autocmd BufDelete   * :if g:spaces_wd == getcwd() | mksession! .session | endif
     augroup END
   endif
 endfunction
 
 function! spaces#Disable()
+  if exists("g:spaces_wd")
+    unlet g:spaces_wd
+  endif
   if exists("#Spaces")
     augroup Spaces
       autocmd!
@@ -24,7 +23,8 @@ function! spaces#Disable()
   endif
 endfunction
 
-function! s:Change()
+function! spaces#Enable()
+  call spaces#Disable()
   if filereadable(".session")
     " Clean up
     try
@@ -51,6 +51,7 @@ function! s:Change()
       endif
     endwhile
   endif
+  call s:StartFileTracking()
 endfunction
 
 " vim:sw=2:tw=0:nocindent:foldmethod=marker
