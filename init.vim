@@ -167,6 +167,8 @@ endif
 
 imap <F1> <Esc><F1>
 nnoremap <F1> :Help help.txt<CR>
+imap <C-F1> <Esc><C-F1>
+nnoremap <C-F1> :Help <C-r><C-w><CR>
 
 imap <F2> <Esc><F2>
 nnoremap <F2> :edit <C-r>=expand("%:p:h").g:psep<CR>
