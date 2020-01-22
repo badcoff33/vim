@@ -262,3 +262,12 @@ if has("win32") || has("win64")
   set grepprg=findstr\ /N\ /F:.index
 endif
 ```
+
+## HELP!
+
+Open help file in the left window (if there is enough room)
+
+```
+autocmd BufEnter <buffer> if (winnr('$') == 2) && (&columns > 164) | wincmd H | endif
+```
+
