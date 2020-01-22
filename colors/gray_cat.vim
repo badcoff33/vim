@@ -1,6 +1,6 @@
 " Vim color theme
 "
-" Description: A light one with fresh colors. 
+" Description: A light one with fresh colors.
 
 if exists("syntax_on")
   syntax reset
@@ -13,10 +13,10 @@ let g:colors_name = "gray_cat"
 " basics
 highlight Normal guifg=grey30 guibg=grey94
 highlight NonText guifg=grey80 guibg=grey91
-highlight Visual guifg=grey20 guibg=yellow1
+highlight Visual guifg=white guibg=dodgerblue4
 highlight Cursor guifg=white guibg=palevioletred3
 
-highlight! link NormalFloat  StatusLine 
+highlight NormalFloat  guifg=black guibg=azure3
 
 " window decoration
 highlight StatusLine guifg=grey90 guibg=grey30 gui=bold
@@ -51,7 +51,7 @@ highlight PmenuSbar guibg=fg
 highlight PmenuThumb guifg=grey30
 
 " search
-highlight IncSearch guifg=grey30 guibg=orange gui=bold
+highlight IncSearch guifg=black guibg=yellow gui=bold
 highlight Search guifg=black guibg=cyan2 gui=none
 highlight MatchParen guifg=grey10 guibg=bg gui=underline
 
