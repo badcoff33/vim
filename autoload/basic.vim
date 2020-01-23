@@ -110,8 +110,8 @@ function! basic#SurroundSelection()
     let l:opening_char = nr2char(l:nr)
     let l:closing_char = l:opening_char
     for pair in [ "()", "{}", "[]", "<>" ]
-      if l:opening_char == pair[1]
-        let l:closing_char = pair[0]
+      if l:opening_char == pair[0]
+        let l:closing_char = pair[1]
         break
       endif
     endfor
