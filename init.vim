@@ -213,7 +213,7 @@ nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
-nnoremap <Leader>G :silent grep<Space>
+nnoremap <Leader>G :silent grep  <C-r>=expand("%:p:h").g:psep<CR><C-b><Right><Right><Right><Right><Right>
 
 nnoremap <Leader><Space> :clist<CR>
 
