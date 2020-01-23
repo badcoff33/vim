@@ -1,6 +1,5 @@
-repos=(https://github.com/plasticboy/vim-markdown.git
-           https://github.com/junegunn/vim-easy-align.git \
-           https://github.com/liuchengxu/vista.vim.git)
+repos=(https://github.com/junegunn/vim-easy-align.git \
+  https://github.com/liuchengxu/vista.vim.git)
 for r in ${repos[*]} ; do {
     s=${r##*/}
     if [ -d Github/start/$s ];
