@@ -150,9 +150,6 @@ vnoremap < <gv
 " Switch Vim modes
 inoremap <C-Space> <Esc>
 
-" Position where last change was made
-nnoremap <BS> ˋ.
-
 " Terminals
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -252,7 +249,7 @@ command! -nargs=1 -complete=help Help      :call basic#OpenFloatingHelp(<q-args>
 
 " surround visual selection with double quote ("), quote ('), backtick (`),
 " parentheses (), braces {} and brackets []
-vnoremap <Leader>% <ESC>:call basic#SurroundSelection()<CR>
+vnoremap <BS> <ESC>:call basic#SurroundSelection()<CR>
 
 nnoremap <Leader>h   :HighlightWord <C-r><C-w><CR>
 nnoremap <Leader>w   :WhitespaceMelt<CR>
