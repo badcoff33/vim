@@ -215,10 +215,8 @@ nnoremap <C-k> :cprevious<CR>
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
 nnoremap <Leader>G :silent grep  <C-r>=expand("%:p:h").g:psep<CR><C-b><C-Right><C-Right><Right>
 
-nnoremap <Leader><Space> :clist<CR>
-
-nnoremap <Leader>r :%s/\<<C-r><C-w>\>//c<Left><Left>
-vnoremap <Leader>r :s/\<<C-r><C-w>\>//c<Left><Left>
+nnoremap <Leader>r :%s/\C//c<Left><Left><Left>
+vnoremap <Leader>r :s/\C//c<Left><Left><Left>
 
 " Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
 " record a macro with those keys and make macro playback easy as possible.
