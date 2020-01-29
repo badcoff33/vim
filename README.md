@@ -82,17 +82,23 @@ This line does the trick: `:g/hi/ s/foo/hey/g`
 
 ## GREP
 
-Under boring, old Windows this works quit good to run a grep on bigger code basis.
-It uses a kind of index-file with all C an H files. This file is used by Windows-standard program `findstr`. 
-Works quit fast!
+Vimgrep can run on any OS. But performance is somehow week. Speed up on recursive
+operation can be achieved by setting a proper value for option 'wildoptions'
+to ignore a set of sub-directories.
+
+Even under Windows, grep-commands can run on bigger code basis even without
+any special tool. The method uses a kind of index-file with all C an H files.
+This file is used by Windows-standard program `findstr`.  Works
+quit fast!
 
 ```
 call writefile(split(globpath('.', '**/*.[ch]')), "files")
 set gp=findstr\ /N\ /F:files 
 ```
 
-A nice addition to spice up the `:grep` experience: Run `:grep` with the current word under cursor, 
-highlighted in the results. Needs option `hlsearch` to be set.
+A nice addition to spice up the `:grep` experience: Run `:grep` with the
+current word under cursor, highlighted in the results. Needs option `hlsearch`
+to be set.
 
 ```
 nnoremap <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w> . <CR> :cfirst<CR>
