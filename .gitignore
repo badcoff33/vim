@@ -2,6 +2,7 @@ plugin/site.vim
 bitmaps
 .netrwhist
 .netrwbook
+.session
 spell
 *.swo
 undo
