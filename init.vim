@@ -76,7 +76,7 @@ for d in s
   if isdirectory(d . '/backup')
     set backup
     execute 'set backupdir=' . d . '/backup'
-    set wildignore+=backup/**
+    set wildignore+=*/backup/*
     break
   endif
 endfor
@@ -85,7 +85,7 @@ for d in s
   if isdirectory(d . '/undo')
     set undofile
     execute 'set undodir=' . d . '/undo'
-    set wildignore+=undo/**
+    set wildignore+=*/undo/*
     break
   endif
 endfor
