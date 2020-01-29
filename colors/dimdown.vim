@@ -18,12 +18,6 @@ highlight Normal guifg=grey85 guibg=grey25 ctermbg=black
 highlight NonText guifg=skyblue1 guibg=bg gui=none
 highlight Visual guifg=white guibg=darkseagreen4
 
-" used if Nvim's option 'winhighlight' exists (Nvim)
-if has ('nvim')
-  highlight NormalFocus guibg=grey13
-  highlight NormalNoFocus guibg=grey16
-endif
-
 " where is the cursor?
 highlight LineNr guifg=grey38 guibg=bg gui=none
 highlight Cursor guifg=white guibg=lightblue3
@@ -51,7 +45,7 @@ highlight Search guifg=fg guibg=grey35 gui=bold
 highlight MatchParen guifg=cyan2 guibg=bg gui=underline
 
 " popup Menu
-highlight Pmenu guifg=white guibg=deepskyblue gui=none 
+highlight Pmenu guifg=white guibg=deepskyblue gui=none
 highlight PmenuSel guifg=white guibg=deepskyblue gui=bold,underline
 highlight PmenuSbar guibg=lightblue4
 highlight PmenuThumb guifg=white guibg=lightblue4
@@ -89,7 +83,7 @@ highlight Question guifg=yellow2 guibg=bg gui=none
 highlight MoreMsg guifg=yellow2 guibg=bg gui=none
 
 " quickfix
-highlight! link qfLineNr LineNr 
+highlight! link qfLineNr LineNr
 highlight qfFileName guifg=lightblue2 gui=underline
 highlight qfSeparator guifg=fg
 highlight qfError guifg=grey60
@@ -104,13 +98,13 @@ highlight cCppOutIf2 guifg=#c0c0e0 guibg=#333340
 highlight cParen guifg=deepskyblue3
 highlight cBlock guifg=deepskyblue4
 
-" Doxygen 
+" Doxygen
 highlight doxygenComment guifg=grey55 gui=none
 highlight doxygenBrief guifg=grey66 gui=none
 highlight doxygenParam guifg=grey40 gui=none
 highlight doxygenOtherTODO guifg=indianred3 gui=bold,underline
 highlight doxygenOtherWARN guifg=indianred3 gui=bold,underline
-highlight! link DoxygenBody Comment 
+highlight! link DoxygenBody Comment
 highlight! link doxygenSpecialOnelineDesc doxygenBrief
 
 highlight DiffChange guifg=cyan4 guibg=white gui=none

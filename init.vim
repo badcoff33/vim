@@ -263,4 +263,8 @@ augroup init
   autocmd BufWritePre *.vim     :call whitespace#Cleanup()
 augroup END
 
+if has('nvim')
+  set winhighlight=Normal:Normal
+endif
+
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:

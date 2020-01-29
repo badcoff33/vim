@@ -16,14 +16,6 @@ highlight NonText   guifg=#4285F4  guibg=#18242e gui=none
 highlight Cursor    guifg=#000000  guibg=#ffffff gui=none
 highlight Visual    guifg=#bfbfca  guibg=#585863 gui=none
 
-" used if Nvim's option 'winhighlight' exists (Nvim)
-if has ('nvim')
-  highlight NormalFloat   guifg=#aad0b8 guibg=#28202f 
-  highlight NormalFocus   guibg=#2d2d3a
-  highlight NormalNoFocus guibg=#18242e
-  "set winhighlight=Normal:Normal,NormalNC:NormalNoFocus
-endif
-
 " Decoration
 highlight StatusLineNC  guifg=#a0a000   guibg=#1f2836  gui=none
 highlight StatusLine    guifg=#eeee00   guibg=#434356  gui=none

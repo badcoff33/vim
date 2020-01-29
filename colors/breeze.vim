@@ -1,6 +1,6 @@
 " Vim color theme
 "
-" Description: A light one with fresh colors. 
+" Description: A light one with fresh colors.
 
 if exists("syntax_on")
   syntax reset
@@ -15,14 +15,6 @@ highlight Normal guifg=grey30 guibg=white
 highlight NonText guifg=lightblue guibg=bg
 highlight Visual guifg=white guibg=cornflowerblue
 highlight Cursor guifg=white guibg=red3
-
-" used if Nvim's option 'winhighlight' exists (Nvim)
-if has ('nvim')
-  highlight NormalFocus   guibg=white
-  highlight NormalNoFocus guibg=grey98
-  highlight NormalFloat   guifg=seagreen2 guibg=black 
-  "set winhighlight=Normal:NormalFocus,NormalNC:NormalNoFocus
-endif
 
 " window decoration
 highlight StatusLine guifg=white guibg=grey20 gui=bold
@@ -54,7 +46,7 @@ highlight TabLineSel guifg=black guibg=bg gui=bold,underline
 highlight Pmenu guifg=grey20 guibg=grey90
 highlight PmenuSbar guibg=grey50
 highlight PmenuThumb guifg=white
-highlight PmenuSel guifg=white guibg=seagreen4 
+highlight PmenuSel guifg=white guibg=seagreen4
 
 " search
 highlight IncSearch guifg=white guibg=coral1 gui=none
