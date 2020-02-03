@@ -151,6 +151,7 @@ vnoremap < <gv
 
 " Switch Vim modes
 inoremap <C-Space> <Esc>
+inoremap <Char-0xDF> <Esc>
 
 " Terminals
 if has('nvim')
