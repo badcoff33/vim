@@ -11,8 +11,8 @@ set background=light
 let g:colors_name = "gray_cat"
 
 " basics
-highlight Normal guifg=grey30 guibg=grey94
-highlight NonText guifg=grey80 guibg=grey91
+highlight Normal guifg=grey30 guibg=grey90
+highlight NonText guifg=grey80 guibg=grey88
 highlight Visual guifg=white guibg=dodgerblue4
 highlight Cursor guifg=white guibg=palevioletred3
 
@@ -37,7 +37,7 @@ highlight CursorColumn guibg=bg
 highlight CursorLineNr guifg=grey30 guibg=bg gui=bold,italic
 highlight SignColumn guifg=grey30 guibg=bg
 highlight! link FoldColumn Normal
-highlight Folded guifg=grey30 guibg=bg gui=NONE
+highlight! link Folded NonText
 
 " tabs
 highlight TabLineFill guifg=grey30 guibg=bg gui=NONE

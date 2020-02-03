@@ -10,6 +10,14 @@ hi clear
 set background=dark
 let g:colors_name = "apollo"
 
+function! s:hi(group, fg, bg, attr)
+  let l:fg = a:fg   != '' ? 'guifg=' . a:fg   : ''
+  let l:bg = a:bg   != '' ? 'guibg=' . a:bg   : ''
+  let l:at = a:attr != '' ? 'gui='   . a:attr : ''
+  exec "highlight" a:group l:bg l:fg l:at
+endfunction
+"call s:hi("Normal", "", "lightblue1", "")
+"finish
 highlight apolloWhite       guifg=#FFFFFF
 highlight apolloWhiteBold   guifg=#FFFFFF gui=bold
 highlight apolloWhiteItalic guifg=#FFFFFF gui=italic
@@ -17,26 +25,25 @@ highlight apolloWhiteUnderline guifg=#FFFFFF gui=underline
 highlight apolloBg          guibg=#201C23 guifg=#F0F0FF gui=none
 highlight apolloBg1         guibg=#18252B               gui=none
 highlight apolloBg2         guibg=#222F3f               gui=none
-highlight apolloPopLowKey   guifg=#D0D0F0 guibg=#6068A0 ctermfg=237
-highlight apolloPopHighKey  guifg=#E0E0F8 guibg=#4040B0 gui=bold ctermfg=237
-highlight apolloDeco        guibg=#202830 guifg=#B0B0B8 ctermfg=237
-highlight apolloDeco1       guibg=#282F38 guifg=#C0C0FF ctermfg=239
-highlight apolloDeco1Blind  guibg=#202830 guifg=#202830 ctermfg=239
-highlight apolloDeco2       guibg=#284330 guifg=#A0E8A8 ctermfg=239
+highlight apolloPopLowKey   guifg=#E0E0F8 guibg=#606898
+highlight apolloPopHighKey  guifg=#E0E0F8 guibg=#4040B0 gui=bold
+highlight apolloDeco        guibg=#202830 guifg=#B0B0B8
+highlight apolloDeco1       guibg=#282F38 guifg=#C0C0FF
+highlight apolloDeco1Blind  guibg=#202830 guifg=#202830
+highlight apolloDeco2       guibg=#207040 guifg=#C0F8E0
 
-highlight apolloGray0      guifg=#40404C guibg=bg ctermfg=237
-highlight apolloGray1      guifg=#60606C guibg=bg ctermfg=239
-highlight apolloGray2      guifg=#80808C guibg=bg ctermfg=242
-highlight apolloGray3      guifg=#C0C0CF guibg=bg ctermfg=249
-highlight apolloGreen      guifg=#38AA27 guibg=bg ctermfg=71
-highlight apolloGreen2     guifg=#68CF47 guibg=bg ctermfg=71
-highlight apolloGreenBold  guifg=#379A17 guibg=bg ctermfg=71 gui=bold
-highlight apolloGreen2Bold guifg=#67CF47 guibg=bg ctermfg=71 gui=bold
-highlight apolloWhite      guifg=#F8F8F8 guibg=bg ctermfg=231
-highlight apolloBlue       guifg=#7080B0 guibg=bg ctermfg=110
-highlight apolloBlue2      guifg=#A0A8D0 guibg=bg ctermfg=111
-highlight apolloRed        guifg=#902020 guibg=bg ctermfg=1
-highlight apolloRed2       guifg=#C04040 guibg=bg ctermfg=196
+highlight apolloGray0      guifg=#40404C guibg=bg
+highlight apolloGray1      guifg=#60606C guibg=bg
+highlight apolloGray2      guifg=#80808C guibg=bg
+highlight apolloGray3      guifg=#C0C0CF guibg=bg
+highlight apolloGreen      guifg=#38AA27 guibg=bg
+highlight apolloGreen2     guifg=#68CF47 guibg=bg
+highlight apolloGreenBold  guifg=#379A17 guibg=bg gui=bold
+highlight apolloGreen2Bold guifg=#67CF47 guibg=bg gui=bold
+highlight apolloWhite      guifg=#F8F8F8 guibg=bg
+highlight apolloBlue       guifg=#7080B0 guibg=bg
+highlight apolloBlue2      guifg=#A0A8D0 guibg=bg
+highlight apolloRed        guifg=#D02050 guibg=bg
 
 highlight Cursor           guifg=fg guibg=bg gui=inverse
 
@@ -88,7 +95,7 @@ highlight! link Number       apolloBlue
 
 highlight! link Title        apolloGray2
 highlight! link Todo         apolloGray2
-highlight! link Error        apolloRed2
+highlight! link Error        apolloRed
 highlight! link Directory    apolloGray2
 
 highlight! link ErrorMsg     apolloRed
@@ -112,7 +119,7 @@ highlight! link cBlock     apolloGray3
 " filetype HTML
 highlight! link htmlH1     apolloWhiteBold
 highlight! link htmlH2     apolloWhiteBold
-highlight! link htmlH3     apolloWhite
+highlight! link htmlH3     apolloWhiteBold
 highlight! link htmlBold   apolloWhiteBold
 highlight! link htmlItalic apolloWhiteItalic
 
