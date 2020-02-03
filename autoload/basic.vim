@@ -40,7 +40,7 @@ endfunction
 " when jumping within the current buffer (:help g').
 function! basic#RestoreCursor ()
   if line("'\"") > 1 && line("'\"") <= line("$")
-    exe "normal! g'\""
+    exe "normal! g`\""
   endif
 endfunction
 
