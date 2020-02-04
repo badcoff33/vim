@@ -120,7 +120,7 @@ set sessionoptions=buffers,curdir,localoptions,globals,tabpages,winsize
 set autowrite
 
 " Tune the diff feature for my needs.
-set diffopt=context:3,vertical,iwhite,filler
+set diffopt=internal,context:3,vertical,iwhite,filler
 
 if has('unix')
   let g:psep = '/'
@@ -194,6 +194,8 @@ imap <f11> <Esc><f11>
 nnoremap <f11> :tabnew<CR>
 imap <S-f11> <Esc><S-f11>
 nnoremap <S-f11> :tabclose<CR>
+inoremap <C-Tab> <Esc>gt
+nnoremap <C-Tab> gt
 
 imap <F12> <Esc><F12>
 nnoremap <F12> :ToggleQuickfix<CR>
