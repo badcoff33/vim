@@ -131,3 +131,4 @@ highlight! link markdownCodeBlock Comment
 hi! link DiffChange apolloBg2
 hi! link DiffText   apolloDeco1
 hi! link DiffDelete apolloRed
+hi! link DiffAdd    apolloGreen

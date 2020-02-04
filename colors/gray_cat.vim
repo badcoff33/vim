@@ -11,7 +11,7 @@ set background=light
 let g:colors_name = "gray_cat"
 
 " basics
-highlight Normal guifg=grey30 guibg=grey90
+highlight Normal guifg=grey30 guibg=grey94
 highlight NonText guifg=grey80 guibg=grey88
 highlight Visual guifg=white guibg=dodgerblue4
 highlight Cursor guifg=white guibg=palevioletred3
@@ -92,29 +92,15 @@ highlight doxygenRefWord guifg=grey40 gui=underline
 highlight doxygenSpecial guifg=grey50 gui=none
 highlight doxygenSpecialOnelineDesc guifg=grey30
 
-
-highlight diffOldFile guifg=grey30
-highlight diffNewFile guifg=grey30
-highlight diffFile guifg=grey30
-highlight diffOnly guifg=grey30
-highlight diffIdentical guifg=grey30
-highlight diffDiffer guifg=grey30
-highlight diffBDiffer guifg=grey30
-highlight diffIsA guifg=grey30
-highlight diffNoEOL guifg=grey30
-highlight diffCommon guifg=grey30
-highlight diffRemoved guifg=firebrick2
-highlight diffChanged guifg=steelblue2
-highlight diffAdded guifg=green3
-highlight diffLine guifg=grey30
-highlight diffSubname guifg=grey30
-highlight diffComment guifg=grey30
+highlight diffRemoved guifg=firebrick3
+highlight diffChanged guifg=steelblue3
+highlight diffAdded guifg=forestgreen
 
 " Diff highlighting
 highlight! link DiffChange diffChanged
 highlight! link DiffAdd diffAdded
 highlight! link DiffDelete diffRemoved
-highlight DiffText guifg=grey30 guibg=bg gui=none
+highlight DiffText guifg=grey30 guibg=grey85 gui=none
 
 " netrw
 highlight netrwMarkFile gui=inverse
