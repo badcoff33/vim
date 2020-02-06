@@ -189,7 +189,9 @@ nnoremap <F7> :sil make<Space><Up><CR>
 nnoremap <C-F7> :sil make<Space><Up>
 
 imap <F8> <Esc><F8>
-nnoremap <F8> :sil vimgrep /\C<C-r><C-w>/j *.<C-r>=&filetype<CR>
+nnoremap <F8> :sil vimgrep<Up><C-B><C-Right><C-Right><C-Right>
+cabbrev xloc <C-r>=expand("%:p:h").g:psep.'*.'.&filetype<CR>
+cabbrev xglob <C-r>=getcwd().g:psep.'*.'.&filetype<CR>
 
 imap <f11> <Esc><f11>
 nnoremap <f11> :tabnew<CR>
