@@ -15,7 +15,6 @@ set expandtab
 set history=200
 set visualbell
 set noerrorbells
-set viminfo='50,<1000,s100,:100
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
@@ -166,41 +165,12 @@ elseif has('terminal')
   tnoremap <C-Space> <C-w>N
 endif
 
-imap <F1> <Esc><F1>
-nnoremap <F1> :Help help.txt<CR>
-imap <C-F1> <Esc><C-F1>
-nnoremap <C-F1> :Help <C-r><C-w><CR>
-
-imap <F2> <Esc><F2>
-nnoremap <F2> :edit <C-r>=expand("%:p:h").g:psep<CR>
-cnoremap <F2> <C-r>=expand("%:p:h").g:psep<CR>
-
-imap <F3> <Esc><f3>
-nnoremap <F3> :buffer<Space>
-
-imap <F4> <Esc><F4>
-nnoremap <F4> :find<Space>
-
-nnoremap <F5> :call basic#PopupTerminal()<CR>
-inoremap <F5> <Esc>:call basic#PopupTerminal()<CR>
-
-inoremap <F7> <Esc>:sil make<Space><Up><CR>
-nnoremap <F7> :sil make<Space><Up><CR>
-nnoremap <C-F7> :sil make<Space><Up>
-
-imap <F8> <Esc><F8>
-nnoremap <F8> :sil vimgrep<Up><C-B><C-Right><C-Right><C-Right>
-cabbrev %% <C-r>=expand("%:p:h").g:psep<CR>
-
-imap <f11> <Esc><f11>
-nnoremap <f11> :tabnew<CR>
-imap <S-f11> <Esc><S-f11>
-nnoremap <S-f11> :tabclose<CR>
-inoremap <C-Tab> <Esc>gt
-nnoremap <C-Tab> gt
-
-imap <F12> <Esc><F12>
-nnoremap <F12> :ToggleQuickfix<CR>
+nnoremap <Leader>e :edit <C-r>=expand("%:p:h").g:psep<CR>
+nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader>f :find<Space>
+nnoremap <Leader>m :sil make<Space><Up><CR>
+nnoremap <Leader>M :sil make<Space><Up>
+nnoremap <Leader>v :sil vimgrep<Up><C-B><C-Right><C-Right><C-Right>
 
 nnoremap <A-.> :tjump<Space>
 inoremap <A-.> <Esc>:tjump<Space>
@@ -210,7 +180,7 @@ nnoremap <C-,> <C-t>
 inoremap <C-,> <Esc><C-t>
 
 nnoremap <A-y> "*yiw
-vnoremap <A-x> "*x
+vnoremap <A-y> "*x
 vnoremap <A-y> "*y
 nnoremap <A-p> "*P
 vnoremap <A-p> "*P
@@ -240,9 +210,20 @@ nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
+" surround visual selection with double quote ("), quote ('), backtick (`),
+" parentheses (), braces {} and brackets []
+vnoremap <CR> <ESC>:call basic#SurroundSelection()<CR>
+
+nnoremap <Leader>h    :HighlightWord <C-r><C-w><CR>
+nnoremap <Leader>w    :WhitespaceMelt<CR>
+nnoremap <Leader>l    :ToggleStatusline<CR>
+nnoremap <S-Tab>      :ToggleQuickfix<CR>
+nnoremap <Leader>t    :PopupTerminal<CR>
+
 command! -nargs=0 ShowHiName               :call basic#HiName()
 command! -nargs=1 HighlightWord            :call basic#HighlightWord("<args>")
 command! -nargs=0 ToggleStickyCursorline   :call basic#ToggleStickyCursorLine()
+command! -nargs=0 PopupTerminal            :call basic#PopupTerminal()
 command! -nargs=0 ToggleStatusline         :call basic#ToggleStatusline()
 command! -nargs=0 ToggleQuickfix           :call basic#ToggleQuickfix()
 command! -nargs=0 WhitespaceMelt           :call whitespace#Melt()
@@ -252,13 +233,7 @@ command! -nargs=* -complete=dir TwoDirDiff :call vimdiff#TwoDirDiff(<f-args>)
 command! -nargs=1 -complete=dir Cd         :call spaces#Start(<q-args>)
 command! -nargs=1 -complete=help Help      :call basic#OpenFloatingHelp(<q-args>)
 
-" surround visual selection with double quote ("), quote ('), backtick (`),
-" parentheses (), braces {} and brackets []
-vnoremap <BS> <ESC>:call basic#SurroundSelection()<CR>
-
-nnoremap <Leader>h   :HighlightWord <C-r><C-w><CR>
-nnoremap <Leader>w   :WhitespaceMelt<CR>
-nnoremap <Leader>l   :ToggleStatusline<CR>
+cabbrev _% <C-r>=expand("%:p:h")
 
 augroup init
   autocmd!
