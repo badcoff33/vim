@@ -80,7 +80,7 @@ endfunction
 " If no term buffer open, open a new one.
 " TODO: handle multiple term buffers.
 function! basic#PopupTerminal()
-  let l:termBufNr = bufnr("^term:*")
+  let l:termBufNr = bufnr("^term:")
   if l:termBufNr < 0
     terminal
     return

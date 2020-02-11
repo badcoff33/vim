@@ -153,11 +153,15 @@ inoremap <C-Space> <Esc>
 inoremap <Char-0xDF> <Esc>
 nnoremap <Leader><Space> :
 
+inoremap <C-Tab> <Esc>gt
+nnoremap <C-Tab> gt
+
 " Terminals
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-Space> <C-\><C-n>
   tnoremap <C-w> <C-\><C-n><C-w>
+  tnoremap <C-Tab> <C-\><C-n>gt
   autocmd BufEnter term://* startinsert
   autocmd TermOpen term://* startinsert
 elseif has('terminal')

@@ -11,8 +11,8 @@ set background=light
 let g:colors_name = "gray_cat"
 
 " basics
-highlight Normal guifg=grey30 guibg=grey94
-highlight NonText guifg=grey80 guibg=grey88
+highlight Normal guifg=grey30 guibg=white
+highlight NonText guifg=grey50 guibg=grey96
 highlight Visual guifg=white guibg=dodgerblue4
 highlight Cursor guifg=white guibg=palevioletred3
 
