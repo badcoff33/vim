@@ -233,7 +233,7 @@ command! -nargs=* -complete=dir TwoDirDiff :call vimdiff#TwoDirDiff(<f-args>)
 command! -nargs=1 -complete=dir Cd         :call spaces#Start(<q-args>)
 command! -nargs=1 -complete=help Help      :call basic#OpenFloatingHelp(<q-args>)
 
-cabbrev _% <C-r>=expand("%:p:h")
+cabbrev %% <C-r>=expand("%:p:h")
 
 augroup init
   autocmd!
