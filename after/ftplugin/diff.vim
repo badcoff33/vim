@@ -10,7 +10,7 @@ let b:did_diff_ftplugin = 1
 
 setlocal foldexpr=Diff_FoldLevel()
 setlocal foldmethod=expr
-setlocal foldcolumn=2
+
 " use 'zi' to fold diffs output
 setlocal nofoldenable
 
