@@ -10,14 +10,6 @@ hi clear
 set background=dark
 let g:colors_name = "apollo"
 
-function! s:hi(group, fg, bg, attr)
-  let l:fg = a:fg   != '' ? 'guifg=' . a:fg   : ''
-  let l:bg = a:bg   != '' ? 'guibg=' . a:bg   : ''
-  let l:at = a:attr != '' ? 'gui='   . a:attr : ''
-  exec "highlight" a:group l:bg l:fg l:at
-endfunction
-"call s:hi("Normal", "", "lightblue1", "")
-"finish
 highlight apolloWhite       guifg=#FFFFFF
 highlight apolloWhiteBold   guifg=#FFFFFF gui=bold
 highlight apolloWhiteItalic guifg=#FFFFFF gui=italic
@@ -25,12 +17,13 @@ highlight apolloWhiteUnderline guifg=#FFFFFF gui=underline
 highlight apolloBg          guibg=#201C23 guifg=#F0F0FF gui=none
 highlight apolloBg1         guibg=#18252B               gui=none
 highlight apolloBg2         guibg=#222F3f               gui=none
-highlight apolloPopLowKey   guifg=#E0E0F8 guibg=#606898
-highlight apolloPopHighKey  guifg=#E0E0F8 guibg=#4040B0 gui=bold
+highlight apolloPopLowKey   guifg=#A0E0E0 guibg=#507080
+highlight apolloPopHighKey  guifg=#007070 guibg=#A0B0C0 gui=bold
 highlight apolloDeco        guibg=#202830 guifg=#B0B0B8
 highlight apolloDeco1       guibg=#282F38 guifg=#C0C0FF
 highlight apolloDeco1Blind  guibg=#202830 guifg=#202830
 highlight apolloDeco2       guibg=#207040 guifg=#C0F8E0
+highlight apolloDecoBright  guibg=#507080 guifg=#B0E0FF
 
 highlight apolloGray0      guifg=#40404C guibg=bg
 highlight apolloGray1      guifg=#60606C guibg=bg
@@ -47,14 +40,14 @@ highlight apolloRed        guifg=#D02050 guibg=bg
 
 highlight Cursor           guifg=fg guibg=bg gui=inverse
 
-" (basics)
+" basics
 highlight! link Normal       apolloBg
 highlight! link NormalFloat  apolloBg2
 highlight! link StatusLine   apolloDeco1
 highlight! link StatusLineNC apolloDeco
 highlight! link VertSplit    apolloDeco1Blind
 highlight! link IncSearch    apolloPopHighKey
-highlight! link Search       apolloPopLowKey
+highlight! link Search       apolloDecoBright
 highlight! link MatchParen   apolloWhiteBold
 highlight! link QuickFixLine apolloBg1
 
