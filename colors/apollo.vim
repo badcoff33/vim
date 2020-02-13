@@ -17,13 +17,13 @@ highlight apolloWhiteUnderline guifg=#FFFFFF gui=underline
 highlight apolloBg          guibg=#201C23 guifg=#F0F0FF gui=none
 highlight apolloBg1         guibg=#18252B               gui=none
 highlight apolloBg2         guibg=#222F3f               gui=none
-highlight apolloPopLowKey   guifg=#A0E0E0 guibg=#507080
-highlight apolloPopHighKey  guifg=#007070 guibg=#A0B0C0 gui=bold
-highlight apolloDeco        guibg=#202830 guifg=#B0B0B8
-highlight apolloDeco1       guibg=#282F38 guifg=#C0C0FF
-highlight apolloDeco1Blind  guibg=#202830 guifg=#202830
-highlight apolloDeco2       guibg=#207040 guifg=#C0F8E0
-highlight apolloDecoBright  guibg=#507080 guifg=#B0E0FF
+highlight apolloPopLowKey   guifg=#A0A0A0 guibg=#505058
+highlight apolloPopHighKey  guifg=#F0F0F0 guibg=#787880 gui=bold
+highlight apolloDeco        guifg=#B0B0B8 guibg=#202830
+highlight apolloDeco1       guifg=#C0C0FF guibg=#282F38
+highlight apolloDeco1Blind  guifg=#202830 guibg=#202830
+highlight apolloDeco2       guifg=#C0F8E0 guibg=#207040
+highlight apolloDecoBright  guifg=#F0F030 guibg=#606030
 
 highlight apolloGray0      guifg=#40404C guibg=bg
 highlight apolloGray1      guifg=#60606C guibg=bg
@@ -40,7 +40,7 @@ highlight apolloRed        guifg=#D02050 guibg=bg
 
 highlight Cursor           guifg=fg guibg=bg gui=inverse
 
-" basics
+" Basics
 highlight! link Normal       apolloBg
 highlight! link NormalFloat  apolloBg2
 highlight! link StatusLine   apolloDeco1
