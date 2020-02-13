@@ -183,12 +183,14 @@ inoremap <C-.> <Esc>g<C-]>
 nnoremap <C-,> <C-t>
 inoremap <C-,> <Esc><C-t>
 
-nnoremap <A-y> "*yiw
-vnoremap <A-y> "*x
-vnoremap <A-y> "*y
-nnoremap <A-p> "*P
-vnoremap <A-p> "*P
-cnoremap <A-p> <C-r>*
+inoremap <S-up>     <Esc><C-w>k
+inoremap <S-down>   <Esc><C-w>j
+inoremap <S-left>   <Esc><C-w>h
+inoremap <S-right>  <Esc><C-w>l
+nnoremap <S-up>     <C-w>k
+nnoremap <S-down>   <C-w>j
+nnoremap <S-left>   <C-w>h
+nnoremap <S-right>  <C-w>l
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
