@@ -113,7 +113,6 @@ set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 
 set showtabline=1
-set sessionoptions=buffers,curdir,localoptions,globals,tabpages,winsize
 
 " Write all files before any ':make' command
 set autowrite
