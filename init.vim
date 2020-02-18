@@ -51,6 +51,9 @@ set nofoldenable
 set notimeout
 set nottimeout
 
+" Clipboard behavior
+set clipboard=unnamed
+
 " backspace and cursor keys wrap to previous/next line
 " keep indent level when Ctrl-U is pressed
 set backspace=eol,start,indent
