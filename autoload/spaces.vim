@@ -2,7 +2,7 @@
 
 " Global Option: Define what to store in a session. Gets sourced by the very first function
 " call to spaces#func.
-set sessionoptions=buffers,curdir,localoptions,globals,tabpages,winsize
+set sessionoptions=buffers,curdir,tabpages,winsize
 
 function! spaces#Start(newd)
   " Clean up
