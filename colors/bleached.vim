@@ -13,20 +13,14 @@ hi clear
 set background=light
 let g:colors_name = "bleached"
 
-highlight Normal guifg=grey25 guibg=snow1
+highlight Normal guifg=grey25 guibg=white
 highlight NonText guifg=cyan3 guibg=bg
-highlight Visual guibg=peachpuff
-
-" used if option 'winhl' exists (Nvim)
-if has ('nvim')
- highlight NormalFocus guibg=white
- highlight NormalNoFocus guibg=snow1
-endif
+highlight Visual guifg=white guibg=lightblue4
 
 " cursor
 highlight Cursor guifg=white guibg=slateblue4 gui=none
 highlight CursorLineNr guifg=cornflowerblue guibg=snow2 gui=bold
-highlight CursorLine guibg=snow2
+highlight CursorLine guibg=ghostwhite
 
 " decorations
 highlight StatusLine guifg=white guibg=turquoise3 gui=bold
@@ -44,14 +38,14 @@ highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link WildMenu PmenuSel
 highlight! link TabLineFill Normal
-highlight! link TabLine StatusLineNC
-highlight! link TabLineSel StatusLine
+highlight! link TabLine Pmenu
+highlight! link TabLineSel PmenuSel
 highlight! link CursorColumn CursorLine
 
 " popup menu set set
-highlight! link Pmenu Search
-highlight! link PmenuSel IncSearch
-highlight PmenuSbar guibg=grey50
+highlight Pmenu guifg=grey20 guibg=cornsilk1
+highlight PmenuSel guifg=white guibg=cornsilk4 gui=bold
+highlight PmenuSbar guibg=grey70
 highlight PmenuThumb guifg=white
 
 highlight Search guifg=cyan4 guibg=lightcyan2 gui=bold
@@ -123,7 +117,7 @@ highlight htmlH1 guifg=skyblue1 gui=bold
 highlight htmlH2 guifg=skyblue3 gui=none
 highlight htmlH3 guifg=skyblue3 gui=none
 highlight htmlBold guifg=dodgerblue gui=bold
-highlight htmlItalic guifg=dodgerblue gui=italic 
+highlight htmlItalic guifg=dodgerblue gui=italic
 
 " markdown
 highlight! link markdownCode String

@@ -31,7 +31,7 @@ highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
 
 " line numbers / side decorations
-highlight LineNr guifg=grey30 guibg=bg gui=bold,italic
+highlight LineNr guifg=grey80 guibg=bg gui=bold,italic
 highlight CursorLine guibg=grey87
 highlight CursorColumn guibg=bg
 highlight CursorLineNr guifg=grey30 guibg=bg gui=bold,italic
@@ -62,7 +62,7 @@ highlight Type guifg=dodgerblue4 gui=none
 highlight StorageClass guifg=grey60 gui=bold
 highlight PreProc guifg=grey10 gui=bold
 highlight Comment guifg=grey60
-highlight Identifier guifg=grey50
+highlight Identifier guifg=grey50 gui=italic
 highlight Special guifg=grey30
 highlight Constant guifg=palevioletred3
 
