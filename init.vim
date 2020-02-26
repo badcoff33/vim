@@ -15,6 +15,12 @@ set expandtab
 set history=200
 set visualbell
 set noerrorbells
+set noswapfile
+set laststatus=2
+set ruler
+set showcmd
+set showmatch matchtime=1
+set showtabline=1
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
@@ -47,12 +53,12 @@ set foldmethod=indent
 set foldnestmax=1
 set nofoldenable
 
+" Write all files before any ':make' command
+set autowrite
+
 " timer configuration for key sequences
 set notimeout
 set nottimeout
-
-" Clipboard behavior
-set clipboard=unnamed
 
 " backspace and cursor keys wrap to previous/next line
 " keep indent level when Ctrl-U is pressed
@@ -70,8 +76,6 @@ set gdefault
 " /\C<text> can be used on demand.
 set ignorecase smartcase
 "set noignorecase nosmartcase
-
-set noswapfile
 
 let s = split(&runtimepath, ',')
 for d in s
@@ -92,12 +96,6 @@ for d in s
   endif
 endfor
 
-" Configured content and style of the statusline
-set laststatus=2
-set ruler
-set showcmd
-set showmatch matchtime=1
-
 " Insert mode completion
 set complete=.,w
 set completeopt=menu
@@ -114,11 +112,6 @@ else
 endif
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
-
-set showtabline=1
-
-" Write all files before any ':make' command
-set autowrite
 
 " Tune the diff feature for my needs.
 set diffopt=internal,context:3,vertical,iwhite,filler
@@ -176,7 +169,7 @@ nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
-nnoremap <Leader>v :sil vimgrep<Up><C-B><C-Right><C-Right><C-Right>
+nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
 
 nnoremap <A-.> :tjump<Space>
 inoremap <A-.> <Esc>:tjump<Space>
@@ -185,20 +178,22 @@ inoremap <C-.> <Esc>g<C-]>
 nnoremap <C-,> <C-t>
 inoremap <C-,> <Esc><C-t>
 
-inoremap <S-up>     <Esc><C-w>k
-inoremap <S-down>   <Esc><C-w>j
-inoremap <S-left>   <Esc><C-w>h
-inoremap <S-right>  <Esc><C-w>l
-nnoremap <S-up>     <C-w>k
-nnoremap <S-down>   <C-w>j
-nnoremap <S-left>   <C-w>h
-nnoremap <S-right>  <C-w>l
+inoremap <S-up>    <Esc><C-w>k
+inoremap <S-down>  <Esc><C-w>j
+inoremap <S-left>  <Esc><C-w>h
+inoremap <S-right> <Esc><C-w>l
+nnoremap <S-up>    <C-w>k
+nnoremap <S-down>  <C-w>j
+nnoremap <S-left>  <C-w>h
+nnoremap <S-right> <C-w>l
+nnoremap <CS-Up>   <C-w>3+
+nnoremap <CS-Down> <C-w>3-
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 
-nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:silent grep <C-r><C-w><CR>
-nnoremap <Leader>G :silent grep  <C-r>=expand("%:p:h").g:psep<CR><C-b><C-Right><C-Right><Right>
+nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
+nnoremap <Leader>G :sil grep<Space><Up>
 
 nnoremap <Leader>r :%s/\C//c<Left><Left><Left>
 vnoremap <Leader>r :s/\C//c<Left><Left><Left>
