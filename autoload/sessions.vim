@@ -1,10 +1,10 @@
 " Vim autoload file
 
 " Global Option: Define what to store in a session. Gets sourced by the very first function
-" call to spaces#func.
+" call to sessions#func.
 set sessionoptions=buffers,curdir,tabpages,winsize
 
-function! spaces#Start(newd)
+function! sessions#Start(newd)
   if !isdirectory(a:newd)
     echoerr "directory" a:newd "does not exist"
     return
@@ -12,7 +12,7 @@ function! spaces#Start(newd)
   " close all terminals
   bufdo if &buftype == 'terminal' | bw! | endif
   " Save previous session if one is allready open
-  call spaces#CloseSession()
+  call sessions#CloseSession()
   " Clean up
   try
     noautocmd %bwipeout
@@ -47,15 +47,15 @@ function! spaces#Start(newd)
     augroup Spaces
       autocmd!
       autocmd ExitPre     *       :mksession! .session
-      autocmd DirChanged  global  :call spaces#CloseSession()
+      autocmd DirChanged  global  :call sessions#CloseSession()
     augroup END
   endif
 endfunction
 
-function! spaces#CloseSession()
+function! sessions#CloseSession()
   if exists("#Spaces")
     mksession! .session
-    echo "closing session."
+    echo "closing session in" getcwd()
     augroup Spaces
       autocmd!
     augroup END

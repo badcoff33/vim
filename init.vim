@@ -230,7 +230,7 @@ command! -nargs=0 WhitespaceMelt           :call whitespace#Melt()
 command! -nargs=0 WhitespaceClenup         :call whitespace#Cleanup()
 command! -nargs=0 ShowUnsavedChanges       :call vimdiff#UnsavedChanges()
 command! -nargs=* -complete=dir TwoDirDiff :call vimdiff#TwoDirDiff(<f-args>)
-command! -nargs=1 -complete=dir Cd         :call spaces#Start(<q-args>)
+command! -nargs=1 -complete=dir Cd         :call sessions#Start(<q-args>)
 command! -nargs=1 -complete=help Help      :call basic#OpenFloatingHelp(<q-args>)
 
 cabbrev %% <C-r>=expand("%:p:h")<CR>
