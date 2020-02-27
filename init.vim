@@ -174,7 +174,7 @@ nnoremap <A-.> g<C-]>
 inoremap <A-.> <Esc>g<C-]>
 nnoremap <A-,> <C-t>
 inoremap <A-,> <Esc><C-t>
-C
+
 inoremap <S-up>    <Esc><C-w>k
 inoremap <S-down>  <Esc><C-w>j
 inoremap <S-left>  <Esc><C-w>h
@@ -192,8 +192,8 @@ nnoremap <C-,> :cprevious<CR>
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>
 
-nnoremap <Leader>r :%s/\C//c<Left><Left><Left>
-vnoremap <Leader>r :s/\C//c<Left><Left><Left>
+nnoremap <Leader>r :%s/\C\<\>//c<Left><Left><Left><Left><Left>
+vnoremap <Leader>r :s/\C\<\>//c<Left><Left><Left><Left><Left>
 
 " Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
 " record a macro with those keys and make macro playback easy as possible.
