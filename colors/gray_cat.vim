@@ -32,7 +32,7 @@ highlight! link StatusLineTermNC StatusLineNC
 
 " line numbers / side decorations
 highlight LineNr guifg=grey80 guibg=bg gui=bold,italic
-highlight CursorLine guibg=grey87
+highlight CursorLine guibg=grey97
 highlight CursorColumn guibg=bg
 highlight CursorLineNr guifg=grey30 guibg=bg gui=bold,italic
 highlight SignColumn guifg=grey30 guibg=bg
