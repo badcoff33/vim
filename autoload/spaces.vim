@@ -5,6 +5,14 @@
 set sessionoptions=buffers,curdir,tabpages,winsize
 
 function! spaces#Start(newd)
+  if !isdirectory(a:newd)
+    echoerr "directory" a:newd "does not exist"
+    return
+  endif
+  " close all terminals
+  bufdo if &buftype == 'terminal' | bw! | endif
+  " Save previous session if one is allready open
+  call spaces#CloseSession()
   " Clean up
   try
     noautocmd %bwipeout
@@ -26,41 +34,32 @@ function! spaces#Start(newd)
         break
       endif
     endwhile
+    echo "\n"
   endif
   " find a resource file in curdir or in upper dirs
   let l:workspace_file = findfile(".vimrc", ".;")
   if filereadable(l:workspace_file)
-    echomsg "found workspace file " . simplify(expand(l:workspace_file, ":p:h"))
+    echomsg "using resource file " . simplify(expand(l:workspace_file, ":p:h"))
     execute "source " . l:workspace_file
-    let g:workspace_source_file = expand(l:workspace_file, ":p")
   endif
-  call s:StartFileTracking()
-endfunction
-
-function! s:StartFileTracking()
   if !exists("#Spaces")
-    let g:spaces_wd = getcwd()
-    echo "Started session tracking in " . g:spaces_wd
+    echo "Started session tracking in " . getcwd()
     augroup Spaces
       autocmd!
-      autocmd BufAdd      * :call spaces#UpdateSession()
-      autocmd BufDelete   * :call spaces#UpdateSession()
+      autocmd ExitPre     *       :mksession! .session
+      autocmd DirChanged  global  :call spaces#CloseSession()
     augroup END
   endif
 endfunction
 
-function! spaces#UpdateSession()
-  if g:spaces_wd == getcwd()
+function! spaces#CloseSession()
+  if exists("#Spaces")
     mksession! .session
-  else
-    echo "closing session in " . g:spaces_wd
-    let g:spaces_wd = ""
-    if exists("#Spaces")
-      augroup Spaces
-        autocmd!
-      augroup END
-      augroup! Spaces
-    endif
+    echo "closing session."
+    augroup Spaces
+      autocmd!
+    augroup END
+    augroup! Spaces
   endif
 endfunction
 

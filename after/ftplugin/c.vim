@@ -6,7 +6,7 @@
 " Kind of standard to have a type prefix _t
 syn match cType /\w*_t/
 
-" A enhanced version of :ptjump -- open a preview window with current symbol highlighted 
+" A enhanced version of :ptjump -- open a preview window with current symbol highlighted
 nnoremap <buffer> <LocalLeader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
 
 " Toggle automatic code formatting
@@ -16,7 +16,7 @@ nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <b
 nmap <buffer> <LocalLeader>f ggVG!clang-format -style=file<CR>
 vmap <buffer> <LocalLeader>f !clang-format -style=file<CR>gv=
 
-let b:load_doxygen_syntax=1
+"let b:load_doxygen_syntax=1
 let c_no_comment_fold = 1
 let c_comment_strings = 1
 let c_space_errors = 1

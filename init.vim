@@ -70,7 +70,6 @@ if has('nvim')
   set inccommand=split
 endif
 set magic
-set gdefault
 
 " Optional config: if 'smartcase' is active a case sensitive search with
 " /\C<text> can be used on demand.
@@ -171,12 +170,10 @@ nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
 
-nnoremap <A-.> :tjump<Space>
-inoremap <A-.> <Esc>:tjump<Space>
-nnoremap <C-.> g<C-]>
-inoremap <C-.> <Esc>g<C-]>
-nnoremap <C-,> <C-t>
-inoremap <C-,> <Esc><C-t>
+nnoremap <A-.> g<C-]>
+inoremap <A-.> <Esc>g<C-]>
+nnoremap <A-,> <C-t>
+inoremap <A-,> <Esc><C-t>
 
 inoremap <S-up>    <Esc><C-w>k
 inoremap <S-down>  <Esc><C-w>j
@@ -189,14 +186,14 @@ nnoremap <S-right> <C-w>l
 nnoremap <CS-Up>   <C-w>3+
 nnoremap <CS-Down> <C-w>3-
 
-nnoremap <C-j> :cnext<CR>
-nnoremap <C-k> :cprevious<CR>
+nnoremap <C-.> :cnext<CR>
+nnoremap <C-,> :cprevious<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>
 
-nnoremap <Leader>r :%s/\C//c<Left><Left><Left>
-vnoremap <Leader>r :s/\C//c<Left><Left><Left>
+nnoremap <Leader>r :%s/\C\<\>//c<Left><Left><Left><Left><Left>
+vnoremap <Leader>r :s/\C\<\>//c<Left><Left><Left><Left><Left>
 
 " Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
 " record a macro with those keys and make macro playback easy as possible.
@@ -217,11 +214,11 @@ nnoremap <Leader>s :setlocal invspell<CR>
 " parentheses (), braces {} and brackets []
 vnoremap <CR> <ESC>:call basic#SurroundSelection()<CR>
 
-nnoremap <Leader>h    :HighlightWord <C-r><C-w><CR>
-nnoremap <Leader>w    :WhitespaceMelt<CR>
-nnoremap <Leader>l    :ToggleStatusline<CR>
-nnoremap <S-Tab>      :ToggleQuickfix<CR>
-nnoremap <Leader>t    :PopupTerminal<CR>
+nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
+nnoremap <Leader>w :WhitespaceMelt<CR>
+nnoremap <Leader>l :ToggleStatusline<CR>
+nnoremap <S-Tab>   :ToggleQuickfix<CR>
+nnoremap <Leader>t :PopupTerminal<CR>
 
 command! -nargs=0 ShowHiName               :call basic#HiName()
 command! -nargs=1 HighlightWord            :call basic#HighlightWord("<args>")

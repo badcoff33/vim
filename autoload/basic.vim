@@ -67,7 +67,7 @@ function! basic#ToggleQuickfix()
   let l:qfIsOpen = 0
   windo if &buftype == 'quickfix' | let l:qfIsOpen = 1 | endif
   if l:qfIsOpen == 0
-    botright copen
+    copen
   else
     cclose
   endif
@@ -94,6 +94,9 @@ function! basic#PopupTerminal()
 endfunction
 
 function! basic#ToggleStatusline()
+  if !empty(&buftype)
+    return
+  endif
   if !exists("b:saved_statusline")
     let b:saved_statusline = &statusline
     setlocal statusline=%1*%F\ %0*%=%l,%c%V\ %P

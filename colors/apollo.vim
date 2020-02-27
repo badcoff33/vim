@@ -23,13 +23,13 @@ highlight apolloDeco        guifg=#B0B0B8 guibg=#202830
 highlight apolloDeco1       guifg=#C0C0FF guibg=#282F38
 highlight apolloDeco1Blind  guifg=#202830 guibg=#202830
 highlight apolloDeco2       guifg=#C0F8E0 guibg=#207040
-highlight apolloDecoBright  guifg=#F0F030 guibg=#606030
+highlight apolloDecoBright  guifg=#60F0A0 guibg=#307740
 
 highlight apolloGray0      guifg=#40404C guibg=bg
 highlight apolloGray1      guifg=#60606C guibg=bg
 highlight apolloGray2      guifg=#80808C guibg=bg
 highlight apolloGray3      guifg=#C0C0CF guibg=bg
-highlight apolloGreen      guifg=#38AA27 guibg=bg
+highlight apolloGreen      guifg=#78CF40 guibg=bg
 highlight apolloGreen2     guifg=#68CF47 guibg=bg
 highlight apolloGreenBold  guifg=#379A17 guibg=bg gui=bold
 highlight apolloGreen2Bold guifg=#67CF47 guibg=bg gui=bold
@@ -41,7 +41,7 @@ highlight apolloRed        guifg=#D02050 guibg=bg
 highlight Cursor           guifg=fg guibg=bg gui=inverse
 
 " Basics
-highlight! link Normal       apolloBg
+highlight Normal       guibg=#201C23 guifg=#F0F0FF gui=none
 highlight! link NormalFloat  apolloBg2
 highlight! link StatusLine   apolloDeco1
 highlight! link StatusLineNC apolloDeco
@@ -49,7 +49,7 @@ highlight! link VertSplit    apolloDeco1Blind
 highlight! link IncSearch    apolloPopHighKey
 highlight! link Search       apolloDecoBright
 highlight! link MatchParen   apolloWhiteBold
-highlight! link QuickFixLine apolloBg1
+highlight  QuickFixLine gui=bold
 
 highlight! link NonText apolloGray2
 highlight! link Visual  apolloDeco2
@@ -79,7 +79,7 @@ highlight! link Structure    apolloGreen
 highlight! link StorageClass apolloBlue
 highlight! link PreProc      apolloWhiteBold
 highlight! link PreCondit    apolloWhiteBold
-highlight! link Comment      apolloGray2
+highlight! link Comment      apolloGreen
 highlight! link Function     apolloGreen1
 highlight! link Identifier   apolloGreen
 highlight! link Special      apolloGreen2
