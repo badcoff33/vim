@@ -13,16 +13,13 @@ let g:colors_name = "gray_cat"
 " basics
 highlight Normal  guifg=grey30 guibg=white
 highlight NonText guifg=grey50 guibg=grey96
-highlight Visual               guibg=grey90
+highlight Visual  guifg=white  guibg=grey35
 highlight Cursor  guifg=white  guibg=palevioletred3
 
 highlight NormalFloat  guifg=black guibg=azure3
 
 " window decoration
 highlight StatusLine   guifg=grey10 guibg=grey75 gui=bold
-highlight User1        guifg=grey90 guibg=grey30 gui=bold
-highlight User2        guifg=grey90 guibg=grey30 gui=none
-highlight User3        guifg=grey90 guibg=grey30 gui=none
 highlight StatusLineNC guifg=grey30 guibg=grey90 gui=italic
 highlight VertSplit    guifg=grey80 guibg=grey80 gui=italic
 highlight! link WildMenu IncSearch
@@ -60,8 +57,8 @@ highlight Conditional  guifg=grey20      gui=bold
 highlight Type         guifg=dodgerblue4 gui=none
 highlight StorageClass guifg=grey60      gui=bold
 highlight PreProc      guifg=grey10      gui=bold
-highlight Comment      guifg=grey60
-highlight Identifier   guifg=grey50      gui=italic
+highlight Comment      guifg=grey45
+highlight Identifier   guifg=grey55      gui=italic
 highlight Special      guifg=grey30
 highlight Constant     guifg=palevioletred3
 
