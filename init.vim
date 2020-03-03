@@ -183,8 +183,8 @@ nnoremap <S-up>    <C-w>k
 nnoremap <S-down>  <C-w>j
 nnoremap <S-left>  <C-w>h
 nnoremap <S-right> <C-w>l
-nnoremap <CS-Up>   <C-w>3+
-nnoremap <CS-Down> <C-w>3-
+nnoremap <CS-Up>   <C-w>3+<C-w>3>
+nnoremap <CS-Down> <C-w>3-<C-w>3<
 
 nnoremap <C-.> :cnext<CR>
 nnoremap <C-,> :cprevious<CR>
