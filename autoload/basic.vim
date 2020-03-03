@@ -67,7 +67,7 @@ function! basic#ToggleQuickfix()
   let l:qfIsOpen = 0
   windo if &buftype == 'quickfix' | let l:qfIsOpen = 1 | endif
   if l:qfIsOpen == 0
-    botright copen
+    topleft copen
   else
     cclose
   endif
