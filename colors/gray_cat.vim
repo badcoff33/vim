@@ -19,7 +19,7 @@ highlight Cursor  guifg=white  guibg=palevioletred3
 highlight NormalFloat  guifg=black guibg=azure3
 
 " window decoration
-highlight StatusLine   guifg=grey10 guibg=grey75 gui=bold
+highlight StatusLine   guifg=grey90 guibg=grey10 gui=bold
 highlight StatusLineNC guifg=grey30 guibg=grey90 gui=italic
 highlight VertSplit    guifg=grey80 guibg=grey80 gui=italic
 highlight! link WildMenu IncSearch
@@ -48,16 +48,16 @@ highlight PmenuThumb guifg=grey30
 
 " search
 highlight IncSearch  guifg=black  guibg=yellow1 gui=bold
-highlight Search     guifg=black  guibg=cyan1   gui=none
+highlight Search     guifg=white  guibg=grey60  gui=none
 highlight MatchParen guifg=grey10 guibg=bg      gui=underline
 
 " code
 highlight Statement    guifg=grey10      gui=bold
 highlight Conditional  guifg=grey20      gui=bold
-highlight Type         guifg=dodgerblue4 gui=none
+highlight Type         guifg=aquamarine4 gui=none
 highlight StorageClass guifg=grey60      gui=bold
 highlight PreProc      guifg=grey10      gui=bold
-highlight Comment      guifg=grey45
+highlight Comment      guifg=grey65
 highlight Identifier   guifg=grey55      gui=italic
 highlight Special      guifg=grey30
 highlight Constant     guifg=palevioletred3

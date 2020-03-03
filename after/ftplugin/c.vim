@@ -17,9 +17,10 @@ nmap <buffer> <LocalLeader>f ggVG!clang-format -style=file<CR>
 vmap <buffer> <LocalLeader>f !clang-format -style=file<CR>gv=
 
 "let b:load_doxygen_syntax=1
-let c_no_comment_fold = 1
-let c_comment_strings = 1
-let c_space_errors = 1
+let g:c_no_comment_fold = 1
+let g:c_comment_strings = 0
+let g:c_space_errors = 1
+let g:c_syntax_for_h = 1
 
 setlocal noshowfulltag
 setlocal textwidth=80
@@ -48,7 +49,7 @@ iabbrev <buffer> xop     {<C-f><CR><CR>}<CR><Up><Up><C-f>
 iabbrev <buffer> xif     if ()<Left><C-f>
 iabbrev <buffer> xelse   else<C-f><CR>{<C-f><CR><CR>}<CR><Up><Up><C-f>
 iabbrev <buffer> xinc    #include ".h"<Left><Left><Left>
-iabbrev <buffer> xdef    #define<Space>
+iabbrev <buffer> xdef    #define
 iabbrev <buffer> xc      /** \brief */<Left><Left><Left>
 iabbrev <buffer> xcc     /**<CR>\brief<CR><BS>/<Up><End>
 iabbrev <buffer> xdbg    #warning DEBUG CHANGE STARTS HERE<CR><CR>#warning DEBUG CHANGE ENDS HERE<CR>
