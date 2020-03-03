@@ -156,8 +156,8 @@ if has('nvim')
   tnoremap <C-Space> <C-\><C-n>
   tnoremap <C-w> <C-\><C-n><C-w>
   tnoremap <C-Tab> <C-\><C-n>gt
-  autocmd BufEnter term://* startinsert
-  autocmd TermOpen term://* startinsert
+  "autocmd BufEnter term://* startinsert
+  "autocmd TermOpen term://* startinsert
 elseif has('terminal')
   tnoremap <Esc> <C-w>N
   tnoremap <C-Space> <C-w>N
@@ -186,8 +186,8 @@ nnoremap <S-right> <C-w>l
 nnoremap <CS-Up>   <C-w>3+<C-w>3>
 nnoremap <CS-Down> <C-w>3-<C-w>3<
 
-nnoremap <C-.> :cnext<CR>
-nnoremap <C-,> :cprevious<CR>
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprevious<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>
