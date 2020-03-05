@@ -22,7 +22,8 @@ highlight apolloPopHighKey  guifg=#F0F0F0 guibg=#787880 gui=bold
 highlight apolloDeco        guifg=#B0B0B8 guibg=#202830
 highlight apolloDeco1       guifg=#C0C0FF guibg=#282F38
 highlight apolloDeco1Blind  guifg=#202830 guibg=#202830
-highlight apolloDecoBright  guifg=#C0F0C0 guibg=#307740
+highlight apolloSilverfish  guifg=#E0E0FF guibg=#586080
+highlight apolloSilverfish2 guifg=#F0F0FF guibg=#7888A8
 
 highlight apolloGray0      guifg=#40404C guibg=bg
 highlight apolloGray1      guifg=#60606C guibg=bg
@@ -33,26 +34,24 @@ highlight apolloGreen2     guifg=#68CF47 guibg=bg
 highlight apolloGreenBold  guifg=#379A17 guibg=bg gui=bold
 highlight apolloGreen2Bold guifg=#67CF47 guibg=bg gui=bold
 highlight apolloWhite      guifg=#F8F8F8 guibg=bg
-highlight apolloBlue       guifg=#7080B0 guibg=bg
-highlight apolloBlue2      guifg=#A0A8D0 guibg=bg
+highlight apolloBlue       guifg=#8090C0 guibg=bg
+highlight apolloBlue2      guifg=#A0A8D8 guibg=bg
 highlight apolloRed        guifg=#D02050 guibg=bg
 
 highlight Cursor           guifg=fg guibg=bg gui=inverse
 
 " Basics
-highlight Normal           guibg=#201C23 guifg=#F0F0FF gui=none
-
+highlight Normal             guibg=#201C23 guifg=#F0F0FF gui=none
+highlight! link NonText      apolloGray2
+highlight! link Visual       apolloSilverfish2
 highlight! link NormalFloat  apolloBg2
 highlight! link StatusLine   apolloDeco1
 highlight! link StatusLineNC apolloDeco
 highlight! link VertSplit    apolloDeco1Blind
 highlight! link IncSearch    apolloPopHighKey
-highlight! link Search       apolloBg2
-highlight! link MatchParen   apolloWhiteBold
+highlight! link Search       apolloSilverfish
+highlight! link MatchParen   apolloGreen2
 highlight  QuickFixLine gui=bold
-
-highlight! link NonText apolloGray2
-highlight! link Visual  apolloDecoBright
 
 " Decoration
 highlight! link LineNr           apolloBg1
@@ -77,14 +76,14 @@ highlight! link Conditional  apolloGreen2Bold
 highlight! link Type         apolloGray3
 highlight! link Structure    apolloGreen
 highlight! link StorageClass apolloBlue
-highlight! link PreProc      apolloWhiteBold
+highlight! link PreProc      apolloWhite
 highlight! link PreCondit    apolloWhiteBold
 highlight! link Comment      apolloGreen
 highlight! link Function     apolloGreen1
 highlight! link Identifier   apolloGreen
 highlight! link Special      apolloGreen2
-highlight! link Constant     apolloBlue
-highlight! link Number       apolloBlue
+highlight! link Constant     apolloBlue2
+highlight! link Number       apolloBlue2
 
 highlight! link Title        apolloGray2
 highlight! link Todo         apolloGray2
