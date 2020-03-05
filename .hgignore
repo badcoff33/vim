@@ -1,4 +1,6 @@
-plugin/site.vim
+syntax: glob
+vimrc
+gvimrc
 bitmaps
 .netrwhist
 .netrwbook
@@ -7,3 +9,5 @@ spell
 *.swo
 undo
 backup
+pack/Github
+pack/Machine
