@@ -99,7 +99,7 @@ endfor
 " Insert mode completion
 set complete=.,w
 if !has('nvim')
-  set completeopt=menu,popup,noinsert
+  set completeopt=menu,noselect
 else
   set completeopt=menu
 endif
