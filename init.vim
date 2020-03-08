@@ -241,6 +241,7 @@ cabbrev %% <C-r>=expand("%:p:h")<CR>
 augroup init
   autocmd!
   autocmd VimResized  *         :wincmd =
+  autocmd VimEnter    *         :runtime site.vim
   autocmd BufReadPost *         :call basic#RestoreCursor()
   autocmd BufWritePre *.cc,*.hh :call whitespace#Cleanup()
   autocmd BufWritePre *.c,*.h   :call whitespace#Cleanup()

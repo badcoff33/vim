@@ -9,5 +9,6 @@ spell
 *.swo
 undo
 backup
+site.vim
 pack/Github
 pack/Machine
