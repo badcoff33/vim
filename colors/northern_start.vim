@@ -39,7 +39,7 @@ endfunction
 
 "+--- Editor ---+
 call s:hi("ColorColumn",           "",             s:nord1,  "",          "")
-call s:hi("Cursor",                s:nord0,        s:nord4,  "",          "")
+call s:hi("Cursor",                s:nord0,        s:nord4,  "NONE",      "")
 call s:hi("CursorLine",            "",             s:nord1,  "NONE",      "")
 call s:hi("Error",                 s:nord0,        s:nord11, "",          "")
 call s:hi("iCursor",               s:nord0,        s:nord4,  "",          "")

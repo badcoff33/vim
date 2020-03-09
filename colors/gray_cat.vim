@@ -19,7 +19,7 @@ highlight Cursor  guifg=white  guibg=palevioletred3
 highlight NormalFloat  guifg=black guibg=azure3
 
 " window decoration
-highlight StatusLine   guifg=grey90 guibg=grey10 gui=bold
+highlight StatusLine   guifg=gold   guibg=grey10 gui=bold
 highlight StatusLineNC guifg=grey30 guibg=grey90 gui=italic
 highlight VertSplit    guifg=grey80 guibg=grey80 gui=italic
 highlight! link WildMenu IncSearch
@@ -28,7 +28,7 @@ highlight! link StatusLineTermNC StatusLineNC
 
 " line numbers / side decorations
 highlight LineNr       guifg=grey80 guibg=bg gui=bold,italic
-highlight CursorLine                guibg=lightcyan1
+highlight CursorLine                guibg=grey97
 highlight CursorColumn              guibg=bg
 highlight CursorLineNr guifg=grey30 guibg=bg gui=bold,italic
 highlight SignColumn   guifg=grey30 guibg=bg
@@ -36,9 +36,9 @@ highlight! link FoldColumn Normal
 highlight! link Folded NonText
 
 " tabs
-highlight TabLineFill guifg=grey30 guibg=bg gui=NONE
-highlight TabLine     guifg=grey30 guibg=bg gui=none
-highlight TabLineSel  guifg=grey30 guibg=bg gui=bold,underline
+highlight! link  TabLineFill StatusLineNC
+highlight! link TabLine      StatusLineNC
+highlight! link TabLineSel   StatusLine
 
 " popup Menu
 highlight Pmenu      guifg=black guibg=turquoise2 gui=none
@@ -47,8 +47,8 @@ highlight PmenuSbar  guibg=fg
 highlight PmenuThumb guifg=grey30
 
 " search
-highlight IncSearch  guifg=black  guibg=yellow1 gui=bold
-highlight Search     guifg=white  guibg=grey60  gui=none
+highlight IncSearch  guifg=white  guibg=cornflowerblue gui=bold
+highlight Search     guifg=black  guibg=grey80  gui=bold
 highlight MatchParen guifg=grey10 guibg=bg      gui=underline
 
 " code
@@ -76,7 +76,7 @@ highlight ModeMsg    guifg=palevioletred4 guibg=bg gui=bold
 highlight Question   guifg=palevioletred4 guibg=bg gui=bold
 
 " quickfix colors
-highlight QuickFixLine guibg=bg          gui=bold
+highlight! link  QuickFixLine CursorLine
 highlight qfFileName   guifg=dodgerblue4 gui=none
 highlight qfLineNr     guifg=grey40
 highlight qfSeparator  guifg=grey50
