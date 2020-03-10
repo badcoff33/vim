@@ -19,7 +19,7 @@ highlight Cursor  guifg=white  guibg=palevioletred3
 highlight NormalFloat  guifg=black guibg=azure3
 
 " window decoration
-highlight StatusLine   guifg=gold   guibg=grey10 gui=bold
+highlight StatusLine   guifg=green1 guibg=grey10 gui=bold
 highlight StatusLineNC guifg=grey30 guibg=grey90 gui=italic
 highlight VertSplit    guifg=grey80 guibg=grey80 gui=italic
 highlight! link WildMenu IncSearch
@@ -57,7 +57,7 @@ highlight Conditional  guifg=grey10      gui=bold
 highlight Type         guifg=gray35      gui=none
 highlight StorageClass guifg=grey40      gui=bold
 highlight PreProc      guifg=black       gui=bold
-highlight Comment      guifg=grey65
+highlight Comment      guifg=grey65      gui=italic
 highlight Identifier   guifg=grey50      gui=italic
 highlight Special      guifg=grey30
 highlight Constant     guifg=palevioletred4
@@ -89,15 +89,11 @@ highlight doxygenRefWord            guifg=grey40 gui=underline
 highlight doxygenSpecial            guifg=grey50 gui=none
 highlight doxygenSpecialOnelineDesc guifg=grey30
 
-highlight diffRemoved guifg=firebrick3
-highlight diffChanged guifg=steelblue3
-highlight diffAdded guifg=forestgreen
-
 " Diff highlighting
-highlight DiffText guifg=grey30 guibg=grey85 gui=none
-highlight! link DiffChange diffChanged
-highlight! link DiffAdd diffAdded
-highlight! link DiffDelete diffRemoved
+highlight DiffText   guifg=dodgerblue4 guibg=skyblue1   gui=bold
+highlight DiffChange guifg=dodgerblue4 guibg=lightblue1 gui=none
+highlight DiffAdd    guifg=dodgerblue4 guibg=lightblue1 gui=bold
+highlight DiffDelete guifg=salmon1     guibg=salmon1
 
 " netrw
 highlight netrwMarkFile gui=inverse

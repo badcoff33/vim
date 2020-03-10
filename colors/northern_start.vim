@@ -142,12 +142,6 @@ call s:hi("DiffChange",            s:nord13,       s:nord1,  "",          "")
 call s:hi("DiffDelete",            s:nord11,       s:nord1,  "",          "")
 call s:hi("DiffText",              s:nord9,        s:nord1,  "",          "")
 
-" Legacy groups for official git.vim and diff.vim syntax
-hi! link diffAdded DiffAdd
-hi! link diffChanged DiffChange
-hi! link diffRemoved DiffDelete
-
-
 call s:hi("htmlArg",               s:nord7,        "",       "",          "")
 call s:hi("htmlLink",              s:nord4,        "",       "NONE",      "NONE")
 hi! link htmlBold Bold
