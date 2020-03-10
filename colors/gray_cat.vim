@@ -93,7 +93,7 @@ highlight doxygenSpecialOnelineDesc guifg=grey30
 highlight DiffText   guifg=dodgerblue4 guibg=skyblue1   gui=bold
 highlight DiffChange guifg=dodgerblue4 guibg=lightblue1 gui=none
 highlight DiffAdd    guifg=dodgerblue4 guibg=lightblue1 gui=bold
-highlight DiffDelete guifg=salmon1     guibg=salmon1
+highlight DiffDelete guifg=pink1       guibg=pink1
 
 " netrw
 highlight netrwMarkFile gui=inverse
