@@ -7,6 +7,7 @@ filetype indent on
 
 " Even on Windows, this works best
 behave xterm
+set clipboard=
 
 set nowrap
 set tabstop=2
@@ -97,7 +98,11 @@ endfor
 
 " Insert mode completion
 set complete=.,w
-set completeopt=menu
+if !has('nvim')
+  set completeopt=menu,popup
+else
+  set completeopt=menu
+endif
 set pumheight=10
 if has('nvim')
   set pumblend=10
@@ -105,9 +110,13 @@ endif
 
 " Command line completion
 if has ('nvim')
-  set wildmenu wildmode=full wildoptions=pum,tagfile
+  set wildmenu
+  set wildmode=full
+  set wildoptions=pum,tagfile
 else
-  set nowildmenu wildmode=list:lastused,full wildoptions=tagfile
+  set nowildmenu
+  set wildmode=list:lastused,full
+  set wildoptions=tagfile
 endif
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
@@ -175,16 +184,10 @@ inoremap <A-.> <Esc>g<C-]>
 nnoremap <A-,> <C-t>
 inoremap <A-,> <Esc><C-t>
 
-inoremap <S-up>    <Esc><C-w>k
-inoremap <S-down>  <Esc><C-w>j
-inoremap <S-left>  <Esc><C-w>h
-inoremap <S-right> <Esc><C-w>l
-nnoremap <S-up>    <C-w>k
-nnoremap <S-down>  <C-w>j
-nnoremap <S-left>  <C-w>h
-nnoremap <S-right> <C-w>l
-nnoremap <CS-Up>   <C-w>3+<C-w>3>
-nnoremap <CS-Down> <C-w>3-<C-w>3<
+nnoremap <A-+>  <C-w>4+
+nnoremap <A-->  <C-w>4-
+nnoremap <A-*>  <C-w>4>
+nnoremap <A-_>  <C-w>4<
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
@@ -238,6 +241,7 @@ cabbrev %% <C-r>=expand("%:p:h")<CR>
 augroup init
   autocmd!
   autocmd VimResized  *         :wincmd =
+  autocmd VimEnter    *         :runtime site.vim
   autocmd BufReadPost *         :call basic#RestoreCursor()
   autocmd BufWritePre *.cc,*.hh :call whitespace#Cleanup()
   autocmd BufWritePre *.c,*.h   :call whitespace#Cleanup()

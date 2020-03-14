@@ -24,7 +24,7 @@ function! basic#ToggleStickyCursorLine()
     augroup ToggleStickyCursorline
       au!
       autocmd WinLeave * set nocursorline
-      autocmd BufEnter,BufWinEnter,WinEnter * call s:TurnCursorLineOn()
+      autocmd BufEnter,BufWinEnter,WinEnter * if &diff==0 | call s:TurnCursorLineOn() | endif
     augroup END
   else
     let g:use_sticky_cursorline = 0

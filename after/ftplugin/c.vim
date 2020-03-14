@@ -7,6 +7,7 @@
 syn match cType /\w*_t/
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted
+" Don't forget: close preview window with <C-w>z.
 nnoremap <buffer> <LocalLeader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
 
 " Toggle automatic code formatting
