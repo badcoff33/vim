@@ -81,7 +81,10 @@ endfunction
 " TODO: handle multiple term buffers.
 function! basic#PopupTerminal()
   let l:termBufNr = bufnr("^term:")
-  if l:termBufNr < 0
+  if l:termBufNr == -1
+    let l:termBufNr = bufnr("^\!")
+  endif
+  if l:termBufNr == -1
     terminal
     return
   endif

@@ -37,7 +37,7 @@ set hidden
 set switchbuf=useopen
 
 " keep cursor line away from the upper and lower window border
-set scrolloff=3
+set scrolloff=2
 set scrolljump=1
 
 " make vertical scrolling more smooth
@@ -99,7 +99,7 @@ endfor
 " Insert mode completion
 set complete=.,w
 if !has('nvim')
-  set completeopt=menu,noselect
+  set completeopt=menu
 else
   set completeopt=menu
 endif
@@ -190,8 +190,8 @@ nnoremap <A-->  <C-w>4-
 nnoremap <A-*>  <C-w>4>
 nnoremap <A-_>  <C-w>4<
 
-nnoremap <C-j> :cnext<CR>
-nnoremap <C-k> :cprevious<CR>
+nnoremap <A-.> :cnext<CR>
+nnoremap <A-,> :cprevious<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>

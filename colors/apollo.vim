@@ -27,7 +27,7 @@ highlight apolloSilverfish  guifg=#FFFFFF guibg=#9090B0
 highlight apolloGray0      guifg=#40404C guibg=bg
 highlight apolloGray1      guifg=#60606C guibg=bg
 highlight apolloGray2      guifg=#90909C guibg=bg
-highlight apolloGray3      guifg=#D0D0DF guibg=bg
+highlight apolloGray3      guifg=#C0C0C0 guibg=bg
 highlight apolloGreen      guifg=#78CF40 guibg=bg
 highlight apolloGreen2     guifg=#68CF47 guibg=bg
 highlight apolloGreenBold  guifg=#379A17 guibg=bg gui=bold
@@ -94,7 +94,7 @@ highlight! link WarningMsg   apolloGray2
 highlight! link ModeMsg      apolloGray2
 highlight! link Question     apolloGreen
 
-highlight! link qfFileName  apolloGray1
+highlight! link qfFileName  apolloBlue2
 highlight! link qfSeparator apolloGray1
 highlight! link qfLineNr    LineNr
 
