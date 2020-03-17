@@ -21,12 +21,21 @@ function! sessions#Start(newd)
     echomsg "Check your changed buffers. Want to save them?"
     return
   endtry
-  if isdirectory(a:newd)
-    execute "cd " . a:newd
+  if !isdirectory(a:newd)
+    echoerr "directory" a:newd "doesn't exist"
+    return
+  endif
+  echo "entering" a:newd
+  execute "cd " . a:newd
+  " find a resource file in curdir or in upper dirs
+  let g:workspace_file = findfile(".vimrc", ".;")
+  if filereadable(g:workspace_file)
+    execute "source " . g:workspace_file
+    echo "sourcing " simplify(expand(g:workspace_file, ":p:h"))
   endif
   if filereadable(".session")
     while 1
-      let answer = tolower(input("load last session [yes|no]? " ,"yes"))
+      let answer = tolower(input("open last session [yes|no]? " ,"yes"))
       if answer == "yes"
         source .session
         break
@@ -34,16 +43,9 @@ function! sessions#Start(newd)
         break
       endif
     endwhile
-    echo "\n"
-  endif
-  " find a resource file in curdir or in upper dirs
-  let l:workspace_file = findfile(".vimrc", ".;")
-  if filereadable(l:workspace_file)
-    echomsg "using resource file " . simplify(expand(l:workspace_file, ":p:h"))
-    execute "source " . l:workspace_file
   endif
   if !exists("#Spaces")
-    echo "Started session tracking in " . getcwd()
+    echo "started session tracking"
     augroup Spaces
       autocmd!
       autocmd ExitPre     *       :mksession! .session
