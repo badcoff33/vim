@@ -15,19 +15,19 @@ highlight apolloWhiteBold   guifg=#FFFFFF gui=bold
 highlight apolloWhiteItalic guifg=#FFFFFF gui=italic
 highlight apolloWhiteUnderline guifg=#FFFFFF gui=underline
 highlight apolloBg          guibg=#201C23 guifg=#F0F0FF gui=none
-highlight apolloBg1         guibg=#18252B               gui=none
-highlight apolloBg2         guibg=#223848               gui=none
+highlight apolloBg1                       guibg=#2F232D gui=none
+highlight apolloBg2                       guibg=#323848 gui=none
 highlight apolloPopLowKey   guifg=#D0D0D8 guibg=#585058
 highlight apolloPopHighKey  guifg=#101010 guibg=#C0C0FF gui=bold
-highlight apolloDeco        guifg=#B0B0B8 guibg=#202830
-highlight apolloDeco1       guifg=#C0C0FF guibg=#282F38
+highlight apolloDeco        guifg=#B8B0B8 guibg=#382838
+highlight apolloDeco1       guifg=#C0C0FF guibg=#382F38
 highlight apolloDeco1Blind  guifg=#202830 guibg=#202830
 highlight apolloSilverfish  guifg=#FFFFFF guibg=#9090B0
 
 highlight apolloGray0      guifg=#40404C guibg=bg
 highlight apolloGray1      guifg=#60606C guibg=bg
 highlight apolloGray2      guifg=#90909C guibg=bg
-highlight apolloGray3      guifg=#D0D0DF guibg=bg
+highlight apolloGray3      guifg=#C0C0C0 guibg=bg
 highlight apolloGreen      guifg=#78CF40 guibg=bg
 highlight apolloGreen2     guifg=#68CF47 guibg=bg
 highlight apolloGreenBold  guifg=#379A17 guibg=bg gui=bold
@@ -94,7 +94,7 @@ highlight! link WarningMsg   apolloGray2
 highlight! link ModeMsg      apolloGray2
 highlight! link Question     apolloGreen
 
-highlight! link qfFileName  apolloGray1
+highlight! link qfFileName  apolloBlue2
 highlight! link qfSeparator apolloGray1
 highlight! link qfLineNr    LineNr
 

@@ -96,23 +96,6 @@ highlight DiffAdd guifg=black guibg=lightblue1 gui=none
 highlight DiffDelete guifg=coral1 guibg=coral1 gui=none
 highlight DiffText guifg=black guibg=yellow3 gui=none
 
-highlight diffOldFile guifg=red
-highlight diffNewFile guifg=seagreen4
-highlight diffFile guifg=dodgerblue3
-highlight diffOnly guifg=fg
-highlight diffIdentical guifg=fg
-highlight diffDiffer guifg=darkslategray
-highlight diffBDiffer guifg=fg
-highlight diffIsA guifg=fg
-highlight diffNoEOL guifg=fg
-highlight diffCommon guifg=fg
-highlight diffRemoved guifg=seagreen3
-highlight diffChanged guifg=slategray
-highlight diffAdded guifg=skyblue3
-highlight diffLine guifg=grey50
-highlight diffSubname guifg=fg
-highlight diffComment guifg=grey50
-
 " netrw
 highlight netrwMarkFile gui=inverse
 

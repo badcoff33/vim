@@ -110,24 +110,6 @@ highlight DiffText      guifg=#c0c090 guibg=#2e4040 gui=none
 highlight DiffAdd       guifg=#90c090 guibg=#2e3e48 gui=none
 highlight DiffDelete    guifg=#981e2e guibg=bg gui=none
 
-" Diff buffer
-highlight diffOldFile   guifg=fg
-highlight diffNewFile   guifg=yellow2
-highlight diffFile      guifg=yellow2
-highlight diffOnly      guifg=yellow2
-highlight diffIdentical guifg=fg
-highlight diffDiffer    guifg=fg
-highlight diffBDiffer   guifg=fg
-highlight diffIsA       guifg=fg
-highlight diffNoEOL     guifg=fg
-highlight diffCommon    guifg=fg
-highlight diffRemoved   guifg=fg      gui=italic
-highlight diffChanged   guifg=fg
-highlight diffAdded     guifg=white   gui=bold
-highlight diffLine      guifg=yellow1
-highlight diffSubname   guifg=fg
-highlight diffComment   guifg=fg
-
 " netrw
 highlight netrwMarkFile          gui=inverse
 
