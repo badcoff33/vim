@@ -1,6 +1,6 @@
 " Colorscheme: Northen Star
 
-let g:colors_name = "northern_star"
+let g:colors_name = "frost"
 set background=dark
 
 let s:nord0 = "#2E3440"

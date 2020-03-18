@@ -51,8 +51,6 @@ iabbrev <buffer> xif     if ()<Left><C-f>
 iabbrev <buffer> xelse   else<C-f><CR>{<C-f><CR><CR>}<CR><Up><Up><C-f>
 iabbrev <buffer> xinc    #include ".h"<Left><Left><Left>
 iabbrev <buffer> xdef    #define
-iabbrev <buffer> xc      /** \brief */<Left><Left><Left>
-iabbrev <buffer> xcc     /**<CR>\brief<CR><BS>/<Up><End>
-iabbrev <buffer> xdbg    #warning DEBUG CHANGE STARTS HERE<CR><CR>#warning DEBUG CHANGE ENDS HERE<CR>
+iabbrev <buffer> xdbg    #warning DEBUG CODE:
 
 

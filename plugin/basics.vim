@@ -9,6 +9,7 @@ noremap <unique> <script> <Plug>ToggleStickyCursorline <SID>ToggleStickyCursorli
 noremap <unique> <script> <Plug>ToggleQuickfix         <SID>ToggleQuickfix
 noremap <unique> <script> <Plug>ToggleStatusline       <SID>ToggleStatusline
 noremap <unique> <script> <Plug>PopupTerminal          <SID>PopupTerminal
+noremap <unique> <script> <Plug>HighlightWord          <SID>HighlightWord
 noremap <unique> <script> <Plug>SurroundSelection      <SID>SurroundSelection
 
 noremap <SID>ShowHiInfo             :call <SID>ShowHiInfo()<CR>
@@ -16,9 +17,10 @@ noremap <SID>ToggleStickyCursorline :call <SID>ToggleStickyCursorline()<CR>
 noremap <SID>ToggleQuickfix         :call <SID>ToggleQuickfix()<CR>
 noremap <SID>ToggleStatusline       :call <SID>ToggleStatusline()<CR>
 noremap <SID>PopupTerminal          :call <SID>PopupTerminal()<CR>
+noremap <SID>HighlightWord          :call <SID>HighlightWord("<C-r><C-w>")<CR>
 noremap <SID>SurroundSelection      :<C-u>call <SID>SurroundSelection()<CR>
 
-" Defaults:
+" Defaults: Key mappings
 if !hasmapto('<Plug>ShowHiInfo')
   nmap <leader><leader>h <Plug>ShowHiInfo
 endif
@@ -39,10 +41,15 @@ if !hasmapto('<Plug>PopupTerminal')
     nmap <leader>t <Plug>PopupTerminal
 endif
 
+if !hasmapto('<Plug>HighlightWord')
+  nmap <leader>* <Plug>HighlightWord
+endif
+
 if !hasmapto('<Plug>SurroundSelection','v')
   vmap <CR> <Plug>SurroundSelection
 endif
 
+" Autocmd: put them in a dedicaed group
 augroup basics
   autocmd!
   autocmd BufReadPost * :call <SID>RestoreCursor()
@@ -69,7 +76,7 @@ function! s:ToggleStickyCursorline()
     augroup ToggleStickyCursorline
       au!
       autocmd WinLeave * set nocursorline
-      autocmd BufEnter,BufWinEnter,WinEnter * if &diff==0 | call s:TurnCursorLineOn() | endif
+      autocmd BufEnter,BufWinEnter,WinEnter * call <SID>TurnCursorLineOn()
     augroup END
   else
     let g:use_sticky_cursorline = 0

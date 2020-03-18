@@ -12,14 +12,14 @@ let g:colors_name = "gray_cat"
 
 " basics
 highlight Normal  guifg=grey30 guibg=white
-highlight NonText guifg=grey50 guibg=grey96
+highlight NonText guifg=grey50 guibg=grey97
 highlight Visual  guifg=white  guibg=grey35
 highlight Cursor  guifg=white  guibg=palevioletred3
 
 highlight NormalFloat  guifg=black guibg=azure3
 
 " window decoration
-highlight StatusLine   guifg=green1 guibg=grey10 gui=bold
+highlight StatusLine   guifg=white guibg=grey10 gui=bold
 highlight StatusLineNC guifg=grey30 guibg=grey90 gui=italic
 highlight VertSplit    guifg=grey80 guibg=grey80 gui=italic
 highlight! link WildMenu IncSearch
