@@ -17,6 +17,7 @@ set history=200
 set visualbell
 set noerrorbells
 set noswapfile
+set nohlsearch
 set laststatus=2
 set ruler
 set showcmd
