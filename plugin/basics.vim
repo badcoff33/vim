@@ -9,6 +9,7 @@ noremap <unique> <script> <Plug>ToggleStickyCursorline <SID>ToggleStickyCursorli
 noremap <unique> <script> <Plug>ToggleQuickfix         <SID>ToggleQuickfix
 noremap <unique> <script> <Plug>ToggleStatusline       <SID>ToggleStatusline
 noremap <unique> <script> <Plug>PopupTerminal          <SID>PopupTerminal
+noremap <unique> <script> <Plug>HighlightWord          <SID>HighlightWord
 noremap <unique> <script> <Plug>SurroundSelection      <SID>SurroundSelection
 
 noremap <SID>ShowHiInfo             :call <SID>ShowHiInfo()<CR>
@@ -16,6 +17,7 @@ noremap <SID>ToggleStickyCursorline :call <SID>ToggleStickyCursorline()<CR>
 noremap <SID>ToggleQuickfix         :call <SID>ToggleQuickfix()<CR>
 noremap <SID>ToggleStatusline       :call <SID>ToggleStatusline()<CR>
 noremap <SID>PopupTerminal          :call <SID>PopupTerminal()<CR>
+noremap <SID>HighlightWord          :call <SID>HighlightWord("<C-r><C-w>")<CR>
 noremap <SID>SurroundSelection      :<C-u>call <SID>SurroundSelection()<CR>
 
 " Defaults: Key mappings
@@ -37,6 +39,10 @@ endif
 
 if !hasmapto('<Plug>PopupTerminal')
     nmap <leader>t <Plug>PopupTerminal
+endif
+
+if !hasmapto('<Plug>HighlightWord')
+  nmap <leader>* <Plug>HighlightWord
 endif
 
 if !hasmapto('<Plug>SurroundSelection','v')
