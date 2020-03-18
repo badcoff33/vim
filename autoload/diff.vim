@@ -1,9 +1,8 @@
 " Vim autoload file
-"
 
 " Description: Run a diff of current buffer content and file content.
 " Taken from Vims help file diff.txt:
-function! vimdiff#UnsavedChanges()
+function! diff#UnsavedChanges()
   vert new
   set bt=nofile
   r ++edit #
@@ -16,7 +15,7 @@ endfunction
 " Description: Run recursive diff between two directories.  Diff's output get
 " reformatted. Press <CR> on a set of two files that differ and Vimdiff gets
 " opened.
-function! vimdiff#TwoDirDiff(...)
+function! diff#CompareDirs(...)
   if !exists('a:1')
   let l:a = input("diff directory A: ", expand("%:p:h"), "dir")
   else
@@ -32,21 +31,21 @@ function! vimdiff#TwoDirDiff(...)
   let l:b = fnamemodify(l:b, ":p:h")
   " create a fresh out buffer
   enew
-  setlocal buftype=nofile 
+  setlocal buftype=nofile
   insert
 " Diff run with -rq options
 " Optimal diff paramter can be added by variable 'g:two_dir_diff_option'
 " Press <CR> on the set of files that differ.
 .
   " run the recursive diff
-  silent execute 'read !diff -rq ' . l:a . " " . l:b 
+  silent execute 'read !diff -rq ' . l:a . " " . l:b
   " reformat diff's --brief output format
   silent %s/^Only\s/\rOnly /e
-  silent %s/^Files\s/\r/e 
-  silent %s/\sand\s/\r/e 
-  silent %s/\sdiffer//e 
+  silent %s/^Files\s/\r/e
+  silent %s/\sand\s/\r/e
+  silent %s/\sdiffer//e
   " save buffer for further changes
-  setlocal nomodified nomodifiable 
+  setlocal nomodified nomodifiable
   " one key magic
   nnoremap <buffer> <CR> {j0"ay$j0"by$:tabedit <C-r>a<CR>:diffsplit <C-r>b<CR>
 endfunction

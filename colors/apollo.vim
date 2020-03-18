@@ -15,12 +15,12 @@ highlight apolloWhiteBold   guifg=#FFFFFF gui=bold
 highlight apolloWhiteItalic guifg=#FFFFFF gui=italic
 highlight apolloWhiteUnderline guifg=#FFFFFF gui=underline
 highlight apolloBg          guibg=#201C23 guifg=#F0F0FF gui=none
-highlight apolloBg1         guibg=#18252B               gui=none
-highlight apolloBg2         guibg=#223848               gui=none
+highlight apolloBg1                       guibg=#2F232D gui=none
+highlight apolloBg2                       guibg=#323848 gui=none
 highlight apolloPopLowKey   guifg=#D0D0D8 guibg=#585058
 highlight apolloPopHighKey  guifg=#101010 guibg=#C0C0FF gui=bold
-highlight apolloDeco        guifg=#B0B0B8 guibg=#202830
-highlight apolloDeco1       guifg=#C0C0FF guibg=#282F38
+highlight apolloDeco        guifg=#B8B0B8 guibg=#382838
+highlight apolloDeco1       guifg=#C0C0FF guibg=#382F38
 highlight apolloDeco1Blind  guifg=#202830 guibg=#202830
 highlight apolloSilverfish  guifg=#FFFFFF guibg=#9090B0
 
@@ -77,7 +77,7 @@ highlight! link Structure    apolloGreen
 highlight! link StorageClass apolloBlue
 highlight! link PreProc      apolloWhite
 highlight! link PreCondit    apolloWhiteBold
-highlight! link Comment      apolloGreen
+highlight! link Comment      apolloGray2
 highlight! link Function     apolloGreen1
 highlight! link Identifier   apolloGreen
 highlight! link Special      apolloGreen2

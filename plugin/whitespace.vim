@@ -2,6 +2,26 @@
 "
 " Description: Plugin provides functions to delete unwanted whitespaces.
 
+
+" Interface: command, plugin mapping, auto command
+
+command! -nargs=0 WhitespaceCleanup :sil call <SID>WhitespaceCleanup()
+
+noremap <unique> <script> <Plug>WhitespaceMelt <SID>WhitespaceMelt
+noremap <SID>WhitespaceMelt :call <SID>WhitespaceMelt()<CR>
+
+if !hasmapto('<Plug>WhitespaceMelt')
+  nmap <Leader>w <Plug>WhitespaceMelt
+endif
+
+augroup whitespace
+  autocmd!
+  autocmd BufWritePre *.cc,*.hh :WhitespaceCleanup
+  autocmd BufWritePre *.c,*.h   :WhitespaceCleanup
+  autocmd BufWritePre *.py      :WhitespaceCleanup
+  autocmd BufWritePre *.vim     :WhitespaceCleanup
+augroup END
+
 " Description: Support function. It returns previous character with parameter
 " "prev" or the next one with parameter "next". Any other string given as
 " parameter, returns the character under cursor. If the cursor is at the very
@@ -49,7 +69,7 @@ function! s:OneSpace()
 endfunction
 
 " Description: Autoloaded wrapper function.
-function! whitespace#Melt()
+function! s:WhitespaceMelt()
   if getcurpos()[2] > 1
     call s:OneSpace()
   else
@@ -61,7 +81,7 @@ endfunction
 " Remove trailing spaces, replace existing tabs with spaces and
 " remove trailing Ctrl-M on each line. The amount of spaces is set by
 " 'tabstop'. This is done by :retab and option 'expandtab'.
-function! whitespace#Cleanup()
+function! s:WhitespaceCleanup()
   if &modifiable
     let l:savedView = winsaveview()
     setlocal expandtab
