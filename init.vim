@@ -164,7 +164,6 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-Space> <C-\><C-n>
   tnoremap <C-w> <C-\><C-n><C-w>
-  tnoremap <C-Tab> <C-\><C-n>gt
 elseif has('terminal')
   tnoremap <Esc> <C-w>N
   tnoremap <C-Space> <C-w>N
@@ -186,6 +185,7 @@ nnoremap <A-+>  <C-w>4+
 nnoremap <A-->  <C-w>4-
 nnoremap <A-*>  <C-w>4>
 nnoremap <A-_>  <C-w>4<
+nnoremap <C-Tab> :tabnext<CR>
 
 nnoremap <A-.> :cnext<CR>
 nnoremap <A-,> :cprevious<CR>
@@ -194,6 +194,7 @@ nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>
 
 nnoremap <Leader>r :%s/\C\<\>//g<Left><Left><Left><Left><Left>
+nnoremap <Leader>R :%s/\C\<<C-r><C-w>\>//g<Left><Left>
 vnoremap <Leader>r :s/\C\<\>//g<Left><Left><Left><Left><Left>
 
 " Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
