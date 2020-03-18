@@ -153,7 +153,6 @@ vnoremap < <gv
 
 " Switch Vim modes
 inoremap <C-Space> <Esc>
-nnoremap <Leader><Space> :
 
 " make things easy on non-english keyboards
 inoremap <Char-0xDF> <Esc>
@@ -166,8 +165,6 @@ if has('nvim')
   tnoremap <C-Space> <C-\><C-n>
   tnoremap <C-w> <C-\><C-n><C-w>
   tnoremap <C-Tab> <C-\><C-n>gt
-  "autocmd BufEnter term://* startinsert
-  "autocmd TermOpen term://* startinsert
 elseif has('terminal')
   tnoremap <Esc> <C-w>N
   tnoremap <C-Space> <C-w>N
@@ -214,40 +211,12 @@ nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
-" surround visual selection with double quote ("), quote ('), backtick (`),
-" parentheses (), braces {} and brackets []
-vnoremap <CR> <ESC>:call basic#SurroundSelection()<CR>
-
-nnoremap <Leader>h :HighlightWord <C-r><C-w><CR>
-nnoremap <Leader>w :WhitespaceMelt<CR>
-nnoremap <Leader>l :ToggleStatusline<CR>
-nnoremap <S-Tab>   :ToggleQuickfix<CR>
-nnoremap <Leader>t :PopupTerminal<CR>
-
-command! -nargs=0 ShowHiName               :call basic#HiName()
-command! -nargs=1 HighlightWord            :call basic#HighlightWord("<args>")
-command! -nargs=0 ToggleStickyCursorline   :call basic#ToggleStickyCursorLine()
-command! -nargs=0 PopupTerminal            :call basic#PopupTerminal()
-command! -nargs=0 ToggleStatusline         :call basic#ToggleStatusline()
-command! -nargs=0 ToggleQuickfix           :call basic#ToggleQuickfix()
-command! -nargs=0 WhitespaceMelt           :call whitespace#Melt()
-command! -nargs=0 WhitespaceClenup         :call whitespace#Cleanup()
-command! -nargs=0 ShowUnsavedChanges       :call vimdiff#UnsavedChanges()
-command! -nargs=* -complete=dir TwoDirDiff :call vimdiff#TwoDirDiff(<f-args>)
-command! -nargs=1 -complete=dir Cd         :call sessions#Start(<q-args>)
-command! -nargs=1 -complete=help Help      :call basic#OpenFloatingHelp(<q-args>)
-
 cabbrev %% <C-r>=expand("%:p:h")<CR>
 
 augroup init
   autocmd!
   autocmd VimResized  *         :wincmd =
   autocmd VimEnter    *         :runtime site.vim
-  autocmd BufReadPost *         :call basic#RestoreCursor()
-  autocmd BufWritePre *.cc,*.hh :call whitespace#Cleanup()
-  autocmd BufWritePre *.c,*.h   :call whitespace#Cleanup()
-  autocmd BufWritePre *.py      :call whitespace#Cleanup()
-  autocmd BufWritePre *.vim     :call whitespace#Cleanup()
 augroup END
 
 if has('nvim')

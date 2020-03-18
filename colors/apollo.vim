@@ -77,7 +77,7 @@ highlight! link Structure    apolloGreen
 highlight! link StorageClass apolloBlue
 highlight! link PreProc      apolloWhite
 highlight! link PreCondit    apolloWhiteBold
-highlight! link Comment      apolloGreen
+highlight! link Comment      apolloGray2
 highlight! link Function     apolloGreen1
 highlight! link Identifier   apolloGreen
 highlight! link Special      apolloGreen2
