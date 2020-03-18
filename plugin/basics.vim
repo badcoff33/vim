@@ -18,7 +18,7 @@ noremap <SID>ToggleStatusline       :call <SID>ToggleStatusline()<CR>
 noremap <SID>PopupTerminal          :call <SID>PopupTerminal()<CR>
 noremap <SID>SurroundSelection      :<C-u>call <SID>SurroundSelection()<CR>
 
-" Defaults:
+" Defaults: Key mappings
 if !hasmapto('<Plug>ShowHiInfo')
   nmap <leader><leader>h <Plug>ShowHiInfo
 endif
@@ -43,6 +43,7 @@ if !hasmapto('<Plug>SurroundSelection','v')
   vmap <CR> <Plug>SurroundSelection
 endif
 
+" Autocmd: put them in a dedicaed group
 augroup basics
   autocmd!
   autocmd BufReadPost * :call <SID>RestoreCursor()
@@ -69,7 +70,7 @@ function! s:ToggleStickyCursorline()
     augroup ToggleStickyCursorline
       au!
       autocmd WinLeave * set nocursorline
-      autocmd BufEnter,BufWinEnter,WinEnter * if &diff==0 | call s:TurnCursorLineOn() | endif
+      autocmd BufEnter,BufWinEnter,WinEnter * call <SID>TurnCursorLineOn()
     augroup END
   else
     let g:use_sticky_cursorline = 0
