@@ -188,8 +188,8 @@ nnoremap <A-*>  <C-w>4>
 nnoremap <A-_>  <C-w>4<
 nnoremap <C-Tab> :tabnext<CR>
 
-nnoremap <A-.> :cnext<CR>
-nnoremap <A-,> :cprevious<CR>
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprevious<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>
