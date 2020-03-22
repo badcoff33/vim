@@ -19,8 +19,8 @@ highlight apolloBg1                       guibg=#2F232D gui=none
 highlight apolloBg2                       guibg=#323848 gui=none
 highlight apolloPopLowKey   guifg=#D0D0D8 guibg=#585058
 highlight apolloPopHighKey  guifg=#101010 guibg=#C0C0FF gui=bold
-highlight apolloDeco        guifg=#B8B0B8 guibg=#382838
-highlight apolloDeco1       guifg=#C0C0FF guibg=#382F38
+highlight apolloDeco        guifg=#8080C0 guibg=#302835
+highlight apolloDeco1       guifg=#A0A0FF guibg=#352F43 gui=bold
 highlight apolloDeco1Blind  guifg=#202830 guibg=#202830
 highlight apolloSilverfish  guifg=#FFFFFF guibg=#9090B0
 
