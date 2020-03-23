@@ -14,7 +14,7 @@ let g:colors_name = "gray_cat"
 highlight Normal  guifg=grey30 guibg=white
 highlight NonText guifg=grey50 guibg=grey97
 highlight Visual  guifg=white  guibg=grey35
-highlight Cursor  guifg=white  guibg=palevioletred3
+highlight Cursor  guifg=black  guibg=orange1
 
 highlight NormalFloat  guifg=black guibg=azure3
 
@@ -29,11 +29,11 @@ highlight! link StatusLineTermNC StatusLineNC
 " line numbers / side decorations
 highlight LineNr       guifg=grey80 guibg=bg gui=bold,italic
 highlight CursorLine                guibg=grey97
-highlight CursorColumn              guibg=bg
 highlight CursorLineNr guifg=grey30 guibg=bg gui=bold,italic
 highlight SignColumn   guifg=grey30 guibg=bg
 highlight! link FoldColumn Normal
 highlight! link Folded NonText
+highlight! link CursorColumn CursorLine
 
 " tabs
 highlight! link  TabLineFill StatusLineNC
