@@ -14,7 +14,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set history=200
-set visualbell
+set novisualbell
 set noerrorbells
 set noswapfile
 set nohlsearch
@@ -102,6 +102,7 @@ set complete=.,w
 if !has('nvim')
   set completeopt=menu
 else
+  set showfulltag
   set completeopt=menu
 endif
 set pumheight=10
@@ -112,13 +113,12 @@ endif
 " Command line completion
 if has ('nvim')
   set wildmenu
-  set wildmode=full
   set wildoptions=pum,tagfile
 else
   set nowildmenu
-  set wildmode=list:lastused,full
   set wildoptions=tagfile
 endif
+set wildmode=full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 
@@ -156,7 +156,7 @@ vnoremap < <gv
 inoremap <C-Space> <Esc>
 
 " make things easy on non-english keyboards
-inoremap <Char-0xDF> <Esc>
+inoremap <Char-0x00DF> <Esc>
 nnoremap ´ "
 vnoremap ´ "
 
@@ -187,6 +187,7 @@ nnoremap <A-->  <C-w>4-
 nnoremap <A-*>  <C-w>4>
 nnoremap <A-_>  <C-w>4<
 nnoremap <C-Tab> :tabnext<CR>
+nnoremap <Leader>t :tabnew<CR>
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
