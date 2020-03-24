@@ -14,7 +14,7 @@ let g:colors_name = "gray_cat"
 highlight Normal  guifg=grey30 guibg=white
 highlight NonText guifg=grey50 guibg=grey97
 highlight Visual  guifg=white  guibg=grey35
-highlight Cursor  guifg=black  guibg=orange1
+highlight Cursor  guifg=black  guibg=chocolate1
 
 highlight NormalFloat  guifg=black guibg=azure3
 
@@ -47,9 +47,9 @@ highlight PmenuSbar  guibg=fg
 highlight PmenuThumb guifg=grey30
 
 " search
-highlight IncSearch  guifg=white  guibg=cornflowerblue gui=bold
-highlight Search     guifg=black  guibg=grey80  gui=bold
-highlight MatchParen guifg=grey10 guibg=bg      gui=underline
+highlight IncSearch  guifg=white guibg=cornflowerblue gui=bold
+highlight Search     guifg=black guibg=grey80         gui=bold
+highlight MatchParen guifg=black guibg=lightyellow3   gui=bold
 
 " code
 highlight Statement    guifg=grey10      gui=bold
@@ -60,20 +60,20 @@ highlight PreProc      guifg=black       gui=bold
 highlight Comment      guifg=grey65      gui=italic
 highlight Identifier   guifg=grey50      gui=italic
 highlight Special      guifg=grey30
-highlight Constant     guifg=palevioletred4
+highlight Constant     guifg=pink4
 
 " misc
 highlight Title     guifg=grey30
 highlight Subtitle  guifg=grey30
 highlight todo      guifg=grey30         guibg=bg
-highlight Error     guifg=palevioletred3 guibg=bg gui=undercurl
+highlight Error     guifg=pink3 guibg=bg gui=undercurl
 highlight Directory guifg=dodgerblue3    guibg=bg gui=underline
 
 " messages
 highlight WarningMsg guifg=steelblue      guibg=bg gui=none
 highlight ErrorMsg   guifg=orangered      guibg=bg gui=none
-highlight ModeMsg    guifg=palevioletred4 guibg=bg gui=bold
-highlight Question   guifg=palevioletred4 guibg=bg gui=bold
+highlight ModeMsg    guifg=pink4 guibg=bg gui=bold
+highlight Question   guifg=pink4 guibg=bg gui=bold
 
 " quickfix colors
 highlight! link  QuickFixLine CursorLine
