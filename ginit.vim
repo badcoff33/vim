@@ -16,15 +16,18 @@ augroup ginit
 augroup END
 
 if has('gui')
+  " Hello Vim!
   set guioptions=a
+  set encoding=utf-8
+  set renderoptions=type:directx
   set mousemodel=popup
-elseif has("nvim") 
+elseif has("nvim")
   if exists('g:GtkGuiLoaded')
     call rpcnotify(1, 'Gui', 'Font', 'Courier 11')
     call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 1)
     call rpcnotify(1, 'Gui', 'Option', 'Cmdline', 0)
-  elseif exists('g:GuiLoaded') 
+  elseif exists('g:GuiLoaded')
     if g:GuiLoaded == 1
       GuiLinespace 3
       GuiTabline 0

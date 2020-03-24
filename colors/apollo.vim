@@ -15,40 +15,42 @@ highlight apolloWhiteBold   guifg=#FFFFFF gui=bold
 highlight apolloWhiteItalic guifg=#FFFFFF gui=italic
 highlight apolloWhiteUnderline guifg=#FFFFFF gui=underline
 highlight apolloBg          guibg=#201C23 guifg=#F0F0FF gui=none
-highlight apolloBg1                       guibg=#2F232D gui=none
+highlight apolloBg1                       guibg=#32252F gui=none
 highlight apolloBg2                       guibg=#323848 gui=none
+highlight apolloVisual      guifg=#C0F0F0 guibg=#204050 gui=none
 highlight apolloPopLowKey   guifg=#D0D0D8 guibg=#585058
 highlight apolloPopHighKey  guifg=#101010 guibg=#C0C0FF gui=bold
-highlight apolloDeco        guifg=#B8B0B8 guibg=#382838
-highlight apolloDeco1       guifg=#C0C0FF guibg=#382F38
+highlight apolloDeco        guifg=#8080C0 guibg=#302835
+highlight apolloDeco1       guifg=#A0A0FF guibg=#352F43 gui=bold
 highlight apolloDeco1Blind  guifg=#202830 guibg=#202830
-highlight apolloSilverfish  guifg=#FFFFFF guibg=#9090B0
+highlight apolloSearch      guifg=#FFFFFF guibg=#308830
 
-highlight apolloGray0      guifg=#40404C guibg=bg
-highlight apolloGray1      guifg=#60606C guibg=bg
-highlight apolloGray2      guifg=#90909C guibg=bg
-highlight apolloGray3      guifg=#C0C0C0 guibg=bg
-highlight apolloGreen      guifg=#78CF40 guibg=bg
-highlight apolloGreen2     guifg=#68CF47 guibg=bg
-highlight apolloGreenBold  guifg=#379A17 guibg=bg gui=bold
-highlight apolloGreen2Bold guifg=#67CF47 guibg=bg gui=bold
-highlight apolloWhite      guifg=#F8F8F8 guibg=bg
-highlight apolloBlue       guifg=#8090C0 guibg=bg
-highlight apolloBlue2      guifg=#A0A8D8 guibg=bg
-highlight apolloRed        guifg=#D02050 guibg=bg
+highlight apolloGray0      guifg=#40404C
+highlight apolloGray1      guifg=#60606C
+highlight apolloGray2      guifg=#90909C
+highlight apolloGray3      guifg=#C0C0C0
+highlight apolloGreen      guifg=#78CF40
+highlight apolloGreen2     guifg=#68CF47
+highlight apolloGreenBold  guifg=#379A17 gui=bold
+highlight apolloGreen2Bold guifg=#67CF47 gui=bold
+highlight apolloWhite      guifg=#F8F8F8
+highlight apolloBlue       guifg=#8090C0
+highlight apolloBlue2      guifg=#A0A8D8
+highlight apolloRed        guifg=#E84080
 
 highlight Cursor           guifg=fg guibg=bg gui=inverse
 
 " Basics
 highlight Normal guibg=#201C23 guifg=#F0F0FF gui=none
-highlight Visual guibg=#68AF47 guifg=#F0FFF0 gui=none
+
+highlight! link Visual       apolloVisual
 highlight! link NonText      apolloGray2
 highlight! link NormalFloat  apolloBg2
 highlight! link StatusLine   apolloDeco1
 highlight! link StatusLineNC apolloDeco
 highlight! link VertSplit    apolloDeco1Blind
 highlight! link IncSearch    apolloPopHighKey
-highlight! link Search       apolloSilverfish
+highlight! link Search       apolloSearch
 highlight! link MatchParen   apolloGreen2
 highlight  QuickFixLine gui=bold
 

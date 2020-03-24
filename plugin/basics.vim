@@ -34,11 +34,11 @@ if !hasmapto('<Plug>ToggleQuickfix')
 endif
 
 if !hasmapto('<Plug>ToggleStatusline')
-    nmap <leader><leader>s <Plug>ToggleStatusline
+  nmap <leader><leader>s <Plug>ToggleStatusline
 endif
 
 if !hasmapto('<Plug>PopupTerminal')
-    nmap <leader>t <Plug>PopupTerminal
+  nmap <leader>T <Plug>PopupTerminal
 endif
 
 if !hasmapto('<Plug>HighlightWord')

@@ -14,7 +14,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set history=200
-set visualbell
+set novisualbell
 set noerrorbells
 set noswapfile
 set nohlsearch
@@ -102,6 +102,7 @@ set complete=.,w
 if !has('nvim')
   set completeopt=menu
 else
+  set showfulltag
   set completeopt=menu
 endif
 set pumheight=10
@@ -112,13 +113,12 @@ endif
 " Command line completion
 if has ('nvim')
   set wildmenu
-  set wildmode=full
   set wildoptions=pum,tagfile
 else
   set nowildmenu
-  set wildmode=list:lastused,full
   set wildoptions=tagfile
 endif
+set wildmode=full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 
@@ -153,12 +153,10 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Switch Vim modes
-inoremap <C-Space> <Esc>
+inoremap <S-Enter> <Esc>
 
 " make things easy on non-english keyboards
-inoremap <Char-0xDF> <Esc>
-nnoremap ´ "
-vnoremap ´ "
+inoremap <Char-0x00DF> <Esc>
 
 " Terminals
 if has('nvim')
@@ -176,20 +174,13 @@ nnoremap <Leader>f :find<Space>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
+nnoremap <Leader>x :set columns=999 lines=999<CR>
 
-nnoremap <A-.> g<C-]>
-inoremap <A-.> <Esc>g<C-]>
-nnoremap <A-,> <C-t>
-inoremap <A-,> <Esc><C-t>
-
-nnoremap <A-+>  <C-w>4+
-nnoremap <A-->  <C-w>4-
-nnoremap <A-*>  <C-w>4>
-nnoremap <A-_>  <C-w>4<
 nnoremap <C-Tab> :tabnext<CR>
+nnoremap <Leader>t :tabnew<CR>
 
-nnoremap <A-.> :cnext<CR>
-nnoremap <A-,> :cprevious<CR>
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprevious<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>
@@ -217,8 +208,9 @@ cabbrev %% <C-r>=expand("%:p:h")<CR>
 
 augroup init
   autocmd!
-  autocmd VimResized  *         :wincmd =
-  autocmd VimEnter    *         :runtime site.vim
+  autocmd VimResized * :wincmd =
+  autocmd VimEnter   * :runtime site.vim
+  autocmd BufEnter   * :if &ft !~ "\(vim\|help\)" | nnoremap K g<C-]> | endif
 augroup END
 
 if has('nvim')

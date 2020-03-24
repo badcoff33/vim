@@ -23,7 +23,6 @@ let g:c_comment_strings = 0
 let g:c_space_errors = 1
 let g:c_syntax_for_h = 1
 
-setlocal noshowfulltag
 setlocal textwidth=80
 setlocal expandtab
 setlocal formatoptions+=j
