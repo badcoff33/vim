@@ -156,7 +156,7 @@ vnoremap < <gv
 inoremap <S-Enter> <Esc>
 
 " make things easy on non-english keyboards
-inoremap <Char-0x00DF> <Esc>
+inoremap <Char-0xDF> <Esc>
 
 " Terminals
 if has('nvim')
@@ -177,7 +177,8 @@ nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
 nnoremap <Leader>x :set columns=999 lines=999<CR>
 
 nnoremap <C-Tab> :tabnext<CR>
-nnoremap <Leader>t :tabnew<CR>
+nnoremap <Leader>tn :tabnew<CR>
+nnoremap <Leader>tc :tabclose<CR>
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
@@ -210,7 +211,7 @@ augroup init
   autocmd!
   autocmd VimResized * :wincmd =
   autocmd VimEnter   * :runtime site.vim
-  autocmd BufEnter   * :if &ft !~ "\(vim\|help\)" | nnoremap K g<C-]> | endif
+  autocmd BufEnter   * :if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
 augroup END
 
 if has('nvim')
