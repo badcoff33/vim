@@ -48,7 +48,7 @@ set sidescrolloff=3
 " window behavior
 set nosplitbelow
 set splitright
-set noequalalways
+"set noequalalways
 
 " folding
 set foldmethod=indent

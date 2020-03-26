@@ -14,7 +14,7 @@ let g:colors_name = "gray_cat"
 highlight Normal  guifg=grey30 guibg=white
 highlight NonText guifg=grey50 guibg=grey97
 highlight Visual  guifg=white  guibg=grey35
-highlight Cursor  guifg=black  guibg=chocolate1
+highlight Cursor  guifg=white  guibg=black
 
 highlight NormalFloat  guifg=black guibg=azure3
 
@@ -49,7 +49,7 @@ highlight PmenuThumb guifg=grey30
 " search
 highlight IncSearch  guifg=white guibg=cornflowerblue gui=bold
 highlight Search     guifg=black guibg=grey80         gui=bold
-highlight MatchParen guifg=black guibg=lightyellow3   gui=bold
+highlight MatchParen guifg=cyan3 guibg=lightcyan               gui=bold
 
 " code
 highlight Statement    guifg=grey10      gui=bold
