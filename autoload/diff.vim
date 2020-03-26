@@ -58,10 +58,9 @@ function! diff#CompareDirs(...)
   " create a fresh out buffer
   tabnew
   setlocal buftype=nofile nonumber norelativenumber
-  insert
-" Diff run with -rq options
-" Press <CR> on the set of files that differ.
-.
+  call append(0,  '" Diff run with -rq options')
+  call append(1,'" Press <CR> on the set of files that differ.')
+  call append(2,'" ---------------------------------------------------------------------------')
   " run the recursive diff
   silent execute 'read !diff -rq ' . l:a . " " . l:b
   " save buffer for further changes
