@@ -1,9 +1,6 @@
 " Desccription: Enhance Vim's diff capabilities
 " the interfaces for the new functions are defined here.
 
-" make it more obvious what is in each buffer
-nnoremap <Leader>? :call diff#DivergeNamesVisitedBuffers()<CR>
-
 " taken from the Vim doc
 command! -nargs=0 ShowUnsavedChanges :call diff#UnsavedChanges()
 

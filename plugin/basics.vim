@@ -7,7 +7,6 @@
 noremap <unique> <script> <Plug>ShowHiInfo             <SID>ShowHiInfo
 noremap <unique> <script> <Plug>ToggleStickyCursorline <SID>ToggleStickyCursorline
 noremap <unique> <script> <Plug>ToggleQuickfix         <SID>ToggleQuickfix
-noremap <unique> <script> <Plug>ToggleStatusline       <SID>ToggleStatusline
 noremap <unique> <script> <Plug>PopupTerminal          <SID>PopupTerminal
 noremap <unique> <script> <Plug>HighlightWord          <SID>HighlightWord
 noremap <unique> <script> <Plug>SurroundSelection      <SID>SurroundSelection
@@ -15,7 +14,6 @@ noremap <unique> <script> <Plug>SurroundSelection      <SID>SurroundSelection
 noremap <SID>ShowHiInfo             :call <SID>ShowHiInfo()<CR>
 noremap <SID>ToggleStickyCursorline :call <SID>ToggleStickyCursorline()<CR>
 noremap <SID>ToggleQuickfix         :call <SID>ToggleQuickfix()<CR>
-noremap <SID>ToggleStatusline       :call <SID>ToggleStatusline()<CR>
 noremap <SID>PopupTerminal          :call <SID>PopupTerminal()<CR>
 noremap <SID>HighlightWord          :call <SID>HighlightWord("<C-r><C-w>")<CR>
 noremap <SID>SurroundSelection      :<C-u>call <SID>SurroundSelection()<CR>
@@ -31,10 +29,6 @@ endif
 
 if !hasmapto('<Plug>ToggleQuickfix')
   nmap <S-Tab> <Plug>ToggleQuickfix
-endif
-
-if !hasmapto('<Plug>ToggleStatusline')
-  nmap <leader><leader>s <Plug>ToggleStatusline
 endif
 
 if !hasmapto('<Plug>PopupTerminal')
@@ -139,19 +133,6 @@ function! s:PopupTerminal()
     execute l:termBufNr . "buffer"
   else
     noautocmd call win_gotoid(l:termWinNr[0])
-  endif
-endfunction
-
-function! s:ToggleStatusline()
-  if !empty(&buftype)
-    return
-  endif
-  if !exists("b:saved_statusline")
-    let b:saved_statusline = &statusline
-    setlocal statusline=%1*%F\ %0*%=%l,%c%V\ %P
-  else
-    execute "setlocal statusline=" . escape(b:saved_statusline, ' ')
-    unlet b:saved_statusline
   endif
 endfunction
 

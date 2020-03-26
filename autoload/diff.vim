@@ -1,31 +1,5 @@
 " Vim autoload file
 
-"Description: print a short hint where the buffers % and # differ in
-"their name. Might help in Vimdiff view.
-function! diff#DivergeNamesVisitedBuffers()
-  let l:file_a = bufname('%')
-  let l:file_b = bufname('#')
-  let l:file_diverge_a =  fnamemodify(l:file_a, ":p:t")
-  let l:file_diverge_b =  fnamemodify(l:file_b, ":p:t")
-  let l:file_head_a = split(fnamemodify(l:file_a, ":p:h"), '\')
-  let l:file_head_b = split(fnamemodify(l:file_b, ":p:h"), '\')
-
-  if l:file_diverge_a == l:file_diverge_b
-    while !empty(l:file_head_a) && !empty(l:file_head_b)
-      let l:part_a = l:file_head_a[-1]
-      let l:part_b = l:file_head_b[-1]
-      let l:file_head_a = l:file_head_a[:-2]
-      let l:file_head_b = l:file_head_b[:-2]
-      if l:part_a != l:part_b
-        let l:file_diverge_a =  '|' . l:part_a . '|' . l:file_diverge_a
-        let l:file_diverge_b =  '|' . l:part_b . '|' . l:file_diverge_b
-        break
-      endif
-    endwhile
-  endif
-  echo printf('%%: %s  #: %s', l:file_diverge_a, l:file_diverge_b)
-endfunction
-
 " Description: Run a diff of current buffer content and file content.
 " Taken from Vims help file diff.txt:
 function! diff#UnsavedChanges()
