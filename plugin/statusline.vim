@@ -1,78 +1,20 @@
 " Vim plugin files
 
-set statusline=%{DivergeBufNames()}%m%r%y%w\ %{ScopeParser()}%=%l,%c%V\ %P
+set statusline=%{DivergeBufNames()}%m%r%y%w\ %{DispatchScopeParser()}%=%l,%c%V\ %P
 
-function! ScopeParser()
-  if &ft == 'vim'
-    return <SID>ScopeParserVim()
-  elseif &ft == 'c'
-    return <SID>ScopeParserC()
-  elseif &ft == 'python'
-    return <SID>ScopeParserPython()
+" Description: If a function ScopeParser&ft exists, call it. The returned
+" string can be used by 'statusline'. Recommended way to add new parser
+" functions is in a file, located in after/ftplugin/&ft/scope.vim. Most
+" important is that the function ScopeParser&ft exists.
+function! DispatchScopeParser()
+  let parser_str = 'ScopeParser' . toupper(&ft[0]) . &ft[1:]
+  if exists('*' . parser_str)
+    let Parser = function(parser_str)
+    return Parser()
   else
     return ''
   endif
 endfunction
-
-" Description: A scope parser for C files. Returns a string in which context
-" (scope) the cursor is.
-function! s:ScopeParserC()
-  " Regular expressions to find head and bottom lines of a C function.
-  let regexpFindFuncHead = '^\w\+.*('
-  let regexpFindFuncBottom = '^}.*$'
-  " Regular expression to find the function name. Group 1 holds the function
-  " name.
-  let regexpExtractFunctionName = '.*\(\<[0-9a-zA-Z_]\+\)\s*(.*'
-  " Get the line numbers, starting from current cursor line.
-  " (search backward, do not move cursor, do not wrap at head of buffer)
-  let  lineFuncHead = search(regexpFindFuncHead, 'bnW')
-  let  lineFuncBottom = search(regexpFindFuncBottom, 'bnW')
-  " Where is the cursor?
-  if lineFuncHead > lineFuncBottom
-    " Cursor is inside of function
-    let cFunctionName = substitute(getline(lineFuncHead),
-          \ regexpExtractFunctionName, '\1()', '')
-  else
-    let cFunctionName = ''
-  endif
-  return cFunctionName[:48]
-endfun
-
-" Description: A scope parser for Vim files. Returns a string in which context
-" (scope) the cursor is.
-function! s:ScopeParserVim()
-  " Regular expressions to find head and bottom lines of a Vim function.
-  let regexpFindFuncHead = '^fun.*\s\+[A-Za-z0-9#:<>]\+\s*(.*)'
-  let regexpFindFuncBottom = '^endf.*$'
-  " Regular expression to find the function name. Group 1 holds the function
-  " name plus its parameters.
-  let regexpExtractFunctionName = '^fun.*\s\+\([A-Za-z0-9#:<>]\+\s*(.*)\)'
-  " Get the line numbers, starting from current cursor line.
-  " (search backward, do not move cursor, do not wrap at head of buffer)
-  let  lineFuncHead = search(regexpFindFuncHead, 'bnW')
-  let  lineFuncBottom = search(regexpFindFuncBottom, 'bnW')
-  " Where is the cursor?
-  if lineFuncHead > lineFuncBottom
-    " Cursor is inside of function
-    let vimFunctionName = substitute(getline(lineFuncHead),
-          \ regexpExtractFunctionName, '\1', '')
-  else
-    let vimFunctionName = ''
-  endif
-  return vimFunctionName[:30]
-endfun
-
-
-" Description: A simple scope parser for Python files. Returns a string in
-" which context (scope) the cursor is.
-function! s:ScopeParserPython()
-    let fNum = search('^\s*\(class\|def\)\s\+.*:$', 'bnWe')
-    if fNum > 0
-      return substitute(getline(fNum), '^\s*\(class\|def\)\s\+\(\w\+\).*$', '\1 \2', '')[:30]
-    else
-      return ""
-    endif
-endfun
 
 "Description: Returns a distinguishable buffer name as a
 "string. If the previous visited buffer '#' has the name base
