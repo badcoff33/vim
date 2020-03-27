@@ -37,7 +37,6 @@ function! UpdateDiverge()
   endif
   let div_string = ''
   for b in tabpagebuflist()
-    echomsg " >> " . bufname('%') . b
     if bufnr('%') != b && empty(div_string)
       let div_string = s:FindDivergePart(bufname('%'), bufname(b))
     endif
