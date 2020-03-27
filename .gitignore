@@ -1,4 +1,6 @@
-plugin/site.vim
+site.vim
+vimrc
+gvimrc
 bitmaps
 .netrwhist
 .netrwbook
