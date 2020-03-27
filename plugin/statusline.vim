@@ -81,7 +81,7 @@ endfun
 function! DivergeBufNames()
   let file_a = bufname('%')
   if empty(file_a)
-    return '[buffer ' . bufnr('%') . ']'
+    return '[No Name ' . bufnr('%') . ']'
   endif
   let file_b = bufname('#')
   let file_tail_a = fnamemodify(file_a, ":p:t")
