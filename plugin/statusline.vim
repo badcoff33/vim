@@ -18,8 +18,9 @@ endfunction
 
 augroup statusline
   au!
-  au WinEnter * :call UpdateDiverge()
-  au WinLeave * :call UpdateDiverge()
+  au WinEnter    * :call UpdateDiverge()
+  au WinLeave    * :call UpdateDiverge()
+  au BufWinEnter * :call UpdateDiverge()
 augroup END
 
 " Description: Returns a distinguishable buffer name as a " string. If
@@ -44,20 +45,31 @@ function! UpdateDiverge()
   let b:diverge_string = div_string
 endfunction
 
-function s:FindDivergePart(name_a, name_b)
-  if fnamemodify(a:name_a, ":p:t") == fnamemodify(a:name_b, ":p:t")
-    let file_head_a = split(fnamemodify(a:name_a, ":p:h"), '\')
-    let file_head_b = split(fnamemodify(a:name_b, ":p:h"), '\')
-    while !empty(file_head_a) && !empty(file_head_b)
-      let part_a = file_head_a[-1]
-      let part_b = file_head_b[-1]
-      let file_head_a = file_head_a[:-2]
-      let file_head_b = file_head_b[:-2]
-      if part_a != part_b
-        return '|' . part_a . '|'
+" Description: Find the differences in buffers path name and return the
+" resulting string for the first parameter bufname_a.
+function s:FindDivergePart(bufname_a, bufname_b)
+  if fnamemodify(a:bufname_a, ":p:t") == fnamemodify(a:bufname_b, ":p:t")
+    let diverge_list = [] " converted to a string, the returned
+    let path_list_a = split(fnamemodify(a:bufname_a, ":p:h"), '\')
+    let path_list_b = split(fnamemodify(a:bufname_b, ":p:h"), '\')
+    while !empty(path_list_a) && !empty(path_list_b)
+      " get last part of directories A/B
+      let part_a = path_list_a[-1]
+      if part_a != path_list_b[-1]
+        call insert(diverge_list, part_a)
+        break
+      else
+        call insert(diverge_list, '')
       endif
+      " throwaway the last directory items A/B for next
+      " iteration
+      let path_list_a = path_list_a[:-2]
+      let path_list_b = path_list_b[:-2]
     endwhile
-    return ''
+    return '|' . substitute(join(diverge_list, '|') . '|'
+          \ , '|\{2,\}'
+          \ , '|'
+          \ , 'g')
   else
     return ''
   endif
