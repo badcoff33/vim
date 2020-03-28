@@ -10,3 +10,5 @@ spell
 *.swo
 undo
 backup
+pack/Github
+pack/Machine
