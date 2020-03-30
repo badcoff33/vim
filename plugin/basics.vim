@@ -1,4 +1,4 @@
-" Vim autoload file
+" Vim plugin file
 "
 " Description: very basic functions called from init.vim as autoload functions
 " to save startup time.

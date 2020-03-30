@@ -13,11 +13,10 @@ if has("conceal")
   setlocal conceallevel=0 concealcursor=nc
 endif
 
-
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif <CR>
 
-nnoremap <buffer> <f9> :sil call <SID>ToggleTodo()<CR>
+nnoremap <buffer> <LocalLeader>x :sil call <SID>ToggleTodo()<CR>
 
 nmap <buffer> <C-f>  :call search('^#\{1,\}\s',"W")<CR>
 nmap <buffer> <C-b>  :call search('^#\{1,\}\s',"bW")<CR>
