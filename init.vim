@@ -155,9 +155,6 @@ vnoremap < <gv
 " Switch Vim modes
 inoremap <S-Enter> <Esc>
 
-" make things easy on non-english keyboards
-inoremap <Char-0xDF> <Esc>
-
 " Terminals
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
