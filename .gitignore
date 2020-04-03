@@ -1,7 +1,6 @@
 site.vim
 vimrc
 gvimrc
-bitmaps
 .netrwhist
 .netrwbook
 .session
@@ -10,4 +9,3 @@ spell
 undo
 backup
 pack/Github
-pack/Machine
