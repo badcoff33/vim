@@ -202,7 +202,7 @@ nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>N :set invhlsearch<CR>
 nnoremap <Leader>s :setlocal invspell<CR>
 
-cabbrev %% <C-r>=expand("%:p:h")<CR>
+cabbrev %% <C-r>=expand("%:h")<CR>
 
 augroup init
   autocmd!
