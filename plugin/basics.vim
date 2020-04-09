@@ -24,7 +24,7 @@ if !hasmapto('<Plug>ShowHiInfo')
 endif
 
 if !hasmapto('<Plug>ToggleStickyCursorline')
-  nmap <leader><leader>c <Plug>ToggleStickyCursorline
+  nmap <leader>l <Plug>ToggleStickyCursorline
 endif
 
 if !hasmapto('<Plug>ToggleQuickfix')
