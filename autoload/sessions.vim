@@ -26,12 +26,12 @@ function! sessions#Start(newd)
     return
   endif
   echo "entering" a:newd
-  execute "cd " . a:newd
+  execute "cd" a:newd
   " find a resource file in curdir or in upper dirs
   let g:workspace_file = findfile(".vimrc", ".;")
   if filereadable(g:workspace_file)
-    execute "source " . g:workspace_file
-    echo "sourcing " simplify(expand(g:workspace_file, ":p:h"))
+    execute "source" g:workspace_file
+    echo "sourcing" simplify(expand(g:workspace_file, ":p:h"))
   endif
   if filereadable(".session")
     while 1
