@@ -20,7 +20,7 @@ noremap <SID>SurroundSelection      :<C-u>call <SID>SurroundSelection()<CR>
 
 " Defaults: Key mappings
 if !hasmapto('<Plug>ShowHiInfo')
-  nmap <leader><leader>h <Plug>ShowHiInfo
+  nmap <leader>h <Plug>ShowHiInfo
 endif
 
 if !hasmapto('<Plug>ToggleStickyCursorline')

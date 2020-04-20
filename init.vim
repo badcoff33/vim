@@ -46,8 +46,8 @@ set sidescroll=8
 set sidescrolloff=3
 
 " window behavior
-set splitbelow
-set nosplitright
+set nosplitbelow
+set splitright
 set equalalways
 
 " folding
@@ -153,7 +153,7 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Switch Vim modes
-inoremap <S-Enter> <Esc>
+inoremap jj <Esc>
 
 " Terminals
 if has('nvim')
