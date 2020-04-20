@@ -34,44 +34,32 @@ function! s:Hi(group, guifg, guibg, attr, guisp)
   endif
 endfunction
 
-let s:apolloDeco1Fg        = '#8080C0'
-let s:apolloDeco1Bg        = '#302835'
-let s:apolloDeco2Fg        = '#A0A0FF'
-let s:apolloDeco2Bg        = '#352F43'
-let s:apolloSearchFg       = '#FFFFFF'
-let s:apolloSearchBg       = '#308830'
 let s:apolloSearch         = '#FFFFFF'
-let s:apolloPopLowFg       = '#D0D0D8'
-let s:apolloPopLowBg       = '#585058'
-let s:apolloPopHighFg      = '#101010'
-let s:apolloPopHighBg      = '#C0C0FF'
 let s:apolloWhite          = '#F8F8FF'
 let s:apolloBlack          = '#18181F'
-let s:apolloBg1            = '#2C222C'
-let s:apolloBg2            = '#352838'
-let s:apolloVisual         = '#C0F0F0'
-let s:apolloPopLowKey      = '#D0D0D8'
-let s:apolloPopHighKey     = '#101010'
-let s:apolloGray0          = '#40404C'
-let s:apolloGray1          = '#60606C'
-let s:apolloGray2          = '#90909C'
-let s:apolloGray3          = '#C0C0C0'
-let s:apolloGreen1         = '#78CF40'
-let s:apolloGreen2         = '#68CF47'
+let s:apolloBg1            = '#2F2131'
+let s:apolloBg2            = '#343240'
+let s:apolloBg3            = '#484555'
+let s:apolloSilver1        = '#505860'
+let s:apolloSilver2        = '#9098A0'
+let s:apolloSilver3        = '#C0CBD0'
+let s:apolloGreen1         = '#20A040'
+let s:apolloGreen2         = '#47E058'
 let s:apolloWhite          = '#F8F8F8'
-let s:apolloBlue1          = '#8090C0'
-let s:apolloBlue2          = '#A0A8D8'
-let s:apolloRed            = '#E84080'
+let s:apolloBlue1          = '#6898A0'
+let s:apolloBlue2          = '#A0D0F0'
+let s:apolloRed1           = '#C85012'
+let s:apolloRed2           = '#F86020'
 
 " Basics
 call s:Hi('Normal', s:apolloWhite, s:apolloBg1, 'NONE', '')
 call s:Hi('NonText', '', s:apolloBg2, '', '')
-call s:Hi('Visual', s:apolloWhite, s:apolloGray2, '', '')
-call s:Hi('StatusLine', s:apolloDeco1Fg, s:apolloDeco1Bg, 'bold', '')
-call s:Hi('StatusLineNC', s:apolloDeco2Fg, s:apolloDeco2Bg, 'bold',  '')
-call s:Hi('VertSplit', s:apolloDeco2Fg, 'bg', 'NONE', '')
-call s:Hi('IncSearch', s:apolloPopHighFg, s:apolloPopHighBg, 'bold', '')
-call s:Hi('Search', s:apolloPopLowFg, s:apolloPopLowBg, 'bold', '')
+call s:Hi('Visual', s:apolloWhite, s:apolloSilver2, '', '')
+call s:Hi('StatusLine', s:apolloBlue2, s:apolloBg3, 'bold', '')
+call s:Hi('StatusLineNC', s:apolloSilver1, s:apolloBg2, 'bold',  '')
+call s:Hi('VertSplit', s:apolloBg3, 'bg', 'NONE', '')
+call s:Hi('IncSearch', s:apolloWhite, s:apolloBlue1, 'bold', '')
+call s:Hi('Search', s:apolloWhite, s:apolloBg3, 'bold', '')
 call s:Hi('MatchParen', s:apolloGreen2, '', 'underline', '')
 call s:Hi('QuickFixLine', '', '', 'bold', '')
 call s:Hi('CursorLine', '', s:apolloBg2, '', '')
@@ -93,42 +81,42 @@ highlight! link TabLineSel Statusline
 highlight! link WildMenu PmenuSel
 
 " Apollo specific
-call s:Hi('BlendDown', s:apolloWhite, s:apolloBlack, '', '')
+call s:Hi('BlendDown', s:apolloWhite, s:apolloBg3, '', '')
 
 " Code
 call s:Hi('Statement', s:apolloGreen2, '', 'bold', '')
 call s:Hi('Conditional', s:apolloGreen2, '', 'bold', '')
-call s:Hi('Type', s:apolloGray3, '', '', '')
+call s:Hi('Type', s:apolloSilver3, '', '', '')
 call s:Hi('Structure', s:apolloGreen1, '', '', '')
 call s:Hi('StorageClass', s:apolloBlue1, '', '', '')
 call s:Hi('PreProc', s:apolloWhite, '', '', '')
 call s:Hi('PreCondit', s:apolloWhite, '', 'bold', '')
-call s:Hi('Comment', s:apolloGray2, '', '', '')
+call s:Hi('Comment', s:apolloSilver2, '', '', '')
 call s:Hi('Function', s:apolloGreen1, '', '', '')
 call s:Hi('Identifier', s:apolloGreen1, '', '', '')
 call s:Hi('Special', s:apolloGreen2, '', '', '')
 call s:Hi('Constant', s:apolloBlue2, '', '', '')
 call s:Hi('Number', s:apolloBlue2, '', '', '')
-call s:Hi('Title', s:apolloGray2, '', '', '')
-call s:Hi('Todo', s:apolloGray2, '', '', '')
+call s:Hi('Title', s:apolloSilver2, '', '', '')
+call s:Hi('Todo', s:apolloSilver2, '', '', '')
 call s:Hi('Error', s:apolloRed, '', '', '')
-call s:Hi('Directory', s:apolloGray2, '', '', '')
+call s:Hi('Directory', s:apolloSilver2, '', '', '')
 call s:Hi('ErrorMsg', s:apolloRed, 'bg', '', '')
 call s:Hi('WarningMsg', s:apolloBlue1, 'bg', '', '')
-call s:Hi('ModeMsg', s:apolloGray2, 'bg', '', '')
+call s:Hi('ModeMsg', s:apolloSilver2, 'bg', '', '')
 call s:Hi('Question', s:apolloGreen1, 'bg', '', '')
 call s:Hi('qfFileName', s:apolloBlue2, '', '', '')
-call s:Hi('qfSeparator', s:apolloGray1, '', '', '')
+call s:Hi('qfSeparator', s:apolloSilver1, '', '', '')
 highlight! link qfLineNr    LineNr
 
 " Filetype VIM
 call s:Hi('vimCommentTitle', s:apolloWhite, '', 'bold', '')
 
 " Filetype C
-call s:Hi('cCppOut', s:apolloGray3, '', '', '')
-call s:Hi('cCppOutIf2', s:apolloGray3, '', '', '')
-call s:Hi('cParen', s:apolloGray3, '', '', '')
-call s:Hi('cBlock', s:apolloGray3, '', '', '')
+call s:Hi('cCppOut', s:apolloSilver3, '', '', '')
+call s:Hi('cCppOutIf2', s:apolloSilver3, '', '', '')
+call s:Hi('cParen', s:apolloSilver3, '', '', '')
+call s:Hi('cBlock', s:apolloSilver3, '', '', '')
 
 " filetype HTML
 call s:Hi('htmlH1', s:apolloWhite, '', 'bold', '')
@@ -138,11 +126,11 @@ call s:Hi('htmlBold', s:apolloWhite, '', 'bold', '')
 call s:Hi('htmlItalic', s:apolloWhite, '', 'italic', '')
 
 " markdown
-call s:Hi('markdownCode', s:apolloGray2, s:apolloBg2, '', '')
-call s:Hi('markdownCodeBlock', s:apolloGray2, '', '', '')
+call s:Hi('markdownCode', s:apolloSilver2, s:apolloBg2, '', '')
+call s:Hi('markdownCodeBlock', s:apolloSilver2, '', '', '')
 
 " Diffs
 call s:Hi('DiffChange', '', s:apolloBg2, '', '')
-call s:Hi('DiffText', s:apolloBlue2, s:apolloDeco1Bg, '', '')
+call s:Hi('DiffText', s:apolloBlue2, s:apolloBg2, '', '')
 call s:Hi('DiffDelete', s:apolloRed, s:apolloBg2, 'bold', '')
 call s:Hi('DiffAdd', s:apolloGreen1, s:apolloBg2, 'bold', '')
