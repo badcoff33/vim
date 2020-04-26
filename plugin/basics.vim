@@ -9,14 +9,12 @@ noremap <unique> <script> <Plug>ToggleStickyCursorline <SID>ToggleStickyCursorli
 noremap <unique> <script> <Plug>ToggleQuickfix         <SID>ToggleQuickfix
 noremap <unique> <script> <Plug>PopupTerminal          <SID>PopupTerminal
 noremap <unique> <script> <Plug>HighlightWord          <SID>HighlightWord
-noremap <unique> <script> <Plug>SurroundSelection      <SID>SurroundSelection
 
 noremap <SID>ShowHiInfo             :call <SID>ShowHiInfo()<CR>
 noremap <SID>ToggleStickyCursorline :call <SID>ToggleStickyCursorline()<CR>
 noremap <SID>ToggleQuickfix         :call <SID>ToggleQuickfix()<CR>
 noremap <SID>PopupTerminal          :call <SID>PopupTerminal()<CR>
 noremap <SID>HighlightWord          :call <SID>HighlightWord("<C-r><C-w>")<CR>
-noremap <SID>SurroundSelection      :<C-u>call <SID>SurroundSelection()<CR>
 
 " Defaults: Key mappings
 if !hasmapto('<Plug>ShowHiInfo')
@@ -37,10 +35,6 @@ endif
 
 if !hasmapto('<Plug>HighlightWord')
   nmap <leader>* <Plug>HighlightWord
-endif
-
-if !hasmapto('<Plug>SurroundSelection','v')
-  vmap <CR> <Plug>SurroundSelection
 endif
 
 " Autocmd: put them in a dedicaed group
@@ -133,25 +127,6 @@ function! s:PopupTerminal()
     execute l:termBufNr . "buffer"
   else
     noautocmd call win_gotoid(l:termWinNr[0])
-  endif
-endfunction
-
-" Description: surround visual selection with double quote ("), quote ('),
-" backtick (`), parentheses (), braces {} and brackets []
-function! s:SurroundSelection()
-  echomsg "Press key to surround visual selection ... "
-  let l:nr = getchar()
-  if (l:nr != "\<ESC>") && (l:nr != "\<C-c>")
-    let l:opening_char = nr2char(l:nr)
-    let l:closing_char = l:opening_char
-    for pair in [ "()", "{}", "[]", "<>" ]
-      if l:opening_char == pair[0]
-        let l:closing_char = pair[1]
-        break
-      endif
-    endfor
-    call feedkeys('`>a' . l:closing_char, "x")
-    call feedkeys('`<i' . l:opening_char, "x")
   endif
 endfunction
 

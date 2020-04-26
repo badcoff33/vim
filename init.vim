@@ -124,6 +124,10 @@ set wildignore+=*.*~,*.o,TAGS
 
 " Tune the diff feature for my needs.
 set diffopt=internal,context:3,vertical,iwhite,filler
+" When starting in 'diff' mode, go full screen.
+if &diff
+  set columns=999 lines=999
+endif
 
 if has('unix')
   let g:psep = '/'
@@ -151,6 +155,14 @@ vnoremap <C-a> <C-a>gv
 " visual region
 vnoremap > >gv
 vnoremap < <gv
+
+" Enclose current visual selectino
+vnoremap <Leader>" c"<C-r>-"
+vnoremap <Leader>' c'<C-r>-'
+vnoremap <Leader>´ c´<C-r>-´
+vnoremap <Leader>( c(<C-r>-)
+vnoremap <Leader>[ c[<C-r>-]
+vnoremap <Leader>{ c{<C-r>-}
 
 " Switch Vim modes
 inoremap jj <Esc>
