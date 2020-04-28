@@ -55,7 +55,7 @@ call s:hi("SpellBad",      s:frostRed,    s:frost0, "undercurl", "")
 call s:hi("SpellCap",      s:frostYellow, s:frost0, "undercurl", "")
 call s:hi("SpellLocal",    s:frost5,      s:frost0, "undercurl", "")
 call s:hi("SpellRare",     s:frost6,      s:frost0, "undercurl", "")
-call s:hi("Visual",        "",            s:frost2, "",          "")
+call s:hi("Visual",        "",            s:frost3, "",          "")
 call s:hi("VisualNOS",     "",            s:frost2, "",          "")
 "+- Neovim Support -+
 call s:hi("healthError",   s:frostRed,    s:frost1, "",          "")
