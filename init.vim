@@ -185,9 +185,9 @@ nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
 nnoremap <Leader>x :set columns=999 lines=999<CR>
 
-nnoremap <C-Tab> :tabnext<CR>
-nnoremap <Leader>tn :tabnew<CR>
-nnoremap <Leader>tc :tabclose<CR>
+nnoremap <C-Tab>n :tabnew<CR>
+nnoremap <C-Tab>o :tabonly<CR>
+nnoremap <C-Tab>c :tabclose<CR>
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
@@ -201,18 +201,18 @@ vnoremap <Leader>r :s/\C\<\>//g<Left><Left><Left><Left><Left>
 
 " Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
 " record a macro with those keys and make macro playback easy as possible.
-nnoremap <Leader><left> :let @x=input("Go back ('[[', '[s', '[d'): ", "")<CR>
-nnoremap <Leader><right> :let @y=input("Go forward (']]', ']s', ']d'): ", "")<CR>
-nnoremap <A-left> @x
-vnoremap <A-left> @x
-nnoremap <A-right> @y
-vnoremap <A-right> @y
+nnoremap <C-S-left> :let @x=input("Go back ('[[', '[s', '[d'): ", "")<CR>
+nnoremap <C-S-right> :let @y=input("Go forward (']]', ']s', ']d'): ", "")<CR>
+nnoremap <S-left> @x
+vnoremap <S-left> @x
+nnoremap <S-right> @y
+vnoremap <S-right> @y
 let @x = "{"
 let @y = "}"
 
 nnoremap <Leader>n :nohlsearch<CR>
-nnoremap <Leader>N :set invhlsearch<CR>
-nnoremap <Leader>s :setlocal invspell<CR>
+nnoremap <Leader>oh :set invhlsearch<CR>
+nnoremap <Leader>os :setlocal invspell<CR>
 
 cabbrev %% <C-r>=expand("%:h")<CR>
 
