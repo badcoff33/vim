@@ -156,13 +156,13 @@ vnoremap <C-a> <C-a>gv
 vnoremap > >gv
 vnoremap < <gv
 
-" Enclose current visual selectino
-vnoremap <Leader>" c"<C-r>-"
-vnoremap <Leader>' c'<C-r>-'
-vnoremap <Leader>´ c´<C-r>-´
-vnoremap <Leader>( c(<C-r>-)
-vnoremap <Leader>[ c[<C-r>-]
-vnoremap <Leader>{ c{<C-r>-}
+" Enclose current visual selection
+vnoremap <Leader>" c"<C-r>-"<Esc>
+vnoremap <Leader>' c'<C-r>-'<Esc>
+vnoremap <Leader>` c`<C-r>-`<Esc>
+vnoremap <Leader>( c(<C-r>-)<Esc>
+vnoremap <Leader>[ c[<C-r>-]<Esc>
+vnoremap <Leader>{ c{<C-r>-}<Esc>
 
 " Switch Vim modes
 inoremap jj <Esc>
