@@ -5,4 +5,4 @@
 command! -nargs=0 ShowUnsavedChanges :call diff#UnsavedChanges()
 
 " compare two enitre directory trees against each other
-command! -nargs=* -complete=dir CompareDirs :call diff#CompareDirs(<f-args>)
+command! -nargs=0 CompareDirs :call diff#CompareDirs()
