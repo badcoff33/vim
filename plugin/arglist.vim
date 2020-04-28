@@ -27,7 +27,11 @@ endif
 
 augroup arglist
   autocmd!
-  autocmd TerminalOpen * :tmap <buffer> <C-a> <C-w>"=expand('##')<CR>
+  if has('nvim')
+    autocmd TermOpen * :tmap <buffer> <C-a> <C-w>"=expand('##')<CR>
+  else
+    autocmd TerminalOpen * :tmap <buffer> <C-a> <C-w>"=expand('##')<CR>
+  endif
 augroup END
 
 " Description: Show a popup with the arg list in the upper right corner
