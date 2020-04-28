@@ -30,15 +30,15 @@ endif
 
 iabbrev <buffer> xlink []()<Esc>2hi
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
-iabbrev <buffer> xx    [ ]
+iabbrev <buffer> todo  TODO
 iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
 
 function! s:ToggleTodo()
-  if search('\[[ Xx]\]','b') > 0
-    if strcharpart(getline('.')[col('.'):], 0, 1) == ' '
-      normal lrX
+  if search('\(TODO\|DONE\)','b') > 0
+    if strpart(getline('.'), col(".") - 1, 4) == 'TODO'
+      normal cwDONE
     else
-      exe "normal lr "
+      normal cwTODO
     endif
   endif
 endfunction
