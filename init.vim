@@ -14,6 +14,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set history=200
+set belloff=all
 set novisualbell
 set noerrorbells
 set noswapfile
@@ -185,9 +186,9 @@ nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
 nnoremap <Leader>x :set columns=999 lines=999<CR>
 
-nnoremap <C-Tab>n :tabnew<CR>
-nnoremap <C-Tab>o :tabonly<CR>
-nnoremap <C-Tab>c :tabclose<CR>
+nnoremap <Leader>n :tabnew<CR>
+nnoremap <Leader>1 :tabonly<CR>
+nnoremap <Leader>c :tabclose<CR>
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
@@ -214,7 +215,7 @@ nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch<CR>
 nnoremap <Leader>os :setlocal invspell<CR>
 
-cabbrev %% <C-r>=expand("%:h")<CR>
+cabbrev x/ <C-r>=expand("%:h")<CR>
 
 augroup init
   autocmd!
