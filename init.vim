@@ -211,7 +211,7 @@ vnoremap <S-right> @y
 let @x = "{"
 let @y = "}"
 
-nnoremap <Leader>n :nohlsearch<CR>
+nnoremap <Leader>* :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch<CR>
 nnoremap <Leader>os :setlocal invspell<CR>
 
