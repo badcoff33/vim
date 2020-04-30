@@ -3,11 +3,14 @@ command! -buffer -nargs=0 RunCode call <SID>RunCode()
 nnoremap <buffer> <LocalLeader>r :RunCode<CR>
 
 function! s:RunCode()
-  let l:save_reg_v = @v
   " found head line of embedded code
-  let l:headline = search('^```\s*\w\+.*$', 'cWb') 
+  let l:headline = search('^```\s*\w\+.*$', 'cWb')
+  if &buftype != ""
+    echomsg "write to buffer"
+    return
+  endif
   if l:headline == 0
-    echomsg "found no Mardown code block or parser"
+    echomsg "found no Markdown code block or parser"
     return
   endif
   let l:start = l:headline + 1
@@ -17,22 +20,18 @@ function! s:RunCode()
   let l:end = search('^```\s*$', 'cW') - 1
   if l:end >= l:start
     let l:codelines = getline(l:start, l:end)
-    let l:filename = expand('%:h') . g:psep . ".runcode.tmp"
-    call writefile(l:codelines, l:filename)
+    call writefile(l:codelines, ".script")
     if match(l:parser, 'vim') >= 0
-      redir @v
-      execute 'source ' . l:filename
+      redir! > .output
+      source .script
       redir END
-      call basic#OpenFloatingWin(@v)
     else
-      let l:syscall = l:parser . " " . l:options . " " . l:filename
-      echo l:syscall
+      let l:syscall = l:parser . " " . l:options . " .script"
       let l:output = system(l:syscall)
-      call basic#OpenFloatingWin(l:output)
+      call writefile(split(l:output, '\n'), ".output")
     endif
-    call delete(l:filename)
+    call delete(".script")
   endif
-  let @v = l:save_reg_v
 endfunction
 
 
