@@ -186,9 +186,9 @@ nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
 nnoremap <Leader>x :set columns=999 lines=999<CR>
 
-nnoremap <Leader>n :tabnew<CR>
-nnoremap <Leader>1 :tabonly<CR>
-nnoremap <Leader>c :tabclose<CR>
+nnoremap <Leader>tn :tabnew<CR>
+nnoremap <Leader>to :tabonly<CR>
+nnoremap <Leader>tc :tabclose<CR>
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
@@ -211,7 +211,7 @@ vnoremap <S-right> @y
 let @x = "{"
 let @y = "}"
 
-nnoremap <Leader>* :nohlsearch<CR>
+nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch<CR>
 nnoremap <Leader>os :setlocal invspell<CR>
 

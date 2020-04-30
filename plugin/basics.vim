@@ -18,7 +18,7 @@ noremap <SID>HighlightWord          :call <SID>HighlightWord("<C-r><C-w>")<CR>
 
 " Defaults: Key mappings
 if !hasmapto('<Plug>ShowHiInfo')
-  nmap <leader>h <Plug>ShowHiInfo
+  nmap <leader>H <Plug>ShowHiInfo
 endif
 
 if !hasmapto('<Plug>ToggleStickyCursorline')
@@ -34,7 +34,7 @@ if !hasmapto('<Plug>PopupTerminal')
 endif
 
 if !hasmapto('<Plug>HighlightWord')
-  nmap <leader><leader> <Plug>HighlightWord
+  nmap <leader>h <Plug>HighlightWord
 endif
 
 " Autocmd: put them in a dedicaed group

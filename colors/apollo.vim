@@ -53,6 +53,8 @@ let s:apolloRed2           = '#F86020'
 
 " Basics
 call s:Hi('Normal', s:apolloWhite, s:apolloBg1, 'NONE', '')
+call s:Hi('Bold',   s:apolloWhite, '', 'bold', '')
+call s:Hi('Italic', s:apolloWhite, '', 'italic', '')
 call s:Hi('NonText', '', s:apolloBg2, '', '')
 call s:Hi('Visual', s:apolloWhite, s:apolloSilver2, '', '')
 call s:Hi('StatusLine', s:apolloBlue2, s:apolloBg3, 'bold', '')
@@ -122,8 +124,6 @@ call s:Hi('cBlock', s:apolloSilver3, '', '', '')
 call s:Hi('htmlH1', s:apolloWhite, '', 'bold', '')
 call s:Hi('htmlH2', s:apolloWhite, '', 'bold', '')
 call s:Hi('htmlH3', s:apolloWhite, '', 'bold,italic', '')
-call s:Hi('htmlBold', s:apolloWhite, '', 'bold', '')
-call s:Hi('htmlItalic', s:apolloWhite, '', 'italic', '')
 
 " markdown
 call s:Hi('markdownCode', s:apolloSilver2, s:apolloBg2, '', '')
