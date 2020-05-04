@@ -3,23 +3,22 @@
 let g:colors_name = "frost"
 set background=dark
 
-let s:frostBlack = "#121518"
-let s:frost0 = "#2E3440"
-let s:frost1 = "#3B4252"
-let s:frost2 = "#434C5E"
-let s:frost3 = "#4C566A"
-let s:frost4 = "#516779"
-let s:frost5 = "#7589A0"
-let s:frost6 = "#DCDFE4"
-let s:frostBlue1 = "#8FBCBB"
-let s:frostBlue2 = "#81A1C1"
-let s:frostBlue3 = "#88C0D0"
-let s:frostBlue4 = "#5E81AC"
-let s:frostRed = "#BF616A"
+let s:frostBlack   = "#121518"
+let s:frost0       = "#2E3440"
+let s:frost1       = "#3B4252"
+let s:frost2       = "#434C5E"
+let s:frost3       = "#4C566A"
+let s:frost4       = "#516779"
+let s:frost5       = "#7589A0"
+let s:frost6       = "#DCDFE4"
+let s:frostBlue1   = "#8FBCBB"
+let s:frostBlue2   = "#81A1C1"
+let s:frostBlue3   = "#88C0D0"
+let s:frostRed     = "#BF616A"
 let s:frostPumpkin = "#D08770"
-let s:frostYellow = "#EBCB8B"
-let s:frostGreen = "#A3BE8C"
-let s:frostViolet = "#B48EAD"
+let s:frostYellow  = "#EBCB8B"
+let s:frostGreen   = "#A3BE8C"
+let s:frostViolet  = "#B48EAD"
 
 
 function! s:hi(group, guifg, guibg, attr, guisp)
@@ -83,7 +82,7 @@ call s:hi("ModeMsg",          s:frostBlack, s:frostGreen,  "",     "")
 call s:hi("MoreMsg",          s:frostBlack, s:frostYellow, "",     "")
 call s:hi("Question",         s:frost4,     "",            "",     "")
 call s:hi("StatusLine",       s:frost6,     s:frost3,      "NONE", "")
-call s:hi("StatusLineNC",     s:frost4,     s:frost1,      "NONE", "")
+call s:hi("StatusLineNC",     s:frost5,     s:frost1,      "NONE", "")
 call s:hi("StatusLineTerm",   s:frostBlue2, s:frost3,      "NONE", "")
 call s:hi("StatusLineTermNC", s:frost4,     s:frost1,      "NONE", "")
 call s:hi("WildMenu",         s:frostBlue2, s:frost1,      "",     "")
