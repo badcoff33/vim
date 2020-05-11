@@ -8,13 +8,9 @@ set grepprg=rg\ --vimgrep\ --follow\ -tc\ -tvim\ -tpy
 set grepformat=%f:%l:%c:%m
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap <Leader>a <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap <Leader>a <Plug>(EasyAlign)
-
-" Open a more vimish command window
-nmap <f1> q:i
-imap <f1> <Esc><f1>
+nmap ga <Plug>(EasyAlign)
 
 if exists('g:GuiLoaded')
   if g:GuiLoaded == 1
