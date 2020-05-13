@@ -76,8 +76,7 @@ set magic
 
 " Optional config: if 'smartcase' is active a case sensitive search with
 " /\C<text> can be used on demand.
-set ignorecase smartcase
-"set noignorecase nosmartcase
+set noignorecase nosmartcase
 
 let s = split(&runtimepath, ',')
 for d in s
@@ -167,6 +166,9 @@ vnoremap <Leader>{ c{<C-r>-}<Esc>
 
 " Switch Vim modes
 inoremap jj <Esc>
+" Open a more vimish command window
+nmap <C-Space> q:i
+imap <C-Space> <Esc><C-Space>
 
 " Terminals
 if has('nvim')
@@ -192,6 +194,8 @@ nnoremap <Leader>tc :tabclose<CR>
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
+nnoremap <C-down> :cnext<CR>
+nnoremap <C-up> :cprevious<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>
@@ -213,9 +217,10 @@ let @y = "}"
 
 nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch<CR>
+nnoremap <Leader>oi :set invignorecase<CR>
 nnoremap <Leader>os :setlocal invspell<CR>
 
-cabbrev x/ <C-r>=expand("%:h")<CR>
+cabbrev ./ <C-r>=expand("%:h")<CR>
 
 augroup init
   autocmd!
