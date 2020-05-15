@@ -18,9 +18,9 @@ endfunction
 
 augroup statusline
   au!
-  au WinEnter    * :call UpdateDiverge()
-  au WinLeave    * :call UpdateDiverge()
-  au BufWinEnter * :call UpdateDiverge()
+  au WinEnter    * :windo call UpdateDiverge()
+  au WinLeave    * :windo call UpdateDiverge()
+  au BufWinEnter * :windo call UpdateDiverge()
 augroup END
 
 " Description: Returns a distinguishable buffer name as a " string. If
