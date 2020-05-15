@@ -4,14 +4,15 @@ let g:colors_name = "frost"
 set background=dark
 
 let s:frostBlack   = "#121518"
+let s:frostWhite   = "#CFD7E3"
 let s:frost0       = "#2E3440"
 let s:frost1       = "#3B4252"
 let s:frost2       = "#434C5E"
 let s:frost3       = "#4C566A"
 let s:frost4       = "#516779"
 let s:frost5       = "#7589A0"
-let s:frost6       = "#DCDFE4"
-let s:frostBlue1   = "#8FBCBB"
+let s:frost6       = "#A3B7D3"
+let s:frostBlue1   = "#8194AB"
 let s:frostBlue2   = "#81A1C1"
 let s:frostBlue3   = "#88C0D0"
 let s:frostRed     = "#BF616A"
@@ -37,15 +38,15 @@ endfunction
 
 "+--- Editor ---+
 call s:hi("ColorColumn", "", s:frost1, "", "")
-call s:hi("Cursor", s:frost0, s:frostYellow, "NONE", "")
+call s:hi("Cursor", s:frost0, s:frostViolet, "NONE", "")
 call s:hi("CursorLine", "", s:frost1, "NONE", "")
 call s:hi("Error", s:frostRed, "bg", "", "")
 call s:hi("iCursor", s:frost0, s:frost4, "", "")
 call s:hi("LineNr", s:frost3, s:frost0, "", "")
 call s:hi("MatchParen", s:frostBlue2, s:frost3, "", "")
 call s:hi("NonText", s:frost2, "", "", "")
-call s:hi("Normal", s:frost6, s:frost0, "", "")
-call s:hi("PMenu", s:frost4, s:frost2, "NONE", "")
+call s:hi("Normal", s:frostWhite, s:frost0, "", "")
+call s:hi("PMenu", s:frostBlue1, s:frost2, "NONE", "")
 call s:hi("PmenuSbar", s:frost4, s:frost2, "", "")
 call s:hi("PMenuSel", s:frostBlue2, s:frost3, "", "")
 call s:hi("PmenuThumb", s:frostBlue2, s:frost3, "", "")
@@ -94,7 +95,7 @@ call s:hi("Search", s:frostBlack, s:frostYellow, "NONE", "")
 "+--- Tabs ---+
 call s:hi("TabLine", s:frost5, s:frost1, "NONE", "")
 call s:hi("TabLineFill", s:frost4, s:frost1, "NONE", "")
-call s:hi("TabLineSel", s:frostGreen, s:frost4, "underline", "")
+call s:hi("TabLineSel", s:frostYellow, s:frost4, "underline", "")
 
 "+--- Window ---+
 call s:hi("Title", s:frost4, "", "NONE", "")
@@ -157,9 +158,9 @@ hi! link htmlTag Keyword
 hi! link htmlTagN htmlTag
 
 call s:hi("markdownBlockquote", s:frostBlue1, "", "", "")
-call s:hi("markdownCode", s:frost5, "bg", "", "")
+call s:hi("markdownCode", s:frost6, "bg", "", "")
 call s:hi("markdownCodeBlock", s:frost5, "bg", "", "")
-call s:hi("markdownCodeDelimiter", s:frost6, "bg", "", "")
+call s:hi("markdownCodeDelimiter", s:frostGreen, "bg", "", "")
 call s:hi("markdownFootnote", s:frostBlue1, "", "", "")
 call s:hi("markdownId", s:frostBlue1, "", "", "")
 call s:hi("markdownIdDeclaration", s:frostBlue1, "", "", "")

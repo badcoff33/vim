@@ -102,8 +102,13 @@ function! s:ToggleQuickfix()
   windo if &buftype == 'quickfix' | let l:qfIsOpen = 1 | endif
   if l:qfIsOpen == 0
     topleft copen
+    augroup togqf
+      au!
+      au CursorHold * :cclose
+    augroup END
   else
     cclose
+    augroup! togqf
   endif
   if win_gotoid(l:save_win) == 0
     wincmd p
@@ -128,60 +133,6 @@ function! s:PopupTerminal()
   else
     noautocmd call win_gotoid(l:termWinNr[0])
   endif
-endfunction
-
-function! s:OpenFloatingWin(string)
-  if !has('nvim')
-    call popup_create(split(a:string, '\n'), #{ pos: 'topleft',
-      \ line: 'cursor+1', col: 'cursor', moved: 'WORD' })
-    return
-  endif
-  let l:opts = {
-        \ 'relative': 'cursor',
-        \ 'row': 1,
-        \ 'col': 1,
-        \ 'anchor': 'NW',
-        \ 'height': 10,
-        \ 'width': 40,
-        \ 'style': 'minimal'
-        \ }
-
-  let l:buf = nvim_create_buf(v:false, v:true)
-  let l:win = nvim_open_win(l:buf, v:true, l:opts)
-  call nvim_win_set_option(win, 'winhl', 'Normal:NormalFloat')
-  call nvim_win_set_option(win, 'winblend', 20)
-
-  setlocal
-        \ buftype=nofile
-        \ nobuflisted
-        \ bufhidden=hide
-        \ signcolumn=no
-  0put =printf('%s', a:string)
-  normal gg
-  autocmd BufLeave <buffer> bwipeout!
-  nmap <buffer> <Esc> :bwipeout!<CR>
-  nmap <buffer> <CR>  :bwipeout!<CR>
-endfunction
-
-function! s:OpenFloatingHelp(help_arg)
-  if !has('nvim')
-    echo "sorry, nvim only."
-  endif
-  let width = min([&columns - 4, max([80, &columns - 20])])
-  let height = min([&lines - 4, max([20, &lines - 10])])
-  let top = ((&lines - height) / 2) - 1
-  let left = (&columns - width) / 2
-  let opts = {'relative': 'editor',
-        \'row': top,
-        \'col': left,
-        \'width': width,
-        \'height': height,
-        \'style': 'minimal'}
-  let s:buf = nvim_create_buf(v:false, v:true)
-  let l:win = nvim_open_win(s:buf, v:true, opts)
-  call nvim_win_set_option(win, 'winhl', 'Normal:NormalFloat')
-  setlocal nonumber norelativenumber buftype=help
-  exe "help " . a:help_arg
 endfunction
 
 " Description: Print highlighting information at current cursor position.
