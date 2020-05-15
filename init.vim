@@ -221,6 +221,8 @@ nnoremap <Leader>oi :set invignorecase<CR>
 nnoremap <Leader>os :setlocal invspell<CR>
 
 cabbrev ./ <C-r>=expand("%:h")<CR>
+cabbrev grep sil grep
+cabbrev vimgrep sil vimgrep
 
 augroup init
   autocmd!
