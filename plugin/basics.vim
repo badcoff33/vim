@@ -96,19 +96,22 @@ function! s:HighlightWord(word)
   endif
 endfunction
 
+func TogQf_Callback(timer)
+    cclose
+endfunc
+
 function! s:ToggleQuickfix()
   let l:save_win = win_getid()
   let l:qfIsOpen = 0
   windo if &buftype == 'quickfix' | let l:qfIsOpen = 1 | endif
   if l:qfIsOpen == 0
     topleft copen
-    augroup togqf
-      au!
-      au CursorHold * :cclose
-    augroup END
+    let g:togqf_timer = timer_start(7000, 'TogQf_Callback')
   else
     cclose
-    augroup! togqf
+    if exists('g:togqf_timer')
+      call timer_stop(g:togqf_timer)
+    endif
   endif
   if win_gotoid(l:save_win) == 0
     wincmd p
