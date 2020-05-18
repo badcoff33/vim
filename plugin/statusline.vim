@@ -18,10 +18,11 @@ endfunction
 
 augroup statusline
   au!
-  au WinEnter    * :windo call UpdateDiverge()
-  au WinLeave    * :windo call UpdateDiverge()
-  au BufWinEnter * :windo call UpdateDiverge()
+  au WinEnter * :call UpdateDiverge()
+  au BufWinEnter * :call UpdateDiverge()
 augroup END
+
+let g:winlist = []
 
 " Description: Returns a distinguishable buffer name as a " string. If
 " two windows on a tabpage has the same base name, this function returns
@@ -32,12 +33,14 @@ function! GetDiverge()
 endfunction
 
 function! UpdateDiverge()
-  let b:diverge_string = get(b:, 'diverge_string', '')
   if !empty(&buftype) || empty(bufname('%'))
-    return ''
+    let b:diverge_string = ''
+    return
   endif
+  call add(g:winlist, bufnr('%'))
+  let g:winlist = uniq(sort(g:winlist))
   let div_string = ''
-  for b in tabpagebuflist()
+  for b in g:winlist
     if bufnr('%') != b && empty(div_string)
       let div_string = s:FindDivergePart(bufname('%'), bufname(b))
     endif
