@@ -62,7 +62,7 @@ function! s:ToggleStickyCursorline()
     let g:use_sticky_cursorline = 1
     set cursorline
     augroup ToggleStickyCursorline
-      au!
+      autocmd!
       autocmd WinLeave * set nocursorline
       autocmd BufEnter,BufWinEnter,WinEnter * call <SID>TurnCursorLineOn()
     augroup END
@@ -97,23 +97,35 @@ function! s:HighlightWord(word)
 endfunction
 
 func TogQf_Callback(timer)
-    cclose
+    augroup ToggleQuickfix
+      autocmd!
+    augroup END
+    if &buftype==''
+      cclose
+    else
+      let g:togqf_timer_id = timer_start(2000, 'TogQf_Callback')
+    endif
 endfunc
 
 function! s:ToggleQuickfix()
-  let l:save_win = win_getid()
-  let l:qfIsOpen = 0
-  windo if &buftype == 'quickfix' | let l:qfIsOpen = 1 | endif
-  if l:qfIsOpen == 0
+  let save_win = win_getid()
+  let qfIsOpen = 0
+  windo if &buftype == 'quickfix' | let qfIsOpen = 1 | endif
+  if qfIsOpen == 0
     topleft copen
-    let g:togqf_timer = timer_start(7000, 'TogQf_Callback')
+    let g:togqf_timer_id = timer_start(6000, 'TogQf_Callback')
+    augroup ToggleQuickfix
+      autocmd!
+      autocmd CursorMoved,CursorMovedI  * :call timer_pause(g:togqf_timer_id, 1)
+      autocmd CursorHold,CursorHoldI    * :call timer_pause(g:togqf_timer_id, 0)
+    augroup END
   else
     cclose
-    if exists('g:togqf_timer')
-      call timer_stop(g:togqf_timer)
+    if exists('g:togqf_timer_id')
+      call timer_stop(g:togqf_timer_id)
     endif
   endif
-  if win_gotoid(l:save_win) == 0
+  if win_gotoid(save_win) == 0
     wincmd p
   endif
 endfunction
@@ -122,19 +134,19 @@ endfunction
 " If no term buffer open, open a new one.
 " TODO: handle multiple term buffers.
 function! s:PopupTerminal()
-  let l:termBufNr = bufnr("^term:")
-  if l:termBufNr == -1
-    let l:termBufNr = bufnr("^\!")
+  let termBufNr = bufnr("^term:")
+  if termBufNr == -1
+    let termBufNr = bufnr("^\!")
   endif
-  if l:termBufNr == -1
+  if termBufNr == -1
     terminal
     return
   endif
-  let l:termWinNr = win_findbuf(l:termBufNr)
-  if empty(l:termWinNr)
-    execute l:termBufNr . "buffer"
+  let termWinNr = win_findbuf(termBufNr)
+  if empty(termWinNr)
+    execute termBufNr . "buffer"
   else
-    noautocmd call win_gotoid(l:termWinNr[0])
+    noautocmd call win_gotoid(termWinNr[0])
   endif
 endfunction
 
