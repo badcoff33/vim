@@ -286,24 +286,24 @@ function! s:job_pid(jobid) abort
 endfunction
 
 " public apis {{{
-function! async#job#start(cmd, opts) abort
+function! lib#job#start(cmd, opts) abort
     return s:job_start(a:cmd, a:opts)
 endfunction
 
-function! async#job#stop(jobid) abort
+function! lib#job#stop(jobid) abort
     call s:job_stop(a:jobid)
 endfunction
 
-function! async#job#send(jobid, data) abort
+function! lib#job#send(jobid, data) abort
     call s:job_send(a:jobid, a:data)
 endfunction
 
-function! async#job#wait(jobids, ...) abort
+function! lib#job#wait(jobids, ...) abort
     let l:timeout = get(a:000, 0, -1)
     return s:job_wait(a:jobids, l:timeout)
 endfunction
 
-function! async#job#pid(jobid) abort
+function! lib#job#pid(jobid) abort
     return s:job_pid(a:jobid)
 endfunction
 " }}}
