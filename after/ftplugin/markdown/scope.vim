@@ -6,7 +6,7 @@ endif
 
 " Description: A simple scope parser for Markdown files.
 function! ScopeParserMarkdown() abort
-  let l:fNum = search('^#\{1,\}\s*\(.*\)$', 'bnWe')
+  let l:fNum = search('^#\{1,\}', 'bcnWe')
     if l:fNum > 0
       let chapter_str = substitute(getline(l:fNum), '^\(#\{1,\}\)\s\+\(.*\)$', '\=len(submatch(1)).."/"..submatch(2)', '')
       if len(chapter_str) > 30
