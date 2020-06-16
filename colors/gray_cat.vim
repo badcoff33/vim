@@ -28,7 +28,7 @@ highlight Cursor  guifg=white  guibg=black
 highlight NormalFloat  guifg=black guibg=azure3
 
 " window decoration
-highlight StatusLine   guifg=white guibg=grey10 gui=bold
+highlight StatusLine   guifg=white guibg=grey30 gui=NONE
 highlight StatusLineNC guifg=grey30 guibg=grey90 gui=italic
 highlight VertSplit    guifg=grey80 guibg=grey80 gui=italic
 highlight! link WildMenu IncSearch

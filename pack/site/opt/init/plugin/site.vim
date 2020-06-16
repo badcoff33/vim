@@ -8,9 +8,11 @@ set grepprg=rg\ --vimgrep\ --follow\ -tc\ -tvim\ -tpy
 set grepformat=%f:%l:%c:%m
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+xmap <Leader>a <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+nnoremap <Leader>O :drop ~/.notes.md<cr>
+nnoremap <leader>n :tabedit ~\.notes.md<cr>
 
 if exists('g:GuiLoaded')
   if g:GuiLoaded == 1
@@ -18,16 +20,18 @@ if exists('g:GuiLoaded')
     nnoremap <leader>1 :GuiFont! Consolas:h11<CR>
     nnoremap <leader>0 :GuiFont! Consolas:h10<CR>
     GuiLinespace 6
-    call feedkeys(' 1') " default font
+    call feedkeys(' 0') " default font
     colorscheme apollo
+    set mouse=a
   endif
 else
   if has('gui')
-    set guifont=Consolas:h11 linespace=4
+    call feedkeys(' 1') " default font
     nnoremap <leader>2 :set guifont=Consolas:h12 linespace=4<CR>
     nnoremap <leader>1 :set guifont=Consolas:h11 linespace=4<CR>
     nnoremap <leader>0 :set guifont=Consolas:h10 linespace=3<CR>
-    colorscheme frost
+    colorscheme apollo
+    set guicursor+=a:blinkon0
   endif
 endif
 

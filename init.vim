@@ -28,6 +28,9 @@ set showtabline=1
 " limit number of suggestions of z=
 set spellsuggest=best,10
 set spelllang=en_us
+if exists('&spelloptions')
+  set spelloptions=camel
+endif
 
 " Read changed files automatically if they are changed in the background
 set autoread
@@ -70,7 +73,7 @@ set backspace=eol,start,indent
 " Search: Some configuration for the search behavior.
 set incsearch
 if has('nvim')
-  set inccommand=split
+  set inccommand=nosplit
 endif
 set magic
 
@@ -114,11 +117,12 @@ endif
 if has ('nvim')
   set wildmenu
   set wildoptions=pum,tagfile
+  set wildmode=full " works best with 'completeopt'=menu
 else
   set nowildmenu
   set wildoptions=tagfile
+  set wildmode=longest,list,full
 endif
-set wildmode=full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 
@@ -167,8 +171,11 @@ vnoremap <Leader>{ c{<C-r>-}<Esc>
 " Switch Vim modes
 inoremap jj <Esc>
 " Open a more vimish command window
-nmap <C-Space> q:i
-imap <C-Space> <Esc><C-Space>
+nmap <expr> <CR> &buftype=='quickfix' ? "\<CR>" : ":"
+
+inoremap <Tab> <C-n>
+inoremap <S-Tab> <C-p>
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " Terminals
 if has('nvim')
@@ -187,15 +194,14 @@ nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
 nnoremap <Leader>x :set columns=999 lines=999<CR>
-
 nnoremap <Leader>tn :tabnew<CR>
 nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
-nnoremap <C-down> :cnext<CR>
-nnoremap <C-up> :cprevious<CR>
+nnoremap <f4> :cnext<CR>
+nnoremap <S-f4> :cprevious<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>
@@ -223,12 +229,16 @@ nnoremap <Leader>os :setlocal invspell<CR>
 cabbrev ./ <C-r>=expand("%:h")<CR>
 cabbrev grep sil grep
 cabbrev vimgrep sil vimgrep
+cabbrev start sil !start
 
 augroup init
   autocmd!
   autocmd VimResized * :wincmd =
   autocmd VimEnter   * :runtime site.vim
   autocmd BufEnter   * :if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
+  if has('nvim')
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 350)
+  endif
 augroup END
 
 if has('nvim')
