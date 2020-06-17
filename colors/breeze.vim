@@ -10,102 +10,221 @@ hi clear
 set background=light
 let g:colors_name = "breeze"
 
-" basics
-highlight Normal guifg=grey30 guibg=white
-highlight NonText guifg=lightblue guibg=bg
-highlight Visual guifg=white guibg=cornflowerblue
-highlight Cursor guifg=white guibg=red3
+augroup Colorscheme
+  au!
+  if exists('&wincolor')
+    " Low-key colors for non-file buffers
+    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+          \ | set wincolor=BlendDown | else | set wincolor= | endif
+  endif
+augroup END
 
-" window decoration
-highlight StatusLine guifg=white guibg=grey20 gui=bold
-highlight User1 guifg=white  guibg=grey20 gui=bold
-highlight User2 guifg=grey44 guibg=grey40 gui=none
-highlight User3 guifg=grey44 guibg=grey40 gui=none
-highlight StatusLineNC guifg=grey20 guibg=grey95 gui=italic
-highlight VertSplit guifg=grey85 guibg=bg gui=none
-highlight QuickFixLine guibg=mistyrose1 gui=bold
-highlight! link WildMenu IncSearch
+function! s:Hi(group, guifg, guibg, attr, guisp)
+  if a:guifg != ''
+    exec 'hi ' . a:group . ' guifg=' . a:guifg
+  endif
+  if a:guibg != ''
+    exec 'hi ' . a:group . ' guibg=' . a:guibg
+  endif
+  if a:attr != ''
+    exec 'hi ' . a:group . ' gui=' . a:attr
+  endif
+  if a:guisp != ''
+    exec 'hi ' . a:group . ' guisp=' . a:guisp
+  endif
+endfunction
+
+let s:black = "#1b1f23"
+let s:white = "#ffffff"
+
+" -------- Grays --------
+let s:gray_9 = "#fafbfc"
+let s:gray_8 = "#f6f8fa"
+let s:gray_7 = "#e1e4e8"
+let s:gray_6 = "#d1d5da"
+let s:gray_5 = "#959da5"
+let s:gray_4 = "#6a737d"
+let s:gray_3 = "#586069"
+let s:gray_2 = "#444d56"
+let s:gray_1 = "#2f363d"
+let s:gray_0 = "#24292e"
+
+" -------- Blue --------
+let s:blue_9 = "#f1f8ff"
+let s:blue_8 = "#dbedff"
+let s:blue_7 = "#c8e1ff"
+let s:blue_6 = "#79b8ff"
+let s:blue_5 = "#2188ff"
+let s:blue_4 = "#0366d6"
+let s:blue_3 = "#005cc5"
+let s:blue_2 = "#044289"
+let s:blue_1 = "#032f62"
+let s:blue_0 = "#05264c"
+
+" -------- Green --------
+let s:green_9 = "#f0fff4"
+let s:green_8 = "#dcffe4"
+let s:green_7 = "#bef5cb"
+let s:green_6 = "#85e89d"
+let s:green_5 = "#34d058"
+let s:green_4 = "#28a745"
+let s:green_3 = "#22863a"
+let s:green_2 = "#176f2c"
+let s:green_1 = "#165c26"
+let s:green_0 = "#144620"
+
+" -------- Yellow --------
+let s:yellow_9 = "#fffdef"
+let s:yellow_8 = "#fffbdd"
+let s:yellow_7 = "#fff5b1"
+let s:yellow_6 = "#ffea7f"
+let s:yellow_5 = "#ffdf5d"
+let s:yellow_4 = "#ffd33d"
+let s:yellow_3 = "#f9c513"
+let s:yellow_2 = "#dbab09"
+let s:yellow_1 = "#b08800"
+let s:yellow_0 = "#735c0f"
+
+" -------- Orange --------
+let s:orange_9 = "#fff8f2"
+let s:orange_8 = "#ffebda"
+let s:orange_7 = "#ffd1ac"
+let s:orange_6 = "#ffab70"
+let s:orange_5 = "#fb8532"
+let s:orange_4 = "#f66a0a"
+let s:orange_3 = "#e36209"
+let s:orange_2 = "#d15704"
+let s:orange_1 = "#c24e00"
+let s:orange_0 = "#a04100"
+
+" -------- Red --------
+let s:red_9 = "#ffeef0"
+let s:red_8 = "#ffdce0"
+let s:red_7 = "#fdaeb7"
+let s:red_6 = "#f97583"
+let s:red_5 = "#ea4a5a"
+let s:red_4 = "#d73a49"
+let s:red_3 = "#cb2431"
+let s:red_2 = "#b31d28"
+let s:red_1 = "#9e1c23"
+let s:red_0 = "#86181d"
+
+" -------- Purple --------
+let s:purple_9 = "#f5f0ff"
+let s:purple_8 = "#e6dcfd"
+let s:purple_7 = "#d1bcf9"
+let s:purple_6 = "#b392f0"
+let s:purple_5 = "#8a63d2"
+let s:purple_4 = "#6f42c1"
+let s:purple_3 = "#5a32a3"
+let s:purple_2 = "#4c2889"
+let s:purple_1 = "#3a1d6e"
+let s:purple_0 = "#29134e"
+
+" -------- Pink --------
+let s:pink_9 = "#ffeef8"
+let s:pink_8 = "#fedbf0"
+let s:pink_7 = "#f9b3dd"
+let s:pink_6 = "#f692ce"
+let s:pink_5 = "#ec6cb9"
+let s:pink_4 = "#ea4aaa"
+let s:pink_3 = "#d03592"
+let s:pink_2 = "#b93a86"
+let s:pink_1 = "#99306f"
+let s:pink_0 = "#6d224f"
+
+" -------- Defaults --------
+let s:red        = s:red_4
+let s:purple     = s:purple_4
+let s:blue       = s:blue_4
+let s:green      = s:green_4
+let s:yellow     = s:yellow_4
+let s:orange     = s:orange_4
+let s:gray_dark  = s:gray_4
+let s:gray_light = s:gray_9
+let s:gray       = s:gray_5
+
+
+" Basics
+call s:Hi('Normal', s:gray_1, s:gray_9, 'NONE', '')
+call s:Hi('Bold',   s:white, '', 'bold', '')
+call s:Hi('Italic', s:white, '', 'italic', '')
+call s:Hi('NonText', s:black, s:gray_7, '', '')
+call s:Hi('Visual', s:white, s:orange_4, '', '')
+call s:Hi('StatusLine', s:blue_8, s:gray_2, 'bold', '')
+call s:Hi('StatusLineNC', s:blue_2, s:gray_6, 'bold', '')
+call s:Hi('VertSplit', s:gray_6, 'bg', 'NONE', '')
+call s:Hi('IncSearch', s:yellow_0, s:yellow_4, 'bold', '')
+call s:Hi('Search', s:blue_0, s:blue_7, 'NONE', '')
+call s:Hi('MatchParen', s:green_2, '', '', '')
+call s:Hi('QuickFixLine', '', '', 'bold', '')
+call s:Hi('CursorLine', '', s:gray_7, '', '')
+call s:Hi('LineNr', s:blue_1, '', '', '')
+
+highlight! link CursorColumn CursorLine
+highlight! link CursorLineNr CursorLine
+highlight! link FoldColumn LineNr
+highlight! link Folded StatusLineNC
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
+highlight! link PmenuSel IncSearch
+highlight! link Pmenu Search
+highlight! link PmenuSbar Search
+highlight! link PmenuThumb IncSearch
+highlight! link TabLineFill Normal
+highlight! link TabLine StatusLineNC
+highlight! link TabLineSel Statusline
+highlight! link WildMenu PmenuSel
 
-" line numbers / side decorations
-highlight LineNr guifg=azure3 guibg=bg gui=bold,italic
-highlight CursorLine guibg=grey96
-highlight CursorColumn guibg=grey96
-highlight CursorLineNr guifg=azure3 guibg=grey96 gui=bold,italic
-highlight SignColumn guifg=skyblue4 guibg=bg
-highlight FoldColumn guifg=skyblue4 guibg=bg
-highlight Folded guifg=fg guibg=bg gui=NONE
+" Breeze specific
+call s:Hi('BlendDown', s:gray_0, s:gray_8, '', '')
 
-" tabs
-highlight TabLineFill guifg=fg guibg=bg gui=NONE
-highlight TabLine guifg=fg guibg=bg gui=none
-highlight TabLineSel guifg=black guibg=bg gui=bold,underline
+" Code
+call s:Hi('Statement', s:green_2, '', 'bold', '')
+call s:Hi('Conditional', s:green_2, '', 'bold', '')
+call s:Hi('Type', s:gray_3, '', '', '')
+call s:Hi('Structure', s:green_1, '', '', '')
+call s:Hi('StorageClass', s:blue_1, '', '', '')
+call s:Hi('PreProc', s:blue_4, '', '', '')
+call s:Hi('PreCondit', s:white, '', 'bold', '')
+call s:Hi('Comment', s:gray_2, '', '', '')
+call s:Hi('Function', s:green_1, '', '', '')
+call s:Hi('Identifier', s:green_1, '', '', '')
+call s:Hi('Special', s:green_1, '', '', '')
+call s:Hi('Constant', s:blue_2, '', '', '')
+call s:Hi('Number', s:blue_2, '', '', '')
+call s:Hi('Title', s:gray_2, '', '', '')
+call s:Hi('Todo', s:gray_2, s:gray_7, '', '')
+call s:Hi('Error', s:red_1, s:red_8, '', '')
+call s:Hi('Directory', s:gray_2, '', '', '')
+call s:Hi('ErrorMsg', s:red_1, 'bg', '', '')
+call s:Hi('WarningMsg', s:green_1, s:green_8, '', '')
+call s:Hi('ModeMsg', s:yellow_1, s:yellow_7, '', '')
+call s:Hi('Question', s:green_1, 'bg', '', '')
+call s:Hi('qfFileName', s:blue_2, '', '', '')
+call s:Hi('qfSeparator', s:gray_1, '', '', '')
+highlight! link qfLineNr    LineNr
 
-" popup Menu
-highlight Pmenu guifg=grey20 guibg=grey90
-highlight PmenuSbar guibg=grey50
-highlight PmenuThumb guifg=white
-highlight PmenuSel guifg=white guibg=seagreen4
+" Filetype VIM
+call s:Hi('vimCommentTitle', s:white, '', 'bold', '')
 
-" search
-highlight IncSearch guifg=white guibg=coral1 gui=none
-highlight Search guifg=grey25 guibg=lightgoldenrod1 gui=none
-highlight MatchParen guifg=fg guibg=bg gui=underline
+" Filetype C
+call s:Hi('cCppOut', s:gray_3, '', '', '')
+call s:Hi('cCppOutIf2', s:gray_3, '', '', '')
+call s:Hi('cParen', s:gray_3, '', '', '')
+call s:Hi('cBlock', s:gray_3, '', '', '')
 
-" code
-highlight Statement guifg=maroon3 gui=bold
-highlight Conditional guifg=maroon3 gui=bold
-highlight Type guifg=dodgerblue2 gui=none
-highlight StorageClass guifg=grey50 gui=bold
-highlight PreProc guifg=dodgerblue2 gui=bold
-highlight Comment guifg=darkseagreen4
-highlight Identifier guifg=aquamarine4
-highlight Special guifg=dodgerblue3
-highlight Constant guifg=goldenrod4
-
-" misc
-highlight Title guifg=steelblue2
-highlight Subtitle guifg=steelblue3
-highlight todo guifg=darkseagreen4 guibg=darkseagreen1
-highlight Error guifg=red guibg=bg gui=undercurl
-highlight Directory guifg=steelblue3 gui=underline
-
-" messages
-highlight WarningMsg guifg=forestgreen guibg=bg gui=none
-highlight ErrorMsg guifg=coral3 guibg=bg gui=none
-highlight! link ModeMsg StatusLine
-highlight! link Question StatusLine
-
-" quickfix colors
-highlight qfFileName guifg=dodgerblue3 gui=none
-highlight qfLineNr guifg=dodgerblue4
-highlight qfSeparator guifg=dodgerblue4
-
-" Doxygen highlighting
-highlight doxygenComment guifg=darkseagreen3 gui=none
-highlight doxygenBrief guifg=darkseagreen4 gui=bold
-highlight doxygenParam guifg=darkseagreen3 gui=italic
-highlight doxygenRefWord guifg=skyblue3 gui=underline
-highlight doxygenSpecial guifg=darkseagreen4 gui=none
-highlight doxygenSpecialOnelineDesc guifg=darkseagreen4
-
-" Diff highlighting
-highlight DiffChange guifg=black guibg=yellow2 gui=none
-highlight DiffAdd guifg=black guibg=lightblue1 gui=none
-highlight DiffDelete guifg=coral1 guibg=coral1 gui=none
-highlight DiffText guifg=black guibg=yellow3 gui=none
-
-" netrw
-highlight netrwMarkFile gui=inverse
-
-" html
-highlight htmlH1 guifg=maroon1 gui=bold
-highlight htmlH2 guifg=maroon3 gui=bold
-highlight htmlH3 guifg=maroon3 gui=none
-highlight htmlBold gui=bold
-highlight htmlItalic gui=italic,bold
+" filetype HTML
+call s:Hi('htmlH1', s:green_2, '', 'bold', '')
+call s:Hi('htmlH2', s:green_2, '', 'bold', '')
+call s:Hi('htmlH3', s:green_2, '', 'bold,italic', '')
 
 " markdown
-highlight! link markdownCode String
-highlight! link markdownCodeBlock Comment
+call s:Hi('markdownCode', s:gray_2, s:gray_7, '', '')
+call s:Hi('markdownCodeBlock', s:gray_2, '', '', '')
+
+" Diffs
+call s:Hi('DiffChange', s:blue_1, s:blue_7, '', '')
+call s:Hi('DiffText', s:blue_1, s:blue_6, '', '')
+call s:Hi('DiffDelete', s:red_1, s:red_7, '', '')
+call s:Hi('DiffAdd', s:green_1, s:green_7, '', '')
