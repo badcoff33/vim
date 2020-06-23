@@ -146,18 +146,18 @@ let s:gray       = s:gray_5
 
 
 " Basics
-call s:Hi('Normal', s:gray_1, s:gray_9, 'NONE', '')
+call s:Hi('Normal', s:gray_2, s:gray_9, 'NONE', '')
 call s:Hi('Bold',   s:white, '', 'bold', '')
 call s:Hi('Italic', s:white, '', 'italic', '')
-call s:Hi('NonText', s:black, s:gray_7, '', '')
-call s:Hi('Visual', s:white, s:orange_4, '', '')
+call s:Hi('NonText', s:gray_5, s:gray_8, '', '')
+call s:Hi('Visual', s:orange_0, s:orange_8, '', '')
 call s:Hi('StatusLine', s:blue_8, s:gray_2, 'bold', '')
-call s:Hi('StatusLineNC', s:blue_2, s:gray_6, 'bold', '')
+call s:Hi('StatusLineNC', s:gray_3, s:gray_6, 'bold', '')
 call s:Hi('VertSplit', s:gray_6, 'bg', 'NONE', '')
-call s:Hi('IncSearch', s:yellow_0, s:yellow_4, 'bold', '')
+call s:Hi('IncSearch', s:black, s:yellow_6, 'none', '')
 call s:Hi('Search', s:blue_0, s:blue_7, 'NONE', '')
 call s:Hi('MatchParen', s:green_2, '', '', '')
-call s:Hi('QuickFixLine', '', '', 'bold', '')
+call s:Hi('QuickFixLine', '', s:yellow_8, 'bold', '')
 call s:Hi('CursorLine', '', s:gray_7, '', '')
 call s:Hi('LineNr', s:blue_1, '', '', '')
 
@@ -180,14 +180,14 @@ highlight! link WildMenu PmenuSel
 call s:Hi('BlendDown', s:gray_0, s:gray_8, '', '')
 
 " Code
-call s:Hi('Statement', s:green_2, '', 'bold', '')
-call s:Hi('Conditional', s:green_2, '', 'bold', '')
-call s:Hi('Type', s:gray_3, '', '', '')
+call s:Hi('Statement', s:purple_4, '', 'none', '')
+call s:Hi('Conditional', s:purple_5, '', 'none', '')
+call s:Hi('Type', s:pink_2, '', 'none', '')
 call s:Hi('Structure', s:green_1, '', '', '')
 call s:Hi('StorageClass', s:blue_1, '', '', '')
-call s:Hi('PreProc', s:blue_4, '', '', '')
-call s:Hi('PreCondit', s:white, '', 'bold', '')
-call s:Hi('Comment', s:gray_2, '', '', '')
+call s:Hi('PreProc', s:blue_4, '', 'bold', '')
+call s:Hi('PreCondit', s:blue_5, '', 'bold', '')
+call s:Hi('Comment', s:green_3, '', '', '')
 call s:Hi('Function', s:green_1, '', '', '')
 call s:Hi('Identifier', s:green_1, '', '', '')
 call s:Hi('Special', s:green_1, '', '', '')
@@ -206,7 +206,7 @@ call s:Hi('qfSeparator', s:gray_1, '', '', '')
 highlight! link qfLineNr    LineNr
 
 " Filetype VIM
-call s:Hi('vimCommentTitle', s:white, '', 'bold', '')
+call s:Hi('vimCommentTitle', s:blue_6, '', 'bold', '')
 
 " Filetype C
 call s:Hi('cCppOut', s:gray_3, '', '', '')
@@ -224,7 +224,7 @@ call s:Hi('markdownCode', s:gray_2, s:gray_7, '', '')
 call s:Hi('markdownCodeBlock', s:gray_2, '', '', '')
 
 " Diffs
-call s:Hi('DiffChange', s:blue_1, s:blue_7, '', '')
-call s:Hi('DiffText', s:blue_1, s:blue_6, '', '')
-call s:Hi('DiffDelete', s:red_1, s:red_7, '', '')
-call s:Hi('DiffAdd', s:green_1, s:green_7, '', '')
+call s:Hi('DiffChange', s:blue_3, s:blue_8, '', '')
+call s:Hi('DiffText', s:blue_3, s:blue_7, '', '')
+call s:Hi('DiffDelete', s:red_6, s:red_8, '', '')
+call s:Hi('DiffAdd', s:green_3, s:green_8, '', '')
