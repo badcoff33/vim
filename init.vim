@@ -169,14 +169,14 @@ vnoremap <Leader>[ c[<C-r>-]<Esc>
 vnoremap <Leader>{ c{<C-r>-}<Esc>
 
 " Switch Vim modes
-inoremap jj <Esc>
+inoremap <S-Space> <Esc>
 " Open a more vimish command window
 nmap <expr> <CR> &buftype=='quickfix' ? "\<CR>" : ":"
 
 inoremap <Tab> <C-n>
 inoremap <S-Tab> <C-p>
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-
+inoremap <C-tab> <C-v><tab>
 " Terminals
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -187,7 +187,7 @@ elseif has('terminal')
   tnoremap <C-Space> <C-w>N
 endif
 
-nnoremap <Leader>e :edit <C-r>=expand("%:p:h").g:psep<CR>
+nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>m :sil make<Space><Up><CR>
@@ -226,10 +226,7 @@ nnoremap <Leader>oh :set invhlsearch<CR>
 nnoremap <Leader>oi :set invignorecase<CR>
 nnoremap <Leader>os :setlocal invspell<CR>
 
-cabbrev ./ <C-r>=expand("%:h")<CR>
-cabbrev grep sil grep
-cabbrev vimgrep sil vimgrep
-cabbrev start sil !start
+cnoremap <C-r>/ <C-r>=expand("%:h")..g:psep<CR>
 
 augroup init
   autocmd!
