@@ -16,7 +16,7 @@ endif
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif <CR>
 
-nnoremap <buffer> <LocalLeader>x :sil call <SID>ToggleTodo()<CR>
+nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 
 nmap <buffer> <C-f>  :call search('^#\{1,\}\s',"W")<CR>
 nmap <buffer> <C-b>  :call search('^#\{1,\}\s',"bW")<CR>
@@ -34,12 +34,17 @@ iabbrev <buffer> todo  TODO
 iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
 
 function! s:ToggleTodo()
-  if search('\(TODO\|DONE\)','b') > 0
-    if strpart(getline('.'), col(".") - 1, 4) == 'TODO'
-      normal cwDONE
+  let stop_at_line = search('^\s*$','nbW')
+  if stop_at_line == 0
+    let stop_at_line = 1
+  endif
+  if search('- \[\( \|X\)\]','bsc', stop_at_line) > 0 " set mark ' before search starts
+    if (strpart(getline('.'), col(".") - 1, 5) == '- [ ]')
+      call feedkeys('3lrX', 'x')
     else
-      normal cwTODO
+      call feedkeys('3lr ', 'x')
     endif
+    normal `'
   endif
 endfunction
 
