@@ -96,36 +96,14 @@ function! s:HighlightWord(word)
   endif
 endfunction
 
-function! TogQf_Callback(timer)
-    augroup ToggleQuickfix
-      autocmd!
-    augroup END
-    if &buftype==''
-      cclose
-    else
-      let g:togqf_timer_id = timer_start(g:togqf_retry_time, 'TogQf_Callback')
-    endif
-endfunc
-
 function! s:ToggleQuickfix()
-  let g:togqf_closing_time = get(g:, "togqf_closing_time", 6000)
-  let g:togqf_retry_time = get(g:, "togqf_retry_time", 3000)
   let save_win = win_getid()
   let qfIsOpen = 0
   windo if &buftype == 'quickfix' | let qfIsOpen = 1 | endif
   if qfIsOpen == 0
     topleft copen
-    let g:togqf_timer_id = timer_start(g:togqf_closing_time, 'TogQf_Callback')
-    augroup ToggleQuickfix
-      autocmd!
-      autocmd CursorMoved,CursorMovedI  * :call timer_pause(g:togqf_timer_id, 1)
-      autocmd CursorHold,CursorHoldI    * :call timer_pause(g:togqf_timer_id, 0)
-    augroup END
   else
     cclose
-    if exists('g:togqf_timer_id')
-      call timer_stop(g:togqf_timer_id)
-    endif
   endif
   if win_gotoid(save_win) == 0
     wincmd p
