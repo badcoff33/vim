@@ -16,7 +16,13 @@ endif
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif <CR>
 
+" Toggle between  `- [ ]` and `- [x]`
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
+
+" Open Markdown preview
+if exists(":Start")
+  nnoremap <buffer> <silent> <LocalLeader>p :Start pandoc -f gfm -t html -o %TEMP%\preview.html <C-r>% && %TEMP%\preview.html<CR>
+endif
 
 nmap <buffer> <C-f>  :call search('^#\{1,\}\s',"W")<CR>
 nmap <buffer> <C-b>  :call search('^#\{1,\}\s',"bW")<CR>
@@ -30,7 +36,6 @@ endif
 
 iabbrev <buffer> xlink []()<Esc>2hi
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
-iabbrev <buffer> todo  TODO
 iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
 
 function! s:ToggleTodo()
@@ -38,9 +43,9 @@ function! s:ToggleTodo()
   if stop_at_line == 0
     let stop_at_line = 1
   endif
-  if search('- \[\( \|X\)\]','bsc', stop_at_line) > 0 " set mark ' before search starts
+  if search('- \[\( \|x\)\]','bsc', stop_at_line) > 0 " set mark ' before search starts
     if (strpart(getline('.'), col(".") - 1, 5) == '- [ ]')
-      call feedkeys('3lrX', 'x')
+      call feedkeys('3lrx', 'x')
     else
       call feedkeys('3lr ', 'x')
     endif
