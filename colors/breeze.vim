@@ -10,22 +10,6 @@ hi clear
 set background=light
 let g:colors_name = "breeze"
 
-if exists('&wincolor')
-  augroup Wincolor
-    au!
-    " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
-          \ | set wincolor=BlendDown | else | set wincolor= | endif
-  augroup END
-elseif exists('&winhighlight')
-  augroup Winhighlight
-    au!
-    " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
-          \ | set winhighlight=Normal:BlendDown | set winhighlight= | endif
-  augroup END
-endif
-
 function! s:Hi(group, guifg, guibg, attr, guisp)
   if a:guifg != ''
     exec 'hi ' . a:group . ' guifg=' . a:guifg
@@ -151,14 +135,21 @@ let s:gray_dark  = s:gray_4
 let s:gray_light = s:gray_9
 let s:gray       = s:gray_5
 
-augroup Colorscheme
-  au!
-  if exists('&wincolor')
+if exists('&wincolor')
+  augroup Wincolor
+    au!
     " Low-key colors for non-file buffers
     autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
           \ | set wincolor=BlendDown | else | set wincolor= | endif
-  endif
-augroup END
+  augroup END
+elseif exists('&winhighlight')
+  augroup Winhighlight
+    au!
+    " Low-key colors for non-file buffers
+    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+          \ | set winhighlight=Normal:BlendDown | set winhighlight= | endif
+  augroup END
+endif
 
 " Color scheme specific
 call s:Hi('BlendDown', s:white, s:gray_9, '', '')
