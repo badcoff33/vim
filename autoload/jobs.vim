@@ -14,7 +14,7 @@ function! s:async_make_handler(job_id, data, event_type)
     let iter = 0
     for d in g:job_list
       if d['job_id'] == a:job_id
-        call s:PopupList(["closing job " .. a:job_id .. ":" .. d['cmd']])
+        call s:PopupList("Closing job " .. a:job_id, [d['cmd']])
         call remove(g:job_list, iter)
         break
       endif
@@ -32,9 +32,9 @@ function! jobs#jobs()
   let text_as_list = []
   call add(text_as_list, len(g:job_list).." jobs active")
   for d in g:job_list
-    call add(text_as_list, ["job " .. d['job_id'] .. ":" .. d['cmd']])
+    call add(text_as_list, ["job " .. d['job_id'] .. ":", d['cmd']])
   endfor
-  call s:PopupList(text_as_list)
+  call s:PopupList("Jobs", text_as_list)
 endfunction
 
 let g:job_list = []
@@ -49,13 +49,13 @@ function! jobs#start(make_cmd) abort
   else
     let g:job_list = add(g:job_list, { 'job_id':job_id , 'cmd': a:make_cmd})
     call delete(getenv('TEMP') .. '/job' .. job_id)
-    call s:PopupList(["starting job " .. job_id .. ":" .. a:make_cmd])
+    call s:PopupList("Start job " .. job_id, [a:make_cmd])
   endif
 endfunction
 
 " Description: Show a popup with the arguments as a  list in the upper right
 " corner.
-function! s:PopupList(list_of_strings)
+function! s:PopupList(title, list_of_strings)
   let best_fit = 20
   for a in a:list_of_strings
     if len(a) > best_fit
@@ -74,7 +74,7 @@ function! s:PopupList(list_of_strings)
         \ 'drag': 1,
         \ 'close': 'click',
         \ 'padding': [0,1,0,1],
-        \ 'title': "Job Message:",
+        \ 'title': a:title,
         \ })
   call setwinvar(winid, '&wincolor', 'WarningMsg')
 endfunction
