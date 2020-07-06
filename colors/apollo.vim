@@ -10,14 +10,21 @@ hi clear
 set background=dark
 let g:colors_name = 'apollo'
 
-augroup Colorscheme
-  au!
-  if exists('&wincolor')
+if exists('&wincolor')
+  augroup Wincolor
+    au!
     " Low-key colors for non-file buffers
     autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
           \ | set wincolor=BlendDown | else | set wincolor= | endif
-  endif
-augroup END
+  augroup END
+elseif exists('&winhighlight')
+  augroup Winhighlight
+    au!
+    " Low-key colors for non-file buffers
+    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+          \ | set winhighlight=Normal:BlendDown | set winhighlight= | endif
+  augroup END
+endif
 
 function! s:Hi(group, guifg, guibg, attr, guisp)
   if a:guifg != ''
@@ -77,6 +84,7 @@ highlight! link PmenuSel IncSearch
 highlight! link Pmenu Search
 highlight! link PmenuSbar Search
 highlight! link PmenuThumb IncSearch
+highlight! link SignColumn LineNr
 highlight! link TabLineFill Normal
 highlight! link TabLine StatusLineNC
 highlight! link TabLineSel Statusline
