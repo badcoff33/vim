@@ -8,7 +8,9 @@ function! s:async_make_handler(job_id, data, event_type)
   elseif a:event_type == "stderr"
     call writefile(filter(a:data, 'v:val !~ "^\s*$"'), getenv('TEMP') .. '/job' .. a:job_id, 'a')
   else
-    execute "cgetfile " .. getenv('TEMP') .. '/job' .. a:job_id
+    if filereadable(getenv('TEMP') .. '/job' .. a:job_id)
+      execute "cgetfile " .. getenv('TEMP') .. '/job' .. a:job_id
+    endif
     let iter = 0
     for d in g:job_list
       if d['job_id'] == a:job_id
