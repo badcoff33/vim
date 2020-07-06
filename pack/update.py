@@ -3,7 +3,7 @@ import os
 github_home_dir = "Github/start/"
 git_dict = { "easy-align": "https://github.com/junegunn/vim-easy-align.git",
         "vista": "https://github.com/liuchengxu/vista.vim.git",
-        "LangClient": "https://github.com/autozimu/LanguageClient-neovim.git",
+        "gitgutter": "https://github.com/airblade/vim-gitgutter",
         "dirvish": "https://github.com/justinmk/vim-dirvish.git" }
 
 saved_pwd = os.getcwd()

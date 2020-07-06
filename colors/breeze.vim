@@ -10,14 +10,21 @@ hi clear
 set background=light
 let g:colors_name = "breeze"
 
-augroup Colorscheme
-  au!
-  if exists('&wincolor')
+if exists('&wincolor')
+  augroup Wincolor
+    au!
     " Low-key colors for non-file buffers
     autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
           \ | set wincolor=BlendDown | else | set wincolor= | endif
-  endif
-augroup END
+  augroup END
+elseif exists('&winhighlight')
+  augroup Winhighlight
+    au!
+    " Low-key colors for non-file buffers
+    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+          \ | set winhighlight=Normal:BlendDown | set winhighlight= | endif
+  augroup END
+endif
 
 function! s:Hi(group, guifg, guibg, attr, guisp)
   if a:guifg != ''
@@ -144,9 +151,20 @@ let s:gray_dark  = s:gray_4
 let s:gray_light = s:gray_9
 let s:gray       = s:gray_5
 
+augroup Colorscheme
+  au!
+  if exists('&wincolor')
+    " Low-key colors for non-file buffers
+    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+          \ | set wincolor=BlendDown | else | set wincolor= | endif
+  endif
+augroup END
+
+" Color scheme specific
+call s:Hi('BlendDown', s:white, s:gray_9, '', '')
 
 " Basics
-call s:Hi('Normal', s:gray_2, s:gray_9, 'NONE', '')
+call s:Hi('Normal', s:gray_2, s:white, 'NONE', '')
 call s:Hi('Bold',   s:white, '', 'bold', '')
 call s:Hi('Italic', s:white, '', 'italic', '')
 call s:Hi('NonText', s:gray_5, s:gray_8, '', '')
@@ -163,8 +181,9 @@ call s:Hi('LineNr', s:blue_1, '', '', '')
 
 highlight! link CursorColumn CursorLine
 highlight! link CursorLineNr CursorLine
+highlight! link SignColumn LineNr
 highlight! link FoldColumn LineNr
-highlight! link Folded StatusLineNC
+highlight! link Folded Comment
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link PmenuSel IncSearch
