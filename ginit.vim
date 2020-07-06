@@ -20,7 +20,7 @@ if has('gui')
   " Hello Vim!
   set guioptions=a
   set encoding=utf-8
-  set renderoptions=type:directx
+  set renderoptions=
   set mousemodel=popup
 elseif has("nvim")
   if exists('g:GtkGuiLoaded')
