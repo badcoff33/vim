@@ -184,16 +184,17 @@ if has('nvim')
   tnoremap <C-w> <C-\><C-n><C-w>
 elseif has('terminal')
   tnoremap <Esc> <C-w>N
-  tnoremap <C-Space> <C-w>N
+  tnoremap <S-Ins> <C-w>"*
 endif
 
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
+nnoremap <Leader>x :terminal ++close explorer <C-r>=expand("%:p:h")<CR><CR>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
-nnoremap <Leader>x :set columns=999 lines=999<CR>
+nnoremap <Leader>X :set columns=999 lines=999<CR>
 nnoremap <Leader>tn :tabnew<CR>
 nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tc :tabclose<CR>
@@ -205,6 +206,10 @@ nnoremap <S-f4> :cprevious<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --follow\ -tc\ -tvim\ -tpy
+  set grepformat=%f:%l:%c:%m
+endif
 
 nnoremap <Leader>r :%s/\C\<\>//g<Left><Left><Left><Left><Left>
 nnoremap <Leader>R :%s/\C\<<C-r><C-w>\>//g<Left><Left>
@@ -237,9 +242,5 @@ augroup init
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 350)
   endif
 augroup END
-
-if has('nvim')
-  set winhighlight=Normal:Normal
-endif
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
