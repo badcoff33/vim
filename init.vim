@@ -50,7 +50,7 @@ set sidescroll=8
 set sidescrolloff=3
 
 " window behavior
-set nosplitbelow
+set splitbelow
 set splitright
 set equalalways
 
@@ -231,7 +231,7 @@ nnoremap <Leader>oh :set invhlsearch<CR>
 nnoremap <Leader>oi :set invignorecase<CR>
 nnoremap <Leader>os :setlocal invspell<CR>
 
-cnoremap <C-r>/ <C-r>=expand("%:h")..g:psep<CR>
+cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 
 augroup init
   autocmd!
