@@ -8,8 +8,8 @@
 set makeprg=make
 
 " multiline
-set errorformat=%W\"%f\"\\,\ line\ %l:\ warning\ %m,%Z%m
-set errorformat+=%E\"%f\"\\,\ line\ %l:\ error\ %m,%Z%m
+set errorformat=%W\"%f\"\\,\ line\ %l:\ %t%*[^0-9]%n-%m,%Z%m
+set errorformat+=%E\"%f\"\\,\ line\ %l:\ %t%*[^0-9]%n-%m,%Z%m
 
 " singleline
 " set errorformat+=\"%f\"\\,\ line\ %l:\ %m
