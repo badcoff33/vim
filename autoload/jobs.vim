@@ -2,19 +2,19 @@ let g:job_list = []
 
 " Description: Capture data and skip empty lines. Process data for the closed
 " job.
-function! s:async_make_handler(job_id, data, event_type)
+function! s:async_make_handler(id, data, event_type)
   if a:event_type == "stdout"
-    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), getenv('TEMP') .. '/job' .. a:job_id, 'a')
+    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), getenv('TEMP') .. '/job' .. a:id, 'a')
   elseif a:event_type == "stderr"
-    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), getenv('TEMP') .. '/job' .. a:job_id, 'a')
+    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), getenv('TEMP') .. '/job' .. a:id, 'a')
   else
-    if filereadable(getenv('TEMP') .. '/job' .. a:job_id)
-      execute "cgetfile " .. getenv('TEMP') .. '/job' .. a:job_id
+    if filereadable(getenv('TEMP') .. '/job' .. a:id)
+      execute "cgetfile " .. getenv('TEMP') .. '/job' .. a:id
     endif
     let iter = 0
     for d in g:job_list
-      if d['job_id'] == a:job_id
-        call s:PopupList("Closing job " .. a:job_id, [d['cmd']])
+      if d['id'] == a:id
+        call s:PopupList("Closing job " .. a:id, [d['cmd']])
         call remove(g:job_list, iter)
         break
       endif
@@ -23,18 +23,25 @@ function! s:async_make_handler(job_id, data, event_type)
   endif
 endfunction
 
-function! jobs#stop(job_id)
+function! jobs#stop(id)
   " get confirmation by job handler with event 'exit'
-  call lib#job#stop(a:job_id)
+  call lib#job#stop(a:id)
 endfunction
 
 function! jobs#jobs()
   let text_as_list = []
-  call add(text_as_list, len(g:job_list).." jobs active")
-  for d in g:job_list
-    call add(text_as_list, ["job " .. d['job_id'] .. ":", d['cmd']])
-  endfor
-  call s:PopupList("Jobs", text_as_list)
+  let num_of_jobs = len(g:job_list)
+    for d in g:job_list
+      call add(text_as_list, "job "..d['id']..":"..d['cmd'])
+    endfor
+  if num_of_jobs == 0
+    let title = "No jobs active"
+  elseif num_of_jobs == 1
+    let title = "One job active"
+  else
+    let title = num_of_jobs.." jobs active"
+  endif
+  call s:PopupList(title, text_as_list)
 endfunction
 
 let g:job_list = []
@@ -43,13 +50,13 @@ let s:async_make_options = { 'on_stdout': function('s:async_make_handler'),
       \ 'on_exit': function('s:async_make_handler') }
 
 function! jobs#start(make_cmd) abort
-  let job_id = lib#job#start( ['cmd', '/c', a:make_cmd], s:async_make_options )
-  if job_id == 0
+  let id = lib#job#start( ['cmd', '/c', a:make_cmd], s:async_make_options )
+  if id == 0
     echoerr 'job failed to start'
   else
-    let g:job_list = add(g:job_list, { 'job_id':job_id , 'cmd': a:make_cmd})
-    call delete(getenv('TEMP') .. '/job' .. job_id)
-    call s:PopupList("Start job " .. job_id, [a:make_cmd])
+    let g:job_list = add(g:job_list, { 'id':id , 'cmd': a:make_cmd})
+    call delete(getenv('TEMP') .. '/job' .. id)
+    call s:PopupList("Start job " .. id, [a:make_cmd])
   endif
 endfunction
 
@@ -80,8 +87,8 @@ function! s:PopupList(title, list_of_strings)
 endfunction
 
 " If you want to get the process id of the job
-" let pid = lib#job#pid(job_id)
+" let pid = lib#job#pid(id)
 "
 " " If you want to wait the job:
-" call lib#job#wait([job_id], 5000)  " timeout: 5 sec
+" call lib#job#wait([id], 5000)  " timeout: 5 sec
 "
