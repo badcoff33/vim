@@ -41,7 +41,6 @@ function! s:Hi(group, guifg, guibg, attr, guisp)
   endif
 endfunction
 
-let s:apolloSearch         = '#FFFFFF'
 let s:apolloWhite          = '#F8F8FF'
 let s:apolloBlack          = '#18181F'
 let s:apolloBg1            = '#2F2131'
@@ -53,7 +52,7 @@ let s:apolloSilver3        = '#C0CBD0'
 let s:apolloGreen1         = '#20A040'
 let s:apolloGreen2         = '#47E058'
 let s:apolloWhite          = '#F8F8F8'
-let s:apolloBlue1          = '#6898A0'
+let s:apolloBlue1          = '#6080A8'
 let s:apolloBlue2          = '#A0D0F0'
 let s:apolloRed1           = '#C85012'
 let s:apolloRed2           = '#F86020'
@@ -62,15 +61,15 @@ let s:apolloRed2           = '#F86020'
 call s:Hi('Normal', s:apolloWhite, s:apolloBg1, 'NONE', '')
 call s:Hi('Bold',   s:apolloWhite, '', 'bold', '')
 call s:Hi('Italic', s:apolloWhite, '', 'italic', '')
-call s:Hi('NonText', s:apolloBlack, s:apolloBg2, '', '')
+call s:Hi('NonText', s:apolloBlue1, s:apolloBlack, '', '')
 call s:Hi('Visual', s:apolloWhite, s:apolloSilver2, '', '')
 call s:Hi('StatusLine', s:apolloBlue2, s:apolloBg3, 'bold', '')
 call s:Hi('StatusLineNC', s:apolloSilver1, s:apolloBg2, 'bold',  '')
 call s:Hi('VertSplit', s:apolloBg3, 'bg', 'NONE', '')
-call s:Hi('IncSearch', s:apolloWhite, s:apolloBlue1, 'bold', '')
-call s:Hi('Search', s:apolloWhite, s:apolloBg3, 'bold', '')
+call s:Hi('IncSearch', s:apolloBlack, s:apolloBlue2, 'bold', '')
+call s:Hi('Search', s:apolloWhite, s:apolloBlue1, '', '')
 call s:Hi('MatchParen', s:apolloGreen2, '', 'underline', '')
-call s:Hi('QuickFixLine', '', '', 'bold', '')
+call s:Hi('QuickFixLine', '', s:apolloBlack, 'bold', '')
 call s:Hi('CursorLine', '', s:apolloBg2, '', '')
 call s:Hi('LineNr', s:apolloBlue1, '', '', '')
 
@@ -116,7 +115,7 @@ call s:Hi('WarningMsg', s:apolloBlue1, 'bg', '', '')
 call s:Hi('ModeMsg', s:apolloSilver2, 'bg', '', '')
 call s:Hi('Question', s:apolloGreen1, 'bg', '', '')
 call s:Hi('qfFileName', s:apolloBlue2, '', '', '')
-call s:Hi('qfSeparator', s:apolloSilver1, '', '', '')
+call s:Hi('qfSeparator', 'fg', '', '', '')
 highlight! link qfLineNr    LineNr
 
 " Filetype VIM
@@ -139,6 +138,6 @@ call s:Hi('markdownCodeBlock', s:apolloSilver2, '', '', '')
 
 " Diffs
 call s:Hi('DiffChange', '', s:apolloBg2, '', '')
-call s:Hi('DiffText', s:apolloBlue2, s:apolloBg2, '', '')
-call s:Hi('DiffDelete', s:apolloRed1, s:apolloBg2, 'bold', '')
+call s:Hi('DiffText', s:apolloBlue2, s:apolloBg3, 'bold', '')
+call s:Hi('DiffDelete', s:apolloRed1, s:apolloBg2, 'italic', '')
 call s:Hi('DiffAdd', s:apolloGreen1, s:apolloBg2, 'bold', '')
