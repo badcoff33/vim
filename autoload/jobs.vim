@@ -56,9 +56,23 @@ function! jobs#start(make_cmd) abort
   else
     let g:job_list = add(g:job_list, { 'id':id , 'cmd': a:make_cmd})
     call delete(getenv('TEMP') .. '/job' .. id)
+    call writefile(['job'..id..': '..a:make_cmd], getenv('TEMP') .. '/job' .. id, 'a')
     call s:PopupList("Start job " .. id, [a:make_cmd])
   endif
 endfunction
+
+
+if has('nvim')
+
+function! s:PopupList(title, list_of_strings)
+  echo a:title
+  for text in a:list_of_strings
+    echo text
+  endfor
+endfunction
+finish
+
+endif
 
 " Description: Show a popup with the arguments as a  list in the upper right
 " corner.
