@@ -18,7 +18,7 @@ set belloff=all
 set novisualbell
 set noerrorbells
 set noswapfile
-set nohlsearch
+set hlsearch
 set laststatus=2
 set ruler
 set showcmd
@@ -119,9 +119,9 @@ if has ('nvim')
   set wildoptions=pum,tagfile
   set wildmode=full " works best with 'completeopt'=menu
 else
-  set nowildmenu
   set wildoptions=tagfile
-  set wildmode=longest,list,full
+  "set nowildmenu wildmode=longest,list,full
+  set wildmenu
 endif
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
@@ -203,6 +203,7 @@ nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 nnoremap <f4> :cnext<CR>
 nnoremap <S-f4> :cprevious<CR>
+nnoremap <C-f4> :cfirst<CR>
 
 nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space><Up>

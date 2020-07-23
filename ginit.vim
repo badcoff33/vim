@@ -18,11 +18,12 @@ augroup END
 
 if has('gui')
   " Hello Vim!
-  set guioptions=a
-  set encoding=utf-8
+  set guioptions=!ca
+  set encoding=latin1
   set renderoptions=
   set mousemodel=popup
 elseif has("nvim")
+  set mousemodel=popup
   if exists('g:GtkGuiLoaded')
     call rpcnotify(1, 'Gui', 'Font', 'Courier 11')
     call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)

@@ -3,6 +3,8 @@
 " Description:   Some support functions and mappings for C code files.
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
+let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
+
 " Kind of standard to have a type prefix _t
 syn match cType /\w*_t/
 
@@ -14,8 +16,8 @@ nnoremap <buffer> <LocalLeader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
 
 " run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
-nmap <buffer> <LocalLeader>f ggVG!clang-format -style=file<CR>
-vmap <buffer> <LocalLeader>f !clang-format -style=file<CR>gv=
+nnoremap <buffer> <LocalLeader>f ggVG!clang-format -style=file<CR>
+vnoremap <buffer> <LocalLeader>f !clang-format -style=file<CR>gv=
 
 "let b:load_doxygen_syntax=1
 let g:c_no_comment_fold = 1
@@ -32,7 +34,11 @@ setlocal tabstop=4
 setlocal shiftwidth=4
 
 " How to display unprintable charcters
-setlocal list
+if g:c_show_list_chars == 0
+  setlocal nolist
+else
+  setlocal list
+endif
 setlocal listchars=tab:>-,trail:.,extends:#
 
 " Customize the c indent style
