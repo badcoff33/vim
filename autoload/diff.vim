@@ -12,6 +12,8 @@ function! diff#UnsavedChanges()
   diffthis
 endfunction
 
+let g:compare_dirs_options = get(g:, 'compare_dirs_options', '--ignore-file-name-case')
+
 " Description: Run recursive diff between two directories.  Diff's output get
 " reformatted and display in a new scratch buffer. Then, press <CR> on a line
 " with two files that differ and Vimdiff gets opened.
@@ -32,7 +34,7 @@ function! diff#CompareDirs() abort
   call append(1, '# Press <CR> on the set of files that differ.')
   call append(2, '# ---------------------------------------------------------------------------')
   " run the recursive diff
-  silent execute 'read !diff -rq "' . a . '" "' . b . '"'
+  silent execute 'read !diff -rq ' g:compare_dirs_options '"'.a.'"' '"'.b.'"'
   normal gg}
   " save buffer for further changes
   setlocal nomodified nomodifiable wrap cursorline
