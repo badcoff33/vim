@@ -135,6 +135,8 @@ call s:Hi('htmlH3', s:apolloGreen2, '', 'bold,italic', '')
 " markdown
 call s:Hi('markdownCode', s:apolloSilver2, s:apolloBg2, '', '')
 call s:Hi('markdownCodeBlock', s:apolloSilver2, '', '', '')
+call s:Hi('markdownUrl', s:apolloSilver2, s:apolloBg2, 'underline', '')
+call s:Hi('markdownLinkText', s:apolloBlue2, '', 'none', '')
 
 " Diffs
 call s:Hi('DiffChange', '', s:apolloBg2, '', '')

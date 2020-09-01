@@ -13,7 +13,6 @@ augroup ginit
   autocmd FocusGained * :checktime
   " Option 'title' needs to be set for this
   autocmd BufEnter * :set titlestring=%t\ %{expand('%:h')}\ %{strftime('%c',getftime(expand('%')))}
-
 augroup END
 
 if has('gui')
