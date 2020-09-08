@@ -52,7 +52,7 @@ function! s:Hi(group, guifg, guibg, attr, guisp)
   endif
 endfunction
 
-"+--- Editor ---+
+" Editor
 call s:Hi("ColorColumn", "", s:frost1, "", "")
 call s:Hi("Cursor", s:frost0, s:frostViolet, "NONE", "")
 call s:Hi("CursorLine", "", s:frost1, "NONE", "")
@@ -71,29 +71,30 @@ call s:Hi("SpellBad", s:frostRed, s:frost0, "undercurl", "")
 call s:Hi("SpellCap", s:frostYellow, s:frost0, "undercurl", "")
 call s:Hi("SpellLocal", s:frost5, s:frost0, "undercurl", "")
 call s:Hi("SpellRare", s:frost6, s:frost0, "undercurl", "")
-call s:Hi("Visual", "", s:frost3, "", "")
+call s:Hi("Visual", s:frost6, s:frost3, "", "")
 call s:Hi("VisualNOS", "", s:frost2, "", "")
+call s:Hi("Whitespace", s:frost3, "", "", "")
 
 " Frost specific
 call s:Hi('BlendDown', "", s:frost1, '', '')
 
-"+- Neovim Support -+
+" Neovim Support
 call s:Hi("healthError", s:frostRed, s:frost1, "", "")
 call s:Hi("healthSuccess", s:frostGreen, s:frost1, "", "")
 call s:Hi("healthWarning", s:frostYellow, s:frost1, "", "")
 call s:Hi("TermCursorNC", "", s:frost1, "", "")
 
-"+--- Gutter ---+
+" Gutter
 call s:Hi("CursorColumn", "", s:frost1, "", "")
 call s:Hi("CursorLineNr", s:frost4, s:frost0, "NONE", "")
 call s:Hi("Folded", s:frost3, s:frost1, "bold", "")
 call s:Hi("FoldColumn", s:frost3, s:frost0, "", "")
 call s:Hi("SignColumn", s:frost1, s:frost0, "", "")
 
-"+--- Navigation ---+
+" Navigation
 call s:Hi("Directory", s:frostBlue2, "", "", "")
 
-"+--- Prompt/Status ---+
+" Prompt/Status
 call s:Hi("EndOfBuffer", s:frost1, "", "", "")
 call s:Hi("WarningMsg", s:frostBlack, s:frostYellow, "", "")
 call s:Hi("ErrorMsg", s:frostBlack, s:frostRed, "", "")
@@ -104,10 +105,10 @@ call s:Hi("StatusLine", s:frost6, s:frost3, "NONE", "")
 call s:Hi("StatusLineNC", s:frost5, s:frost1, "NONE", "")
 call s:Hi("StatusLineTerm", s:frostBlue2, s:frost3, "NONE", "")
 call s:Hi("StatusLineTermNC", s:frost4, s:frost1, "NONE", "")
-call s:Hi("WildMenu", s:frostBlue2, s:frost1, "", "")
 call s:Hi("VertSplit", s:frost2, s:frost0, "NONE", "")
+hi! link WildMenu IncSearch
 
-"+--- Search ---+
+" Search
 call s:Hi("IncSearch", s:frostBlack, s:frostGreen, "bold", "")
 call s:Hi("Search", s:frostBlack, s:frostYellow, "NONE", "")
 
@@ -117,12 +118,12 @@ hi! link qfLineNr Directory
 call s:Hi("qfSeparator", "fg", "bg", "", "")
 call s:Hi("QuickFixLine", "fg", "bg", "bold", "")
 
-"+--- Tabs ---+
+" Tabs
 call s:Hi("TabLine", s:frost5, s:frost1, "NONE", "")
 call s:Hi("TabLineFill", s:frost4, s:frost1, "NONE", "")
 call s:Hi("TabLineSel", s:frostYellow, s:frost4, "underline", "")
 
-"+--- Window ---+
+" Window
 call s:Hi("Title", s:frost4, "", "NONE", "")
 call s:Hi("Bold", "", "", "bold", "")
 call s:Hi("Italic", "", "", "italic", "")

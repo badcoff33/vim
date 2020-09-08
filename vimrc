@@ -125,6 +125,8 @@ else
 endif
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
+" How to handle search for tags
+set tagcase=smart
 
 " Tune the diff feature for my needs.
 set diffopt=internal,context:3,vertical,iwhite,filler

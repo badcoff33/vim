@@ -34,7 +34,7 @@ if !hasmapto('<Plug>PopupTerminal')
 endif
 
 if !hasmapto('<Plug>HighlightWord')
-  nmap <leader>h <Plug>HighlightWord
+  nmap <leader>* <Plug>HighlightWord
 endif
 
 " Autocmd: put them in a dedicaed group
