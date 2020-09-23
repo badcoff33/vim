@@ -21,10 +21,6 @@ if !hasmapto('<Plug>ShowHiInfo')
   nmap <leader>H <Plug>ShowHiInfo
 endif
 
-if !hasmapto('<Plug>ToggleStickyCursorline')
-  nmap <leader>l <Plug>ToggleStickyCursorline
-endif
-
 if !hasmapto('<Plug>ToggleQuickfix')
   nmap <S-Tab> <Plug>ToggleQuickfix
 endif
@@ -36,6 +32,8 @@ endif
 if !hasmapto('<Plug>HighlightWord')
   nmap <leader>* <Plug>HighlightWord
 endif
+
+command -nargs=0 ToggleStickyCursorline call <SID>ToggleStickyCursorline()
 
 " Autocmd: put them in a dedicaed group
 augroup basics

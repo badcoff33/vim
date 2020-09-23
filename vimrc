@@ -170,8 +170,6 @@ vnoremap <Leader>( c(<C-r>-)<Esc>
 vnoremap <Leader>[ c[<C-r>-]<Esc>
 vnoremap <Leader>{ c{<C-r>-}<Esc>
 
-" Switch Vim modes
-inoremap <S-Space> <Esc>
 " Open a more vimish command window
 nmap <expr> <CR> &buftype=='quickfix' ? "\<CR>" : ":"
 
@@ -207,10 +205,12 @@ nnoremap <f4> :cnext<CR>
 nnoremap <S-f4> :cprevious<CR>
 nnoremap <C-f4> :cfirst<CR>
 
-nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
-nnoremap <Leader>G :sil grep<Space><Up>
+" nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
+nnoremap <silent> <Leader>g :sil grep <C-r><C-w><CR>
+nnoremap <Leader>G :sil grep<Space>
 if executable("rg")
-  set grepprg=rg\ --vimgrep\ --follow\ -tc\ -tvim\ -tpy
+  "set grepprg=rg\ --vimgrep\ --follow\ -tc\ -tvim\ -tpy
+  set grepprg=rg\ --vimgrep\ -tc\ -tvim\ -tpy
   set grepformat=%f:%l:%c:%m
 endif
 

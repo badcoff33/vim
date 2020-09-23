@@ -20,12 +20,27 @@ function! s:async_make_handler(id, data, event_type)
       endif
       let iter += 1
     endfor
+    if len(g:job_list) == 0
+        hi Statusline gui=none
+    endif
   endif
 endfunction
 
 function! jobs#stop(id)
   " get confirmation by job handler with event 'exit'
   call lib#job#stop(a:id)
+  let iter = 0
+  for d in g:job_list
+    if d['id'] == a:id
+      call s:PopupList("Stopping job " .. a:id, [d['cmd']])
+      call remove(g:job_list, iter)
+      break
+    endif
+    let iter += 1
+  endfor
+  if len(g:job_list) == 0
+    hi Statusline gui=none
+  endif
 endfunction
 
 function! jobs#jobs()
@@ -58,6 +73,7 @@ function! jobs#start(make_cmd) abort
     call delete(getenv('TEMP') .. '/job' .. id)
     call writefile(['job'..id..': '..a:make_cmd], getenv('TEMP') .. '/job' .. id, 'a')
     call s:PopupList("Start job " .. id, [a:make_cmd])
+    hi Statusline gui=inverse
   endif
 endfunction
 

@@ -64,7 +64,6 @@ call s:Hi("NonText", s:frost2, "", "", "")
 call s:Hi("Normal", s:frostWhite, s:frost0, "", "")
 call s:Hi("PMenu", s:frostBlue1, s:frost2, "NONE", "")
 call s:Hi("PmenuSbar", s:frost4, s:frost2, "", "")
-call s:Hi("PMenuSel", s:frostBlue2, s:frost3, "", "")
 call s:Hi("PmenuThumb", s:frostBlue2, s:frost3, "", "")
 call s:Hi("SpecialKey", s:frost3, "", "", "")
 call s:Hi("SpellBad", s:frostRed, s:frost0, "undercurl", "")
@@ -74,6 +73,7 @@ call s:Hi("SpellRare", s:frost6, s:frost0, "undercurl", "")
 call s:Hi("Visual", s:frost6, s:frost3, "", "")
 call s:Hi("VisualNOS", "", s:frost2, "", "")
 call s:Hi("Whitespace", s:frost3, "", "", "")
+hi! link PMenuSel IncSearch
 
 " Frost specific
 call s:Hi('BlendDown', "", s:frost1, '', '')
