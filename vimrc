@@ -129,7 +129,7 @@ set wildignore+=*.*~,*.o,TAGS
 set tagcase=smart
 
 " Tune the diff feature for my needs.
-set diffopt=internal,context:3,vertical,iwhite,filler
+set diffopt=internal,algorithm:minimal,context:3,vertical,iwhite,filler
 " When starting in 'diff' mode, go full screen.
 if &diff
   set columns=999 lines=999
@@ -196,6 +196,7 @@ nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
 nnoremap <Leader>X :set columns=999 lines=999<CR>
 nnoremap <Leader>tn :tabnew<CR>
+nnoremap <Leader>te :tabedit %<CR>
 nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tc :tabclose<CR>
 

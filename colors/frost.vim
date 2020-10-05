@@ -20,7 +20,7 @@ elseif exists('&winhighlight')
 endif
 
 let s:frostBlack   = "#121518"
-let s:frostWhite   = "#CFD7E3"
+let s:frostWhite   = "#DFDFF3"
 let s:frost0       = "#2E3440"
 let s:frost1       = "#3B4252"
 let s:frost2       = "#434C5E"
