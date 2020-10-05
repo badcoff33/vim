@@ -12,7 +12,7 @@ function! diff#UnsavedChanges()
   diffthis
 endfunction
 
-let g:compare_dirs_options = get(g:, 'compare_dirs_options', '--ignore-file-name-case')
+let g:compare_dirs_options = get(g:, 'compare_dirs_options', '')
 
 " Description: Run recursive diff between two directories.  Diff's output get
 " reformatted and display in a new scratch buffer. Then, press <CR> on a line
