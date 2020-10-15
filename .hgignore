@@ -1,5 +1,5 @@
-^site.vim$
 syntax: glob
+site.vim
 vimrc
 gvimrc
 .netrwhist
