@@ -14,7 +14,7 @@ function! s:async_make_handler(id, data, event_type)
     let iter = 0
     for d in g:job_list
       if d['id'] == a:id
-        call s:PopupList("Closing job " .. a:id, [d['cmd']])
+        call s:PopupList("", ["Closing #" .. a:id  .. ":" .. d['cmd']])
         call remove(g:job_list, iter)
         break
       endif
@@ -32,7 +32,7 @@ function! jobs#stop(id)
   let iter = 0
   for d in g:job_list
     if d['id'] == a:id
-      call s:PopupList("Stopping job " .. a:id, [d['cmd']])
+        call s:PopupList("", ["Stopping #" .. a:id ..":" .. d['cmd']])
       call remove(g:job_list, iter)
       break
     endif
@@ -46,9 +46,6 @@ endfunction
 function! jobs#jobs()
   let text_as_list = []
   let num_of_jobs = len(g:job_list)
-    for d in g:job_list
-      call add(text_as_list, "job "..d['id']..":"..d['cmd'])
-    endfor
   if num_of_jobs == 0
     let title = "No jobs active"
   elseif num_of_jobs == 1
@@ -56,7 +53,11 @@ function! jobs#jobs()
   else
     let title = num_of_jobs.." jobs active"
   endif
-  call s:PopupList(title, text_as_list)
+  call add(text_as_list, title)
+  for d in g:job_list
+    call add(text_as_list, "#" .. d['id'] .. ":" .. d['cmd'])
+  endfor
+  call s:PopupList("", text_as_list)
 endfunction
 
 let g:job_list = []
@@ -72,7 +73,7 @@ function! jobs#start(make_cmd) abort
     let g:job_list = add(g:job_list, { 'id':id , 'cmd': a:make_cmd})
     call delete(getenv('TEMP') .. '/job' .. id)
     call writefile(['job'..id..': '..a:make_cmd], getenv('TEMP') .. '/job' .. id, 'a')
-    call s:PopupList("Start job " .. id, [a:make_cmd])
+    call s:PopupList("", ["Start #" .. id .. ":" .. a:make_cmd])
     hi Statusline gui=inverse
   endif
 endfunction
