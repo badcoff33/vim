@@ -120,8 +120,8 @@ if has ('nvim')
   set wildmode=full " works best with 'completeopt'=menu
 else
   set wildoptions=tagfile
-  "set nowildmenu wildmode=longest,list,full
-  set wildmenu
+  set nowildmenu wildmode=longest,list,full
+  "set wildmenu
 endif
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS

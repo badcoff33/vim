@@ -99,7 +99,11 @@ function! s:ToggleQuickfix()
   let qfIsOpen = 0
   windo if &buftype == 'quickfix' | let qfIsOpen = 1 | endif
   if qfIsOpen == 0
-    topleft copen
+    if winnr("$") == 1 && &columns > 110
+      exe "vert topleft copen " . max([50, &columns - 80])
+    else
+      topleft copen
+    endif
   else
     cclose
   endif

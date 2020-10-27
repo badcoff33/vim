@@ -48,7 +48,7 @@ function! sessions#Start(newd)
     echo "started session tracking"
     augroup Spaces
       autocmd!
-      autocmd ExitPre     *       :mksession! .session
+      autocmd ExitPre     *       :call sessions#CloseSession()
       autocmd DirChanged  global  :call sessions#CloseSession()
     augroup END
   endif
