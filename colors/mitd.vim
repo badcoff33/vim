@@ -1,6 +1,6 @@
 " Colorscheme: Frost
 
-let g:colors_name = "frost"
+let g:colors_name = "mitd"
 set background=dark
 
 if exists('&wincolor')
@@ -19,21 +19,21 @@ elseif exists('&winhighlight')
   augroup END
 endif
 
-let s:frostWorkbench  = "#171c28"
-let s:frostBackground = "#1d2433"
-let s:frostForeground = "#a2aabc"
-let s:frostUi_grey    = "#6679a4"
-let s:frostAccent     = "#ffcc66"
-let s:frostRed        = "#ef6b73"
-let s:frostGreen      = "#bae67e"
-let s:frostYellow     = "#ffd580"
-let s:frostOrange     = "#ffae57"
-let s:frostBlue       = "#5ccfe6"
-let s:frostPurple     = "#c3a6ff"
-let s:frostForeground = "#d7dce2"
-let s:frostLight_grey = "#8695b7"
-let s:frostGrey       = "#2f3b54"
-let s:frostDark_grey  = "#1d2433"
+let s:Workbench  = "#171c28"
+let s:Background = "#1d2433"
+let s:Foreground = "#a2aabc"
+let s:Ui_grey    = "#6679a4"
+let s:Accent     = "#ffcc66"
+let s:Red        = "#ef6b73"
+let s:Green      = "#bae67e"
+let s:Yellow     = "#ffd580"
+let s:Orange     = "#ffae57"
+let s:Blue       = "#5ccfe6"
+let s:Purple     = "#c3a6ff"
+let s:Foreground = "#d7dce2"
+let s:Light_grey = "#8695b7"
+let s:Grey       = "#2f3b54"
+let s:Dark_grey  = "#1d2433"
 
 function! s:Hi(group, guifg, guibg, attr, guisp)
   if a:guifg != ""
@@ -51,124 +51,124 @@ function! s:Hi(group, guifg, guibg, attr, guisp)
 endfunction
 
 " Editor
-call s:Hi("ColorColumn", "", s:frostLight_grey, "", "")
-call s:Hi("Cursor", s:frostBackground, s:frostPurple, "NONE", "")
-call s:Hi("CursorLine", "", s:frostLight_grey, "NONE", "")
-call s:Hi("Error", s:frostRed, "bg", "", "")
-call s:Hi("iCursor", s:frostLight_grey, s:frostGrey, "", "")
-call s:Hi("LineNr", s:frostGrey, s:frostLight_grey, "", "")
-call s:Hi("MatchParen", s:frostBlue, s:frostGrey, "", "")
-call s:Hi("NonText", s:frostRed, s:frostGrey, "", "")
-call s:Hi("Normal", s:frostForeground, s:frostWorkbench, "", "")
-call s:Hi("PMenu", s:frostDark_grey, s:frostLight_grey, "NONE", "")
-call s:Hi("PmenuSbar", s:frostGrey, s:frostLight_grey, "", "")
-call s:Hi("PmenuThumb", s:frostBlue, s:frostGrey, "", "")
-call s:Hi("SpecialKey", s:frostGrey, "", "", "")
-call s:Hi("SpellBad", s:frostRed, s:frostLight_grey, "undercurl", "")
-call s:Hi("SpellCap", s:frostYellow, s:frostLight_grey, "undercurl", "")
-call s:Hi("SpellLocal", s:frostDark_grey, s:frostLight_grey, "undercurl", "")
-call s:Hi("SpellRare", s:frostDark_grey, s:frostLight_grey, "undercurl", "")
-call s:Hi("Visual", "", s:frostAccent, "", "")
-call s:Hi("VisualNOS", "", s:frostLight_grey, "", "")
-call s:Hi("Whitespace", s:frostGrey, "", "", "")
+call s:Hi("ColorColumn", "", s:Light_grey, "", "")
+call s:Hi("Cursor", s:Background, s:Purple, "NONE", "")
+call s:Hi("CursorLine", "", s:Light_grey, "NONE", "")
+call s:Hi("Error", s:Red, "bg", "", "")
+call s:Hi("iCursor", s:Light_grey, s:Grey, "", "")
+call s:Hi("LineNr", s:Grey, s:Light_grey, "", "")
+call s:Hi("MatchParen", s:Blue, s:Grey, "", "")
+call s:Hi("NonText", s:Red, s:Grey, "", "")
+call s:Hi("Normal", s:Foreground, s:Background, "", "")
+call s:Hi("PMenu", s:Dark_grey, s:Light_grey, "NONE", "")
+call s:Hi("PmenuSbar", s:Grey, s:Light_grey, "", "")
+call s:Hi("PmenuThumb", s:Blue, s:Grey, "", "")
+call s:Hi("SpecialKey", s:Grey, "", "", "")
+call s:Hi("SpellBad", s:Red, "bg", "undercurl", "")
+call s:Hi("SpellCap", s:Yellow, "bg", "undercurl", "")
+call s:Hi("SpellLocal", s:Red, "bg", "undercurl", "")
+call s:Hi("SpellRare", s:Red, "bg", "undercurl", "")
+call s:Hi("Visual", "", s:Accent, "", "")
+call s:Hi("VisualNOS", "", s:Light_grey, "", "")
+call s:Hi("Whitespace", s:Grey, "", "", "")
 hi! link PMenuSel IncSearch
 
 " Frost specific
-call s:Hi('BlendDown', "", s:frostUi_grey, '', '')
+call s:Hi('BlendDown', "", s:Workbench, '', '')
 
 " Neovim Support
-call s:Hi("healthError", s:frostRed, s:frostLight_grey, "", "")
-call s:Hi("healthSuccess", s:frostGreen, s:frostLight_grey, "", "")
-call s:Hi("healthWarning", s:frostYellow, s:frostLight_grey, "", "")
-call s:Hi("TermCursorNC", "", s:frostLight_grey, "", "")
+call s:Hi("healthError", s:Red, s:Light_grey, "", "")
+call s:Hi("healthSuccess", s:Green, s:Light_grey, "", "")
+call s:Hi("healthWarning", s:Yellow, s:Light_grey, "", "")
+call s:Hi("TermCursorNC", "", s:Light_grey, "", "")
 
 " Gutter
-call s:Hi("CursorColumn", "", s:frostLight_grey, "", "")
-call s:Hi("CursorLineNr", s:frostGrey, s:frostLight_grey, "NONE", "")
-call s:Hi("FoldColumn", s:frostGrey, s:frostLight_grey, "", "")
-call s:Hi("Folded", s:frostGrey, s:frostLight_grey, "bold", "")
-call s:Hi("SignColumn", s:frostLight_grey, s:frostBackground, "", "")
+call s:Hi("CursorColumn", "", s:Light_grey, "", "")
+call s:Hi("CursorLineNr", s:Grey, s:Light_grey, "NONE", "")
+call s:Hi("FoldColumn", s:Grey, s:Light_grey, "", "")
+call s:Hi("Folded", s:Grey, s:Light_grey, "bold", "")
+call s:Hi("SignColumn", s:Light_grey, s:Background, "", "")
 
 " Navigation
-call s:Hi("Directory", s:frostBlue, "", "", "")
+call s:Hi("Directory", s:Blue, "", "", "")
 
 " Prompt/Status
-call s:Hi("EndOfBuffer", s:frostLight_grey, "", "", "")
-call s:Hi("ErrorMsg", s:frostBackground, s:frostRed, "", "")
-call s:Hi("ModeMsg", s:frostGreen, "", "" , "")
-call s:Hi("MoreMsg", s:frostYellow, "", "" , "")
-call s:Hi("Question", s:frostGrey, "", "", "")
-call s:Hi("StatusLine", s:frostDark_grey, s:frostLight_grey, "NONE", "")
-call s:Hi("StatusLineNC", s:frostLight_grey, s:frostGrey, "NONE", "")
-call s:Hi("StatusLineTerm", s:frostBlue, s:frostGrey, "NONE", "")
-call s:Hi("StatusLineTermNC", s:frostGrey, s:frostLight_grey, "NONE", "")
-call s:Hi("VertSplit", s:frostLight_grey, s:frostBackground, "NONE", "")
-call s:Hi("WarningMsg", s:frostBackground, s:frostYellow, "", "")
+call s:Hi("EndOfBuffer", s:Light_grey, "bg", "", "")
+call s:Hi("ErrorMsg", s:Red, "bg", "", "")
+call s:Hi("ModeMsg", s:Green, "bg", "" , "")
+call s:Hi("MoreMsg", s:Yellow, "bg", "" , "")
+call s:Hi("Question", s:Accent, "bg", "", "")
+call s:Hi("StatusLine", s:Yellow, s:Grey, "NONE", "")
+call s:Hi("StatusLineNC", s:Light_grey, s:Workbench, "NONE", "")
+call s:Hi("VertSplit", s:Grey, "bg", "NONE", "")
+call s:Hi("WarningMsg", s:Accent, "bg", "", "")
+hi! link StatusLineTerm StatusLine
+hi! link StatusLineTermNC StatusLineNC
 hi! link WildMenu IncSearch
 
 " Search
-call s:Hi("IncSearch", s:frostBackground, s:frostGreen, "bold", "")
-call s:Hi("Search", s:frostBackground, s:frostYellow, "NONE", "")
+call s:Hi("IncSearch", s:Background, s:Green, "bold", "")
+call s:Hi("Search", s:Background, s:Yellow, "NONE", "")
 
  " QuickFix
-hi! link qfFileName Directory
-hi! link qfLineNr Directory
 call s:Hi("qfSeparator", "fg", "bg", "", "")
 call s:Hi("QuickFixLine", "fg", "bg", "bold", "")
+hi! link qfFileName Directory
+hi! link qfLineNr Directory
 
 " Tabs
-call s:Hi("TabLineSel", s:frostYellow, s:frostLight_grey, "bold", "")
-call s:Hi("TabLine", s:frostYellow, s:frostGrey, "none", "")
+call s:Hi("TabLineSel", s:Yellow, s:Light_grey, "bold", "")
+call s:Hi("TabLine", s:Yellow, s:Grey, "none", "")
 hi! link TabLineSel StatusLine
 hi! link TabLineFill Normal
 
 " Window
-call s:Hi("Title", s:frostGrey, "", "NONE", "")
+call s:Hi("Title", s:Green, "", "bold", "")
 call s:Hi("Bold", "", "", "bold", "")
 call s:Hi("Italic", "", "", "italic", "")
-call s:Hi("Boolean", s:frostBlue, "", "", "")
-call s:Hi("Character", s:frostYellow, "", "", "")
-call s:Hi("Comment", s:frostGreen, "", "italic", "")
-call s:Hi("Conditional", s:frostOrange, "", "", "")
-call s:Hi("Constant", s:frostAccent, "", "", "")
-call s:Hi("Define", s:frostOrange, "", "", "")
-call s:Hi("Delimiter", s:frostBlue, "", "", "")
-call s:Hi("Exception", s:frostBlue, "", "", "")
-call s:Hi("Float", s:frostPurple, "", "", "")
-call s:Hi("Function", s:frostBlue, "", "", "")
-call s:Hi("Identifier", s:frostGreen, "", "NONE", "")
-call s:Hi("Include", s:frostBlue, "", "", "")
-call s:Hi("Keyword", s:frostBlue, "", "", "")
-call s:Hi("Label", s:frostBlue, "", "", "")
-call s:Hi("Number", s:frostPurple, "", "", "")
-call s:Hi("Operator", s:frostYellow, "", "NONE", "")
-call s:Hi("PreProc", s:frostBlue, "", "NONE", "")
-call s:Hi("Repeat", s:frostBlue, "", "", "")
-call s:Hi("Special", s:frostAccent, "", "", "")
-call s:Hi("SpecialChar", s:frostYellow, "", "", "")
-call s:Hi("SpecialComment", s:frostBlue, "", "italic", "")
-call s:Hi("Statement", s:frostOrange, "", "", "")
-call s:Hi("StorageClass", s:frostBlue, "", "", "")
-call s:Hi("String", s:frostPurple, "", "", "")
-call s:Hi("Structure", s:frostBlue, "", "", "")
-call s:Hi("Tag", s:frostGrey, "", "", "")
-call s:Hi("Todo", s:frostYellow, "NONE", "", "")
-call s:Hi("Type", s:frostBlue, "", "NONE", "")
-call s:Hi("Typedef", s:frostBlue, "", "", "")
+call s:Hi("Boolean", s:Blue, "", "", "")
+call s:Hi("Character", s:Yellow, "", "", "")
+call s:Hi("Comment", s:Green, "", "italic", "")
+call s:Hi("Conditional", s:Orange, "", "", "")
+call s:Hi("Constant", s:Accent, "", "", "")
+call s:Hi("Define", s:Orange, "", "", "")
+call s:Hi("Delimiter", s:Blue, "", "", "")
+call s:Hi("Exception", s:Blue, "", "", "")
+call s:Hi("Float", s:Purple, "", "", "")
+call s:Hi("Function", s:Blue, "", "", "")
+call s:Hi("Identifier", s:Green, "", "NONE", "")
+call s:Hi("Include", s:Blue, "", "", "")
+call s:Hi("Keyword", s:Blue, "", "", "")
+call s:Hi("Label", s:Blue, "", "", "")
+call s:Hi("Number", s:Purple, "", "", "")
+call s:Hi("Operator", s:Yellow, "", "NONE", "")
+call s:Hi("PreProc", s:Blue, "", "NONE", "")
+call s:Hi("Repeat", s:Blue, "", "", "")
+call s:Hi("Special", s:Accent, "", "", "")
+call s:Hi("SpecialChar", s:Yellow, "", "", "")
+call s:Hi("SpecialComment", s:Blue, "", "italic", "")
+call s:Hi("Statement", s:Orange, "", "", "")
+call s:Hi("StorageClass", s:Blue, "", "", "")
+call s:Hi("String", s:Purple, "", "", "")
+call s:Hi("Structure", s:Blue, "", "", "")
+call s:Hi("Tag", s:Grey, "", "", "")
+call s:Hi("Todo", s:Yellow, "NONE", "", "")
+call s:Hi("Type", s:Blue, "", "NONE", "")
+call s:Hi("Typedef", s:Blue, "", "", "")
 hi! link Macro Define
 hi! link PreCondit PreProc
 
-call s:Hi("DiffAdd", s:frostGreen, s:frostWorkbench, "", "")
-call s:Hi("DiffChange", s:frostYellow, s:frostWorkbench, "bold", "")
-call s:Hi("DiffDelete", s:frostRed, s:frostWorkbench, "", "")
-call s:Hi("DiffText", s:frostBlue, s:frostWorkbench, "", "")
+call s:Hi("DiffAdd", s:Green, s:Workbench, "", "")
+call s:Hi("DiffChange", s:Yellow, s:Workbench, "bold", "")
+call s:Hi("DiffDelete", s:Red, s:Workbench, "", "")
+call s:Hi("DiffText", s:Blue, s:Workbench, "", "")
 
-call s:Hi("cIncluded", s:frostBlue, "", "", "")
+call s:Hi("cIncluded", s:Blue, "", "", "")
 hi! link cOperator Operator
 hi! link cPreCondit PreCondit
 
-call s:Hi("htmlArg", s:frostBlue, "", "", "")
-call s:Hi("htmlLink", s:frostGrey, "", "NONE", "NONE")
+call s:Hi("htmlArg", s:Blue, "", "", "")
+call s:Hi("htmlLink", s:Grey, "", "NONE", "NONE")
 hi! link htmlBold Bold
 hi! link htmlEndTag htmlTag
 hi! link htmlItalic Italic
@@ -182,16 +182,16 @@ hi! link htmlSpecialChar SpecialChar
 hi! link htmlTag Keyword
 hi! link htmlTagN htmlTag
 
-call s:Hi("markdownBlockquote", s:frostBlue, "", "", "")
-call s:Hi("markdownCode", s:frostDark_grey, "bg", "", "")
-call s:Hi("markdownCodeBlock", s:frostDark_grey, "bg", "", "")
-call s:Hi("markdownCodeDelimiter", s:frostGreen, "bg", "", "")
-call s:Hi("markdownFootnote", s:frostBlue, "", "", "")
-call s:Hi("markdownId", s:frostBlue, "", "", "")
-call s:Hi("markdownIdDeclaration", s:frostBlue, "", "", "")
-call s:Hi("markdownH1", s:frostYellow, "", "", "")
-call s:Hi("markdownLinkText", s:frostBlue, "", "", "")
-call s:Hi("markdownUrl", s:frostGrey, "", "underline", "")
+call s:Hi("markdownBlockquote", s:Blue, "", "", "")
+call s:Hi("markdownCode", s:Dark_grey, "bg", "", "")
+call s:Hi("markdownCodeBlock", s:Dark_grey, "bg", "", "")
+call s:Hi("markdownCodeDelimiter", s:Green, "bg", "", "")
+call s:Hi("markdownFootnote", s:Blue, "", "", "")
+call s:Hi("markdownId", s:Blue, "", "", "")
+call s:Hi("markdownIdDeclaration", s:Blue, "", "", "")
+call s:Hi("markdownH1", s:Yellow, "", "", "")
+call s:Hi("markdownLinkText", s:Blue, "", "", "")
+call s:Hi("markdownUrl", s:Grey, "", "underline", "")
 hi! link markdownBold Bold
 hi! link markdownItalic Italic
 hi! link markdownItalicDelimiter Keyword
