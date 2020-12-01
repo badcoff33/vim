@@ -14,7 +14,7 @@ function! s:async_make_handler(id, data, event_type)
     let iter = 0
     for d in g:job_list
       if d['id'] == a:id
-        call s:PopupList("", ["Closing #" .. a:id  .. ":" .. d['cmd']])
+        call s:PopupList(["Closing #" .. a:id  .. ":" .. d['cmd']])
         call remove(g:job_list, iter)
         break
       endif
@@ -32,7 +32,7 @@ function! jobs#stop(id)
   let iter = 0
   for d in g:job_list
     if d['id'] == a:id
-        call s:PopupList("", ["Stopping #" .. a:id ..":" .. d['cmd']])
+        call s:PopupList(["Stopping #" .. a:id ..":" .. d['cmd']])
       call remove(g:job_list, iter)
       break
     endif
@@ -57,7 +57,7 @@ function! jobs#jobs()
   for d in g:job_list
     call add(text_as_list, "#" .. d['id'] .. ":" .. d['cmd'])
   endfor
-  call s:PopupList("", text_as_list)
+  call s:PopupList(text_as_list)
 endfunction
 
 let g:job_list = []
@@ -73,7 +73,7 @@ function! jobs#start(make_cmd) abort
     let g:job_list = add(g:job_list, { 'id':id , 'cmd': a:make_cmd})
     call delete(getenv('TEMP') .. '/job' .. id)
     call writefile(['job'..id..': '..a:make_cmd], getenv('TEMP') .. '/job' .. id, 'a')
-    call s:PopupList("", ["Start #" .. id .. ":" .. a:make_cmd])
+    call s:PopupList(["Start #" .. id .. ":" .. a:make_cmd])
     hi Statusline gui=inverse
   endif
 endfunction
@@ -81,11 +81,8 @@ endfunction
 
 if has('nvim')
 
-function! s:PopupList(title, list_of_strings)
-  echo a:title
-  for text in a:list_of_strings
-    echo text
-  endfor
+function! s:PopupList(list_of_strings)
+  call lib#popup#OpenFloatingWin(a:list_of_strings)
 endfunction
 finish
 
@@ -93,7 +90,7 @@ endif
 
 " Description: Show a popup with the arguments as a  list in the upper right
 " corner.
-function! s:PopupList(title, list_of_strings)
+function! s:PopupList(list_of_strings)
   let best_fit = 20
   for a in a:list_of_strings
     if len(a) > best_fit
@@ -112,7 +109,7 @@ function! s:PopupList(title, list_of_strings)
         \ 'drag': 1,
         \ 'close': 'click',
         \ 'padding': [0,1,0,1],
-        \ 'title': a:title,
+        \ 'title': "",
         \ })
   call setwinvar(winid, '&wincolor', 'WarningMsg')
 endfunction
