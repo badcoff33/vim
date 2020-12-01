@@ -17,7 +17,7 @@ nnoremap <S-F5> :Jobs<cr>
 imap <f5> <Esc><F5>
 imap <S-f5> <Esc><S-F5>
 
-nnoremap <F12> :tj /\C
+nnoremap <F12> :tj /\c
 imap <f12> <esc><f12>
 
 " Switching between panels
@@ -31,8 +31,8 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-let g:GuiWindowFullScreen = 0
-nnoremap <F11> :call GuiWindowFullScreen(!g:GuiWindowFullScreen)<cr>
+let g:guiWindowFullScreen = 0
+nnoremap <F11> :let g:guiWindowFullScreen = !g:guiWindowFullScreen <bar> call GuiWindowFullScreen(g:guiWindowFullScreen)<CR>
 imap <f11> <esc><f11>
 
 if has('nvim')
@@ -50,7 +50,7 @@ if exists('g:GuiLoaded')
     nnoremap <leader>0 :GuiFont! Consolas:h10<CR>
     GuiLinespace 6
     call feedkeys(' 0') " default font
-    colorscheme breeze
+    colorscheme mitd
     set mouse=a
   endif
 else
@@ -64,4 +64,3 @@ else
   endif
 endif
 
-" vim:ft=vim:fenc=latin1
