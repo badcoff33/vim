@@ -68,7 +68,7 @@ call s:Hi("SpellBad", s:Red, "bg", "undercurl", "")
 call s:Hi("SpellCap", s:Yellow, "bg", "undercurl", "")
 call s:Hi("SpellLocal", s:Red, "bg", "undercurl", "")
 call s:Hi("SpellRare", s:Red, "bg", "undercurl", "")
-call s:Hi("Visual", "", s:Accent, "", "")
+call s:Hi("Visual", s:Light_grey, s:Grey, "", "")
 call s:Hi("VisualNOS", "", s:Light_grey, "", "")
 call s:Hi("Whitespace", s:Grey, "", "", "")
 hi! link PMenuSel IncSearch
