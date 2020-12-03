@@ -2,7 +2,7 @@
 function! lib#popup#OpenFloatingWin(text_list)
   if !has('nvim')
     call popup_create(split(a:text, '\n'), #{ pos: 'topleft',
-      \ line: 'cursor+1', col: 'cursor', moved: 'WORD' })
+          \ line: 'cursor+1', col: 'cursor', moved: 'WORD' })
     return
   endif
   let l:opts = {
@@ -14,19 +14,21 @@ function! lib#popup#OpenFloatingWin(text_list)
         \ 'width': &columns,
         \ 'style': 'minimal'
         \ }
-  let buf = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(buf, v:true, l:opts)
-  call nvim_win_set_option(win, 'winhl', 'Normal:NormalFloat')
-  call nvim_win_set_option(win, 'winblend', 10)
-  call nvim_buf_set_option(buf, 'buftype', 'nofile')
-  call nvim_buf_set_option(buf, 'buflisted', v:true)
-  call nvim_buf_set_option(buf, 'bufhidden', 'hide')
-  call nvim_win_set_option(win, 'signcolumn', 'no')
+  if !exists('w:popup_win')
+    let buf = nvim_create_buf(v:false, v:true)
+    let w:popup_win = nvim_open_win(buf, v:true, l:opts)
+    call nvim_win_set_option(w:popup_win, 'winhl', 'Normal:NormalFloat')
+    call nvim_win_set_option(w:popup_win, 'winblend', 10)
+    call nvim_win_set_option(w:popup_win, 'signcolumn', 'no')
+    call nvim_buf_set_option(buf, 'buftype', 'nofile')
+    call nvim_buf_set_option(buf, 'buflisted', v:true)
+    call nvim_buf_set_option(buf, 'bufhidden', 'hide')
+    autocmd BufLeave <buffer> bwipeout!
+    nmap <silent> <buffer> <Esc> :bwipeout!<CR>
+    nmap <silent> <buffer> <CR>  :bwipeout!<CR>
+  endif
   call append(0, a:text_list)
   normal gg
-  autocmd BufLeave <buffer> bwipeout!
-  nmap <buffer> <Esc> :bwipeout!<CR>
-  nmap <buffer> <CR>  :bwipeout!<CR>
 endfunction
 
 function! lib#popup#OpenFloatingHelp(help_arg)
