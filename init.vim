@@ -180,7 +180,6 @@ inoremap <C-tab> <C-v><tab>
 " Terminals
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
-  tnoremap <C-Space> <C-\><C-n>
   tnoremap <C-w> <C-\><C-n><C-w>
 elseif has('terminal')
   tnoremap <Esc> <C-w>N
@@ -211,7 +210,7 @@ nnoremap <silent> <Leader>g :sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space>
 if executable("rg")
   "set grepprg=rg\ --vimgrep\ --follow\ -tc\ -tvim\ -tpy
-  set grepprg=rg\ --vimgrep\ -tc\ -tvim\ -tpy
+  set grepprg=rg\ --vimgrep\ -tcpp\ -tc\ -tvim\ -tpy
   set grepformat=%f:%l:%c:%m
 endif
 
