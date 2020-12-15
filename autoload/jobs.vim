@@ -20,27 +20,22 @@ function! s:async_make_handler(id, data, event_type)
       endif
       let iter += 1
     endfor
-    if len(g:job_list) == 0
-        hi Statusline gui=none
-    endif
   endif
 endfunction
 
 function! jobs#stop(id)
   " get confirmation by job handler with event 'exit'
-  call lib#job#stop(a:id)
   let iter = 0
   for d in g:job_list
     if d['id'] == a:id
-        call s:PopupList(["Stopping #" .. a:id ..":" .. d['cmd']])
+      echo a:id
+      call s:PopupList(["Stopping #" .. a:id ..":" .. d['cmd']])
+      call lib#job#stop(a:id)
       call remove(g:job_list, iter)
       break
     endif
     let iter += 1
   endfor
-  if len(g:job_list) == 0
-    hi Statusline gui=none
-  endif
 endfunction
 
 function! jobs#jobs()
@@ -74,7 +69,6 @@ function! jobs#start(make_cmd) abort
     call delete(getenv('TEMP') .. '/job' .. id)
     call writefile(['job'..id..': '..a:make_cmd], getenv('TEMP') .. '/job' .. id, 'a')
     call s:PopupList(["Start #" .. id .. ":" .. a:make_cmd])
-    hi Statusline gui=inverse
   endif
 endfunction
 
@@ -91,16 +85,10 @@ endif
 " Description: Show a popup with the arguments as a  list in the upper right
 " corner.
 function! s:PopupList(list_of_strings)
-  let best_fit = 20
-  for a in a:list_of_strings
-    if len(a) > best_fit
-      let best_fit = len(a)
-    endif
-  endfor
   let winid = popup_create(a:list_of_strings, {
-        \ 'line': 2,
-        \ 'col': &columns - best_fit - 5,
-        \ 'minwidth': 20,
+        \ 'line': 1,
+        \ 'col': 1,
+        \ 'minwidth': &columns,
         \ 'maxheight': 10,
         \ 'minheight': argc(),
         \ 'time': 3000,
@@ -111,12 +99,5 @@ function! s:PopupList(list_of_strings)
         \ 'padding': [0,1,0,1],
         \ 'title': "",
         \ })
-  call setwinvar(winid, '&wincolor', 'WarningMsg')
+  call setwinvar(winid, '&wincolor', 'TabLineSel')
 endfunction
-
-" If you want to get the process id of the job
-" let pid = lib#job#pid(id)
-"
-" " If you want to wait the job:
-" call lib#job#wait([id], 5000)  " timeout: 5 sec
-"
