@@ -230,9 +230,9 @@ let @x = "{"
 let @y = "}"
 
 nnoremap <Leader><Leader> :nohlsearch<CR>
-nnoremap <Leader>oh :set invhlsearch<CR>
-nnoremap <Leader>oi :set invignorecase<CR>
-nnoremap <Leader>os :setlocal invspell<CR>
+nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
+nnoremap <Leader>oi :set invignorecase ignorecase?<CR>
+nnoremap <Leader>os :setlocal invspell spell?<CR>
 
 cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 
