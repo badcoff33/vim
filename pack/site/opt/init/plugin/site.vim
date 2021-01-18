@@ -49,16 +49,16 @@ if exists('g:GuiLoaded')
     nnoremap <leader>1 :GuiFont! Consolas:h11<CR>
     nnoremap <leader>0 :GuiFont! Consolas:h10<CR>
     GuiLinespace 6
-    call feedkeys(' 0') " default font
-    colorscheme mitd
+    call feedkeys(mapleader.'1') " default font
+    colorscheme breeze
     set mouse=a
   endif
 else
   if has('gui')
-    call feedkeys(' 1') " default font
-    nnoremap <leader>2 :set guifont=Consolas:h12 linespace=4<CR>
-    nnoremap <leader>1 :set guifont=Consolas:h11 linespace=4<CR>
-    nnoremap <leader>0 :set guifont=Consolas:h10 linespace=3<CR>
+    call feedkeys(mapleader.'1') " default font
+    nnoremap <leader>2 :set guifont=Courier\ New:h11 linespace=3<CR>
+    nnoremap <leader>1 :set guifont=Courier\ New:h10 linespace=3<CR>
+    nnoremap <leader>0 :set guifont=Courier\ New:h9  linespace=3<CR>
     colorscheme breeze
     set guicursor+=a:blinkon0
   endif
