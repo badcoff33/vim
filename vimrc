@@ -235,6 +235,10 @@ nnoremap <Leader>oi :set invignorecase ignorecase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 
 cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
+if has('nvim')
+cnoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+cnoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
+endif
 
 augroup init
   autocmd!
