@@ -168,7 +168,7 @@ call s:Hi('Search', s:blue_0, s:blue_7, 'NONE', '')
 call s:Hi('MatchParen', s:green_1, s:green_7, '', '')
 call s:Hi('QuickFixLine', '', s:yellow_8, 'bold', '')
 call s:Hi('CursorLine', '', s:gray_7, '', '')
-call s:Hi('LineNr', s:blue_1, '', '', '')
+call s:Hi('LineNr', s:gray_6, '', '', '')
 
 highlight! link CursorColumn CursorLine
 highlight! link CursorLineNr CursorLine

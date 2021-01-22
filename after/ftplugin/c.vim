@@ -7,6 +7,12 @@ let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
 
 " Kind of standard to have a type prefix _t
 syn match cType /\w*_t/
+syn match cType /uint8/
+syn match cType /uint16/
+syn match cType /uint32/
+syn match cType /sint8/
+syn match cType /sint16/
+syn match cType /sint32/
 
 " A enhanced version of :ptjump -- open a preview window with current symbol highlighted
 " Don't forget: close preview window with <C-w>z.
