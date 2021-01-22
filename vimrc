@@ -208,7 +208,10 @@ nnoremap <C-f4> :cfirst<CR>
 " nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
 nnoremap <silent> <Leader>g :sil grep <C-r><C-w><CR>
 nnoremap <Leader>G :sil grep<Space>
-if executable("rg")
+if executable("grep")
+  set grepprg=grep\ -Hnr\ --exclude-dir=_3P\ --include=*.[ch]\ --include=*.[ch]pp
+  set grepformat=%f:%l:%m
+else if executable("rg")
   "set grepprg=rg\ --vimgrep\ --follow\ -tc\ -tvim\ -tpy
   set grepprg=rg\ --vimgrep\ -tcpp\ -tc\ -tvim\ -tpy
   set grepformat=%f:%l:%c:%m
