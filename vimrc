@@ -70,6 +70,11 @@ set nottimeout
 " keep indent level when Ctrl-U is pressed
 set backspace=eol,start,indent
 
+if has ('jumpoptions')
+  " New option is coming for Neovim/Vim
+  set jumpoptions=stack
+endif
+
 " Search: Some configuration for the search behavior.
 set incsearch
 if has('nvim')
@@ -120,7 +125,7 @@ if has ('nvim')
   set wildmode=full " works best with 'completeopt'=menu
 else
   set wildoptions=tagfile
-  set nowildmenu wildmode=longest,list,full
+  set nowildmenu wildmode=full
   "set wildmenu
 endif
 set wildignorecase
@@ -206,12 +211,12 @@ nnoremap <S-f4> :cprevious<CR>
 nnoremap <C-f4> :cfirst<CR>
 
 " nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
-nnoremap <silent> <Leader>g :sil grep <C-r><C-w><CR>
+nnoremap <silent> <Leader>g :sil grep <C-r><C-w> .<CR>
 nnoremap <Leader>G :sil grep<Space>
 if executable("grep")
   set grepprg=grep\ -Hnr\ --exclude-dir=_3P\ --include=*.[ch]\ --include=*.[ch]pp
   set grepformat=%f:%l:%m
-else if executable("rg")
+elseif executable("rg")
   "set grepprg=rg\ --vimgrep\ --follow\ -tc\ -tvim\ -tpy
   set grepprg=rg\ --vimgrep\ -tcpp\ -tc\ -tvim\ -tpy
   set grepformat=%f:%l:%c:%m
