@@ -75,6 +75,11 @@ if has ('jumpoptions')
   set jumpoptions=stack
 endif
 
+if (has("termguicolors"))
+  set termguicolors
+  syntax on
+endif
+
 " Search: Some configuration for the search behavior.
 set incsearch
 if has('nvim')
