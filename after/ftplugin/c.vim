@@ -22,8 +22,20 @@ nnoremap <buffer> <LocalLeader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
 
 " run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
-nnoremap <buffer> <LocalLeader>f mr:1,$!clang-format -style=file<CR>`r
-vnoremap <buffer> <LocalLeader>f !clang-format -style=file<CR>gv=
+nnoremap <buffer> <LocalLeader>f :silent call FormatC()
+vnoremap <buffer> <LocalLeader>f :silent call FormatC()
+
+function! FormatC() range
+    let save_cursor = getcurpos()
+    execute "cd" expand("%:p:h")
+    if a:firstline == a:lastline
+        1,$!clang-format -style=file
+    else
+        execute a:firstline.."."..a:lastline.."!clang-format -style=file"
+    endif
+    execute "cd -"
+    call setpos('.', save_cursor)
+endfunction
 
 "let b:load_doxygen_syntax=1
 let g:c_no_comment_fold = 1
@@ -63,5 +75,3 @@ iabbrev <buffer> xelse   else<C-f><CR>{<C-f><CR><CR>}<CR><Up><Up><C-f>
 iabbrev <buffer> xinc    #include ".h"<Left><Left><Left>
 iabbrev <buffer> xdef    #define
 iabbrev <buffer> xdbg    #warning DEBUG CODE:
-
-
