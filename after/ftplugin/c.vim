@@ -22,8 +22,8 @@ nnoremap <buffer> <LocalLeader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
 
 " run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
-nnoremap <buffer> <LocalLeader>f :silent call FormatC()
-vnoremap <buffer> <LocalLeader>f :silent call FormatC()
+nnoremap <buffer> <LocalLeader>f :silent call FormatC()<cr>
+vnoremap <buffer> <LocalLeader>f :silent call FormatC()<cr>
 
 function! FormatC() range
     let save_cursor = getcurpos()
