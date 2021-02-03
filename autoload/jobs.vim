@@ -38,6 +38,10 @@ function! jobs#stop(id)
   endfor
 endfunction
 
+function! jobs#active()
+  return len(g:job_list) ? 1 : 0
+endfunction
+
 function! jobs#jobs()
   let text_as_list = []
   let num_of_jobs = len(g:job_list)

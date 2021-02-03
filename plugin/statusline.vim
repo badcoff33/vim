@@ -1,6 +1,16 @@
 " Vim plugin files
 
-set statusline=%{GetDiverge()}%t%m%r%y%w\ %{DispatchScopeParser()}%=%l,%c%V\ %P
+set statusline=%{GetJobActive()}%{GetDiverge()}%t%m%r%y%w\ %{DispatchScopeParser()}%=%l,%c%V\ %P
+
+" Description: give a simple indicator about the job status to make it more
+" obvious.
+function GetJobActive()
+  if jobs#active()
+    return '& '
+  else
+    return''
+  endif
+endfunction
 
 " Description: If a function ScopeParser&ft exists, call it. The returned
 " string can be used by 'statusline'. Recommended way to add new parser
