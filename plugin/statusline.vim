@@ -42,6 +42,7 @@ function! GetDiverge()
   return b:diverge_string
 endfunction
 
+" Description: autocmd function
 function! UpdateDiverge()
   if !empty(&buftype) || empty(bufname('%'))
     let b:diverge_string = ''
@@ -52,7 +53,7 @@ function! UpdateDiverge()
   let div_string = ''
   for b in g:winlist
     if bufnr('%') != b && empty(div_string)
-      let div_string = s:FindDivergePart(bufname('%'), bufname(b))
+      let div_string = s:FindDivergePart(bufname('%'), bufname(b))..'|'
     endif
   endfor
   let b:diverge_string = div_string
@@ -62,27 +63,24 @@ endfunction
 " resulting string for the first parameter bufname_a.
 function s:FindDivergePart(bufname_a, bufname_b)
   if fnamemodify(a:bufname_a, ":p:t") == fnamemodify(a:bufname_b, ":p:t")
-    let diverge_list = [] " converted to a string, the returned
     let path_list_a = split(fnamemodify(a:bufname_a, ":p:h"), '\')
     let path_list_b = split(fnamemodify(a:bufname_b, ":p:h"), '\')
     while !empty(path_list_a) && !empty(path_list_b)
       " get last part of directories A/B
-      let part_a = path_list_a[-1]
-      if part_a != path_list_b[-1]
-        call insert(diverge_list, part_a)
+      let part_a = path_list_a[0]
+      let part_b = path_list_b[0]
+      if part_a != part_b
         break
-      else
-        call insert(diverge_list, '')
       endif
-      " throwaway the last directory items A/B for next
-      " iteration
-      let path_list_a = path_list_a[:-2]
-      let path_list_b = path_list_b[:-2]
+      " throwaway the last directory items A/B for next iteration
+      let path_list_a = path_list_a[1:]
+      let path_list_b = path_list_b[1:]
     endwhile
-    return '|' . substitute(join(diverge_list, '|') . '|'
-          \ , '|\{2,\}'
-          \ , '|'
-          \ , 'g')
+    if !empty(path_list_a)
+      return path_list_a[0]
+    else
+      return part_a
+    endif
   else
     return ''
   endif
