@@ -196,6 +196,7 @@ elseif has('terminal')
   tnoremap <S-Ins> <C-w>"*
 endif
 
+nnoremap <Leader>s :wa<CR>
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
 nnoremap <Leader>x :terminal ++close explorer <C-r>=expand("%:p:h")<CR><CR>
 nnoremap <Leader>b :buffer<Space>
@@ -215,20 +216,18 @@ nnoremap <f4> :cnext<CR>
 nnoremap <S-f4> :cprevious<CR>
 nnoremap <C-f4> :cfirst<CR>
 
-" nnoremap <silent> <Leader>g :let @/="<C-r><C-w>"<CR>:sil grep <C-r><C-w><CR>
-nnoremap <silent> <Leader>g :sil grep <C-r><C-w> .<CR>
-nnoremap <Leader>G :sil grep<Space>
-if executable("grep")
-  set grepprg=grep\ -Hnr\ --exclude-dir=_3P\ --include=*.[ch]\ --include=*.[ch]pp
-  set grepformat=%f:%l:%m
-elseif executable("rg")
-  "set grepprg=rg\ --vimgrep\ --follow\ -tc\ -tvim\ -tpy
-  set grepprg=rg\ --vimgrep\ -tcpp\ -tc\ -tvim\ -tpy
+if executable("rg")
+  " Using links? Ripgrep supports this by th option '--follow'
+  set grepprg=rg\ --vimgrep\ -tc\ -tcpp\ -tcmake\ -g\ !cmake\ $*\ . 
   set grepformat=%f:%l:%c:%m
+elseif executable("grep")
+  set grepprg=grep\ -Hnr\ --exclude=cmake\ $* \.
+  set grepformat=%f:%l:%m
 endif
+nnoremap <Leader>G :set grepprg=<C-r>=escape(input("set greprg:", &grepprg), ' ')<CR><CR>
+nnoremap <Leader>g :silent grep <C-r><C-w>
 
-nnoremap <Leader>r :%s/\C\<\>//g<Left><Left><Left><Left><Left>
-nnoremap <Leader>R :%s/\C\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <Leader>r :%s/\C\<<C-r><C-w>\>//g<Left><Left>
 vnoremap <Leader>r :s/\C\<\>//g<Left><Left><Left><Left><Left>
 
 " Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
