@@ -1,15 +1,19 @@
 let g:job_list = []
 
+function! s:GetJobFile(id)
+  return getenv('TEMP') .. '/job' .. a:id
+endfunction
+
 " Description: Capture data and skip empty lines. Process data for the closed
 " job.
 function! s:async_make_handler(id, data, event_type)
   if a:event_type == "stdout"
-    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), getenv('TEMP') .. '/job' .. a:id, 'a')
+    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), s:GetJobFile(a:id), 'a')
   elseif a:event_type == "stderr"
-    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), getenv('TEMP') .. '/job' .. a:id, 'a')
+    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), s:GetJobFile(a:id), 'a')
   else
-    if filereadable(getenv('TEMP') .. '/job' .. a:id)
-      execute "cgetfile " .. getenv('TEMP') .. '/job' .. a:id
+    if filereadable(s:GetJobFile(a:id)) " for quiet jobs
+      execute "cgetfile " .. s:GetJobFile(a:id)
     endif
     let iter = 0
     for d in g:job_list
@@ -28,7 +32,6 @@ function! jobs#stop(id)
   let iter = 0
   for d in g:job_list
     if d['id'] == a:id
-      echo a:id
       call s:PopupList(["Stopping #" .. a:id ..":" .. d['cmd']])
       call lib#job#stop(a:id)
       call remove(g:job_list, iter)
@@ -64,15 +67,15 @@ let s:async_make_options = { 'on_stdout': function('s:async_make_handler'),
       \ 'on_stderr': function('s:async_make_handler'),
       \ 'on_exit': function('s:async_make_handler') }
 
-function! jobs#start(make_cmd) abort
-  let id = lib#job#start( ['cmd', '/c', a:make_cmd], s:async_make_options )
+function! jobs#start(cmd) abort
+  let id = lib#job#start( ['cmd', '/c', a:cmd], s:async_make_options )
   if id == 0
     echoerr 'job failed to start'
   else
-    let g:job_list = add(g:job_list, { 'id':id , 'cmd': a:make_cmd})
+    let g:job_list = add(g:job_list, { 'id':id , 'cmd': a:cmd})
     call delete(getenv('TEMP') .. '/job' .. id)
-    call writefile(['job'..id..': '..a:make_cmd], getenv('TEMP') .. '/job' .. id, 'a')
-    call s:PopupList(["Start #" .. id .. ":" .. a:make_cmd])
+    call writefile(['job'..id..': '..a:cmd], s:GetJobFile(id), 'a')
+    call s:PopupList(["Start #" .. id .. ":" .. a:cmd])
   endif
 endfunction
 
