@@ -139,20 +139,20 @@ if exists('&wincolor')
   augroup Wincolor
     au!
     " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+    autocmd BufWinEnter,WinEnter * if &readonly
           \ | set wincolor=BlendDown | else | set wincolor= | endif
   augroup END
 elseif exists('&winhighlight')
   augroup Winhighlight
     au!
     " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+    autocmd BufWinEnter,WinEnter * if &readonly
           \ | set winhighlight=Normal:BlendDown | set winhighlight= | endif
   augroup END
 endif
 
 " Color scheme specific
-call s:Hi('BlendDown', s:white, s:gray_9, '', '')
+call s:Hi('BlendDown', s:white, s:gray_8, '', '')
 
 " Basics
 call s:Hi('Normal', s:gray_2, s:white, 'NONE', '')
@@ -168,10 +168,10 @@ call s:Hi('Search', s:blue_0, s:yellow_6, 'NONE', '')
 call s:Hi('MatchParen', s:green_1, s:green_7, '', '')
 call s:Hi('QuickFixLine', '', s:yellow_8, 'bold', '')
 call s:Hi('CursorLine', '', s:gray_8, '', '')
+call s:Hi('CursorLineNr', s:gray_5, s:gray_6, 'bold', '')
 call s:Hi('LineNr', s:gray_6, '', '', '')
 
 highlight! link CursorColumn CursorLine
-highlight! link CursorLineNr CursorLine
 highlight! link SignColumn LineNr
 highlight! link FoldColumn LineNr
 highlight! link Folded Comment

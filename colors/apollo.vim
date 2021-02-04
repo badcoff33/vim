@@ -14,14 +14,14 @@ if exists('&wincolor')
   augroup Wincolor
     au!
     " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+    autocmd BufWinEnter,WinEnter * if &readonly
           \ | set wincolor=BlendDown | else | set wincolor= | endif
   augroup END
 elseif exists('&winhighlight')
   augroup Winhighlight
     au!
     " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+    autocmd BufWinEnter,WinEnter * if &readonly
           \ | set winhighlight=Normal:BlendDown | set winhighlight= | endif
   augroup END
 endif
@@ -41,21 +41,22 @@ function! s:Hi(group, guifg, guibg, attr, guisp)
   endif
 endfunction
 
-let s:apolloWhite          = '#F8F8FF'
-let s:apolloBlack          = '#18181F'
-let s:apolloBg1            = '#2F2131'
-let s:apolloBg2            = '#343240'
-let s:apolloBg3            = '#484555'
-let s:apolloSilver1        = '#505860'
-let s:apolloSilver2        = '#9098A0'
-let s:apolloSilver3        = '#C0CBD0'
-let s:apolloGreen1         = '#20A040'
-let s:apolloGreen2         = '#47E058'
-let s:apolloWhite          = '#F8F8F8'
-let s:apolloBlue1          = '#6080A8'
-let s:apolloBlue2          = '#A0D0F0'
-let s:apolloRed1           = '#C85012'
-let s:apolloRed2           = '#F86020'
+let s:apolloWhite   = '#F8F8FF'
+let s:apolloBlack   = '#18181F'
+let s:apolloBg0     = '#2F2131'
+let s:apolloBg1     = '#312A3A'
+let s:apolloBg2     = '#343240'
+let s:apolloBg3     = '#484555'
+let s:apolloSilver1 = '#505860'
+let s:apolloSilver2 = '#9098A0'
+let s:apolloSilver3 = '#C0CBD0'
+let s:apolloGreen1  = '#20A040'
+let s:apolloGreen2  = '#47E058'
+let s:apolloWhite   = '#F8F8F8'
+let s:apolloBlue1   = '#6080A8'
+let s:apolloBlue2   = '#A0D0F0'
+let s:apolloRed1    = '#C85012'
+let s:apolloRed2    = '#F86020'
 
 " Basics
 call s:Hi('Normal', s:apolloWhite, s:apolloBg1, 'NONE', '')

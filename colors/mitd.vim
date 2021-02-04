@@ -14,7 +14,7 @@ elseif exists('&winhighlight')
   augroup Winhighlight
     au!
     " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
+    autocmd BufWinEnter,WinEnter * if &readonly
           \ | set winhighlight=Normal:BlendDown | set winhighlight= | endif
   augroup END
 endif
