@@ -1,6 +1,6 @@
 " Colorscheme: Frost
 
-let g:colors_name = "mitd"
+let g:colors_name = "little_monster"
 set background=dark
 
 if exists('&wincolor')
