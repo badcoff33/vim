@@ -39,7 +39,11 @@ let g:winlist = []
 " the difference in file's path (if there is any).
 function! GetDiverge()
   let b:diverge_string = get(b:, 'diverge_string', '')
-  return b:diverge_string
+  if !exists('b:diverge_string') || empty(b:diverge_string)
+    return ''
+  else
+    return b:diverge_string..'|'
+  endif
 endfunction
 
 " Description: autocmd function
@@ -53,7 +57,7 @@ function! UpdateDiverge()
   let div_string = ''
   for b in g:winlist
     if bufnr('%') != b && empty(div_string)
-      let div_string = s:FindDivergePart(bufname('%'), bufname(b))..'|'
+      let div_string = s:FindDivergePart(bufname('%'), bufname(b))
     endif
   endfor
   let b:diverge_string = div_string
