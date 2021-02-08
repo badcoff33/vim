@@ -163,6 +163,9 @@ let g:netrw_winsize = 25
 let mapleader = " "
 let maplocalleader = "s"
 
+" Switch to normal mode from home row
+inoremap jj <Esc>
+
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
 vnoremap <C-a> <C-a>gv
@@ -181,7 +184,7 @@ vnoremap <Leader>[ c[<C-r>-]<Esc>
 vnoremap <Leader>{ c{<C-r>-}<Esc>
 
 " Open a more vimish command window
-nmap <expr> <CR> &buftype=='quickfix' ? "\<CR>" : ":"
+nnoremap <expr> <CR> &buftype=='quickfix' ? "\<CR>" : ":"
 
 inoremap <Tab> <C-n>
 inoremap <S-Tab> <C-p>
@@ -224,8 +227,9 @@ elseif executable("grep")
   set grepprg=grep\ -Hnr\ --exclude=cmake\ $* \.
   set grepformat=%f:%l:%m
 endif
-nnoremap <Leader>G :set grepprg=<C-r>=escape(input("set greprg:", &grepprg), ' ')<CR><CR>
 nnoremap <Leader>g :silent grep <C-r><C-w>
+
+command! -nargs=1 -complete=file WriteOptions :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>', 'a')
 
 nnoremap <Leader>r :%s/\C\<<C-r><C-w>\>//g<Left><Left>
 vnoremap <Leader>r :s/\C\<\>//g<Left><Left><Left><Left><Left>
@@ -245,6 +249,7 @@ nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
 nnoremap <Leader>oi :set invignorecase ignorecase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
+nnoremap <Leader>og :set grepprg=<C-r>=escape(input("set greprg:", &grepprg), ' ')<CR><CR>
 
 " command completion needs terminating backslash (sorry, Windows)
 cnoremap <C-CR> \
