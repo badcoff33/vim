@@ -21,7 +21,7 @@ endif
 
 let s:Workbench  = "#171c28"
 let s:Background = "#1d2433"
-let s:Foreground = "#a2aabc"
+let s:Pencil     = "#a2aab2"
 let s:Ui_grey    = "#6679a4"
 let s:Accent     = "#ffcc66"
 let s:Red        = "#ef6b73"
@@ -74,7 +74,7 @@ call s:Hi("Whitespace", s:Grey, "", "", "")
 hi! link PMenuSel IncSearch
 
 " Frost specific
-call s:Hi('BlendDown', "", s:Workbench, '', '')
+call s:Hi('BlendDown', s:Pencil, s:Workbench, '', '')
 
 " Neovim Support
 call s:Hi("healthError", s:Red, s:Light_grey, "", "")

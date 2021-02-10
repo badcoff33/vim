@@ -207,6 +207,7 @@ nnoremap <Leader>f :find<Space>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
+nnoremap <Leader><C-]> :tjump /
 nnoremap <Leader>X :set columns=999 lines=999<CR>
 nnoremap <Leader>tn :tabnew<CR>
 nnoremap <Leader>te :tabedit %<CR>
