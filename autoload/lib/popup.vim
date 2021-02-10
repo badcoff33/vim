@@ -1,4 +1,26 @@
 
+
+
+" Description: Show a popup with the arguments as a list in the upper right
+" corner.
+function! lib#popup#Head(list_of_strings)
+  let winid = popup_create(a:list_of_strings, {
+        \ 'line': 1,
+        \ 'col': 1,
+        \ 'minwidth': &columns,
+        \ 'maxheight': 10,
+        \ 'minheight': argc() + 2,
+        \ 'time': 3000,
+        \ 'tabpage': -1,
+        \ 'zindex': 300,
+        \ 'drag': 1,
+        \ 'close': 'click',
+        \ 'padding': [0,1,0,1],
+        \ 'title': "",
+        \ })
+  call setwinvar(winid, '&wincolor', 'TabLineSel')
+endfunction
+
 function! lib#popup#OpenFloatingWin(text_list)
   if !has('nvim')
     call popup_create(split(a:text, '\n'), #{ pos: 'topleft',

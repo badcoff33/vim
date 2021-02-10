@@ -5,7 +5,7 @@ set statusline=%{GetJobActive()}%{GetDiverge()}%t%m%r%y%w\ %{DispatchScopeParser
 " Description: give a simple indicator about the job status to make it more
 " obvious.
 function GetJobActive()
-  if jobs#active()
+  if jobs#Active()
     return '& '
   else
     return''
