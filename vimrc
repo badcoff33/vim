@@ -163,8 +163,9 @@ let g:netrw_winsize = 25
 let mapleader = " "
 let maplocalleader = "s"
 
-" Switch to normal mode from home row
+" Switch to normal mode 
 inoremap jj <Esc>
+inoremap <S-Space> <Esc>
 
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
@@ -183,11 +184,10 @@ vnoremap <Leader>( c(<C-r>-)<Esc>
 vnoremap <Leader>[ c[<C-r>-]<Esc>
 vnoremap <Leader>{ c{<C-r>-}<Esc>
 
-" Open a more vimish command window
-nnoremap <expr> <CR> &buftype=='quickfix' ? "\<CR>" : ":"
+autocmd TerminalOpen * :nnoremap <buffer> <CR> :cbuffer<CR>:bwipe<CR>
 
-inoremap <Tab> <C-n>
-inoremap <S-Tab> <C-p>
+inoremap <expr> <C-Space> pumvisible() ? "\<C-]>" : "\<C-x>\<C-]>"
+inoremap <C-S-Space> <C-p>
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <C-tab> <C-v><tab>
 " Terminals
