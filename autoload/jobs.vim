@@ -1,46 +1,5 @@
 let g:job_list = []
 
-function! s:GetJobFile(id)
-  return getenv('TEMP') .. '/job' .. a:id
-endfunction
-
-" Description: Capture data and skip empty lines. Process data for the closed
-" job.
-function! s:async_make_handler(id, data, event_type)
-  if a:event_type == "stdout"
-    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), s:GetJobFile(a:id), 'a')
-  elseif a:event_type == "stderr"
-    call writefile(filter(a:data, 'v:val !~ "^\s*$"'), s:GetJobFile(a:id), 'a')
-  else
-    if filereadable(s:GetJobFile(a:id)) " for quiet jobs
-      execute "cgetfile " .. s:GetJobFile(a:id)
-    endif
-    let iter = 0
-    for d in g:job_list
-      if d['id'] == a:id
-        call s:PopupList(["Closing #" .. a:id  .. ":" .. d['cmd']])
-        call remove(g:job_list, iter)
-        break
-      endif
-      let iter += 1
-    endfor
-  endif
-endfunction
-
-function! jobs#stop(id)
-  " get confirmation by job handler with event 'exit'
-  let iter = 0
-  for d in g:job_list
-    if d['id'] == a:id
-      call s:PopupList(["Stopping #" .. a:id ..":" .. d['cmd']])
-      call lib#job#stop(a:id)
-      call remove(g:job_list, iter)
-      break
-    endif
-    let iter += 1
-  endfor
-endfunction
-
 function! jobs#active()
   return len(g:job_list) ? 1 : 0
 endfunction
@@ -62,23 +21,55 @@ function! jobs#jobs()
   call s:PopupList(text_as_list)
 endfunction
 
-let g:job_list = []
-let s:async_make_options = { 'on_stdout': function('s:async_make_handler'),
-      \ 'on_stderr': function('s:async_make_handler'),
-      \ 'on_exit': function('s:async_make_handler') }
+function! Async_error_handler(channel)
+  echomsg "ERR"
+endfunction
 
-function! jobs#start(cmd) abort
-  let id = lib#job#start( ['cmd', '/c', a:cmd], s:async_make_options )
-  if id == 0
-    echoerr 'job failed to start'
+function! Async_close_handler(channel)
+  let iter = 0
+  let id = split(ch_getjob(a:channel))[1]
+  for d in g:job_list
+    if d['id'] == id
+      call s:PopupList(["Stopping #" .. id ..": " .. d['cmd']])
+      call remove(g:job_list, iter)
+      break
+    endif
+    let iter += 1
+  endfor
+endfunction
+
+function! Async_out_handler(channel, msg)
+  echomsg "out" a:msg
+endfunction
+
+let s:async_make_options = {
+      \ 'close_cb': 'Async_close_handler',
+      \ 'err_cb': 'Async_error_handler',
+      \ 'out_cb': 'Async_out_handler',
+      \ 'out_io': 'file',
+      \ 'err_io': 'file',
+      \ 'out_name': 'out',
+      \ 'err_name': 'out'}
+
+function! jobs#run_bg(cmd) abort
+  let job = job_start('cmd /C '..a:cmd, s:async_make_options )
+  let id = job_info(job)['process']
+  if job_info(job)['status'] == 'run'
+    let g:job_list = add(g:job_list, { 'id': id, 'cmd': a:cmd})
+    "call delete(getenv('TEMP') .. '/job' .. id)
+    "call writefile(['job'..id..': '..a:cmd], s:GetJobFile(id), 'a')
+    call s:PopupList(["Start #" .. id .. ": " .. a:cmd])
   else
-    let g:job_list = add(g:job_list, { 'id':id , 'cmd': a:cmd})
-    call delete(getenv('TEMP') .. '/job' .. id)
-    call writefile(['job'..id..': '..a:cmd], s:GetJobFile(id), 'a')
-    call s:PopupList(["Start #" .. id .. ":" .. a:cmd])
+    echoerr 'job failed to start'
   endif
 endfunction
 
+function! jobs#run(cmd) abort
+   execute ":terminal ++shell "..a:cmd
+   let b:started_as_job = 1
+   nnoremap <buffer> <CR> :cbuffer<CR><C-w>c
+   nnoremap <buffer> <Esc> <C-w>c
+endfunction
 
 if has('nvim')
 
