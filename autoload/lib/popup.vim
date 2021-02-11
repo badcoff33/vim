@@ -20,6 +20,26 @@ function! lib#popup#Head(list_of_strings)
         \ })
   call setwinvar(winid, '&wincolor', 'TabLineSel')
 endfunction
+"
+" Description: Show a popup with the arguments as a list in the lower right
+" corner.
+function! lib#popup#Bottom(list_of_strings)
+  let winid = popup_create(a:list_of_strings, {
+        \ 'line': &lines - 3 - argc(),
+        \ 'col': 1,
+        \ 'minwidth': &columns,
+        \ 'maxheight': 10,
+        \ 'minheight': argc() + 2,
+        \ 'time': 3000,
+        \ 'tabpage': -1,
+        \ 'zindex': 300,
+        \ 'drag': 1,
+        \ 'close': 'click',
+        \ 'padding': [0,1,0,1],
+        \ 'title': "",
+        \ })
+  call setwinvar(winid, '&wincolor', 'Search')
+endfunction
 
 function! lib#popup#OpenFloatingWin(text_list)
   if !has('nvim')
