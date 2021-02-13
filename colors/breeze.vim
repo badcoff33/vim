@@ -164,12 +164,12 @@ call s:Hi('StatusLine', s:blue_8, s:gray_2, 'bold', '')
 call s:Hi('StatusLineNC', s:gray_3, s:gray_6, 'bold', '')
 call s:Hi('VertSplit', s:gray_6, 'bg', 'NONE', '')
 call s:Hi('IncSearch', s:black, s:blue_6, 'none', '')
-call s:Hi('Search', s:blue_0, s:yellow_6, 'NONE', '')
+call s:Hi('Search', s:blue_0, s:blue_8, 'NONE', '')
 call s:Hi('MatchParen', s:green_1, s:green_7, '', '')
 call s:Hi('QuickFixLine', '', s:yellow_8, 'bold', '')
-call s:Hi('CursorLine', '', s:blue_9, '', '')
-call s:Hi('CursorLineNr', s:blue_9, s:blue_5, 'bold', '')
-call s:Hi('LineNr', s:red_4, '', '', '')
+call s:Hi('CursorLine', '', s:green_9, '', '')
+call s:Hi('CursorLineNr', s:green_3, s:green_7, '', '')
+call s:Hi('LineNr', s:green_4, '', '', '')
 
 highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr
@@ -213,7 +213,7 @@ call s:Hi('ModeMsg', s:yellow_0, s:yellow_7, '', '')
 call s:Hi('Question', s:green_1, 'bg', '', '')
 call s:Hi('qfFileName', s:blue_2, '', '', '')
 call s:Hi('qfSeparator', s:gray_1, '', '', '')
-highlight! link qfLineNr    LineNr
+call s:Hi('qfLineNr', s:red_6, '', '', '')
 
 " Filetype VIM
 call s:Hi('vimCommentTitle', s:blue_6, '', 'bold', '')

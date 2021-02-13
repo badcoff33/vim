@@ -164,8 +164,7 @@ let mapleader = " "
 let maplocalleader = "s"
 
 " Switch to normal mode 
-inoremap jj <Esc>
-inoremap <S-Space> <Esc>
+inoremap <C-Enter> <Esc>
 
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
@@ -207,7 +206,6 @@ nnoremap <Leader>f :find<Space>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
-nnoremap <Leader><C-]> :tjump /
 nnoremap <Leader>X :set columns=999 lines=999<CR>
 nnoremap <Leader>tn :tabnew<CR>
 nnoremap <Leader>te :tabedit %<CR>
@@ -219,6 +217,14 @@ nnoremap <C-k> :cprevious<CR>
 nnoremap <f4> :cnext<CR>
 nnoremap <S-f4> :cprevious<CR>
 nnoremap <C-f4> :cfirst<CR>
+
+nnoremap <A-.> :tjump /<C-r><C-w>
+nnoremap <A-,> :cnext<CR>
+nnoremap <A-S-,> :cprev<CR>
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 if executable("rg")
   " Using links? Ripgrep supports this by th option '--follow'

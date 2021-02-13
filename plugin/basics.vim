@@ -99,7 +99,7 @@ function! s:ToggleQuickfix()
   let qfIsOpen = 0
   windo if &buftype == 'quickfix' | let qfIsOpen = 1 | endif
   if qfIsOpen == 0
-    topleft copen 7
+    belowright copen 7
   else
     cclose
   endif

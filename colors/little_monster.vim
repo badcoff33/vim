@@ -53,10 +53,10 @@ endfunction
 " Editor
 call s:Hi("ColorColumn", "", s:Light_grey, "", "")
 call s:Hi("Cursor", s:Background, s:Purple, "NONE", "")
-call s:Hi("CursorLine", "", s:Light_grey, "NONE", "")
+call s:Hi("CursorLine", "", s:Grey, "NONE", "")
 call s:Hi("Error", s:Red, "bg", "", "")
 call s:Hi("iCursor", s:Light_grey, s:Grey, "", "")
-call s:Hi("LineNr", s:Grey, s:Light_grey, "", "")
+call s:Hi("LineNr", s:Light_grey, "bg", "", "")
 call s:Hi("MatchParen", s:Blue, s:Grey, "", "")
 call s:Hi("NonText", s:Red, s:Grey, "", "")
 call s:Hi("Normal", s:Foreground, s:Background, "", "")
@@ -84,7 +84,7 @@ call s:Hi("TermCursorNC", "", s:Light_grey, "", "")
 
 " Gutter
 call s:Hi("CursorColumn", "", s:Light_grey, "", "")
-call s:Hi("CursorLineNr", s:Grey, s:Light_grey, "NONE", "")
+call s:Hi("CursorLineNr", s:Purple, s:Ui_grey, "NONE", "")
 call s:Hi("FoldColumn", s:Grey, s:Light_grey, "", "")
 call s:Hi("Folded", s:Grey, s:Light_grey, "bold", "")
 call s:Hi("SignColumn", s:Light_grey, s:Background, "", "")

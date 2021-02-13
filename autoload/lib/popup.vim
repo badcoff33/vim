@@ -1,5 +1,11 @@
 
-
+function! s:PickColor(winid)
+  if hlID("BlendDown")
+    call setwinvar(a:winid, '&wincolor', 'BlendDown')
+  else
+    call setwinvar(a:winid, '&wincolor', 'StatusLineNC')
+  endif
+endfunction
 
 " Description: Show a popup with the arguments as a list in the upper right
 " corner.
@@ -18,7 +24,7 @@ function! lib#popup#Head(list_of_strings)
         \ 'padding': [0,1,0,1],
         \ 'title': "",
         \ })
-  call setwinvar(winid, '&wincolor', 'TabLineSel')
+  call s:PickColor(winid)
 endfunction
 "
 " Description: Show a popup with the arguments as a list in the lower right
@@ -38,7 +44,7 @@ function! lib#popup#Bottom(list_of_strings)
         \ 'padding': [0,1,0,1],
         \ 'title': "",
         \ })
-  call setwinvar(winid, '&wincolor', 'Search')
+  call s:PickColor(winid)
 endfunction
 
 function! lib#popup#OpenFloatingWin(text_list)

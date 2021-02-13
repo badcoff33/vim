@@ -1,6 +1,17 @@
 " Vim plugin file
 
-command! -nargs=* -complete=file_in_path Start :call jobs#Start(<q-args>)
-command! -nargs=* -complete=file_in_path Run   :call jobs#Run(<q-args>)
-command! -nargs=0 CloseTerm :call jobs#CloseTermWindows()
-command! -nargs=1 Stop      :call jobs#Stop(<q-args>)
+" Interfaces:
+nnoremap <leader>j :ShowJob<CR>
+
+command! -nargs=* -complete=file_in_path RunAuto :term ++rows=5 ++close ++shell <args>
+command! -nargs=* -complete=file_in_path Run     :call jobs#Start(<q-args>)
+command! -nargs=0 CloseTerm                      :call lib#windows#CloseTermWindows()
+command! -nargs=0 ShowOutput                     :call jobs#PopupBuffer()
+command! -nargs=0 HideOutput                     :call jobs#HideBuffer()
+
+
+if !hasmapto(mapleader.'j')
+  nnoremap <Leader>js :ShowOutput<CR>
+  nnoremap <Leader>jh :HideOutput<CR>
+  nnoremap <Leader>jj :Run<Up>
+endif
