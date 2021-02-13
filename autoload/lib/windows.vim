@@ -10,14 +10,19 @@ endfunction
 
 function! lib#windows#PopupBuffer(buf)
   if bufexists(a:buf)
-    execute "buffer" a:buf
+    let visible_win = bufwinnr(a:buf) 
+    if visible_win >= 0
+      call win_gotoid(visible_win)
+    else
+      execute "buffer" a:buf
+    endif 
   endif
-endfunction
+endfunction 
 
 function! lib#windows#HideBuffer(buf)
   if bufexists(a:buf)
     let visible_win = bufwinnr(a:buf)
-    if visible_win > 0
+    if visible_win >= 0
       call win_gotoid(visible_win)
       buffer #
     endif
