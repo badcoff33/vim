@@ -212,6 +212,8 @@ nnoremap <Leader>te :tabedit %<CR>
 nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
+nnoremap <C-l> :cnewer<CR>
+nnoremap <C-h> :colder<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 nnoremap <f4> :cnext<CR>

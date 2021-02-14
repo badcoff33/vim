@@ -6,7 +6,7 @@ function! jobs#Active()
   return exists('g:job_active') && g:job_active==1 ? 1 : 0
 endfunction
 
-function! jobs#PopupBuffer()
+function! jobs#ToFrontBuffer()
   call lib#windows#PopupBuffer(g:job_bufnr)
   if (bufnr('%') == g:job_bufnr)
     setlocal nomodifiable
@@ -29,7 +29,7 @@ function! AsyncCloseHandler(channel)
     setlocal nomodifiable
     call win_gotoid(save_win)
   endif
-  call lib#popup#Bottom([
+  call lib#popup#Tiny([
         \ "Stop process " .. ch_getjob(a:channel),
         \ printf("Process toke %.3f seconds", reltimefloat(reltime(g:job_start_time)))])
 endfunction
@@ -41,6 +41,10 @@ function! s:Head(cmdstr)
   normal ggVGx
   call append(0, '# cmd:' .. a:cmdstr)
   call append(1, '-------------------------------------------------------------------------------')
+endfunction
+
+function! jobs#UseAsQuickfix()
+  execute "cbuffer" g:job_bufnr
 endfunction
 
 function! jobs#Start(cmd) abort

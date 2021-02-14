@@ -6,12 +6,13 @@ nnoremap <leader>j :ShowJob<CR>
 command! -nargs=* -complete=file_in_path RunAuto :term ++rows=5 ++close ++shell <args>
 command! -nargs=* -complete=file_in_path Run     :call jobs#Start(<q-args>)
 command! -nargs=0 CloseTerm                      :call lib#windows#CloseTermWindows()
-command! -nargs=0 ShowOutput                     :call jobs#PopupBuffer()
+command! -nargs=0 ShowOutput                     :call jobs#ToFrontBuffer()
 command! -nargs=0 HideOutput                     :call jobs#HideBuffer()
+command! -nargs=0 JobAsQuickfix                  :call jobs#UseAsQuickfix()
 
-
-if !hasmapto(mapleader.'j')
+if !hasmapto(mapleader..'j')
   nnoremap <Leader>js :ShowOutput<CR>
   nnoremap <Leader>jh :HideOutput<CR>
   nnoremap <Leader>jj :Run<Up>
+  nnoremap <Leader>jq :JobAsQuickfix<Up>
 endif

@@ -1,10 +1,30 @@
 
 function! s:PickColor(winid)
-  if hlID("BlendDown")
-    call setwinvar(a:winid, '&wincolor', 'BlendDown')
+  if hlID("PopupWin")
+    call setwinvar(a:winid, '&wincolor', 'PopupWin')
   else
-    call setwinvar(a:winid, '&wincolor', 'StatusLineNC')
+    call setwinvar(a:winid, '&wincolor', 'PmenuSel')
   endif
+endfunction
+
+" Description: Show a popup with the arguments as a list in the upper right
+" corner.
+function! lib#popup#Tiny(list_of_strings)
+  let winid = popup_create(a:list_of_strings, {
+        \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
+        \ 'col': 1,
+        \ 'minwidth': &columns/3,
+        \ 'maxheight': 10,
+        \ 'minheight': argc() + 2,
+        \ 'time': 2000,
+        \ 'tabpage': -1,
+        \ 'zindex': 300,
+        \ 'drag': 1,
+        \ 'close': 'click',
+        \ 'padding': [0,1,0,1],
+        \ 'title': "",
+        \ })
+  call s:PickColor(winid)
 endfunction
 
 " Description: Show a popup with the arguments as a list in the upper right

@@ -9,23 +9,38 @@ function! lib#windows#CloseTermWindows()
 endfunction
 
 function! lib#windows#PopupBuffer(buf)
+  let save_winr = winnr()
   if bufexists(a:buf)
-    let visible_win = bufwinnr(a:buf) 
-    if visible_win >= 0
-      call win_gotoid(visible_win)
+    let buf_winid = bufwinid(a:buf)
+    if buf_winid >= 0
+      call win_gotoid(buf_winid)
     else
       execute "buffer" a:buf
-    endif 
+    endif
   endif
-endfunction 
+  execute save_winr .. "wincmd w"
+endfunction
+
+function! lib#windows#GotoBuffer(buf)
+  if bufexists(a:buf)
+    let buf_winid = bufwinid(a:buf)
+    if buf_winid >= 0
+      call win_gotoid(buf_winid)
+    else
+      execute "buffer" a:buf
+    endif
+  endif
+endfunction
 
 function! lib#windows#HideBuffer(buf)
+  let save_winr = winnr()
   if bufexists(a:buf)
-    let visible_win = bufwinnr(a:buf)
-    if visible_win >= 0
-      call win_gotoid(visible_win)
+    let buf_winid = bufwinid(a:buf)
+    if buf_winid >= 0
+      call win_gotoid(buf_winid)
       buffer #
     endif
   endif
+  execute save_winr .. "wincmd w"
 endfunction
 
