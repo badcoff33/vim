@@ -168,8 +168,8 @@ call s:Hi('Search', s:blue_0, s:blue_8, 'NONE', '')
 call s:Hi('MatchParen', s:green_1, s:green_7, '', '')
 call s:Hi('QuickFixLine', '', s:yellow_8, 'bold', '')
 call s:Hi('CursorLine', '', s:green_9, '', '')
-call s:Hi('CursorLineNr', s:green_3, s:green_7, '', '')
-call s:Hi('LineNr', s:green_4, '', '', '')
+call s:Hi('CursorLineNr', s:green_1, s:green_7, 'bold,italic', '')
+call s:Hi('LineNr', s:gray_6, '', 'italic', '')
 
 highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr
@@ -183,7 +183,7 @@ highlight! link PmenuSbar Search
 highlight! link PmenuThumb IncSearch
 highlight! link TabLineFill Normal
 highlight! link TabLine StatusLineNC
-highlight! link TabLineSel Statusline
+highlight! link TabLineSel StatusLine
 highlight! link WildMenu PmenuSel
 
 " Breeze specific
@@ -199,9 +199,9 @@ call s:Hi('PreProc', s:blue_4, '', 'bold', '')
 call s:Hi('PreCondit', s:blue_5, '', 'bold', '')
 call s:Hi('Comment', s:green_3, '', '', '')
 call s:Hi('Function', s:green_1, '', '', '')
-call s:Hi('Identifier', s:green_1, '', '', '')
+call s:Hi('Identifier', s:green_4, '', '', '')
 call s:Hi('Special', s:green_1, '', '', '')
-call s:Hi('Constant', s:blue_2, '', '', '')
+call s:Hi('Constant', s:blue_4, '', '', '')
 call s:Hi('Number', s:blue_2, '', '', '')
 call s:Hi('Title', s:gray_2, '', '', '')
 call s:Hi('Todo', s:gray_2, s:gray_7, '', '')
