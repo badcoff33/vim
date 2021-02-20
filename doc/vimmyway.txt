@@ -1,0 +1,80 @@
+*vimmyway.txt*  For Vim version 8.2.  Last change: 2021 Feb 20
+
+
+      VIM REFERENCE MANUAL    by Bram Moolenaar
+
+
+Reminder help file for my most common tips          *vimmyway*
+
+1. Help commands            |vmw-intro|
+2. Window navigation        |vmw-win-navigation|
+3. GUI font                 |vmw-gui-font|
+4. German keyboards sucks!  |vmw-german-keyboard|
+5. Capture notes            |vmw-notes|
+
+==============================================================================
+1. Vim, my way                                                   *vimway-intro*
+
+In the years I used Vim, a lot of interesting stuff comes my way. A fast as I
+read valueable Vim tips and how todos, the things yust disappear from my brain.  
+
+Here is the place to store the worthwile things. 
+
+------------------------------------------------------------------------------
+2. Window navigation                                       *vmw-win-navigation*
+To ease navigation between the vertical and horizontal splitted windows, this 
+mappings helpsme a lot.
+
+The Vim way: ~
+The first option uses the hjkl keys on the home row. Maybe the most vimish way.  >
+	tnoremap <A-h> <C-\><C-n><C-w>h
+	tnoremap <A-j> <C-\><C-n><C-w>j
+	tnoremap <A-k> <C-\><C-n><C-w>k
+	tnoremap <A-l> <C-\><C-n><C-w>l
+	nnoremap <A-h> <C-w>h
+	nnoremap <A-j> <C-w>j
+	nnoremap <A-k> <C-w>k
+	nnoremap <A-l> <C-w>l
+<
+The CUA way: ~
+Well, the second option uses the cursor keys. Works very well!  >
+	nnoremap <S-down>  <C-w>j
+	nnoremap <S-up>    <C-w>k
+	nnoremap <S-left>  <C-w>h
+	nnoremap <S-right> <C-w>l
+<
+Way not use both?
+
+------------------------------------------------------------------------------
+3. GUI font                                                      *vmw-gui-font*
+Fonts are alway a matter of taste. Whatever font is used, they appear of
+different display in different sizes. Set an new font size becomes a habit.
+This lines of Vim script does the trick: >
+	if has('gui')
+		nnoremap <leader>3 :set guifont=Consolas:h12 linespace=1<CR>
+		nnoremap <leader>2 :set guifont=Consolas:h11 linespace=1<CR>
+		nnoremap <leader>1 :set guifont=Consolas:h10  linespace=1<CR>
+		call feedkeys(mapleader.'1') " default font
+		colorscheme breeze
+		set guicursor+=a:blinkon0
+	endif
+<
+------------------------------------------------------------------------------
+4. German keyboards sucks!                                *vmw-german-keyboard*
+Lets say it clear: Vim is made for american keyboard layout. All othter
+layouts suck. At least the German one. To make the "[". "], "{", "}" and the
+search keys more accesable in normal mode, I use this in vimrc. >
+
+        set langmap=ü/,ü?,ö[,ä],ö{,ä}
+<
+
+------------------------------------------------------------------------------
+5. Capture notes                                                    *vmw-notes*
+
+Quick access to a simple text file to capture your ideas. >
+    	nnoremap <Leader>nn :drop ~\.notes\notes.md<cr>
+        nnoremap <Leader>nd :drop ~\.notes\diary.md<cr>
+<
+------------------------------------------------------------------------------
+ vim:tw=78:ts=8:noet:ft=help:norl:
+
