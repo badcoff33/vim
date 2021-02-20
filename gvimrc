@@ -16,11 +16,12 @@ augroup ginit
 augroup END
 
 if has('gui')
-  " Hello Vim!
   set guioptions=!ca
   set encoding=latin1
   set renderoptions=
   set mousemodel=popup
+  nnoremenu 1.300 PopUp.-SEP3- <NOP>
+  nnoremenu 1.310 PopUp.GUI\ Font  :set guifont=*<CR>
 elseif has("nvim")
   " Hello Neovim!
   set mousemodel=popup
