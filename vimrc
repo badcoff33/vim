@@ -27,7 +27,7 @@ set showtabline=1
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
-set spelllang=en_us
+set spelllang=en_us,de_de
 if exists('&spelloptions')
   set spelloptions=camel
 endif
@@ -38,8 +38,8 @@ set autoread
 " Allow modified files to flip in background, without a write.
 set hidden
 
-" Use open buffer when commands like ":cc", ":cn", "cp", etc. were used
-set switchbuf=useopen
+" Set behavior for commands ':cc', ':cn', 'cp', etc.
+set switchbuf=useopen,uselast
 
 " keep cursor line away from the upper and lower window border
 set scrolloff=2
@@ -163,8 +163,12 @@ let g:netrw_winsize = 25
 let mapleader = " "
 let maplocalleader = "s"
 
-" Switch to normal mode 
+" Switch modes
 inoremap <C-Enter> <Esc>
+vnoremap <F13> :
+nnoremap <F13> :
+vnoremap <F12> :
+nnoremap <F12> :
 
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
@@ -198,7 +202,6 @@ elseif has('terminal')
   tnoremap <S-Ins> <C-w>"*
 endif
 
-nnoremap <Leader>s :wa<CR>
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
 nnoremap <Leader>x :terminal ++close explorer <C-r>=expand("%:p:h")<CR><CR>
 nnoremap <Leader>b :buffer<Space>
@@ -243,16 +246,15 @@ command! -nargs=1 -complete=file WriteOptions :call writefile(['set grepprg='..e
 nnoremap <Leader>r :%s/\C\<<C-r><C-w>\>//g<Left><Left>
 vnoremap <Leader>r :s/\C\<\>//g<Left><Left><Left><Left><Left>
 
-" Keys '[' and ']' is hard to reach on some non-english keyboards. Here is a way to
-" record a macro with those keys and make macro playback easy as possible.
-nnoremap <C-S-left> :let @x=input("Go back ('[[', '[s', '[d'): ", "")<CR>
-nnoremap <C-S-right> :let @y=input("Go forward (']]', ']s', ']d'): ", "")<CR>
-nnoremap <S-left> @x
-vnoremap <S-left> @x
-nnoremap <S-right> @y
-vnoremap <S-right> @y
-let @x = "{"
-let @y = "}"
+nnoremap <S-down>  <C-w>j
+nnoremap <S-up>    <C-w>k
+nnoremap <S-left>  <C-w>h
+nnoremap <S-right> <C-w>l
+
+nnoremap <Leader><C-w>j <C-w>j<C-w>c<C-w>p
+nnoremap <Leader><C-w>k <C-w>k<C-w>c<C-w>p
+nnoremap <Leader><C-w>h <C-w>h<C-w>c<C-w>p
+nnoremap <Leader><C-w>l <C-w>l<C-w>c<C-w>p
 
 nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
