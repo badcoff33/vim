@@ -17,23 +17,20 @@ noremap <SID>PopupTerminal          :call <SID>PopupTerminal()<CR>
 noremap <SID>HighlightWord          :call <SID>HighlightWord("<C-r><C-w>")<CR>
 
 " Defaults: Key mappings
-if !hasmapto('<Plug>ShowHiInfo')
-  nmap <leader>H <Plug>ShowHiInfo
-endif
-
 if !hasmapto('<Plug>ToggleQuickfix')
-  nmap <S-Tab> <Plug>ToggleQuickfix
+  nmap <Leader>q <Plug>ToggleQuickfix
 endif
 
 if !hasmapto('<Plug>PopupTerminal')
-  nmap <leader>T <Plug>PopupTerminal
+  nmap <Leader>T <Plug>PopupTerminal
 endif
 
 if !hasmapto('<Plug>HighlightWord')
-  nmap <leader>* <Plug>HighlightWord
+  nmap <Leader>* <Plug>HighlightWord
 endif
 
 command -nargs=0 ToggleStickyCursorline call <SID>ToggleStickyCursorline()
+command -nargs=0 ShowHiInfo             call <SID>ShowHiInfo()
 
 " Autocmd: put them in a dedicaed group
 augroup basics

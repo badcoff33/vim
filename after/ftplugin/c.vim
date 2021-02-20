@@ -5,12 +5,9 @@
 
 let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
 
-" A enhanced version of :ptjump -- open a preview window with current symbol highlighted
-" Don't forget: close preview window with <C-w>z.
-nnoremap <buffer> <LocalLeader>p yiw<C-w>}<C-w>P:match Search /<C-r>0/<CR><C-w><C-p>
-
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
+nnoremap <buffer> <LocalLeader>a :execute "setlocal fo"..(match(&fo, 'a') < 0) ?<bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
 
 " run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
 nnoremap <buffer> <LocalLeader>f :silent call FormatC()<cr>

@@ -10,9 +10,9 @@ command! -nargs=0 ShowOutput                     :call jobs#ToFrontBuffer()
 command! -nargs=0 HideOutput                     :call jobs#HideBuffer()
 command! -nargs=0 JobAsQuickfix                  :call jobs#UseAsQuickfix()
 
-if !hasmapto(mapleader..'j')
+if !hasmapto(mapleader .. 'j')
   nnoremap <Leader>js :ShowOutput<CR>
   nnoremap <Leader>jh :HideOutput<CR>
   nnoremap <Leader>jj :Run<Up>
-  nnoremap <Leader>jq :JobAsQuickfix<Up>
+  nnoremap <Leader>jq :JobAsQuickfix<CR>
 endif

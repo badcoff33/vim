@@ -1,70 +1,103 @@
 
 function! s:PickColor(winid)
-  if hlID("PopupWin")
-    call setwinvar(a:winid, '&wincolor', 'PopupWin')
+  if hlID("PopupNotification")
+    call setwinvar(a:winid, '&wincolor', 'PopupNotification')
   else
     call setwinvar(a:winid, '&wincolor', 'PmenuSel')
   endif
 endfunction
 
-" Description: Show a popup with the arguments as a list in the upper right
-" corner.
-function! lib#popup#Tiny(list_of_strings)
-  let winid = popup_create(a:list_of_strings, {
-        \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
-        \ 'col': 1,
-        \ 'minwidth': &columns/3,
-        \ 'maxheight': 10,
-        \ 'minheight': argc() + 2,
-        \ 'time': 2000,
-        \ 'tabpage': -1,
-        \ 'zindex': 300,
-        \ 'drag': 1,
-        \ 'close': 'click',
-        \ 'padding': [0,1,0,1],
-        \ 'title': "",
-        \ })
-  call s:PickColor(winid)
+function! lib#popup#TopLeft(list_of_strings)
+  if exists('g:winid_tiny') && match(popup_list(), g:winid_tiny) != -1
+    call popup_settext(a:list_of_strings)
+  else
+    let g:winid_tiny = popup_create(a:list_of_strings, {
+          \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
+          \ 'col': 1,
+          \ 'minwidth': &columns/3,
+          \ 'maxheight': 10,
+          \ 'minheight': argc() + 2,
+          \ 'time': 2000,
+          \ 'tabpage': -1,
+          \ 'zindex': 300,
+          \ 'drag': 1,
+          \ 'close': 'click',
+          \ 'padding': [0,1,0,1],
+          \ 'title': "",
+          \ })
+    call s:PickColor(g:winid_tiny)
+  endif
+endfunction
+
+function! lib#popup#TopRight(list_of_strings)
+  if exists('g:winid_tiny') && match(popup_list(), g:winid_tiny) != -1
+    call popup_settext(a:list_of_strings)
+  else
+    let g:winid_tiny = popup_create(a:list_of_strings, {
+          \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
+          \ 'col': (2 * &columns)/3 - 1,
+          \ 'minwidth': &columns/3,
+          \ 'maxheight': 10,
+          \ 'minheight': argc() + 2,
+          \ 'time': 2000,
+          \ 'tabpage': -1,
+          \ 'zindex': 300,
+          \ 'drag': 1,
+          \ 'close': 'click',
+          \ 'padding': [0,1,0,1],
+          \ 'title': "",
+          \ })
+    call s:PickColor(g:winid_tiny)
+  endif
 endfunction
 
 " Description: Show a popup with the arguments as a list in the upper right
 " corner.
 function! lib#popup#Head(list_of_strings)
-  let winid = popup_create(a:list_of_strings, {
-        \ 'line': 1,
-        \ 'col': 1,
-        \ 'minwidth': &columns,
-        \ 'maxheight': 10,
-        \ 'minheight': argc() + 2,
-        \ 'time': 3000,
-        \ 'tabpage': -1,
-        \ 'zindex': 300,
-        \ 'drag': 1,
-        \ 'close': 'click',
-        \ 'padding': [0,1,0,1],
-        \ 'title': "",
-        \ })
-  call s:PickColor(winid)
+  if exists('g:winid_head') && match(popup_list(), g:winid_head) != -1
+    call popup_settext(a:list_of_strings)
+  else
+    let g:winid_head = popup_create(a:list_of_strings, {
+          \ 'line': 1,
+          \ 'col': 1,
+          \ 'minwidth': &columns,
+          \ 'maxheight': 10,
+          \ 'minheight': argc() + 2,
+          \ 'time': 3000,
+          \ 'tabpage': -1,
+          \ 'zindex': 300,
+          \ 'drag': 1,
+          \ 'close': 'click',
+          \ 'padding': [0,1,0,1],
+          \ 'title': "",
+          \ })
+    call s:PickColor(g:winid_head)
+  endif
 endfunction
+
 "
 " Description: Show a popup with the arguments as a list in the lower right
 " corner.
 function! lib#popup#Bottom(list_of_strings)
-  let winid = popup_create(a:list_of_strings, {
-        \ 'line': &lines - 3 - argc(),
-        \ 'col': 1,
-        \ 'minwidth': &columns,
-        \ 'maxheight': 10,
-        \ 'minheight': argc() + 2,
-        \ 'time': 3000,
-        \ 'tabpage': -1,
-        \ 'zindex': 300,
-        \ 'drag': 1,
-        \ 'close': 'click',
-        \ 'padding': [0,1,0,1],
-        \ 'title': "",
-        \ })
-  call s:PickColor(winid)
+  if exists('g:winid_bot') && match(popup_list(), g:winid_bot) != -1
+    call popup_settext(a:list_of_strings)
+  else
+    let g:winid_bot = popup_create(a:list_of_strings, {
+          \ 'line': &lines - 2 - argc(),
+          \ 'col': 1,
+          \ 'minwidth': &columns,
+          \ 'maxheight': 10,
+          \ 'minheight': argc() + 1,
+          \ 'time': 3000,
+          \ 'tabpage': -1,
+          \ 'zindex': 300,
+          \ 'drag': 1,
+          \ 'close': 'click',
+          \ 'padding': [0,1,0,1],
+          \ 'title': "",
+          \ })
+    call s:PickColor(g:winid_bot)
+  endif
 endfunction
 
 function! lib#popup#OpenFloatingWin(text_list)

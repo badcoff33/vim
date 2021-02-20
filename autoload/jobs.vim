@@ -1,5 +1,4 @@
 
-let g:job_bufnr = get(g:, 'job_bufnr', bufadd('JOB'))
 let g:jobs_active = get(g:, 'jobs_active', 0)
 
 function! jobs#Active()
@@ -8,9 +7,6 @@ endfunction
 
 function! jobs#ToFrontBuffer()
   call lib#windows#PopupBuffer(g:job_bufnr)
-  if (bufnr('%') == g:job_bufnr)
-    setlocal nomodifiable
-  endif
 endfunction
 
 function! jobs#HideBuffer()
@@ -22,14 +18,7 @@ endfunction
 
 function! AsyncCloseHandler(channel)
   let g:job_active = 0
-  let save_win = winnr()
-  let win = bufwinid(g:job_bufnr)
-  if win > 0
-    call win_gotoid(win)
-    setlocal nomodifiable
-    call win_gotoid(save_win)
-  endif
-  call lib#popup#Tiny([
+  call lib#popup#TopLeft([
         \ "Stop process " .. ch_getjob(a:channel),
         \ printf("Process toke %.3f seconds", reltimefloat(reltime(g:job_start_time)))])
 endfunction
@@ -39,7 +28,7 @@ endfunction
 
 function! s:Head(cmdstr)
   normal ggVGx
-  call append(0, '# cmd:' .. a:cmdstr)
+  call append(0, '# ' .. a:cmdstr)
   call append(1, '-------------------------------------------------------------------------------')
 endfunction
 
@@ -48,7 +37,7 @@ function! jobs#UseAsQuickfix()
 endfunction
 
 function! jobs#Start(cmd) abort
-  let g:job_bufnr = bufnr('JOB', 1)
+  let g:job_bufnr = bufnr('<job-output>', v:true)
   execute "buffer" g:job_bufnr
   setlocal buftype=nofile nonumber norelativenumber modifiable
   nnoremap <buffer> <CR>  :cbuffer<CR>
@@ -72,8 +61,7 @@ function! jobs#Start(cmd) abort
     let g:job_active = 1
     let g:job_start_time = reltime()
     call lib#popup#Bottom([
-          \ "Start process " .. id .. ": " .. a:cmd,
-          \ "Output buffer is JOB("..g:job_bufnr..")"])
+          \ "Start process " .. id])
   else
     let g:job_active = 0
     call lib#popup#Bottom([
