@@ -21,10 +21,10 @@ The History of hjkl
 Back in the days of 1976 there was this thing_.
 Some things never change!
 
-.. _Vim wiki   :http://vim.wikia.com/wiki/Vim_Tips_Wiki
-.. _Vim Galore :https://github.com/mhinz/vim-galore
-.. _reedit     :https://www.reddit.com/r/vim/
-.. _thing      :https://en.m.wikipedia.org/wiki/ADM-3A
+.. _Vim wiki   : http://vim.wikia.com/wiki/Vim_Tips_Wiki
+.. _Vim Galore : https://github.com/mhinz/vim-galore
+.. _reedit     : https://www.reddit.com/r/vim/
+.. _thing      : https://en.m.wikipedia.org/wiki/ADM-3A
 
  vim:ft=rst
 
