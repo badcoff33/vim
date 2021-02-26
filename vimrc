@@ -18,7 +18,6 @@ set belloff=all
 set novisualbell
 set noerrorbells
 set noswapfile
-set hlsearch
 set laststatus=2
 set ruler
 set showcmd
@@ -81,15 +80,13 @@ if (has("termguicolors"))
 endif
 
 " Search: Some configuration for the search behavior.
+set ignorecase nosmartcase
 set incsearch
+set hlsearch
 if has('nvim')
   set inccommand=nosplit
 endif
 set magic
-
-" Optional config: if 'smartcase' is active a case sensitive search with
-" /\C<text> can be used on demand.
-set noignorecase nosmartcase
 
 let s = split(&runtimepath, ',')
 for d in s
@@ -116,9 +113,10 @@ if !has('nvim')
   set completeopt=menu
 else
   set showfulltag
-  set completeopt=menu
+  set completeopt=menu,noselect
 endif
-set pumheight=10
+
+set pumheight=7
 if has('nvim')
   set pumblend=10
 endif
@@ -127,10 +125,10 @@ endif
 if has ('nvim')
   set wildmenu
   set wildoptions=pum,tagfile
-  set wildmode=full " works best with 'completeopt'=menu
+  set wildmode=full 
 else
   set wildoptions=tagfile
-  set nowildmenu wildmode=full
+  set nowildmenu wildmode=list:full
   "set wildmenu
 endif
 set wildignorecase
@@ -164,7 +162,9 @@ let mapleader = " "
 let maplocalleader = "s"
 
 " Switch modes
-inoremap <C-Enter> <Esc>
+inoremap <C-Space> <Esc>
+nnoremap <C-Space> :
+vnoremap <C-Space> :
 vnoremap <F13> :
 nnoremap <F13> :
 vnoremap <F12> :
@@ -179,20 +179,28 @@ vnoremap <C-a> <C-a>gv
 vnoremap > >gv
 vnoremap < <gv
 
-" Enclose current visual selection
-vnoremap <Leader>" c"<C-r>-"<Esc>
-vnoremap <Leader>' c'<C-r>-'<Esc>
-vnoremap <Leader>` c`<C-r>-`<Esc>
-vnoremap <Leader>( c(<C-r>-)<Esc>
-vnoremap <Leader>[ c[<C-r>-]<Esc>
-vnoremap <Leader>{ c{<C-r>-}<Esc>
+" "Enclose" `current` (visual) {selection}
+vnoremap "<Space> c"<C-r>-"<Esc>
+vnoremap '<Space> c'<C-r>-'<Esc>
+vnoremap `<Space> c`<C-r>-`<Esc>
+vnoremap (<Space> c(<C-r>-)<Esc>
+vnoremap [<Space> c[<C-r>-]<Esc>
+vnoremap {<Space> c{<C-r>-}<Esc>
 
 autocmd TerminalOpen * :nnoremap <buffer> <CR> :cbuffer<CR>:bwipe<CR>
-
-inoremap <expr> <C-Space> pumvisible() ? "\<C-]>" : "\<C-x>\<C-]>"
-inoremap <C-S-Space> <C-p>
+"
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent> <expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ "\<C-x>\<C-]>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <C-tab> <C-v><tab>
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " Terminals
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -202,6 +210,7 @@ elseif has('terminal')
   tnoremap <S-Ins> <C-w>"*
 endif
 
+nnoremap <Leader>. :tjump /
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
 nnoremap <Leader>x :terminal ++close explorer <C-r>=expand("%:p:h")<CR><CR>
 nnoremap <Leader>b :buffer<Space>
@@ -223,8 +232,8 @@ nnoremap <f4> :cnext<CR>
 nnoremap <S-f4> :cprevious<CR>
 nnoremap <C-f4> :cfirst<CR>
 
-nnoremap <A-.> :tjump /<C-r><C-w>
-nnoremap <A-,> :cnext<CR>
+nnoremap <A-.> :cnext<CR>
+nnoremap <A-,> :cprev<CR>
 nnoremap <A-S-,> :cprev<CR>
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
@@ -241,7 +250,8 @@ elseif executable("grep")
 endif
 nnoremap <Leader>g :silent grep <C-r><C-w>
 
-command! -nargs=1 -complete=file WriteOptions :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>', 'a')
+command! -nargs=1 -complete=dir WriteOptionsToDir :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>'..'/.vimrc', 'a')
+command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
 
 nnoremap <Leader>r :%s/\C\<<C-r><C-w>\>//g<Left><Left>
 vnoremap <Leader>r :s/\C\<\>//g<Left><Left><Left><Left><Left>
@@ -259,6 +269,7 @@ nnoremap <Leader><C-w>l <C-w>l<C-w>c<C-w>p
 nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
 nnoremap <Leader>oi :set invignorecase ignorecase?<CR>
+nnoremap <Leader>om :set invsmartcase smartcase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(input("set greprg:", &grepprg), ' ')<CR><CR>
 
