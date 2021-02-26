@@ -152,7 +152,7 @@ call lib#color#Hi('IncSearch', s:black, s:blue_6, 'none', '')
 call lib#color#Hi('Search', s:blue_0, s:blue_8, 'NONE', '')
 call lib#color#Hi('MatchParen', s:green_1, s:green_7, '', '')
 call lib#color#Hi('QuickFixLine', s:red_0, s:red_8, 'bold', '')
-call lib#color#Hi('CursorLine', '', s:green_9, '', '')
+call lib#color#Hi('CursorLine', 'skip', s:green_9, '', '')
 call lib#color#Hi('CursorLineNr', s:green_1, s:green_7, 'bold,italic', '')
 call lib#color#Hi('LineNr', s:gray_6, '', 'italic', '')
 

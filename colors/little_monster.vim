@@ -19,18 +19,19 @@ elseif exists('&winhighlight')
   augroup END
 endif
 
-let s:workbench  = "#171C28"
+let s:workbench  = "#122027"
 let s:background = "#1D2433"
-let s:pencil     = "#A2AAB2"
+let s:ui_black   = "#A2AAB2"
 let s:ui_grey    = "#6679A4"
 let s:ui_dimmed  = "#50618A"
 let s:ui_dark    = "#30416A"
+let s:ui_darker  = "#222C3C"
 let s:accent     = "#FFCC66"
 let s:red        = "#EF6B73"
 let s:green      = "#BAE67E"
 let s:yellow     = "#FFD580"
 let s:orange     = "#FFAE57"
-let s:blue       = "#5CAFE6"
+let s:blue       = "#7C9FD6"
 let s:purple     = "#C3A6FF"
 let s:foreground = "#D7DCE2"
 let s:light_grey = "#8695B7"
@@ -39,8 +40,8 @@ let s:dark_grey  = "#1D2433"
 
 " Editor
 call lib#color#Hi("ColorColumn", "", s:light_grey, "", "")
-call lib#color#Hi("Cursor", s:background, s:purple, "NONE", "")
-call lib#color#Hi("CursorLine", "", s:grey, "NONE", "")
+call lib#color#Hi("Cursor", s:background, s:red, "NONE", "")
+call lib#color#Hi("CursorLine", "skip", s:ui_darker, "", "")
 call lib#color#Hi("Error", s:red, "bg", "", "")
 call lib#color#Hi("iCursor", s:light_grey, s:grey, "", "")
 call lib#color#Hi("LineNr", s:light_grey, "bg", "", "")
@@ -55,13 +56,13 @@ call lib#color#Hi("SpellBad", s:red, "bg", "undercurl", "")
 call lib#color#Hi("SpellCap", s:yellow, "bg", "undercurl", "")
 call lib#color#Hi("SpellLocal", s:red, "bg", "undercurl", "")
 call lib#color#Hi("SpellRare", s:red, "bg", "undercurl", "")
-call lib#color#Hi("Visual", s:foreground, s:blue, "", "")
+call lib#color#Hi("Visual", s:dark_grey, s:blue, "", "")
 call lib#color#Hi("VisualNOS", s:foreground, s:blue, "", "")
 call lib#color#Hi("Whitespace", s:grey, "", "", "")
 hi! link PMenuSel IncSearch
 
 " Frost specific
-call lib#color#Hi('BlendDown', s:pencil, s:workbench, '', '')
+call lib#color#Hi('BlendDown', s:light_grey, s:workbench, '', '')
 
 " Neovim Support
 call lib#color#Hi("healthError", s:red, s:light_grey, "", "")
@@ -95,7 +96,7 @@ hi! link WildMenu IncSearch
 
 " Search
 call lib#color#Hi("IncSearch", s:background, s:green, "bold", "")
-call lib#color#Hi("Search", s:foreground, s:ui_dark, "NONE", "")
+call lib#color#Hi("Search", s:yellow, s:ui_darker, "underline", s:blue)
 
  " QuickFix
 call lib#color#Hi("qfSeparator", "fg", "bg", "", "")
@@ -145,10 +146,10 @@ call lib#color#Hi("Typedef", s:blue, "", "", "")
 hi! link Macro Define
 hi! link PreCondit PreProc
 
-call lib#color#Hi("DiffAdd", s:green, '', "", "")
-call lib#color#Hi("DiffChange", s:yellow, '', "bold", "")
-call lib#color#Hi("DiffDelete", s:red, '', "", "")
-call lib#color#Hi("DiffText", s:blue, '', "", "")
+call lib#color#Hi("DiffAdd", s:green, s:ui_darker, "", "")
+call lib#color#Hi("DiffChange", s:yellow, s:ui_darker, "bold", "")
+call lib#color#Hi("DiffDelete", s:red, s:ui_darker, "", "")
+call lib#color#Hi("DiffText", s:blue, s:ui_darker, "", "")
 
 call lib#color#Hi("cIncluded", s:blue, "", "", "")
 hi! link cOperator Operator
