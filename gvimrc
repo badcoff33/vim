@@ -17,20 +17,31 @@ augroup END
 
 if has('gui')
   set guioptions=!ca
-  set encoding=latin1
   set renderoptions=
   set mousemodel=popup
+  set nomousefocus
   nnoremenu 1.300 PopUp.-SEP3- <NOP>
   nnoremenu 1.310 PopUp.GUI\ Font  :set guifont=*<CR>
+  nnoremap <leader>3 :set guifont=Courier\ New:h12 linespace=1<CR>
+  nnoremap <leader>2 :set guifont=Courier\ New:h11 linespace=1<CR>
+  nnoremap <leader>1 :set guifont=Courier\ New:h10  linespace=1<CR>
+  call feedkeys(mapleader.'2') " default font
+  colorscheme breeze
+  set guicursor+=a:blinkon0
 elseif has("nvim")
-  " Hello Neovim!
   set mousemodel=popup
   if exists('g:GuiLoaded')
-    if g:GuiLoaded == 1
-      GuiLinespace 3
-      GuiTabline 0
-      GuiPopupmenu 0
-    endif
+    GuiLinespace 3
+    GuiTabline 0
+    GuiPopupmenu 0
+    nnoremap <leader>3 :GuiFont! Consolas:h13<CR>
+    nnoremap <leader>2 :GuiFont! Consolas:h11<CR>
+    nnoremap <leader>1 :GuiFont! Consolas:h10<CR>
+    GuiLinespace 6
+    call feedkeys(mapleader.'1') " default font
+    colorscheme breeze
+    set mouse=a
   endif
 endif
+
 " vim:ft=vim
