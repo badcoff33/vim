@@ -1,5 +1,6 @@
 
 let g:term_active = get(g:, 'term_active', 0)
+let g:term_auto_quickfix = get(g:, 'term_auto_quickfix', 1)
 
 function! term#JobActive()
   return exists('g:term_job_active') && g:term_job_active==1 ? 1 : 0
@@ -21,6 +22,9 @@ function! AsyncCloseHandler(channel)
   call lib#popup#TopLeft([
         \ "Stop process " .. ch_getjob(a:channel),
         \ printf("Process toke %.3f seconds", reltimefloat(reltime(g:term_job_start_time)))])
+  if g:term_auto_quickfix
+    execute 'cbuffer' g:term_job_bufnr
+  endif
 endfunction
 
 function! AsyncOutHandler(channel, msg)
@@ -28,8 +32,8 @@ endfunction
 
 function! s:Head(cmdstr)
   normal ggVGx
-  call append(0, '# ' .. a:cmdstr)
-  call append(1, '-------------------------------------------------------------------------------')
+  call append(0, '# <' .. strftime("%Y-%m-%d %X") .. '> ' .. a:cmdstr)
+  call append(1, '===============================================================================')
 endfunction
 
 function! term#UseAsQuickfix()
@@ -60,7 +64,7 @@ function! term#Start(cmd) abort
   if job_info(job)['status'] == 'run'
     let g:term_job_active = 1
     let g:term_job_start_time = reltime()
-    call lib#popup#Bottom([
+    call lib#popup#TopLeft([
           \ "Start process " .. id])
   else
     let g:term_job_active = 0
