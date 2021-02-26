@@ -9,7 +9,7 @@ endfunction
 
 function! lib#popup#TopLeft(list_of_strings)
   if exists('g:winid_tiny') && match(popup_list(), g:winid_tiny) != -1
-    call popup_settext(a:list_of_strings)
+    call popup_settext(g:winid_tiny, a:list_of_strings)
   else
     let g:winid_tiny = popup_create(a:list_of_strings, {
           \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
@@ -31,7 +31,7 @@ endfunction
 
 function! lib#popup#TopRight(list_of_strings)
   if exists('g:winid_tiny') && match(popup_list(), g:winid_tiny) != -1
-    call popup_settext(a:list_of_strings)
+    call popup_settext(g:winid_tiny, a:list_of_strings)
   else
     let g:winid_tiny = popup_create(a:list_of_strings, {
           \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
@@ -55,7 +55,7 @@ endfunction
 " corner.
 function! lib#popup#Head(list_of_strings)
   if exists('g:winid_head') && match(popup_list(), g:winid_head) != -1
-    call popup_settext(a:list_of_strings)
+    call popup_settext(g:winid_head,a:list_of_strings)
   else
     let g:winid_head = popup_create(a:list_of_strings, {
           \ 'line': 1,
@@ -80,7 +80,7 @@ endfunction
 " corner.
 function! lib#popup#Bottom(list_of_strings)
   if exists('g:winid_bot') && match(popup_list(), g:winid_bot) != -1
-    call popup_settext(a:list_of_strings)
+    call popup_settext(g:winid_bot, a:list_of_strings)
   else
     let g:winid_bot = popup_create(a:list_of_strings, {
           \ 'line': &lines - 2 - argc(),
