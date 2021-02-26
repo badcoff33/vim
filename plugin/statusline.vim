@@ -1,14 +1,25 @@
 " Vim plugin files
 
-set statusline=%{GetJobActive()}%{GetDiverge()}%t%m%r%y%w\ %{DispatchScopeParser()}%=%l,%c%V\ %P
+"set statusline=%{GetJobActive()}\ %{GetDiverge()}%t%m%r%y%w%=/%{GetSearchMode()}\ %{DispatchScopeParser()}\ %l,%c%V\ %P
+set statusline=%3l/%L,%c\ %{GetSearchMode()}\ %{GetJobActive()}%=\ %{DispatchScopeParser()}\ %{GetDiverge()}%t%m%r%y%w
 
 " Description: give a simple indicator about the job status to make it more
 " obvious.
-function GetJobActive()
+function! GetJobActive()
   if term#JobActive()
-    return '& '
+    return '$'
   else
     return''
+  endif
+endfunction
+
+function! GetSearchMode()
+  if &ignorecase == 1 && &smartcase == 1
+    return 's'
+  elseif &ignorecase == 0
+    return 'c'
+  else
+    return 'i'
   endif
 endfunction
 
