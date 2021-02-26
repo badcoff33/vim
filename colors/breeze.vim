@@ -10,21 +10,6 @@ hi clear
 set background=light
 let g:colors_name = "breeze"
 
-function! s:Hi(group, guifg, guibg, attr, guisp)
-  if a:guifg != ''
-    exec 'hi ' . a:group . ' guifg=' . a:guifg
-  endif
-  if a:guibg != ''
-    exec 'hi ' . a:group . ' guibg=' . a:guibg
-  endif
-  if a:attr != ''
-    exec 'hi ' . a:group . ' gui=' . a:attr
-  endif
-  if a:guisp != ''
-    exec 'hi ' . a:group . ' guisp=' . a:guisp
-  endif
-endfunction
-
 let s:black = "#1b1f23"
 let s:white = "#ffffff"
 
@@ -152,24 +137,24 @@ elseif exists('&winhighlight')
 endif
 
 " Color scheme specific
-call s:Hi('BlendDown', s:white, s:gray_8, '', '')
+call lib#color#Hi('BlendDown', s:white, s:gray_8, '', '')
 
 " Basics
-call s:Hi('Normal', s:gray_2, s:white, 'NONE', '')
-call s:Hi('Bold',   s:white, '', 'bold', '')
-call s:Hi('Italic', s:white, '', 'italic', '')
-call s:Hi('NonText', s:gray_5, s:gray_8, '', '')
-call s:Hi('Visual', s:blue_0, s:blue_7, '', '')
-call s:Hi('StatusLine', s:blue_8, s:gray_2, 'bold', '')
-call s:Hi('StatusLineNC', s:gray_3, s:gray_6, 'bold', '')
-call s:Hi('VertSplit', s:gray_6, 'bg', 'NONE', '')
-call s:Hi('IncSearch', s:black, s:blue_6, 'none', '')
-call s:Hi('Search', s:blue_0, s:blue_8, 'NONE', '')
-call s:Hi('MatchParen', s:green_1, s:green_7, '', '')
-call s:Hi('QuickFixLine', '', s:yellow_8, 'bold', '')
-call s:Hi('CursorLine', '', s:green_9, '', '')
-call s:Hi('CursorLineNr', s:green_1, s:green_7, 'bold,italic', '')
-call s:Hi('LineNr', s:gray_6, '', 'italic', '')
+call lib#color#Hi('Normal', s:gray_2, s:white, 'NONE', '')
+call lib#color#Hi('Bold',   s:white, '', 'bold', '')
+call lib#color#Hi('Italic', s:white, '', 'italic', '')
+call lib#color#Hi('NonText', s:gray_5, s:gray_8, '', '')
+call lib#color#Hi('Visual', s:blue_0, s:blue_7, '', '')
+call lib#color#Hi('StatusLine', s:blue_8, s:gray_2, 'bold', '')
+call lib#color#Hi('StatusLineNC', s:gray_3, s:gray_6, 'bold', '')
+call lib#color#Hi('VertSplit', s:gray_6, 'bg', 'NONE', '')
+call lib#color#Hi('IncSearch', s:black, s:blue_6, 'none', '')
+call lib#color#Hi('Search', s:blue_0, s:blue_8, 'NONE', '')
+call lib#color#Hi('MatchParen', s:green_1, s:green_7, '', '')
+call lib#color#Hi('QuickFixLine', s:red_0, s:red_8, 'bold', '')
+call lib#color#Hi('CursorLine', '', s:green_9, '', '')
+call lib#color#Hi('CursorLineNr', s:green_1, s:green_7, 'bold,italic', '')
+call lib#color#Hi('LineNr', s:gray_6, '', 'italic', '')
 
 highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr
@@ -187,54 +172,54 @@ highlight! link TabLineSel StatusLine
 highlight! link WildMenu PmenuSel
 
 " Breeze specific
-call s:Hi('BlendDown', s:gray_0, s:gray_8, '', '')
+call lib#color#Hi('BlendDown', s:gray_0, s:gray_8, '', '')
 
 " Code
-call s:Hi('Statement', s:purple_4, '', 'none', '')
-call s:Hi('Conditional', s:purple_5, '', 'none', '')
-call s:Hi('Type', s:pink_2, '', 'none', '')
-call s:Hi('Structure', s:green_1, '', '', '')
-call s:Hi('StorageClass', s:purple_3, '', '', '')
-call s:Hi('PreProc', s:blue_4, '', 'bold', '')
-call s:Hi('PreCondit', s:blue_5, '', 'bold', '')
-call s:Hi('Comment', s:green_3, '', '', '')
-call s:Hi('Function', s:green_1, '', '', '')
-call s:Hi('Identifier', s:green_4, '', '', '')
-call s:Hi('Special', s:green_1, '', '', '')
-call s:Hi('Constant', s:blue_4, '', '', '')
-call s:Hi('Number', s:blue_2, '', '', '')
-call s:Hi('Title', s:gray_2, '', '', '')
-call s:Hi('Todo', s:gray_2, s:gray_7, '', '')
-call s:Hi('Error', s:red_1, s:red_8, '', '')
-call s:Hi('Directory', s:gray_2, '', '', '')
-call s:Hi('ErrorMsg', s:red_0, s:red_7, '', '')
-call s:Hi('WarningMsg', s:green_0, s:green_7, '', '')
-call s:Hi('ModeMsg', s:yellow_0, s:yellow_7, '', '')
-call s:Hi('Question', s:green_1, 'bg', '', '')
-call s:Hi('qfFileName', s:blue_2, '', '', '')
-call s:Hi('qfSeparator', s:gray_1, '', '', '')
-call s:Hi('qfLineNr', s:red_6, '', '', '')
+call lib#color#Hi('Statement', s:pink_3, '', 'bold', '')
+call lib#color#Hi('Conditional', s:pink_4, '', 'none', '')
+call lib#color#Hi('Type', s:pink_2, '', 'none', '')
+call lib#color#Hi('Structure', s:green_1, '', '', '')
+call lib#color#Hi('StorageClass', s:purple_3, '', '', '')
+call lib#color#Hi('PreProc', s:blue_5, '', 'bold', '')
+call lib#color#Hi('PreCondit', s:blue_6, '', 'bold', '')
+call lib#color#Hi('Comment', s:green_3, '', '', '')
+call lib#color#Hi('Function', s:green_1, '', '', '')
+call lib#color#Hi('Identifier', s:green_4, '', '', '')
+call lib#color#Hi('Special', s:green_1, '', '', '')
+call lib#color#Hi('Constant', s:blue_4, '', '', '')
+call lib#color#Hi('Number', s:blue_2, '', '', '')
+call lib#color#Hi('Title', s:gray_2, '', '', '')
+call lib#color#Hi('Todo', s:gray_2, s:gray_7, '', '')
+call lib#color#Hi('Error', s:red_1, s:red_8, '', '')
+call lib#color#Hi('Directory', s:gray_2, '', '', '')
+call lib#color#Hi('ErrorMsg', s:red_0, s:red_7, '', '')
+call lib#color#Hi('WarningMsg', s:green_0, s:green_7, '', '')
+call lib#color#Hi('ModeMsg', s:yellow_0, s:yellow_7, '', '')
+call lib#color#Hi('Question', s:green_1, 'bg', '', '')
+call lib#color#Hi('qfFileName', s:blue_2, '', '', '')
+call lib#color#Hi('qfSeparator', s:gray_1, '', '', '')
+call lib#color#Hi('qfLineNr', s:red_6, '', '', '')
 
 " Filetype VIM
-call s:Hi('vimCommentTitle', s:blue_6, '', 'bold', '')
+call lib#color#Hi('vimCommentTitle', s:blue_6, '', 'bold', '')
 
 " Filetype C
-call s:Hi('cCppOut', s:gray_3, '', '', '')
-call s:Hi('cCppOutIf2', s:gray_3, '', '', '')
-call s:Hi('cParen', s:gray_3, '', '', '')
-call s:Hi('cBlock', s:gray_3, '', '', '')
+call lib#color#Hi('cCppOut', s:gray_3, '', '', '')
+call lib#color#Hi('cCppOutIf2', s:gray_3, '', '', '')
+call lib#color#Hi('cParen', s:gray_3, '', '', '')
+call lib#color#Hi('cBlock', s:gray_3, '', '', '')
 
 " filetype HTML
-call s:Hi('htmlH1', s:green_2, '', 'bold', '')
-call s:Hi('htmlH2', s:green_2, '', 'bold', '')
-call s:Hi('htmlH3', s:green_2, '', 'bold,italic', '')
+call lib#color#Hi('htmlH1', s:green_2, '', 'bold', '')
+call lib#color#Hi('htmlH2', s:green_2, '', 'bold', '')
+call lib#color#Hi('htmlH3', s:green_2, '', 'bold,italic', '')
 
 " markdown
-call s:Hi('markdownCode', s:gray_2, s:gray_7, '', '')
-call s:Hi('markdownCodeBlock', s:gray_2, '', '', '')
+call lib#color#Hi('markdownCode', s:gray_2, s:gray_7, '', '')
+call lib#color#Hi('markdownCodeBlock', s:gray_2, '', '', '')
 
 " Diffs
-call s:Hi('DiffChange', s:blue_3, s:blue_8, '', '')
-call s:Hi('DiffText', s:blue_3, s:blue_7, '', '')
-call s:Hi('DiffDelete', s:red_6, s:red_8, '', '')
-call s:Hi('DiffAdd', s:green_3, s:green_8, '', '')
+call lib#color#Hi('DiffChange', s:blue_3, s:blue_8, '', '')
+call lib#color#Hi('DiffText', s:blue_3, s:blue_7, '', '')
+call lib#color#Hi('DiffDelete', s:red_6, s:red_8, '', '')
+call lib#color#Hi('DiffAdd', s:green_3, s:green_8, '', '')
