@@ -62,7 +62,12 @@ Lets say it clear: Vim is made for american keyboard layout. All othter
 layouts suck. At least the German one. To make the "[". "], "{", "}" and the
 search keys more accesable in normal mode, I use this in vimrc. >
 
-        set langmap=ü/,Ü?,ö[,ä],Ö{,Ä} 
+	execute "set langmap=\<Char-252>/"
+	execute "set langmap+=\<Char-220>?"
+	execute "set langmap+=\<Char-246>["
+	execute "set langmap+=\<Char-228>]"
+	execute "set langmap+=\<Char-214>{"
+	execute "set langmap+=\<Char-196>}"
 <
 Or change to the american keyboard layout in the OS.  Especially when you
 spend a lot of time in Vim.  Here is a short list of the most important shifted keys:
