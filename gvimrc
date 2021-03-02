@@ -24,7 +24,7 @@ if has('gui')
   nnoremenu 1.310 PopUp.GUI\ Font  :set guifont=*<CR>
   nnoremap <leader>3 :set guifont=Courier\ New:h12 linespace=1<CR>
   nnoremap <leader>2 :set guifont=Courier\ New:h11 linespace=1<CR>
-  nnoremap <leader>1 :set guifont=Courier\ New:h10  linespace=1<CR>
+  nnoremap <leader>1 :set guifont=Courier\ New:h10 linespace=1<CR>
   call feedkeys(mapleader.'2') " default font
   colorscheme breeze
   set guicursor+=a:blinkon0

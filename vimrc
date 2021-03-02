@@ -5,9 +5,10 @@
 filetype plugin on
 filetype indent on
 
-" Even on Windows, this works best
-behave xterm
-set clipboard=
+set clipboard=autoselect
+set selection=inclusive
+set keymodel=
+set selectmode=
 
 set nowrap
 set tabstop=2
@@ -19,6 +20,7 @@ set novisualbell
 set noerrorbells
 set noswapfile
 set laststatus=2
+set report=0
 set ruler
 set showcmd
 set showmatch matchtime=1
@@ -80,7 +82,7 @@ if (has("termguicolors"))
 endif
 
 " Search: Some configuration for the search behavior.
-set ignorecase nosmartcase
+set noignorecase nosmartcase
 set incsearch
 set hlsearch
 if has('nvim')
@@ -213,7 +215,7 @@ endif
 nnoremap <Leader>. :tjump /
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
 nnoremap <Leader>x :terminal ++close explorer <C-r>=expand("%:p:h")<CR><CR>
-nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader>b :ls<CR>:buffer<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
@@ -253,8 +255,8 @@ nnoremap <Leader>g :silent grep <C-r><C-w>
 command! -nargs=1 -complete=dir WriteOptionsToDir :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>'..'/.vimrc', 'a')
 command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
 
-nnoremap <Leader>r :%s/\C\<<C-r><C-w>\>//g<Left><Left>
-vnoremap <Leader>r :s/\C\<\>//g<Left><Left><Left><Left><Left>
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
+vnoremap <Leader>r :s/\<\>//gI<Left><Left><Left><Left><Left><Left>
 
 nnoremap <S-down>  <C-w>j
 nnoremap <S-up>    <C-w>k
