@@ -84,14 +84,33 @@ Quick access to a simple text file to capture your ideas. >
 ------------------------------------------------------------------------------
 6. Tips                                                              *vmw-tips*
 
+Useful 'g' Keystrokes ~
+Some usefule 'g' commands:
+
+'g<' command can be used to see the last page of previous command output.  Use
+this quit often when changing my plugins.
+
+'gn' Select the match of your last search:
+1. Move to the last searched match.
+2. Switch to VISUAL mode (if you weren’t in VISUAL mode already).
+3. Select the match.
+4. You can continue to hit n (or gn ) to select the area between the current
+   match and the next match.
+
+'gi' Move to the last insertion you did and switch to INSERT mode.
+Pretty useful if you stopped your editing to look at some other file.
+
+'gf' Edit the file located at the filepath under your cursor.
+       	You can use CTRL+W CTRL+F to open the file in a new window.
+	It can open the URL under your cursor if you have the plugin netrw .
+
 Clean up buffers ~
 Want to wipe out all buffers in current session containing `snap` in its name?
-Just type `:bw *snap<TAB><C-a><CR>`. The `<TAB>` is required for take a quick 
+Just type ':bw *snap<TAB><C-a><CR>'. The `<TAB>` is required for take a quick 
 look which buffers will be wiped-out. Another solution might be this: >
 
 	:bufdo if expand("%") =~ '.*snap.*' | bw | endif
 <
-
 Use templates ~
 Want to start new files with a template. Read more here `:help template`.
 
@@ -122,7 +141,6 @@ For example, replace 'foo' to 'hey' if a line contains 'hi'.  This line does
 the trick: `:g/hi/ s/foo/hey/g`
 
 GREP ~
-
 Vimgrep can run on any OS. But performance is somehow week. Speed up on
 recursive operation can be achieved by setting a proper value for option
 'wildoptions' to ignore a set of sub-directories.
@@ -146,10 +164,6 @@ Ripgrep works very well on Windows. To setup Vim for rg use this >
 Show unsaved buffers ~
 Simply enter `:ls +` to get a filtered view of unsaved buffers. The unfiltered
 output of the `:ls` command indicates those buffers with the plus sign.
-
-View last messages ~
-The `"g<" command can be used to see the last page of previous command output.
-Use this quit often when changing my plugins.
 
 How to remove ^M ~
 In command mode you can use this substitute command `:%s/<C-v><C-m>//`.  If
