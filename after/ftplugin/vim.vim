@@ -13,7 +13,17 @@ nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 " source current visual region -- use register @v
 vnoremap <special> <buffer> <LocalLeader>s "vyQexecute @v<CR>visual<CR>
 
-if empty(matchstr(expand("%:p"), "color"))
+
+if !exists('*LogError')
+" Description: Support testing with Vim's assert functions
+function! LogError(t)
+  if a:t
+    echomsg "LogAssert:" v:errors[-1]
+  endif
+endfunction
+endif
+
+if empty(matchstr(expand("%:p:h"), "color"))
   " source Vim file
   nnoremap <special> <buffer> <LocalLeader>s :w<bar>source%<CR>
 else

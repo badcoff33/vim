@@ -1,13 +1,13 @@
 " Vim plugin files
 
-"set statusline=%{GetJobActive()}\ %{GetDiverge()}%t%m%r%y%w%=/%{GetSearchMode()}\ %{DispatchScopeParser()}\ %l,%c%V\ %P
-set statusline=%3l/%L,%c\ %{GetSearchMode()}\ %{GetJobActive()}%=\ %{DispatchScopeParser()}\ %{GetDiverge()}%t%m%r%y%w
+"set statusline=%{GetJobActive()}\ %{GetDiverge()}%t%m%r%y%w%=/%{GetSearchMode()}\ %{GetScope()}\ %l,%c%V\ %P
+set statusline=%{GetDiverge()}%t%m%r%y%w\ %l/%L,%c\ %{GetJobActive()}%{GetSearchMode()}\ %=%{GetScope()}
 
 " Description: give a simple indicator about the job status to make it more
 " obvious.
 function! GetJobActive()
   if term#JobActive()
-    return '$'
+    return '$ '
   else
     return''
   endif
@@ -27,7 +27,7 @@ endfunction
 " string can be used by 'statusline'. Recommended way to add new parser
 " functions is in a file, located in after/ftplugin/&ft/scope.vim. Most
 " important is that the function ScopeParser&ft exists.
-function! DispatchScopeParser()
+function! GetScope()
   let parser_str = 'ScopeParser' . toupper(&ft[0]) . &ft[1:]
   if exists('*' . parser_str)
     let Parser = function(parser_str)
@@ -43,7 +43,9 @@ augroup statusline
   au BufWinEnter * :call UpdateDiverge()
 augroup END
 
-let g:winlist = []
+" List of all opened buffers during the running Vim session. Each listed buffer
+" is tested by UpdateDiverge.
+let g:diverge_buflist = []
 
 " Description: Returns a distinguishable buffer name as a " string. If
 " two windows on a tabpage has the same base name, this function returns
@@ -63,10 +65,10 @@ function! UpdateDiverge()
     let b:diverge_string = ''
     return
   endif
-  call add(g:winlist, bufnr('%'))
-  let g:winlist = uniq(sort(g:winlist))
+  call add(g:diverge_buflist, bufnr('%'))
+  let g:diverge_buflist = uniq(sort(g:diverge_buflist))
   let div_string = ''
-  for b in g:winlist
+  for b in g:diverge_buflist
     if bufnr('%') != b && empty(div_string)
       let div_string = s:FindDivergePart(bufname('%'), bufname(b))
     endif
@@ -100,3 +102,21 @@ function s:FindDivergePart(bufname_a, bufname_b)
     return ''
   endif
 endfunction
+
+if exists('*LogError')
+call LogError(assert_match( "", s:FindDivergePart("aaa/bbb/ccc/111.txt", "aaa/bbb/ccc/111.txt")))
+call LogError(assert_match( "", s:FindDivergePart("aaa/bbb/ccc/111.txt", "aaa/bbb/ccc/111.txt")))
+
+call LogError(assert_match( "ccc", s:FindDivergePart("aaa/b2/ccc/111.txt", "aaa/b2/c3/111.txt")))
+call LogError(assert_match( "c3", s:FindDivergePart("aaa/b2/c3/111.txt", "aaa/b2/ccc/111.txt")))
+call LogError(assert_match( "bb", s:FindDivergePart("aaa/bb/c3/111.txt", "aaa/bbb/ccc/111.txt")))
+
+" varying path length
+call LogError(assert_match( "bb", s:FindDivergePart("aaa/bb/111.txt", "aaa/bb/ccc/111.txt")))
+call LogError(assert_match( "c3", s:FindDivergePart("aaa/bb/c3/111.txt", "aaa/bb/111.txt")))
+
+" case sensitive?
+call LogError(assert_match( "CCC", s:FindDivergePart("aaa/bbb/CCC/111.txt", "aaa/bbb/ccc/111.txt")))
+call LogError(assert_match( "ccc", s:FindDivergePart("aaa/bbb/ccc/111.txt", "aaa/bbb/CCC/111.txt")))
+endif
+
