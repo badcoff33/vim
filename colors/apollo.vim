@@ -1,6 +1,11 @@
 " A Vim color theme
-" Name:        Apollo
-" Maintainer:  Markus Prepens
+" Intro: Apollo tries to be a less-is-more color theme. It uses less colors to
+" gain better readability and colorful clutter. But the temptation was too
+" strong: I added some blueish and greenish colors to make thins not too
+" boring. Enjoy!
+" Name: Apollo
+" Maintainer: Markus Prepens
+"
 
 if exists('syntax_on')
    syntax reset
@@ -26,56 +31,42 @@ elseif exists('&winhighlight')
   augroup END
 endif
 
-function! s:Hi(group, guifg, guibg, attr, guisp)
-  if a:guifg != ''
-    exec 'hi ' . a:group . ' guifg=' . a:guifg
-  endif
-  if a:guibg != ''
-    exec 'hi ' . a:group . ' guibg=' . a:guibg
-  endif
-  if a:attr != ''
-    exec 'hi ' . a:group . ' gui=' . a:attr
-  endif
-  if a:guisp != ''
-    exec 'hi ' . a:group . ' guisp=' . a:guisp
-  endif
-endfunction
-
-let s:apolloWhite   = '#F8F8FF'
-let s:apolloBlack   = '#18181F'
-let s:apolloBg0     = '#2F2131'
-let s:apolloBg1     = '#312A3A'
-let s:apolloBg2     = '#343240'
-let s:apolloBg3     = '#484555'
-let s:apolloSilver1 = '#505860'
-let s:apolloSilver2 = '#9098A0'
-let s:apolloSilver3 = '#C0CBD0'
-let s:apolloGreen1  = '#20A040'
-let s:apolloGreen2  = '#47E058'
-let s:apolloWhite   = '#F8F8F8'
-let s:apolloBlue1   = '#6080A8'
-let s:apolloBlue2   = '#A0D0F0'
-let s:apolloRed1    = '#C85012'
-let s:apolloRed2    = '#F86020'
+let s:white   = '#FFFFFF'
+let s:black   = '#18181F'
+let s:bg1     = '#2F2131'
+let s:bg2     = '#312A3A'
+let s:bg3     = '#343240'
+let s:bg4     = '#434050'
+let s:silver1 = '#505860'
+let s:silver2 = '#9098A0'
+let s:silver3 = '#C0CBD0'
+let s:silver4 = '#E8E8FE'
+let s:green1  = '#309840'
+let s:green2  = '#20D055'
+let s:green3  = '#47F058'
+let s:blue1   = '#6080A8'
+let s:blue2   = '#90B0E0'
+let s:red1    = '#C85012'
+let s:red2    = '#F86020'
 
 " Basics
-call s:Hi('Normal', s:apolloWhite, s:apolloBg1, 'NONE', '')
-call s:Hi('Bold',   s:apolloWhite, '', 'bold', '')
-call s:Hi('Italic', s:apolloWhite, '', 'italic', '')
-call s:Hi('NonText', s:apolloBlue1, s:apolloBlack, '', '')
-call s:Hi('Visual', s:apolloWhite, s:apolloSilver2, '', '')
-call s:Hi('StatusLine', s:apolloBlue2, s:apolloBg3, 'bold', '')
-call s:Hi('StatusLineNC', s:apolloSilver1, s:apolloBg2, 'bold',  '')
-call s:Hi('VertSplit', s:apolloBg3, 'bg', 'NONE', '')
-call s:Hi('IncSearch', s:apolloBlack, s:apolloBlue2, 'bold', '')
-call s:Hi('Search', s:apolloWhite, s:apolloBlue1, '', '')
-call s:Hi('MatchParen', s:apolloGreen2, '', 'underline', '')
-call s:Hi('QuickFixLine', '', s:apolloBlack, 'bold', '')
-call s:Hi('CursorLine', '', s:apolloBg2, '', '')
-call s:Hi('LineNr', s:apolloBlue1, '', '', '')
+call lib#color#Hi('Normal', s:white, s:bg2, 'NONE', '')
+call lib#color#Hi('Bold',   s:silver4, '', 'bold', '')
+call lib#color#Hi('Italic', s:silver4, '', 'italic', '')
+call lib#color#Hi('NonText', s:blue1, s:black, '', '')
+call lib#color#Hi('Visual', s:black, s:silver3, '', '')
+call lib#color#Hi('StatusLine', s:black, s:silver3, '', '')
+call lib#color#Hi('StatusLineNC', s:silver2, s:bg3, '',  '')
+call lib#color#Hi('VertSplit', s:bg4, 'bg', 'NONE', '')
+call lib#color#Hi('IncSearch', s:black, s:silver3, 'bold', '')
+call lib#color#Hi('Search', s:blue2, s:bg4, '', '')
+call lib#color#Hi('MatchParen', s:green3, '', 'underline', '')
+call lib#color#Hi('QuickFixLine', '', s:black, 'bold', '')
+call lib#color#Hi('CursorLine', 'skip', s:bg3, '', '')
+call lib#color#Hi('CursorLineNr', '', s:bg4, 'bold', '')
+call lib#color#Hi('LineNr', s:blue1, '', '', '')
 
 highlight! link CursorColumn CursorLine
-highlight! link CursorLineNr CursorLine
 highlight! link FoldColumn LineNr
 highlight! link Folded StatusLineNC
 highlight! link StatusLineTerm StatusLine
@@ -91,56 +82,56 @@ highlight! link TabLineSel Statusline
 highlight! link WildMenu PmenuSel
 
 " Apollo specific
-call s:Hi('BlendDown', s:apolloWhite, s:apolloBg3, '', '')
+call lib#color#Hi('BlendDown', s:white, s:bg3, '', '')
 
 " Code
-call s:Hi('Statement', s:apolloGreen2, '', 'bold', '')
-call s:Hi('Conditional', s:apolloGreen2, '', 'bold', '')
-call s:Hi('Type', s:apolloSilver3, '', '', '')
-call s:Hi('Structure', s:apolloGreen1, '', '', '')
-call s:Hi('StorageClass', s:apolloBlue1, '', '', '')
-call s:Hi('PreProc', s:apolloWhite, '', '', '')
-call s:Hi('PreCondit', s:apolloWhite, '', 'bold', '')
-call s:Hi('Comment', s:apolloSilver2, '', '', '')
-call s:Hi('Function', s:apolloGreen1, '', '', '')
-call s:Hi('Identifier', s:apolloGreen1, '', '', '')
-call s:Hi('Special', s:apolloGreen1, '', '', '')
-call s:Hi('Constant', s:apolloBlue2, '', '', '')
-call s:Hi('Number', s:apolloBlue2, '', '', '')
-call s:Hi('Title', s:apolloSilver2, '', '', '')
-call s:Hi('Todo', s:apolloSilver2, s:apolloBg2, '', '')
-call s:Hi('Error', s:apolloRed1, s:apolloBg2, '', '')
-call s:Hi('Directory', s:apolloSilver2, '', '', '')
-call s:Hi('ErrorMsg', s:apolloRed1, 'bg', '', '')
-call s:Hi('WarningMsg', s:apolloBlue1, 'bg', '', '')
-call s:Hi('ModeMsg', s:apolloSilver2, 'bg', '', '')
-call s:Hi('Question', s:apolloGreen1, 'bg', '', '')
-call s:Hi('qfFileName', s:apolloBlue2, '', '', '')
-call s:Hi('qfSeparator', 'fg', '', '', '')
+call lib#color#Hi('Statement', s:silver4, '', '', '')
+call lib#color#Hi('Conditional', s:silver3, '', 'bold', '')
+call lib#color#Hi('Type', s:green2, 'skip', '', '')
+call lib#color#Hi('Structure', s:green2, '', '', '')
+call lib#color#Hi('StorageClass', s:blue1, '', '', '')
+call lib#color#Hi('PreProc', s:blue2, 'skip', 'bold', '')
+call lib#color#Hi('PreCondit', s:blue1, '', 'bold', '')
+call lib#color#Hi('Comment', s:silver2, 'skip', '', '')
+call lib#color#Hi('Function', s:silver3, '', '', '')
+call lib#color#Hi('Identifier', s:green2, 'skip', '', '')
+call lib#color#Hi('Special', s:green2, 'skip', '', '')
+call lib#color#Hi('Constant', s:silver3, 'skip', '', '')
+call lib#color#Hi('Number', s:blue2, '', '', '')
+call lib#color#Hi('Title', s:green3, '', '', '')
+call lib#color#Hi('Todo', s:silver2, s:bg3, '', '')
+call lib#color#Hi('Error', s:red1, s:bg3, '', '')
+call lib#color#Hi('Directory', s:silver2, '', '', '')
+call lib#color#Hi('ErrorMsg', s:red1, 'bg', '', '')
+call lib#color#Hi('WarningMsg', s:blue1, 'bg', '', '')
+call lib#color#Hi('ModeMsg', s:silver2, 'bg', '', '')
+call lib#color#Hi('Question', s:green2, 'bg', '', '')
+call lib#color#Hi('qfFileName', s:blue2, '', '', '')
+call lib#color#Hi('qfSeparator', 'fg', '', '', '')
 highlight! link qfLineNr    LineNr
 
 " Filetype VIM
-call s:Hi('vimCommentTitle', s:apolloWhite, '', 'bold', '')
+call lib#color#Hi('vimCommentTitle', s:white, '', 'bold', '')
 
 " Filetype C
-call s:Hi('cCppOut', s:apolloSilver3, '', '', '')
-call s:Hi('cCppOutIf2', s:apolloSilver3, '', '', '')
-call s:Hi('cParen', s:apolloSilver3, '', '', '')
-call s:Hi('cBlock', s:apolloSilver3, '', '', '')
+call lib#color#Hi('cCppOut', s:silver3, '', '', '')
+call lib#color#Hi('cCppOutIf2', s:silver3, '', '', '')
+call lib#color#Hi('cParen', s:silver3, '', '', '')
+call lib#color#Hi('cBlock', s:silver3, '', '', '')
 
 " filetype HTML
-call s:Hi('htmlH1', s:apolloGreen2, '', 'bold', '')
-call s:Hi('htmlH2', s:apolloGreen2, '', 'bold', '')
-call s:Hi('htmlH3', s:apolloGreen2, '', 'bold,italic', '')
+call lib#color#Hi('htmlH1', s:green3, '', 'bold', '')
+call lib#color#Hi('htmlH2', s:green3, '', 'bold', '')
+call lib#color#Hi('htmlH3', s:green3, '', 'bold,italic', '')
 
 " markdown
-call s:Hi('markdownCode', s:apolloSilver2, s:apolloBg2, '', '')
-call s:Hi('markdownCodeBlock', s:apolloSilver2, '', '', '')
-call s:Hi('markdownUrl', s:apolloSilver2, s:apolloBg2, 'underline', '')
-call s:Hi('markdownLinkText', s:apolloBlue2, '', 'none', '')
+call lib#color#Hi('markdownCode', s:silver2, s:bg3, '', '')
+call lib#color#Hi('markdownCodeBlock', s:silver2, '', '', '')
+call lib#color#Hi('markdownUrl', s:silver2, s:bg3, 'underline', '')
+call lib#color#Hi('markdownLinkText', s:blue2, '', 'none', '')
 
 " Diffs
-call s:Hi('DiffChange', '', s:apolloBg2, '', '')
-call s:Hi('DiffText', s:apolloBlue2, s:apolloBg3, 'bold', '')
-call s:Hi('DiffDelete', s:apolloRed1, s:apolloBg2, 'italic', '')
-call s:Hi('DiffAdd', s:apolloGreen1, s:apolloBg2, 'bold', '')
+call lib#color#Hi('DiffChange', s:white, s:bg4, '', '')
+call lib#color#Hi('DiffText', s:blue2, s:bg4, 'bold', '')
+call lib#color#Hi('DiffDelete', s:red1, s:bg4, 'italic', '')
+call lib#color#Hi('DiffAdd', s:green2, s:bg3, 'bold', '')

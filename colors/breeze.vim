@@ -109,17 +109,6 @@ let s:pink_2 = "#b93a86"
 let s:pink_1 = "#99306f"
 let s:pink_0 = "#6d224f"
 
-" -------- Defaults --------
-let s:red        = s:red_4
-let s:purple     = s:purple_4
-let s:blue       = s:blue_4
-let s:green      = s:green_4
-let s:yellow     = s:yellow_4
-let s:orange     = s:orange_4
-let s:gray_dark  = s:gray_4
-let s:gray_light = s:gray_9
-let s:gray       = s:gray_5
-
 if exists('&wincolor')
   augroup Wincolor
     au!
@@ -144,7 +133,7 @@ call lib#color#Hi('Normal', s:gray_2, s:white, 'NONE', '')
 call lib#color#Hi('Bold',   s:white, '', 'bold', '')
 call lib#color#Hi('Italic', s:white, '', 'italic', '')
 call lib#color#Hi('NonText', s:gray_5, s:gray_8, '', '')
-call lib#color#Hi('Visual', s:blue_0, s:blue_7, '', '')
+call lib#color#Hi('Visual', s:blue_0, s:gray_7, '', '')
 call lib#color#Hi('StatusLine', s:blue_8, s:gray_2, 'bold', '')
 call lib#color#Hi('StatusLineNC', s:gray_3, s:gray_6, 'bold', '')
 call lib#color#Hi('VertSplit', s:gray_6, 'bg', 'NONE', '')
@@ -154,7 +143,7 @@ call lib#color#Hi('MatchParen', s:green_1, s:green_7, '', '')
 call lib#color#Hi('QuickFixLine', s:red_0, s:red_8, 'bold', '')
 call lib#color#Hi('CursorLine', 'skip', s:green_9, '', '')
 call lib#color#Hi('CursorLineNr', s:green_1, s:green_7, 'bold,italic', '')
-call lib#color#Hi('LineNr', s:gray_6, '', 'italic', '')
+call lib#color#Hi('LineNr', s:blue_5, '', 'italic', '')
 
 highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr
@@ -188,7 +177,7 @@ call lib#color#Hi('Identifier', s:green_4, '', '', '')
 call lib#color#Hi('Special', s:green_1, '', '', '')
 call lib#color#Hi('Constant', s:blue_4, '', '', '')
 call lib#color#Hi('Number', s:blue_2, '', '', '')
-call lib#color#Hi('Title', s:gray_2, '', '', '')
+call lib#color#Hi('Title', s:gray_2, '', 'bold', '')
 call lib#color#Hi('Todo', s:gray_2, s:gray_7, '', '')
 call lib#color#Hi('Error', s:red_1, s:red_8, '', '')
 call lib#color#Hi('Directory', s:gray_2, '', '', '')
