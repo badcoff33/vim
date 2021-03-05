@@ -24,21 +24,19 @@ function! diff#CompareDirs() abort
   let g:compare_dir_default_b = get(g:, 'compare_dir_default_b', getcwd())
   let b = input("compare base dir B: ", g:compare_dir_default_b, "dir")
   let g:compare_dir_default_b = b
-  " remove trailing backslash (added by dir completion) and expand '~'
+  " remove trailing backslash (added by dir completion). Diff doesn't like
+  " them. And expand '~'
   let a = fnamemodify(a, ":p:h")
   let b = fnamemodify(b, ":p:h")
   " create a fresh out buffer
+
+  call term#Start('diff -rq '
+        \ .. g:compare_dirs_options
+        \ .. ' "' .. a .. '"'
+        \ .. ' "' .. b .. '"',
+        \ 0) " do not forward to quickfix
   tabnew
-  setlocal buftype=nofile nonumber norelativenumber cursorline wrap
-  call append(0, '# Diff run with -rq options')
-  call append(1, '# Press <CR> on the set of files that differ.')
-  call append(2, '# ---------------------------------------------------------------------------')
-  " run the recursive diff
-  silent execute 'read !diff -rq ' g:compare_dirs_options '"'.a.'"' '"'.b.'"'
-  normal gg}
-  " save buffer for further changes
-  setlocal nomodified nomodifiable wrap cursorline
-  " one key magic
+  call term#ToFrontBuffer()
   nnoremap <buffer> <silent> <CR> :call <SID>DiffParseLine(getline('.'))<CR>
 endfunction
 
