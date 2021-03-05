@@ -9,9 +9,9 @@ setlocal shiftwidth=4
 setlocal nocindent
 
 " Make heading underlined
-nnoremap <buffer> <LocalLeader>h0 0v$beyo<Esc>PVr=
-nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr-
-nnoremap <buffer> <LocalLeader>h2 0v$beyo<Esc>PVr~
+nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr=
+nnoremap <buffer> <LocalLeader>h2 0v$beyo<Esc>PVr-
+nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr~
 
 " be up to date
 nnoremap <buffer> <LocalLeader>d i<C-r>=strftime("%Y-%m-%d")<CR><Esc>

@@ -137,10 +137,18 @@ Here is a Vim script to show custom completion of a new command: >
 <
 
 How to replace a word in lines im interested in? ~
+
 For example, replace 'foo' to 'hey' if a line contains 'hi'.  This line does
 the trick: `:g/hi/ s/foo/hey/g`
 
+How to delete lines with a certain pattern?
+
+A 'diff -ru dirA dirB' may has a lot of annoying lines in the output. To look
+at the different files: `g/^Only/normal dd` . Or the other way round use the
+`g/^Files/normal dd` to look at the missing files.
+
 GREP ~
+
 Vimgrep can run on any OS. But performance is somehow week. Speed up on
 recursive operation can be achieved by setting a proper value for option
 'wildoptions' to ignore a set of sub-directories.

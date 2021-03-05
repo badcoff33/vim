@@ -24,10 +24,15 @@ if exists(":Start")
   nnoremap <buffer> <silent> <LocalLeader>p :Start pandoc -f gfm -t html -o %TEMP%\preview.html <C-r>% && %TEMP%\preview.html<CR>
 endif
 
-nmap <buffer> <C-f>  :call search('^#\{1,\}\s',"W")<CR>
-nmap <buffer> <C-b>  :call search('^#\{1,\}\s',"bW")<CR>
+" Make heading underlined
+nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr=
+nnoremap <buffer> <LocalLeader>h2 0v$beyo<Esc>PVr-
+nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr~
 
-nmap <buffer> <LocalLeader>d i<C-r>=strftime("%Y-%m-%d")<CR><Esc>
+nnoremap <buffer> <C-f> :call search('^#\{1,\}\s',"W")<CR>
+nnoremap <buffer> <C-b> :call search('^#\{1,\}\s',"bW")<CR>
+
+nnoremap <buffer> <LocalLeader>d i<C-r>=strftime("%Y-%m-%d")<CR><Esc>
 
 " iabbrev did not work when 'cpoptions' has '>'
 if match(&cpoptions, '>') >= 0

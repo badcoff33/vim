@@ -110,7 +110,7 @@ hi! link WildMenu IncSearch
 
 " Search
 call s:Hi("IncSearch", s:frostBlack, s:frostGreen, "bold", "")
-call s:Hi("Search", s:frostBlack, s:frostYellow, "NONE", "")
+call s:Hi("Search", s:frostYellow, s:frost2, "bold", "")
 
  " QuickFix
 hi! link qfFileName Directory
