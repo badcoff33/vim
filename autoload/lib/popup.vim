@@ -16,7 +16,7 @@ function! lib#popup#TopLeft(list_of_strings)
           \ 'col': 1,
           \ 'minwidth': &columns/3,
           \ 'maxheight': 10,
-          \ 'minheight': argc() + 2,
+          \ 'minheight': argc(),
           \ 'time': 2000,
           \ 'tabpage': -1,
           \ 'zindex': 300,
@@ -38,7 +38,7 @@ function! lib#popup#TopRight(list_of_strings)
           \ 'col': (2 * &columns)/3 - 1,
           \ 'minwidth': &columns/3,
           \ 'maxheight': 10,
-          \ 'minheight': argc() + 2,
+          \ 'minheight': argc(),
           \ 'time': 2000,
           \ 'tabpage': -1,
           \ 'zindex': 300,
@@ -83,11 +83,11 @@ function! lib#popup#Bottom(list_of_strings)
     call popup_settext(g:winid_bot, a:list_of_strings)
   else
     let g:winid_bot = popup_create(a:list_of_strings, {
-          \ 'line': &lines - 2 - argc(),
+          \ 'line': &lines - argc() - 1,
           \ 'col': 1,
           \ 'minwidth': &columns,
           \ 'maxheight': 10,
-          \ 'minheight': argc() + 1,
+          \ 'minheight': argc(),
           \ 'time': 3000,
           \ 'tabpage': -1,
           \ 'zindex': 300,
