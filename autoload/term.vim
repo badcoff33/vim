@@ -1,6 +1,5 @@
 
 let g:term_active = get(g:, 'term_active', 0)
-let g:term_auto_quickfix = get(g:, 'term_auto_quickfix', 1)
 
 function! term#JobActive()
   return exists('g:term_job_active') && g:term_job_active==1 ? 1 : 0
@@ -22,8 +21,8 @@ function! AsyncCloseHandler(channel)
   call lib#popup#TopLeft([
         \ "Stop process " .. ch_getjob(a:channel),
         \ printf("Process toke %.3f seconds", reltimefloat(reltime(g:term_job_start_time)))])
-  if g:term_auto_quickfix
-    execute 'cbuffer' g:term_job_bufnr
+  if s:term_auto_quickfix == 1
+    execute '3,$cbuffer' g:term_job_bufnr
   endif
 endfunction
 
@@ -31,26 +30,37 @@ function! AsyncOutHandler(channel, msg)
 endfunction
 
 function! s:Head(cmdstr)
-  normal ggVGx
-  call append(0, '# <' .. strftime("%Y-%m-%d %X") .. '> ' .. a:cmdstr)
-  call append(1, '===============================================================================')
+  normal ggVG"_x
+  let head_str  = '# started ' .. strftime("%Y-%m-%d %X") .. '$ '
+  let separator = '###############################################################################'
+  call append(0, [head_str .. a:cmdstr, separator])
+  call prop_clear(1, 2)
+  call prop_add(1, 1, {'length': len(head_str), 'type': 'term_head'})
+  call prop_add(1, len(head_str), {'length': len(a:cmdstr), 'type': 'term_cmd'})
+  call prop_add(2, 1, {'length': len(separator), 'type': 'term_head'})
 endfunction
 
 function! term#UseAsQuickfix()
-  execute "cbuffer" g:term_job_bufnr
+  execute "3,$cbuffer" g:term_job_bufnr
 endfunction
 
-function! term#Start(cmd) abort
+if empty(prop_type_get('term_head'))
+  call prop_type_add('term_head', {'highlight': 'Title'})
+  call prop_type_add('term_cmd', {'highlight': 'Statement'})
+endif
+
+function! term#Start(cmd, ...) abort
   let g:term_job_bufnr = bufnr('<job-output>', v:true)
-  execute "buffer" g:term_job_bufnr
-  setlocal buftype=nofile nonumber norelativenumber modifiable
-  nnoremap <buffer> <CR>  :cbuffer<CR>
-  nnoremap <buffer> <Esc> <C-w>c
-  call s:Head(a:cmd)
-  buffer #
   if &autowrite || &autowriteall
     wall
   endif
+  let s:term_auto_quickfix = (a:0 == 1) ? a:1 : 0
+  execute "buffer" g:term_job_bufnr
+  setlocal buftype=nofile nonumber norelativenumber modifiable
+  nnoremap <buffer> <CR>  :3,$cbuffer<CR>
+  nnoremap <buffer> <Esc> <C-w>c
+  call s:Head(a:cmd)
+  buffer #
   let s:async_make_options = {
         \ 'close_cb': 'AsyncCloseHandler',
         \ 'err_cb': 'AsyncErrorHandler',
@@ -64,12 +74,10 @@ function! term#Start(cmd) abort
   if job_info(job)['status'] == 'run'
     let g:term_job_active = 1
     let g:term_job_start_time = reltime()
-    call lib#popup#TopLeft([
-          \ "Start process " .. id])
+    call lib#popup#Bottom(["Start process " .. id])
   else
     let g:term_job_active = 0
-    call lib#popup#Bottom([
-          \ "Failed process " .. id .. ": " .. a:cmd])
+    call lib#popup#Bottom(["Failed process " .. id .. ": " .. a:cmd])
     echoerr 'job failed to start'
   endif
 endfunction
