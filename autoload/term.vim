@@ -1,3 +1,4 @@
+" Vim plugin term -- run job asynchron
 
 let g:term_active = get(g:, 'term_active', 0)
 
@@ -31,12 +32,12 @@ endfunction
 
 function! s:Head(cmdstr)
   normal ggVG"_x
-  let head_str  = '# started ' .. strftime("%Y-%m-%d %X") .. '$ '
+  let head_str  = '# started ' .. strftime("%Y-%m-%d %X") .. '& '
   let separator = '###############################################################################'
   call append(0, [head_str .. a:cmdstr, separator])
   call prop_clear(1, 2)
   call prop_add(1, 1, {'length': len(head_str), 'type': 'term_head'})
-  call prop_add(1, len(head_str), {'length': len(a:cmdstr), 'type': 'term_cmd'})
+  call prop_add(1, len(head_str), {'length': len(a:cmdstr) + 1, 'type': 'term_cmd'})
   call prop_add(2, 1, {'length': len(separator), 'type': 'term_head'})
 endfunction
 
@@ -45,14 +46,20 @@ function! term#UseAsQuickfix()
 endfunction
 
 if empty(prop_type_get('term_head'))
-  call prop_type_add('term_head', {'highlight': 'Title'})
-  call prop_type_add('term_cmd', {'highlight': 'Statement'})
+  call prop_type_add('term_head', {'highlight': 'Comment'})
+  call prop_type_add('term_cmd', {'highlight': 'Title'})
 endif
 
 function! term#Start(cmd, ...) abort
   let g:term_job_bufnr = bufnr('<job-output>', v:true)
   if &autowrite || &autowriteall
-    wall
+    try
+      wall
+    catch /.*/
+      echo "Couldn't write all buffers"
+    finally
+      ls +
+    endtry
   endif
   let s:term_auto_quickfix = (a:0 == 1) ? a:1 : 0
   execute "buffer" g:term_job_bufnr
@@ -68,7 +75,8 @@ function! term#Start(cmd, ...) abort
         \ 'out_io': 'buffer',
         \ 'err_io': 'buffer',
         \ 'out_buf': g:term_job_bufnr,
-        \ 'err_buf': g:term_job_bufnr}
+        \ 'err_buf': g:term_job_bufnr
+        \ }
   let job = job_start('cmd /C '..a:cmd, s:async_make_options )
   let id = job_info(job)['process']
   if job_info(job)['status'] == 'run'
