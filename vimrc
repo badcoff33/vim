@@ -165,9 +165,6 @@ let mapleader = " "
 let maplocalleader = "s"
 
 " Switch modes
-inoremap <C-Space> <Esc>
-nnoremap <C-Space> :
-vnoremap <C-Space> :
 vnoremap <F13> :
 nnoremap <F13> :
 vnoremap <F12> :
@@ -193,10 +190,15 @@ vnoremap {<Space> c{<C-r>-}<Esc>
 autocmd TerminalOpen * :nnoremap <buffer> <CR> :cbuffer<CR>:bwipe<CR>
 "
 " Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent> <expr> <TAB>
+inoremap <silent> <expr> <C-Space>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ "\<C-x>\<C-]>"
+inoremap <C-S-Space> <C-p>
+inoremap <silent> <expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ "\<C-n>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 function! s:check_back_space() abort
@@ -257,7 +259,7 @@ command! -nargs=1 -complete=dir WriteOptionsToDir :call writefile(['set grepprg=
 command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
 
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
-vnoremap <Leader>r :s///gI<Left><Left><Left><Left
+vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 nnoremap <S-down>  <C-w>j
 nnoremap <S-up>    <C-w>k
