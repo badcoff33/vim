@@ -256,8 +256,8 @@ nnoremap <Leader>g :silent grep <C-r><C-w>
 command! -nargs=1 -complete=dir WriteOptionsToDir :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>'..'/.vimrc', 'a')
 command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
 
-nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
-vnoremap <Leader>r :s/\<\>//gI<Left><Left><Left><Left><Left><Left>
+nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
+vnoremap <Leader>r :s///gI<Left><Left><Left><Left
 
 nnoremap <S-down>  <C-w>j
 nnoremap <S-up>    <C-w>k
