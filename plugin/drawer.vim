@@ -7,29 +7,29 @@
 let g:drawer_buffer_list = get(g:, 'drawer_buffer_list', [])
 
 " Populate Interfaces:
-noremap <script> <Plug>DrawerOpenIt <SID>DrawerOpenIt()
-noremap <SID>DrawerOpenIt :call <SID>DrawerOpenIt(g:drawer_buffer_list)<CR>
+noremap <script> <Plug>DrawerShowIt <SID>DrawerShowIt()
+noremap <SID>DrawerShowIt :call <SID>DrawerShowIt(g:drawer_buffer_list)<CR>
 
 noremap <script> <Plug>DrawerDropBuffer DrawerDropBuffer()
 noremap <SID>DrawerDropBuffer :call DrawerDropBuffer(bufnr('%'))<CR>
 
-noremap <script> <Plug>DrawerPullBuffer <SID>DrawerPullBuffer()
-noremap <SID>DrawerPullBuffer :call <SID>DrawerPullBuffer(bufnr('%'))<CR>
+noremap <script> <Plug>DrawerRemoveBuffer <SID>DrawerRemoveBuffer()
+noremap <SID>DrawerRemoveBuffer :call <SID>DrawerRemoveBuffer(bufnr('%'))<CR>
 
 noremap <script> <Plug>DrawerClear <SID>DrawerClear()
 noremap <SID>DrawerClear :let g:drawer_buffer_list= []<CR>
 
 " Defaults: Unique key mappings
-if !hasmapto('<Plug>DrawerOpenIt')
-  nmap <unique> <Leader>as <Plug>DrawerOpenIt
+if !hasmapto('<Plug>DrawerShowIt')
+  nmap <unique> <Leader>as <Plug>DrawerShowIt
 endif
 
 if !hasmapto('<Plug>DrawerDropBuffer')
-  nmap <unique> <Leader>a+ <Plug>DrawerDropBuffer
+  nmap <unique> <Leader>aa <Plug>DrawerDropBuffer
 endif
 
-if !hasmapto('<Plug>DrawerPullBuffer')
-  nmap <unique> <Leader>a- <Plug>DrawerPullBuffer
+if !hasmapto('<Plug>DrawerRemoveBuffer')
+  nmap <unique> <Leader>ar <Plug>DrawerRemoveBuffer
 endif
 
 if !hasmapto('<Plug>DrawerClear')
@@ -56,21 +56,21 @@ endfunction
 function! DrawerDropBuffer(b)
   let is_in_list = index(g:drawer_buffer_list, a:b) >= 0  ? 1 : 0
   if (is_in_list == 0)
-    let g:drawer_buffer_list=uniq(sort((add(g:drawer_buffer_list, a:b)))
-    call s:DrawerOpenIt(g:drawer_buffer_list)
+    let g:drawer_buffer_list=uniq(sort(add(g:drawer_buffer_list, a:b)))
+    call s:DrawerShowIt(g:drawer_buffer_list)
   endif
 endfunction
 
-function! s:DrawerPullBuffer(b)
+function! s:DrawerRemoveBuffer(b)
   if len(g:drawer_buffer_list) > 1
     call remove(g:drawer_buffer_list, index(g:drawer_buffer_list, a:b)))
   else
     let g:drawer_buffer_list = []
   endif
-  call s:DrawerOpenIt(g:drawer_buffer_list)
+  call s:DrawerShowIt(g:drawer_buffer_list)
 endfunction
 
-function! s:DrawerOpenIt(blist)
+function! s:DrawerShowIt(blist)
   let d = []
   for e in a:blist
     call add(d, fnamemodify(bufname(e), ':t') .. '  (' .. fnamemodify(bufname(e), ':p:h') .. ')')
