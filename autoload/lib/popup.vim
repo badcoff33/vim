@@ -7,14 +7,23 @@ function! s:PickColor(winid)
   endif
 endfunction
 
+function! s:max_len_in_list(list)
+  let max = 1
+  for e in a:list
+    let max = max < len(e) ? len(e) : max
+  endfor
+  return max
+endfunction
+
 function! lib#popup#TopLeft(list_of_strings)
   if exists('g:winid_tiny') && match(popup_list(), g:winid_tiny) != -1
     call popup_settext(g:winid_tiny, a:list_of_strings)
   else
+    let width = s:max_len_in_list(a:list_of_strings)
     let g:winid_tiny = popup_create(a:list_of_strings, {
           \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
           \ 'col': 1,
-          \ 'minwidth': &columns/3,
+          \ 'minwidth': width,
           \ 'maxheight': 10,
           \ 'minheight': argc(),
           \ 'time': 2000,
@@ -33,10 +42,11 @@ function! lib#popup#TopRight(list_of_strings)
   if exists('g:winid_tiny') && match(popup_list(), g:winid_tiny) != -1
     call popup_settext(g:winid_tiny, a:list_of_strings)
   else
+    let width = s:max_len_in_list(a:list_of_strings)
     let g:winid_tiny = popup_create(a:list_of_strings, {
           \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
-          \ 'col': (2 * &columns)/3 - 1,
-          \ 'minwidth': &columns/3,
+          \ 'col': &columns - width,
+          \ 'minwidth': width,
           \ 'maxheight': 10,
           \ 'minheight': argc(),
           \ 'time': 2000,
