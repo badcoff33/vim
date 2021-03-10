@@ -217,13 +217,11 @@ endif
 
 nnoremap <Leader>. :tjump /
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
-nnoremap <Leader>x :terminal ++close explorer <C-r>=expand("%:p:h")<CR><CR>
 nnoremap <Leader>b :ls<CR>:buffer<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
-nnoremap <Leader>X :set columns=999 lines=999<CR>
 nnoremap <Leader>tn :tabnew<CR>
 nnoremap <Leader>te :tabedit %<CR>
 nnoremap <Leader>to :tabonly<CR>
@@ -244,6 +242,7 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+nnoremap <C-w>X :<C-r>=(4*(&columns)/5)<CR>wincmd<bar><CR>:<C-r>=(4*(&lines)/5)<CR>wincmd_<CR>
 
 if executable("rg")
   " Using links? Ripgrep supports this by th option '--follow'

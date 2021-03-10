@@ -21,11 +21,13 @@ if has('gui')
   set mousemodel=popup
   set nomousefocus
   nnoremenu 1.300 PopUp.-SEP3- <NOP>
-  nnoremenu 1.310 PopUp.GUI\ Font  :set guifont=*<CR>
-  nnoremap <leader>3 :set guifont=Courier\ New:h12 linespace=1<CR>
-  nnoremap <leader>2 :set guifont=Courier\ New:h11 linespace=1<CR>
-  nnoremap <leader>1 :set guifont=Courier\ New:h10 linespace=1<CR>
-  call feedkeys(mapleader.'2') " default font
+  nnoremenu 1.310 PopUp.Explore :silent Lexplore <C-r>=expand('%:p:h')<CR><CR>
+  nnoremenu 1.320 PopUp.-SEP4- <NOP>
+  nnoremenu 1.321 PopUp.Set\ font  :set guifont=*<CR>
+  nnoremap <leader>3 :set guifont=Courier\ New:h12 linespace=2<CR>
+  nnoremap <leader>2 :set guifont=Courier\ New:h11 linespace=2<CR>
+  nnoremap <leader>1 :set guifont=Courier\ New:h10 linespace=2<CR>
+  call feedkeys(mapleader.'3') " default font
   colorscheme breeze
   set guicursor+=a:blinkon0
 elseif has("nvim")
