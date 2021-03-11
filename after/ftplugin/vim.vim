@@ -1,7 +1,7 @@
 " Vim ftplugin file
 
 if exists("b:did_ftplugin_after")
-  finish
+"  finish
 endif
 
 setlocal textwidth=0
@@ -10,9 +10,18 @@ setlocal nocindent
 
 nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 
-" source current visual region -- use register @v
-vnoremap <special> <buffer> <LocalLeader>s "vyQexecute @v<CR>visual<CR>
+" source current visual region
+vnoremap <buffer> <LocalLeader>s :<C-U>call VisExecute()<CR>
 
+function! VisExecute() abort
+  let save_selection = &selection
+  let save_reg_x = @x
+  silent normal '<V'>"ay
+  let @a = substitute(@a, '\r', '\n', 'g')
+  @a
+  let @x = save_reg_x
+  let &selection = save_selection
+endfunction
 
 if !exists('*LogError')
 " Description: Support testing with Vim's assert functions
