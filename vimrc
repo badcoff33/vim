@@ -82,7 +82,7 @@ if (has("termguicolors"))
 endif
 
 " Search: Some configuration for the search behavior.
-set noignorecase nosmartcase
+set noignorecase smartcase
 set incsearch
 set hlsearch
 if has('nvim')
@@ -227,22 +227,17 @@ nnoremap <Leader>te :tabedit %<CR>
 nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
+nnoremap <C-w>X :<C-r>=(4*(&columns)/5)<CR>wincmd<bar><CR>:<C-r>=(4*(&lines)/5)<CR>wincmd_<CR>
+
 nnoremap <C-l> :cnewer<CR>
 nnoremap <C-h> :colder<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
-nnoremap <f4> :cnext<CR>
-nnoremap <S-f4> :cprevious<CR>
-nnoremap <C-f4> :cfirst<CR>
 
-nnoremap <A-.> :cnext<CR>
-nnoremap <A-,> :cprev<CR>
-nnoremap <A-S-,> :cprev<CR>
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
-nnoremap <C-w>X :<C-r>=(4*(&columns)/5)<CR>wincmd<bar><CR>:<C-r>=(4*(&lines)/5)<CR>wincmd_<CR>
+nnoremap <A-Down> :cnext<CR>
+nnoremap <A-Up> :cprev<CR>
+nnoremap <A-Left> :bprevious<CR>
+nnoremap <A-Right> :bnext<CR>
 
 if executable("rg")
   " Using links? Ripgrep supports this by th option '--follow'
