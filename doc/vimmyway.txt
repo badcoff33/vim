@@ -69,10 +69,17 @@ search keys more accesable in normal mode, I use this in vimrc. >
 	execute "set langmap+=\<Char-214>{"
 	execute "set langmap+=\<Char-196>}"
 <
-Or change to the american keyboard layout in the OS.  Especially when you
-spend a lot of time in Vim.  Here is a short list of the most important shifted keys:
+Or change to the american keyboard layout in the OS.  Especially when you spend
+a lot of time in Vim.  Here is a short list of the most important keys with
+enabled US keyboard: >
+	
+Nonshifted key: ^ 1 2 3 4 5 6 7 8 9 0 ß ´
+US keyboard:    ` 1 2 3 4 5 6 7 8 9 0 - =
+shifted US:     ~ ! @ # $ % ^ & * ( ) _ +
+<
 
-	1=!`  `2=@`  `3=#`  `4=$`  `5=%`  `6=^`  7=&`  `8=*`  `9=(` `0=)
+Just in case to enter german umlaut without switching back from US to german
+keyboard layout, press 'C-k' followed by 'a' ':' for an 'ä'.
 
 ------------------------------------------------------------------------------
 5. Capture notes                                                    *vmw-notes*
