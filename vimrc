@@ -202,8 +202,10 @@ inoremap <silent> <expr> <TAB>
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.')
+  let g:char_backward = getline('.')[col - 1]
+  let g:char_forward = getline('.')[col]
+  return !(col - 1) || ((g:char_backward !~ '\s') && (g:char_forward =~ '\s'))
 endfunction
 
 " Terminals
@@ -227,7 +229,8 @@ nnoremap <Leader>te :tabedit %<CR>
 nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
-nnoremap <C-w>X :<C-r>=(4*(&columns)/5)<CR>wincmd<bar><CR>:<C-r>=(4*(&lines)/5)<CR>wincmd_<CR>
+nnoremap <C-w>X :<C-r>=(4*(&columns)/5)<CR>wincmd<bar><CR>
+nnoremap <C-w>0 <C-^>:bw#<Esc>
 
 nnoremap <C-l> :cnewer<CR>
 nnoremap <C-h> :colder<CR>
