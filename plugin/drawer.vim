@@ -1,7 +1,7 @@
-" Vim plugin file -- put buffer in the drawer
+" Vim plugin file -- put buffer in the drawer and pull it out
 "
 " Description: A simple frontend to add/remove buffers to/from the drawer-list.
-" The list of buffers can be used in the terminal as tools parameters.
+" The list of buffers can be used in the terminal as cmd line parameters.
 
 " Defaults: variables
 let g:drawer_buffer_list = get(g:, 'drawer_buffer_list', [])
@@ -38,20 +38,14 @@ endif
 
 augroup drawer
   autocmd!
-  autocmd TerminalOpen * :tmap <buffer> <C-a> <C-w>"=DrawerInsertBuffers(g:drawer_buffer_list)<CR>
   autocmd TextChanged  * :call DrawerDropBuffer(bufnr('%'))
   autocmd TextChangedI * :call DrawerDropBuffer(bufnr('%'))
 augroup END
 
-cnoremap <A-Space> <C-r>=DrawerInsertBuffers(g:drawer_buffer_list)<CR>
-
-function! DrawerInsertBuffers(bufnrs)
-  let bufnames = []
-  for e in a:bufnrs
-    call add(bufnames, bufname(e))
-  endfor
-  return join(bufnames)
-endfunction
+nnoremap <C-CR> :call DrawerSelectBuffer()<CR>
+inoremap <C-CR> <C-r>=g:drawer_selected_buffername<CR>
+cnoremap <C-CR> <C-r>=g:drawer_selected_buffername<CR>
+tnoremap <C-CR> <C-w>"=g:drawer_selected_buffername<CR>
 
 function! DrawerDropBuffer(b)
   let is_in_list = index(g:drawer_buffer_list, a:b) >= 0  ? 1 : 0
@@ -70,37 +64,50 @@ function! s:DrawerRemoveBuffer(b)
   call s:DrawerShowIt(g:drawer_buffer_list)
 endfunction
 
-function! s:DrawerShowIt(blist)
+function! s:DrawerGetReadableList(blist)
   let d = []
   for e in a:blist
     call add(d, fnamemodify(bufname(e), ':t') .. '  (' .. fnamemodify(bufname(e), ':p:h') .. ')')
   endfor
-  call lib#popup#TopRight(d)
+  return d
 endfunction
 
-if 0
-  call popup_menu(['Save', 'Cancel', 'Discard'], #{
-    \ filter: 'MyMenuFilter',
-    \ callback: 'MyMenuHandler',
-    \ })
+function! s:DrawerShowIt(blist)
+  call lib#popup#TopRight(s:DrawerGetReadableList(a:blist))
+endfunction
 
-  func MyMenuFilter(id, key)
-    " Handle shortcuts
-    if a:key == 'S'
-      call popup_close(a:id, 1)
-      return 1
-    elseif a:key == 'C'
-      call popup_close(a:id, 2)
-      return 1
-    elseif a:key == 'D'
-      call popup_close(a:id, 3)
-      return 1
-    endif
+function! DrawerSelectBuffer()
+  let bufnames = s:DrawerGetReadableList(g:drawer_buffer_list)
+  call popup_menu(bufnames, #{
+        \ filter: 'MyMenuFilter',
+        \ callback: 'MyMenuHandler',
+        \ padding: [0,2,0,2],
+        \ border: [],
+        \ })
+endfunction
 
-    func MyMenuHandler(a1)
-    endfunc
+func! MyMenuHandler(id, index)
+  if a:index > 0
+    let g:drawer_selected_buffername = bufname(g:drawer_buffer_list[a:index - 1])
+  else
+    let g:drawer_selected_buffername = ''
+  endif
+endfunc
 
-    " No shortcut, pass to generic filter
-    return popup_filter_menu(a:id, a:key)
-  endfunc
-endif
+func! MyMenuFilter(id, key)
+  call popup_list()
+  " Handle shortcuts
+  if a:key == 'S'
+    call popup_close(a:id)
+    return 1
+  elseif a:key == 'C'
+    call popup_close(a:id)
+    return 1
+  elseif a:key == 'D'
+    call popup_close(a:id)
+    return 1
+  endif
+
+  " No shortcut, pass to generic filter
+  return popup_filter_menu(a:id, a:key)
+endfunc
