@@ -82,7 +82,7 @@ if (has("termguicolors"))
 endif
 
 " Search: Some configuration for the search behavior.
-set noignorecase smartcase
+set ignorecase smartcase
 set incsearch
 set hlsearch
 if has('nvim')
@@ -136,7 +136,7 @@ endif
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
-set tagcase=smart
+set tagcase=followscs
 
 " Tune the diff feature for my needs.
 set diffopt=internal,algorithm:minimal,context:3,vertical,iwhite,filler
@@ -188,24 +188,24 @@ vnoremap [<Space> c[<C-r>-]<Esc>
 vnoremap {<Space> c{<C-r>-}<Esc>
 
 autocmd TerminalOpen * :nnoremap <buffer> <CR> :cbuffer<CR>:bwipe<CR>
-"
+
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent> <expr> <C-Space>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ <SID>CompletionInhibit() ? "\<TAB>" :
       \ "\<C-x>\<C-]>"
 inoremap <C-S-Space> <C-p>
 inoremap <silent> <expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ <SID>CompletionInhibit() ? "\<TAB>" :
       \ "\<C-n>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-function! s:check_back_space() abort
-  let col = col('.')
-  let g:char_backward = getline('.')[col - 1]
-  let g:char_forward = getline('.')[col]
-  return !(col - 1) || ((g:char_backward !~ '\s') && (g:char_forward =~ '\s'))
+function! s:CompletionInhibit() abort
+  let col = col('.') - 1
+    let g:char_backward = getline('.')[col - 1]
+    let g:char_forward = getline('.')[col]
+    return (col == 0) || (g:char_backward =~? '\w') && (g:char_forward =~? '\w')
 endfunction
 
 " Terminals
@@ -229,7 +229,7 @@ nnoremap <Leader>te :tabedit %<CR>
 nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
-nnoremap <C-w>X :<C-r>=(4*(&columns)/5)<CR>wincmd<bar><CR>
+nnoremap <C-w><C-x> :<C-r>=(4*(&columns)/5)<CR>wincmd<bar><CR>:<C-r>=(4*(&lines)/5)<CR>wincmd_<CR>
 nnoremap <C-w>0 <C-^>:bw#<Esc>
 
 nnoremap <C-l> :cnewer<CR>
@@ -254,6 +254,7 @@ nnoremap <Leader>g :silent grep <C-r><C-w>
 
 command! -nargs=1 -complete=dir WriteOptionsToDir :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>'..'/.vimrc', 'a')
 command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
+command! -nargs=0 EditOptions :execute "edit" findfile(".vimrc", ";")
 
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
@@ -275,19 +276,36 @@ nnoremap <Leader>om :set invsmartcase smartcase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(input("set greprg:", &grepprg), ' ')<CR><CR>
 
+command! -nargs=0 IgnoreCaseSensetive :set   ignorecase nosmartcase
+command! -nargs=0 CaseSensetive       :set noignorecase nosmartcase
+command! -nargs=0 SmartCase           :set   ignorecase  smartcase
+
+command! -nargs=0 ReadOnly :setlocal nomodifiable readonly
+
 " command completion needs terminating backslash (sorry, Windows)
-cnoremap <C-CR> \
+cnoremap <C-Space> \
 cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 if has('nvim')
 cnoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
 cnoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
 endif
 
+function! Update(tid)
+  if exists(':Update')
+    if !exists('g:run_update_tid') || empty(timer_info(g:run_update_tid))
+      let g:run_update_tid = timer_start(1000, 'Update')
+    elseif a:tid == g:run_update_tid
+      Update
+    endif
+  endif
+endfunction
+
 augroup init
   autocmd!
   autocmd VimResized * :wincmd =
-  autocmd VimEnter   * :runtime site.vim
-  autocmd BufEnter   * :if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
+  autocmd VimEnter * :runtime site.vim
+  autocmd BufEnter * :if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
+  autocmd BufWritePost * :call Update(-1)
   if has('nvim')
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 350)
   endif
