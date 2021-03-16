@@ -37,10 +37,11 @@ let s:foreground = "#D7DCE2"
 let s:light_grey = "#8695B7"
 let s:grey       = "#2F3B54"
 let s:dark_grey  = "#1D2433"
+let s:white      = "#FFFFFF"
 
 " Editor
 call lib#color#Hi("ColorColumn", "", s:light_grey, "", "")
-call lib#color#Hi("Cursor", s:background, s:red, "NONE", "")
+call lib#color#Hi("Cursor", s:yellow, s:ui_dimmed, "NONE", "")
 call lib#color#Hi("CursorLine", "skip", s:ui_darker, "", "")
 call lib#color#Hi("Error", s:red, "bg", "", "")
 call lib#color#Hi("iCursor", s:light_grey, s:grey, "", "")
@@ -73,8 +74,8 @@ call lib#color#Hi("TermCursorNC", "", s:light_grey, "", "")
 " Gutter
 call lib#color#Hi("CursorColumn", "", s:light_grey, "", "")
 call lib#color#Hi("CursorLineNr", s:purple, s:ui_grey, "NONE", "")
-call lib#color#Hi("FoldColumn", s:grey, s:light_grey, "", "")
-call lib#color#Hi("Folded", s:grey, s:light_grey, "bold", "")
+call lib#color#Hi("FoldColumn", s:grey, s:background, "", "")
+call lib#color#Hi("Folded", s:red, s:background, "bold", "")
 call lib#color#Hi("SignColumn", s:light_grey, s:background, "", "")
 
 " Navigation
@@ -86,8 +87,8 @@ call lib#color#Hi("ErrorMsg", s:red, "bg", "", "")
 call lib#color#Hi("ModeMsg", s:green, "bg", "" , "")
 call lib#color#Hi("MoreMsg", s:yellow, "bg", "" , "")
 call lib#color#Hi("Question", s:accent, "bg", "", "")
-call lib#color#Hi("StatusLine", s:yellow, s:ui_grey, "bold", "")
-call lib#color#Hi("StatusLineNC", s:foreground, s:ui_dimmed, "NONE", "")
+call lib#color#Hi("StatusLine", s:yellow, s:ui_dimmed, "bold", "")
+call lib#color#Hi("StatusLineNC", s:yellow, s:ui_dark, "NONE", "")
 call lib#color#Hi("VertSplit", s:grey, "bg", "NONE", "")
 call lib#color#Hi("WarningMsg", s:accent, "bg", "", "")
 hi! link StatusLineTerm StatusLine

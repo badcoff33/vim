@@ -94,8 +94,8 @@ call s:hi("TermCursorNC", "", s:fg1, "", "")
 call s:hi("CursorColumn", "", s:fg1, "", "")
 call s:hi("CursorLineNr", s:line_num, "", "NONE", "")
 call s:hi("Folded", s:fg3, s:fg1, "bold", "")
-call s:hi("FoldColumn", s:fg3, s:fg0, "", "")
-call s:hi("SignColumn", s:fg1, s:fg0, "", "")
+call s:hi("FoldColumn", s:fg3, s:bg0, "", "")
+call s:hi("SignColumn", s:fg1, s:bg0, "", "")
 
 " --- Navigation ---
 call s:hi("Directory", s:blue, "", "underline", "")
