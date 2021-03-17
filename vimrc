@@ -290,22 +290,11 @@ cnoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
 cnoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
 endif
 
-function! Update(tid)
-  if exists(':Update')
-    if !exists('g:run_update_tid') || empty(timer_info(g:run_update_tid))
-      let g:run_update_tid = timer_start(1000, 'Update')
-    elseif a:tid == g:run_update_tid
-      Update
-    endif
-  endif
-endfunction
-
 augroup init
   autocmd!
   autocmd VimResized * :wincmd =
   autocmd VimEnter * :runtime site.vim
   autocmd BufEnter * :if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
-  autocmd BufWritePost * :call Update(-1)
   if has('nvim')
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 350)
   endif
