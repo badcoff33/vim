@@ -187,27 +187,6 @@ vnoremap (<Space> c(<C-r>-)<Esc>
 vnoremap [<Space> c[<C-r>-]<Esc>
 vnoremap {<Space> c{<C-r>-}<Esc>
 
-autocmd TerminalOpen * :nnoremap <buffer> <CR> :cbuffer<CR>:bwipe<CR>
-
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent> <expr> <C-Space>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>CompletionInhibit() ? "\<TAB>" :
-      \ "\<C-x>\<C-]>"
-inoremap <C-S-Space> <C-p>
-inoremap <silent> <expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>CompletionInhibit() ? "\<TAB>" :
-      \ "\<C-n>"
-inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-function! s:CompletionInhibit() abort
-  let col = col('.') - 1
-    let g:char_backward = getline('.')[col - 1]
-    let g:char_forward = getline('.')[col]
-    return (col == 0) || (g:char_backward =~? '\w') && (g:char_forward =~? '\w')
-endfunction
-
 " Terminals
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>

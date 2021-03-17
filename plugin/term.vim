@@ -1,8 +1,5 @@
 " Vim plugin file
 
-" Interfaces:
-nnoremap <leader>j :ShowJob<CR>
-
 command! -nargs=* -complete=file_in_path RunAuto :term ++rows=5 ++close ++shell <args>
 command! -nargs=* -complete=file_in_path Run     :call term#Start(<q-args>)
 command! -nargs=0 CloseTerm                      :call lib#windows#CloseTermWindows()
