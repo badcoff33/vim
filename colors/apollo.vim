@@ -53,15 +53,16 @@ let s:red2    = '#F86020'
 call lib#color#Hi('Normal', s:white, s:bg2, 'NONE', '')
 call lib#color#Hi('Bold',   s:silver4, '', 'bold', '')
 call lib#color#Hi('Italic', s:silver4, '', 'italic', '')
-call lib#color#Hi('NonText', s:blue1, s:black, '', '')
+call lib#color#Hi('NonText', s:blue1, s:bg3, '', '')
 call lib#color#Hi('Visual', s:black, s:silver3, '', '')
 call lib#color#Hi('StatusLine', s:white, s:bg4, 'bold', '')
 call lib#color#Hi('StatusLineNC', s:silver2, s:bg4, '',  '')
 call lib#color#Hi('VertSplit', s:bg4, 'bg', 'NONE', '')
 call lib#color#Hi('IncSearch', s:black, s:silver3, 'bold', '')
-call lib#color#Hi('Search', s:blue2, s:bg4, '', '')
+call lib#color#Hi('Search', s:white, s:green1, '', '')
 call lib#color#Hi('MatchParen', s:green3, '', 'underline', '')
 call lib#color#Hi('QuickFixLine', '', s:black, 'bold', '')
+call lib#color#Hi('Cursor', s:white, s:green1, '', '')
 call lib#color#Hi('CursorLine', 'skip', s:bg3, '', '')
 call lib#color#Hi('CursorLineNr', '', s:bg4, 'bold', '')
 call lib#color#Hi('LineNr', s:blue1, '', '', '')
@@ -78,7 +79,7 @@ highlight! link PmenuThumb IncSearch
 highlight! link SignColumn LineNr
 highlight! link TabLineFill Normal
 highlight! link TabLine StatusLineNC
-highlight! link TabLineSel Statusline
+highlight! link TabLineSel Search
 highlight! link WildMenu PmenuSel
 
 " Apollo specific
