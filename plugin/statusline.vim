@@ -6,8 +6,8 @@ set statusline=%{GetUniqueName()}%t%m%r%y%w\ %l/%L,%c\ %{GetJobActive()}%{GetSea
 " Description: give a simple indicator about the job status to make it more
 " obvious.
 function! GetJobActive()
-  if term#JobActive()
-    return '$ '
+  if async#JobActive()
+    return '& '
   else
     return''
   endif

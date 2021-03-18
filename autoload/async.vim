@@ -2,15 +2,15 @@
 
 let g:term_active = get(g:, 'term_active', 0)
 
-function! term#JobActive()
+function! async#JobActive()
   return exists('g:term_job_active') && g:term_job_active==1 ? 1 : 0
 endfunction
 
-function! term#ToFrontBuffer()
+function! async#JobBufferToFront()
   call lib#windows#PopupBuffer(g:term_job_bufnr)
 endfunction
 
-function! term#HideBuffer()
+function! async#HideJobBuffer()
   call lib#windows#HideBuffer(g:term_job_bufnr)
 endfunction
 
@@ -41,7 +41,7 @@ function! s:Head(cmdstr)
   call prop_add(2, 1, {'length': len(separator), 'type': 'term_head'})
 endfunction
 
-function! term#UseAsQuickfix()
+function! async#JobBufferAsQuickfix()
   execute "3,$cbuffer" g:term_job_bufnr
 endfunction
 
@@ -50,7 +50,7 @@ if empty(prop_type_get('term_head'))
   call prop_type_add('term_cmd', {'highlight': 'Title'})
 endif
 
-function! term#Start(cmd, ...) abort
+function! async#StartJob(cmd, ...) abort
   let g:term_job_bufnr = bufnr('<job-output>', v:true)
   if &autowrite || &autowriteall
     try
@@ -88,5 +88,24 @@ function! term#Start(cmd, ...) abort
     call lib#popup#Bottom(["Failed process " .. id .. ": " .. a:cmd])
     echoerr 'job failed to start'
   endif
+endfunction
+
+" Description: Popup to first not finished term buffer in buffer list.
+function! async#PopupTerm()
+  for b in term_list()
+    if term_getstatus(b) != 'normal'
+      call lib#windows#GotoBuffer(b)
+      return
+    endif
+  endfor
+  terminal
+endfunction
+
+function! async#CloseFinishedTerm()
+  for b in term_list()
+    if term_getstatus(b) == 'finished'
+      execute 'bdelete' b
+    endif
+  endfor
 endfunction
 

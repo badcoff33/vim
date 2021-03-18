@@ -1,13 +1,5 @@
 " Vim autoload file -- Manage open/close windows
 
-function! lib#windows#CloseTermWindows()
-  for b in term_list()
-    if term_getstatus(b) == 'finished'
-      execute 'bdelete' b
-    endif
-  endfor
-endfunction
-
 function! lib#windows#PopupBuffer(buf)
   let save_winr = winnr()
   if bufexists(a:buf)
