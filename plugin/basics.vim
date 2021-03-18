@@ -7,22 +7,16 @@
 noremap <unique> <script> <Plug>ShowHiInfo             <SID>ShowHiInfo
 noremap <unique> <script> <Plug>ToggleStickyCursorline <SID>ToggleStickyCursorline
 noremap <unique> <script> <Plug>ToggleQuickfix         <SID>ToggleQuickfix
-noremap <unique> <script> <Plug>PopupTerminal          <SID>PopupTerminal
 noremap <unique> <script> <Plug>HighlightWord          <SID>HighlightWord
 
 noremap <SID>ShowHiInfo             :call <SID>ShowHiInfo()<CR>
 noremap <SID>ToggleStickyCursorline :call <SID>ToggleStickyCursorline()<CR>
 noremap <SID>ToggleQuickfix         :call <SID>ToggleQuickfix()<CR>
-noremap <SID>PopupTerminal          :call <SID>PopupTerminal()<CR>
 noremap <SID>HighlightWord          :call <SID>HighlightWord("<C-r><C-w>")<CR>
 
 " Defaults: Key mappings
 if !hasmapto('<Plug>ToggleQuickfix')
   nmap <Leader>q <Plug>ToggleQuickfix
-endif
-
-if !hasmapto('<Plug>PopupTerminal')
-  nmap <Leader>T <Plug>PopupTerminal
 endif
 
 if !hasmapto('<Plug>HighlightWord')
@@ -102,26 +96,6 @@ function! s:ToggleQuickfix()
   endif
   if win_gotoid(save_win) == 0
     wincmd p
-  endif
-endfunction
-
-" Description: Popup term buffer.
-" If no term buffer open, open a new one.
-" TODO: handle multiple term buffers.
-function! s:PopupTerminal()
-  let termBufNr = bufnr("^term:")
-  if termBufNr == -1
-    let termBufNr = bufnr("^\!")
-  endif
-  if termBufNr == -1
-    terminal
-    return
-  endif
-  let termWinNr = win_findbuf(termBufNr)
-  if empty(termWinNr)
-    execute termBufNr . "buffer"
-  else
-    noautocmd call win_gotoid(termWinNr[0])
   endif
 endfunction
 

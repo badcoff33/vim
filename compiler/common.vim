@@ -1,5 +1,5 @@
 " Vim compiler file
-" Compiler:   Greenhills - Compiler
+" Compiler:   Try to match most common compiler formats (Green Hills , GCC)
 " Maintainer: Markus Prepens (markus.prepens@gmail.com)
 "
 " Description: Use build.cmd to re-route STDERR to STDOUT. The script includes

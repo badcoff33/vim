@@ -33,7 +33,7 @@ endif
 
 let s:white   = '#FFFFFF'
 let s:black   = '#18181F'
-let s:bg1     = '#2F2131'
+let s:bg1     = '#221533'
 let s:bg2     = '#312A3A'
 let s:bg3     = '#343240'
 let s:bg4     = '#434050'
@@ -82,7 +82,7 @@ highlight! link TabLineSel Statusline
 highlight! link WildMenu PmenuSel
 
 " Apollo specific
-call lib#color#Hi('BlendDown', s:white, s:bg3, '', '')
+call lib#color#Hi('BlendDown', s:white, s:bg2, '', '')
 
 " Code
 call lib#color#Hi('Statement', s:silver4, '', '', '')

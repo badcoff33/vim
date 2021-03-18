@@ -80,8 +80,10 @@ endfunction
 " resulting string for the first parameter bufname_a.
 function s:FindUniqueNamePart(bufname_a, bufname_b)
   if fnamemodify(a:bufname_a, ":p:t") == fnamemodify(a:bufname_b, ":p:t")
-    let path_list_a = split(fnamemodify(a:bufname_a, ":p:h"), '\')
-    let path_list_b = split(fnamemodify(a:bufname_b, ":p:h"), '\')
+    let path_a = substitute(fnamemodify(a:bufname_a, ":p:h"), '\', '/', 'g')
+    let path_list_a = split(path_a, '/')
+    let path_b = substitute(fnamemodify(a:bufname_b, ":p:h"), '\', '/', 'g')
+    let path_list_b = split(path_b, '/')
     while !empty(path_list_a) && !empty(path_list_b)
       " get last part of directories A/B
       let part_a = path_list_a[0]
@@ -114,6 +116,9 @@ call LogError(assert_match( "bb", s:FindUniqueNamePart("aaa/bb/c3/111.txt", "aaa
 " varying path length
 call LogError(assert_match( "bb", s:FindUniqueNamePart("aaa/bb/111.txt", "aaa/bb/ccc/111.txt")))
 call LogError(assert_match( "c3", s:FindUniqueNamePart("aaa/bb/c3/111.txt", "aaa/bb/111.txt")))
+
+call LogError(assert_match( 'cmake', s:FindUniqueNamePart('\Daten\play\Software\cmake\_3P\comp_MCAL_V_RH850_F1KM\42.6.0\MCAL\ASR_RH850_F1KM_42.06.00\X1X\F1x\common_family\src\ghs\Mcu_Rram_startup_F1KM.850',
+      \ '\Daten\play\Software\sources\LowLevel\Mcu_Rram_startup_F1KM.850')))
 
 " case sensitive?
 call LogError(assert_match( "CCC", s:FindUniqueNamePart("aaa/bbb/CCC/111.txt", "aaa/bbb/ccc/111.txt")))
