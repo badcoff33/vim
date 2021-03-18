@@ -26,6 +26,8 @@ endfunction
 
 function! s:CompletionInhibit() abort
   let n = s:neighbors()
-  return empty(n['backward']) || (n['backward'] =~? '\w') && (n['forward'] =~? '\w')
+  return empty(n['backward'])
+        \ || (n['backward'] =~? '\s')
+        \ || (n['backward'] =~? '\w') && (n['forward'] =~? '\w')
 endfunction
 
