@@ -28,15 +28,14 @@ function! diff#CompareDirs() abort
   " them. And expand '~'
   let a = fnamemodify(a, ":p:h")
   let b = fnamemodify(b, ":p:h")
-  " create a fresh out buffer
-
-  call term#Start('diff -rq '
+  " run the diff command
+  call async#StartJob('diff -rq '
         \ .. g:compare_dirs_options
         \ .. ' "' .. a .. '"'
         \ .. ' "' .. b .. '"',
         \ 0) " do not forward to quickfix
   tabnew
-  call term#ToFrontBuffer()
+  call async#JobBufferToFront()
   nnoremap <buffer> <silent> <CR> :call <SID>DiffParseLine(getline('.'))<CR>
 endfunction
 
