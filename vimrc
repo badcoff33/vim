@@ -85,9 +85,6 @@ endif
 set ignorecase smartcase
 set incsearch
 set hlsearch
-if has('nvim')
-  set inccommand=nosplit
-endif
 set magic
 
 let s = split(&runtimepath, ',')
@@ -119,20 +116,11 @@ else
 endif
 
 set pumheight=7
-if has('nvim')
-  set pumblend=10
-endif
 
 " Command line completion
-if has ('nvim')
-  set wildmenu
-  set wildoptions=pum,tagfile
-  set wildmode=full 
-else
-  set wildoptions=tagfile
-  set nowildmenu wildmode=list:full
-  "set wildmenu
-endif
+set wildoptions=tagfile
+set nowildmenu wildmode=list:full
+"set wildmenu
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
@@ -188,13 +176,8 @@ vnoremap [<Space> c[<C-r>-]<Esc>
 vnoremap {<Space> c{<C-r>-}<Esc>
 
 " Terminals
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <C-w> <C-\><C-n><C-w>
-elseif has('terminal')
-  tnoremap <Esc> <C-w>N
-  tnoremap <S-Ins> <C-w>"*
-endif
+toremap <Esc> <C-w>N
+tnoremap <S-Ins> <C-w>"*
 
 nnoremap <Leader>. :tjump /
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
@@ -264,19 +247,12 @@ command! -nargs=0 ReadOnly :setlocal nomodifiable readonly
 " command completion needs terminating backslash (sorry, Windows)
 cnoremap <C-Space> \
 cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
-if has('nvim')
-cnoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
-cnoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
-endif
 
 augroup init
   autocmd!
   autocmd VimResized * :wincmd =
   autocmd VimEnter * :runtime site.vim
   autocmd BufEnter * :if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
-  if has('nvim')
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 350)
-  endif
 augroup END
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
