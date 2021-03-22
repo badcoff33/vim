@@ -10,16 +10,17 @@ setlocal shiftwidth=4
 setlocal nocindent
 
 " Make heading underlined
-nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr=
-nnoremap <buffer> <LocalLeader>h2 0v$beyo<Esc>PVr-
-nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr~
+nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr=Ykkp}
+nnoremap <buffer> <LocalLeader>h2 0v$beyo<Esc>PVr-Ykkp}
+nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr~}
+nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr^}
 
 " Toggle between TODO and DONE
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 
 " be up to date
 nnoremap <buffer> <LocalLeader>d i<C-r>=strftime("%Y-%m-%d")<CR><Esc>
-iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
+iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d %a")<CR>
 iabbrev <buffer> xlink `NAME <>`_<Esc>2bea
 
 function! s:ToggleTodo()
