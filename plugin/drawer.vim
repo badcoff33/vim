@@ -49,7 +49,7 @@ tnoremap <C-CR> <C-w>"=g:drawer_selected_buffername<CR>
 
 function! DrawerDropBuffer(b)
   let is_in_list = index(g:drawer_buffer_list, a:b) >= 0  ? 1 : 0
-  if (is_in_list == 0)
+  if (is_in_list == 0) && getbufvar(a:b, '&buftype') == ''
     let g:drawer_buffer_list=uniq(sort(add(g:drawer_buffer_list, a:b)))
     call s:DrawerShowIt(g:drawer_buffer_list)
   endif
