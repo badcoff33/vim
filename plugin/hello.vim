@@ -1,15 +1,15 @@
 
 "setbufline({expr}, {lnum}, {text})     *setbufline()*
 
-noremap <unique> <script> <Plug>SayWelcome <SID>SayWelcome
-noremap <SID>SayWelcome :silent call <SID>SayWelcome()<CR>
+noremap <unique> <script> <Plug>SayHello <SID>SayHello
+noremap <SID>SayHello :silent call <SID>SayHello()<CR>
 
-if !hasmapto('<Plug>SayWelcome')
-  nmap <Leader>W <Plug>SayWelcome
+if !hasmapto('<Plug>SayHello')
+  nmap <Leader>h <Plug>SayHello
 endif
 
 " Descrition: Wow! A really dirty function. But it works.
-function! s:SayWelcome()
+function! s:SayHello()
   let head = []
   call add(head,'    _----------_')
   call add(head,'     Need help? ')
@@ -28,21 +28,23 @@ function! s:SayWelcome()
   let infofile = &viminfofile ? &viminfofile : '~\_viminfo'
   for line in readfile(expand(infofile))
     let m = matchlist(line, '\(^:cd\)\s\+\(.\+\)$')
-    if !empty(m) && isdirectory(m[2])
+    if !empty(m) && isdirectory(m[2]) && len(cd_cmds) <= 5
       echo m[2] isdirectory(m[2])
       let cd_cmds[nr2char(num)] = m[0]
       let num += 1
     endif
     let m = matchlist(line, '\(^:e\|^:edit\)\s\+\(.\+\)$')
-    if !empty(m) && filereadable(m[2])
+    if !empty(m) && filereadable(m[2]) && len(edit_cmds) <= 10
       let edit_cmds[nr2char(key)] = m[0]
       let key += 1
     endif
   endfor
 
-  silent bw! Welcome
+  if bufexists('Hello')
+    silent bdelete! Hello
+  endif
   enew
-  file Welcome
+  file Hello
   let seperator = '    '
   for n in range(winwidth(0)-4)
     let seperator = seperator ..  '-'
@@ -60,7 +62,7 @@ function! s:SayWelcome()
     execute 'nnoremap <buffer>' key cd_cmds[key]..'<CR>'
   endfor
 
-  setlocal statusline=Welcome!
-  setlocal nomodified nomodifiable
+  setlocal statusline=Hello!
+  setlocal buftype=nofile nomodified nomodifiable
 
 endfunction
