@@ -33,7 +33,7 @@ endif
 
 let s:white   = '#FFFFFF'
 let s:black   = '#18181F'
-let s:bg1     = '#221533'
+let s:bg1     = '#282835'
 let s:bg2     = '#312A3A'
 let s:bg3     = '#343240'
 let s:bg4     = '#434050'
@@ -50,14 +50,14 @@ let s:red1    = '#C85012'
 let s:red2    = '#F86020'
 
 " Basics
-call lib#color#Hi('Normal', s:white, s:bg2, 'NONE', '')
+call lib#color#Hi('Normal', s:white, s:bg1, 'NONE', '')
 call lib#color#Hi('Bold',   s:silver4, '', 'bold', '')
 call lib#color#Hi('Italic', s:silver4, '', 'italic', '')
-call lib#color#Hi('NonText', s:blue1, s:bg3, '', '')
+call lib#color#Hi('NonText', s:blue1, s:bg2, '', '')
 call lib#color#Hi('Visual', s:silver4, s:silver1, '', '')
 call lib#color#Hi('StatusLine', s:white, s:bg4, 'bold', '')
 call lib#color#Hi('StatusLineNC', s:silver2, s:bg4, '',  '')
-call lib#color#Hi('VertSplit', s:bg4, 'bg', 'NONE', '')
+call lib#color#Hi('VertSplit', s:bg3, s:bg3, 'NONE', '')
 call lib#color#Hi('IncSearch', s:black, s:silver3, 'bold', '')
 call lib#color#Hi('Search', s:white, s:blue1, '', '')
 call lib#color#Hi('MatchParen', s:green3, '', 'underline', '')
