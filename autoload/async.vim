@@ -98,7 +98,7 @@ function! async#PopupTerm()
       return
     endif
   endfor
-  terminal
+  botright terminal
 endfunction
 
 function! async#CloseFinishedTerm()
