@@ -256,6 +256,8 @@ nnoremap <Leader>om :set invsmartcase smartcase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(input("set greprg:", &grepprg), ' ')<CR><CR>
 
+command! -nargs=0 CleanUpBuffers      :bufdo if bufname('%')=='' | bd! | endif
+
 command! -nargs=0 IgnoreCaseSensetive :set   ignorecase nosmartcase
 command! -nargs=0 CaseSensetive       :set noignorecase nosmartcase
 command! -nargs=0 SmartCase           :set   ignorecase  smartcase
