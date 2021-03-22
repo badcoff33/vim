@@ -208,7 +208,8 @@ nnoremap <Leader>te :tabedit %<CR>
 nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
-nnoremap <C-w><C-x> :<C-r>=(4*(&columns)/5)<CR>wincmd<bar><CR>:<C-r>=(4*(&lines)/5)<CR>wincmd_<CR>
+nnoremap <A-+> 3<C-w>+3<C-w>>
+nnoremap <A--> 3<C-w>-3<C-w><
 nnoremap <C-w>0 <C-^>:bw#<Esc>
 
 nnoremap <C-l> :cnewer<CR>
