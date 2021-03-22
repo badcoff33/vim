@@ -108,13 +108,8 @@ endfor
 
 " Insert mode completion
 set complete=.,w
-if !has('nvim')
-  set completeopt=menu
-else
-  set showfulltag
-  set completeopt=menu,noselect
-endif
-
+set showfulltag
+set completeopt=menu,noselect
 set pumheight=7
 
 " Command line completion
@@ -227,11 +222,6 @@ nnoremap <S-up>    <C-w>k
 nnoremap <S-left>  <C-w>h
 nnoremap <S-right> <C-w>l
 
-nnoremap <Leader><C-w>j <C-w>j<C-w>c<C-w>p
-nnoremap <Leader><C-w>k <C-w>k<C-w>c<C-w>p
-nnoremap <Leader><C-w>h <C-w>h<C-w>c<C-w>p
-nnoremap <Leader><C-w>l <C-w>l<C-w>c<C-w>p
-
 nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
 nnoremap <Leader>oi :set invignorecase ignorecase?<CR>
@@ -239,7 +229,7 @@ nnoremap <Leader>om :set invsmartcase smartcase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(input("set greprg:", &grepprg), ' ')<CR><CR>
 
-command! -nargs=0 CleanUpBuffers      :bufdo if bufname('%')=='' | bd! | endif
+command! -nargs=0 CleanUpBuffers :bufdo if bufname('%')=='' | bd! | endif
 
 command! -nargs=0 IgnoreCaseSensetive :set   ignorecase nosmartcase
 command! -nargs=0 CaseSensetive       :set noignorecase nosmartcase
@@ -248,7 +238,7 @@ command! -nargs=0 SmartCase           :set   ignorecase  smartcase
 command! -nargs=0 ReadOnly :setlocal nomodifiable readonly
 
 " command completion needs terminating backslash (sorry, Windows)
-cnoremap <C-Space> \
+cnoremap <C-Space> <C-r>=g:psep<CR>
 cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 
 augroup init
