@@ -24,9 +24,9 @@ if has('gui')
   nnoremenu 1.310 PopUp.Explore :silent Lexplore <C-r>=expand('%:p:h')<CR><CR>
   nnoremenu 1.320 PopUp.-SEP4- <NOP>
   nnoremenu 1.321 PopUp.Set\ font  :set guifont=*<CR>
-  nnoremap <leader>3 :set guifont=Consolas:h12 linespace=2<CR>
-  nnoremap <leader>2 :set guifont=Consolas:h11 linespace=2<CR>
-  nnoremap <leader>1 :set guifont=Consolas:h10 linespace=2<CR>
+  nnoremap <leader>3 :set guifont=Iosevka_Extended:h12:cANSI:qDRAFT linespace=2<CR>
+  nnoremap <leader>2 :set guifont=Iosevka_Extended:h11:cANSI:qDRAFT linespace=2<CR>
+  nnoremap <leader>1 :set guifont=Iosevka_Extended:h9:cANSI:qDRAFT  linespace=2<CR>
   call feedkeys(mapleader.'3') " default font
   set guicursor+=a:blinkon0
 elseif has("nvim")
