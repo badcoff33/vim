@@ -90,19 +90,28 @@ function! async#StartJob(cmd, ...) abort
   endif
 endfunction
 
-" Description: Popup to first not finished term buffer in buffer list.
-" An any optional parameter is present execute last terminal command.
-function! async#PopupTerm(...)
+" Description: Go to first not finished term buffer in buffer list.
+function! async#OpenTerm(...)
   for b in term_list()
     if term_getstatus(b) != 'normal'
       call lib#windows#GotoBuffer(b)
-      if mode() != 'i'
-        call feedkeys("i")
-      endif
-      if (a:0 == 1) && (a:1 == 'last_cmd')
-        call feedkeys("\<Up>\<CR>")
-      elseif (a:0 == 2) && (a:1 == 'new_cmd')
-        call feedkeys(a:2 .. "\<CR>")
+      return
+    endif
+  endfor
+  botright terminal
+endfunction
+
+" Description: Popup to first not finished term buffer in buffer list.
+" An any optional parameter is present execute last terminal command.
+function! async#SendTermCmd(cmd)
+  for b in term_list()
+    if term_getstatus(b) != 'normal'
+      call lib#windows#GotoBuffer(b)
+      call feedkeys("\<Esc>i")
+      if empty(a:cmd)
+        call feedkeys("\<Up>\<CR>\<C-w>p")
+      else
+        call feedkeys(a:cmd .. "\<CR>\<C-w>p")
       endif
       return
     endif
