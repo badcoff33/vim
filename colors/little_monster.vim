@@ -148,7 +148,7 @@ hi! link PreCondit PreProc
 
 call lib#color#Hi("DiffAdd", s:green, s:workbench_passive, "", "")
 call lib#color#Hi("DiffChange", s:yellow, s:workbench_passive, "bold", "")
-call lib#color#Hi("DiffDelete", s:red, s:red, "", "")
+call lib#color#Hi("DiffDelete", s:yellow, s:red, "", "")
 call lib#color#Hi("DiffText", s:blue, s:workbench_passive, "", "")
 
 call lib#color#Hi("cIncluded", s:blue, "", "", "")
