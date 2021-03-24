@@ -109,7 +109,7 @@ endfor
 " Insert mode completion
 set complete=.,w
 set showfulltag
-set completeopt=menu,noselect
+set completeopt=menu,preview
 set pumheight=7
 
 " Command line completion
@@ -174,17 +174,15 @@ vnoremap {<Space> c{<C-r>-}<Esc>
 tnoremap <Esc> <C-w>N
 tnoremap <S-Ins> <C-w>"*
 
-nnoremap <Leader>. :tjump /
+nnoremap <Leader><C-]> :tjump /
 nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
 nnoremap <Leader>b :ls<CR>:buffer<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
 nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
-nnoremap <Leader>tn :tabnew<CR>
-nnoremap <Leader>te :tabedit %<CR>
-nnoremap <Leader>to :tabonly<CR>
-nnoremap <Leader>tc :tabclose<CR>
+nnoremap <Leader>+ :tabnew<CR>
+nnoremap <Leader>- :tabclose<CR>
 
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><

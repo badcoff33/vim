@@ -92,12 +92,17 @@ endfunction
 
 " Description: Popup to first not finished term buffer in buffer list.
 " An any optional parameter is present execute last terminal command.
-function! async#PopupTerm(.)
+function! async#PopupTerm(...)
   for b in term_list()
     if term_getstatus(b) != 'normal'
       call lib#windows#GotoBuffer(b)
-      if a:0 == 1
-        call feedkeys("i\<Up>\<CR>")
+      if mode() != 'i'
+        call feedkeys("i")
+      endif
+      if (a:0 == 1) && (a:1 == 'last_cmd')
+        call feedkeys("\<Up>\<CR>")
+      elseif (a:0 == 2) && (a:1 == 'new_cmd')
+        call feedkeys(a:2 .. "\<CR>")
       endif
       return
     endif
