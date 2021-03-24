@@ -42,14 +42,13 @@ augroup drawer
   autocmd TextChangedI * :call DrawerDropBuffer(bufnr('%'))
 augroup END
 
-nnoremap <C-CR> :call DrawerSelectBuffer()<CR>
-inoremap <C-CR> <C-r>=g:drawer_selected_buffername<CR>
-cnoremap <C-CR> <C-r>=g:drawer_selected_buffername<CR>
-tnoremap <C-CR> <C-w>"=g:drawer_selected_buffername<CR>
+tnoremap <C-Space> <C-w>N:call DrawerSelectBuffer()<CR>
 
 function! DrawerDropBuffer(b)
   let is_in_list = index(g:drawer_buffer_list, a:b) >= 0  ? 1 : 0
-  if (is_in_list == 0) && getbufvar(a:b, '&buftype') == ''
+  if (is_in_list == 0)
+        \ && getbufvar(a:b, '&buftype') == ''
+        \ && filereadable(bufname(a:b))
     let g:drawer_buffer_list=uniq(sort(add(g:drawer_buffer_list, a:b)))
     call s:DrawerShowIt(g:drawer_buffer_list)
   endif
@@ -57,7 +56,7 @@ endfunction
 
 function! s:DrawerRemoveBuffer(b)
   if len(g:drawer_buffer_list) > 1
-    call remove(g:drawer_buffer_list, index(g:drawer_buffer_list, a:b)))
+    call remove(g:drawer_buffer_list, index(g:drawer_buffer_list, a:b))
   else
     let g:drawer_buffer_list = []
   endif
@@ -78,6 +77,7 @@ endfunction
 
 function! DrawerSelectBuffer()
   let bufnames = s:DrawerGetReadableList(g:drawer_buffer_list)
+  let g:drawer_winnr = winnr()
   call popup_menu(bufnames, #{
         \ filter: 'MyMenuFilter',
         \ callback: 'MyMenuHandler',
@@ -88,10 +88,10 @@ endfunction
 
 func! MyMenuHandler(id, index)
   if a:index > 0
-    let g:drawer_selected_buffername = bufname(g:drawer_buffer_list[a:index - 1])
-  else
-    let g:drawer_selected_buffername = ''
+    let @* = bufname(g:drawer_buffer_list[a:index - 1])
   endif
+  execute g:drawer_winnr "wincmd w"
+  call feedkeys("i\<C-w>"..'"*')
 endfunc
 
 func! MyMenuFilter(id, key)
