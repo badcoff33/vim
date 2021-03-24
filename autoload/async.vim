@@ -91,10 +91,14 @@ function! async#StartJob(cmd, ...) abort
 endfunction
 
 " Description: Popup to first not finished term buffer in buffer list.
-function! async#PopupTerm()
+" An any optional parameter is present execute last terminal command.
+function! async#PopupTerm(.)
   for b in term_list()
     if term_getstatus(b) != 'normal'
       call lib#windows#GotoBuffer(b)
+      if a:0 == 1
+        call feedkeys("i\<Up>\<CR>")
+      endif
       return
     endif
   endfor
