@@ -10,8 +10,8 @@ setlocal shiftwidth=4
 setlocal nocindent
 
 " Make heading underlined
-nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr=Ykkp}
-nnoremap <buffer> <LocalLeader>h2 0v$beyo<Esc>PVr-Ykkp}
+nnoremap <buffer> <LocalLeader>h1 yyppkkVr=jjVr=}
+nnoremap <buffer> <LocalLeader>h2 yyppkkVr-jjVr-}
 nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr~}
 nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr^}
 
