@@ -21,19 +21,19 @@ noremap <SID>DrawerClear :let g:drawer_buffer_list= []<CR>
 
 " Defaults: Unique key mappings
 if !hasmapto('<Plug>DrawerShowIt')
-  nmap <unique> <Leader>as <Plug>DrawerShowIt
+  nmap <unique> <Leader>ds <Plug>DrawerShowIt
 endif
 
 if !hasmapto('<Plug>DrawerDropBuffer')
-  nmap <unique> <Leader>aa <Plug>DrawerDropBuffer
+  nmap <unique> <Leader>da <Plug>DrawerDropBuffer
 endif
 
 if !hasmapto('<Plug>DrawerRemoveBuffer')
-  nmap <unique> <Leader>ar <Plug>DrawerRemoveBuffer
+  nmap <unique> <Leader>dr <Plug>DrawerRemoveBuffer
 endif
 
 if !hasmapto('<Plug>DrawerClear')
-  nmap <unique> <leader>ac <Plug>DrawerClear
+  nmap <unique> <leader>dc <Plug>DrawerClear
 endif
 
 augroup drawer
