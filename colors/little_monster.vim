@@ -20,6 +20,7 @@ elseif exists('&winhighlight')
 endif
 
 let s:white             = "#FFFFFF"
+let s:black             = "#000000"
 let s:workbench_passive = "#272F3F"
 let s:workbench_active  = "#373F5F"
 let s:workbench_grey    = "#3E4468"
@@ -37,10 +38,9 @@ let s:white             = "#D7DCE2"
 let s:light_silver      = "#90909F"
 let s:silver            = "#70707A"
 
-
 " Editor
 call lib#color#Hi("ColorColumn", "", s:light_silver, "", "")
-call lib#color#Hi("Cursor", s:yellow, s:silver, "NONE", "")
+call lib#color#Hi("Cursor", s:black, s:yellow, "NONE", "")
 call lib#color#Hi("CursorLine", "skip", s:background_plus, "", "")
 call lib#color#Hi("Error", s:red, "bg", "", "")
 call lib#color#Hi("iCursor", s:light_silver, s:workbench_grey, "", "")
@@ -48,9 +48,9 @@ call lib#color#Hi("LineNr", s:light_silver, "bg", "", "")
 call lib#color#Hi("MatchParen", s:blue, s:workbench_grey, "", "")
 call lib#color#Hi("NonText", s:red, s:silver, "", "")
 call lib#color#Hi("Normal", s:foreground, s:background, "", "")
-call lib#color#Hi("PMenu", s:background_plus, s:light_silver, "NONE", "")
-call lib#color#Hi("PmenuSbar", s:silver, s:silver, "", "")
-call lib#color#Hi("PmenuThumb", s:blue, s:workbench_grey, "", "")
+call lib#color#Hi("PMenu", s:silver, s:workbench_passive, "NONE", "")
+call lib#color#Hi("PMenuSbar", s:silver, s:workbench_passive, "", "")
+call lib#color#Hi("PMenuThumb", s:blue, s:workbench_grey, "", "")
 call lib#color#Hi("SpecialKey", s:silver, "", "", "")
 call lib#color#Hi("SpellBad", s:red, "bg", "undercurl", "")
 call lib#color#Hi("SpellCap", s:yellow, "bg", "undercurl", "")
@@ -148,7 +148,7 @@ hi! link PreCondit PreProc
 
 call lib#color#Hi("DiffAdd", s:green, s:workbench_passive, "", "")
 call lib#color#Hi("DiffChange", s:yellow, s:workbench_passive, "bold", "")
-call lib#color#Hi("DiffDelete", s:yellow, s:red, "", "")
+call lib#color#Hi("DiffDelete", s:black, s:red, "", "")
 call lib#color#Hi("DiffText", s:blue, s:workbench_passive, "", "")
 
 call lib#color#Hi("cIncluded", s:blue, "", "", "")
