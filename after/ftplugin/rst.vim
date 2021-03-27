@@ -19,8 +19,7 @@ nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr^}
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 
 " be up to date
-nnoremap <buffer> <LocalLeader>d i<C-r>=strftime("%Y-%m-%d")<CR><Esc>
-iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d %a")<CR>
+iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
 iabbrev <buffer> xtodo *TODO*
 iabbrev <buffer> xlink `NAME <>`_<Esc>2bea
 
