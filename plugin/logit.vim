@@ -9,5 +9,7 @@ let g:diary_file = get(g:, 'diary_file', '~\.notes\diary.txt')
 nnoremap <Leader>nn :drop <C-r>=g:notes_file<cr><cr>
 nnoremap <Leader>nd :drop <C-r>=g:diary_file<cr><cr>
 
-execute 'autocmd BufEnter' fnamemodify(g:diary_file, ':t') 'nnoremap <buffer> + :call logit#AddNewEntry()<CR>i'
+execute 'autocmd BufEnter' fnamemodify(g:diary_file, ':t') 'nnoremap <buffer> + :call logit#AddNewEntry()<CR>'
+execute 'autocmd InsertLeave' fnamemodify(g:diary_file, ':t') ':call logit#HighlightDates()'
+execute 'autocmd BufWinEnter' fnamemodify(g:diary_file, ':t') ':call logit#HighlightDates()'
 

@@ -50,7 +50,7 @@ function! DrawerDropBuffer(b)
         \ && getbufvar(a:b, '&buftype') == ''
         \ && filereadable(bufname(a:b))
     let g:drawer_buffer_list=uniq(sort(add(g:drawer_buffer_list, a:b)))
-    call s:DrawerShowIt(g:drawer_buffer_list)
+    "call s:DrawerShowIt(g:drawer_buffer_list)
   endif
 endfunction
 

@@ -45,7 +45,7 @@ call lib#color#Hi("CursorLine", "skip", s:background_plus, "", "")
 call lib#color#Hi("Error", s:red, "bg", "", "")
 call lib#color#Hi("iCursor", s:light_silver, s:workbench_grey, "", "")
 call lib#color#Hi("LineNr", s:light_silver, "bg", "", "")
-call lib#color#Hi("MatchParen", s:blue, s:workbench_grey, "", "")
+call lib#color#Hi("MatchParen", "", "", "underline,bold", "")
 call lib#color#Hi("NonText", s:red, s:silver, "", "")
 call lib#color#Hi("Normal", s:foreground, s:background, "", "")
 call lib#color#Hi("PMenu", s:silver, s:workbench_passive, "NONE", "")
@@ -147,9 +147,9 @@ hi! link Macro Define
 hi! link PreCondit PreProc
 
 call lib#color#Hi("DiffAdd", s:green, s:workbench_passive, "", "")
-call lib#color#Hi("DiffChange", s:yellow, s:workbench_passive, "bold", "")
+call lib#color#Hi("DiffChange", s:yellow, s:workbench_passive, "", "")
 call lib#color#Hi("DiffDelete", s:black, s:red, "", "")
-call lib#color#Hi("DiffText", s:blue, s:workbench_passive, "", "")
+call lib#color#Hi("DiffText", s:blue, s:workbench_active, "", "")
 
 call lib#color#Hi("cIncluded", s:blue, "", "", "")
 hi! link cOperator Operator
@@ -171,8 +171,8 @@ hi! link htmlTag Keyword
 hi! link htmlTagN htmlTag
 
 call lib#color#Hi("markdownBlockquote", s:blue, "", "", "")
-call lib#color#Hi("markdownCode", s:background_plus, "bg", "", "")
-call lib#color#Hi("markdownCodeBlock", s:background_plus, "bg", "", "")
+call lib#color#Hi("markdownCode", s:silver, "bg", "", "")
+call lib#color#Hi("markdownCodeBlock", s:silver, "bg", "", "")
 call lib#color#Hi("markdownCodeDelimiter", s:green, "bg", "", "")
 call lib#color#Hi("markdownFootnote", s:blue, "", "", "")
 call lib#color#Hi("markdownId", s:blue, "", "", "")

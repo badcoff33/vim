@@ -91,14 +91,15 @@ function! async#StartJob(cmd, ...) abort
 endfunction
 
 " Description: Go to first not finished term buffer in buffer list.
-function! async#OpenTerm(...)
+function! async#OpenTerm()
   for b in term_list()
-    if term_getstatus(b) != 'normal'
+    if getbufvar(b, 'home_term', 0) == 1
       call lib#windows#GotoBuffer(b)
       return
     endif
   endfor
   botright terminal
+  let b:home_term = 1
 endfunction
 
 " Description: Popup to first not finished term buffer in buffer list.

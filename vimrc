@@ -122,7 +122,7 @@ set wildignore+=*.*~,*.o,TAGS
 set tagcase=followscs
 
 " Tune the diff feature for my needs.
-set diffopt=internal,algorithm:minimal,context:3,vertical,iwhite,filler
+set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler
 " When starting in 'diff' mode, go full screen.
 if &diff
   set columns=999 lines=999
@@ -153,6 +153,9 @@ nnoremap <F13> :
 vnoremap <F12> :
 nnoremap <F12> :
 
+" yank current word -- CUA style
+nnoremap <C-Ins> "+yiw
+
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
 vnoremap <C-a> <C-a>gv
@@ -174,19 +177,27 @@ vnoremap {<Space> c{<C-r>-}<Esc>
 tnoremap <Esc> <C-w>N
 tnoremap <S-Ins> <C-w>"*
 
-nnoremap <Leader><C-]> :tjump /
-nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
-nnoremap <Leader>b :ls<CR>:buffer<Space>
+nnoremap <Leader>bb :ls<CR>:buffer<Space>
+nnoremap <Leader>bc :filter /\.[ch]/ ls<CR>:buffer<Space>
+nnoremap <Leader>bm :filter /\ccmake/ ls<CR>:buffer<Space>
+nnoremap <Leader>bv :filter /vim/ ls<CR>:buffer<Space>
 nnoremap <Leader>f :find<Space>
+nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader>M :sil make<Space><Up>
-nnoremap <Leader>v :sil vimgrep<Space><Up><C-B><C-Right><C-Right><C-Right>
+nnoremap <Leader>v :sil vimgrep<Space><Up>
+nnoremap <Leader>g :silent grep <C-r><C-w>
 nnoremap <Leader>+ :tabnew<CR>
 nnoremap <Leader>- :tabclose<CR>
+nnoremap <Leader>c <C-^>:bw#<Esc>
 
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
-nnoremap <C-w>0 <C-^>:bw#<Esc>
+
+nnoremap <S-down>  <C-w>j
+nnoremap <S-up>    <C-w>k
+nnoremap <S-left>  <C-w>h
+nnoremap <S-right> <C-w>l
 
 nnoremap <C-l> :cnewer<CR>
 nnoremap <C-h> :colder<CR>
@@ -206,7 +217,6 @@ elseif executable("grep")
   set grepprg=grep\ -Hnr\ --exclude=cmake\ $* \.
   set grepformat=%f:%l:%m
 endif
-nnoremap <Leader>g :silent grep <C-r><C-w>
 
 command! -nargs=1 -complete=dir WriteOptionsToDir :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>'..'/.vimrc', 'a')
 command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
@@ -214,11 +224,6 @@ command! -nargs=0 EditOptions :execute "edit" findfile(".vimrc", ";")
 
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
-
-nnoremap <S-down>  <C-w>j
-nnoremap <S-up>    <C-w>k
-nnoremap <S-left>  <C-w>h
-nnoremap <S-right> <C-w>l
 
 nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>

@@ -13,7 +13,7 @@ if !hasmapto(mapleader .. 'T')
   nnoremap <Leader>T :call async#OpenTerm()<CR>
 endif
 if !hasmapto(mapleader .. 't')
-  nnoremap <Leader>t :call async#SendTermCmd("")<CR>
+  nnoremap <Leader>t :wa<CR>:call async#SendTermCmd("")<CR>
 endif
 
 if !hasmapto(mapleader .. 'j')

@@ -13,17 +13,17 @@ let g:colors_name = "breeze"
 let s:black = "#1b1f23"
 let s:white = "#ffffff"
 
-" -------- Grays --------
-let s:gray_9 = "#fafbfc"
-let s:gray_8 = "#f6f8fa"
-let s:gray_7 = "#e1e4e8"
-let s:gray_6 = "#d1d5da"
-let s:gray_5 = "#959da5"
-let s:gray_4 = "#6a737d"
-let s:gray_3 = "#586069"
-let s:gray_2 = "#444d56"
-let s:gray_1 = "#2f363d"
-let s:gray_0 = "#24292e"
+" -------- Grey --------
+let s:grey_9 = "#fafbfc"
+let s:grey_8 = "#f6f8fa"
+let s:grey_7 = "#e1e4e8"
+let s:grey_6 = "#d1d5da"
+let s:grey_5 = "#959da5"
+let s:grey_4 = "#6a737d"
+let s:grey_3 = "#586069"
+let s:grey_2 = "#444d56"
+let s:grey_1 = "#2f363d"
+let s:grey_0 = "#24292e"
 
 " -------- Blue --------
 let s:blue_9 = "#f1f8ff"
@@ -126,24 +126,24 @@ elseif exists('&winhighlight')
 endif
 
 " Color scheme specific
-call lib#color#Hi('BlendDown', s:white, s:gray_8, '', '')
+call lib#color#Hi('BlendDown', s:white, s:grey_8, '', '')
 
 " Basics
-call lib#color#Hi('Normal', s:gray_2, s:white, 'NONE', '')
+call lib#color#Hi('Normal', s:grey_2, s:white, 'NONE', '')
 call lib#color#Hi('Bold',   s:white, '', 'bold', '')
 call lib#color#Hi('Italic', s:white, '', 'italic', '')
-call lib#color#Hi('NonText', s:gray_6, s:gray_9, '', '')
+call lib#color#Hi('NonText', s:grey_6, s:grey_9, '', '')
 call lib#color#Hi('Visual', s:blue_0, s:green_7, '', '')
-call lib#color#Hi('StatusLine', s:blue_8, s:gray_2, 'bold', '')
-call lib#color#Hi('StatusLineNC', s:gray_3, s:gray_6, 'bold', '')
-call lib#color#Hi('VertSplit', s:gray_6, 'bg', 'NONE', '')
+call lib#color#Hi('StatusLine', s:blue_8, s:grey_2, 'bold', '')
+call lib#color#Hi('StatusLineNC', s:grey_3, s:grey_6, 'bold', '')
+call lib#color#Hi('VertSplit', s:grey_6, 'bg', 'NONE', '')
 call lib#color#Hi('IncSearch', s:black, s:yellow_6, 'none', '')
 call lib#color#Hi('Search', s:blue_0, s:blue_9, 'NONE', '')
 call lib#color#Hi('MatchParen', s:green_1, s:green_7, '', '')
 call lib#color#Hi('QuickFixLine', s:red_0, s:red_8, 'bold', '')
 call lib#color#Hi('CursorLine', 'skip', s:green_9, '', '')
 call lib#color#Hi('CursorLineNr', s:green_1, s:green_7, 'bold,italic', '')
-call lib#color#Hi('LineNr', s:blue_5, 'skip', 'italic', '')
+call lib#color#Hi('LineNr', s:grey_6, 'skip', 'italic', '')
 
 highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr
@@ -161,7 +161,7 @@ highlight! link TabLineSel StatusLine
 highlight! link WildMenu PmenuSel
 
 " Breeze specific
-call lib#color#Hi('BlendDown', s:gray_0, s:gray_8, '', '')
+call lib#color#Hi('BlendDown', s:grey_0, s:grey_8, '', '')
 
 " Code
 call lib#color#Hi('Statement', s:pink_3, '', 'bold', '')
@@ -177,26 +177,26 @@ call lib#color#Hi('Identifier', s:green_4, 'skip', '', '')
 call lib#color#Hi('Special', s:green_1, 'skip', '', '')
 call lib#color#Hi('Constant', s:blue_4, '', '', '')
 call lib#color#Hi('Number', s:blue_2, '', '', '')
-call lib#color#Hi('Title', s:gray_2, '', 'bold', '')
-call lib#color#Hi('Todo', s:gray_2, s:gray_7, '', '')
+call lib#color#Hi('Title', s:grey_2, '', 'bold', '')
+call lib#color#Hi('Todo', s:grey_2, s:grey_7, '', '')
 call lib#color#Hi('Error', s:red_3, 'bg', 'undercurl', s:red_4)
-call lib#color#Hi('Directory', s:gray_2, 'skip', '', '')
+call lib#color#Hi('Directory', s:grey_2, 'skip', '', '')
 call lib#color#Hi('ErrorMsg', s:red_0, s:red_7, '', '')
 call lib#color#Hi('WarningMsg', s:green_0, s:green_7, '', '')
 call lib#color#Hi('ModeMsg', s:yellow_0, s:yellow_7, '', '')
 call lib#color#Hi('Question', s:green_1, 'bg', '', '')
 call lib#color#Hi('qfFileName', s:blue_2, '', '', '')
-call lib#color#Hi('qfSeparator', s:gray_1, '', '', '')
+call lib#color#Hi('qfSeparator', s:grey_1, '', '', '')
 call lib#color#Hi('qfLineNr', s:red_6, '', '', '')
 
 " Filetype VIM
 call lib#color#Hi('vimCommentTitle', s:blue_6, '', 'bold', '')
 
 " Filetype C
-call lib#color#Hi('cCppOut', s:gray_3, '', '', '')
-call lib#color#Hi('cCppOutIf2', s:gray_3, '', '', '')
-call lib#color#Hi('cParen', s:gray_3, '', '', '')
-call lib#color#Hi('cBlock', s:gray_3, '', '', '')
+call lib#color#Hi('cCppOut', s:grey_3, '', '', '')
+call lib#color#Hi('cCppOutIf2', s:grey_3, '', '', '')
+call lib#color#Hi('cParen', s:grey_3, '', '', '')
+call lib#color#Hi('cBlock', s:grey_3, '', '', '')
 
 " filetype HTML
 call lib#color#Hi('htmlH1', s:green_2, '', 'bold', '')
@@ -204,8 +204,8 @@ call lib#color#Hi('htmlH2', s:green_2, '', 'bold', '')
 call lib#color#Hi('htmlH3', s:green_2, '', 'bold,italic', '')
 
 " markdown
-call lib#color#Hi('markdownCode', s:gray_3, s:gray_9, '', '')
-call lib#color#Hi('markdownCodeBlock', s:gray_2, '', '', '')
+call lib#color#Hi('markdownCode', s:grey_3, s:grey_9, '', '')
+call lib#color#Hi('markdownCodeBlock', s:grey_2, '', '', '')
 call lib#color#Hi('rstEmphasis', s:green_2, '', '', '')
 call lib#color#Hi('rstStrongEmphasis', s:green_2, '', 'bold', '')
 

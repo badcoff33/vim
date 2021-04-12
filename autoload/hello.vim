@@ -13,16 +13,20 @@ endfunction
 function! hello#SayHello()
   call hello#SetProps()
   let head = []
-  call add(head,'    _----------_')
-  call add(head,'     Need help? ')
-  call add(head,'    -__________-')
-  call add(head,'     \')
-  call add(head,'      \   \_\_    _/_/')
-  call add(head,'       \      \__/')
-  call add(head,'              (oo)\_______')
-  call add(head,'              (__)\       )\/\')
-  call add(head,'                  ||----w |')
-  call add(head,'                  ||     ||')
+  call add(head, "            |\\   _,,,---,,_        ")
+  call add(head, "    ZZzzz /,`.-'`'    -.  ;-;;,_    ")
+  call add(head, "         |,4-  ) )-,_. ,\\ (  `'-'  ")
+  call add(head, "        '---''(_/--'  `-'\\_)       ")
+" call add(head,'    _----------_')
+" call add(head,'     Need help? ')
+" call add(head,'    -__________-')
+" call add(head,'     \')
+" call add(head,'      \   \_\_    _/_/')
+" call add(head,'       \      \__/')
+" call add(head,'              (oo)\_______')
+" call add(head,'              (__)\       )\/\')
+" call add(head,'                  ||----w |')
+" call add(head,'                  ||     ||')
 
   let edit_cmds = {}
   let cd_cmds = {}
@@ -66,7 +70,6 @@ function! hello#SayHello()
   endfor
 
   call prop_add(1, 1, {'end_lnum': len(head)+1, 'type': 'HelloHead'})
-  "call prop_add(len(head)+2                            , 1, {'end_col': 80, 'type': 'HelloSep'})
   call prop_add(line_sep1, 1, {'end_col': 80, 'type': 'HelloSep'})
   call prop_add(line_sep2, 1, {'end_col': 80, 'type': 'HelloSep'})
   call prop_add(line_sep3, 1, {'end_col': 80, 'type': 'HelloSep'})

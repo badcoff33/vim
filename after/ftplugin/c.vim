@@ -5,9 +5,20 @@
 
 let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
 
-" Toggle automatic code formatting
+" iabbrev did not work when 'cpoptions' has '>'
+if match(&cpoptions, '>') < 0
+iabbrev <buffer> xswitch switch ()<Left><C-f>
+iabbrev <buffer> xcase   case :<C-f><CR>break;<CR><Up><Up><End><Left>
+iabbrev <buffer> xop     {<C-f><CR><CR>}<CR><Up><Up><C-f>
+iabbrev <buffer> xif     if ()<Left><C-f>
+iabbrev <buffer> xelse   else<C-f><CR>{<C-f><CR><CR>}<CR><Up><Up><C-f>
+iabbrev <buffer> xinc    #include ".h"<Left><Left><Left>
+iabbrev <buffer> xdef    #define
+iabbrev <buffer> xdbg    #warning DEBUG CODE:
+endif
+
+" Toggle automatic comment formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
-nnoremap <buffer> <LocalLeader>a :execute "setlocal fo"..(match(&fo, 'a') < 0) ?<bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
 
 " run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
 nnoremap <buffer> <LocalLeader>f :silent call FormatC()<cr>
@@ -50,16 +61,3 @@ setlocal listchars=tab:>-,trail:.,extends:#
 " Customize the c indent style
 setlocal cinoptions=(0,W4,gN
 
-" iabbrev did not work when 'cpoptions' has '>'
-if match(&cpoptions, '>') >= 0
-  finish
-endif
-
-iabbrev <buffer> xswitch switch ()<Left><C-f>
-iabbrev <buffer> xcase   case :<C-f><CR>break;<CR><Up><Up><End><Left>
-iabbrev <buffer> xop     {<C-f><CR><CR>}<CR><Up><Up><C-f>
-iabbrev <buffer> xif     if ()<Left><C-f>
-iabbrev <buffer> xelse   else<C-f><CR>{<C-f><CR><CR>}<CR><Up><Up><C-f>
-iabbrev <buffer> xinc    #include ".h"<Left><Left><Left>
-iabbrev <buffer> xdef    #define
-iabbrev <buffer> xdbg    #warning DEBUG CODE:
