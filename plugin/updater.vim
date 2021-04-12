@@ -3,7 +3,7 @@
 " vimrc needs to set the command :Update to run any action after any buffer has
 " been written.
 
-command! -nargs=0 StartUpdater :let g:updater_timer_id = timer_start(1000, '<SID>UpdaterCb', {'repeat': -1})
+command! -nargs=0 StartUpdater :let g:updater_timer_id = timer_start(5000, '<SID>UpdaterCb', {'repeat': -1})
 command! -nargs=0 StopUpdater  :call timer_stop(g:updater_timer_id)
 
 let g:updater_run_it = get(g:, 'updater_run_it', 0)

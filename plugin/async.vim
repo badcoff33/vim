@@ -22,7 +22,3 @@ if !hasmapto(mapleader .. 'j')
   nnoremap <Leader>jj :Run<Up>
   nnoremap <Leader>jq :JobAsQuickfix<CR>
 endif
-
-autocmd TerminalOpen * setlocal nonumber norelativenumber
-
-
