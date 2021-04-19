@@ -93,7 +93,7 @@ function! lib#popup#Bottom(list_of_strings)
     call popup_settext(g:winid_bot, a:list_of_strings)
   else
     let g:winid_bot = popup_create(a:list_of_strings, {
-          \ 'line': &lines - argc() - 1,
+          \ 'line': &lines - len(a:list_of_strings) - 1,
           \ 'col': 1,
           \ 'minwidth': &columns,
           \ 'maxheight': 10,
