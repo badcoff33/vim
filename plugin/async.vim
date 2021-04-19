@@ -1,6 +1,6 @@
 " Vim plugin file -- make access on async processes or terminal easier
 
-command! -nargs=* -complete=file_in_path Run :call async#StartJob(<q-args>)
+command! -nargs=* -complete=file_in_path RunJob :call async#StartJob(<q-args>)
 command! -nargs=0 JobOutput :call async#JobBufferToFront()
 command! -nargs=0 HideJob :call async#HideJobBuffer()
 command! -nargs=0 JobAsQuickfix :call async#JobBufferAsQuickfix()
