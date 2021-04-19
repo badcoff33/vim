@@ -2,7 +2,7 @@
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent> <expr> <C-Space>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>CompletionInhibit() ? "\<TAB>" :
+      \ <SID>CompletionInhibit() ? "" :
       \ "\<C-x>\<C-]>"
 inoremap <C-S-Space> <C-p>
 
