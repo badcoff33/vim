@@ -87,24 +87,19 @@ set incsearch
 set hlsearch
 set magic
 
-let s = split(&runtimepath, ',')
-for d in s
-  if isdirectory(d . '/backup')
-    set backup
-    execute 'set backupdir=' . d . '/backup'
-    set wildignore+=*/backup/*
-    break
-  endif
-endfor
+let g:vim_home = split(&runtimepath, ',')[0]
 
-for d in s
-  if isdirectory(d . '/undo')
-    set undofile
-    execute 'set undodir=' . d . '/undo'
-    set wildignore+=*/undo/*
-    break
-  endif
-endfor
+if  isdirectory(g:vim_home .. '/backup')
+  set backup
+  execute 'set backupdir=' .. g:vim_home .. '/backup'
+  set wildignore+=*/backup/*
+endif
+
+if isdirectory(g:vim_home .. '/undo')
+  set undofile
+  execute 'set undodir=' .. g:vim_home .. '/undo'
+  set wildignore+=*/undo/*
+endif
 
 " Insert mode completion
 set complete=.,w
@@ -143,15 +138,8 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_preview = 1
 
-" Set leader and localleader keys, that works best for me
-let mapleader = " "
-let maplocalleader = "s"
-
 " Switch modes
-vnoremap <F13> :
-nnoremap <F13> :
-vnoremap <F12> :
-nnoremap <F12> :
+inoremap <S-Space> <Esc>
 
 " yank current word -- CUA style
 nnoremap <C-Ins> "+yiw
@@ -173,19 +161,24 @@ vnoremap (<Space> c(<C-r>-)<Esc>
 vnoremap [<Space> c[<C-r>-]<Esc>
 vnoremap {<Space> c{<C-r>-}<Esc>
 
+" Set leader and localleader keys, that works best for me
+let mapleader = " "
+let maplocalleader = "s"
+imap <C-Space> <Esc><Leader>
+nmap <C-Space> <Leader>
+
+nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader>B :filter /\.<C-r>=&ft<CR>/ ls<CR>:buffer<Space>
+nnoremap <Leader>f :find<Space>
+nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
+nnoremap <Leader>m :sil make<Space><Up><CR>
+nnoremap <Leader><C-m> :sil make<Space><Up>
+
 " Terminals
 tnoremap <Esc> <C-w>N
 tnoremap <S-Ins> <C-w>"*
 
-nnoremap <Leader>bb :ls<CR>:buffer<Space>
-nnoremap <Leader>bc :filter /\.[ch]/ ls<CR>:buffer<Space>
-nnoremap <Leader>bm :filter /\ccmake/ ls<CR>:buffer<Space>
-nnoremap <Leader>bv :filter /vim/ ls<CR>:buffer<Space>
-nnoremap <Leader>f :find<Space>
-nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
-nnoremap <Leader>m :sil make<Space><Up><CR>
-nnoremap <Leader>M :sil make<Space><Up>
-nnoremap <Leader>v :sil vimgrep<Space><Up>
+nnoremap <Leader>v :edit <C-r>=g:vim_home<CR>
 nnoremap <Leader>g :silent grep <C-r><C-w>
 nnoremap <Leader>+ :tabnew<CR>
 nnoremap <Leader>- :tabclose<CR>
@@ -246,9 +239,10 @@ cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 
 augroup init
   autocmd!
-  autocmd VimResized * :wincmd =
-  autocmd VimEnter * :runtime site.vim
-  autocmd BufEnter * :if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
+  autocmd VimResized * wincmd =
+  autocmd VimEnter * runtime site.vim
+  autocmd BufEnter * if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
+  autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
 augroup END
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
