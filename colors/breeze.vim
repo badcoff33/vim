@@ -138,12 +138,12 @@ call lib#color#Hi('StatusLine', s:blue_8, s:grey_2, 'bold', '')
 call lib#color#Hi('StatusLineNC', s:grey_3, s:grey_6, 'bold', '')
 call lib#color#Hi('VertSplit', s:grey_6, 'bg', 'NONE', '')
 call lib#color#Hi('IncSearch', s:black, s:yellow_6, 'none', '')
-call lib#color#Hi('Search', s:blue_0, s:blue_9, 'NONE', '')
+call lib#color#Hi('Search', s:blue_0, s:blue_8, 'NONE', '')
 call lib#color#Hi('MatchParen', s:green_1, s:green_7, '', '')
 call lib#color#Hi('QuickFixLine', s:red_0, s:red_8, 'bold', '')
 call lib#color#Hi('CursorLine', 'skip', s:green_9, '', '')
 call lib#color#Hi('CursorLineNr', s:green_1, s:green_7, 'bold,italic', '')
-call lib#color#Hi('LineNr', s:grey_6, 'skip', 'italic', '')
+call lib#color#Hi('LineNr', s:green_5, 'skip', '', '')
 
 highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr

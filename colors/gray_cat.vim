@@ -10,27 +10,18 @@ hi clear
 set background=light
 let g:colors_name = "gray_cat"
 
-augroup Colorscheme
-  au!
-  if exists('&wincolor')
-    " Lok-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
-          \ | set wincolor=NonText | else | set wincolor= | endif
-  endif
-augroup END
-
 " basics
 highlight Normal  guifg=grey30 guibg=white
-highlight NonText guifg=grey50 guibg=grey97
+highlight NonText guifg=paleturquoise2 guibg=white
 highlight Visual  guifg=white  guibg=grey35
 highlight Cursor  guifg=white  guibg=black
 
 highlight NormalFloat  guifg=black guibg=azure3
 
 " window decoration
-highlight StatusLine   guifg=white guibg=grey30 gui=NONE
-highlight StatusLineNC guifg=grey30 guibg=grey90 gui=italic
-highlight VertSplit    guifg=grey80 guibg=grey80 gui=italic
+highlight StatusLine   guifg=black guibg=grey80 gui=none
+highlight StatusLineNC guifg=grey30 guibg=grey94 gui=none
+highlight VertSplit    guifg=grey60 guibg=bg gui=none
 highlight! link WildMenu IncSearch
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
@@ -51,12 +42,12 @@ highlight! link TabLineSel   StatusLine
 
 " popup Menu
 highlight Pmenu      guifg=black guibg=turquoise2 gui=none
-highlight PmenuSel   guifg=white guibg=turquoise4 gui=bold
+highlight PmenuSel   guifg=white guibg=grey20 gui=bold
 highlight PmenuSbar  guibg=fg
-highlight PmenuThumb guifg=grey30
+highlight PmenuThumb guifg=turquoise2
 
 " search
-highlight IncSearch  guifg=white guibg=cornflowerblue gui=bold
+highlight IncSearch  guifg=black guibg=turquoise2 gui=bold
 highlight Search     guifg=black guibg=grey80         gui=bold
 highlight MatchParen guifg=cyan3 guibg=lightcyan               gui=bold
 
@@ -99,10 +90,10 @@ highlight doxygenSpecial            guifg=grey50 gui=none
 highlight doxygenSpecialOnelineDesc guifg=grey30
 
 " Diff highlighting
-highlight DiffText   guifg=dodgerblue4 guibg=skyblue1   gui=bold
-highlight DiffChange guifg=dodgerblue4 guibg=lightblue1 gui=none
-highlight DiffAdd    guifg=dodgerblue4 guibg=lightblue1 gui=bold
-highlight DiffDelete guifg=pink1       guibg=pink1
+highlight DiffText   guifg=black guibg=paleturquoise2 gui=bold
+highlight DiffChange guifg=black guibg=paleturquoise1 gui=none
+highlight DiffAdd    guifg=black guibg=paleturquoise1 gui=bold
+highlight DiffDelete guifg=pink1 guibg=pink1
 
 " netrw
 highlight netrwMarkFile gui=inverse
