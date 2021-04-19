@@ -1,6 +1,7 @@
 " Vim plugin term -- run job asynchron
 
 let g:term_active = get(g:, 'term_active', 0)
+let g:async_auto_quickfix = get(g:, 'async_auto_quickfix', 0)
 
 function! async#JobActive()
   return exists('g:term_job_active') && g:term_job_active==1 ? 1 : 0
@@ -22,7 +23,7 @@ function! AsyncCloseHandler(channel)
   call lib#popup#TopLeft([
         \ "Stop process " .. ch_getjob(a:channel),
         \ printf("Process toke %.3f seconds", reltimefloat(reltime(g:term_job_start_time)))])
-  if s:term_auto_quickfix == 1
+  if g:async_auto_quickfix == 1
     execute '3,$cbuffer' g:term_job_bufnr
   endif
 endfunction
@@ -50,18 +51,16 @@ if empty(prop_type_get('term_head'))
   call prop_type_add('term_cmd', {'highlight': 'Title'})
 endif
 
-function! async#StartJob(cmd, ...) abort
+function! async#StartJob(cmd) abort
   let g:term_job_bufnr = bufnr('<job-output>', v:true)
   if &autowrite || &autowriteall
     try
       wall
     catch /.*/
-      echo "Couldn't write all buffers"
+      echomsg "modified uffers no written"
     finally
-      ls +
     endtry
   endif
-  let s:term_auto_quickfix = (a:0 == 1) ? a:1 : 0
   execute "buffer" g:term_job_bufnr
   setlocal buftype=nofile nonumber norelativenumber modifiable
   nnoremap <buffer> <CR>  :3,$cbuffer<CR>
@@ -105,19 +104,29 @@ endfunction
 " Description: Popup to first not finished term buffer in buffer list.
 " An any optional parameter is present execute last terminal command.
 function! async#SendTermCmd(cmd)
+  if mode() == 'n'
+    let cmd_keys = 'a'
+  else
+    let cmd_keys = ''
+  endif
+  if empty(a:cmd)
+    let cmd_keys = cmd_keys .. "\<Up>\<CR>\<C-w>p"
+  else
+    let cmd_keys = cmd_keys .. a:cmd .. "\<CR>\<C-w>p"
+  endif
   for b in term_list()
-    if term_getstatus(b) != 'normal'
+    if getbufvar(b, 'home_term', 0) == 1
       call lib#windows#GotoBuffer(b)
-      call feedkeys("\<Esc>i")
-      if empty(a:cmd)
-        call feedkeys("\<Up>\<CR>\<C-w>p")
-      else
-        call feedkeys(a:cmd .. "\<CR>\<C-w>p")
-      endif
+      call feedkeys(cmd_keys)
       return
     endif
   endfor
   botright terminal
+  let b:home_term = 1
+  if mode() == 'n'
+    call feedkeys('a')
+  endif
+  call feedkeys(cmd_keys)
 endfunction
 
 function! async#CloseFinishedTerm()
