@@ -47,10 +47,13 @@ function! hello#SayHello()
   endfor
 
   if bufexists('Hello')
-    silent bdelete! Hello
+    buffer Hello
+    setlocal modifiable
+    normal ggVG"_x
+  else
+    enew
+    file Hello
   endif
-  enew
-  file Hello
 
   call append(0, head)
   call append(line('$'), '    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
