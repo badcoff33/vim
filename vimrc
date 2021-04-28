@@ -87,6 +87,7 @@ set incsearch
 set hlsearch
 set magic
 
+" first elementis users home of Vim files
 let g:vim_home = split(&runtimepath, ',')[0]
 
 if  isdirectory(g:vim_home .. '/backup')
@@ -153,6 +154,16 @@ vnoremap <C-a> <C-a>gv
 vnoremap > >gv
 vnoremap < <gv
 
+" Window movement
+nnoremap <S-Right> <C-w>l
+nnoremap <S-Left> <C-w>h
+nnoremap <S-Up> <C-w>k
+nnoremap <S-Down> <C-w>j
+tnoremap <S-Right> <C-w>l
+tnoremap <S-Left> <C-w>h
+tnoremap <S-Up> <C-w>k
+tnoremap <S-Down> <C-w>j
+
 " "Enclose" `current` (visual) {selection}
 vnoremap "<Space> c"<C-r>-"<Esc>
 vnoremap '<Space> c'<C-r>-'<Esc>
@@ -164,36 +175,37 @@ vnoremap {<Space> c{<C-r>-}<Esc>
 " Set leader and localleader keys, that works best for me
 let mapleader = " "
 let maplocalleader = "s"
-imap <C-Space> <Esc><Leader>
-nmap <C-Space> <Leader>
+" By default, <c-l> clears and redraws the screen (like :redraw!). The
+" following mapping does a little bit more to keep the screen sane.
+nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 
-nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>B :filter /\.<C-r>=&ft<CR>/ ls<CR>:buffer<Space>
+let g:ft2regex = { 
+      \ 'c':'\.[ch]$', 
+      \ 'vim':'\.vim', 
+      \ 'py':'\.py$', 
+      \ 'cmake':'\(\.cmake\|CMakeLists.txt\)',
+      \ }
+let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
+nnoremap <expr> <Leader>B ':filter /' .. LsFilter(&ft) .. '/ ls<CR>:buffer '
+nnoremap <Leader>b :ls +<CR>:buffer<Space>
 nnoremap <Leader>f :find<Space>
-nnoremap <Leader>e :edit <C-r>=expand("%:p:h")..g:psep<CR>
+nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader><C-m> :sil make<Space><Up>
+nnoremap <expr> <Leader>v ':edit' g:vim_home
+nnoremap <Leader>g <cmd>silent grep <C-r><C-w><CR>
+nnoremap <Leader>G :silent grep <C-r><C-w>
+nnoremap <Leader>+ :tabnew<CR>
+nnoremap <Leader>- :tabclose<CR>
+nnoremap <Leader>c <C-^>:bw#<Esc>
 
 " Terminals
 tnoremap <Esc> <C-w>N
 tnoremap <S-Ins> <C-w>"*
 
-nnoremap <Leader>v :edit <C-r>=g:vim_home<CR>
-nnoremap <Leader>g :silent grep <C-r><C-w>
-nnoremap <Leader>+ :tabnew<CR>
-nnoremap <Leader>- :tabclose<CR>
-nnoremap <Leader>c <C-^>:bw#<Esc>
-
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
 
-nnoremap <S-down>  <C-w>j
-nnoremap <S-up>    <C-w>k
-nnoremap <S-left>  <C-w>h
-nnoremap <S-right> <C-w>l
-
-nnoremap <C-l> :cnewer<CR>
-nnoremap <C-h> :colder<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 
@@ -202,10 +214,30 @@ nnoremap <A-Up> :cprev<CR>
 nnoremap <A-Left> :bprevious<CR>
 nnoremap <A-Right> :bnext<CR>
 
+" Insert mode: map all functions keys to normal mode mappinng
+imap <F1> <Esc><F1>
+imap <F2> <Esc><F2>
+imap <F3> <Esc><F3>
+imap <F4> <Esc><F4>
+imap <F5> <Esc><F5>
+imap <F6> <Esc><F6>
+imap <F7> <Esc><F7>
+imap <F8> <Esc><F8>
+imap <F9> <Esc><F9>
+imap <F10> <Esc><F10>
+imap <F11> <Esc><F11>
+imap <F12> <Esc><F12>
+imap <F13> <Esc><F13>
+
 if executable("rg")
   " Using links? Ripgrep supports this by th option '--follow'
-  set grepprg=rg\ --vimgrep\ -tc\ -tcpp\ -tcmake\ -g\ !cmake\ $*\ . 
+  set grepprg=rg\ --vimgrep\ -g\ !cmake\ $*\ . 
   set grepformat=%f:%l:%c:%m
+  let g:ft2rg_glob = { 'c':'-g *.[ch]', 'vim':'-g *.vim', 'asm': '-g *.850',
+        \ 'py':'-g *.py', 'cmake':'-g *.cmake -g CMakeLists.txt',
+        \ }
+  let RgGlob = { ft -> has_key(g:ft2rg_glob, ft) ? g:ft2rg_glob[ft] : '-g *.*' }
+  nnoremap <expr> <Leader>g ':silent grep ' .. RgGlob(&ft) .. ' ' .. expand('<cword>')
 elseif executable("grep")
   set grepprg=grep\ -Hnr\ --exclude=cmake\ $* \.
   set grepformat=%f:%l:%m
@@ -218,7 +250,6 @@ command! -nargs=0 EditOptions :execute "edit" findfile(".vimrc", ";")
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
-nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
 nnoremap <Leader>oi :set invignorecase ignorecase?<CR>
 nnoremap <Leader>om :set invsmartcase smartcase?<CR>
@@ -232,6 +263,7 @@ command! -nargs=0 CaseSensetive       :set noignorecase nosmartcase
 command! -nargs=0 SmartCase           :set   ignorecase  smartcase
 
 command! -nargs=0 ReadOnly :setlocal nomodifiable readonly
+command! -nargs=0 RestoreSession :source $TMP/session.vim
 
 " command completion needs terminating backslash (sorry, Windows)
 cnoremap <C-Space> <C-r>=g:psep<CR>
@@ -240,9 +272,13 @@ cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 augroup init
   autocmd!
   autocmd VimResized * wincmd =
-  autocmd VimEnter * runtime site.vim
+  autocmd VimLeave * mksession! $TMP/session.vim
   autocmd BufEnter * if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
   autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
 augroup END
+
+" run an optional, machine-dependent script here. May set plugin vars before the
+" plugins gets sourced.
+runtime site.vim
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
