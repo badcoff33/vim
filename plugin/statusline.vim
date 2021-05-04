@@ -28,13 +28,13 @@ endfunction
 " functions is in a file, located in after/ftplugin/&ft/scope.vim. Most
 " important is that the function ScopeParser&ft exists.
 function! GetScope()
-  let parser_str = 'ScopeParser' . toupper(&ft[0]) . &ft[1:]
-  if exists('*' . parser_str)
+  let parser_str = 'lib#scope#Parser' . toupper(&ft[0]) . &ft[1:]
+	try 
     let Parser = function(parser_str)
     return Parser()
-  else
+  catch
     return ''
-  endif
+  endtry
 endfunction
 
 augroup statusline
