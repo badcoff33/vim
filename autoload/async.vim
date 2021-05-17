@@ -4,86 +4,73 @@ let g:term_active = get(g:, 'term_active', 0)
 let g:async_auto_quickfix = get(g:, 'async_auto_quickfix', 0)
 
 function! async#JobActive()
-  return exists('g:term_job_active') && g:term_job_active==1 ? 1 : 0
+  return exists('g:async_jo_active') && g:async_jo_active==1 ? 1 : 0
 endfunction
 
 function! async#JobBufferToFront()
-  call lib#windows#PopupBuffer(g:term_job_bufnr)
+  call lib#windows#PopupBuffer(g:async_job_bufnr)
 endfunction
 
 function! async#HideJobBuffer()
-  call lib#windows#HideBuffer(g:term_job_bufnr)
+  call lib#windows#HideBuffer(g:async_job_bufnr)
 endfunction
 
 function! AsyncErrorHandler(channel, msg)
 endfunction
 
 function! AsyncCloseHandler(channel)
-  let g:term_job_active = 0
-  call lib#popup#TopLeft([
+  let g:async_jo_active = 0
+  call lib#popup#Bottom([
         \ "Stop process " .. ch_getjob(a:channel),
-        \ printf("Process toke %.3f seconds", reltimefloat(reltime(g:term_job_start_time)))])
+        \ printf("Process toke %.3f seconds", reltimefloat(reltime(g:async_job_start_time)))])
   if g:async_auto_quickfix == 1
-    execute '3,$cbuffer' g:term_job_bufnr
+    execute '1,$cbuffer' g:async_job_bufnr
   endif
 endfunction
 
 function! AsyncOutHandler(channel, msg)
 endfunction
 
-function! s:Head(cmdstr)
-  normal ggVG"_x
-  let head_str  = '# started ' .. strftime("%Y-%m-%d %X") .. '& '
-  let separator = '###############################################################################'
-  call append(0, [head_str .. a:cmdstr, separator])
-  call prop_clear(1, 2)
-  call prop_add(1, 1, {'length': len(head_str), 'type': 'term_head'})
-  call prop_add(1, len(head_str), {'length': len(a:cmdstr) + 1, 'type': 'term_cmd'})
-  call prop_add(2, 1, {'length': len(separator), 'type': 'term_head'})
-endfunction
-
 function! async#JobBufferAsQuickfix()
-  execute "3,$cbuffer" g:term_job_bufnr
+  execute "3,$cbuffer" g:async_job_bufnr
 endfunction
-
-if empty(prop_type_get('term_head'))
-  call prop_type_add('term_head', {'highlight': 'Comment'})
-  call prop_type_add('term_cmd', {'highlight': 'Title'})
-endif
 
 function! async#StartJob(cmd) abort
-  let g:term_job_bufnr = bufnr('<job-output>', v:true)
+  let g:async_job_bufnr = bufnr('<job-output>', v:true)
+  execute 'buffer' g:async_job_bufnr
+  normal gg"_dG
+  buffer #
   if &autowrite || &autowriteall
     try
       wall
     catch /.*/
-      echomsg "modified uffers no written"
+      echomsg "modified buffers not written"
     finally
     endtry
   endif
-  execute "buffer" g:term_job_bufnr
-  setlocal buftype=nofile nonumber norelativenumber modifiable
-  nnoremap <buffer> <CR>  :3,$cbuffer<CR>
-  nnoremap <buffer> <Esc> <C-w>c
-  call s:Head(a:cmd)
-  buffer #
+  call setbufvar(g:async_job_bufnr, "&buftype", "nofile")
+  call setbufvar(g:async_job_bufnr, "&number", 0)
+  call setbufvar(g:async_job_bufnr, "&relativenumber", 0)
+  call setbufvar(g:async_job_bufnr, "&modifiable", 1)
+  call setbufline(g:async_job_bufnr, 1, '# started ' .. strftime("%Y-%m-%d %X") .. ': ' .. a:cmd)
+  call setbufline(g:async_job_bufnr, 2, '#########')
   let s:async_make_options = {
         \ 'close_cb': 'AsyncCloseHandler',
         \ 'err_cb': 'AsyncErrorHandler',
         \ 'out_cb': 'AsyncOutHandler',
         \ 'out_io': 'buffer',
         \ 'err_io': 'buffer',
-        \ 'out_buf': g:term_job_bufnr,
-        \ 'err_buf': g:term_job_bufnr
+        \ 'out_buf': g:async_job_bufnr,
+        \ 'err_buf': g:async_job_bufnr
         \ }
   let job = job_start('cmd /C '..a:cmd, s:async_make_options )
   let id = job_info(job)['process']
   if job_info(job)['status'] == 'run'
-    let g:term_job_active = 1
-    let g:term_job_start_time = reltime()
+    let g:async_jo_active = 1
+    let g:async_job_start_time = reltime()
     call lib#popup#Bottom(["Start process " .. id])
   else
-    let g:term_job_active = 0
+    let g:async_jo_active = 0
     call lib#popup#Bottom(["Failed process " .. id .. ": " .. a:cmd])
     echoerr 'job failed to start'
   endif
@@ -117,6 +104,7 @@ function! async#SendTermCmd(cmd)
   for b in term_list()
     if getbufvar(b, 'home_term', 0) == 1
       call lib#windows#GotoBuffer(b)
+      execute 'nnoremap <buffer> <CR> :' .. line('$') .. ',$cbuffer<CR>'
       call feedkeys(cmd_keys)
       return
     endif

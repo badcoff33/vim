@@ -1,7 +1,3 @@
-"setbufline({expr}, {lnum}, {text})     *setbufline()*
-"in contrust to
-"append(...)?
-
 function! hello#SetProps()
   call prop_type_delete('HelloHead')
   call prop_type_add('HelloHead', {'highlight': 'Title'})
@@ -13,63 +9,55 @@ endfunction
 function! hello#SayHello()
   call hello#SetProps()
   let head = []
+  call add(head, "                                    ")
   call add(head, "            |\\   _,,,---,,_        ")
   call add(head, "    ZZzzz /,`.-'`'    -.  ;-;;,_    ")
   call add(head, "         |,4-  ) )-,_. ,\\ (  `'-'  ")
   call add(head, "        '---''(_/--'  `-'\\_)       ")
-" call add(head,'    _----------_')
-" call add(head,'     Need help? ')
-" call add(head,'    -__________-')
-" call add(head,'     \')
-" call add(head,'      \   \_\_    _/_/')
-" call add(head,'       \      \__/')
-" call add(head,'              (oo)\_______')
-" call add(head,'              (__)\       )\/\')
-" call add(head,'                  ||----w |')
-" call add(head,'                  ||     ||')
 
-  let edit_cmds = {}
-  let cd_cmds = {}
-  let key = char2nr('a')
-  let num = char2nr('0')
-  let infofile = &viminfofile ? &viminfofile : '~\_viminfo'
-  for line in readfile(expand(infofile))
-    let m = matchlist(line, '\(^:e\|^:edit\)\s\+\(.\+\)$')
-    if !empty(m) && filereadable(fnamemodify(m[2], ':p')) && len(edit_cmds) <= 5
-      let edit_cmds[nr2char(key)] = m[0]
-      let key += 1
+  let edit_cmds = []
+  let num_of_edit_cmds = 0
+  let cd_cmds = []
+  let num_of_cd_cmds = 0
+
+  let cmd_entries = histnr('cmd')
+  for hist_num in range(1, cmd_entries)
+    let cmd_line = histget('cmd', -hist_num)
+    let m = matchlist(cmd_line, '\(^e\|^:edit\)\s\+\(.\+\)$')
+    if !empty(m) && filereadable(fnamemodify(m[2], ':p')) && num_of_edit_cmds <= 5
+      call add(edit_cmds, m[0])
+      let num_of_edit_cmds += 1
     endif
-    let m = matchlist(line, '\(^:cd\)\s\+\(.\+\)$')
+    let m = matchlist(cmd_line, '\(^cd\)\s\+\(.\+\)$')
     if !empty(m) && isdirectory(fnamemodify(m[2], ':p')) && len(cd_cmds) <= 5
-      let cd_cmds[nr2char(num)] = m[0]
-      let num += 1
+      call add(cd_cmds, m[0])
+      let num_of_cd_cmds += 1
     endif
   endfor
 
-  if bufexists('Hello')
-    buffer Hello
-    setlocal modifiable
-    normal ggVG"_x
-  else
-    enew
-    file Hello
-  endif
+  let std_cmds = [
+        \ 'e ~\vimfiles\site.vim',
+        \ 'e ~\vimfiles\vimrc']
+
+  enew
+  setlocal modifiable cursorline
+  autocmd BufLeave <buffer> bwipe
 
   call append(0, head)
   call append(line('$'), '    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
   let line_sep3=line('$')
-  call append(line('$'), printf('    [q]    quit'))
+  for l in std_cmds
+    call append(line('$'), printf('    %s', l))
+  endfor
   call append(line('$'), '    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
   let line_sep1=line('$')
-  for key in keys(edit_cmds)
-    call append(line('$'), printf('    [%s]    %s', key, edit_cmds[key]))
-    execute 'nnoremap <buffer>' key edit_cmds[key]..'<CR>'
+  for l in edit_cmds
+    call append(line('$'), printf('    %s', l))
   endfor
   call append(line('$'), '    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
   let line_sep2=line('$')
-  for key in keys(cd_cmds)
-    call append(line('$'), printf('    [%s]    %s', key, cd_cmds[key]))
-    execute 'nnoremap <buffer>' key cd_cmds[key]..'<CR>'
+  for l in cd_cmds
+    call append(line('$'), printf('    %s', l))
   endfor
 
   call prop_add(1, 1, {'end_lnum': len(head)+1, 'type': 'HelloHead'})
@@ -79,10 +67,12 @@ function! hello#SayHello()
   setlocal statusline=Hello!
   setlocal buftype=nofile nomodified nomodifiable
   nnoremap <buffer> q :bw<CR>
-  nnoremap <buffer> j jzz
-  nnoremap <buffer> k kzz
-  nnoremap <buffer> <down> jzz
-  nnoremap <buffer> <up> kzz
+  nnoremap <buffer> j j_
+  nnoremap <buffer> k k_
+  nnoremap <buffer> <down> j_
+  nnoremap <buffer> <up> k_
+  nnoremap <buffer> <CR> 0"hy$:<C-r>h<CR>_
+  execute 'normal' line_sep1 .. 'G'
 
 endfunction
 

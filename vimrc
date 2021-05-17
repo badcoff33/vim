@@ -4,6 +4,10 @@
 
 filetype plugin on
 filetype indent on
+syntax on
+if exists('&termguicolors')
+  set termguicolors
+endif
 
 set clipboard=autoselect
 set selection=inclusive
@@ -22,9 +26,11 @@ set noswapfile
 set laststatus=2
 set report=0
 set ruler
-set showcmd
 set showmatch matchtime=1
 set showtabline=1
+set showcmd
+set shortmess-=f " long form for file info
+set shortmess-=S " Yes, search count please
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
@@ -71,16 +77,6 @@ set nottimeout
 " keep indent level when Ctrl-U is pressed
 set backspace=eol,start,indent
 
-if has ('jumpoptions')
-  " New option is coming for Neovim/Vim
-  set jumpoptions=stack
-endif
-
-if (has("termguicolors"))
-  set termguicolors
-  syntax on
-endif
-
 " Search: Some configuration for the search behavior.
 set ignorecase smartcase
 set incsearch
@@ -90,7 +86,7 @@ set magic
 " first elementis users home of Vim files
 let g:vim_home = split(&runtimepath, ',')[0]
 
-if  isdirectory(g:vim_home .. '/backup')
+if isdirectory(g:vim_home .. '/backup')
   set backup
   execute 'set backupdir=' .. g:vim_home .. '/backup'
   set wildignore+=*/backup/*
@@ -110,8 +106,8 @@ set pumheight=7
 
 " Command line completion
 set wildoptions=tagfile
-set nowildmenu wildmode=list:full
-"set wildmenu
+set nowildmenu wildmode=full
+"set wildmenu wildmode=full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
@@ -141,6 +137,8 @@ let g:netrw_preview = 1
 
 " Switch modes
 inoremap <S-Space> <Esc>
+tnoremap <Esc> <C-w>N
+tnoremap <S-Space> <C-w>N
 
 " yank current word -- CUA style
 nnoremap <C-Ins> "+yiw
@@ -199,8 +197,7 @@ nnoremap <Leader>+ :tabnew<CR>
 nnoremap <Leader>- :tabclose<CR>
 nnoremap <Leader>c <C-^>:bw#<Esc>
 
-" Terminals
-tnoremap <Esc> <C-w>N
+" Terminal
 tnoremap <S-Ins> <C-w>"*
 
 nnoremap <A-+> 3<C-w>+3<C-w>>
@@ -243,7 +240,7 @@ elseif executable("grep")
   set grepformat=%f:%l:%m
 endif
 
-command! -nargs=1 -complete=dir WriteOptionsToDir :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>'..'/.vimrc', 'a')
+command! -nargs=1 -complete=file WriteOptionsToDir :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>'..'/.vimrc', 'a')
 command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
 command! -nargs=0 EditOptions :execute "edit" findfile(".vimrc", ";")
 
@@ -263,7 +260,7 @@ command! -nargs=0 CaseSensetive       :set noignorecase nosmartcase
 command! -nargs=0 SmartCase           :set   ignorecase  smartcase
 
 command! -nargs=0 ReadOnly :setlocal nomodifiable readonly
-command! -nargs=0 RestoreSession :source $TMP/session.vim
+command! -nargs=0 LastSession :execute 'source '..$TMP..'/'..sha256(getcwd())..'.vim'
 
 " command completion needs terminating backslash (sorry, Windows)
 cnoremap <C-Space> <C-r>=g:psep<CR>
@@ -272,13 +269,15 @@ cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 augroup init
   autocmd!
   autocmd VimResized * wincmd =
-  autocmd VimLeave * mksession! $TMP/session.vim
+  autocmd VimLeavePre * execute 'mksession! '..$TMP..'/'..sha256(getcwd())..'.vim'
   autocmd BufEnter * if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
   autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
+  autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split('<C-r>t','\r')<CR>
+  autocmd TerminalOpen * nnoremap <buffer> <CR> :cexpr getline('.')<CR><C-w>p
 augroup END
 
 " run an optional, machine-dependent script here. May set plugin vars before the
 " plugins gets sourced.
 runtime site.vim
 
-" vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
+" vim:ft=vim

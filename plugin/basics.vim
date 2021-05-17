@@ -20,7 +20,7 @@ if !hasmapto('<Plug>ToggleQuickfix')
 endif
 
 if !hasmapto('<Plug>HighlightWord')
-  nmap <Leader>* <Plug>HighlightWord
+  nmap <Leader><Leader> <Plug>HighlightWord
 endif
 
 command -nargs=0 ToggleStickyCursorline call <SID>ToggleStickyCursorline()
@@ -90,7 +90,7 @@ function! s:ToggleQuickfix()
   let qfIsOpen = 0
   windo if &buftype == 'quickfix' | let qfIsOpen = 1 | endif
   if qfIsOpen == 0
-    belowright copen 7
+   execute "botright copen"  (40 * getwininfo()['variables']['height'] ) / 100
   else
     cclose
   endif

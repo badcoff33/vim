@@ -1,5 +1,4 @@
 " GUI startup script
-syntax on
 set title
 
 " Save when Vim is losing or gaining focus
@@ -12,9 +11,6 @@ augroup ginit
   autocmd FocusGained * :checktime
   " Option 'title' needs to be set for this
   autocmd BufEnter * :set titlestring=Vim\ in\ %{getcwd()}
-  " C-Click to open file under cursor (only works if pwd of Vim and terminal
-  " matches)
-  autocmd TerminalOpen * :nnoremap <C-LeftMouse> gf
 augroup END
 
 set guioptions=!ca
@@ -22,7 +18,10 @@ set guicursor+=a:blinkon0
 set renderoptions=
 set mousemodel=popup
 set nomousefocus
-set foldcolumn=2
+set foldcolumn=1
+
+tnoremap <LeftMouse> <C-w>N
+tmap <RightMouse> <C-w>N<RightMouse>
 
 nnoremenu 1.300 PopUp.-SEP3- <NOP>
 if has('win32') || has('win64')
@@ -33,11 +32,10 @@ endif
 nnoremenu 1.320 PopUp.-SEP4- <NOP>
 nnoremenu 1.321 PopUp.Set\ font  :set guifont=*<CR>
 
-nnoremap <leader>4 :set guifont=<C-r>=matchstr(&gfn,'^\w\+')<CR>:h12 linespace=1<CR>
-nnoremap <leader>3 :set guifont=<C-r>=matchstr(&gfn,'^\w\+')<CR>:h11 linespace=1<CR>
-nnoremap <leader>2 :set guifont=<C-r>=matchstr(&gfn,'^\w\+')<CR>:h10 linespace=1<CR>
-nnoremap <leader>1 :set guifont=<C-r>=matchstr(&gfn,'^\w\+')<CR>:h9  linespace=1<CR>
-
-
+let F = {font -> escape(matchstr(&gfn,'^[A-Za-z_\ ]\+'), ' ')}
+nnoremap <expr> <leader>4 ':set guifont='..F(&gfn)..':h12 linespace=1<CR>'
+nnoremap <expr> <leader>3 ':set guifont='..F(&gfn)..':h11 linespace=1<CR>'
+nnoremap <expr> <leader>2 ':set guifont='..F(&gfn)..':h10 linespace=1<CR>'
+nnoremap <expr> <leader>1 ':set guifont='..F(&gfn)..':h9  linespace=1<CR>'
 
 " vim:ft=vim

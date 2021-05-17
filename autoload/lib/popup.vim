@@ -3,14 +3,14 @@ function! s:PickColor(winid)
   if hlID("PopupNotification")
     call setwinvar(a:winid, '&wincolor', 'PopupNotification')
   else
-    call setwinvar(a:winid, '&wincolor', 'PmenuSel')
+    call setwinvar(a:winid, '&wincolor', 'Pmenu')
   endif
 endfunction
 
 function! s:max_len_in_list(list)
   let max = 1
   for e in a:list
-    let max = max < len(e) ? len(e) : max
+    let max = (max < len(e)) ? len(e) : max
   endfor
   return max
 endfunction
@@ -23,6 +23,7 @@ function! lib#popup#TopLeft(list_of_strings)
     let g:winid_tiny = popup_create(a:list_of_strings, {
           \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
           \ 'col': 1,
+          \ 'maxwidth': &columns,
           \ 'minwidth': width,
           \ 'maxheight': 10,
           \ 'minheight': argc(),
@@ -46,6 +47,7 @@ function! lib#popup#TopRight(list_of_strings)
     let g:winid_tiny = popup_create(a:list_of_strings, {
           \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
           \ 'col': &columns - width,
+          \ 'maxwidth': &columns,
           \ 'minwidth': width,
           \ 'maxheight': 10,
           \ 'minheight': argc(),
@@ -70,7 +72,8 @@ function! lib#popup#Head(list_of_strings)
     let g:winid_head = popup_create(a:list_of_strings, {
           \ 'line': 1,
           \ 'col': 1,
-          \ 'minwidth': &columns,
+          \ 'maxwidth': &columns,
+          \ 'minwidth': 10
           \ 'maxheight': 10,
           \ 'minheight': argc() + 2,
           \ 'time': 3000,
@@ -93,25 +96,25 @@ function! lib#popup#Bottom(list_of_strings)
     call popup_settext(g:winid_bot, a:list_of_strings)
   else
     let g:winid_bot = popup_create(a:list_of_strings, {
-          \ 'line': &lines - len(a:list_of_strings) - 1,
-          \ 'col': 1,
-          \ 'minwidth': &columns,
+          \ 'line': &lines - len(a:list_of_strings) - 5,
+          \ 'col': 3,
+          \ 'maxwidth': &columns-10,
+          \ 'minwidth': 40,
           \ 'maxheight': 10,
-          \ 'minheight': argc(),
+          \ 'minheight': len(a:list_of_strings),
           \ 'time': 3000,
+          \ 'padding': [1, 2, 1, 2],
           \ 'tabpage': -1,
-          \ 'zindex': 300,
           \ 'drag': 1,
           \ 'close': 'click',
-          \ 'padding': [0,1,0,1],
-          \ 'title': "",
+          \ 'title': ""
           \ })
     call s:PickColor(g:winid_bot)
   endif
 endfunction
 
-function! lib#popup#OpenFloatingWin(text_list)
-    call popup_create(split(a:text, '\n'), #{ pos: 'topleft',
+function! lib#popup#OpenFloatingWin(buffer)
+    call popup_create(split(buffer, #{ pos: 'topleft',
           \ line: 'cursor+1', col: 'cursor', moved: 'WORD' })
     return
 endfunction

@@ -166,10 +166,10 @@ hi! link Macro Define
 hi! link PreCondit PreProc
 hi! link Define PreProc
 
-call s:hi("DiffAdd", s:green, s:fg1, "", "")
-call s:hi("DiffChange", s:yellow, s:fg1, "", "")
-call s:hi("DiffDelete", s:red, s:fg1, "", "")
-call s:hi("DiffText", s:blue, s:fg1, "", "")
+call s:hi("DiffAdd", s:green, s:bg2, "", "")
+call s:hi("DiffChange", s:yellow, s:bg2, "", "")
+call s:hi("DiffDelete", s:red, s:bg2, "", "")
+call s:hi("DiffText", s:blue, s:bg2, "", "")
 
 call s:hi("cIncluded", s:blue, "", "", "")
 hi! link cOperator Operator

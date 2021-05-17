@@ -3,8 +3,8 @@
 " file) and a log file (goes into the diary file). No further bells and
 " whistles.
 
-let g:notes_file = get(g:, 'notes_file', '~\.notes\notes.txt')
-let g:diary_file = get(g:, 'diary_file', '~\.notes\diary.txt')
+let g:notes_file = get(g:, 'notes_file', fnameescape('~\OneDrive - Webasto Group\Notes\notes.txt'))
+let g:diary_file = get(g:, 'diary_file', fnameescape('~\OneDrive - Webasto Group\Notes\diary.txt'))
 
 nnoremap <Leader>nn :drop <C-r>=g:notes_file<cr><cr>
 nnoremap <Leader>nd :drop <C-r>=g:diary_file<cr><cr>

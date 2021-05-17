@@ -1,7 +1,7 @@
 " Vim ftplugin file
 
 if exists("b:did_ftplugin_after")
-"  finish
+  finish
 endif
 
 setlocal textwidth=0

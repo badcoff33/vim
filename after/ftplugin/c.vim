@@ -17,6 +17,9 @@ iabbrev <buffer> xdef    #define
 iabbrev <buffer> xdbg    #warning DEBUG CODE:
 endif
 
+" quick preview of tags
+nnoremap <buffer> <CR> <C-w>}
+
 " Toggle automatic comment formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
 
@@ -36,7 +39,7 @@ function! FormatC() range
     call setpos('.', save_cursor)
 endfunction
 
-"let b:load_doxygen_syntax=1
+let b:load_doxygen_syntax=1
 let g:c_no_comment_fold = 1
 let g:c_comment_strings = 0
 let g:c_space_errors = 1

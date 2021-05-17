@@ -37,13 +37,15 @@ let s:bg1     = '#282835'
 let s:bg2     = '#312A3A'
 let s:bg3     = '#343240'
 let s:bg4     = '#434050'
+let s:bg5     = '#4F4B6C'
 let s:silver1 = '#505860'
 let s:silver2 = '#9098A0'
 let s:silver3 = '#C0CBD0'
 let s:silver4 = '#E8E8FE'
-let s:green1  = '#309840'
-let s:green2  = '#20D055'
-let s:green3  = '#47F058'
+let s:green1  = '#257333'
+let s:green2  = '#30B840'
+let s:green3  = '#20D055'
+let s:green4  = '#47FF58'
 let s:blue1   = '#6080A8'
 let s:blue2   = '#90B0E0'
 let s:red1    = '#C85012'
@@ -54,33 +56,38 @@ call lib#color#Hi('Normal', s:white, s:bg1, 'NONE', '')
 call lib#color#Hi('Bold',   s:silver4, '', 'bold', '')
 call lib#color#Hi('Italic', s:silver4, '', 'italic', '')
 call lib#color#Hi('NonText', s:blue1, s:bg2, '', '')
-call lib#color#Hi('Visual', s:silver4, s:silver1, '', '')
-call lib#color#Hi('StatusLine', s:white, s:bg4, 'bold', '')
-call lib#color#Hi('StatusLineNC', s:silver2, s:bg3, '',  '')
-call lib#color#Hi('VertSplit', s:bg4, s:bg3, 'NONE', '')
-call lib#color#Hi('IncSearch', s:black, s:silver3, 'bold', '')
-call lib#color#Hi('Search', s:white, s:blue1, '', '')
+call lib#color#Hi('Visual', s:white, s:blue1, '', '')
+call lib#color#Hi('Terminal', s:silver3, s:bg5, '', '')
+call lib#color#Hi('StatusLine', s:white, s:blue1, '', '')
+call lib#color#Hi('StatusLineNC', s:silver4, s:bg5, '',  '')
+call lib#color#Hi('VertSplit', s:bg5, s:bg2, 'NONE', '')
+call lib#color#Hi('IncSearch', s:black, s:silver4, '', '')
+call lib#color#Hi('Search', s:green4, s:bg5, 'bold', '')
 call lib#color#Hi('MatchParen', s:green3, '', 'underline', '')
 call lib#color#Hi('QuickFixLine', '', s:black, 'bold', '')
 call lib#color#Hi('Cursor', s:black, s:silver3, '', '')
 call lib#color#Hi('CursorLine', 'skip', s:bg3, '', '')
-call lib#color#Hi('CursorLineNr', '', s:bg4, 'bold', '')
-call lib#color#Hi('LineNr', s:blue1, '', '', '')
+call lib#color#Hi('CursorLineNr', '', s:bg4, '', '')
+call lib#color#Hi('LineNr', s:silver1, '', '', '')
 
+call lib#color#Hi("PMenuSel", s:white, s:green1, "NONE", "")
+call lib#color#Hi("PMenu", s:silver3, s:silver1, "NONE", "")
+call lib#color#Hi("PMenuSbar", s:silver3, s:bg3, "", "")
+call lib#color#Hi("PMenuThumb", s:blue2, s:bg4, "", "")
+highlight! link User1 StatusLine
+highlight! link User2 StatusLine
+highlight! link User3 StatusLine
+highlight! link User4 StatusLine
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link Folded StatusLineNC
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link PmenuSel IncSearch
-highlight! link Pmenu Search
-highlight! link PmenuSbar Search
-highlight! link PmenuThumb IncSearch
 highlight! link SignColumn LineNr
 highlight! link TabLineFill Normal
 highlight! link TabLine StatusLineNC
-highlight! link TabLineSel Search
-highlight! link WildMenu PmenuSel
+highlight! link TabLineSel StatusLine
+highlight! link WildMenu IncSearch
 
 " Apollo specific
 call lib#color#Hi('BlendDown', s:white, s:bg2, '', '')
@@ -88,15 +95,15 @@ call lib#color#Hi('BlendDown', s:white, s:bg2, '', '')
 " Code
 call lib#color#Hi('Statement', s:silver4, '', '', '')
 call lib#color#Hi('Conditional', s:silver3, '', 'bold', '')
-call lib#color#Hi('Type', s:green2, 'skip', '', '')
+call lib#color#Hi('Type', s:white, 'skip', '', '')
 call lib#color#Hi('Structure', s:green2, '', '', '')
 call lib#color#Hi('StorageClass', s:blue1, '', '', '')
 call lib#color#Hi('PreProc', s:blue2, 'skip', 'bold', '')
 call lib#color#Hi('PreCondit', s:blue1, '', 'bold', '')
-call lib#color#Hi('Comment', s:silver2, 'skip', '', '')
+call lib#color#Hi('Comment', s:green2, 'skip', '', '')
 call lib#color#Hi('Function', s:silver3, '', '', '')
-call lib#color#Hi('Identifier', s:green2, 'skip', '', '')
-call lib#color#Hi('Special', s:green2, 'skip', '', '')
+call lib#color#Hi('Identifier', s:green4, 'skip', '', '')
+call lib#color#Hi('Special', s:green3, 'skip', '', '')
 call lib#color#Hi('Constant', s:silver3, 'skip', '', '')
 call lib#color#Hi('Number', s:blue2, '', '', '')
 call lib#color#Hi('Title', s:green3, '', '', '')
@@ -121,9 +128,9 @@ call lib#color#Hi('cParen', s:silver3, '', '', '')
 call lib#color#Hi('cBlock', s:silver3, '', '', '')
 
 " filetype HTML
-call lib#color#Hi('htmlH1', s:green3, '', 'bold', '')
+call lib#color#Hi('htmlH1', s:green4, '', 'bold', '')
 call lib#color#Hi('htmlH2', s:green3, '', 'bold', '')
-call lib#color#Hi('htmlH3', s:green3, '', 'bold,italic', '')
+call lib#color#Hi('htmlH3', s:green2, '', 'bold', '')
 
 " markdown
 call lib#color#Hi('markdownCode', s:silver2, s:bg3, '', '')
@@ -138,5 +145,5 @@ call lib#color#Hi('rstStrongEmphasis', s:green2, '', 'bold', '')
 " Diffs
 call lib#color#Hi('DiffChange', s:white, s:bg4, '', '')
 call lib#color#Hi('DiffText', s:blue2, s:bg4, 'bold', '')
-call lib#color#Hi('DiffDelete', s:red1, s:bg4, 'italic', '')
+call lib#color#Hi('DiffDelete', s:red1, s:bg4, '', '')
 call lib#color#Hi('DiffAdd', s:green2, s:bg3, 'bold', '')
