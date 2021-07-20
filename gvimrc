@@ -13,9 +13,9 @@ augroup ginit
   autocmd BufEnter * :set titlestring=Vim\ in\ %{getcwd()}
 augroup END
 
-set guioptions=!ca
+set guioptions=!a
 set guicursor+=a:blinkon0
-set renderoptions=
+set renderoptions=type:directx
 set mousemodel=popup
 set nomousefocus
 set foldcolumn=1

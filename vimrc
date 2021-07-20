@@ -104,6 +104,8 @@ set showfulltag
 set completeopt=menu,preview
 set pumheight=7
 
+set previewpopup=height:10,width:60,highlight:Pmenu
+
 " Command line completion
 set wildoptions=tagfile
 set nowildmenu wildmode=full
@@ -137,8 +139,7 @@ let g:netrw_preview = 1
 
 " Switch modes
 inoremap <S-Space> <Esc>
-tnoremap <Esc> <C-w>N
-tnoremap <S-Space> <C-w>N
+tnoremap <Esc> <C-w>c
 
 " yank current word -- CUA style
 nnoremap <C-Ins> "+yiw
@@ -192,7 +193,7 @@ nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader><C-m> :sil make<Space><Up>
 nnoremap <expr> <Leader>v ':edit' g:vim_home
 nnoremap <Leader>g <cmd>silent grep <C-r><C-w><CR>
-nnoremap <Leader>G :silent grep <C-r><C-w>
+nnoremap <Leader>G :silent grep<Space>
 nnoremap <Leader>+ :tabnew<CR>
 nnoremap <Leader>- :tabclose<CR>
 nnoremap <Leader>c <C-^>:bw#<Esc>
@@ -228,9 +229,9 @@ imap <F13> <Esc><F13>
 
 if executable("rg")
   " Using links? Ripgrep supports this by th option '--follow'
-  set grepprg=rg\ --vimgrep\ -g\ !cmake\ $*\ . 
+  set grepprg=rg\ --vimgrep\ -g\ !cmake\ $*
   set grepformat=%f:%l:%c:%m
-  let g:ft2rg_glob = { 'c':'-g *.[ch]', 'vim':'-g *.vim', 'asm': '-g *.850',
+  let g:ft2rg_glob = { 'c':'-g *.[ch]','cpp':'-g *.[ch]', 'vim':'-g *.vim', 'asm': '-g *.850',
         \ 'py':'-g *.py', 'cmake':'-g *.cmake -g CMakeLists.txt',
         \ }
   let RgGlob = { ft -> has_key(g:ft2rg_glob, ft) ? g:ft2rg_glob[ft] : '-g *.*' }
@@ -240,10 +241,6 @@ elseif executable("grep")
   set grepformat=%f:%l:%m
 endif
 
-command! -nargs=1 -complete=file WriteOptionsToDir :call writefile(['set grepprg='..escape(&grepprg, ' \'), 'set path='..&path], '<args>'..'/.vimrc', 'a')
-command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
-command! -nargs=0 EditOptions :execute "edit" findfile(".vimrc", ";")
-
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
@@ -251,7 +248,10 @@ nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
 nnoremap <Leader>oi :set invignorecase ignorecase?<CR>
 nnoremap <Leader>om :set invsmartcase smartcase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
-nnoremap <Leader>og :set grepprg=<C-r>=escape(input("set greprg:", &grepprg), ' ')<CR><CR>
+nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
+
+command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
+command! -nargs=0 EditOptions :execute "edit" findfile(".vimrc", ";")
 
 command! -nargs=0 CleanUpBuffers :bufdo if bufname('%')=='' | bd! | endif
 
@@ -271,6 +271,7 @@ augroup init
   autocmd VimResized * wincmd =
   autocmd VimLeavePre * execute 'mksession! '..$TMP..'/'..sha256(getcwd())..'.vim'
   autocmd BufEnter * if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
+  autocmd BufEnter * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
   autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split('<C-r>t','\r')<CR>
   autocmd TerminalOpen * nnoremap <buffer> <CR> :cexpr getline('.')<CR><C-w>p

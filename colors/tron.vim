@@ -67,116 +67,110 @@ function! s:hi(group, guifg, guibg, attr, guisp)
 endfunction
 
 " --- Editor ---
-call s:hi("ColorColumn", "", s:fg1, "", "")
-call s:hi("Cursor", "#ffffff", s:magenta, "NONE", "")
-call s:hi("CursorLine", "", s:hl_line, "NONE", "")
-call s:hi("Error", s:red, "bg", "", "")
-call s:hi("iCursor", s:fg0, s:fg4, "", "")
-call s:hi("LineNr", s:fg3, s:bg2, "", "")
-call s:hi("MatchParen", s:green, s:bg3, "", "")
-call s:hi("NonText", s:fg2, "", "", "")
-call s:hi("Normal", s:fg0, s:bg1, "", "")
-call s:hi("SpecialKey", s:fg3, "", "", "")
-call s:hi("SpellBad", s:red, s:bg0, "undercurl", s:red)
-call s:hi("SpellCap", s:yellow, s:bg0, "undercurl", s:yellow)
-call s:hi("SpellLocal", s:fg4, s:bg0, "undercurl", s:red)
-call s:hi("SpellRare", s:fg4, s:bg0, "undercurl", s:red)
-call s:hi("Visual", "", s:bg_hl, "", "")
-call s:hi("VisualNOS", "", s:bg_hl, "", "")
-
-" - Neovim Support -
-call s:hi("healthError", s:red, s:fg1, "", "")
-call s:hi("healthSuccess", s:green, s:fg1, "", "")
-call s:hi("healthWarning", s:yellow, s:fg1, "", "")
-call s:hi("TermCursorNC", "", s:fg1, "", "")
+call lib#color#Hi("ColorColumn", "", s:fg1, "", "")
+call lib#color#Hi("Cursor", "#ffffff", s:magenta, "NONE", "")
+call lib#color#Hi("CursorLine", "", s:hl_line, "NONE", "")
+call lib#color#Hi("Error", s:red, "bg", "", "")
+call lib#color#Hi("iCursor", s:fg0, s:fg4, "", "")
+call lib#color#Hi("LineNr", s:fg3, s:bg2, "", "")
+call lib#color#Hi("MatchParen", s:green, s:bg3, "", "")
+call lib#color#Hi("NonText", s:fg0, s:blue, "", "")
+call lib#color#Hi("Normal", s:fg0, s:bg1, "", "")
+call lib#color#Hi("SpecialKey", s:fg3, "", "", "")
+call lib#color#Hi("SpellBad", s:red, s:bg0, "undercurl", s:red)
+call lib#color#Hi("SpellCap", s:yellow, s:bg0, "undercurl", s:yellow)
+call lib#color#Hi("SpellLocal", s:fg4, s:bg0, "undercurl", s:red)
+call lib#color#Hi("SpellRare", s:fg4, s:bg0, "undercurl", s:red)
+call lib#color#Hi("Visual", "", s:bg_hl, "", "")
+call lib#color#Hi("VisualNOS", "", s:bg_hl, "", "")
 
 " --- Gutter ---
-call s:hi("CursorColumn", "", s:fg1, "", "")
-call s:hi("CursorLineNr", s:line_num, "", "NONE", "")
-call s:hi("Folded", s:fg3, s:fg1, "bold", "")
-call s:hi("FoldColumn", s:fg3, s:bg0, "", "")
-call s:hi("SignColumn", s:fg1, s:bg0, "", "")
+call lib#color#Hi("CursorColumn", "", s:fg1, "", "")
+call lib#color#Hi("CursorLineNr", s:line_num, "", "NONE", "")
+call lib#color#Hi("Folded", s:fg3, s:fg1, "bold", "")
+call lib#color#Hi("FoldColumn", s:fg3, s:bg0, "", "")
+call lib#color#Hi("SignColumn", s:fg1, s:bg0, "", "")
 
 " --- Navigation ---
-call s:hi("Directory", s:blue, "", "underline", "")
+call lib#color#Hi("Directory", s:blue, "", "underline", "")
 
 " --- Prompt/Status ---
-call s:hi("EndOfBuffer", s:fg1, "", "", "")
-call s:hi("WarningMsg", s:bg0, s:yellow, "", "")
-call s:hi("ErrorMsg", s:bg0, s:red, "", "")
-call s:hi("ModeMsg", s:bg0, s:green, "", "")
-call s:hi("MoreMsg", s:bg0, s:yellow, "", "")
-call s:hi("Question", s:fg4, "", "", "")
+call lib#color#Hi("EndOfBuffer", s:fg1, "", "", "")
+call lib#color#Hi("WarningMsg", s:bg0, s:yellow, "", "")
+call lib#color#Hi("ErrorMsg", s:bg0, s:red, "", "")
+call lib#color#Hi("ModeMsg", s:bg0, s:green, "", "")
+call lib#color#Hi("MoreMsg", s:bg0, s:yellow, "", "")
+call lib#color#Hi("Question", s:fg4, "", "", "")
 
 " --- Decorations ---
-call s:hi("StatusLine", s:fg4, s:mode_line_bg, "NONE", "")
-call s:hi("StatusLineNC", s:fg0, s:bg2, "NONE", "")
-call s:hi("StatusLineTerm", s:blue, s:fg3, "NONE", "")
-call s:hi("IncSearch", s:yellow, s:bg3, "bold", "")
-call s:hi("Search", s:green, s:bg4, "NONE", "")
+call lib#color#Hi("StatusLine", s:fg4, s:mode_line_bg, "NONE", "")
+call lib#color#Hi("StatusLineNC", s:fg0, s:bg2, "NONE", "")
+call lib#color#Hi("StatusLineTerm", s:blue, s:fg3, "NONE", "")
+call lib#color#Hi("IncSearch", s:yellow, s:bg3, "bold", "")
+call lib#color#Hi("Search", s:green, s:bg4, "NONE", "")
 
 hi! link StatusLineTerm StatusLine
 hi! link StatusLineTermNC StatusLineNC
 hi! link WildMenu IncSearch
 hi! link VertSplit StatusLineNC
 
-call s:hi("PmenuSbar", s:fg3, s:bg2, "", "")
-call s:hi("PmenuThumb", s:fg4, s:bg3, "", "")
+call lib#color#Hi("PmenuSbar", s:fg3, s:bg2, "", "")
+call lib#color#Hi("PmenuThumb", s:fg4, s:bg3, "", "")
 hi! link PMenuSel IncSearch
 hi! link PMenu    Search
 
-call s:hi("TabLine", s:fg4, s:fg1, "NONE", "")
-call s:hi("TabLineFill", s:fg4, s:fg1, "NONE", "")
-call s:hi("TabLineSel", s:red, s:fg4, "", "")
+call lib#color#Hi("TabLine", s:fg4, s:fg1, "NONE", "")
+call lib#color#Hi("TabLineFill", s:fg4, s:fg1, "NONE", "")
+call lib#color#Hi("TabLineSel", s:red, s:fg4, "", "")
 
 " --- Window ---
-call s:hi("Title", s:fg4, "", "NONE", "")
-call s:hi("Bold", "", "", "bold", "")
-call s:hi("Italic", "", "", "italic", "")
-call s:hi("Boolean", s:yellow, "", "", "")
-call s:hi("Character", s:yellow, "", "", "")
-call s:hi("Comment", s:fg1, "", "italic", "")
-call s:hi("Conditional", s:lightred, "", "", "")
-call s:hi("Constant", s:bluegreen, "", "", "")
-call s:hi("Exception", s:blue, "", "", "")
-call s:hi("Float", s:bluegreen, "", "", "")
-call s:hi("Function", s:yellow, "", "", "")
-call s:hi("Identifier", s:green, "", "NONE", "")
-call s:hi("Keyword", s:lightred, "", "", "")
-call s:hi("Label", s:blue, "", "", "")
-call s:hi("Number", s:magenta, "", "", "")
-call s:hi("Operator", s:yellow, "", "NONE", "")
-call s:hi("Repeat", s:red, "", "", "")
-call s:hi("Special", s:fg4, "", "", "")
-call s:hi("SpecialChar", s:yellow, "", "", "")
-call s:hi("SpecialComment", s:blue, "", "italic", "")
-call s:hi("Statement", s:lightred, "", "", "")
-call s:hi("StorageClass", s:blue, "", "", "")
-call s:hi("String", s:fg3, "", "", "")
-call s:hi("Structure", s:magenta, "", "", "")
-call s:hi("Tag", s:fg4, "", "", "")
-call s:hi("Todo", s:fg3, s:red, "NONE", "")
-call s:hi("Type", s:red, "", "NONE", "")
-call s:hi("Typedef", s:blue, "", "", "")
-call s:hi("Delimiter", s:fg4, "", "", "")
+call lib#color#Hi("Title", s:fg4, "", "NONE", "")
+call lib#color#Hi("Bold", "", "", "bold", "")
+call lib#color#Hi("Italic", "", "", "italic", "")
+call lib#color#Hi("Boolean", s:yellow, "", "", "")
+call lib#color#Hi("Character", s:yellow, "", "", "")
+call lib#color#Hi("Comment", s:fg1, "", "italic", "")
+call lib#color#Hi("Conditional", s:lightred, "", "", "")
+call lib#color#Hi("Constant", s:bluegreen, "", "", "")
+call lib#color#Hi("Delimiter", s:fg4, "", "", "")
+call lib#color#Hi("Exception", s:blue, "", "", "")
+call lib#color#Hi("Float", s:bluegreen, "", "", "")
+call lib#color#Hi("Function", s:yellow, "", "", "")
+call lib#color#Hi("Identifier", s:green, "", "NONE", "")
+call lib#color#Hi("Keyword", s:lightred, "", "", "")
+call lib#color#Hi("Label", s:blue, "", "", "")
+call lib#color#Hi("Number", s:magenta, "", "", "")
+call lib#color#Hi("Operator", s:yellow, "", "NONE", "")
+call lib#color#Hi("Repeat", s:red, "", "", "")
+call lib#color#Hi("Special", s:fg4, "", "", "")
+call lib#color#Hi("SpecialChar", s:yellow, "", "", "")
+call lib#color#Hi("SpecialComment", s:blue, "", "italic", "")
+call lib#color#Hi("Statement", s:lightred, "", "", "")
+call lib#color#Hi("StorageClass", s:blue, "", "", "")
+call lib#color#Hi("String", s:fg3, "", "", "")
+call lib#color#Hi("Structure", s:magenta, "", "", "")
+call lib#color#Hi("Tag", s:fg4, "", "", "")
+call lib#color#Hi("Todo", s:fg3, s:red, "NONE", "")
+call lib#color#Hi("Type", s:red, "", "NONE", "")
+call lib#color#Hi("Typedef", s:blue, "", "", "")
 
-call s:hi("PreProc", s:yellow, "", "bold", "")
-call s:hi("Include", s:yellow, "", "", "")
+call lib#color#Hi("PreProc", s:yellow, "", "bold", "")
+call lib#color#Hi("Include", s:yellow, "", "", "")
 hi! link Macro Define
 hi! link PreCondit PreProc
 hi! link Define PreProc
 
-call s:hi("DiffAdd", s:green, s:bg2, "", "")
-call s:hi("DiffChange", s:yellow, s:bg2, "", "")
-call s:hi("DiffDelete", s:red, s:bg2, "", "")
-call s:hi("DiffText", s:blue, s:bg2, "", "")
+call lib#color#Hi("DiffAdd", s:green, s:bg2, "", "")
+call lib#color#Hi("DiffChange", s:yellow, s:bg2, "", "")
+call lib#color#Hi("DiffDelete", s:red, s:bg2, "", "")
+call lib#color#Hi("DiffText", s:blue, s:bg2, "", "")
 
-call s:hi("cIncluded", s:blue, "", "", "")
+call lib#color#Hi("cIncluded", s:blue, "", "", "")
 hi! link cOperator Operator
 hi! link cPreCondit PreCondit
 
-call s:hi("htmlArg", s:blue, "", "", "")
-call s:hi("htmlLink", s:fg4, "", "NONE", "NONE")
+call lib#color#Hi("htmlArg", s:blue, "", "", "")
+call lib#color#Hi("htmlLink", s:fg4, "", "NONE", "NONE")
 hi! link htmlBold Bold
 hi! link htmlEndTag htmlTag
 hi! link htmlItalic Italic
@@ -190,18 +184,18 @@ hi! link htmlSpecialChar SpecialChar
 hi! link htmlTag Keyword
 hi! link htmlTagN htmlTag
 
-call s:hi("vimCommentTitle", s:blue, "", "bold", "")
+call lib#color#Hi("vimCommentTitle", s:blue, "", "bold", "")
 
-call s:hi("markdownBlockquote", s:blue, "", "", "")
-call s:hi("markdownCode", s:fg4, "bg", "", "")
-call s:hi("markdownCodeBlock", s:fg4, "bg", "", "")
-call s:hi("markdownCodeDelimiter", s:green, "bg", "", "")
-call s:hi("markdownFootnote", s:blue, "", "", "")
-call s:hi("markdownId", s:blue, "", "", "")
-call s:hi("markdownIdDeclaration", s:blue, "", "", "")
-call s:hi("markdownH1", s:yellow, "", "", "")
-call s:hi("markdownLinkText", s:blue, "", "", "")
-call s:hi("markdownUrl", s:fg4, "", "underline", "")
+call lib#color#Hi("markdownBlockquote", s:blue, "", "", "")
+call lib#color#Hi("markdownCode", s:fg4, "bg", "", "")
+call lib#color#Hi("markdownCodeBlock", s:fg4, "bg", "", "")
+call lib#color#Hi("markdownCodeDelimiter", s:green, "bg", "", "")
+call lib#color#Hi("markdownFootnote", s:blue, "", "", "")
+call lib#color#Hi("markdownId", s:blue, "", "", "")
+call lib#color#Hi("markdownIdDeclaration", s:blue, "", "", "")
+call lib#color#Hi("markdownH1", s:yellow, "", "", "")
+call lib#color#Hi("markdownLinkText", s:blue, "", "", "")
+call lib#color#Hi("markdownUrl", s:fg4, "", "underline", "")
 hi! link markdownBold Bold
 hi! link markdownItalic Italic
 hi! link markdownItalicDelimiter Keyword

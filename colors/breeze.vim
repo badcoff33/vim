@@ -130,21 +130,26 @@ call lib#color#Hi('BlendDown', s:white, s:grey_8, '', '')
 
 " Basics
 call lib#color#Hi('Normal', s:grey_2, s:white, 'NONE', '')
+call lib#color#Hi('NonText', s:grey_2, s:white, 'NONE', '')
+call lib#color#Hi('Ignore', s:grey_3, s:white, 'NONE', '')
 call lib#color#Hi('Bold',   s:white, '', 'bold', '')
 call lib#color#Hi('Italic', s:white, '', 'italic', '')
-call lib#color#Hi('NonText', s:grey_6, s:grey_9, '', '')
 call lib#color#Hi('Terminal', s:grey_0, s:grey_8, '', '')
 call lib#color#Hi('Visual', s:blue_0, s:green_7, '', '')
-call lib#color#Hi('StatusLine', s:blue_9, s:grey_5, '', '')
-call lib#color#Hi('StatusLineNC', s:grey_3, s:grey_6, '', '')
+call lib#color#Hi('StatusLine', s:blue_8, s:blue_2, '', '')
+call lib#color#Hi('StatusLineNC', s:grey_3, s:grey_7, '', '')
 call lib#color#Hi('VertSplit', s:grey_6, s:grey_8, 'NONE', '')
-call lib#color#Hi('IncSearch', s:black, s:yellow_6, 'none', '')
-call lib#color#Hi('Search', s:grey_2, s:grey_7, 'NONE', '')
+call lib#color#Hi('IncSearch', s:black, s:orange_6, 'none', '')
+call lib#color#Hi('Search', s:grey_2, s:orange_7, 'NONE', '')
 call lib#color#Hi('MatchParen', s:green_1, s:green_7, '', '')
 call lib#color#Hi('QuickFixLine', s:red_0, s:red_8, 'bold', '')
 call lib#color#Hi('CursorLine', 'skip', s:yellow_8, '', '')
 call lib#color#Hi('CursorLineNr', s:yellow_2, s:yellow_6, 'bold', '')
 call lib#color#Hi('LineNr', s:grey_6, 'skip', '', '')
+call lib#color#Hi('PmenuSel', s:white, s:green_4, 'none', '')
+call lib#color#Hi('Pmenu', s:black, s:green_6, 'none', '')
+call lib#color#Hi('PmenuThumb', s:black, s:grey_5, 'none', '')
+call lib#color#Hi('PmenuSbar', s:black, s:grey_7, 'none', '')
 
 highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr
@@ -152,10 +157,6 @@ highlight! link FoldColumn LineNr
 highlight! link Folded Comment
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link PmenuSel IncSearch
-highlight! link Pmenu Search
-highlight! link PmenuSbar Search
-highlight! link PmenuThumb IncSearch
 highlight! link TabLineFill Normal
 highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
@@ -167,17 +168,17 @@ call lib#color#Hi('BlendDown', s:grey_0, s:grey_8, '', '')
 " Code
 call lib#color#Hi('Statement', s:red_3, '', '', '')
 call lib#color#Hi('Conditional', s:red_4, '', '', '')
-call lib#color#Hi('Type', s:pink_2, '', 'none', '')
+call lib#color#Hi('Type', s:pink_2, 'skip', 'none', '')
 call lib#color#Hi('Structure', s:green_1, '', '', '')
 call lib#color#Hi('StorageClass', s:purple_3, '', '', '')
 call lib#color#Hi('PreProc', s:blue_5, 'skip', 'bold', '')
 call lib#color#Hi('PreCondit', s:blue_6, '', 'bold', '')
-call lib#color#Hi('Comment', s:grey_5, '', '', '')
+call lib#color#Hi('Comment', s:grey_4, 'skip', '', '')
 call lib#color#Hi('Function', s:green_1, 'skip', '', '')
 call lib#color#Hi('Identifier', s:green_4, 'skip', '', '')
 call lib#color#Hi('Special', s:green_1, 'skip', '', '')
-call lib#color#Hi('Constant', s:blue_4, '', '', '')
-call lib#color#Hi('Number', s:blue_2, '', '', '')
+call lib#color#Hi('Constant', s:blue_4, 'skip', '', '')
+call lib#color#Hi('Number', s:blue_2, 'skip', '', '')
 call lib#color#Hi('Title', s:grey_2, '', 'bold', '')
 call lib#color#Hi('Todo', s:grey_2, s:grey_7, '', '')
 call lib#color#Hi('Error', s:red_3, 'bg', 'undercurl', s:red_4)
