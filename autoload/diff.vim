@@ -32,8 +32,7 @@ function! diff#CompareDirs() abort
   call async#StartJob('diff -rq '
         \ .. g:compare_dirs_options
         \ .. ' "' .. a .. '"'
-        \ .. ' "' .. b .. '"',
-        \ 0) " do not forward to quickfix
+        \ .. ' "' .. b .. '"')
   tabnew
   call async#JobBufferToFront()
   nnoremap <buffer> <silent> <CR> :call <SID>DiffParseLine(getline('.'))<CR>
