@@ -93,8 +93,9 @@ function! s:ToggleQuickfix()
   if qfIsOpen == 0
     let max_lines = (40 * getwininfo()['variables']['height'] ) / 100
     if len(getqflist()) == 0
+      echomsg "quickfix list empty"
       cclose
-    if len(getqflist()) <= max_lines
+    elseif len(getqflist()) <= max_lines
       execute "botright copen"  len(getqflist())
     else
       execute "botright copen"  max_lines
