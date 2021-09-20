@@ -26,10 +26,11 @@ endif
 command -nargs=0 ToggleStickyCursorline call <SID>ToggleStickyCursorline()
 command -nargs=0 ShowHiInfo             call <SID>ShowHiInfo()
 
-" Autocmd: put them in a dedicaed group
+" Autocmd: put them in a dedicated group
 augroup basics
   autocmd!
   autocmd BufReadPost * :call <SID>RestoreCursor()
+  autocmd QuickFixCmdPre * :cclose
 augroup END
 
 " Description: Make the actual window more obvious.
@@ -90,13 +91,20 @@ function! s:ToggleQuickfix()
   let qfIsOpen = 0
   windo if &buftype == 'quickfix' | let qfIsOpen = 1 | endif
   if qfIsOpen == 0
-   execute "botright copen"  (40 * getwininfo()['variables']['height'] ) / 100
+    let max_lines = (40 * getwininfo()['variables']['height'] ) / 100
+    if len(getqflist()) == 0
+      cclose
+    if len(getqflist()) <= max_lines
+      execute "botright copen"  len(getqflist())
+    else
+      execute "botright copen"  max_lines
+    endif
   else
-    cclose
-  endif
-  if win_gotoid(save_win) == 0
-    wincmd p
-  endif
+  cclose
+endif
+if win_gotoid(save_win) == 0
+  wincmd p
+endif
 endfunction
 
 " Description: Print highlighting information at current cursor position.

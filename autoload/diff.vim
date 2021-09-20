@@ -29,12 +29,14 @@ function! diff#CompareDirs() abort
   let a = fnamemodify(a, ":p:h")
   let b = fnamemodify(b, ":p:h")
   " run the diff command
-  call async#StartJob('diff -rq '
+  let cmd = 'diff -rq '
         \ .. g:compare_dirs_options
         \ .. ' "' .. a .. '"'
-        \ .. ' "' .. b .. '"')
+        \ .. ' "' .. b .. '"'
   tabnew
-  call async#JobBufferToFront()
+  execute 'file diff-' .. stdout_buf
+  setlocal buftype=nofile
+  call job_start(cmd, {'out_io': "buffer", "out_buf": bufnr('%')})
   nnoremap <buffer> <silent> <CR> :call <SID>DiffParseLine(getline('.'))<CR>
 endfunction
 

@@ -1,5 +1,8 @@
 " Vim resource file
 "
+" New Vim features are nicly tracked on this site:
+"   https://www.arp242.net/vimlog/
+"
 " Maintainer: Markus Prepens (markus dot prepens at gmail dot com)
 
 filetype plugin on
@@ -138,7 +141,6 @@ let g:netrw_winsize = 25
 let g:netrw_preview = 1
 
 " Switch modes
-inoremap <S-Space> <Esc>
 tnoremap <Esc> <C-w>c
 
 " yank current word -- CUA style
@@ -174,14 +176,17 @@ vnoremap {<Space> c{<C-r>-}<Esc>
 " Set leader and localleader keys, that works best for me
 let mapleader = " "
 let maplocalleader = "s"
+imap <C-CR> <Esc><Leader>
+nmap <C-CR> <Leader>
+
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 
-let g:ft2regex = { 
-      \ 'c':'\.[ch]$', 
-      \ 'vim':'\.vim', 
-      \ 'py':'\.py$', 
+let g:ft2regex = {
+      \ 'c':'\.[ch]$',
+      \ 'vim':'\.vim',
+      \ 'py':'\.py$',
       \ 'cmake':'\(\.cmake\|CMakeLists.txt\)',
       \ }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
@@ -262,8 +267,7 @@ command! -nargs=0 SmartCase           :set   ignorecase  smartcase
 command! -nargs=0 ReadOnly :setlocal nomodifiable readonly
 command! -nargs=0 LastSession :execute 'source '..$TMP..'/'..sha256(getcwd())..'.vim'
 
-" command completion needs terminating backslash (sorry, Windows)
-cnoremap <C-Space> <C-r>=g:psep<CR>
+" command line completion
 cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 
 augroup init

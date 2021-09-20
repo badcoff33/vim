@@ -15,7 +15,7 @@ augroup END
 
 set guioptions=!a
 set guicursor+=a:blinkon0
-set renderoptions=type:directx
+set renderoptions=
 set mousemodel=popup
 set nomousefocus
 set foldcolumn=1

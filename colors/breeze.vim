@@ -113,7 +113,7 @@ if exists('&wincolor')
   augroup Wincolor
     au!
     " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if &readonly
+    autocmd BufWinEnter,WinEnter * if &readonly || &buftype=='quickfix'
           \ | set wincolor=BlendDown | else | set wincolor= | endif
   augroup END
 elseif exists('&winhighlight')
@@ -136,8 +136,8 @@ call lib#color#Hi('Bold',   s:white, '', 'bold', '')
 call lib#color#Hi('Italic', s:white, '', 'italic', '')
 call lib#color#Hi('Terminal', s:grey_0, s:grey_8, '', '')
 call lib#color#Hi('Visual', s:blue_0, s:green_7, '', '')
-call lib#color#Hi('StatusLine', s:blue_8, s:blue_2, '', '')
-call lib#color#Hi('StatusLineNC', s:grey_3, s:grey_7, '', '')
+call lib#color#Hi('StatusLine', s:black, s:grey_8, 'none', '')
+call lib#color#Hi('StatusLineNC', s:grey_4, s:grey_9, 'italic', '')
 call lib#color#Hi('VertSplit', s:grey_6, s:grey_8, 'NONE', '')
 call lib#color#Hi('IncSearch', s:black, s:orange_6, 'none', '')
 call lib#color#Hi('Search', s:grey_2, s:orange_7, 'NONE', '')
@@ -173,7 +173,7 @@ call lib#color#Hi('Structure', s:green_1, '', '', '')
 call lib#color#Hi('StorageClass', s:purple_3, '', '', '')
 call lib#color#Hi('PreProc', s:blue_5, 'skip', 'bold', '')
 call lib#color#Hi('PreCondit', s:blue_6, '', 'bold', '')
-call lib#color#Hi('Comment', s:grey_4, 'skip', '', '')
+call lib#color#Hi('Comment', s:green_3, 'skip', '', '')
 call lib#color#Hi('Function', s:green_1, 'skip', '', '')
 call lib#color#Hi('Identifier', s:green_4, 'skip', '', '')
 call lib#color#Hi('Special', s:green_1, 'skip', '', '')
