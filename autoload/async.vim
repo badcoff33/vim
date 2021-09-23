@@ -15,24 +15,14 @@ function! async#HideJobBuffer()
   call lib#windows#HideBuffer(g:async_job_bufnr)
 endfunction
 
-function! AsyncErrorHandler(channel, msg)
-endfunction
-
 function! AsyncCloseHandler(channel)
   let g:async_jo_active = 0
   call lib#popup#Bottom([
-        \ "Stop process " .. ch_getjob(a:channel),
-        \ printf("Process toke %.3f seconds", reltimefloat(reltime(g:async_job_start_time)))])
+        \ "Job " .. ch_status(a:channel),
+        \ printf("run for %.3f seconds", reltimefloat(reltime(g:async_job_start_time)))])
   if g:async_auto_quickfix == 1
     execute '1,$cbuffer' g:async_job_bufnr
   endif
-endfunction
-
-function! AsyncOutHandler(channel, msg)
-endfunction
-
-function! async#JobBufferAsQuickfix()
-  execute "3,$cbuffer" g:async_job_bufnr
 endfunction
 
 function! async#StartJob(cmd) abort
@@ -54,21 +44,15 @@ function! async#StartJob(cmd) abort
   call setbufvar(g:async_job_bufnr, "&modifiable", 1)
   call setbufline(g:async_job_bufnr, 1, '-- started ' .. strftime("%Y-%m-%d %X") .. ': ' .. a:cmd)
   call setbufline(g:async_job_bufnr, 2, '----------------------------------------')
-  let s:async_make_options = {
-        \ 'close_cb': 'AsyncCloseHandler',
-        \ 'err_cb': 'AsyncErrorHandler',
-        \ 'out_cb': 'AsyncOutHandler',
-        \ 'out_io': 'buffer',
-        \ 'err_io': 'buffer',
-        \ 'out_buf': g:async_job_bufnr,
-        \ 'err_buf': g:async_job_bufnr
-        \ }
-  let job = job_start('cmd /C '..a:cmd, s:async_make_options )
+  let options = {
+        \ 'out_io': "buffer", "out_buf": g:async_job_bufnr,
+        \ 'err_io': "buffer", "err_buf": g:async_job_bufnr,
+        \ "close_cb": "AsyncCloseHandler", "err_cb": "AsyncCloseHandler"}
+  let job = job_start('cmd /C ' .. a:cmd, options)
   let id = job_info(job)['process']
   if job_info(job)['status'] == 'run'
     let g:async_jo_active = 1
     let g:async_job_start_time = reltime()
-    call lib#popup#Bottom(["Start process " .. id])
   else
     let g:async_jo_active = 0
     call lib#popup#Bottom(["Failed process " .. id .. ": " .. a:cmd])
