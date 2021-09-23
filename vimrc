@@ -141,7 +141,7 @@ let g:netrw_winsize = 25
 let g:netrw_preview = 1
 
 " Switch modes
-tnoremap <Esc> <C-w>c
+tnoremap <expr> <Esc> winnr('$') == 1 ? "\<C-w>N:b#\<CR>" : "\<C-w>c"
 
 " yank current word -- CUA style
 nnoremap <C-Ins> "+yiw
