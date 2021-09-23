@@ -69,10 +69,8 @@ endfunction
 " --- Editor ---
 call lib#color#Hi("ColorColumn", "", s:fg1, "", "")
 call lib#color#Hi("Cursor", "#ffffff", s:magenta, "NONE", "")
-call lib#color#Hi("CursorLine", "", s:hl_line, "NONE", "")
 call lib#color#Hi("Error", s:red, "bg", "", "")
 call lib#color#Hi("iCursor", s:fg0, s:fg4, "", "")
-call lib#color#Hi("LineNr", s:fg3, s:bg2, "", "")
 call lib#color#Hi("MatchParen", s:green, s:bg3, "", "")
 call lib#color#Hi("NonText", s:fg0, s:blue, "", "")
 call lib#color#Hi("Normal", s:fg0, s:bg1, "", "")
@@ -86,7 +84,11 @@ call lib#color#Hi("VisualNOS", "", s:bg_hl, "", "")
 
 " --- Gutter ---
 call lib#color#Hi("CursorColumn", "", s:fg1, "", "")
-call lib#color#Hi("CursorLineNr", s:line_num, "", "NONE", "")
+call lib#color#Hi("CursorLine", "", s:hl_line, "NONE", "")
+call lib#color#Hi("CursorLineNr", s:fg3, s:magenta, "", "")
+call lib#color#Hi("LineNrAbove", s:line_num, s:magenta, "", "")
+call lib#color#Hi("LineNrBelow", s:line_num, s:magenta, "", "")
+call lib#color#Hi("LineNr", s:line_num, "", "NONE", "")
 call lib#color#Hi("Folded", s:fg3, s:fg1, "bold", "")
 call lib#color#Hi("FoldColumn", s:fg3, s:bg0, "", "")
 call lib#color#Hi("SignColumn", s:fg1, s:bg0, "", "")

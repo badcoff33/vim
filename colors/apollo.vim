@@ -36,8 +36,8 @@ let s:black   = '#18181F'
 let s:bg1     = '#282835'
 let s:bg2     = '#312A3A'
 let s:bg3     = '#343240'
-let s:bg4     = '#434050'
-let s:bg5     = '#4F4B6C'
+let s:bg4     = '#4A4855'
+let s:bg5     = '#5A5063'
 let s:silver1 = '#505860'
 let s:silver2 = '#9098A0'
 let s:silver3 = '#C0CBD0'
@@ -57,9 +57,9 @@ call lib#color#Hi('Bold',   s:silver4, '', 'bold', '')
 call lib#color#Hi('Italic', s:silver4, '', 'italic', '')
 call lib#color#Hi('NonText', s:blue1, s:bg2, '', '')
 call lib#color#Hi('Visual', s:white, s:blue1, '', '')
-call lib#color#Hi('Terminal', s:silver3, s:bg5, '', '')
-call lib#color#Hi('StatusLine', s:white, s:blue1, '', '')
-call lib#color#Hi('StatusLineNC', s:silver4, s:bg5, '',  '')
+call lib#color#Hi('Terminal', s:silver4, s:bg3, '', '')
+call lib#color#Hi('StatusLine', s:white, s:bg5, '', '')
+call lib#color#Hi('StatusLineNC', s:silver3, s:bg4, '',  '')
 call lib#color#Hi('VertSplit', s:bg5, s:bg2, 'NONE', '')
 call lib#color#Hi('IncSearch', s:black, s:silver4, '', '')
 call lib#color#Hi('Search', s:green4, s:bg5, '', '')
