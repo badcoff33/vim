@@ -37,9 +37,9 @@ endfun
 
 " Description: A simple scope parser for Markdown files.
 function! lib#scope#ParserMarkdown() abort
-  let l:fNum = search('^#\{1,\}', 'bcnWe')
+  let l:fNum = search('^#\{1,\}', 'bcnWez')
     if l:fNum > 0
-      let chapter_str = substitute(getline(l:fNum), '^\(#\{1,\}\)\s\+\(.*\)$', '\=len(submatch(1)).."/"..submatch(2)', '')
+      let chapter_str = substitute(getline(l:fNum), '^\(#\{1,\}\)\s\+\(.*\)$', '\=len(submatch(1)).."|"..submatch(2)', '')
       if len(chapter_str) > 30
         return chapter_str[:30] .. '...'
       else
