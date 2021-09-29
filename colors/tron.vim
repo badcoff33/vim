@@ -9,7 +9,7 @@ if exists("syntax_on")
 endif
 
 hi clear
-let g:colors_name = "frost"
+let g:colors_name = "tron"
 set background=dark
 
 let s:fg0              ="#90ACBC"
@@ -22,8 +22,8 @@ let s:bg1              ="#17181b"
 let s:bg2              ="#192533"
 let s:bg3              ="#1B324B"
 let s:bg4              ="#2B4255"
-let s:hl_line          ="#0E2638" " hl_line
-let s:bg_hl            ="#2B4255" " region, selection
+let s:hl_line          ="#0E2638"
+let s:bg_hl            ="#2B4255"
 let s:vc_r             ="#B62D66"
 let s:vc_g             ="#4BB5BE"
 let s:vc_b             ="#387AAA"
@@ -33,7 +33,7 @@ let s:accent           ="#FFFFFF"
 let s:mode_line_bg     ="#3D5666"
 let s:line_num         ="#5A7387"
 
-"       ;; standardized palette
+" standardized palette
 let s:yellow       = "#DEB45B"
 let s:bluegreen    = "#4BB5BE"
 let s:magenta      = "#B62D66"
@@ -51,24 +51,9 @@ let s:red_bghl     = "#462026"
 let s:blue_bghl    = "#141E4F"
 let s:green_bghl   = "#13454E"
 
-function! s:hi(group, guifg, guibg, attr, guisp)
-  if a:guifg != ""
-    exec "hi " . a:group . " guifg=" . a:guifg
-  endif
-  if a:guibg != ""
-    exec "hi " . a:group . " guibg=" . a:guibg
-  endif
-  if a:attr != ""
-    exec "hi " . a:group . " gui=" . a:attr
-  endif
-  if a:guisp != ""
-    exec "hi " . a:group . " guisp=" . a:guisp
-  endif
-endfunction
-
 " --- Editor ---
 call lib#color#Hi("ColorColumn", "", s:fg1, "", "")
-call lib#color#Hi("Cursor", "#ffffff", s:magenta, "NONE", "")
+call lib#color#Hi("Cursor", s:fg4, s:red, "NONE", "")
 call lib#color#Hi("Error", s:red, "bg", "", "")
 call lib#color#Hi("iCursor", s:fg0, s:fg4, "", "")
 call lib#color#Hi("MatchParen", s:green, s:bg3, "", "")

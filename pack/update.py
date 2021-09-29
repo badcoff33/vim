@@ -2,9 +2,9 @@ import os
 
 github_home_dir = "Github/start/"
 git_dict = { "easy-align": "https://github.com/junegunn/vim-easy-align.git",
-        "vista": "https://github.com/liuchengxu/vista.vim.git",
-        "gitgutter": "https://github.com/airblade/vim-gitgutter",
-        "dirvish": "https://github.com/justinmk/vim-dirvish.git" }
+        "fzf.vim": "https://github.com/junegunn/fzf.vim.git",
+        "fzf": "https://github.com/junegunn/fzf.git",
+        "signify": "https://github.com/mhinz/vim-signify.git" }
 
 saved_pwd = os.getcwd()
 os.chdir( github_home_dir )

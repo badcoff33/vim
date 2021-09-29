@@ -20,6 +20,8 @@ augroup whitespace
   autocmd BufWritePre *.c,*.h   :WhitespaceCleanup
   autocmd BufWritePre *.py      :WhitespaceCleanup
   autocmd BufWritePre *.vim     :WhitespaceCleanup
+  autocmd BufWritePre vimrc     :WhitespaceCleanup
+  autocmd BufWritePre gvimrc     :WhitespaceCleanup
 augroup END
 
 " Description: Support function. It returns previous character with parameter
