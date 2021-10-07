@@ -139,8 +139,11 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_preview = 1
 
+" Terminal
+tnoremap <S-Ins> <C-w>"*
+
 " Switch modes
-tnoremap <expr> <Esc> winnr('$') == 1 ? "\<C-w>N:b#\<CR>" : "\<C-w>c"
+"tnoremap <expr> <Esc> winnr('$') == 1 ? "\<C-w>N:b#\<CR>" : "\<C-w>c"
 
 " yank current word -- CUA style
 nnoremap <C-Ins> "+yiw
@@ -201,9 +204,6 @@ nnoremap <Leader>G :silent grep<Space>
 nnoremap <Leader>+ :tabnew<CR>
 nnoremap <Leader>- :tabclose<CR>
 nnoremap <Leader>c <C-^>:bw#<Esc>
-
-" Terminal
-tnoremap <S-Ins> <C-w>"*
 
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
@@ -276,8 +276,8 @@ augroup init
   autocmd BufEnter * if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
   autocmd BufEnter * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
-  autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split('<C-r>t','\r')<CR>
-  autocmd TerminalOpen * nnoremap <buffer> <CR> :cexpr getline('.')<CR><C-w>p
+  " move visual selection to quickfix window
+  autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split(@t,'[\n\r]')<CR>
 augroup END
 
 " run an optional, machine-dependent script here. May set plugin vars before the
