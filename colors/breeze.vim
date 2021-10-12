@@ -14,7 +14,7 @@ let s:black = "#1b1f23"
 let s:white = "#ffffff"
 
 " -------- Grey --------
-let s:grey_9 = "#fafbfc"
+let s:grey_9 = "#f8fafb"
 let s:grey_8 = "#f6f8fa"
 let s:grey_7 = "#e1e4e8"
 let s:grey_6 = "#d1d5da"
@@ -113,15 +113,8 @@ if exists('&wincolor')
   augroup Wincolor
     au!
     " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if &readonly || &buftype=='quickfix'
+    autocmd BufWinEnter,WinEnter * if &buftype=='help' || &buftype=='quickfix'
           \ | set wincolor=BlendDown | else | set wincolor= | endif
-  augroup END
-elseif exists('&winhighlight')
-  augroup Winhighlight
-    au!
-    " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if &readonly
-          \ | set winhighlight=Normal:BlendDown | set winhighlight= | endif
   augroup END
 endif
 
@@ -134,10 +127,9 @@ call lib#color#Hi('NonText', s:grey_2, s:white, 'NONE', '')
 call lib#color#Hi('Ignore', s:grey_3, s:white, 'NONE', '')
 call lib#color#Hi('Bold',   s:white, '', 'bold', '')
 call lib#color#Hi('Italic', s:white, '', 'italic', '')
-call lib#color#Hi('Terminal', s:grey_0, s:grey_8, '', '')
 call lib#color#Hi('Visual', s:blue_0, s:green_7, '', '')
-call lib#color#Hi('StatusLine', s:black, s:grey_7, 'none', '')
-call lib#color#Hi('StatusLineNC', s:grey_4, s:grey_9, 'none', '')
+call lib#color#Hi('StatusLine', s:white, s:grey_2, 'none', '')
+call lib#color#Hi('StatusLineNC', s:blue_1, s:blue_7, 'none', '')
 call lib#color#Hi('VertSplit', s:grey_6, s:grey_8, 'NONE', '')
 call lib#color#Hi('IncSearch', s:black, s:orange_6, 'none', '')
 call lib#color#Hi('Search', s:grey_2, s:orange_7, 'NONE', '')
@@ -151,6 +143,7 @@ call lib#color#Hi('Pmenu', s:black, s:green_6, 'none', '')
 call lib#color#Hi('PmenuThumb', s:black, s:grey_5, 'none', '')
 call lib#color#Hi('PmenuSbar', s:black, s:grey_7, 'none', '')
 
+highlight! link Terminal Normal
 highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr
 highlight! link FoldColumn LineNr
@@ -163,7 +156,7 @@ highlight! link TabLineSel StatusLine
 highlight! link WildMenu PmenuSel
 
 " Breeze specific
-call lib#color#Hi('BlendDown', s:grey_0, s:grey_8, '', '')
+call lib#color#Hi('BlendDown', s:grey_0, s:grey_9, '', '')
 
 " Code
 call lib#color#Hi('Statement', s:red_3, '', '', '')

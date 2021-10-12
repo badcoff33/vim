@@ -26,7 +26,7 @@ function! lib#popup#TopLeft(list_of_strings)
           \ 'maxwidth': &columns,
           \ 'minwidth': width,
           \ 'maxheight': 10,
-          \ 'minheight': argc(),
+          \ 'minheight': 2,
           \ 'time': 2000,
           \ 'tabpage': -1,
           \ 'zindex': 300,
@@ -45,19 +45,19 @@ function! lib#popup#TopRight(list_of_strings)
   else
     let width = s:max_len_in_list(a:list_of_strings)
     let g:winid_tiny = popup_create(a:list_of_strings, {
+          \ 'title': "",
+          \ 'padding': [0,1,0,1],
           \ 'line': len(gettabinfo()) > 1 ? 2 : 1,
           \ 'col': &columns - width,
           \ 'maxwidth': &columns,
           \ 'minwidth': width,
           \ 'maxheight': 10,
-          \ 'minheight': argc(),
+          \ 'minheight': 2,
           \ 'time': 2000,
           \ 'tabpage': -1,
           \ 'zindex': 300,
           \ 'drag': 1,
           \ 'close': 'click',
-          \ 'padding': [0,1,0,1],
-          \ 'title': "",
           \ })
     call s:PickColor(g:winid_tiny)
   endif
@@ -96,14 +96,14 @@ function! lib#popup#Bottom(list_of_strings)
     call popup_settext(g:winid_bot, a:list_of_strings)
   else
     let g:winid_bot = popup_create(a:list_of_strings, {
-          \ 'line': &lines - len(a:list_of_strings) - 5,
-          \ 'col': 3,
+          \ 'line': &lines - len(a:list_of_strings) - 1,
+          \ 'col': 1,
           \ 'maxwidth': &columns-10,
           \ 'minwidth': 40,
           \ 'maxheight': 10,
-          \ 'minheight': len(a:list_of_strings),
+          \ 'minheight': 2,
           \ 'time': 3000,
-          \ 'padding': [1, 2, 1, 2],
+          \ 'padding': [0,1,0,1],
           \ 'tabpage': -1,
           \ 'drag': 1,
           \ 'close': 'click',

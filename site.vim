@@ -1,4 +1,4 @@
-
+let $PATH=$PATH..';C:\Users\prepensm\AppData\Local\Programs\Git\usr\bin'
 " Use Umlaut keys in normal mode
 scriptencoding utf-8
 
@@ -9,10 +9,13 @@ xmap <Leader>a <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <Leader>a <Plug>(EasyAlign)
 
-nnoremap <F2> <cmd>FZF<CR>
+nnoremap <F2> <cmd>Files<CR>
+nnoremap <F3> <cmd>Buffers<CR>
+nnoremap <F4> <cmd>BTags<CR>
+nnoremap <C-p> <cmd>Buffers<CR>
 
 colorscheme breeze
-set guifont=Courier\ New:h11
+set guifont=Courier\ Prime:h11
 
 " - Window using a Vim command
 let g:fzf_layout = { 'window': 'enew' }

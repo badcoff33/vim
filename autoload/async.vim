@@ -17,7 +17,7 @@ endfunction
 
 function! AsyncCloseHandler(channel)
   let g:async_jo_active = 0
-  call lib#popup#Bottom([
+  call lib#popup#TopLeft([
         \ "Job " .. ch_status(a:channel),
         \ printf("run for %.3f seconds", reltimefloat(reltime(g:async_job_start_time)))])
   if g:async_auto_quickfix == 1
@@ -27,9 +27,12 @@ endfunction
 
 function! async#StartJob(cmd) abort
   let g:async_job_bufnr = bufnr('<job-output>', v:true)
+  let abufnr = bufnr('%')
   execute 'buffer' g:async_job_bufnr
   normal gg"_dG
-  buffer #
+  if abufnr != g:async_job_bufnr
+    buffer #
+  endif
   if &autowrite || &autowriteall
     try
       wall
@@ -47,7 +50,7 @@ function! async#StartJob(cmd) abort
   let options = {
         \ 'out_io': "buffer", "out_buf": g:async_job_bufnr,
         \ 'err_io': "buffer", "err_buf": g:async_job_bufnr,
-        \ "close_cb": "AsyncCloseHandler", "err_cb": "AsyncCloseHandler"}
+        \ "close_cb": "AsyncCloseHandler"}
   let job = job_start('cmd /C ' .. a:cmd, options)
   let id = job_info(job)['process']
   if job_info(job)['status'] == 'run'
@@ -55,7 +58,7 @@ function! async#StartJob(cmd) abort
     let g:async_job_start_time = reltime()
   else
     let g:async_jo_active = 0
-    call lib#popup#Bottom(["Failed process " .. id .. ": " .. a:cmd])
+    call lib#popup#TopLeft(["Failed process " .. id .. ": " .. a:cmd])
     echoerr 'job failed to start'
   endif
 endfunction

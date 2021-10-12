@@ -19,6 +19,6 @@ endif
 if !hasmapto(mapleader .. 'j')
   nnoremap <Leader>js :JobOutput<CR>
   nnoremap <Leader>jh :HideJob<CR>
-  nnoremap <Leader>jj :Job<Up>
+  nnoremap <Leader>jj <cmd>Job<CR>
   nnoremap <Leader>jq :JobAsQuickfix<CR>
 endif

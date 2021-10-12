@@ -48,6 +48,7 @@ let s:green3  = '#20D055'
 let s:green4  = '#47FF58'
 let s:blue1   = '#6080A8'
 let s:blue2   = '#90B0E0'
+let s:blue3   = '#90C0E8'
 let s:red1    = '#C85012'
 let s:red2    = '#F86020'
 
@@ -67,8 +68,8 @@ call lib#color#Hi('MatchParen', s:green3, '', 'underline', '')
 call lib#color#Hi('QuickFixLine', '', s:black, 'bold', '')
 call lib#color#Hi('Cursor', s:black, s:silver3, '', '')
 call lib#color#Hi('CursorLine', 'skip', s:bg3, '', '')
-call lib#color#Hi('CursorLineNr', '', s:bg4, '', '')
-call lib#color#Hi('LineNr', s:silver1, '', '', '')
+call lib#color#Hi('CursorLineNr', s:green2, s:bg4, 'bold', '')
+call lib#color#Hi('LineNr', s:silver3, '', '', '')
 
 call lib#color#Hi("PMenuSel", s:white, s:green1, "NONE", "")
 call lib#color#Hi("PMenu", s:silver3, s:silver1, "NONE", "")
@@ -93,7 +94,7 @@ highlight! link WildMenu IncSearch
 call lib#color#Hi('BlendDown', s:white, s:bg2, '', '')
 
 " Code
-call lib#color#Hi('Statement', s:silver4, '', '', '')
+call lib#color#Hi('Statement', s:silver2, '', '', '')
 call lib#color#Hi('Conditional', s:silver3, '', 'bold', '')
 call lib#color#Hi('Type', s:white, 'skip', '', '')
 call lib#color#Hi('Structure', s:green2, '', '', '')
@@ -104,7 +105,7 @@ call lib#color#Hi('Comment', s:green2, 'skip', '', '')
 call lib#color#Hi('Function', s:silver3, '', '', '')
 call lib#color#Hi('Identifier', s:green4, 'skip', '', '')
 call lib#color#Hi('Special', s:green3, 'skip', '', '')
-call lib#color#Hi('Constant', s:silver3, 'skip', '', '')
+call lib#color#Hi('Constant', s:blue3, 'skip', '', '')
 call lib#color#Hi('Number', s:blue2, '', '', '')
 call lib#color#Hi('Title', s:green3, '', '', '')
 call lib#color#Hi('Todo', s:silver2, s:bg3, '', '')
