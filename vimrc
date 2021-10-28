@@ -240,6 +240,7 @@ if executable("rg")
         \ }
   let RgGlob = { ft -> has_key(g:ft2rg_glob, ft) ? g:ft2rg_glob[ft] : '-g *.*' }
   nnoremap <expr> <Leader>g ':silent grep ' .. RgGlob(&ft) .. ' ' .. expand('<cword>')
+  command! -nargs=+ Glob :term rg --files -g <args> .
 elseif executable("grep")
   set grepprg=grep\ -Hnr\ --exclude=cmake\ $* \.
   set grepformat=%f:%l:%m
