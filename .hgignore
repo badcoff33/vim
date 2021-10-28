@@ -1,11 +1,8 @@
-vimrc
-gvimrc
+syntax: glob
 .netrwhist
 .netrwbook
 .session
 spell
-*.swo
 undo
 backup
-pack/github
-TAGS
+pack/Github
