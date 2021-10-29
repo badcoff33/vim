@@ -14,8 +14,10 @@ nnoremap <F3> <cmd>Buffers<CR>
 nnoremap <F4> <cmd>BTags<CR>
 nnoremap <C-p> <cmd>Buffers<CR>
 
-colorscheme breeze
-set guifont=Courier\ Prime:h11
+if has('gui')
+  colorscheme breeze
+  set guifont=Courier\ Prime:h11
+endif
 
 " - Window using a Vim command
 let g:fzf_layout = { 'window': 'enew' }
