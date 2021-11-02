@@ -155,6 +155,10 @@ highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 highlight! link WildMenu PmenuSel
 
+call lib#color#Hi('SignifySignAdd', s:green_4, '', '', '')
+call lib#color#Hi('SignifySignChange', s:blue_4, '', '', '')
+call lib#color#Hi('SignifySignDelete', s:red_4, '', '', '')
+
 " Breeze specific
 call lib#color#Hi('BlendDown', s:grey_0, s:grey_9, '', '')
 
