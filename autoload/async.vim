@@ -75,35 +75,6 @@ function! async#OpenTerm()
   let b:home_term = 1
 endfunction
 
-" Description: Popup to first not finished term buffer in buffer list.
-" An any optional parameter is present execute last terminal command.
-function! async#SendTermCmd(cmd)
-  if mode() == 'n'
-    let cmd_keys = 'a'
-  else
-    let cmd_keys = ''
-  endif
-  if empty(a:cmd)
-    let cmd_keys = cmd_keys .. "\<Up>\<CR>\<C-w>p"
-  else
-    let cmd_keys = cmd_keys .. a:cmd .. "\<CR>\<C-w>p"
-  endif
-  for b in term_list()
-    if getbufvar(b, 'home_term', 0) == 1
-      call lib#windows#GotoBuffer(b)
-      execute 'nnoremap <buffer> <CR> :' .. line('$') .. ',$cbuffer<CR>'
-      call feedkeys(cmd_keys)
-      return
-    endif
-  endfor
-  botright terminal
-  let b:home_term = 1
-  if mode() == 'n'
-    call feedkeys('a')
-  endif
-  call feedkeys(cmd_keys)
-endfunction
-
 function! async#CloseFinishedTerm()
   for b in term_list()
     if term_getstatus(b) == 'finished'

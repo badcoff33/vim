@@ -12,9 +12,6 @@ command! -nargs=* -complete=file_in_path Term :call async#SendTermCmd(<q-args>)
 if !hasmapto(mapleader .. 'T')
   nnoremap <Leader>T :call async#OpenTerm()<CR>
 endif
-if !hasmapto(mapleader .. 't')
-  nnoremap <Leader>t :wa<CR>:call async#SendTermCmd("")<CR>
-endif
 
 if !hasmapto(mapleader .. 'j')
   nnoremap <Leader>js :JobOutput<CR>
