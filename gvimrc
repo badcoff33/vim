@@ -18,7 +18,7 @@ set guicursor+=a:blinkon0
 set renderoptions=
 set mousemodel=popup
 set nomousefocus
-set foldcolumn=1
+set signcolumn=yes
 
 tnoremap <LeftMouse> <C-w>N
 tmap <RightMouse> <C-w>N<RightMouse>
