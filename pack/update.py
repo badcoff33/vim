@@ -2,8 +2,6 @@ import os
 
 github_home_dir = "Github/start/"
 git_dict = { "easy-align": "https://github.com/junegunn/vim-easy-align.git",
-        "fzf.vim": "https://github.com/junegunn/fzf.vim.git",
-        "fzf": "https://github.com/junegunn/fzf.git",
         "signify": "https://github.com/mhinz/vim-signify.git" }
 
 saved_pwd = os.getcwd()
@@ -13,11 +11,11 @@ for subdir in git_dict:
     if not os.path.isdir( subdir ):
         print( "clone %s" % ( git_url ) )
         os.makedirs( subdir )
-        os.system( "git clone -q " + git_url + " " + subdir )
+        os.system( "hg clone " + git_url + " " + subdir )
     else:
         print( "update %s" % ( git_url ) )
         os.chdir( subdir )
-        os.system( "git pull -q " + git_url )
+        os.system( "hg clone " + git_url )
         os.chdir( ".." )
 
 os.chdir( saved_pwd )
