@@ -282,8 +282,4 @@ augroup init
   autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split(@t,'[\n\r]')<CR>
 augroup END
 
-" run an optional, machine-dependent script here. May set plugin vars before the
-" plugins gets sourced.
-runtime site.vim
-
 " vim:ft=vim
