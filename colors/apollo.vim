@@ -34,21 +34,21 @@ endif
 let s:white   = '#FFFFFF'
 let s:black   = '#18181F'
 let s:bg1     = '#282835'
-let s:bg2     = '#312A3A'
-let s:bg3     = '#343240'
-let s:bg4     = '#4A4855'
-let s:bg5     = '#5A5063'
+let s:bg2     = '#31313A'
+let s:bg3     = '#343440'
+let s:bg4     = '#484855'
+let s:bg5     = '#505063'
 let s:silver1 = '#505860'
 let s:silver2 = '#9098A0'
 let s:silver3 = '#C0CBD0'
 let s:silver4 = '#E8E8FE'
-let s:green1  = '#257333'
-let s:green2  = '#30B840'
-let s:green3  = '#20D055'
-let s:green4  = '#47FF58'
-let s:blue1   = '#6080A8'
-let s:blue2   = '#90B0E0'
-let s:blue3   = '#90C0E8'
+let s:green1  = '#257325'
+let s:green2  = '#30B830'
+let s:green3  = '#20D025'
+let s:green4  = '#47FF47'
+let s:blue1   = '#7080A8'
+let s:blue2   = '#A0A0E0'
+let s:blue3   = '#B0C0F0'
 let s:red1    = '#C85012'
 let s:red2    = '#F86020'
 
@@ -63,7 +63,7 @@ call lib#color#Hi('StatusLine', s:white, s:bg5, '', '')
 call lib#color#Hi('StatusLineNC', s:silver3, s:bg4, '',  '')
 call lib#color#Hi('VertSplit', s:bg5, s:bg2, 'NONE', '')
 call lib#color#Hi('IncSearch', s:black, s:silver4, '', '')
-call lib#color#Hi('Search', s:green4, s:bg5, '', '')
+call lib#color#Hi('Search', s:white, s:green2, '', '')
 call lib#color#Hi('MatchParen', s:green3, '', 'underline', '')
 call lib#color#Hi('QuickFixLine', '', s:black, 'bold', '')
 call lib#color#Hi('Cursor', s:black, s:silver3, '', '')
