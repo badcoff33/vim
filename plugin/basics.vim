@@ -4,12 +4,12 @@
 " to save startup time.
 
 " Interfaces:
-noremap <unique> <script> <Plug>ShowHiInfo             <SID>ShowHiInfo
+noremap <unique> <script> <Plug>ShowHighlightAttr             <SID>ShowHighlightAttr
 noremap <unique> <script> <Plug>ToggleStickyCursorline <SID>ToggleStickyCursorline
 noremap <unique> <script> <Plug>ToggleQuickfix         <SID>ToggleQuickfix
 noremap <unique> <script> <Plug>HighlightWord          <SID>HighlightWord
 
-noremap <SID>ShowHiInfo             :call <SID>ShowHiInfo()<CR>
+noremap <SID>ShowHighlightAttr      :call <SID>ShowHighlightAttr()<CR>
 noremap <SID>ToggleStickyCursorline :call <SID>ToggleStickyCursorline()<CR>
 noremap <SID>ToggleQuickfix         :call <SID>ToggleQuickfix()<CR>
 noremap <SID>HighlightWord          :call <SID>HighlightWord("<C-r><C-w>")<CR>
@@ -24,7 +24,7 @@ if !hasmapto('<Plug>HighlightWord')
 endif
 
 command -nargs=0 ToggleStickyCursorline call <SID>ToggleStickyCursorline()
-command -nargs=0 ShowHiInfo             call <SID>ShowHiInfo()
+command -nargs=0 ShowHighlightAttr             call <SID>ShowHighlightAttr()
 
 " Autocmd: put them in a dedicated group
 augroup basics
@@ -109,7 +109,7 @@ endif
 endfunction
 
 " Description: Print highlighting information at current cursor position.
-function! s:ShowHiInfo()
+function! s:ShowHighlightAttr()
   let synid = synID(line("."), col("."), 0)
   let synidtrans = synIDtrans(synid)
   echo "highlight name:" synIDattr(synidtrans, "name")
