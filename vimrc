@@ -111,7 +111,7 @@ set previewpopup=height:10,width:60,highlight:Pmenu
 
 " Command line completion
 set wildoptions=tagfile
-set wildmenu wildmode=full
+set nowildmenu wildmode=list:lastused,full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
@@ -199,7 +199,7 @@ nnoremap <Leader>t :tjump<Space>
 nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader><C-m> :sil make<Space><Up>
-nnoremap <expr> <Leader>v ':edit' g:vim_home
+nnoremap <expr> <Leader>v ':edit ' .. g:vim_home .. g:psep .. 'vimrc'
 nnoremap <Leader>g <cmd>silent grep <C-r><C-w><CR>
 nnoremap <Leader>G :silent grep<Space>
 nnoremap <Leader>+ :tabnew<CR>
@@ -256,8 +256,8 @@ nnoremap <Leader>om :set invsmartcase smartcase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
-command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
-command! -nargs=0 EditOptions :execute "edit" findfile(".vimrc", ";")
+command! -nargs=0 ReadDotVimrc :execute "source" findfile(".vimrc", ";")
+command! -nargs=0 EditDotVimrc :execute "edit" findfile(".vimrc", ";")
 
 command! -nargs=0 CleanUpBuffers :bufdo if bufname('%')=='' | bd! | endif
 
