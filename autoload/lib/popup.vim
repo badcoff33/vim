@@ -1,9 +1,14 @@
 
-function! s:PickColor(winid)
-  if hlID("PopupNotification")
-    call setwinvar(a:winid, '&wincolor', 'PopupNotification')
-  else
-    call setwinvar(a:winid, '&wincolor', 'Pmenu')
+autocmd ColorSchemePre * hilghlight clear PopupNotification
+autocmd ColorScheme * call lib#popup#PickColor()
+
+function! lib#popup#PickColor(winid)
+  if !hlID("PopupNotification")
+    if &background == 'light'
+      highlight PopupNotifcation guibg=forestgreen guifg=white
+    else
+      highlight PopupNotifcation guibg=green guifg=black
+    endif
   endif
 endfunction
 
@@ -35,7 +40,7 @@ function! lib#popup#TopLeft(list_of_strings)
           \ 'padding': [0,1,0,1],
           \ 'title': "",
           \ })
-    call s:PickColor(g:winid_tiny)
+    call setwinvar(g:winid_tiny, '&wincolor', 'PopupNotification')
   endif
 endfunction
 
@@ -57,9 +62,9 @@ function! lib#popup#TopRight(list_of_strings)
           \ 'tabpage': -1,
           \ 'zindex': 300,
           \ 'drag': 1,
-          \ 'close': 'click',
+          \ 'close': 'click'
           \ })
-    call s:PickColor(g:winid_tiny)
+    call setwinvar(g:winid_tiny, '&wincolor', 'PopupNotification')
   endif
 endfunction
 
@@ -70,10 +75,11 @@ function! lib#popup#Head(list_of_strings)
     call popup_settext(g:winid_head,a:list_of_strings)
   else
     let g:winid_head = popup_create(a:list_of_strings, {
+          \ 'title': "",
           \ 'line': 1,
           \ 'col': 1,
           \ 'maxwidth': &columns,
-          \ 'minwidth': 10
+          \ 'minwidth': &columns,
           \ 'maxheight': 10,
           \ 'minheight': argc() + 2,
           \ 'time': 3000,
@@ -81,10 +87,9 @@ function! lib#popup#Head(list_of_strings)
           \ 'zindex': 300,
           \ 'drag': 1,
           \ 'close': 'click',
-          \ 'padding': [0,1,0,1],
-          \ 'title': "",
+          \ 'padding': [0,1,0,1]
           \ })
-    call s:PickColor(g:winid_head)
+    call setwinvar(g:winid_head, '&wincolor', 'PopupNotification')
   endif
 endfunction
 
@@ -109,7 +114,7 @@ function! lib#popup#Bottom(list_of_strings)
           \ 'close': 'click',
           \ 'title': ""
           \ })
-    call s:PickColor(g:winid_bot)
+    call setwinvar(g:winid_bot, '&wincolor', 'PopupNotification')
   endif
 endfunction
 

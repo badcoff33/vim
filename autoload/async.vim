@@ -1,6 +1,5 @@
 " Vim plugin term -- run job asynchron
 
-let g:term_active = get(g:, 'term_active', 0)
 let g:async_auto_quickfix = get(g:, 'async_auto_quickfix', 0)
 
 function! async#JobActive()
@@ -17,11 +16,11 @@ endfunction
 
 function! AsyncCloseHandler(channel)
   let g:async_jo_active = 0
-  call lib#popup#TopLeft([
+  call lib#popup#Head([
         \ "Job " .. ch_status(a:channel),
         \ printf("run for %.3f seconds", reltimefloat(reltime(g:async_job_start_time)))])
   if g:async_auto_quickfix == 1
-    execute '1,$cbuffer' g:async_job_bufnr
+    execute 'cbuffer' g:async_job_bufnr
   endif
 endfunction
 
