@@ -75,8 +75,8 @@ call lib#color#Hi("LineNrAbove", s:line_num, s:magenta, "", "")
 call lib#color#Hi("LineNrBelow", s:line_num, s:magenta, "", "")
 call lib#color#Hi("LineNr", s:line_num, "", "NONE", "")
 call lib#color#Hi("Folded", s:fg3, s:fg1, "bold", "")
-call lib#color#Hi("FoldColumn", s:fg3, s:bg0, "", "")
-call lib#color#Hi("SignColumn", s:fg1, s:bg0, "", "")
+highlight! link FoldColumn LineNr
+highlight! link SignColumn LineNr
 
 " --- Navigation ---
 call lib#color#Hi("Directory", s:blue, "", "underline", "")

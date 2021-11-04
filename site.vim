@@ -14,8 +14,8 @@ nnoremap <F3> <cmd>Buffers<CR>
 nnoremap <F4> <cmd>BTags<CR>
 nnoremap <C-p> <cmd>Buffers<CR>
 
-colorscheme apollo
-set guifont=Fira_Code_Medium:h12 linespace=2
+colorscheme tron
+set guifont=Fira_Code_Medium:h10 linespace=2
 
 " - Window using a Vim command
 let g:fzf_layout = { 'window': 'enew' }
