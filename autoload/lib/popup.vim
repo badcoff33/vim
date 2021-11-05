@@ -1,9 +1,17 @@
 
-function! s:PickColor(winid)
-  if hlID("PopupNotification")
-    call setwinvar(a:winid, '&wincolor', 'PopupNotification')
+function! s:PickColor(winid, type)
+  if a:type == "error"
+    if hlID("PopupNotificationError")
+      call setwinvar(a:winid, '&wincolor', 'PopupNotificationError')
+    else
+      call setwinvar(a:winid, '&wincolor', 'ErrorMsg')
+    endif
   else
-    call setwinvar(a:winid, '&wincolor', 'Pmenu')
+    if hlID("PopupNotification")
+      call setwinvar(a:winid, '&wincolor', 'PopupNotification')
+    else
+      call setwinvar(a:winid, '&wincolor', 'Pmenu')
+    endif
   endif
 endfunction
 
@@ -15,7 +23,7 @@ function! s:max_len_in_list(list)
   return max
 endfunction
 
-function! lib#popup#TopLeft(list_of_strings)
+function! lib#popup#TopLeft(list_of_strings, type)
   if exists('g:winid_tiny') && match(popup_list(), g:winid_tiny) != -1
     call popup_settext(g:winid_tiny, a:list_of_strings)
   else
@@ -35,11 +43,11 @@ function! lib#popup#TopLeft(list_of_strings)
           \ 'padding': [0,1,0,1],
           \ 'title': "",
           \ })
-    call s:PickColor(g:winid_tiny)
+    call s:PickColor(g:winid_tiny, a:type)
   endif
 endfunction
 
-function! lib#popup#TopRight(list_of_strings)
+function! lib#popup#TopRight(list_of_strings, type)
   if exists('g:winid_tiny') && match(popup_list(), g:winid_tiny) != -1
     call popup_settext(g:winid_tiny, a:list_of_strings)
   else
@@ -59,13 +67,13 @@ function! lib#popup#TopRight(list_of_strings)
           \ 'drag': 1,
           \ 'close': 'click',
           \ })
-    call s:PickColor(g:winid_tiny)
+    call s:PickColor(g:winid_tiny, a:type)
   endif
 endfunction
 
 " Description: Show a popup with the arguments as a list in the upper right
 " corner.
-function! lib#popup#Head(list_of_strings)
+function! lib#popup#Head(list_of_strings, type)
   if exists('g:winid_head') && match(popup_list(), g:winid_head) != -1
     call popup_settext(g:winid_head,a:list_of_strings)
   else
@@ -84,14 +92,14 @@ function! lib#popup#Head(list_of_strings)
           \ 'padding': [0,1,0,1],
           \ 'title': "",
           \ })
-    call s:PickColor(g:winid_head)
+    call s:PickColor(g:winid_head, a:type)
   endif
 endfunction
 
 "
 " Description: Show a popup with the arguments as a list in the lower right
 " corner.
-function! lib#popup#Bottom(list_of_strings)
+function! lib#popup#Bottom(list_of_strings, type)
   if exists('g:winid_bot') && match(popup_list(), g:winid_bot) != -1
     call popup_settext(g:winid_bot, a:list_of_strings)
   else
@@ -109,7 +117,7 @@ function! lib#popup#Bottom(list_of_strings)
           \ 'close': 'click',
           \ 'title': ""
           \ })
-    call s:PickColor(g:winid_bot)
+    call s:PickColor(g:winid_bot, a:type)
   endif
 endfunction
 

@@ -14,7 +14,7 @@ nnoremap <F3> <cmd>Buffers<CR>
 nnoremap <F4> <cmd>BTags<CR>
 nnoremap <C-p> <cmd>Buffers<CR>
 
-colorscheme tron
+colorscheme gray_cat
 set guifont=Fira_Code_Medium:h10 linespace=2
 
 " - Window using a Vim command

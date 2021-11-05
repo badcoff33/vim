@@ -47,9 +47,9 @@ highlight PmenuSbar  guibg=fg
 highlight PmenuThumb guifg=turquoise2
 
 " search
-highlight IncSearch  guifg=black guibg=turquoise2 gui=bold
-highlight Search     guifg=black guibg=grey80         gui=bold
-highlight MatchParen guifg=cyan3 guibg=lightcyan               gui=bold
+highlight IncSearch  guifg=black guibg=turquoise2 gui=none
+highlight Search     guifg=black guibg=grey80     gui=bold
+highlight MatchParen guifg=cyan3 guibg=lightcyan  gui=bold
 
 " code
 highlight Statement    guifg=grey10      gui=bold
@@ -57,8 +57,8 @@ highlight Conditional  guifg=grey10      gui=bold
 highlight Type         guifg=gray35      gui=none
 highlight StorageClass guifg=grey40      gui=bold
 highlight PreProc      guifg=black       gui=bold
-highlight Comment      guifg=grey65      gui=italic
-highlight Identifier   guifg=grey50      gui=italic
+highlight Comment      guifg=grey65      gui=none
+highlight Identifier   guifg=grey50      gui=none
 highlight Special      guifg=grey30
 highlight Constant     guifg=pink4
 
@@ -70,10 +70,10 @@ highlight Error     guifg=pink3 guibg=bg gui=undercurl
 highlight Directory guifg=dodgerblue3    guibg=bg gui=underline
 
 " messages
-highlight WarningMsg guifg=steelblue      guibg=bg gui=none
-highlight ErrorMsg   guifg=orangered      guibg=bg gui=none
-highlight ModeMsg    guifg=pink4 guibg=bg gui=bold
-highlight Question   guifg=pink4 guibg=bg gui=bold
+highlight WarningMsg guifg=black guibg=yellow2 gui=none
+highlight ErrorMsg   guifg=black guibg=pink2 gui=none
+highlight ModeMsg    guifg=black guibg=turquoise1 gui=none
+highlight Question   guifg=black guibg=turquoise1 gui=none
 
 " quickfix colors
 highlight! link  QuickFixLine CursorLine

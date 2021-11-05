@@ -33,8 +33,8 @@ endif
 
 let s:white   = '#FFFFFF'
 let s:black   = '#18181F'
-let s:bg1     = '#282835'
-let s:bg2     = '#31313A'
+let s:bg1     = '#20202C'
+let s:bg2     = '#303039'
 let s:bg3     = '#343440'
 let s:bg4     = '#484855'
 let s:bg5     = '#505063'
