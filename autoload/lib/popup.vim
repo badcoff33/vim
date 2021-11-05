@@ -1,19 +1,11 @@
+" Vim autload file - display lists of text as popups
 
+augroup popup
+ au!
+ autocmd ColorScheme * highlight! link PopupNotification StatusLine
+augroup END
 
-autocmd ColorSchemePre * hilghlight clear PopupNotification
-autocmd ColorScheme * call lib#popup#PickColor()
-
-function! lib#popup#PickColor(winid)
-  if !hlID("PopupNotification")
-    if &background == 'light'
-      highlight PopupNotifcation guibg=forestgreen guifg=white
-    else
-      highlight PopupNotifcation guibg=green guifg=black
-    endif
-  endif
-endfunction
-
-doautocmd ColorScheme 
+doautocmd ColorScheme %
 
 function! s:max_len_in_list(list)
   let max = 1
@@ -74,26 +66,22 @@ endfunction
 " Description: Show a popup with the arguments as a list in the upper right
 " corner.
 function! lib#popup#Head(list_of_strings)
-  if exists('g:winid_head') && match(popup_list(), g:winid_head) != -1
-    call popup_settext(g:winid_head,a:list_of_strings)
-  else
-    let g:winid_head = popup_create(a:list_of_strings, {
-          \ 'title': "",
-          \ 'line': 1,
-          \ 'col': 1,
-          \ 'maxwidth': &columns,
-          \ 'minwidth': &columns,
-          \ 'maxheight': 10,
-          \ 'minheight': argc() + 2,
-          \ 'time': 3000,
-          \ 'tabpage': -1,
-          \ 'zindex': 300,
-          \ 'drag': 1,
-          \ 'close': 'click',
-          \ 'padding': [0,1,0,1]
-          \ })
-    call setwinvar(g:winid_head, '&wincolor', 'PopupNotification')
-  endif
+  let g:winid_head = popup_create(a:list_of_strings, {
+        \ 'title': "",
+        \ 'line': 1,
+        \ 'col': 1,
+        \ 'maxwidth': &columns,
+        \ 'minwidth': &columns,
+        \ 'maxheight': 10,
+        \ 'minheight': argc() + 2,
+        \ 'time': 3000,
+        \ 'tabpage': -1,
+        \ 'zindex': 300,
+        \ 'drag': 1,
+        \ 'close': 'click',
+        \ 'padding': [0,1,0,1]
+        \ })
+  call setwinvar(g:winid_head, '&wincolor', 'PopupNotification')
 endfunction
 
 "
