@@ -29,13 +29,13 @@ vnoremap <buffer> <LocalLeader>f :silent call FormatC()<cr>
 
 function! FormatC() range
     let save_cursor = getcurpos()
-    execute "cd" expand("%:p:h")
+    noautocmd execute "cd" expand("%:p:h")
     if a:firstline == a:lastline
         1,$!clang-format -style=file
     else
         execute a:firstline.."."..a:lastline.."!clang-format -style=file"
     endif
-    execute "cd -"
+    noautocmd execute "cd -"
     call setpos('.', save_cursor)
 endfunction
 

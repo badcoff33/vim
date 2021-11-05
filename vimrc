@@ -199,7 +199,7 @@ nnoremap <Leader>t :tjump<Space>
 nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader><C-m> :sil make<Space><Up>
-nnoremap <expr> <Leader>v ':edit ' .. g:vim_home .. g:psep .. 'vimrc'
+nnoremap <Leader>v <cmd>edit ~/vimfiles/pack/machine/start/config/plugin/_site.vim<CR>
 nnoremap <Leader>g <cmd>silent grep <C-r><C-w><CR>
 nnoremap <Leader>G :silent grep<Space>
 nnoremap <Leader>+ :tabnew<CR>
