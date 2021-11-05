@@ -1,6 +1,5 @@
 " Vim plugin term -- run job asynchron
 
-let g:term_active = get(g:, 'term_active', 0)
 let g:async_auto_quickfix = get(g:, 'async_auto_quickfix', 0)
 
 function! async#JobActive()
@@ -11,17 +10,17 @@ function! async#JobBufferToFront()
   call lib#windows#PopupBuffer(g:async_job_bufnr)
 endfunction
 
-function! async#HideJobBuffer()
-  call lib#windows#HideBuffer(g:async_job_bufnr)
+function! async#ToggleJobOutput()
+  call lib#windows#ToggleBuffer(g:async_job_bufnr)
 endfunction
 
 function! AsyncCloseHandler(channel)
   let g:async_jo_active = 0
-  call lib#popup#TopLeft([
+  call lib#popup#Head([
         \ "Job " .. ch_status(a:channel),
         \ printf("run for %.3f seconds", reltimefloat(reltime(g:async_job_start_time)))])
   if g:async_auto_quickfix == 1
-    execute '1,$cbuffer' g:async_job_bufnr
+    execute 'cbuffer' g:async_job_bufnr
   endif
 endfunction
 
@@ -58,7 +57,7 @@ function! async#StartJob(cmd) abort
     let g:async_job_start_time = reltime()
   else
     let g:async_jo_active = 0
-    call lib#popup#TopLeft(["Failed process " .. id .. ": " .. a:cmd])
+    call lib#popup#Head(["Failed process " .. id .. ": " .. a:cmd])
     echoerr 'job failed to start'
   endif
 endfunction
@@ -73,35 +72,6 @@ function! async#OpenTerm()
   endfor
   botright terminal
   let b:home_term = 1
-endfunction
-
-" Description: Popup to first not finished term buffer in buffer list.
-" An any optional parameter is present execute last terminal command.
-function! async#SendTermCmd(cmd)
-  if mode() == 'n'
-    let cmd_keys = 'a'
-  else
-    let cmd_keys = ''
-  endif
-  if empty(a:cmd)
-    let cmd_keys = cmd_keys .. "\<Up>\<CR>\<C-w>p"
-  else
-    let cmd_keys = cmd_keys .. a:cmd .. "\<CR>\<C-w>p"
-  endif
-  for b in term_list()
-    if getbufvar(b, 'home_term', 0) == 1
-      call lib#windows#GotoBuffer(b)
-      execute 'nnoremap <buffer> <CR> :' .. line('$') .. ',$cbuffer<CR>'
-      call feedkeys(cmd_keys)
-      return
-    endif
-  endfor
-  botright terminal
-  let b:home_term = 1
-  if mode() == 'n'
-    call feedkeys('a')
-  endif
-  call feedkeys(cmd_keys)
 endfunction
 
 function! async#CloseFinishedTerm()

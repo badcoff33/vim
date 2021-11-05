@@ -11,11 +11,11 @@ set background=light
 let g:colors_name = "breeze"
 
 let s:black = "#1b1f23"
-let s:white = "#ffffff"
+let s:white = "#F8FCFC"
 
 " -------- Grey --------
 let s:grey_9 = "#f8fafb"
-let s:grey_8 = "#f6f8fa"
+let s:grey_8 = "#f3f5f8"
 let s:grey_7 = "#e1e4e8"
 let s:grey_6 = "#d1d5da"
 let s:grey_5 = "#959da5"
@@ -119,11 +119,11 @@ if exists('&wincolor')
 endif
 
 " Color scheme specific
-call lib#color#Hi('BlendDown', s:white, s:grey_8, '', '')
+call lib#color#Hi('BlendDown', s:white, s:grey_7, '', '')
 
 " Basics
-call lib#color#Hi('Normal', s:grey_2, s:white, 'NONE', '')
-call lib#color#Hi('NonText', s:grey_2, s:white, 'NONE', '')
+call lib#color#Hi('Normal', s:grey_2, s:grey_8, 'NONE', '')
+call lib#color#Hi('NonText', s:grey_3, s:grey_8, 'NONE', '')
 call lib#color#Hi('Ignore', s:grey_3, s:white, 'NONE', '')
 call lib#color#Hi('Bold',   s:white, '', 'bold', '')
 call lib#color#Hi('Italic', s:white, '', 'italic', '')
@@ -154,6 +154,10 @@ highlight! link TabLineFill Normal
 highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 highlight! link WildMenu PmenuSel
+
+call lib#color#Hi('SignifySignAdd', s:green_4, '', '', '')
+call lib#color#Hi('SignifySignChange', s:blue_4, '', '', '')
+call lib#color#Hi('SignifySignDelete', s:red_4, '', '', '')
 
 " Breeze specific
 call lib#color#Hi('BlendDown', s:grey_0, s:grey_9, '', '')

@@ -1,7 +1,7 @@
-" Vim color theme
-" Name:        Angry Bee
-" Maintainer:  Markus Prepens
-" Colors taken from https://github.com/ianpan870102/tron-legacy-emacs-theme.
+" vim color theme
+" name:        angry bee
+" maintainer:  markus prepens
+" colors taken from https://github.com/ianpan870102/tron-legacy-emacs-theme.
 " Thanks!
 
 if exists("syntax_on")
@@ -23,7 +23,7 @@ let s:bg2              ="#192533"
 let s:bg3              ="#1B324B"
 let s:bg4              ="#2B4255"
 let s:hl_line          ="#0E2638"
-let s:bg_hl            ="#2B4255"
+let s:bg_hl            ="#35605F"
 let s:vc_r             ="#B62D66"
 let s:vc_g             ="#4BB5BE"
 let s:vc_b             ="#387AAA"

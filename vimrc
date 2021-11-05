@@ -111,7 +111,7 @@ set previewpopup=height:10,width:60,highlight:Pmenu
 
 " Command line completion
 set wildoptions=tagfile
-set wildmenu wildmode=full
+set nowildmenu wildmode=full,list:lastused,full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
@@ -133,7 +133,7 @@ endif
 " Netrw variables
 let g:netrw_use_errorwindow = 0
 let g:netrw_banner = 0
-let g:netrw_liststyle = 3
+let g:netrw_liststyle = 0
 let g:netrw_browse_split = 0
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
@@ -193,12 +193,13 @@ let g:ft2regex = {
       \ }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
 nnoremap <expr> <Leader>B ':filter /' .. LsFilter(&ft) .. '/ ls<CR>:buffer '
-nnoremap <Leader>b :ls +<CR>:buffer<Space>
+nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>f :find<Space>
+nnoremap <Leader>t :tjump<Space>
 nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader><C-m> :sil make<Space><Up>
-nnoremap <expr> <Leader>v ':edit' g:vim_home
+nnoremap <expr> <Leader>v ':edit ' .. g:vim_home .. g:psep .. 'vimrc'
 nnoremap <Leader>g <cmd>silent grep <C-r><C-w><CR>
 nnoremap <Leader>G :silent grep<Space>
 nnoremap <Leader>+ :tabnew<CR>
@@ -271,8 +272,8 @@ nnoremap <Leader>om :set invsmartcase smartcase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
-command! -nargs=0 ReadOptions :execute "source" findfile(".vimrc", ";")
-command! -nargs=0 EditOptions :execute "edit" findfile(".vimrc", ";")
+command! -nargs=0 ReadDotVimrc :execute "source" findfile(".vimrc", ";")
+command! -nargs=0 EditDotVimrc :execute "edit" findfile(".vimrc", ";")
 
 command! -nargs=0 CleanUpBuffers :bufdo if bufname('%')=='' | bd! | endif
 
@@ -296,9 +297,5 @@ augroup init
   " move visual selection to quickfix window
   autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split(@t,'[\n\r]')<CR>
 augroup END
-
-" run an optional, machine-dependent script here. May set plugin vars before the
-" plugins gets sourced.
-runtime site.vim
 
 " vim:ft=vim
