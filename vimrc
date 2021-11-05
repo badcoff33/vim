@@ -274,6 +274,12 @@ nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 command! -nargs=0 ReadDotVimrc :execute "source" findfile(".vimrc", ";")
 command! -nargs=0 EditDotVimrc :execute "edit" findfile(".vimrc", ";")
+function! CallbackDirChanged()
+  let file = findfile(".vimrc", ";")
+  if len(file) > 0
+    call lib#popup#Bottom(["found "..file])
+  endif
+endfunction
 
 command! -nargs=0 CleanUpBuffers :bufdo if bufname('%')=='' | bd! | endif
 
@@ -296,6 +302,7 @@ augroup init
   autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
   " move visual selection to quickfix window
   autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split(@t,'[\n\r]')<CR>
+  autocmd DirChanged * call CallbackDirChanged()
 augroup END
 
 " vim:ft=vim
