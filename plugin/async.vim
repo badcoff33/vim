@@ -1,8 +1,7 @@
 " Vim plugin file -- make access on async processes or terminal easier
 
 command! -nargs=* -complete=file_in_path Job :call async#StartJob(<q-args>)
-command! -nargs=0 JobOutput :call async#JobBufferToFront()
-command! -nargs=0 HideJob :call async#HideJobBuffer()
+command! -nargs=0 ToggleJobOutput :call async#ToggleJobOutput()
 command! -nargs=0 PopupTerm :call async#PopupTerm()
 command! -nargs=0 CloseFinishedTerm :call async#CloseFinishedTerm()
 
@@ -13,7 +12,6 @@ if !hasmapto(mapleader .. 'T')
 endif
 
 if !hasmapto('<F7')
-  nnoremap <S-F7> :JobOutput<CR>
-  nnoremap <CS-F7> :HideJob<CR>
+  nnoremap <S-F7> :ToggleJobOutput<CR>
   nnoremap <F7> :<C-u>Job<Up>
 endif

@@ -10,8 +10,8 @@ function! async#JobBufferToFront()
   call lib#windows#PopupBuffer(g:async_job_bufnr)
 endfunction
 
-function! async#HideJobBuffer()
-  call lib#windows#HideBuffer(g:async_job_bufnr)
+function! async#ToggleJobOutput()
+  call lib#windows#ToggleBuffer(g:async_job_bufnr)
 endfunction
 
 function! AsyncCloseHandler(channel)
@@ -57,7 +57,7 @@ function! async#StartJob(cmd) abort
     let g:async_job_start_time = reltime()
   else
     let g:async_jo_active = 0
-    call lib#popup#TopLeft(["Failed process " .. id .. ": " .. a:cmd])
+    call lib#popup#Head(["Failed process " .. id .. ": " .. a:cmd])
     echoerr 'job failed to start'
   endif
 endfunction

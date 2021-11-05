@@ -111,7 +111,7 @@ set previewpopup=height:10,width:60,highlight:Pmenu
 
 " Command line completion
 set wildoptions=tagfile
-set nowildmenu wildmode=list:lastused,full
+set nowildmenu wildmode=full,list:lastused,full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags

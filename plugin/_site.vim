@@ -9,8 +9,9 @@ xmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
 if has('gui')
-  colorscheme tron
-  set guifont=Fira_Code:h11
+  colorscheme breeze
+  "set guifont=Fira_Code:h11
+  set guifont=Courier_Prime:h11
 endif
 
 " - Window using a Vim command

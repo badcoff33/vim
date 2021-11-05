@@ -24,13 +24,15 @@ function! lib#windows#GotoBuffer(buf)
   endif
 endfunction
 
-function! lib#windows#HideBuffer(buf)
+function! lib#windows#ToggleBuffer(buf)
   let save_winr = winnr()
   if bufexists(a:buf)
     let buf_winid = bufwinid(a:buf)
     if buf_winid >= 0
       call win_gotoid(buf_winid)
       buffer #
+    else
+      call lib#windows#PopupBuffer(a:buf)
     endif
   endif
   execute save_winr .. "wincmd w"
