@@ -111,7 +111,7 @@ set previewpopup=height:10,width:60,highlight:Pmenu
 
 " Command line completion
 set wildoptions=tagfile
-set nowildmenu wildmode=full,list:lastused,full
+set nowildmenu wildmode=list:lastused,full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
@@ -295,14 +295,15 @@ cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 
 augroup init
   autocmd!
-  autocmd VimResized * wincmd =
-  autocmd VimLeavePre * execute 'mksession! '..$TMP..'/'..sha256(getcwd())..'.vim'
-  autocmd BufEnter * if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
-  autocmd BufEnter * if &pvw | setlocal nonu nornu | endif
+  autocmd VimResized   * wincmd =
+  autocmd VimLeavePre  * execute 'mksession! '..$TMP..'/'..sha256(getcwd())..'.vim'
+  autocmd DirChanged   * execute 'mksession! '..$TMP..'/'..sha256(getcwd())..'.vim'
+  autocmd DirChanged   * call CallbackDirChanged()
+  autocmd BufEnter     * if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
+  autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
   " move visual selection to quickfix window
   autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split(@t,'[\n\r]')<CR>
-  autocmd DirChanged * call CallbackDirChanged()
 augroup END
 
 " vim:ft=vim

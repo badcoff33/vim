@@ -109,8 +109,8 @@ call s:Hi("VertSplit", s:frost2, s:frost0, "NONE", "")
 hi! link WildMenu IncSearch
 
 " Search
-call s:Hi("IncSearch", s:frostBlack, s:frostGreen, "bold", "")
-call s:Hi("Search", s:frostYellow, s:frost2, "bold", "")
+call s:Hi("IncSearch", s:frostBlack, s:frostGreen, "none", "")
+call s:Hi("Search", s:frostYellow, s:frost2, "none", "")
 
  " QuickFix
 hi! link qfFileName Directory
@@ -129,7 +129,7 @@ call s:Hi("Bold", "", "", "bold", "")
 call s:Hi("Italic", "", "", "italic", "")
 call s:Hi("Boolean", s:frostBlue3, "", "", "")
 call s:Hi("Character", s:frostYellow, "", "", "")
-call s:Hi("Comment", s:frostGreen, "", "italic", "")
+call s:Hi("Comment", s:frostGreen, "", "none", "")
 call s:Hi("Conditional", s:frostBlue3, "", "", "")
 call s:Hi("Constant", s:frostPumpkin, "", "", "")
 call s:Hi("Define", s:frostBlue3, "", "", "")
@@ -147,7 +147,7 @@ call s:Hi("PreProc", s:frostBlue3, "", "NONE", "")
 call s:Hi("Repeat", s:frostBlue3, "", "", "")
 call s:Hi("Special", s:frost5, "", "", "")
 call s:Hi("SpecialChar", s:frostYellow, "", "", "")
-call s:Hi("SpecialComment", s:frostBlue2, "", "italic", "")
+call s:Hi("SpecialComment", s:frostBlue2, "", "", "")
 call s:Hi("Statement", s:frostBlue3, "", "", "")
 call s:Hi("StorageClass", s:frostBlue3, "", "", "")
 call s:Hi("String", s:frostViolet, "", "", "")
