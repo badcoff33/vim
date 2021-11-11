@@ -13,4 +13,4 @@ set makeprg=make
 
 " single line
 "set errorformat="%f\",\ %l\ \ Warning\[%m\]
-set errorformat=\"%f\",%l%m
+set errorformat=\"%f\"\\,%l\ %m
