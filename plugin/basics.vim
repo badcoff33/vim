@@ -30,7 +30,6 @@ command -nargs=0 ShowHighlightAttr             call <SID>ShowHighlightAttr()
 augroup basics
   autocmd!
   autocmd BufReadPost * :call <SID>RestoreCursor()
-  autocmd QuickFixCmdPre * :cclose
 augroup END
 
 " Description: Make the actual window more obvious.
