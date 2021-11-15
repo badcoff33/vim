@@ -111,7 +111,7 @@ set previewpopup=height:10,width:60,highlight:Pmenu
 
 " Command line completion
 set wildoptions=tagfile
-set nowildmenu wildmode=list:lastused,full
+set nowildmenu wildmode=full:lastused
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
@@ -231,37 +231,6 @@ imap <F10> <Esc><F10>
 imap <F11> <Esc><F11>
 imap <F12> <Esc><F12>
 imap <F13> <Esc><F13>
-
-if executable("rg")
-  " Using links? Ripgrep supports this by th option '--follow'
-  set grepprg=rg\ --vimgrep\ -g\ !cmake\ $*
-  set grepformat=%f:%l:%c:%m
-  let g:ft2rg_glob = { 'c':'-g *.[ch]',
-        \ 'cpp':'-g *.[ch]',
-        \ 'vim':'-g *.vim',
-        \ 'asm': '-g *.850',
-        \ 'py':'-g *.py',
-        \ 'cmake':'-g *.cmake -g CMakeLists.txt'
-        \ }
-  let RgGlob = { ft -> has_key(g:ft2rg_glob, ft) ? g:ft2rg_glob[ft] : '-g *.*' }
-  nnoremap <expr> <Leader>g ':silent grep ' .. RgGlob(&ft) .. ' ' .. expand('<cword>')
-  command! -nargs=+ Glob :term rg --files -g <args> .
-elseif executable("findstr")
-  let g:ft2findstr_glob = { 'c':'*.c *.h',
-        \ 'cpp':'*.c* *.h*',
-        \ 'vim':'*vimrc *.vim',
-        \ 'asm': '*.s *.asm *.850',
-        \ 'py':'*.py',
-        \ 'cmake':'*.cmake CMakeLists.txt'
-        \ }
-  let FindstrGlob = { ft -> has_key(g:ft2findstr_glob, ft) ? g:ft2findstr_glob[ft] : '*.*' }
-  nnoremap <expr> <Leader>g ':silent grep ' .. expand('<cword>') .. ' ' .. FindstrGlob(&ft)
-  set grepprg=findstr\ /S\ /N
-  set grepformat=%f:%l:%m
-elseif executable("grep")
-  set grepprg=grep\ -Hnr\ --exclude=cmake\ $* \.
-  set grepformat=%f:%l:%m
-endif
 
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
