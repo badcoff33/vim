@@ -13,6 +13,7 @@ augroup ginit
   autocmd BufEnter * :set titlestring=Vim\ in\ %{getcwd()}
 augroup END
 
+syntax on
 set guioptions=!a
 set guicursor+=a:blinkon0
 set renderoptions=
