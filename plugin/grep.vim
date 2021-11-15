@@ -4,35 +4,51 @@
 " Ironically, right now grep iteslf is not used, because I work On Windows
 " only.
 
-nnoremap <F8> <cmd>sil grep <C-r><C-w><CR>
+
+let g:rg_glob_patterns = { 'c':'-g *.[ch]',
+      \ 'cpp':'-g *.[ch]',
+      \ 'vim':'-g *.vim',
+      \ 'asm': '-g *.850',
+      \ 'py':'-g *.py',
+      \ 'cmake':'-g *.cmake -g CMakeLists.txt'
+      \ }
+
+let g:findstr_glob_patterns = { 'c':'*.c *.h',
+      \ 'cpp':'*.c* *.h*',
+      \ 'vim':'*vimrc *.vim',
+      \ 'asm': '*.s *.asm *.850',
+      \ 'py':'*.py',
+      \ 'cmake':'*.cmake CMakeLists.txt'
+      \ }
 
 if executable("rg")
+
   " Using links? Ripgrep supports this by th option '--follow'
-  set grepprg=rg\ --vimgrep\ -g\ !cmake\ $*
+  set grepprg=rg\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
-  let g:ft2rg_glob = { 'c':'-g *.[ch]',
-        \ 'cpp':'-g *.[ch]',
-        \ 'vim':'-g *.vim',
-        \ 'asm': '-g *.850',
-        \ 'py':'-g *.py',
-        \ 'cmake':'-g *.cmake -g CMakeLists.txt'
-        \ }
-  let RgGlob = { ft -> has_key(g:ft2rg_glob, ft) ? g:ft2rg_glob[ft] : '-g *.*' }
+  let RgGlob = { ft -> has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft] : '-g *.*' }
   nnoremap <expr> <Leader>g ':silent grep ' .. RgGlob(&ft) .. ' ' .. expand('<cword>')
-  command! -nargs=+ Glob :term rg --files -g <args> .
+  nmap <F8> <Leader>g<CR>
+
 elseif executable("findstr")
-  let g:ft2findstr_glob = { 'c':'*.c *.h',
-        \ 'cpp':'*.c* *.h*',
-        \ 'vim':'*vimrc *.vim',
-        \ 'asm': '*.s *.asm *.850',
-        \ 'py':'*.py',
-        \ 'cmake':'*.cmake CMakeLists.txt'
-        \ }
-  let FindstrGlob = { ft -> has_key(g:ft2findstr_glob, ft) ? g:ft2findstr_glob[ft] : '*.*' }
-  nnoremap <expr> <Leader>g ':silent grep ' .. expand('<cword>') .. ' ' .. FindstrGlob(&ft)
+
   set grepprg=findstr\ /S\ /N
   set grepformat=%f:%l:%m
+  let FindstrGlob = { ft -> has_key(g:findstr_glob_patterns, ft) ? g:findstr_glob_patterns[ft] : '*.*' }
+  nnoremap <expr> <Leader>g ':silent grep ' .. expand('<cword>') .. ' ' .. FindstrGlob(&ft)
+  nmap <F8> <Leader>g<CR>
+
 elseif executable("grep")
+
   set grepprg=grep\ -Hnr\ --exclude=cmake\ $* \.
   set grepformat=%f:%l:%m
+
 endif
+
+if executable("rg")
+  " find any file
+  command! -nargs=+ Glob :term rg --files -g <args> .
+else
+  command! -nargs=+ Glob :term dir /S /B <args>
+endif
+

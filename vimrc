@@ -7,7 +7,7 @@
 
 filetype plugin on
 filetype indent on
-syntax on
+
 if exists('&termguicolors')
   set termguicolors
 endif
@@ -110,7 +110,7 @@ set pumheight=7
 set previewpopup=height:10,width:60,highlight:Pmenu
 
 " Command line completion
-set wildoptions=tagfile
+set wildoptions=
 set nowildmenu wildmode=full:lastused
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
@@ -200,8 +200,7 @@ nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader><C-m> :sil make<Space><Up>
 nnoremap <Leader>v <cmd>edit ~/vimfiles/pack/machine/start/config/plugin/_site.vim<CR>
-nnoremap <Leader>g <cmd>silent grep <C-r><C-w><CR>
-nnoremap <Leader>G :silent grep<Space>
+nnoremap <Leader>g :silent grep<Space>
 nnoremap <Leader>+ :tabnew<CR>
 nnoremap <Leader>- :tabclose<CR>
 nnoremap <Leader>c <C-^>:bw#<Esc>
