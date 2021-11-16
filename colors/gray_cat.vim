@@ -1,6 +1,11 @@
 " Vim color theme
 "
-" Description: A light one with fresh colors.
+" Description: I like cats
+"
+"             |\\   _,,,---,,_
+"     ZZzzz /,`.-'`'    -.  ;-;;,_
+"          |,4-  ) )-,_. ,\\ (  `'-'
+"         '---''(_/--'  `-'\\_)       ")
 
 if exists("syntax_on")
   syntax reset
@@ -11,8 +16,8 @@ set background=light
 let g:colors_name = "gray_cat"
 
 " basics
-highlight Normal  guifg=grey30 guibg=white
-highlight NonText guifg=paleturquoise2 guibg=white
+highlight Normal  guifg=grey30 guibg=grey95
+highlight NonText guifg=paleturquoise2 guibg=grey97
 highlight Visual  guifg=white  guibg=grey35
 highlight Cursor  guifg=white  guibg=black
 
@@ -20,7 +25,7 @@ highlight NormalFloat  guifg=black guibg=azure3
 
 " window decoration
 highlight StatusLine   guifg=black guibg=grey80 gui=none
-highlight StatusLineNC guifg=grey30 guibg=grey94 gui=none
+highlight StatusLineNC guifg=grey30 guibg=grey90 gui=none
 highlight VertSplit    guifg=grey60 guibg=bg gui=none
 highlight! link WildMenu IncSearch
 highlight! link StatusLineTerm StatusLine
@@ -47,9 +52,9 @@ highlight PmenuSbar  guibg=fg
 highlight PmenuThumb guifg=turquoise2
 
 " search
-highlight IncSearch  guifg=black guibg=turquoise2 gui=none
-highlight Search     guifg=black guibg=grey80     gui=bold
-highlight MatchParen guifg=cyan3 guibg=lightcyan  gui=bold
+highlight IncSearch  guifg=white guibg=dodgerblue gui=underline
+highlight Search     guifg=black guibg=lightcyan3    gui=none
+highlight MatchParen guifg=cyan1 guibg=lightcyan2 gui=bold
 
 " code
 highlight Statement    guifg=grey10      gui=bold
