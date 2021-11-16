@@ -178,8 +178,7 @@ vnoremap {<Space> c{<C-r>-}<Esc>
 " Set leader and localleader keys, that works best for me
 let mapleader = " "
 let maplocalleader = "s"
-imap <C-CR> <Esc><Leader>
-nmap <C-CR> <Leader>
+inoremap <C-Space> <Esc>
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
