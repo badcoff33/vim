@@ -1,10 +1,10 @@
 
 " Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent> <expr> <C-Space>
+inoremap <silent> <expr> <C-CR>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>CompletionInhibit() ? "" :
       \ "\<C-x>\<C-]>"
-inoremap <C-S-Space> <C-p>
+inoremap <C-S-CR> <C-p>
 
 inoremap <silent> <expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
