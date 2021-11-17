@@ -24,13 +24,16 @@ g:rg_glob_patterns = {
     'cmake': '*.cmake CMakeLists.txt'
     }
 
+def g:RgGlob(ft: string): string
+ return has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft] : '-g *.*'
+enddef
+
 if executable("rg")
 
   # Using links? Ripgrep supports this by th option '--follow'
   set grepprg=rg\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
-  var RgGlob = (ft) => has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft] : '-g *.*'
-  nnoremap <expr> <Leader>g ':silent grep ' .. RgGlob(&ft) .. ' ' .. expand('<cword>')
+  nnoremap <expr> <Leader>g ':silent grep ' .. g:RgGlob(&ft) .. ' ' .. expand('<cword>')
   nmap <F8> <Leader>g<CR>
 
 elseif executable("findstr")
