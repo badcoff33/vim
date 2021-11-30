@@ -239,15 +239,6 @@ nnoremap <Leader>om :set invsmartcase smartcase?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
-command! -nargs=0 ReadDotVimrc :execute "source" findfile(".vimrc", ";")
-command! -nargs=0 EditDotVimrc :execute "edit" findfile(".vimrc", ";")
-function! CallbackDirChanged()
-  let file = findfile(".vimrc", ";")
-  if len(file) > 0
-    call lib#popup#Bottom(["found "..file])
-  endif
-endfunction
-
 command! -nargs=0 CleanUpBuffers :bufdo if bufname('%')=='' | bd! | endif
 
 command! -nargs=0 IgnoreCaseSensetive :set   ignorecase nosmartcase
@@ -263,12 +254,9 @@ cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 augroup init
   autocmd!
   autocmd VimResized   * wincmd =
-  autocmd VimLeavePre  * execute 'mksession! '..$TMP..'/'..sha256(getcwd())..'.vim'
-  autocmd DirChanged   * execute 'mksession! '..$TMP..'/'..sha256(getcwd())..'.vim'
-  autocmd DirChanged   * call CallbackDirChanged()
   autocmd BufEnter     * if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
-  autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
+  autocmd TerminalOpen * setlocal nonumber norelativenumber signcolumn=no foldcolumn=0
   " move visual selection to quickfix window
   autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split(@t,'[\n\r]')<CR>
 augroup END

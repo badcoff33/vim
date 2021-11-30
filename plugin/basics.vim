@@ -116,3 +116,31 @@ function! s:ShowHighlightAttr()
   echo "background:" synIDattr(synidtrans, "bg")
 endfunction
 
+" Description: When called with projects root directory as parameter, execute
+" the store commands. Dictionary required with this structured required:
+" let g:rc = {
+"      \ '<dir-a>':
+"      \ [
+"      \   '<command-a1>',
+"      \   '<command-a2>',
+"      \   '...'
+"      \ ],
+"      \ '<dir-b>':
+"      \ [
+"      \   '<command-b1>',
+"      \   '<command-b2>',
+"      \   '...'
+"      \ ]
+"      \ }
+"
+function! LookUp(dir)
+  if !exists("g:rc")
+  if g:rc->has_key(a:dir)
+    for v in g:rc[a:dir]
+      echo ":execute" v
+      execute v
+    endfor
+  endif
+endfunction
+
+command! -nargs=0 LookUpRc :call LookUp(getcwd())
