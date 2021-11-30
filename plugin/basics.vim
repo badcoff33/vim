@@ -135,11 +135,15 @@ endfunction
 "
 function! LookUp(dir)
   if !exists("g:rc")
+    return
+  endif
   if g:rc->has_key(a:dir)
     for v in g:rc[a:dir]
       echo ":execute" v
       execute v
     endfor
+  else
+    echomsg "no commands for \""..a:dir.."\""
   endif
 endfunction
 
