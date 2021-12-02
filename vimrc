@@ -196,6 +196,7 @@ nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>t :tjump<Space>
 nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
+nnoremap <Leader>E :browse edit <C-r>=expand("%:p:h")<CR><CR>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader><C-m> :sil make<Space><Up>
 nnoremap <Leader>v <cmd>edit ~/vimfiles/pack/machine/start/config/plugin/_site.vim<CR>
@@ -207,8 +208,8 @@ nnoremap <Leader>c <C-^>:bw#<Esc>
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
 
-nnoremap <C-j> :cnext<CR>
-nnoremap <C-k> :cprevious<CR>
+nnoremap + :cnext<CR>
+nnoremap - :cprevious<CR>
 
 nnoremap <A-Down> :cnext<CR>
 nnoremap <A-Up> :cprev<CR>
