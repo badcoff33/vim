@@ -9,7 +9,7 @@ xmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
 if has('gui')
-  colorscheme breeze
+  colorscheme apollo
   "set guifont=Fira_Code:h11
   set guifont=Courier_Prime:h11
 endif
@@ -22,8 +22,9 @@ let g:rc = {
       \ [ 'set path=.,src,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'command! -nargs=0 Update :terminal ++close ++hidden ctags -R Main XcpBasicDrv "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10agf*.h"',
+      \   'autocmd WinEnter *.c :HighlightTags both',
+      \   'autocmd WinEnter *.h :HighlightTags both',
       \   'StartUpdater',
-      \   'Update',
       \   'let g:async_auto_quickfix=1',
       \   'compiler iar'
       \ ]

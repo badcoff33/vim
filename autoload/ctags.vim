@@ -10,12 +10,12 @@ vim9script
 def ctags#HighlightTags(what: string)
   for tagsfile in tagfiles()
     for line in readfile(tagsfile)
-      if what == 'functions' || what == 'both'
+      if (what == 'functions') || (what == 'both')
         if match(line, '\<f\>') > 0
           execute "syntax keyword ctagsFunction" matchstr(line, '^\w\+')
         endif
       endif
-      if what == 'types' || what == 'both'
+      if (what == 'types') || (what == 'both')
         if match(line, '\<t\>') > 0
           execute "syntax keyword ctagsType" matchstr(line, '^\w\+')
         endif
@@ -28,8 +28,8 @@ enddef
 
 # Description: Callback function run by cyclic timer.
 def ctags#UpdaterCallback(tid: number)
-  if exists(':Update') && exists('g:updater_timer_id') && tid == g:updater_timer_id
-    if g:updater_run_it
+  if exists(':Update') && exists('g:updater_timer_id') && (tid == g:updater_timer_id)
+    if g:updater_run_it != 0
       Update
       g:updater_run_it = 0
     endif
