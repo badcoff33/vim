@@ -133,7 +133,7 @@ endfunction
 "      \ ]
 "      \ }
 "
-function! LookUp(dir)
+function! SourceLocalCmds(dir)
   if !exists("g:rc")
     return
   endif
@@ -147,4 +147,14 @@ function! LookUp(dir)
   endif
 endfunction
 
-command! -nargs=0 LookUpRc :call LookUp(getcwd())
+function CheckSourceLocalCmds()
+  if !exists("g:rc")
+    return
+  endif
+  if g:rc->has_key(getcwd())
+    call lib#popup#Bottom(["dir-local commands available","run :SourceDirLocal<CR> to execute them."])
+  endif
+endfunction
+
+autocmd! DirChanged * :call CheckSourceLocalCmds()
+command! -nargs=0 SourceLocalCmds :call SourceLocalCmds(getcwd())

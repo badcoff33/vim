@@ -21,8 +21,9 @@ let g:rc = {
       \ 'C:\Users\prepensm\Documents\Workspaces\_':
       \ [ 'set path=.,src,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
-      \   'command! -nargs=0 Update :terminal ++close ++hidden ctags -R src "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10agf*.h"',
+      \   'command! -nargs=0 Update :terminal ++close ++hidden ctags -R Main XcpBasicDrv "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10agf*.h"',
       \   'StartUpdater',
+      \   'Update',
       \   'let g:async_auto_quickfix=1',
       \   'compiler iar'
       \ ]
