@@ -7,18 +7,27 @@ vim9script
 # Description: Scan trough current TAG file, find the function symbols and
 # highlight them as keyword when called with parameter "functions". When called
 # with parameter "types", highlight C types. Well, 'both' says it all :)
+#echo match('ApplXcpCalculateChecksum XcpBasicDrv/_xcp_appl.c /^vuint8 ApplXcpCalculateChecksum( ROMBYTEPTR pMemArea, BYTEPTR pRes, vuint32 length )$/;"  f typeref:typename:vuint8','^\(\w\+\).*\(\<f\>\|\<t\>\).*$')
 def ctags#HighlightTags(what: string)
+  var ctags_sym = ""
+  var ctags_type = ""
+  var run_add_func = (what == 'functions') || (what == 'both')
+  var run_add_type = (what == 'types') || (what == 'both')
+  syntax clear ctagsFunction
+  syntax clear ctagsType
   for tagsfile in tagfiles()
     for line in readfile(tagsfile)
-      if (what == 'functions') || (what == 'both')
-        if match(line, '\<f\>') > 0
-          execute "syntax keyword ctagsFunction" matchstr(line, '^\w\+')
-        endif
+      try
+        [ctags_sym, ctags_type] = split(substitute(line, '^\(\w\+\).*\(\<f\>\|\<t\>\).*$', '\1 \2', 'g'), ' ')
+      catch /.*/
+        # no match found on parsed line
+        [ctags_sym, ctags_type] = [ "", "" ]
+      endtry
+      if (ctags_type == 'f') && run_add_func
+        execute "syntax keyword ctagsFunction" ctags_sym
       endif
-      if (what == 'types') || (what == 'both')
-        if match(line, '\<t\>') > 0
-          execute "syntax keyword ctagsType" matchstr(line, '^\w\+')
-        endif
+      if (ctags_type == 't') && run_add_type
+        execute "syntax keyword ctagsType"  ctags_type
       endif
     endfor
   endfor
