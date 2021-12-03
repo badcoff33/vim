@@ -18,11 +18,15 @@ command! -complete=customlist,HighlightTagsCompletion -nargs=1
       \ HighlightTags
       \ call ctags#HighlightTags(<q-args>)
 
-command! -nargs=0 StartUpdater :let g:updater_timer_id = timer_start(5000, 'ctags#UpdaterCallback', {'repeat': -1})
-command! -nargs=0 StopUpdater  :call timer_stop(g:updater_timer_id)
+command! -nargs=0 StartUpdater :let g:ctags_update_timer_id = timer_start(5000, 'ctags#UpdaterCallback', {'repeat': -1})
+command! -nargs=0 StopUpdater  :call timer_stop(g:ctags_update_timer_id)
+
+let g:ctags_functions = []
+let g:ctags_types = []
+let g:ctags_run_update = 0
 
 augroup ctags
   autocmd!
-  autocmd BufWritePost *.c :let g:updater_run_it = 1
-  autocmd BufWritePost *.h :let g:updater_run_it = 1
+  autocmd BufWritePost *.c :let g:ctags_run_update = 1
+  autocmd BufWritePost *.h :let g:ctags_run_update = 1
 augroup END

@@ -7,40 +7,37 @@
 " highlight them as keyword when called with parameter "functions". When called
 " with parameter "types", highlight C types. Well, 'both' says it all :)
 function! ctags#HighlightTags(what)
-  let ctags_sym = ""
-  let ctags_type = ""
+  let sym_name = ""
+  let sym_type = ""
   let run_add_func = (a:what == 'functions') || (a:what == 'both')
   let run_add_type = (a:what == 'types') || (a:what == 'both')
-  syntax clear ctagsFunction
-  syntax clear ctagsType
-
+  let g:ctags_functions = []
+  let g:ctags_types = []
   for tagsfile in tagfiles()
     for line in readfile(tagsfile)
       try
-        let [ctags_sym, ctags_type] = split(substitute(line, '^\(\w\+\).*\(\<f\>\|\<t\>\).*$', '\1 \2', 'g'), ' ')
+        let [sym_name, sym_type] = split(substitute(line, '^\(\w\+\).*\(\<f\>\|\<t\>\).*$', '\1 \2', 'g'), ' ')
       catch /.*/
         " no match found on parsed line
-        let [ctags_sym, ctags_type] = [ "", "" ]
+        let [sym_name, sym_type] = [ "", "" ]
       endtry
-      if (ctags_type == 'f') && run_add_func
-        execute "syntax keyword ctagsFunction" ctags_sym
+      if (sym_type == 'f') && run_add_func
+        call add(g:ctags_functions, sym_name)
       endif
-      if (ctags_type == 't') && run_add_type
-        execute "syntax keyword ctagsType"  ctags_type
+      if (sym_type == 't') && run_add_type
+        call add(g:ctags_types, sym_name)
       endif
     endfor
   endfor
 
-  highlight def link ctagsFunction Function
-  highlight def link ctagsType Type
 endfunction
 
 " Description: Callback function run by cyclic timer.
 function! ctags#UpdaterCallback(tid)
-  if exists(':Update') && exists('g:updater_timer_id') && (a:tid == g:updater_timer_id)
-    if g:updater_run_it != 0
+  if exists(':Update') && exists('g:ctags_update_timer_id') && (a:tid == g:ctags_update_timer_id)
+    if g:ctags_run_update != 0
       Update
-      g:updater_run_it = 0
+      g:ctags_run_update = 0
     endif
   endif
 endfunction
