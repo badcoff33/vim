@@ -32,13 +32,15 @@ function! ctags#HighlightTags(what)
 
 endfunction
 
-" Description: Callback function run by cyclic timer.
+" Description: Callback function run by a one-shot timer.
 function! ctags#UpdaterCallback(tid)
-  if exists(':Update') && exists('g:ctags_update_timer_id') && (a:tid == g:ctags_update_timer_id)
-    if g:ctags_run_update != 0
-      Update
-      g:ctags_run_update = 0
-    endif
+  if exists('g:update_cmd') && exists('g:ctags_update_timer_id') && (a:tid == g:ctags_update_timer_id)
+  let g:update_bufnr = bufnr('<update-output>', v:true)
+  let options = {
+        \ 'out_io': "buffer", "out_buf": g:update_bufnr,
+        \ 'err_io': "buffer", "err_buf": g:update_bufnr,
+        \ "cwd": getcwd() }
+    let j = job_start(["cmd", "/C", "ctags"] + g:update_cmd, options )
   endif
 endfunction
 
