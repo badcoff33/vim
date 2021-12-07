@@ -1,12 +1,11 @@
 " Vim plugin files
 
-"set statusline=%{GetJobActive()}\ %{GetUniqueName()}%t%m%r%y%w%=/%{GetSearchMode()}\ %{GetScope()}\ %l,%c%V\ %P
 set statusline=%{GetUniqueName()}%t%m%r%y%w\ %l/%L,%c\ %{GetJobActive()}%{GetSearchMode()}\ %=%{GetScope()}
 
 " Description: give a simple indicator about the job status to make it more
 " obvious.
 function! GetJobActive()
-  if async#JobActive()
+  if lib#job#JobActive()
     return '& '
   else
     return''
@@ -29,7 +28,7 @@ endfunction
 " important is that the function ScopeParser&ft exists.
 function! GetScope()
   let parser_str = 'lib#scope#Parser' . toupper(&ft[0]) . &ft[1:]
-	try 
+  try
     let Parser = function(parser_str)
     return Parser()
   catch

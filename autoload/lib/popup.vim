@@ -37,12 +37,13 @@ endfunction
 " Description: Show a popup with the arguments as a list in the lower right
 " corner.
 function! lib#popup#Bottom(list_of_strings)
+  let width = s:max_len_in_list(a:list_of_strings)
   let g:winid_bot = popup_create(a:list_of_strings, {
         \ 'title': "",
-        \ 'padding': [0,0,1,0],
-        \ 'line': (&laststatus == 2 ? 2:3) + &lines - len(a:list_of_strings),
-        \ 'col': 4,
-        \ 'minwidth': &columns-6,
+        \ 'padding': [1,0,1,0],
+        \ 'line': (&laststatus == 2 ? 1:2) + &lines - len(a:list_of_strings),
+        \ 'col': (&columns-width-1),
+        \ 'minwidth': width,
         \ 'time': 3000,
         \ 'tabpage': -1,
         \ 'close': 'click'
