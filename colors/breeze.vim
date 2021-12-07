@@ -200,7 +200,7 @@ call lib#color#Hi('cBlock', s:grey_3, '', '', '')
 " filetype HTML
 call lib#color#Hi('htmlH1', s:green_2, '', 'bold', '')
 call lib#color#Hi('htmlH2', s:green_2, '', 'bold', '')
-call lib#color#Hi('htmlH3', s:green_2, '', 'bold,italic', '')
+call lib#color#Hi('htmlH3', s:green_2, '', 'none', '')
 
 " markdown
 call lib#color#Hi('markdownCode', s:grey_3, s:grey_9, '', '')

@@ -90,7 +90,7 @@ function! s:ToggleQuickfix()
   let qfIsOpen = 0
   windo if &buftype == 'quickfix' | let qfIsOpen = 1 | endif
   if qfIsOpen == 0
-    let max_lines = (40 * getwininfo()['variables']['height'] ) / 100
+    let max_lines = (40 * getwininfo(bufwinid('%'))['variables']['height'] ) / 100
     if len(getqflist()) == 0
       echomsg "quickfix list empty"
       cclose

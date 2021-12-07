@@ -198,7 +198,7 @@ nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
 nnoremap <Leader>E :browse edit <C-r>=expand("%:p:h")<CR><CR>
 nnoremap <Leader>m :sil make<Space><Up><CR>
 nnoremap <Leader><C-m> :sil make<Space><Up>
-nnoremap <Leader>v <cmd>edit ~/vimfiles/pack/machine/start/config/plugin/_site.vim<CR>
+nnoremap <Leader>v <cmd>edit ~/vimfiles/local.vim<CR>
 nnoremap <Leader>g :silent grep<Space>
 nnoremap <Leader>+ :tabnew<CR>
 nnoremap <Leader>- :tabclose<CR>
@@ -253,4 +253,5 @@ augroup init
   autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split(@t,'[\n\r]')<CR>
 augroup END
 
+runtime local.vim
 " vim:ft=vim

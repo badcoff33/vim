@@ -21,7 +21,7 @@ let g:rc = {
       \ 'C:\Users\prepensm\Documents\Workspaces\_':
       \ [ 'set path=.,Main,XcpBasicDrv,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
-      \   'let g:update_cmd = ["-R", "Main", "XcpBasicDrv", "..\\..\\BSP\\RL78\\IAR\\copy_inc_ior5f10agf"]',
+      \   'let g:ctags_cmd = ["-R", "Main", "XcpBasicDrv", "..\\..\\BSP\\RL78\\IAR\\copy_inc_ior5f10agf"]',
       \   'StartUpdater',
       \   'let g:async_auto_quickfix=1',
       \   'compiler iar'

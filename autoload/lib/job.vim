@@ -25,7 +25,7 @@ function! AsyncCloseHandler(channel)
 endfunction
 
 function! lib#job#StartJob(cmd) abort
-  let g:job_bufnr = bufnr('<job-output>', v:true)
+  let g:job_bufnr = bufnr('__job', v:true)
   let abufnr = bufnr('%')
   execute 'buffer' g:job_bufnr
   normal gg"_dG

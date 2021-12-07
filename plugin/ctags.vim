@@ -18,7 +18,7 @@ command! -complete=customlist,HighlightTagsCompletion -nargs=1
       \ HighlightTags
       \ call ctags#HighlightTags(<q-args>)
 
-command! -nargs=0 StartUpdater :let g:ctags_update_timer_id = timer_start(5000, 'ctags#UpdaterCallback', {'repeat': 1})
+command! -nargs=0 StartUpdater :let g:ctags_update_timer_id = timer_start(5000, 'ctags#RunCtagsCallback', {'repeat': 1})
 command! -nargs=0 StopUpdater  :call timer_stop(g:ctags_update_timer_id)
 
 let g:ctags_functions = []

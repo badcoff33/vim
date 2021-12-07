@@ -17,9 +17,9 @@ vnoremap <buffer> <LocalLeader>s :<C-U>call VisExecute()<CR>
 function! VisExecute() abort
   let save_selection = &selection
   let save_reg_x = @x
-  silent normal '<V'>"ay
-  let @a = substitute(@a, '\r', '\n', 'g')
-  @a
+  silent normal '<V'>"xy
+  let @a = substitute(@x, '\r', '\n', 'g')
+  @x
   let @x = save_reg_x
   let &selection = save_selection
 endfunction
