@@ -19,6 +19,7 @@ endif
 
 " quick preview of tags
 nnoremap <buffer> <CR> <C-w>}
+nnoremap <buffer> K g<C-]>
 
 " Toggle automatic comment formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>

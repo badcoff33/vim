@@ -10,6 +10,8 @@ setlocal nonumber norelativenumber
 
 " Jump to links with enter
 nmap <silent> <buffer> <CR> <C-]>
+" make use of K
+nnoremap <buffer> K :help <C-r><C-w><CR>
 
 " Close help again
 nmap <silent> <buffer> <Esc> :bd<CR>

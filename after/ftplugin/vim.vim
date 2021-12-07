@@ -8,6 +8,7 @@ setlocal textwidth=0
 setlocal shiftwidth=2
 setlocal nocindent
 
+nnoremap <buffer> K :help <C-r><C-w><CR>
 nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 
 " source current visual region

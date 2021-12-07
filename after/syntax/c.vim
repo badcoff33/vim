@@ -10,21 +10,17 @@ syntax keyword cType boolean
 syntax keyword cType uint8 uint16 uint32
 syntax keyword cType sint8 sint16 sint32
 
-if exists('g:ctags_functions')
+if exists('g:ctags_functions') && !empty(g:ctags_functions)
   for sym in g:ctags_functions
     execute "syntax keyword ctagsFunction" sym
   endfor
-  if !empty(g:ctags_functions)
-    highlight def link ctagsFunction Function
-  endif
+  highlight def link ctagsFunction Function
 endif
 
-if exists('g:ctags_functions')
+if exists('g:ctags_types') && !empty(g:ctags_types)
   for sym in g:ctags_types
     execute "syntax keyword ctagsType"  sym
   endfor
-  if !empty(g:ctags_types)
-    highlight def link ctagsType Type
-  endif
+  highlight def link ctagsType Type
 endif
 

@@ -71,8 +71,8 @@ call lib#color#Hi('CursorLine', 'skip', s:bg3, '', '')
 call lib#color#Hi('CursorLineNr', s:green2, s:bg4, 'bold', '')
 call lib#color#Hi('LineNr', s:silver3, '', '', '')
 
-call lib#color#Hi("PMenuSel", s:white, s:green1, "NONE", "")
-call lib#color#Hi("PMenu", s:silver3, s:silver1, "NONE", "")
+call lib#color#Hi("PMenuSel", s:white, s:blue2, "NONE", "")
+call lib#color#Hi("PMenu", s:white, s:blue1, "NONE", "")
 call lib#color#Hi("PMenuSbar", s:silver3, s:bg3, "", "")
 call lib#color#Hi("PMenuThumb", s:blue2, s:bg4, "", "")
 highlight! link User1 StatusLine

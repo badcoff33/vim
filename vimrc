@@ -178,7 +178,7 @@ vnoremap {<Space> c{<C-r>-}<Esc>
 " Set leader and localleader keys, that works best for me
 let mapleader = " "
 let maplocalleader = "s"
-inoremap <C-Space> <Esc>
+inoremap jj <Esc>
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -194,7 +194,6 @@ let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
 nnoremap <expr> <Leader>B ':filter /' .. LsFilter(&ft) .. '/ ls<CR>:buffer '
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>f :find<Space>
-nnoremap <Leader>t :tjump<Space>
 nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
 nnoremap <Leader>E :browse edit <C-r>=expand("%:p:h")<CR><CR>
 nnoremap <Leader>m :sil make<Space><Up><CR>
@@ -210,11 +209,6 @@ nnoremap <A--> 3<C-w>-3<C-w><
 
 nnoremap + :cnext<CR>
 nnoremap - :cprevious<CR>
-
-nnoremap <A-Down> :cnext<CR>
-nnoremap <A-Up> :cprev<CR>
-nnoremap <A-Left> :bprevious<CR>
-nnoremap <A-Right> :bnext<CR>
 
 " Insert mode: map all functions keys to normal mode mappinng
 imap <F1> <Esc><F1>
@@ -234,11 +228,12 @@ imap <F13> <Esc><F13>
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
-nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
-nnoremap <Leader>oi :set invignorecase ignorecase?<CR>
-nnoremap <Leader>om :set invsmartcase smartcase?<CR>
+nnoremap <Leader>ow :setlocal invwrap
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
+
+" command line completion
+cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
 
 command! -nargs=0 CleanUpBuffers :bufdo if bufname('%')=='' | bd! | endif
 
@@ -249,13 +244,9 @@ command! -nargs=0 SmartCase           :set   ignorecase  smartcase
 command! -nargs=0 ReadOnly :setlocal nomodifiable readonly
 command! -nargs=0 LastSession :execute 'source '..$TMP..'/'..sha256(getcwd())..'.vim'
 
-" command line completion
-cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
-
 augroup init
   autocmd!
   autocmd VimResized   * wincmd =
-  autocmd BufEnter     * if &ft !~ '^\(vim\|help\)$' | nnoremap <buffer> K g<C-]> | endif
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal nonumber norelativenumber signcolumn=no foldcolumn=0
   " move visual selection to quickfix window

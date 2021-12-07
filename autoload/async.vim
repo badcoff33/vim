@@ -44,8 +44,7 @@ function! async#StartJob(cmd) abort
   call setbufvar(g:async_job_bufnr, "&number", 0)
   call setbufvar(g:async_job_bufnr, "&relativenumber", 0)
   call setbufvar(g:async_job_bufnr, "&modifiable", 1)
-  call setbufline(g:async_job_bufnr, 1, '-- started ' .. strftime("%Y-%m-%d %X") .. ': ' .. a:cmd)
-  call setbufline(g:async_job_bufnr, 2, '----------------------------------------')
+  call setbufline(g:async_job_bufnr, 1, '-- job started on ' .. strftime("%Y-%m-%d %X") .. ': ' .. a:cmd)
   let options = {
         \ 'out_io': "buffer", "out_buf": g:async_job_bufnr,
         \ 'err_io': "buffer", "err_buf": g:async_job_bufnr,

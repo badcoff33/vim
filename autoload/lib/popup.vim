@@ -20,8 +20,8 @@ endfunction
 function! lib#popup#Head(list_of_strings)
   let g:winid_head = popup_create(a:list_of_strings, {
         \ 'title': "",
-        \ 'padding': [1,0,1,0],
-        \ 'line': 2 + ( tabpagenr('$') == 1 ? 0:1 ) ,
+        \ 'padding': [1,0,0,0],
+        \ 'line': 1 + ( tabpagenr('$') == 1 ? 0:1 ) ,
         \ 'col': 4,
         \ 'minwidth': &columns-6,
         \ 'time': 3000,
@@ -39,8 +39,8 @@ endfunction
 function! lib#popup#Bottom(list_of_strings)
   let g:winid_bot = popup_create(a:list_of_strings, {
         \ 'title': "",
-        \ 'padding': [1,0,1,0],
-        \ 'line': &lines - len(a:list_of_strings),
+        \ 'padding': [0,0,1,0],
+        \ 'line': (&laststatus == 2 ? 2:3) + &lines - len(a:list_of_strings),
         \ 'col': 4,
         \ 'minwidth': &columns-6,
         \ 'time': 3000,

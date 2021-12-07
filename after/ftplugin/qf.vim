@@ -37,6 +37,8 @@ setlocal foldmethod=expr
 setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
 setlocal nofoldenable
 setlocal nonumber norelativenumber
+setlocal wrap
+setlocal scrolloff=0
 
 nnoremap <buffer> <Esc> :cclose<CR>
 
