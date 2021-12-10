@@ -3,7 +3,7 @@
 function! term#OpenTerm()
   for b in term_list()
     if getbufvar(b, 'home_term', 0) == 1
-      call lib#windows#GotoBuffer(b)
+      call windows#GotoBuffer(b)
       return
     endif
   endfor

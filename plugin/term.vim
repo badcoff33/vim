@@ -7,5 +7,6 @@ endif
 
 if !hasmapto('<F7>')
   nnoremap <S-F7> :ToggleJobOutput<CR>
-  nnoremap <F7> :<C-u>Job<Up>
+  nnoremap <F7> :<C-u>Job<Up><CR>
+  nnoremap <C-F7> :<C-u>Job<Up>
 endif

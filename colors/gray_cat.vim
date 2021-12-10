@@ -16,7 +16,7 @@ set background=light
 let g:colors_name = "gray_cat"
 
 " basics
-highlight Normal  guifg=grey30 guibg=grey95
+highlight Normal  guifg=grey25 guibg=grey95
 highlight NonText guifg=paleturquoise2 guibg=grey97
 highlight Visual  guifg=white  guibg=grey35
 highlight Cursor  guifg=white  guibg=black
@@ -54,7 +54,7 @@ highlight PmenuThumb guifg=turquoise2
 " search
 highlight IncSearch  guifg=white guibg=dodgerblue gui=underline
 highlight Search     guifg=black guibg=lightcyan3    gui=none
-highlight MatchParen guifg=cyan1 guibg=lightcyan2 gui=bold
+highlight MatchParen guifg=black guibg=lightcyan2 gui=bold
 
 " code
 highlight Statement    guifg=grey10      gui=bold
@@ -62,8 +62,9 @@ highlight Conditional  guifg=grey10      gui=bold
 highlight Type         guifg=gray35      gui=none
 highlight StorageClass guifg=grey40      gui=bold
 highlight PreProc      guifg=black       gui=bold
-highlight Comment      guifg=grey65      gui=none
-highlight Identifier   guifg=grey50      gui=none
+highlight Comment      guifg=grey50      gui=none
+highlight Identifier   guifg=grey30      gui=none
+highlight Function     guifg=grey20      gui=none
 highlight Special      guifg=grey30
 highlight Constant     guifg=pink4
 
@@ -77,8 +78,8 @@ highlight Directory guifg=dodgerblue3    guibg=bg gui=underline
 " messages
 highlight WarningMsg guifg=black guibg=yellow2 gui=none
 highlight ErrorMsg   guifg=black guibg=pink2 gui=none
-highlight ModeMsg    guifg=black guibg=turquoise1 gui=none
-highlight Question   guifg=black guibg=turquoise1 gui=none
+highlight ModeMsg    guifg=white guibg=lightyellow4 gui=none
+highlight Question   guifg=black guibg=lightyellow2 gui=none
 
 " quickfix colors
 highlight! link  QuickFixLine CursorLine

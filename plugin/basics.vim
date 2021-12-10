@@ -96,15 +96,17 @@ function! s:ToggleQuickfix()
       cclose
     elseif len(getqflist()) <= max_lines
       execute "botright copen"  len(getqflist())
+      normal G
     else
       execute "botright copen"  max_lines
+      normal G
     endif
   else
-  cclose
-endif
-if win_gotoid(save_win) == 0
-  wincmd p
-endif
+    cclose
+  endif
+  if win_gotoid(save_win) == 0
+    wincmd p
+  endif
 endfunction
 
 " Description: Print highlighting information at current cursor position.
@@ -152,7 +154,7 @@ function CheckSourceLocalCmds()
     return
   endif
   if g:rc->has_key(getcwd())
-    call lib#popup#Bottom(["dir-local commands available","run :SourceDirLocal<CR> to execute them."])
+    call popup#Bottom(["dir-local commands available","run :SourceDirLocal<CR> to execute them."])
   endif
 endfunction
 

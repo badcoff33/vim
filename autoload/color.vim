@@ -1,6 +1,6 @@
 " autoload lib colors
 
-function! lib#color#Hi(group, guifg, guibg, attr, guisp)
+function! color#Hi(group, guifg, guibg, attr, guisp)
 
   let FFg = {fgstr ->  ((fgstr == 'skip') || empty(fgstr)) ? '' : 'guifg='..(empty(fgstr) ? "foreground" : fgstr) }
   let FBg = {bgstr ->  ((bgstr == 'skip') || empty(bgstr)) ? '' : 'guibg='..(empty(bgstr) ? "background" : bgstr) }

@@ -4,7 +4,7 @@
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
 " Description: A scope parser for C files.
-function! lib#scope#ParserC() abort
+function! scope#ParserC() abort
   " Regular expressions to find head and bottom lines of a C function.
   let l:regexpFindFuncHead = '^\w\+.*('
   let l:regexpFindFuncBottom = '^}.*$'
@@ -26,7 +26,7 @@ function! lib#scope#ParserC() abort
 endfun
 
 " Description: A simple scope parser for Python files.
-function! lib#scope#ParserPython() abort
+function! scope#ParserPython() abort
     let l:fNum = search('^\s*\(class\|def\)\s\+.*:$', 'bnWe')
     if l:fNum > 0
       return substitute(getline(l:fNum), '^\s*\(class\|def\)\s\+\(\w\+\).*$', '\1 \2', '')[:30]
@@ -36,7 +36,7 @@ function! lib#scope#ParserPython() abort
 endfun
 
 " Description: A simple scope parser for Markdown files.
-function! lib#scope#ParserMarkdown() abort
+function! scope#ParserMarkdown() abort
   let l:fNum = search('^#\{1,\}', 'bcnWez')
     if l:fNum > 0
       let chapter_str = substitute(getline(l:fNum), '^\(#\{1,\}\)\s\+\(.*\)$', '\=len(submatch(1)).."|"..submatch(2)', '')
@@ -51,7 +51,7 @@ function! lib#scope#ParserMarkdown() abort
 endfun
 
 " Description: A scope parser for Vim files.
-function! lib#scope#ParserVim() abort
+function! scope#ParserVim() abort
   " Regular expressions to find head and bottom lines of a Vim function.
   let l:regexpFindFuncHead = '^fun.*\s\+[A-Za-z0-9#:<>]\+\s*(.*)'
   let l:regexpFindFuncBottom = '^endf.*$'

@@ -2,21 +2,21 @@
 
 let g:job_do_auto_quickfix = get(g:, 'job_do_auto_quickfix', 0)
 
-function! lib#job#JobActive()
+function! job#JobActive()
   return exists('g:job_active') && g:job_active==1 ? 1 : 0
 endfunction
 
-function! lib#job#JobBufferToFront()
-  call lib#windows#PopupBuffer(g:job_bufnr)
+function! job#JobBufferToFront()
+  call windows#PopupBuffer(g:job_bufnr)
 endfunction
 
-function! lib#job#ToggleJobOutput()
-  call lib#windows#ToggleBuffer(g:job_bufnr)
+function! job#ToggleJobOutput()
+  call windows#ToggleBuffer(g:job_bufnr)
 endfunction
 
 function! AsyncCloseHandler(channel)
   let g:job_active = 0
-  call lib#popup#Bottom([
+  call popup#Bottom([
         \ "Job " .. ch_status(a:channel),
         \ printf("run for %.3f seconds", reltimefloat(reltime(g:job_start_time)))])
   if g:job_do_auto_quickfix == 1
@@ -24,7 +24,7 @@ function! AsyncCloseHandler(channel)
   endif
 endfunction
 
-function! lib#job#StartJob(cmd) abort
+function! job#StartJob(cmd) abort
   let g:job_bufnr = bufnr('__job', v:true)
   let abufnr = bufnr('%')
   execute 'buffer' g:job_bufnr
@@ -56,7 +56,7 @@ function! lib#job#StartJob(cmd) abort
     let g:job_start_time = reltime()
   else
     let g:job_active = 0
-    call lib#popup#Bottom(["Failed process " .. id .. ": " .. a:cmd])
+    call popup#Bottom(["Failed process " .. id .. ": " .. a:cmd])
     echoerr 'job failed to start'
   endif
 endfunction

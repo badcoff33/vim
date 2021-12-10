@@ -193,7 +193,7 @@ let g:ft2regex = {
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
 nnoremap <expr> <Leader>B ':filter /' .. LsFilter(&ft) .. '/ ls<CR>:buffer '
 nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>f :find<Space>
+nnoremap <Leader>f :find<Space>*
 nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
 nnoremap <Leader>E :browse edit <C-r>=expand("%:p:h")<CR><CR>
 nnoremap <Leader>m :sil make<Space><Up><CR>

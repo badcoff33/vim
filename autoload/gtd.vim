@@ -1,6 +1,6 @@
 " autoload functions to support any get-things-done stuff
 
-function! lib#gtd#ToggleTodo()
+function! gtd#ToggleTodo()
   let stop_at_line =  search('\(DONE\|TODO\)','nbW')
   if stop_at_line == 0
     return " nothing found

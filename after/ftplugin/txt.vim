@@ -10,7 +10,7 @@ setlocal nocindent
 setlocal formatoptions-=atc
 
 " Toggle between TODO and DONE
-nnoremap <buffer> <LocalLeader>x :call lib#gtd#ToggleTodo()<CR>
+nnoremap <buffer> <LocalLeader>x :call gtd#ToggleTodo()<CR>
 
 " be up to date
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>

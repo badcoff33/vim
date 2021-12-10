@@ -19,7 +19,7 @@ nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr~}
 nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr^}
 
 " Toggle between TODO and DONE
-nnoremap <buffer> <LocalLeader>x :call lib#gtd#ToggleTodo()<CR>
+nnoremap <buffer> <LocalLeader>x :call gtd#ToggleTodo()<CR>
 
 " be up to date
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>

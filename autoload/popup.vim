@@ -17,7 +17,7 @@ endfunction
 
 " Description: Show a popup with the arguments as a list in the upper right
 " corner.
-function! lib#popup#Head(list_of_strings)
+function! popup#Head(list_of_strings)
   let g:winid_head = popup_create(a:list_of_strings, {
         \ 'title': "",
         \ 'padding': [1,0,0,0],
@@ -36,7 +36,7 @@ endfunction
 "
 " Description: Show a popup with the arguments as a list in the lower right
 " corner.
-function! lib#popup#Bottom(list_of_strings)
+function! popup#Bottom(list_of_strings)
   let width = s:max_len_in_list(a:list_of_strings)
   let g:winid_bot = popup_create(a:list_of_strings, {
         \ 'title': "",
@@ -51,7 +51,7 @@ function! lib#popup#Bottom(list_of_strings)
   call setwinvar(g:winid_bot, '&wincolor', 'PopupNotification')
 endfunction
 
-function! lib#popup#OpenFloatingWin(buffer)
+function! popup#OpenFloatingWin(buffer)
     call popup_create(split(buffer, #{ pos: 'topleft',
           \ line: 'cursor+1', col: 'cursor', moved: 'WORD' })
     return

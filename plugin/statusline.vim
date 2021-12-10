@@ -5,7 +5,7 @@ set statusline=%{GetUniqueName()}%t%m%r%y%w\ %l/%L,%c\ %{GetJobActive()}%{GetSea
 " Description: give a simple indicator about the job status to make it more
 " obvious.
 function! GetJobActive()
-  if lib#job#JobActive()
+  if job#JobActive()
     return '& '
   else
     return''
@@ -27,7 +27,7 @@ endfunction
 " functions is in a file, located in after/ftplugin/&ft/scope.vim. Most
 " important is that the function ScopeParser&ft exists.
 function! GetScope()
-  let parser_str = 'lib#scope#Parser' . toupper(&ft[0]) . &ft[1:]
+  let parser_str = 'scope#Parser' . toupper(&ft[0]) . &ft[1:]
   try
     let Parser = function(parser_str)
     return Parser()
