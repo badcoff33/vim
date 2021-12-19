@@ -10,15 +10,6 @@ hi clear
 set background=light
 let g:colors_name = "gray_cat"
 
-augroup Colorscheme
-  au!
-  if exists('&wincolor')
-    " Lok-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
-          \ | set wincolor=NonText | else | set wincolor= | endif
-  endif
-augroup END
-
 " basics
 highlight Normal  guifg=grey30 guibg=white
 highlight NonText guifg=grey50 guibg=grey97

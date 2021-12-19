@@ -3,22 +3,6 @@
 let g:colors_name = "little_monster"
 set background=dark
 
-if exists('&wincolor')
-  augroup Wincolor
-    au!
-    " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if (&buftype!='' && &buftype!='nofile')
-          \ | set wincolor=BlendDown | else | set wincolor= | endif
-  augroup END
-elseif exists('&winhighlight')
-  augroup Winhighlight
-    au!
-    " Low-key colors for non-file buffers
-    autocmd BufWinEnter,WinEnter * if &readonly
-          \ | set winhighlight=Normal:BlendDown | set winhighlight= | endif
-  augroup END
-endif
-
 let s:white             = "#FFFFFF"
 let s:workbench_passive = "#272F3F"
 let s:workbench_active  = "#373F5F"
@@ -37,129 +21,129 @@ let s:white             = "#D7DCE2"
 let s:light_silver      = "#90909F"
 let s:silver            = "#70707A"
 
-let GuiFg = {str -> empty(str) ? "":"guifg=".str}
-let GuiBg = {str -> empty(str) ? "":"guibg=".str}
-let GuiAttr = {str -> empty(str) ? "":"gui=".str}
+let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
+let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}
+let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
 
 " Editor
-execute 'hi ColorColumn'  GuiBg(s:light_silver)
-execute 'hi Cursor' GuiFg(s:yellow) GuiBg(s:silver) GuiAttr('NONE')
-execute 'hi CursorLine' GuiBg(s:background_plus)
-execute 'hi Error' GuiFg(s:red) GuiBg('bg')
-execute 'hi iCursor' GuiFg(s:light_silver) GuiBg(s:workbench_grey)
-execute 'hi LineNr' GuiFg(s:light_silver) GuiBg('bg')
-execute 'hi MatchParen' GuiFg(s:blue) GuiBg(s:workbench_grey)
-execute 'hi NonText' GuiFg(s:red) GuiBg(s:silver)
-execute 'hi Normal' GuiFg(s:foreground) GuiBg(s:background)
-execute 'hi PMenu' GuiFg(s:background_plus) GuiBg(s:light_silver) GuiAttr('NONE')
-execute 'hi PmenuSbar' GuiFg(s:silver) GuiBg(s:silver)
-execute 'hi PmenuThumb' GuiFg(s:blue) GuiBg(s:workbench_grey)
-execute 'hi SpecialKey' GuiFg(s:silver)
-execute 'hi SpellBad' GuiFg(s:red) GuiBg('bg') GuiAttr('undercurl')
-execute 'hi SpellCap' GuiFg(s:yellow) GuiBg('bg') GuiAttr('undercurl')
-execute 'hi SpellLocal' GuiFg(s:red) GuiBg('bg') GuiAttr('undercurl')
-execute 'hi SpellRare' GuiFg(s:red) GuiBg('bg') GuiAttr('undercurl')
-execute 'hi Visual' GuiFg(s:workbench_grey) GuiBg(s:blue)
-execute 'hi VisualNOS' GuiFg(s:foreground) GuiBg(s:blue)
-execute 'hi Whitespace' GuiFg(s:silver)
+execute 'hi ColorColumn'  s:GuiBg(s:light_silver)
+execute 'hi Cursor' s:GuiFg(s:yellow) s:GuiBg(s:silver) s:GuiAttr('NONE')
+execute 'hi CursorLine' s:GuiBg(s:background_plus)
+execute 'hi Error' s:GuiFg(s:red) s:GuiBg('bg')
+execute 'hi iCursor' s:GuiFg(s:light_silver) s:GuiBg(s:workbench_grey)
+execute 'hi LineNr' s:GuiFg(s:light_silver) s:GuiBg('bg')
+execute 'hi MatchParen' s:GuiFg(s:blue) s:GuiBg(s:workbench_grey)
+execute 'hi NonText' s:GuiFg(s:red) s:GuiBg(s:silver)
+execute 'hi Normal' s:GuiFg(s:foreground) s:GuiBg(s:background)
+execute 'hi PMenu' s:GuiFg(s:background_plus) s:GuiBg(s:light_silver) s:GuiAttr('NONE')
+execute 'hi PmenuSbar' s:GuiFg(s:silver) s:GuiBg(s:silver)
+execute 'hi PmenuThumb' s:GuiFg(s:blue) s:GuiBg(s:workbench_grey)
+execute 'hi SpecialKey' s:GuiFg(s:silver)
+execute 'hi SpellBad' s:GuiFg(s:red) s:GuiBg('bg') s:GuiAttr('undercurl')
+execute 'hi SpellCap' s:GuiFg(s:yellow) s:GuiBg('bg') s:GuiAttr('undercurl')
+execute 'hi SpellLocal' s:GuiFg(s:red) s:GuiBg('bg') s:GuiAttr('undercurl')
+execute 'hi SpellRare' s:GuiFg(s:red) s:GuiBg('bg') s:GuiAttr('undercurl')
+execute 'hi Visual' s:GuiFg(s:workbench_grey) s:GuiBg(s:blue)
+execute 'hi VisualNOS' s:GuiFg(s:foreground) s:GuiBg(s:blue)
+execute 'hi Whitespace' s:GuiFg(s:silver)
 hi! link PMenuSel IncSearch
 hi! link CursorColumn CursorLine
 
 " Frost specific
-execute 'hi BlendDown' GuiFg(s:light_silver) GuiBg(s:background_plus)
+execute 'hi BlendDown' s:GuiFg(s:light_silver) s:GuiBg(s:background_plus)
 
 " Neovim Support
-execute 'hi healthError' GuiFg(s:red) GuiBg(s:light_silver)
-execute 'hi healthSuccess' GuiFg(s:green) GuiBg(s:light_silver)
-execute 'hi healthWarning' GuiFg(s:yellow) GuiBg(s:light_silver)
-execute 'hi TermCursorNC'  GuiBg(s:light_silver)
+execute 'hi healthError' s:GuiFg(s:red) s:GuiBg(s:light_silver)
+execute 'hi healthSuccess' s:GuiFg(s:green) s:GuiBg(s:light_silver)
+execute 'hi healthWarning' s:GuiFg(s:yellow) s:GuiBg(s:light_silver)
+execute 'hi TermCursorNC'  s:GuiBg(s:light_silver)
 
 " Gutter
-execute 'hi CursorLineNr' GuiFg(s:purple) GuiBg(s:background_plus) GuiAttr('NONE')
-execute 'hi FoldColumn' GuiFg(s:workbench_grey) GuiBg(s:background)
-execute 'hi Folded' GuiFg(s:red) GuiBg(s:background) GuiAttr('bold')
-execute 'hi SignColumn' GuiFg(s:light_silver) GuiBg(s:background)
+execute 'hi CursorLineNr' s:GuiFg(s:purple) s:GuiBg(s:background_plus) s:GuiAttr('NONE')
+execute 'hi FoldColumn' s:GuiFg(s:workbench_grey) s:GuiBg(s:background)
+execute 'hi Folded' s:GuiFg(s:red) s:GuiBg(s:background) s:GuiAttr('bold')
+execute 'hi SignColumn' s:GuiFg(s:light_silver) s:GuiBg(s:background)
 
 " Navigation
-execute 'hi Directory' GuiFg(s:blue) GuiAttr('underline')
+execute 'hi Directory' s:GuiFg(s:blue) s:GuiAttr('underline')
 
 " Prompt/Status
-execute 'hi EndOfBuffer' GuiFg(s:light_silver) GuiBg('bg')
-execute 'hi ErrorMsg' GuiFg(s:red) GuiBg('bg')
-execute 'hi ModeMsg' GuiFg(s:green) GuiBg('bg') GuiAttr('' )
-execute 'hi MoreMsg' GuiFg(s:yellow) GuiBg('bg') GuiAttr('' )
-execute 'hi Question' GuiFg(s:accent) GuiBg('bg')
-execute 'hi StatusLine' GuiFg(s:yellow) GuiBg(s:workbench_active) GuiAttr('bold')
-execute 'hi StatusLineNC' GuiFg(s:yellow) GuiBg(s:workbench_passive) GuiAttr('NONE')
-execute 'hi VertSplit' GuiFg(s:workbench_passive) GuiBg(s:workbench_passive) GuiAttr('NONE')
-execute 'hi WarningMsg' GuiFg(s:accent) GuiBg('bg')
+execute 'hi EndOfBuffer' s:GuiFg(s:light_silver) s:GuiBg('bg')
+execute 'hi ErrorMsg' s:GuiFg(s:red) s:GuiBg('bg')
+execute 'hi ModeMsg' s:GuiFg(s:green) s:GuiBg('bg') s:GuiAttr('' )
+execute 'hi MoreMsg' s:GuiFg(s:yellow) s:GuiBg('bg') s:GuiAttr('' )
+execute 'hi Question' s:GuiFg(s:accent) s:GuiBg('bg')
+execute 'hi StatusLine' s:GuiFg(s:yellow) s:GuiBg(s:workbench_active) s:GuiAttr('bold')
+execute 'hi StatusLineNC' s:GuiFg(s:yellow) s:GuiBg(s:workbench_passive) s:GuiAttr('NONE')
+execute 'hi VertSplit' s:GuiFg(s:workbench_passive) s:GuiBg(s:workbench_passive) s:GuiAttr('NONE')
+execute 'hi WarningMsg' s:GuiFg(s:accent) s:GuiBg('bg')
 hi! link StatusLineTerm StatusLine
 hi! link StatusLineTermNC StatusLineNC
 hi! link WildMenu IncSearch
 
 " Search
-execute 'hi IncSearch' GuiFg(s:background) GuiBg(s:green) GuiAttr('bold')
-execute 'hi Search' GuiFg(s:white) GuiBg(s:workbench_grey) GuiAttr('underline')
+execute 'hi IncSearch' s:GuiFg(s:background) s:GuiBg(s:green) s:GuiAttr('bold')
+execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:workbench_grey) s:GuiAttr('underline')
 
 " QuickFix
-execute 'hi qfSeparator' GuiFg('fg') GuiBg('bg')
-execute 'hi QuickFixLine' GuiFg('fg') GuiBg('bg') GuiAttr('bold')
+execute 'hi qfSeparator' s:GuiFg('fg') s:GuiBg('bg')
+execute 'hi QuickFixLine' s:GuiFg('fg') s:GuiBg('bg') s:GuiAttr('bold')
 hi! link qfFileName Directory
 hi! link qfLineNr Directory
 
 " Tabs
-execute 'hi TabLineSel' GuiFg(s:yellow) GuiBg(s:workbench_active) GuiAttr('bold')
-execute 'hi TabLine' GuiFg(s:yellow) GuiBg(s:workbench_passive) GuiAttr('none')
+execute 'hi TabLineSel' s:GuiFg(s:yellow) s:GuiBg(s:workbench_active) s:GuiAttr('bold')
+execute 'hi TabLine' s:GuiFg(s:yellow) s:GuiBg(s:workbench_passive) s:GuiAttr('none')
 hi! link TabLineSel StatusLine
 hi! link TabLineFill Normal
 
 " Window
-execute 'hi Title' GuiFg(s:green)  GuiAttr('bold')
-execute 'hi Bold'   GuiAttr('bold')
-execute 'hi Italic'   GuiAttr('italic')
-execute 'hi Boolean' GuiFg(s:blue)
-execute 'hi Character' GuiFg(s:yellow)
-execute 'hi Comment' GuiFg(s:green)
-execute 'hi Conditional' GuiFg(s:orange)
-execute 'hi Constant' GuiFg(s:accent)
-execute 'hi Define' GuiFg(s:orange)
-execute 'hi Delimiter' GuiFg(s:blue)
-execute 'hi Exception' GuiFg(s:blue)
-execute 'hi Float' GuiFg(s:purple)
-execute 'hi Function' GuiFg(s:blue)
-execute 'hi Identifier' GuiFg(s:green)  GuiAttr('NONE')
-execute 'hi Include' GuiFg(s:blue)
-execute 'hi Keyword' GuiFg(s:blue)
-execute 'hi Label' GuiFg(s:blue)
-execute 'hi Number' GuiFg(s:purple)
-execute 'hi Operator' GuiFg(s:yellow)  GuiAttr('NONE')
-execute 'hi PreProc' GuiFg(s:blue)  GuiAttr('NONE')
-execute 'hi Repeat' GuiFg(s:blue)
-execute 'hi Special' GuiFg(s:accent)
-execute 'hi SpecialChar' GuiFg(s:yellow)
-execute 'hi SpecialComment' GuiFg(s:blue)
-execute 'hi Statement' GuiFg(s:orange)
-execute 'hi StorageClass' GuiFg(s:blue)
-execute 'hi String' GuiFg(s:purple)
-execute 'hi Structure' GuiFg(s:blue)
-execute 'hi Tag' GuiFg(s:silver)
-execute 'hi Todo' GuiFg(s:yellow) GuiBg('NONE')
-execute 'hi Type' GuiFg(s:blue)  GuiAttr('NONE')
-execute 'hi Typedef' GuiFg(s:blue)
+execute 'hi Title' s:GuiFg(s:green)  s:GuiAttr('bold')
+execute 'hi Bold'   s:GuiAttr('bold')
+execute 'hi Italic'   s:GuiAttr('italic')
+execute 'hi Boolean' s:GuiFg(s:blue)
+execute 'hi Character' s:GuiFg(s:yellow)
+execute 'hi Comment' s:GuiFg(s:green)
+execute 'hi Conditional' s:GuiFg(s:orange)
+execute 'hi Constant' s:GuiFg(s:accent)
+execute 'hi Define' s:GuiFg(s:orange)
+execute 'hi Delimiter' s:GuiFg(s:blue)
+execute 'hi Exception' s:GuiFg(s:blue)
+execute 'hi Float' s:GuiFg(s:purple)
+execute 'hi Function' s:GuiFg(s:blue)
+execute 'hi Identifier' s:GuiFg(s:green)  s:GuiAttr('NONE')
+execute 'hi Include' s:GuiFg(s:blue)
+execute 'hi Keyword' s:GuiFg(s:blue)
+execute 'hi Label' s:GuiFg(s:blue)
+execute 'hi Number' s:GuiFg(s:purple)
+execute 'hi Operator' s:GuiFg(s:yellow)  s:GuiAttr('NONE')
+execute 'hi PreProc' s:GuiFg(s:blue)  s:GuiAttr('NONE')
+execute 'hi Repeat' s:GuiFg(s:blue)
+execute 'hi Special' s:GuiFg(s:accent)
+execute 'hi SpecialChar' s:GuiFg(s:yellow)
+execute 'hi SpecialComment' s:GuiFg(s:blue)
+execute 'hi Statement' s:GuiFg(s:orange)
+execute 'hi StorageClass' s:GuiFg(s:blue)
+execute 'hi String' s:GuiFg(s:purple)
+execute 'hi Structure' s:GuiFg(s:blue)
+execute 'hi Tag' s:GuiFg(s:silver)
+execute 'hi Todo' s:GuiFg(s:yellow) s:GuiBg('NONE')
+execute 'hi Type' s:GuiFg(s:blue)  s:GuiAttr('NONE')
+execute 'hi Typedef' s:GuiFg(s:blue)
 hi! link Macro Define
 hi! link PreCondit PreProc
 
-execute 'hi DiffAdd' GuiFg(s:green) GuiBg(s:workbench_passive)
-execute 'hi DiffChange' GuiFg(s:yellow) GuiBg(s:workbench_passive) GuiAttr('bold')
-execute 'hi DiffDelete' GuiFg(s:red) GuiBg(s:red)
-execute 'hi DiffText' GuiFg(s:blue) GuiBg(s:workbench_passive)
+execute 'hi DiffAdd' s:GuiFg(s:green) s:GuiBg(s:workbench_passive)
+execute 'hi DiffChange' s:GuiFg(s:yellow) s:GuiBg(s:workbench_passive) s:GuiAttr('bold')
+execute 'hi DiffDelete' s:GuiFg(s:red) s:GuiBg(s:red)
+execute 'hi DiffText' s:GuiFg(s:blue) s:GuiBg(s:workbench_passive)
 
-execute 'hi cIncluded' GuiFg(s:blue)
+execute 'hi cIncluded' s:GuiFg(s:blue)
 hi! link cOperator Operator
 hi! link cPreCondit PreCondit
 
-execute 'hi htmlArg' GuiFg(s:blue)
-execute 'hi htmlLink' GuiFg(s:silver)  GuiAttr('NONE')
+execute 'hi htmlArg' s:GuiFg(s:blue)
+execute 'hi htmlLink' s:GuiFg(s:silver)  s:GuiAttr('NONE')
 hi! link htmlBold Bold
 hi! link htmlEndTag htmlTag
 hi! link htmlItalic Italic
@@ -173,16 +157,16 @@ hi! link htmlSpecialChar SpecialChar
 hi! link htmlTag Keyword
 hi! link htmlTagN htmlTag
 
-execute 'hi markdownBlockquote' GuiFg(s:blue)
-execute 'hi markdownCode' GuiFg(s:background_plus) GuiBg('bg')
-execute 'hi markdownCodeBlock' GuiFg(s:background_plus) GuiBg('bg')
-execute 'hi markdownCodeDelimiter' GuiFg(s:green) GuiBg('bg')
-execute 'hi markdownFootnote' GuiFg(s:blue)
-execute 'hi markdownId' GuiFg(s:blue)
-execute 'hi markdownIdDeclaration' GuiFg(s:blue)
-execute 'hi markdownH1' GuiFg(s:yellow)
-execute 'hi markdownLinkText' GuiFg(s:blue)
-execute 'hi markdownUrl' GuiFg(s:light_silver)  GuiAttr('underline')
+execute 'hi markdownBlockquote' s:GuiFg(s:blue)
+execute 'hi markdownCode' s:GuiFg(s:background_plus) s:GuiBg('bg')
+execute 'hi markdownCodeBlock' s:GuiFg(s:background_plus) s:GuiBg('bg')
+execute 'hi markdownCodeDelimiter' s:GuiFg(s:green) s:GuiBg('bg')
+execute 'hi markdownFootnote' s:GuiFg(s:blue)
+execute 'hi markdownId' s:GuiFg(s:blue)
+execute 'hi markdownIdDeclaration' s:GuiFg(s:blue)
+execute 'hi markdownH1' s:GuiFg(s:yellow)
+execute 'hi markdownLinkText' s:GuiFg(s:blue)
+execute 'hi markdownUrl' s:GuiFg(s:light_silver)  s:GuiAttr('underline')
 hi! link markdownBold Bold
 hi! link markdownItalic Italic
 hi! link markdownItalicDelimiter Keyword
