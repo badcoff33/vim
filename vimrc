@@ -14,6 +14,7 @@ set selection=inclusive
 set mouse=a
 set keymodel=
 set selectmode=
+set paste
 
 set nowrap
 set tabstop=2
