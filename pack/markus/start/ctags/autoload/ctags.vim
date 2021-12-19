@@ -3,6 +3,9 @@
 " Description: Some support functions and mappings for C code files.
 " Maintainer: markus prepens (markus dot prepens at gmail dot com)
 
+let g:ctags_functions = []
+let g:ctags_types = []
+
 " Description: Scan trough current TAG file, find the function symbols and
 " highlight them as keyword when called with parameter "functions". When called
 " with parameter "types", highlight C types. Well, 'both' says it all :)
@@ -33,14 +36,9 @@ function! ctags#HighlightTags(what)
 endfunction
 
 " Description: Callback function run by a one-shot timer.
-function! ctags#RunCtagsCallback(tid)
-  if exists('g:ctags_cmd') && exists('g:ctags_update_timer_id') && (a:tid == g:ctags_update_timer_id)
-  let g:update_bufnr = bufnr('__ctags', v:true)
-  let options = {
-        \ 'out_io': "buffer", "out_buf": g:update_bufnr,
-        \ 'err_io': "buffer", "err_buf": g:update_bufnr,
-        \ "cwd": getcwd() }
-    let j = job_start(["cmd", "/C", "ctags"] + g:ctags_cmd, options )
+function! ctags#ExecuteCtags(tid)
+  if exists(':CtagsCommand') && exists('g:ctags_timer_id') && (a:tid == g:ctags_timer_id)
+    CtagsCommand
   endif
 endfunction
 

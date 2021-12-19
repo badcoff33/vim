@@ -1,23 +1,23 @@
 import os
 
-github_home_dir = "Github/start/"
-git_dict = { "easy-align": "https://github.com/junegunn/vim-easy-align.git",
-        "signify": "https://github.com/mhinz/vim-signify.git",
-        "dirvish": "https://github.com/justinmk/vim-dirvish.git"}
+vcs_cmd_clone = "hg clone -q"
+vcs_cmd_pull = "hg pull -q"
 
-saved_pwd = os.getcwd()
-os.chdir( github_home_dir )
+git_dict = { 
+        "github/start/easy-align": "https://github.com/junegunn/vim-easy-align.git",
+        "github/opt/vista":        "https://github.com/liuchengxu/vista.vim.git",
+        "github/opt/gitgutter":    "https://github.com/airblade/vim-gitgutter",
+        "github/opt/dirvish":      "https://github.com/justinmk/vim-dirvish.git" }
+
 for subdir in git_dict:
-    git_url = git_dict[ subdir ]
-    if not os.path.isdir( subdir ):
-        print( "clone %s" % ( git_url ) )
-        os.makedirs( subdir )
-        os.system( "hg clone " + git_url + " " + subdir )
+    git_url = git_dict[subdir]
+    if not os.path.isdir(subdir):
+        print("clone %s" % (git_url))
+        os.makedirs(subdir)
+        os.system(" ".join([vcs_cmd_clone,git_url,subdir]))
     else:
-        print( "update %s" % ( git_url ) )
-        os.chdir( subdir )
-        os.system( "hg clone " + git_url )
-        os.chdir( ".." )
+        print( "update %s" % (git_url))
+        os.makedirs(subdir)        
+        os.system(" ".join([vcs_cmd_clone,git_url,subdir]))
 
-os.chdir( saved_pwd )
 

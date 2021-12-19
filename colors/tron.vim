@@ -1,7 +1,7 @@
-" vim color theme
-" name:        angry bee
-" maintainer:  markus prepens
-" colors taken from https://github.com/ianpan870102/tron-legacy-emacs-theme.
+" Vim color theme
+" Name:        Angry Bee
+" Maintainer:  Markus Prepens
+" Colors taken from https://github.com/ianpan870102/tron-legacy-emacs-theme.
 " Thanks!
 
 if exists("syntax_on")
@@ -9,7 +9,7 @@ if exists("syntax_on")
 endif
 
 hi clear
-let g:colors_name = "tron"
+let g:colors_name = "frost"
 set background=dark
 
 let s:fg0              ="#90ACBC"
@@ -22,8 +22,8 @@ let s:bg1              ="#17181b"
 let s:bg2              ="#192533"
 let s:bg3              ="#1B324B"
 let s:bg4              ="#2B4255"
-let s:hl_line          ="#0E2638"
-let s:bg_hl            ="#35605F"
+let s:hl_line          ="#0E2638" " hl_line
+let s:bg_hl            ="#2B4255" " region, selection
 let s:vc_r             ="#B62D66"
 let s:vc_g             ="#4BB5BE"
 let s:vc_b             ="#387AAA"
@@ -51,113 +51,121 @@ let s:red_bghl     = "#462026"
 let s:blue_bghl    = "#141E4F"
 let s:green_bghl   = "#13454E"
 
+let GuiFg = {str -> empty(str) ? "":"guifg=".str}
+let GuiBg = {str -> empty(str) ? "":"guibg=".str}
+let GuiAttr = {str -> empty(str) ? "":"gui=".str}
+
 " --- Editor ---
-call color#Hi("ColorColumn", "", s:fg1, "", "")
-call color#Hi("Cursor", s:fg4, s:red, "NONE", "")
-call color#Hi("Error", s:red, "bg", "", "")
-call color#Hi("iCursor", s:fg0, s:fg4, "", "")
-call color#Hi("MatchParen", s:green, s:bg3, "", "")
-call color#Hi("NonText", s:fg0, s:blue, "", "")
-call color#Hi("Normal", s:fg0, s:bg1, "", "")
-call color#Hi("SpecialKey", s:fg3, "", "", "")
-call color#Hi("SpellBad", s:red, s:bg0, "undercurl", s:red)
-call color#Hi("SpellCap", s:yellow, s:bg0, "undercurl", s:yellow)
-call color#Hi("SpellLocal", s:fg4, s:bg0, "undercurl", s:red)
-call color#Hi("SpellRare", s:fg4, s:bg0, "undercurl", s:red)
-call color#Hi("Visual", "", s:bg_hl, "", "")
-call color#Hi("VisualNOS", "", s:bg_hl, "", "")
+execute "hi ColorColumn"  GuiBg(s:fg1)
+execute "hi Cursor" GuiFg("#ffffff") GuiBg(s:magenta) GuiAttr("NONE")
+execute "hi CursorLine"  GuiBg(s:hl_line) GuiAttr("NONE")
+execute "hi Error" GuiFg(s:red) GuiBg("bg")
+execute "hi iCursor" GuiFg(s:fg0) GuiBg(s:fg4)
+execute "hi LineNr" GuiFg(s:fg3) GuiBg(s:bg2)
+execute "hi MatchParen" GuiFg(s:green) GuiBg(s:bg3)
+execute "hi NonText" GuiFg(s:fg2)
+execute "hi Normal" GuiFg(s:fg0) GuiBg(s:bg1)
+execute "hi SpecialKey" GuiFg(s:fg3)
+execute "hi SpellBad" GuiFg(s:red) GuiBg(s:bg0) GuiAttr("undercurl")
+execute "hi SpellCap" GuiFg(s:yellow) GuiBg(s:bg0) GuiAttr("undercurl")
+execute "hi SpellLocal" GuiFg(s:fg4) GuiBg(s:bg0) GuiAttr("undercurl")
+execute "hi SpellRare" GuiFg(s:fg4) GuiBg(s:bg0) GuiAttr("undercurl")
+execute "hi Visual"  GuiBg(s:bg_hl)
+execute "hi VisualNOS"  GuiBg(s:bg_hl)
+
+" - Neovim Support -
+execute "hi healthError" GuiFg(s:red) GuiBg(s:fg1)
+execute "hi healthSuccess" GuiFg(s:green) GuiBg(s:fg1)
+execute "hi healthWarning" GuiFg(s:yellow) GuiBg(s:fg1)
+execute "hi TermCursorNC"  GuiBg(s:fg1)
 
 " --- Gutter ---
-call color#Hi("CursorColumn", "", s:fg1, "", "")
-call color#Hi("CursorLine", "", s:hl_line, "NONE", "")
-call color#Hi("CursorLineNr", s:fg3, s:magenta, "", "")
-call color#Hi("LineNrAbove", s:line_num, s:magenta, "", "")
-call color#Hi("LineNrBelow", s:line_num, s:magenta, "", "")
-call color#Hi("LineNr", s:line_num, "", "NONE", "")
-call color#Hi("Folded", s:fg3, s:fg1, "bold", "")
-highlight! link FoldColumn LineNr
-highlight! link SignColumn LineNr
+execute "hi CursorColumn"  GuiBg(s:fg1)
+execute "hi CursorLineNr" GuiFg(s:line_num)  GuiAttr("NONE")
+execute "hi Folded" GuiFg(s:fg3) GuiBg(s:fg1) GuiAttr("bold")
+execute "hi FoldColumn" GuiFg(s:fg3) GuiBg(s:bg0)
+execute "hi SignColumn" GuiFg(s:fg1) GuiBg(s:bg0)
 
 " --- Navigation ---
-call color#Hi("Directory", s:blue, "", "underline", "")
+execute "hi Directory" GuiFg(s:blue)  GuiAttr("underline")
 
 " --- Prompt/Status ---
-call color#Hi("EndOfBuffer", s:fg1, "", "", "")
-call color#Hi("WarningMsg", s:bg0, s:yellow, "", "")
-call color#Hi("ErrorMsg", s:bg0, s:red, "", "")
-call color#Hi("ModeMsg", s:bg0, s:green, "", "")
-call color#Hi("MoreMsg", s:bg0, s:yellow, "", "")
-call color#Hi("Question", s:fg4, "", "", "")
+execute "hi EndOfBuffer" GuiFg(s:fg1)
+execute "hi WarningMsg" GuiFg(s:bg0) GuiBg(s:yellow)
+execute "hi ErrorMsg" GuiFg(s:bg0) GuiBg(s:red)
+execute "hi ModeMsg" GuiFg(s:bg0) GuiBg(s:green)
+execute "hi MoreMsg" GuiFg(s:bg0) GuiBg(s:yellow)
+execute "hi Question" GuiFg(s:fg4)
 
 " --- Decorations ---
-call color#Hi("StatusLine", s:fg4, s:mode_line_bg, "NONE", "")
-call color#Hi("StatusLineNC", s:fg0, s:bg2, "NONE", "")
-call color#Hi("StatusLineTerm", s:blue, s:fg3, "NONE", "")
-call color#Hi("IncSearch", s:yellow, s:bg3, "bold", "")
-call color#Hi("Search", s:green, s:bg4, "NONE", "")
+execute "hi StatusLine" GuiFg(s:fg4) GuiBg(s:mode_line_bg) GuiAttr("NONE")
+execute "hi StatusLineNC" GuiFg(s:fg0) GuiBg(s:bg2) GuiAttr("NONE")
+execute "hi StatusLineTerm" GuiFg(s:blue) GuiBg(s:fg3) GuiAttr("NONE")
+execute "hi IncSearch" GuiFg(s:yellow) GuiBg(s:bg3) GuiAttr("bold")
+execute "hi Search" GuiFg(s:green) GuiBg(s:bg4) GuiAttr("NONE")
 
 hi! link StatusLineTerm StatusLine
 hi! link StatusLineTermNC StatusLineNC
 hi! link WildMenu IncSearch
 hi! link VertSplit StatusLineNC
 
-call color#Hi("PmenuSbar", s:fg3, s:bg2, "", "")
-call color#Hi("PmenuThumb", s:fg4, s:bg3, "", "")
+execute "hi PmenuSbar" GuiFg(s:fg3) GuiBg(s:bg2)
+execute "hi PmenuThumb" GuiFg(s:fg4) GuiBg(s:bg3)
 hi! link PMenuSel IncSearch
 hi! link PMenu    Search
 
-call color#Hi("TabLine", s:fg4, s:fg1, "NONE", "")
-call color#Hi("TabLineFill", s:fg4, s:fg1, "NONE", "")
-call color#Hi("TabLineSel", s:red, s:fg4, "", "")
+execute "hi TabLine" GuiFg(s:fg4) GuiBg(s:fg1) GuiAttr("NONE")
+execute "hi TabLineFill" GuiFg(s:fg4) GuiBg(s:fg1) GuiAttr("NONE")
+execute "hi TabLineSel" GuiFg(s:red) GuiBg(s:fg4)
 
 " --- Window ---
-call color#Hi("Title", s:fg4, "", "NONE", "")
-call color#Hi("Bold", "", "", "bold", "")
-call color#Hi("Italic", "", "", "italic", "")
-call color#Hi("Boolean", s:yellow, "", "", "")
-call color#Hi("Character", s:yellow, "", "", "")
-call color#Hi("Comment", s:fg1, "", "italic", "")
-call color#Hi("Conditional", s:lightred, "", "", "")
-call color#Hi("Constant", s:bluegreen, "", "", "")
-call color#Hi("Delimiter", s:fg4, "", "", "")
-call color#Hi("Exception", s:blue, "", "", "")
-call color#Hi("Float", s:bluegreen, "", "", "")
-call color#Hi("Function", s:yellow, "", "", "")
-call color#Hi("Identifier", s:green, "", "NONE", "")
-call color#Hi("Keyword", s:lightred, "", "", "")
-call color#Hi("Label", s:blue, "", "", "")
-call color#Hi("Number", s:magenta, "", "", "")
-call color#Hi("Operator", s:yellow, "", "NONE", "")
-call color#Hi("Repeat", s:red, "", "", "")
-call color#Hi("Special", s:fg4, "", "", "")
-call color#Hi("SpecialChar", s:yellow, "", "", "")
-call color#Hi("SpecialComment", s:blue, "", "italic", "")
-call color#Hi("Statement", s:lightred, "", "", "")
-call color#Hi("StorageClass", s:blue, "", "", "")
-call color#Hi("String", s:fg3, "", "", "")
-call color#Hi("Structure", s:magenta, "", "", "")
-call color#Hi("Tag", s:fg4, "", "", "")
-call color#Hi("Todo", s:fg3, s:red, "NONE", "")
-call color#Hi("Type", s:red, "", "NONE", "")
-call color#Hi("Typedef", s:blue, "", "", "")
+execute "hi Title" GuiFg(s:fg4)  GuiAttr("NONE")
+execute "hi Bold"   GuiAttr("bold")
+execute "hi Italic"   GuiAttr("italic")
+execute "hi Boolean" GuiFg(s:yellow)
+execute "hi Character" GuiFg(s:yellow)
+execute "hi Comment" GuiFg(s:fg1)  GuiAttr("italic")
+execute "hi Conditional" GuiFg(s:lightred)
+execute "hi Constant" GuiFg(s:bluegreen)
+execute "hi Exception" GuiFg(s:blue)
+execute "hi Float" GuiFg(s:bluegreen)
+execute "hi Function" GuiFg(s:yellow)
+execute "hi Identifier" GuiFg(s:green)  GuiAttr("NONE")
+execute "hi Keyword" GuiFg(s:lightred)
+execute "hi Label" GuiFg(s:blue)
+execute "hi Number" GuiFg(s:magenta)
+execute "hi Operator" GuiFg(s:yellow)  GuiAttr("NONE")
+execute "hi Repeat" GuiFg(s:red)
+execute "hi Special" GuiFg(s:fg4)
+execute "hi SpecialChar" GuiFg(s:yellow)
+execute "hi SpecialComment" GuiFg(s:blue)  GuiAttr("italic")
+execute "hi Statement" GuiFg(s:lightred)
+execute "hi StorageClass" GuiFg(s:blue)
+execute "hi String" GuiFg(s:fg3)
+execute "hi Structure" GuiFg(s:magenta)
+execute "hi Tag" GuiFg(s:fg4)
+execute "hi Todo" GuiFg(s:fg3) GuiBg(s:red) GuiAttr("NONE")
+execute "hi Type" GuiFg(s:red)  GuiAttr("NONE")
+execute "hi Typedef" GuiFg(s:blue)
+execute "hi Delimiter" GuiFg(s:fg4)
 
-call color#Hi("PreProc", s:yellow, "", "bold", "")
-call color#Hi("Include", s:yellow, "", "", "")
+execute "hi PreProc" GuiFg(s:yellow)  GuiAttr("bold")
+execute "hi Include" GuiFg(s:yellow)
 hi! link Macro Define
 hi! link PreCondit PreProc
 hi! link Define PreProc
 
-call color#Hi("DiffAdd", s:green, s:bg2, "", "")
-call color#Hi("DiffChange", s:yellow, s:bg2, "", "")
-call color#Hi("DiffDelete", s:red, s:bg2, "", "")
-call color#Hi("DiffText", s:blue, s:bg2, "", "")
+execute "hi DiffAdd" GuiFg(s:green) GuiBg(s:fg1)
+execute "hi DiffChange" GuiFg(s:yellow) GuiBg(s:fg1)
+execute "hi DiffDelete" GuiFg(s:red) GuiBg(s:fg1)
+execute "hi DiffText" GuiFg(s:blue) GuiBg(s:fg1)
 
-call color#Hi("cIncluded", s:blue, "", "", "")
+execute "hi cIncluded" GuiFg(s:blue)
 hi! link cOperator Operator
 hi! link cPreCondit PreCondit
 
-call color#Hi("htmlArg", s:blue, "", "", "")
-call color#Hi("htmlLink", s:fg4, "", "NONE", "NONE")
+execute "hi htmlArg" GuiFg(s:blue)
+execute "hi htmlLink" GuiFg(s:fg4)  GuiAttr("NONE")
 hi! link htmlBold Bold
 hi! link htmlEndTag htmlTag
 hi! link htmlItalic Italic
@@ -171,18 +179,18 @@ hi! link htmlSpecialChar SpecialChar
 hi! link htmlTag Keyword
 hi! link htmlTagN htmlTag
 
-call color#Hi("vimCommentTitle", s:blue, "", "bold", "")
+execute "hi vimCommentTitle" GuiFg(s:blue)  GuiAttr("bold")
 
-call color#Hi("markdownBlockquote", s:blue, "", "", "")
-call color#Hi("markdownCode", s:fg4, "bg", "", "")
-call color#Hi("markdownCodeBlock", s:fg4, "bg", "", "")
-call color#Hi("markdownCodeDelimiter", s:green, "bg", "", "")
-call color#Hi("markdownFootnote", s:blue, "", "", "")
-call color#Hi("markdownId", s:blue, "", "", "")
-call color#Hi("markdownIdDeclaration", s:blue, "", "", "")
-call color#Hi("markdownH1", s:yellow, "", "", "")
-call color#Hi("markdownLinkText", s:blue, "", "", "")
-call color#Hi("markdownUrl", s:fg4, "", "underline", "")
+execute "hi markdownBlockquote" GuiFg(s:blue)
+execute "hi markdownCode" GuiFg(s:fg4) GuiBg("bg")
+execute "hi markdownCodeBlock" GuiFg(s:fg4) GuiBg("bg")
+execute "hi markdownCodeDelimiter" GuiFg(s:green) GuiBg("bg")
+execute "hi markdownFootnote" GuiFg(s:blue)
+execute "hi markdownId" GuiFg(s:blue)
+execute "hi markdownIdDeclaration" GuiFg(s:blue)
+execute "hi markdownH1" GuiFg(s:yellow)
+execute "hi markdownLinkText" GuiFg(s:blue)
+execute "hi markdownUrl" GuiFg(s:fg4)  GuiAttr("underline")
 hi! link markdownBold Bold
 hi! link markdownItalic Italic
 hi! link markdownItalicDelimiter Keyword

@@ -8,12 +8,10 @@
 filetype plugin on
 filetype indent on
 
-if exists('&termguicolors')
-  set termguicolors
-endif
-
-set clipboard=autoselect
+set termguicolors
+set clipboard=unnamed
 set selection=inclusive
+set mouse=a
 set keymodel=
 set selectmode=
 
@@ -26,14 +24,13 @@ set belloff=all
 set novisualbell
 set noerrorbells
 set noswapfile
-set laststatus=2
 set report=0
 set ruler
 set showmatch matchtime=1
 set showtabline=1
-set showcmd
 set shortmess-=f " long form for file info
-set shortmess-=S " Yes, search count please
+set shortmess+=S " Yes, search count please
+set laststatus=2
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
@@ -86,32 +83,25 @@ set incsearch
 set hlsearch
 set magic
 
-" first elementis users home of Vim files
-let g:vim_home = split(&runtimepath, ',')[0]
+set backup
+execute 'set backupdir=' . getenv('LOCALAPPDATA') . '\vim\backup'
+set wildignore+=*/backup/*
 
-if isdirectory(g:vim_home .. '/backup')
-  set backup
-  execute 'set backupdir=' .. g:vim_home .. '/backup'
-  set wildignore+=*/backup/*
-endif
-
-if isdirectory(g:vim_home .. '/undo')
-  set undofile
-  execute 'set undodir=' .. g:vim_home .. '/undo'
-  set wildignore+=*/undo/*
-endif
+set undofile
+execute 'set undodir=' . getenv('LOCALAPPDATA') . '\vim\undo'
+set wildignore+=*/undo/*
 
 " Insert mode completion
 set complete=.,w
 set showfulltag
-set completeopt=menu,preview
+set completeopt=menu
+
 set pumheight=7
 
-set previewpopup=height:10,width:60,highlight:Pmenu
-
 " Command line completion
-set wildoptions=
-set nowildmenu wildmode=full:lastused
+set wildmenu
+set wildoptions=tagfile
+set wildmode=full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
@@ -124,29 +114,18 @@ if &diff
   set columns=999 lines=999
 endif
 
-if has('unix')
-  let g:psep = '/'
-else
-  let g:psep = '\'
-endif
-
 " Netrw variables
 let g:netrw_use_errorwindow = 0
 let g:netrw_banner = 0
-let g:netrw_liststyle = 0
+let g:netrw_liststyle = 3
 let g:netrw_browse_split = 0
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_preview = 1
 
-" Terminal
-tnoremap <S-Ins> <C-w>"*
-
-" Switch modes
-"tnoremap <expr> <Esc> winnr('$') == 1 ? "\<C-w>N:b#\<CR>" : "\<C-w>c"
-
-" yank current word -- CUA style
-nnoremap <C-Ins> "+yiw
+" Set leader and localleader keys, that works best for me
+let mapleader = " "
+let maplocalleader = "s"
 
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
@@ -162,55 +141,31 @@ nnoremap <S-Right> <C-w>l
 nnoremap <S-Left> <C-w>h
 nnoremap <S-Up> <C-w>k
 nnoremap <S-Down> <C-w>j
-tnoremap <S-Right> <C-w>l
-tnoremap <S-Left> <C-w>h
-tnoremap <S-Up> <C-w>k
-tnoremap <S-Down> <C-w>j
+imap <S-Right> <Esc><S-Right>
+imap <S-Left> <Esc><S-Left>
+imap <S-Up> <Esc><S-Up>
+imap <S-Down> <Esc><S-Down>
+
+" To map <Esc> to exit terminal-mode: >
+tnoremap <Esc> <C-\><C-n>
+
+" To simulate |i_CTRL-R| in terminal-mode: >
+tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
+tnoremap <S-Right> <C-\><C-n><C-w>l
+tnoremap <S-Left>  <C-\><C-n><C-w>h
+tnoremap <S-Up>    <C-\><C-n><C-w>k
+tnoremap <S-Down>  <C-\><C-n><C-w>j
 
 " "Enclose" `current` (visual) {selection}
-vnoremap "<Space> c"<C-r>-"<Esc>
-vnoremap '<Space> c'<C-r>-'<Esc>
-vnoremap `<Space> c`<C-r>-`<Esc>
-vnoremap (<Space> c(<C-r>-)<Esc>
-vnoremap [<Space> c[<C-r>-]<Esc>
-vnoremap {<Space> c{<C-r>-}<Esc>
+vnoremap <Space>" c"<C-r>-"<Esc>
+vnoremap <Space>' c'<C-r>-'<Esc>
+vnoremap <Space>` c`<C-r>-`<Esc>
+vnoremap <Space>( c(<C-r>-)<Esc>
+vnoremap <Space>[ c[<C-r>-]<Esc>
+vnoremap <Space>{ c{<C-r>-}<Esc>
 
-" Set leader and localleader keys, that works best for me
-let mapleader = " "
-let maplocalleader = "s"
-inoremap jj <Esc>
-
-" By default, <c-l> clears and redraws the screen (like :redraw!). The
-" following mapping does a little bit more to keep the screen sane.
-nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
-
-let g:ft2regex = {
-      \ 'c':'\.[ch]$',
-      \ 'vim':'\.vim',
-      \ 'py':'\.py$',
-      \ 'cmake':'\(\.cmake\|CMakeLists.txt\)',
-      \ }
-let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
-nnoremap <expr> <Leader>B ':filter /' .. LsFilter(&ft) .. '/ ls<CR>:buffer '
-nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>f :find<Space>*
-nnoremap <expr> <Leader>e ':edit ' .. expand("%:p:h") .. g:psep
-nnoremap <Leader>E :browse edit <C-r>=expand("%:p:h")<CR><CR>
-nnoremap <Leader>m :sil make<Space><Up><CR>
-nnoremap <Leader><C-m> :sil make<Space><Up>
-nnoremap <Leader>v <cmd>edit ~/vimfiles/local.vim<CR>
-nnoremap <Leader>g :silent grep<Space>
-nnoremap <Leader>+ :tabnew<CR>
-nnoremap <Leader>- :tabclose<CR>
-nnoremap <Leader>c <C-^>:bw#<Esc>
-
-nnoremap <A-+> 3<C-w>+3<C-w>>
-nnoremap <A--> 3<C-w>-3<C-w><
-
-nnoremap + :cnext<CR>
-nnoremap - :cprevious<CR>
-
-" Insert mode: map all functions keys to normal mode mappinng
+" Function Keys: In insert mode map all functions keys to normal mode mappinng
 imap <F1> <Esc><F1>
 imap <F2> <Esc><F2>
 imap <F3> <Esc><F3>
@@ -225,33 +180,126 @@ imap <F11> <Esc><F11>
 imap <F12> <Esc><F12>
 imap <F13> <Esc><F13>
 
+nnoremap <F7> :<C-u>Make<up>
+nnoremap <F8> :<C-u>Grep<up>
+
+" By default, <c-l> clears and redraws the screen (like :redraw!). The
+" following mapping does a little bit more to keep the screen sane.
+nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
+
+let PathSep = { -> has('unix')?'/':'\' }
+
+let g:ft2regex = {
+      \ 'c':      '\.[ch]$',
+      \ 'vim':    '\.vim',
+      \ 'py':     '\.py$',
+      \ 'cmake':  '\(\.cmake\|CMakeLists.txt\)'
+      \ }
+let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
+nnoremap <expr> <Leader>B ':filter /' . LsFilter(&ft) . '/ ls<CR>:buffer '
+nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader>f :find<Space>*
+nnoremap <Leader>t :tjump<Space>/
+nnoremap <Leader>m :sil make<Space><Up><CR>
+nnoremap <Leader><C-m> :sil make<Space><Up>
+nnoremap <Leader>g :silent grep<Space>
+nnoremap <Leader>+ :tabnew<CR>
+nnoremap <Leader>- :tabclose<CR>
+nnoremap <Leader>c <C-^>:bw#<Esc>
+nnoremap <expr> <Leader>e ':edit ' . expand("%:p:h") . PathSep()
+nnoremap <expr> <Leader>v ':edit ' . stdpath('config') . PathSep()
+
+nnoremap <A-+> 3<C-w>+3<C-w>>
+nnoremap <A--> 3<C-w>-3<C-w><
+
+nnoremap + :cnext<CR>zz
+nnoremap - :cprevious<CR>zz
+
+nnoremap <A-Down> :cnext<CR>zz
+nnoremap <A-Up> :cprev<CR>zz
+nnoremap <A-Left> :bprevious<CR>
+nnoremap <A-Right> :bnext<CR>
+
+" command line completion
+cnoremap <C-r>. <C-r>=expand("%:h") . PathSep()<CR>
+
+" Quick replace command
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
-nnoremap <Leader>ow :setlocal invwrap
+" Toggle options
+nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
+nnoremap <Leader>ow :setlocal invwrap<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
-" command line completion
-cnoremap <C-r>. <C-r>=expand("%:h")..g:psep<CR>
-
-command! -nargs=0 CleanUpBuffers :bufdo if bufname('%')=='' | bd! | endif
-
+command! -nargs=0 CleanUpBuffers      :bufdo if bufname('%')=='' | bd! | endif
 command! -nargs=0 IgnoreCaseSensetive :set   ignorecase nosmartcase
 command! -nargs=0 CaseSensetive       :set noignorecase nosmartcase
 command! -nargs=0 SmartCase           :set   ignorecase  smartcase
 
-command! -nargs=0 ReadOnly :setlocal nomodifiable readonly
-command! -nargs=0 LastSession :execute 'source '..$TMP..'/'..sha256(getcwd())..'.vim'
+" Description: Jump to last location. Check out :help line(). Function checks
+" if the '" marker is valid. Jump to the mark, but don't change the jumplist
+" when jumping within the current buffer (:help g').
+function! RestoreCursor ()
+  if line("'\"") > 1 && line("'\"") <= line("$")
+    exe "normal! g`\""
+  endif
+endfunction
 
+" Description: Some minor extensions to run ripgrep or Windows own findstr.
+" Ironically, because this set 'grepprg', right now grep iteslf is not used.
+" Most of the time I work On Windows only.
+
+let g:rg_glob_patterns = {
+      \ 'c': '-g *.[ch]',
+      \ 'cpp': '-g *.[ch]',
+      \ 'vim': '-g *.vim',
+      \ 'asm': '-g *.850',
+      \ 'py': '-g *.py',
+      \ 'cmake': '-g *.cmake -g CMakeLists.txt',
+      \ }
+
+let g:findstr_glob_patterns = {
+      \ 'c': '*.c *.h',
+      \ 'cpp': '*.c* *.h*',
+      \ 'vim': '*vimrc *.vim',
+      \ 'asm': '*.s *.asm *.850',
+      \ 'py': '*.py',
+      \ 'cmake': '*.cmake CMakeLists.txt'
+      \ }
+
+let RgGlob = {ft -> has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft] : '-g *.*'}
+let FindstrGlob = {ft -> has_key(g:findstr_glob_patterns, ft) ? g:findstr_glob_patterns[ft] : '*.*'}
+
+if executable("rg")
+  " Using links? Ripgrep supports this by th option '--follow'
+  set grepprg=rg\ --vimgrep\ $*
+  set grepformat=%f:%l:%c:%m
+  nnoremap <expr> <Leader>g ':silent grep ' . RgGlob(&ft) . ' ' . expand('<cword>')
+elseif executable("findstr")
+  set grepprg=findstr\ /S\ /N
+  set grepformat=%f:%l:%m
+  nnoremap <expr> <Leader>g ':silent grep ' . expand('<cword>') . ' ' . FindstrGlob(&ft)
+elseif executable("grep")
+  set grepprg=grep\ -Hnr\ --exclude=cmake\ $* \.
+  set grepformat=%f:%l:%m
+endif
+
+if executable("rg")
+  " find any file
+  command! -nargs=+ Glob :term rg --files -g <args> .
+else
+  command! -nargs=+ Glob :term dir /S /B <args>
+endif
 augroup init
   autocmd!
-  autocmd VimResized   * wincmd =
+  autocmd BufReadPost  * call RestoreCursor()
+  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
-  autocmd TerminalOpen * setlocal nonumber norelativenumber signcolumn=no foldcolumn=0
-  " move visual selection to quickfix window
-  autocmd TerminalOpen * vnoremap <buffer> <CR> "ty:cexpr split(@t,'[\n\r]')<CR>
+  autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
+  autocmd VimEnter     * runtime local.vim
+  autocmd VimResized   * wincmd =
 augroup END
 
-runtime local.vim
-" vim:ft=vim
+" vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:

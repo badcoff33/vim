@@ -1,8 +1,6 @@
-===
 Vim
 ===
 
------
 Books
 -----
 
@@ -10,15 +8,13 @@ The web has a load of good Vim tutorials, covering how to use Vim and
 scripting tips.Here is a link to a very comprehensive online book:
 http://learnvimscriptthehardway.stevelosh.com
 
-------------------------
-Vim Knowledge in the WWW
-------------------------
+WWW Vim Knowledge
+-----------------
 
 - `Vim wiki`_
 - `Vim Galore`_
 - `reedit`_
 
--------------------
 The History of hjkl
 -------------------
 

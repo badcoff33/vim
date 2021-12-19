@@ -37,139 +37,128 @@ let s:frostYellow  = "#EBCB8B"
 let s:frostGreen   = "#A3BE8C"
 let s:frostViolet  = "#B48EAD"
 
-function! s:Hi(group, guifg, guibg, attr, guisp)
-  if a:guifg != ""
-    exec "hi " . a:group . " guifg=" . a:guifg
-  endif
-  if a:guibg != ""
-    exec "hi " . a:group . " guibg=" . a:guibg
-  endif
-  if a:attr != ""
-    exec "hi " . a:group . " gui=" . a:attr
-  endif
-  if a:guisp != ""
-    exec "hi " . a:group . " guisp=" . a:guisp
-  endif
-endfunction
+let GuiFg = {str -> empty(str) ? "":"guifg=".str}
+let GuiBg = {str -> empty(str) ? "":"guibg=".str}
+let GuiAttr = {str -> empty(str) ? "":"gui=".str}
 
 " Editor
-call s:Hi("ColorColumn", "", s:frost1, "", "")
-call s:Hi("Cursor", s:frost0, s:frostViolet, "NONE", "")
-call s:Hi("CursorLine", "", s:frost1, "NONE", "")
-call s:Hi("Error", s:frostRed, "bg", "", "")
-call s:Hi("iCursor", s:frost0, s:frost4, "", "")
-call s:Hi("LineNr", s:frost3, s:frost0, "", "")
-call s:Hi("MatchParen", s:frostBlue2, s:frost3, "", "")
-call s:Hi("NonText", s:frost2, "", "", "")
-call s:Hi("Normal", s:frostWhite, s:frost0, "", "")
-call s:Hi("PMenu", s:frostBlue1, s:frost2, "NONE", "")
-call s:Hi("PmenuSbar", s:frost4, s:frost2, "", "")
-call s:Hi("PmenuThumb", s:frostBlue2, s:frost3, "", "")
-call s:Hi("SpecialKey", s:frost3, "", "", "")
-call s:Hi("SpellBad", s:frostRed, s:frost0, "undercurl", "")
-call s:Hi("SpellCap", s:frostYellow, s:frost0, "undercurl", "")
-call s:Hi("SpellLocal", s:frost5, s:frost0, "undercurl", "")
-call s:Hi("SpellRare", s:frost6, s:frost0, "undercurl", "")
-call s:Hi("Visual", s:frost6, s:frost3, "", "")
-call s:Hi("VisualNOS", "", s:frost2, "", "")
-call s:Hi("Whitespace", s:frost3, "", "", "")
+execute "hi ColorColumn"  GuiBg(s:frost1)
+execute "hi Cursor" GuiFg(s:frost0) GuiBg(s:frostViolet) GuiAttr("NONE")
+execute "hi CursorLine"  GuiBg(s:frost1) GuiAttr("NONE")
+execute "hi Error" GuiFg(s:frostRed) GuiBg("bg")
+execute "hi iCursor" GuiFg(s:frost0) GuiBg(s:frost4)
+execute "hi LineNr" GuiFg(s:frost3) GuiBg(s:frost0)
+execute "hi MatchParen" GuiFg(s:frostBlue2) GuiBg(s:frost3)
+execute "hi NonText" GuiFg(s:frost2)
+execute "hi Normal" GuiFg(s:frostWhite) GuiBg(s:frost0)
+execute "hi PMenu" GuiFg(s:frostBlue1) GuiBg(s:frost2) GuiAttr("NONE")
+execute "hi PmenuSbar" GuiFg(s:frost4) GuiBg(s:frost2)
+execute "hi PmenuThumb" GuiFg(s:frostBlue2) GuiBg(s:frost3)
+execute "hi SpecialKey" GuiFg(s:frost3)
+execute "hi SpellBad" GuiFg(s:frostRed) GuiBg(s:frost0) GuiAttr("undercurl")
+execute "hi SpellCap" GuiFg(s:frostYellow) GuiBg(s:frost0) GuiAttr("undercurl")
+execute "hi SpellLocal" GuiFg(s:frost5) GuiBg(s:frost0) GuiAttr("undercurl")
+execute "hi SpellRare" GuiFg(s:frost6) GuiBg(s:frost0) GuiAttr("undercurl")
+execute "hi Visual" GuiFg(s:frost6) GuiBg(s:frost3)
+execute "hi VisualNOS"  GuiBg(s:frost2)
+execute "hi Whitespace" GuiFg(s:frost3)
 hi! link PMenuSel IncSearch
 
 " Frost specific
-call s:Hi('BlendDown', "", s:frost1, '', '')
+execute "hi BlendDown" GuiBg(s:frost1)
 
 " Neovim Support
-call s:Hi("healthError", s:frostRed, s:frost1, "", "")
-call s:Hi("healthSuccess", s:frostGreen, s:frost1, "", "")
-call s:Hi("healthWarning", s:frostYellow, s:frost1, "", "")
-call s:Hi("TermCursorNC", "", s:frost1, "", "")
+execute "hi healthError" GuiFg(s:frostRed) GuiBg(s:frost1)
+execute "hi healthSuccess" GuiFg(s:frostGreen) GuiBg(s:frost1)
+execute "hi healthWarning" GuiFg(s:frostYellow) GuiBg(s:frost1)
+execute "hi TermCursorNC"  GuiBg(s:frost1)
 
 " Gutter
-call s:Hi("CursorColumn", "", s:frost1, "", "")
-call s:Hi("CursorLineNr", s:frost4, s:frost0, "NONE", "")
-call s:Hi("Folded", s:frost3, s:frost1, "bold", "")
-call s:Hi("FoldColumn", s:frost3, s:frost0, "", "")
-call s:Hi("SignColumn", s:frost1, s:frost0, "", "")
+execute "hi CursorColumn"  GuiBg(s:frost1)
+execute "hi CursorLineNr" GuiFg(s:frost4) GuiBg(s:frost0) GuiAttr("NONE")
+execute "hi Folded" GuiFg(s:frost3) GuiBg(s:frost1) GuiAttr("bold")
+execute "hi FoldColumn" GuiFg(s:frost3) GuiBg(s:frost0)
+execute "hi SignColumn" GuiFg(s:frost1) GuiBg(s:frost0)
 
 " Navigation
-call s:Hi("Directory", s:frostBlue2, "", "", "")
+execute "hi Directory" GuiFg(s:frostBlue2)
 
 " Prompt/Status
-call s:Hi("EndOfBuffer", s:frost1, "", "", "")
-call s:Hi("WarningMsg", s:frostBlack, s:frostYellow, "", "")
-call s:Hi("ErrorMsg", s:frostBlack, s:frostRed, "", "")
-call s:Hi("ModeMsg", s:frostBlack, s:frostGreen, "", "")
-call s:Hi("MoreMsg", s:frostBlack, s:frostYellow, "", "")
-call s:Hi("Question", s:frost4, "", "", "")
-call s:Hi("StatusLine", s:frost6, s:frost3, "NONE", "")
-call s:Hi("StatusLineNC", s:frost5, s:frost1, "NONE", "")
-call s:Hi("StatusLineTerm", s:frostBlue2, s:frost3, "NONE", "")
-call s:Hi("StatusLineTermNC", s:frost4, s:frost1, "NONE", "")
-call s:Hi("VertSplit", s:frost2, s:frost0, "NONE", "")
+execute "hi EndOfBuffer" GuiFg(s:frost1)
+execute "hi WarningMsg" GuiFg(s:frostBlack) GuiBg(s:frostYellow)
+execute "hi ErrorMsg" GuiFg(s:frostBlack) GuiBg(s:frostRed)
+execute "hi ModeMsg" GuiFg(s:frostBlack) GuiBg(s:frostGreen)
+execute "hi MoreMsg" GuiFg(s:frostBlack) GuiBg(s:frostYellow)
+execute "hi Question" GuiFg(s:frost4)
+execute "hi StatusLine" GuiFg(s:frost6) GuiBg(s:frost3) GuiAttr("NONE")
+execute "hi StatusLineNC" GuiFg(s:frost5) GuiBg(s:frost1) GuiAttr("NONE")
+execute "hi StatusLineTerm" GuiFg(s:frostBlue2) GuiBg(s:frost3) GuiAttr("NONE")
+execute "hi StatusLineTermNC" GuiFg(s:frost4) GuiBg(s:frost1) GuiAttr("NONE")
+execute "hi VertSplit" GuiFg(s:frost2) GuiBg(s:frost0) GuiAttr("NONE")
 hi! link WildMenu IncSearch
 
 " Search
-call s:Hi("IncSearch", s:frostBlack, s:frostGreen, "none", "")
-call s:Hi("Search", s:frostYellow, s:frost2, "none", "")
+execute "hi IncSearch" GuiFg(s:frostBlack) GuiBg(s:frostGreen) GuiAttr("bold")
+execute "hi Search" GuiFg(s:frostYellow) GuiBg(s:frost2) GuiAttr("bold")
 
  " QuickFix
 hi! link qfFileName Directory
 hi! link qfLineNr Directory
-call s:Hi("qfSeparator", "fg", "bg", "", "")
-call s:Hi("QuickFixLine", "fg", "bg", "bold", "")
+execute "hi qfSeparator" GuiFg("fg") GuiBg("bg")
+execute "hi QuickFixLine" GuiFg("fg") GuiBg("bg") GuiAttr("bold")
 
 " Tabs
-call s:Hi("TabLine", s:frost5, s:frost1, "NONE", "")
-call s:Hi("TabLineFill", s:frost4, s:frost1, "NONE", "")
-call s:Hi("TabLineSel", s:frostYellow, s:frost4, "underline", "")
+execute "hi TabLine" GuiFg(s:frost5) GuiBg(s:frost1) GuiAttr("NONE")
+execute "hi TabLineFill" GuiFg(s:frost4) GuiBg(s:frost1) GuiAttr("NONE")
+execute "hi TabLineSel" GuiFg(s:frostYellow) GuiBg(s:frost4) GuiAttr("underline")
 
 " Window
-call s:Hi("Title", s:frost4, "", "NONE", "")
-call s:Hi("Bold", "", "", "bold", "")
-call s:Hi("Italic", "", "", "italic", "")
-call s:Hi("Boolean", s:frostBlue3, "", "", "")
-call s:Hi("Character", s:frostYellow, "", "", "")
-call s:Hi("Comment", s:frostGreen, "", "none", "")
-call s:Hi("Conditional", s:frostBlue3, "", "", "")
-call s:Hi("Constant", s:frostPumpkin, "", "", "")
-call s:Hi("Define", s:frostBlue3, "", "", "")
-call s:Hi("Delimiter", s:frost6, "", "", "")
-call s:Hi("Exception", s:frostBlue3, "", "", "")
-call s:Hi("Float", s:frostViolet, "", "", "")
-call s:Hi("Function", s:frostBlue2, "", "", "")
-call s:Hi("Identifier", s:frostGreen, "", "NONE", "")
-call s:Hi("Include", s:frostBlue3, "", "", "")
-call s:Hi("Keyword", s:frostBlue3, "", "", "")
-call s:Hi("Label", s:frostBlue3, "", "", "")
-call s:Hi("Number", s:frostViolet, "", "", "")
-call s:Hi("Operator", s:frostYellow, "", "NONE", "")
-call s:Hi("PreProc", s:frostBlue3, "", "NONE", "")
-call s:Hi("Repeat", s:frostBlue3, "", "", "")
-call s:Hi("Special", s:frost5, "", "", "")
-call s:Hi("SpecialChar", s:frostYellow, "", "", "")
-call s:Hi("SpecialComment", s:frostBlue2, "", "", "")
-call s:Hi("Statement", s:frostBlue3, "", "", "")
-call s:Hi("StorageClass", s:frostBlue3, "", "", "")
-call s:Hi("String", s:frostViolet, "", "", "")
-call s:Hi("Structure", s:frostBlue3, "", "", "")
-call s:Hi("Tag", s:frost4, "", "", "")
-call s:Hi("Todo", s:frostYellow, "NONE", "", "")
-call s:Hi("Type", s:frostBlue3, "", "NONE", "")
-call s:Hi("Typedef", s:frostBlue3, "", "", "")
+execute "hi Title" GuiFg(s:frost4)  GuiAttr("NONE")
+execute "hi Bold"   GuiAttr("bold")
+execute "hi Italic"   GuiAttr("italic")
+execute "hi Boolean" GuiFg(s:frostBlue3)
+execute "hi Character" GuiFg(s:frostYellow)
+execute "hi Comment" GuiFg(s:frostGreen)  GuiAttr("italic")
+execute "hi Conditional" GuiFg(s:frostBlue3)
+execute "hi Constant" GuiFg(s:frostPumpkin)
+execute "hi Define" GuiFg(s:frostBlue3)
+execute "hi Delimiter" GuiFg(s:frost6)
+execute "hi Exception" GuiFg(s:frostBlue3)
+execute "hi Float" GuiFg(s:frostViolet)
+execute "hi Function" GuiFg(s:frostBlue2)
+execute "hi Identifier" GuiFg(s:frostGreen)  GuiAttr("NONE")
+execute "hi Include" GuiFg(s:frostBlue3)
+execute "hi Keyword" GuiFg(s:frostBlue3)
+execute "hi Label" GuiFg(s:frostBlue3)
+execute "hi Number" GuiFg(s:frostViolet)
+execute "hi Operator" GuiFg(s:frostYellow)  GuiAttr("NONE")
+execute "hi PreProc" GuiFg(s:frostBlue3)  GuiAttr("NONE")
+execute "hi Repeat" GuiFg(s:frostBlue3)
+execute "hi Special" GuiFg(s:frost5)
+execute "hi SpecialChar" GuiFg(s:frostYellow)
+execute "hi SpecialComment" GuiFg(s:frostBlue2)  GuiAttr("italic")
+execute "hi Statement" GuiFg(s:frostBlue3)
+execute "hi StorageClass" GuiFg(s:frostBlue3)
+execute "hi String" GuiFg(s:frostViolet)
+execute "hi Structure" GuiFg(s:frostBlue3)
+execute "hi Tag" GuiFg(s:frost4)
+execute "hi Todo" GuiFg(s:frostYellow) GuiBg("NONE")
+execute "hi Type" GuiFg(s:frostBlue3)  GuiAttr("NONE")
+execute "hi Typedef" GuiFg(s:frostBlue3)
 hi! link Macro Define
 hi! link PreCondit PreProc
 
-call s:Hi("DiffAdd", s:frostGreen, s:frost1, "", "")
-call s:Hi("DiffChange", s:frostYellow, s:frost2, "bold", "")
-call s:Hi("DiffDelete", s:frostRed, s:frost1, "", "")
-call s:Hi("DiffText", s:frostBlue3, s:frost1, "", "")
+execute "hi DiffAdd" GuiFg(s:frostGreen) GuiBg(s:frost1)
+execute "hi DiffChange" GuiFg(s:frostYellow) GuiBg(s:frost2) GuiAttr("bold")
+execute "hi DiffDelete" GuiFg(s:frostRed) GuiBg(s:frost1)
+execute "hi DiffText" GuiFg(s:frostBlue3) GuiBg(s:frost1)
 
-call s:Hi("cIncluded", s:frostBlue1, "", "", "")
+execute "hi cIncluded" GuiFg(s:frostBlue1)
 hi! link cOperator Operator
 hi! link cPreCondit PreCondit
 
-call s:Hi("htmlArg", s:frostBlue1, "", "", "")
-call s:Hi("htmlLink", s:frost4, "", "NONE", "NONE")
+execute "hi htmlArg" GuiFg(s:frostBlue1)
+execute "hi htmlLink" GuiFg(s:frost4)  GuiAttr("NONE")
 hi! link htmlBold Bold
 hi! link htmlEndTag htmlTag
 hi! link htmlItalic Italic
@@ -183,16 +172,16 @@ hi! link htmlSpecialChar SpecialChar
 hi! link htmlTag Keyword
 hi! link htmlTagN htmlTag
 
-call s:Hi("markdownBlockquote", s:frostBlue1, "", "", "")
-call s:Hi("markdownCode", s:frost6, "bg", "", "")
-call s:Hi("markdownCodeBlock", s:frost5, "bg", "", "")
-call s:Hi("markdownCodeDelimiter", s:frostGreen, "bg", "", "")
-call s:Hi("markdownFootnote", s:frostBlue1, "", "", "")
-call s:Hi("markdownId", s:frostBlue1, "", "", "")
-call s:Hi("markdownIdDeclaration", s:frostBlue1, "", "", "")
-call s:Hi("markdownH1", s:frostYellow, "", "", "")
-call s:Hi("markdownLinkText", s:frostBlue2, "", "", "")
-call s:Hi("markdownUrl", s:frost4, "", "underline", "")
+execute "hi markdownBlockquote" GuiFg(s:frostBlue1)
+execute "hi markdownCode" GuiFg(s:frost6) GuiBg("bg")
+execute "hi markdownCodeBlock" GuiFg(s:frost5) GuiBg("bg")
+execute "hi markdownCodeDelimiter" GuiFg(s:frostGreen) GuiBg("bg")
+execute "hi markdownFootnote" GuiFg(s:frostBlue1)
+execute "hi markdownId" GuiFg(s:frostBlue1)
+execute "hi markdownIdDeclaration" GuiFg(s:frostBlue1)
+execute "hi markdownH1" GuiFg(s:frostYellow)
+execute "hi markdownLinkText" GuiFg(s:frostBlue2)
+execute "hi markdownUrl" GuiFg(s:frost4)  GuiAttr("underline")
 hi! link markdownBold Bold
 hi! link markdownItalic Italic
 hi! link markdownItalicDelimiter Keyword

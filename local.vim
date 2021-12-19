@@ -1,33 +1,23 @@
-" Use Umlaut keys in normal mode
-scriptencoding utf-8
+set langmap=Ã¼/,Ãœ?,Ã¶[,Ã¤],Ã–{,Ã„}
 
-set langmap=ü/,Ü?,ö[,ä],Ö{,Ä}
-
-nnoremap ß aß
-inoremap ß <esc>
+inoremap <C-Space> <Esc>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap <Leader>a <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <Leader>a <Plug>(EasyAlign)
 
-if has('gui')
-  colorscheme gray_cat
-  "set guifont=Fira_Code:h11
-  set guifont=Courier_Prime:h11
+let g:rc = { 'C:\Users\prepensm\Documents\Workspaces\_':
+         \    [ 'set path=Main,XcpBasicDrv,McuR5F10AGF,,',
+         \      'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
+         \      'command! -nargs=0 CtagsCommand Ctags -R Main XcpBasicDrv McuR5F10AGF ..\\..\\BSP\\RL78\\IAR\\copy_inc_ior5f10agf',
+         \      'compiler iar'
+         \    ]
+         \ }
+
+if exists("g:GuiLoaded") && (g:GuiLoaded == 1)
+  GuiFont! Fira\ Code
 endif
 
-" - Window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-
-let g:rc = {
-      \ 'C:\Users\prepensm\Documents\Workspaces\_':
-      \ [ 'set path=.,Main,XcpBasicDrv,,',
-      \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
-      \   'let g:ctags_cmd = ["-R", "Main", "XcpBasicDrv", "..\\..\\BSP\\RL78\\IAR\\copy_inc_ior5f10agf"]',
-      \   'let g:job_do_auto_quickfix=1',
-      \   'compiler iar',
-      \   'StartUpdater'
-      \ ]
-      \ }
-
+set guifont=Fira_Code:h12
+  colorscheme little_monster

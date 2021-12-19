@@ -42,8 +42,8 @@ let s:silver1 = '#505860'
 let s:silver2 = '#9098A0'
 let s:silver3 = '#C0CBD0'
 let s:silver4 = '#E8E8FE'
-let s:green1  = '#357365'
-let s:green2  = '#50A860'
+let s:green1  = '#256325'
+let s:green2  = '#30A840'
 let s:green3  = '#20D025'
 let s:green4  = '#47FF47'
 let s:blue1   = '#7080A8'
@@ -52,29 +52,33 @@ let s:blue3   = '#B0C0F0'
 let s:red1    = '#C85012'
 let s:red2    = '#F86020'
 
-" Basics
-call color#Hi('Normal', s:silver3, s:bg1, 'NONE', '')
-call color#Hi('Bold',   s:silver2, '', 'bold', '')
-call color#Hi('Italic', s:silver2, '', 'italic', '')
-call color#Hi('NonText', s:blue1, s:bg2, '', '')
-call color#Hi('Visual', s:white, s:blue1, '', '')
-call color#Hi('Terminal', s:blue2, s:bg2, '', '')
-call color#Hi('StatusLine', s:white, s:bg5, '', '')
-call color#Hi('StatusLineNC', s:silver3, s:bg4, '',  '')
-call color#Hi('VertSplit', s:bg5, s:bg2, 'NONE', '')
-call color#Hi('IncSearch', s:black, s:silver4, '', '')
-call color#Hi('Search', s:white, s:silver1, '', '')
-call color#Hi('MatchParen', s:green3, '', 'underline', '')
-call color#Hi('QuickFixLine', '', s:black, 'bold', '')
-call color#Hi('Cursor', s:black, s:silver3, '', '')
-call color#Hi('CursorLine', 'skip', s:bg3, '', '')
-call color#Hi('CursorLineNr', s:green2, s:bg4, 'bold', '')
-call color#Hi('LineNr', s:silver3, '', '', '')
+let GuiFg = {str -> empty(str) ? "":"guifg=".str}
+let GuiBg = {str -> empty(str) ? "":"guibg=".str}
+let GuiAttr = {str -> empty(str) ? "":"gui=".str}
 
-call color#Hi("PMenuSel", s:white, s:blue2, "NONE", "")
-call color#Hi("PMenu", s:white, s:blue1, "NONE", "")
-call color#Hi("PMenuSbar", s:silver3, s:bg3, "", "")
-call color#Hi("PMenuThumb", s:blue2, s:bg4, "", "")
+" Basics
+execute 'hi Normal' GuiFg(s:silver3) GuiBg(s:bg1) GuiAttr('NONE')
+execute 'hi Bold' GuiFg(s:silver2)  GuiAttr('bold')
+execute 'hi Italic' GuiFg(s:silver2)  GuiAttr('italic')
+execute 'hi NonText' GuiFg(s:blue1) GuiBg(s:bg2)
+execute 'hi Visual' GuiFg(s:white) GuiBg(s:blue1)
+execute 'hi Terminal' GuiFg(s:blue2) GuiBg(s:bg2)
+execute 'hi StatusLine' GuiFg(s:white) GuiBg(s:blue1) GuiAttr('NONE')
+execute 'hi StatusLineNC' GuiFg(s:silver3) GuiBg(s:bg4)
+execute 'hi VertSplit' GuiFg(s:bg5) GuiBg(s:bg2) GuiAttr('NONE')
+execute 'hi IncSearch' GuiFg(s:black) GuiBg(s:silver4)
+execute 'hi Search' GuiFg(s:green4) GuiBg(s:green1)
+execute 'hi MatchParen' GuiFg(s:green3) GuiBg('bg') GuiAttr('underline')
+execute 'hi QuickFixLine'  GuiBg(s:black) GuiAttr('bold')
+execute 'hi Cursor' GuiFg(s:black) GuiBg(s:silver3)
+execute 'hi CursorLine' GuiFg('skip') GuiBg(s:bg3)
+execute 'hi CursorLineNr' GuiFg(s:green2) GuiBg(s:bg4) GuiAttr('bold')
+execute 'hi LineNr' GuiFg(s:silver3)
+
+execute 'hi PMenuSel' GuiFg(s:white) GuiBg(s:blue2) GuiAttr('NONE')
+execute 'hi PMenu' GuiFg(s:white) GuiBg(s:blue1) GuiAttr('NONE')
+execute 'hi PMenuSbar' GuiFg(s:silver3) GuiBg(s:bg3)
+execute 'hi PMenuThumb' GuiFg(s:blue2) GuiBg(s:bg4)
 highlight! link User1 StatusLine
 highlight! link User2 StatusLine
 highlight! link User3 StatusLine
@@ -91,60 +95,60 @@ highlight! link TabLineSel StatusLine
 highlight! link WildMenu IncSearch
 
 " Apollo specific
-call color#Hi('BlendDown', s:white, s:bg2, '', '')
+execute 'hi BlendDown' GuiFg(s:white) GuiBg(s:bg2)
 
 " Code
-call color#Hi('Statement', s:silver2, '', '', '')
-call color#Hi('Conditional', s:silver3, '', 'bold', '')
-call color#Hi('Type', s:white, 'skip', '', '')
-call color#Hi('Structure', s:green2, '', '', '')
-call color#Hi('StorageClass', s:blue1, '', '', '')
-call color#Hi('PreProc', s:blue2, 'skip', 'bold', '')
-call color#Hi('PreCondit', s:blue1, '', 'bold', '')
-call color#Hi('Comment', s:green2, 'skip', '', '')
-call color#Hi('Function', s:green3, '', '', '')
-call color#Hi('Identifier', s:green4, 'skip', '', '')
-call color#Hi('Special', s:green3, 'skip', '', '')
-call color#Hi('Constant', s:blue3, 'skip', '', '')
-call color#Hi('Number', s:blue2, '', '', '')
-call color#Hi('Title', s:green3, '', '', '')
-call color#Hi('Todo', s:silver2, s:bg3, '', '')
-call color#Hi('Error', s:red1, s:bg3, '', '')
-call color#Hi('Directory', s:silver4, '', 'underline', '')
-call color#Hi('ErrorMsg', s:red1, 'bg', '', '')
-call color#Hi('WarningMsg', s:blue1, 'bg', '', '')
-call color#Hi('ModeMsg', s:silver2, 'bg', '', '')
-call color#Hi('Question', s:green2, 'bg', '', '')
-call color#Hi('qfFileName', s:blue2, '', '', '')
-call color#Hi('qfSeparator', 'fg', '', '', '')
+execute 'hi Statement' GuiFg(s:silver2)
+execute 'hi Conditional' GuiFg(s:silver3)  GuiAttr('bold')
+execute 'hi Type' GuiFg(s:green2) GuiBg('skip') GuiAttr('NONE')
+execute 'hi Structure' GuiFg(s:green2)
+execute 'hi StorageClass' GuiFg(s:blue1)
+execute 'hi PreProc' GuiFg(s:blue2) GuiBg('skip') GuiAttr('bold')
+execute 'hi PreCondit' GuiFg(s:blue1)  GuiAttr('bold')
+execute 'hi Comment' GuiFg(s:green2) GuiBg('skip')
+execute 'hi Function' GuiFg(s:green3)
+execute 'hi Identifier' GuiFg(s:green4) GuiBg('skip')
+execute 'hi Special' GuiFg(s:green3) GuiBg('skip')
+execute 'hi Constant' GuiFg(s:blue3) GuiBg('skip')
+execute 'hi Number' GuiFg(s:blue2)
+execute 'hi Title' GuiFg(s:green3)
+execute 'hi Todo' GuiFg(s:silver2) GuiBg(s:bg3)
+execute 'hi Error' GuiFg(s:red1) GuiBg(s:bg3)
+execute 'hi Directory' GuiFg(s:silver4)  GuiAttr('underline')
+execute 'hi ErrorMsg' GuiFg(s:red1) GuiBg('bg')
+execute 'hi WarningMsg' GuiFg(s:blue1) GuiBg('bg')
+execute 'hi ModeMsg' GuiFg(s:silver2) GuiBg('bg')
+execute 'hi Question' GuiFg(s:green2) GuiBg('bg')
+execute 'hi qfFileName' GuiFg(s:blue2)
+execute 'hi qfSeparator' GuiFg('fg')
 highlight! link qfLineNr    LineNr
 
 " Filetype VIM
-call color#Hi('vimCommentTitle', s:white, '', 'bold', '')
+execute 'hi vimCommentTitle' GuiFg(s:white)  GuiAttr('bold')
 
 " Filetype C
-call color#Hi('cCppOut', s:silver3, '', '', '')
-call color#Hi('cCppOutIf2', s:silver3, '', '', '')
-call color#Hi('cParen', s:silver3, '', '', '')
-call color#Hi('cBlock', s:silver3, '', '', '')
+execute 'hi cCppOut' GuiFg(s:silver3)
+execute 'hi cCppOutIf2' GuiFg(s:silver3)
+execute 'hi cParen' GuiFg(s:silver3)
+execute 'hi cBlock' GuiFg(s:silver3)
 
 " filetype HTML
-call color#Hi('htmlH1', s:green4, '', 'bold', '')
-call color#Hi('htmlH2', s:green3, '', 'bold', '')
-call color#Hi('htmlH3', s:green2, '', 'bold', '')
+execute 'hi htmlH1' GuiFg(s:green4)  GuiAttr('bold')
+execute 'hi htmlH2' GuiFg(s:green3)  GuiAttr('bold')
+execute 'hi htmlH3' GuiFg(s:green2)  GuiAttr('bold')
 
 " markdown
-call color#Hi('markdownCode', s:silver2, s:bg3, '', '')
-call color#Hi('markdownCodeBlock', s:silver2, '', '', '')
-call color#Hi('markdownUrl', s:silver2, s:bg3, 'underline', '')
-call color#Hi('markdownLinkText', s:blue2, '', 'none', '')
+execute 'hi markdownCode' GuiFg(s:silver2) GuiBg(s:bg3)
+execute 'hi markdownCodeBlock' GuiFg(s:silver2)
+execute 'hi markdownUrl' GuiFg(s:silver2) GuiBg(s:bg3) GuiAttr('underline')
+execute 'hi markdownLinkText' GuiFg(s:blue2)  GuiAttr('none')
 
 " restructured text
-call color#Hi('rstEmphasis', s:green2, '', '', '')
-call color#Hi('rstStrongEmphasis', s:green2, '', 'bold', '')
+execute 'hi rstEmphasis' GuiFg(s:green2)
+execute 'hi rstStrongEmphasis' GuiFg(s:green2)  GuiAttr('bold')
 
 " Diffs
-call color#Hi('DiffChange', s:white, s:bg4, '', '')
-call color#Hi('DiffText', s:blue2, s:bg4, 'bold', '')
-call color#Hi('DiffDelete', s:red1, s:bg4, '', '')
-call color#Hi('DiffAdd', s:green2, s:bg3, 'bold', '')
+execute 'hi DiffChange' GuiFg(s:white) GuiBg(s:bg4)
+execute 'hi DiffText' GuiFg(s:blue2) GuiBg(s:bg4) GuiAttr('bold')
+execute 'hi DiffDelete' GuiFg(s:red1) GuiBg(s:bg4)
+execute 'hi DiffAdd' GuiFg(s:green2) GuiBg(s:bg3) GuiAttr('bold')
