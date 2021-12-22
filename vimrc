@@ -14,7 +14,6 @@ set selection=inclusive
 set mouse=a
 set keymodel=
 set selectmode=
-set paste
 
 set nowrap
 set tabstop=2
@@ -94,19 +93,19 @@ set wildignore+=*/undo/*
 
 " Insert mode completion
 set complete=.,w
-set showfulltag
+set noshowfulltag
 set completeopt=menu
 
 set pumheight=7
 
 " Command line completion
-set wildmenu
+set nowildmenu
 set wildoptions=tagfile
 set wildmode=full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
-set tagcase=followscs
+set tagcase=match
 
 " Tune the diff feature for my needs.
 set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler
@@ -123,10 +122,6 @@ let g:netrw_browse_split = 0
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_preview = 1
-
-" Set leader and localleader keys, that works best for me
-let mapleader = " "
-let maplocalleader = "s"
 
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
@@ -166,23 +161,6 @@ vnoremap <Space>( c(<C-r>-)<Esc>
 vnoremap <Space>[ c[<C-r>-]<Esc>
 vnoremap <Space>{ c{<C-r>-}<Esc>
 
-" Function Keys: In insert mode map all functions keys to normal mode mappinng
-imap <F1> <Esc><F1>
-imap <F2> <Esc><F2>
-imap <F3> <Esc><F3>
-imap <F4> <Esc><F4>
-imap <F5> <Esc><F5>
-imap <F6> <Esc><F6>
-imap <F7> <Esc><F7>
-imap <F8> <Esc><F8>
-imap <F9> <Esc><F9>
-imap <F10> <Esc><F10>
-imap <F11> <Esc><F11>
-imap <F12> <Esc><F12>
-imap <F13> <Esc><F13>
-
-nnoremap <F7> :<C-u>Make<up>
-nnoremap <F8> :<C-u>Grep<up>
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -190,25 +168,38 @@ nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 
 let PathSep = { -> has('unix')?'/':'\' }
 
-let g:ft2regex = {
-      \ 'c':      '\.[ch]$',
-      \ 'vim':    '\.vim',
-      \ 'py':     '\.py$',
-      \ 'cmake':  '\(\.cmake\|CMakeLists.txt\)'
-      \ }
-let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
-nnoremap <expr> <Leader>B ':filter /' . LsFilter(&ft) . '/ ls<CR>:buffer '
+" set leader and localleader keys, that works best for me
+let mapleader = " "
+let maplocalleader = "s"
+
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>t :tjump<Space>/
-nnoremap <Leader>m :sil make<Space><Up><CR>
-nnoremap <Leader><C-m> :sil make<Space><Up>
 nnoremap <Leader>g :silent grep<Space>
 nnoremap <Leader>+ :tabnew<CR>
 nnoremap <Leader>- :tabclose<CR>
-nnoremap <Leader>c <C-^>:bw#<Esc>
 nnoremap <expr> <Leader>e ':edit ' . expand("%:p:h") . PathSep()
-nnoremap <expr> <Leader>v ':edit ' . stdpath('config') . PathSep()
+nnoremap <expr> <Leader>v ':edit '.$USERPROFILE.PathSep().'vimfiles'.PathSep()
+nnoremap <leader>m :<C-u>Make<up>
+
+let g:ft2regex = { 'c':'\.[ch]$', 'vim':'\.vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
+let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
+nnoremap <expr> <Leader>B ':filter /' . LsFilter(&ft) . '/ ls<CR>:buffer '
+
+" --- toggle options
+nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
+nnoremap <Leader>os :setlocal invspell spell?<CR>
+nnoremap <Leader>ow :setlocal invwrap<CR>
+nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
+
+" --- quick replace command
+nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
+vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
+
+" --- quickfix
+nnoremap <Leader>co :copen<CR>
+nnoremap <Leader>cc :cclose<CR>
+nnoremap <Leader>cl :clist<CR>
 
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
@@ -216,23 +207,8 @@ nnoremap <A--> 3<C-w>-3<C-w><
 nnoremap + :cnext<CR>zz
 nnoremap - :cprevious<CR>zz
 
-nnoremap <A-Down> :cnext<CR>zz
-nnoremap <A-Up> :cprev<CR>zz
-nnoremap <A-Left> :bprevious<CR>
-nnoremap <A-Right> :bnext<CR>
-
-" command line completion
-cnoremap <C-r>. <C-r>=expand("%:h") . PathSep()<CR>
-
-" Quick replace command
-nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
-vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
-
-" Toggle options
-nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
-nnoremap <Leader>os :setlocal invspell spell?<CR>
-nnoremap <Leader>ow :setlocal invwrap<CR>
-nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
+" --- command line completion
+cnoremap <C-r>. <C-r>=expand("%:h")<CR>
 
 command! -nargs=0 CleanUpBuffers      :bufdo if bufname('%')=='' | bd! | endif
 command! -nargs=0 IgnoreCaseSensetive :set   ignorecase nosmartcase
@@ -293,14 +269,16 @@ if executable("rg")
 else
   command! -nargs=+ Glob :term dir /S /B <args>
 endif
+
 augroup init
   autocmd!
   autocmd BufReadPost  * call RestoreCursor()
-  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
   autocmd VimEnter     * runtime local.vim
   autocmd VimResized   * wincmd =
+  " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
+  autocmd FocusGained * :checktime
 augroup END
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:

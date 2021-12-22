@@ -4,25 +4,22 @@
 " to save startup time.
 
 " Interfaces:
-noremap <unique> <script> <Plug>ShowHighlightAttr       <SID>ShowHighlightAttr
+noremap <unique> <script> <Plug>InfoHighlightAttr       <SID>InfoHighlightAttr
 noremap <unique> <script> <Plug>ToggleStickyCursorline  <SID>ToggleStickyCursorline
-noremap <unique> <script> <Plug>ToggleQuickfix          <SID>ToggleQuickfix
 noremap <unique> <script> <Plug>HighlightWord           <SID>HighlightWord
 
-noremap <SID>HighlightWord          :call hiword#HighlightWord("<C-r><C-w>")<CR>
-noremap <SID>ShowHighlightAttr      :call color#ShowHighlightAttr()<CR>
-noremap <SID>ToggleStickyCursorline :call sticky#ToggleStickyCursorline()<CR>
-noremap <SID>ToggleQuickfix         :call quickfix#ToggleQuickfix()<CR>
+noremap <SID>HighlightWord          :call visuals#HighlightWord("<C-r><C-w>")<CR>
+noremap <SID>ToggleStickyCursorline :call visuals#ToggleStickyCursorline()<CR>
+noremap <SID>InfoHighlightAttr      :call color#InfoHighlightAttr()<CR>
 
 " Defaults: Key mappings
-if !hasmapto('<Plug>ToggleQuickfix')
-  nmap <Leader>q <Plug>ToggleQuickfix
-endif
 
 if !hasmapto('<Plug>HighlightWord')
   nmap <Leader><Leader> <Plug>HighlightWord
 endif
 
-command -nargs=0 ToggleStickyCursorline call sticky#ToggleStickyCursorline()
-command -nargs=0 ShowHighlightAttr      call color#ShowHighlightAttr()
+command -nargs=0 ToggleStickyCursorline call visuals#ToggleStickyCursorline()
+command -nargs=0 InfoHighlightAttr      call color#InfoHighlightAttr()
+
+autocmd BufEnter * call color#BlendDownWindow()
 

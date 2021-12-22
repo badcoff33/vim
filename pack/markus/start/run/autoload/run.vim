@@ -1,18 +1,25 @@
 function! run#Append(channel, msg)
-  let c = split(a:channel,' ')[1]
-  let b = bufnr("__job_channel".c)
+  let b = bufadd("__channel".ch_info(a:channel)['id'])
   call bufload(b)
+  call setbufvar(b, "&buftype", "nofile")
   call appendbufline(b, '$', a:msg)
 endfunction
 
-function! run#Exit(job, status)
-  let c = split(job_getchannel(a:job),' ')[1]
-  let b = bufnr("__job_channel".c)
+function! run#Exit(channel)
+  let b = bufadd("__channel".ch_info(a:channel)['id'])
+  call bufload(b)
   execute "cbuffer ".b
   execute "silent bw!" b
 endfunction
 
-function! run#Run(d)
+function! run#HiddenError(channel,msg)
+  echohl ErrorMsg
+  echo 'error reported by channel' ch_info(a:channel)['id']
+  echo '-->' s:msg
+  echohl None
+endfunction
+
+function! run#Run(dict)
   let options = {}
   if &autowrite || &autowriteall
     try
@@ -22,24 +29,19 @@ function! run#Run(d)
     finally
     endtry
   endif
-  if has_key(a:d, 'cwd')
-    let options.cwd = a:d.cwd
+  if exists('a:dict.cwd')
+    let options.cwd = a:dict.cwd
   else
     let options.cwd = getcwd()
   endif
-  if !(has_key(a:d, 'hidden') && (a:d.hidden != 0))
+  if !exists('a:dict.hidden') && (a:dict.hidden != 0))
     let options.out_cb = function("run#Append")
     let options.err_cb = function("run#Append")
     let options.close_cb = function("run#Exit")
+  else
+    let options.err_cb = function("run#HiddenError")
   endif
-  if has_key(a:d, 'cmd')
-    let j = job_start('cmd /C '.a:d['cmd'], options)
-    if !(has_key(a:d, 'hidden') && (a:d.hidden != 0))
-      let c = split(job_getchannel(j),' ')[1]
-      let b = bufadd("__job_channel".c)
-      call setbufvar(b, "&buftype", "nofile")
-      call setbufline(b, 1, '-- '.strftime("%Y-%m-%d %X"))
-    endif
-    echomsg "job running in channel" c
+  if exists('a:dict.cmd')
+    let j = job_start('cmd /C '.a:dict['cmd'], options)
   endif
 endfunction

@@ -4,8 +4,6 @@ syntax on
 augroup ginit
   " clear group in case file sourced several times
   autocmd!
-  " Reload changed buffers. Command rely on option 'autoread'
-  autocmd FocusGained * :checktime
 augroup END
 
 let F = {font -> escape(matchstr(font,'^[A-Za-z_\ ]\+'), ' ')}

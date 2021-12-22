@@ -1,4 +1,16 @@
 
+function! visuals#HighlightWord(word)
+  let s:thisHighlightWord = get(s:, 'thisHighlightWord', "")
+  highlight HighlightWordGroup gui=underline
+  if a:word != s:thisHighlightWord
+    let s:thisHighlightWord = a:word
+    execute ":match HighlightWordGroup /\\<" . a:word . "\\>/"
+  else
+    let s:thisHighlightWord = ""
+    match none
+  endif
+endfunction
+
 " Description: Make the actual window more obvious.
 " Active 'cursorline' option in diff buffers overrules highlighting of
 " differences. Buffers with 'diff' option shall not use 'cursorline'.
@@ -10,7 +22,7 @@ function! s:TurnCursorLineOn()
   endif
 endfunction
 
-function! sticky#ToggleStickyCursorline()
+function! visuals#ToggleStickyCursorline()
   if !exists("g:use_sticky_cursorline")
     let g:use_sticky_cursorline = 0
   endif

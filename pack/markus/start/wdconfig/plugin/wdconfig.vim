@@ -1,19 +1,28 @@
 
-" Description: When called with projects root directory as parameter, execute
-" the store commands. Dictionary required with this structured required:
+" Description: Execute commands for key, found in the dictionary g:rc
+" Dictionary required with this structured required:
+"
 " let g:rc = {
-"      \ '<dir-a>':
+"      \ '<NAME-A>':
 "      \ [
 "      \   '<command-a1>',
 "      \   '<command-a2>',
 "      \   '...'
 "      \ ],
-"      \ '<dir-b>':
+"      \ '<NAME-B>':
 "      \ [
 "      \   '<command-b1>',
 "      \   '<command-b2>',
 "      \   '...'
 "      \ ]
 "      \ }
-"
-command -nargs=0 ReadWdConfig  call wdconfig#Read(getcwd())
+
+function! CompleteWdConfig(a,l,p)
+  let g:rc = get(g:, 'rc', {})
+  if (type(g:rc) != v:t_dict) && (len(g:rc) == 0)
+    echomsg "variable g:rc is no dictionary or empty"
+  endif
+  return filter(keys(g:rc), 'v:val =~ a:a')
+endfun
+
+command! -complete=customlist,CompleteWdConfig -nargs=1 ReadWdConfig call wdconfig#Read('<args>')
