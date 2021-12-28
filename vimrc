@@ -114,15 +114,6 @@ if &diff
   set columns=999 lines=999
 endif
 
-" Netrw variables
-let g:netrw_use_errorwindow = 0
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 0
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
-let g:netrw_preview = 1
-
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
 vnoremap <C-a> <C-a>gv
@@ -161,16 +152,24 @@ vnoremap <Space>( c(<C-r>-)<Esc>
 vnoremap <Space>[ c[<C-r>-]<Esc>
 vnoremap <Space>{ c{<C-r>-}<Esc>
 
+nnoremap <A-+> 3<C-w>+3<C-w>>
+nnoremap <A--> 3<C-w>-3<C-w><
+
+nnoremap + :cnext<CR>zz
+nnoremap - :cprevious<CR>zz
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
-nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
+nmap <C-l> :diffupdate<cr>:redraw!<cr>
 
 let PathSep = { -> has('unix')?'/':'\' }
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
 let maplocalleader = "s"
+
+inoremap <C-c> <C-c>:nohlsearch<CR>
+nnoremap <C-c> :nohlsearch<CR>
 
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>f :find<Space>*
@@ -200,12 +199,6 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 nnoremap <Leader>co :copen<CR>
 nnoremap <Leader>cc :cclose<CR>
 nnoremap <Leader>cl :clist<CR>
-
-nnoremap <A-+> 3<C-w>+3<C-w>>
-nnoremap <A--> 3<C-w>-3<C-w><
-
-nnoremap + :cnext<CR>zz
-nnoremap - :cprevious<CR>zz
 
 " --- command line completion
 cnoremap <C-r>. <C-r>=expand("%:h")<CR>
@@ -275,7 +268,7 @@ augroup init
   autocmd BufReadPost  * call RestoreCursor()
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
-  autocmd VimEnter     * runtime local.vim
+  autocmd VimEnter     * runtime plugins.vim
   autocmd VimResized   * wincmd =
   " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
   autocmd FocusGained * :checktime

@@ -1,6 +1,13 @@
 set langmap=ü/,Ü?,ö[,ä],Ö{,Ä}
 
-inoremap <C-Space> <Esc>
+" Netrw variables
+let g:netrw_use_errorwindow = 0
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 0
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+let g:netrw_preview = 1
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap <Leader>a <Plug>(EasyAlign)
