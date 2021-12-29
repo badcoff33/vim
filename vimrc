@@ -171,7 +171,10 @@ let maplocalleader = "s"
 inoremap <C-c> <C-c>:nohlsearch<CR>
 nnoremap <C-c> :nohlsearch<CR>
 
-nnoremap <Leader>b :buffer<Space>
+let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
+let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
+nnoremap <expr> <Leader>b ':filter /' . LsFilter(&ft) . '/ ls<CR>:buffer '
+
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>t :tjump<Space>/
 nnoremap <Leader>g :silent grep<Space>
@@ -180,10 +183,6 @@ nnoremap <Leader>- :tabclose<CR>
 nnoremap <expr> <Leader>e ':edit ' . expand("%:p:h") . PathSep()
 nnoremap <expr> <Leader>v ':edit '.$USERPROFILE.PathSep().'vimfiles'.PathSep()
 nnoremap <leader>m :<C-u>Make<up>
-
-let g:ft2regex = { 'c':'\.[ch]$', 'vim':'\.vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
-let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
-nnoremap <expr> <Leader>B ':filter /' . LsFilter(&ft) . '/ ls<CR>:buffer '
 
 " --- toggle options
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>

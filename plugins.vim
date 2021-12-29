@@ -14,7 +14,7 @@ xmap <Leader>a <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <Leader>a <Plug>(EasyAlign)
 
-let g:rc = {
+let g:wdconfig = {
       \ 'RL78EVA': [
       \   'cd c:\users\prepensm\documents\workspaces\_',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
@@ -27,6 +27,3 @@ let g:rc = {
       \   'set path=pack/**,colors,after/**,,'
       \ ]
       \ }
-
-set guifont=fira_code:h12
-colorscheme little_monster

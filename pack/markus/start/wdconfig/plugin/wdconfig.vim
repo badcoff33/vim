@@ -1,8 +1,8 @@
 
-" Description: Execute commands for key, found in the dictionary g:rc
+" Description: Execute commands for key, found in the dictionary g:wdconfig
 " Dictionary required with this structured required:
 "
-" let g:rc = {
+" let g:wdconfig = {
 "      \ '<NAME-A>':
 "      \ [
 "      \   '<command-a1>',
@@ -18,11 +18,11 @@
 "      \ }
 
 function! CompleteWdConfig(a,l,p)
-  let g:rc = get(g:, 'rc', {})
-  if (type(g:rc) != v:t_dict) && (len(g:rc) == 0)
-    echomsg "variable g:rc is no dictionary or empty"
+  let g:wdconfig = get(g:, 'rc', {})
+  if (type(g:wdconfig) != v:t_dict) && (len(g:rc) == 0)
+    echomsg "variable g:wdconfig is no dictionary or empty"
   endif
-  return filter(keys(g:rc), 'v:val =~ a:a')
+  return filter(keys(g:wdconfig), 'v:val =~ a:a')
 endfun
 
 command! -complete=customlist,CompleteWdConfig -nargs=1 ReadWdConfig call wdconfig#Read('<args>')
