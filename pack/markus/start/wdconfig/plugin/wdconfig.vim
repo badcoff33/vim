@@ -18,7 +18,7 @@
 "      \ }
 
 function! CompleteWdConfig(a,l,p)
-  let g:wdconfig = get(g:, 'rc', {})
+  let g:wdconfig = get(g:, 'wdconfig', {})
   if (type(g:wdconfig) != v:t_dict) && (len(g:rc) == 0)
     echomsg "variable g:wdconfig is no dictionary or empty"
   endif
