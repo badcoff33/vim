@@ -160,16 +160,13 @@ nnoremap - :cprevious<CR>zz
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
-nmap <C-l> :diffupdate<cr>:redraw!<cr>
+nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 
 let PathSep = { -> has('unix')?'/':'\' }
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
 let maplocalleader = "s"
-
-inoremap <C-c> <C-c>:nohlsearch<CR>
-nnoremap <C-c> :nohlsearch<CR>
 
 let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
@@ -190,7 +187,7 @@ nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>ow :setlocal invwrap<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
-" --- quick replace command
+" --- replace command
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
@@ -202,7 +199,6 @@ nnoremap <Leader>cl :clist<CR>
 " --- command line completion
 cnoremap <C-r>. <C-r>=expand("%:h")<CR>
 
-command! -nargs=0 CleanUpBuffers      :bufdo if bufname('%')=='' | bd! | endif
 command! -nargs=0 IgnoreCaseSensetive :set   ignorecase nosmartcase
 command! -nargs=0 CaseSensetive       :set noignorecase nosmartcase
 command! -nargs=0 SmartCase           :set   ignorecase  smartcase
@@ -250,9 +246,6 @@ elseif executable("findstr")
   set grepprg=findstr\ /S\ /N
   set grepformat=%f:%l:%m
   nnoremap <expr> <Leader>g ':silent grep ' . expand('<cword>') . ' ' . FindstrGlob(&ft)
-elseif executable("grep")
-  set grepprg=grep\ -Hnr\ --exclude=cmake\ $* \.
-  set grepformat=%f:%l:%m
 endif
 
 if executable("rg")
