@@ -1,13 +1,18 @@
-set langmap=ü/,Ü?,ö[,ä],Ö{,Ä}
-
-inoremap <C-Space> <Esc>
+" Netrw variables
+let g:netrw_use_errorwindow = 0
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 0
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+let g:netrw_preview = 1
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap <Leader>a <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <Leader>a <Plug>(EasyAlign)
 
-let g:rc = {
+let g:wdconfig = {
       \ 'RL78EVA': [
       \   'cd c:\users\prepensm\documents\workspaces\_',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,IAR/inc,,',
@@ -20,6 +25,3 @@ let g:rc = {
       \   'set path=pack/**,colors,after/**,,'
       \ ]
       \ }
-
-set guifont=fira_code:h12
-colorscheme little_monster
