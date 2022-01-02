@@ -10,9 +10,9 @@ nmap <Leader>a <Plug>(EasyAlign)
 let g:rc = {
       \ 'RL78EVA': [
       \   'cd c:\users\prepensm\documents\workspaces\_',
-      \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
+      \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,IAR/inc,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
-      \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431 ..\\..\\bsp\\rl78\\iar\\copy_inc_ior5f10agf',
+      \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431 IAR\\inc\\*F10AGF*.h',
       \   'compiler iar'
       \ ],
       \ 'VIM':[

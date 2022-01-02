@@ -7,10 +7,10 @@ augroup ginit
 augroup END
 
 let F = {font -> escape(matchstr(font,'^[A-Za-z_\ ]\+'), ' ')}
-nnoremap <expr> <leader>4 ':set guifont='..F(g:GuiFont)..':h14 linespace=1<CR>'
-nnoremap <expr> <leader>3 ':set guifont='..F(g:GuiFont)..':h12 linespace=1<CR>'
-nnoremap <expr> <leader>2 ':set guifont='..F(g:GuiFont)..':h10 linespace=1<CR>'
-nnoremap <expr> <leader>1 ':set guifont='..F(g:GuiFont)..':h9  linespace=1<CR>'
+nnoremap <expr> <leader>4 ':set guifont='..F(&guifont)..':h14 linespace=1<CR>'
+nnoremap <expr> <leader>3 ':set guifont='..F(&guifont)..':h12 linespace=1<CR>'
+nnoremap <expr> <leader>2 ':set guifont='..F(&guifont)..':h10 linespace=1<CR>'
+nnoremap <expr> <leader>1 ':set guifont='..F(&guifont)..':h9  linespace=1<CR>'
 
 set guioptions=!a
 set guicursor+=a:blinkon0
