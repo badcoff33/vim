@@ -1,4 +1,4 @@
-" Vim resource file
+﻿" Vim resource file
 "
 " New Vim features are nicly tracked on this site:
 "   https://www.arp242.net/vimlog/
@@ -57,7 +57,7 @@ set sidescroll=8
 set sidescrolloff=3
 
 " window behavior
-set splitbelow
+set nosplitbelow
 set splitright
 set equalalways
 
@@ -128,10 +128,14 @@ nnoremap <S-Right> <C-w>l
 nnoremap <S-Left> <C-w>h
 nnoremap <S-Up> <C-w>k
 nnoremap <S-Down> <C-w>j
-imap <S-Right> <Esc><S-Right>
-imap <S-Left> <Esc><S-Left>
-imap <S-Up> <Esc><S-Up>
-imap <S-Down> <Esc><S-Down>
+imap     <S-Right> <Esc><S-Right>
+imap     <S-Left> <Esc><S-Left>
+imap     <S-Up> <Esc><S-Up>
+imap     <S-Down> <Esc><S-Down>
+tnoremap <S-Right> <C-\><C-n><C-w>l
+tnoremap <S-Left>  <C-\><C-n><C-w>h
+tnoremap <S-Up>    <C-\><C-n><C-w>k
+tnoremap <S-Down>  <C-\><C-n><C-w>j
 
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc> <C-\><C-n>
@@ -139,28 +143,24 @@ tnoremap <Esc> <C-\><C-n>
 " To simulate |i_CTRL-R| in terminal-mode: >
 tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
-tnoremap <S-Right> <C-\><C-n><C-w>l
-tnoremap <S-Left>  <C-\><C-n><C-w>h
-tnoremap <S-Up>    <C-\><C-n><C-w>k
-tnoremap <S-Down>  <C-\><C-n><C-w>j
-
-" "Enclose" `current` (visual) {selection}
-vnoremap <Space>" c"<C-r>-"<Esc>
-vnoremap <Space>' c'<C-r>-'<Esc>
-vnoremap <Space>` c`<C-r>-`<Esc>
-vnoremap <Space>( c(<C-r>-)<Esc>
-vnoremap <Space>[ c[<C-r>-]<Esc>
-vnoremap <Space>{ c{<C-r>-}<Esc>
+" Line bubbling
+nnoremap <c-j> <cmd>move .+1<CR>==
+nnoremap <c-k> <cmd>move .-2<CR>==
+vnoremap <c-j> :move '>+1<CR>==gv=gv
+vnoremap <c-k> :move '<-2<CR>==gv=gv
 
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
 
 nnoremap + :cnext<CR>zz
 nnoremap - :cprevious<CR>zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
+imap <C-l> <Esc><C-l>
 
 let PathSep = { -> has('unix')?'/':'\' }
 
@@ -171,6 +171,14 @@ set langmap=ü/,Ü?,ö[,ä],Ö{,Ä}
 let mapleader = " "
 let maplocalleader = "s"
 
+" "Enclose" `current` (visual) {selection}
+vnoremap <Leader>" c"<C-r>-"<Esc>
+vnoremap <Leader>' c'<C-r>-'<Esc>
+vnoremap <Leader>` c`<C-r>-`<Esc>
+vnoremap <Leader>( c(<C-r>-)<Esc>
+vnoremap <Leader>[ c[<C-r>-]<Esc>
+vnoremap <Leader>{ c{<C-r>-}<Esc>
+
 let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
 nnoremap <expr> <Leader>b ':filter /' . LsFilter(&ft) . '/ ls<CR>:buffer '
@@ -180,6 +188,7 @@ nnoremap <Leader>t :tjump<Space>/
 nnoremap <Leader>g :silent grep<Space>
 nnoremap <Leader>+ :tabnew<CR>
 nnoremap <Leader>- :tabclose<CR>
+nnoremap <Leader>x <cmd>Lexplore<CR>
 nnoremap <expr> <Leader>e ':edit ' . expand("%:p:h") . PathSep()
 nnoremap <expr> <Leader>v ':edit '.$USERPROFILE.PathSep().'vimfiles'.PathSep()
 nnoremap <leader>m :<C-u>Make<up>
@@ -187,6 +196,7 @@ nnoremap <leader>m :<C-u>Make<up>
 " --- toggle options
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
+nnoremap <Leader>op :setlocal invpaste paste?<CR>
 nnoremap <Leader>ow :setlocal invwrap<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
@@ -195,9 +205,8 @@ nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 " --- quickfix
-nnoremap <Leader>co :copen<CR>
-nnoremap <Leader>cc :cclose<CR>
-nnoremap <Leader>cl :clist<CR>
+nnoremap <Leader>c :clist<CR>
+nnoremap <Leader>C :clist ,-1<CR>
 
 " --- command line completion
 cnoremap <C-r>. <C-r>=expand("%:h")<CR>

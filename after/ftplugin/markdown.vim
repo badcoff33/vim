@@ -29,9 +29,19 @@ nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr=
 nnoremap <buffer> <LocalLeader>h2 0v$beyo<Esc>PVr-
 nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr~
 
+" More molecular undo of text
+inoremap <buffer> , ,<C-g>u
+inoremap <buffer> . .<C-g>u
+inoremap <buffer> ! !<C-g>u
+inoremap <buffer> ? ?<C-g>u
+inoremap <buffer> ; ;<C-g>u
+inoremap <buffer> : :<C-g>u
+
+" paragraph hopping
 nnoremap <buffer> <C-f> :call search('^#\{1,\}\s',"W")<CR>
 nnoremap <buffer> <C-b> :call search('^#\{1,\}\s',"bW")<CR>
 
+" insert date in a short form
 nnoremap <buffer> <LocalLeader>d i<C-r>=strftime("%Y-%m-%d")<CR><Esc>
 
 " iabbrev did not work when 'cpoptions' has '>'

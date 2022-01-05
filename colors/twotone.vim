@@ -31,7 +31,7 @@ let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}
 let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
 
 " Color scheme specific
-execute 'hi BlendDown' s:GuiFg(s:white) s:GuiBg(s:silver8)
+execute 'hi BlendDown' s:GuiBg(s:silver9)
 
 " Basics
 execute 'hi Normal' s:GuiFg(s:silver2) s:GuiBg(s:white) s:GuiAttr('NONE')
@@ -39,8 +39,8 @@ execute 'hi Bold' s:GuiFg(  s:white)  s:GuiAttr('bold')
 execute 'hi Italic' s:GuiFg(s:white)  s:GuiAttr('italic')
 execute 'hi NonText' s:GuiFg(s:silver6) s:GuiBg('bg')
 execute 'hi Visual' s:GuiFg(s:silver0) s:GuiBg(s:silver8)
-execute 'hi StatusLine' s:GuiFg(s:white) s:GuiBg(s:silver5) s:GuiAttr('bold')
-execute 'hi StatusLineNC' s:GuiFg(s:silver3) s:GuiBg(s:silver7) s:GuiAttr('bold')
+execute 'hi StatusLine' s:GuiFg(s:black) s:GuiBg(s:silver6) s:GuiAttr('bold')
+execute 'hi StatusLineNC' s:GuiFg(s:silver3) s:GuiBg(s:silver8) s:GuiAttr('bold')
 execute 'hi VertSplit' s:GuiFg(s:silver6) s:GuiBg('bg') s:GuiAttr('NONE')
 execute 'hi IncSearch' s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr('none')
 execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:blue) s:GuiAttr('NONE')
@@ -64,9 +64,6 @@ highlight! link TabLineFill Normal
 highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 highlight! link WildMenu PmenuSel
-
-" Breeze specific
-execute 'hi BlendDown' s:GuiFg(s:silver0) s:GuiBg(s:silver8)
 
 " Code
 execute 'hi Statement' s:GuiFg(s:red)  s:GuiAttr('bold')
@@ -115,7 +112,7 @@ execute 'hi rstEmphasis' s:GuiFg(s:silver2)
 execute 'hi rstStrongEmphasis' s:GuiFg(s:silver2)  s:GuiAttr('bold')
 
 " Diffs
-execute 'hi DiffChange' s:GuiFg(s:blue) s:GuiBg(s:blue)
-execute 'hi DiffText' s:GuiFg(s:blue) s:GuiBg(s:blue)
+execute 'hi DiffChange' s:GuiFg(s:white) s:GuiBg(s:blue)
+execute 'hi DiffText' s:GuiFg(s:white) s:GuiBg(s:blue)
 execute 'hi DiffDelete' s:GuiFg(s:red) s:GuiBg(s:red)
 execute 'hi DiffAdd' s:GuiFg(s:silver3) s:GuiBg(s:silver8)

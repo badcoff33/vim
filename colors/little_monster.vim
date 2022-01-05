@@ -8,7 +8,7 @@ let s:workbench_passive = "#272F3F"
 let s:workbench_active  = "#373F5F"
 let s:workbench_grey    = "#3E4468"
 let s:background        = "#1D2433"
-let s:background_plus   = "#212735"
+let s:background_plus   = "#252A38"
 let s:foreground        = "#B2BACC"
 let s:accent            = "#FFCC66"
 let s:red               = "#EF6B73"
@@ -27,7 +27,7 @@ let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
 
 " Editor
 execute 'hi ColorColumn'  s:GuiBg(s:light_silver)
-execute 'hi Cursor' s:GuiFg(s:yellow) s:GuiBg(s:silver) s:GuiAttr('NONE')
+execute 'hi Cursor' s:GuiFg(s:white) s:GuiBg(s:light_silver) s:GuiAttr('NONE')
 execute 'hi CursorLine' s:GuiBg(s:background_plus)
 execute 'hi Error' s:GuiFg(s:red) s:GuiBg('bg')
 execute 'hi iCursor' s:GuiFg(s:light_silver) s:GuiBg(s:workbench_grey)

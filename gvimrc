@@ -1,12 +1,12 @@
 syntax on
 
 let F = {font -> escape(matchstr(font,'^[A-Za-z_\ ]\+'), ' ')}
-nnoremap <expr> <leader>4 ':set guifont='..F(g:GuiFont)..':h14 <CR>'
-nnoremap <expr> <leader>3 ':set guifont='..F(g:GuiFont)..':h12 <CR>'
-nnoremap <expr> <leader>2 ':set guifont='..F(g:GuiFont)..':h10 <CR>'
-nnoremap <expr> <leader>1 ':set guifont='..F(g:GuiFont)..':h9  <CR>'
+nnoremap <expr> <leader>4 ':set guifont='..F(&guifont)..':h14 <CR>'
+nnoremap <expr> <leader>3 ':set guifont='..F(&guifont)..':h12 <CR>'
+nnoremap <expr> <leader>2 ':set guifont='..F(&guifont)..':h10 <CR>'
+nnoremap <expr> <leader>1 ':set guifont='..F(&guifont)..':h9  <CR>'
 
-colorscheme little_monster
+colorscheme twotone
 
 set guifont=fira_code:h12
 set guioptions=!a

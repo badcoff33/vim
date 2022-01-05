@@ -1,4 +1,5 @@
 function! run#Append(channel, msg)
+
   let b = bufadd("__channel".ch_info(a:channel)['id'])
   call bufload(b)
   call setbufvar(b, "&buftype", "nofile")
@@ -14,8 +15,7 @@ endfunction
 
 function! run#HiddenError(channel,msg)
   echohl ErrorMsg
-  echo 'error reported by channel' ch_info(a:channel)['id']
-  echo '-->' s:msg
+  echo 'error reported by channel' ch_info(a:channel)['id'] '-->' a:msg
   echohl None
 endfunction
 
@@ -34,7 +34,7 @@ function! run#Run(dict)
   else
     let options.cwd = getcwd()
   endif
-  if !exists('a:dict.hidden') && (a:dict.hidden != 0))
+  if !exists('a:dict.hidden') || (a:dict.hidden == 0)
     let options.out_cb = function("run#Append")
     let options.err_cb = function("run#Append")
     let options.close_cb = function("run#Exit")

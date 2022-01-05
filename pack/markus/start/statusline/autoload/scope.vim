@@ -3,6 +3,20 @@
 " Description:
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
+" Description: If a function 'scope#Parser'..&ft exists, call it. The returned
+" string can be used by 'statusline'. Recommended way to add new parser
+" functions is to add it in this file. Most
+" important is that the function ScopeParser&ft exists.
+function! scope#GetScope()
+  let parser_fname = 'scope#Parser' . toupper(&ft[0]) . &ft[1:]
+  try
+    let Parser = function(parser_fname)
+    return Parser()
+  catch
+    return ''
+  endtry
+endfunction
+
 " Description: A scope parser for C files.
 function! scope#ParserC() abort
   " Regular expressions to find head and bottom lines of a C function.

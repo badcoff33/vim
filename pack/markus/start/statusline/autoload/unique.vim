@@ -33,58 +33,77 @@ function! unique#UpdateUniqueName()
   let b:unique_name_string = div_string
 endfunction
 
+
 " Description: Find the differences in buffers path name and return the
 " resulting string for the first parameter bufname_a.
 function s:FindUniqueNamePart(bufname_a, bufname_b)
-  if fnamemodify(a:bufname_a, ":p:t") == fnamemodify(a:bufname_b, ":p:t")
-    let path_a = substitute(fnamemodify(a:bufname_a, ":p:h"), '\', '/', 'g')
-    let path_list_a = split(path_a, '/')
-    let path_b = substitute(fnamemodify(a:bufname_b, ":p:h"), '\', '/', 'g')
-    let path_list_b = split(path_b, '/')
+  if a:bufname_a == a:bufname_b
+    return ''
+  elseif fnamemodify(a:bufname_a, ":p:t") != fnamemodify(a:bufname_b, ":p:t")
+    return ''
+  else
+    let path_list_a = split(substitute(fnamemodify(a:bufname_a, ":p:h"), '\', '/', 'g'), '/')
+    let path_list_b = split(substitute(fnamemodify(a:bufname_b, ":p:h"), '\', '/', 'g'), '/')
     while !empty(path_list_a) && !empty(path_list_b)
-      " get last part of directories A/B
-      let part_a = path_list_a[0]
-      let part_b = path_list_b[0]
-      if part_a != part_b
-        break
+      " check list index 0 of directory lists A/B
+      if (path_list_a[0] != path_list_b[0]) || (len(path_list_a) == 1)
+        return path_list_a[0]
       endif
-      " throwaway the last directory items A/B for next iteration
+      " throwaway the tested directory items A/B for next iteration
       let path_list_a = path_list_a[1:]
       let path_list_b = path_list_b[1:]
     endwhile
-    if !empty(path_list_a)
-      return path_list_a[0]
-    else
-      return part_a
-    endif
-  else
-    return ''
+    return path_list_a[0]
   endif
 endfunction
 
 " --- testing
 let v:errors = []
-"call assert_equal( "", s:FindUniqueNamePart("aaa/bbb/ccc/111.txt", "aaa/bbb/ccc/111.txt"))
-"call assert_equal( "", s:FindUniqueNamePart("aaa/bbb/ccc/111.txt", "aaa/bbb/ccc/111.txt"))
+call assert_equal( "", s:FindUniqueNamePart(
+      \ "aaa/bbb/ccc/111.txt",
+      \ "aaa/bbb/ccc/222.txt"))
+call assert_equal( "", s:FindUniqueNamePart(
+      \ "aaa/bbb/ccc/111.txt",
+      \ "aaa/bbb/ccc/111.txt"))
 
-call assert_equal( "ccc", s:FindUniqueNamePart("aaa/b2/ccc/111.txt", "aaa/b2/c3/111.txt"))
-call assert_equal( "c3", s:FindUniqueNamePart("aaa/b2/c3/111.txt", "aaa/b2/ccc/111.txt"))
-call assert_equal( "bb", s:FindUniqueNamePart("aaa/bb/c3/111.txt", "aaa/bbb/ccc/111.txt"))
+call assert_equal( "ccc", s:FindUniqueNamePart(
+      \ "aaa/b2/ccc/111.txt",
+      \ "aaa/b2/c3/111.txt"))
+call assert_equal( "c3", s:FindUniqueNamePart(
+      \ "aaa/b2/c3/111.txt",
+      \ "aaa/b2/ccc/111.txt"))
+call assert_equal( "bb", s:FindUniqueNamePart(
+      \ "aaa/bb/c3/111.txt",
+      \ "aaa/bbb/ccc/111.txt"))
 
-" varying path length
-call assert_equal( "bb", s:FindUniqueNamePart("aaa/bb/111.txt", "aaa/bb/ccc/111.txt"))
-call assert_equal( "c3", s:FindUniqueNamePart("aaa/bb/c3/111.txt", "aaa/bb/111.txt"))
-
+" --- varying path length
+call assert_equal( "bb", s:FindUniqueNamePart(
+      \ "aaa/bb/111.txt",
+      \ "aaa/bb/ccc/111.txt"))
+call assert_equal( "c3", s:FindUniqueNamePart(
+      \ "aaa/bb/c3/111.txt",
+      \ "aaa/bb/111.txt"))
+call assert_equal( 'sources', s:FindUniqueNamePart(
+      \ '\Daten\play\Software\sources\LowLevel\Mcu_Rram_startup_F1KM.850',
+      \ '\Daten\play\Software\cmake\_3P\src\ghs\Mcu_Rram_startup_F1KM.850'))
 call assert_equal( 'cmake', s:FindUniqueNamePart(
-      \ '\Daten\play\Software\cmake\_3P\comp_MCAL_V_RH850_F1KM\42.6.0\MCAL\ASR_RH850_F1KM_42.06.00\X1X\F1x\common_family\src\ghs\Mcu_Rram_startup_F1KM.850',
+      \ '\Daten\play\Software\cmake\_3P\src\ghs\Mcu_Rram_startup_F1KM.850',
       \ '\Daten\play\Software\sources\LowLevel\Mcu_Rram_startup_F1KM.850'))
 
-" case sensitive?
+" --- case sensitive
 if has('unix')
-  call assert_equal( "CCC", s:FindUniqueNamePart("aaa/bbb/CCC/111.txt", "aaa/bbb/ccc/111.txt"))
-  call assert_equal( "ccc", s:FindUniqueNamePart("aaa/bbb/ccc/111.txt", "aaa/bbb/CCC/111.txt"))
+  call assert_equal( "CCC", s:FindUniqueNamePart(
+        \ "aaa/bbb/CCC/111.txt",
+        \ "aaa/bbb/ccc/111.txt"))
+  call assert_equal( "ccc", s:FindUniqueNamePart(
+        \ "aaa/bbb/ccc/111.txt",
+        \ "aaa/bbb/CCC/111.txt"))
 endif
 " Show assert results
 for e in v:errors
   echo e
 endfor
+
+
+
+

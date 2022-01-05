@@ -10,8 +10,12 @@ function! color#InfoHighlightAttr()
 endfunction
 
 function color#BlendDownWindow()
-  if &previewwindow || &readonly || !empty(hlget('BlendDown'))
-    setlocal wincolor=BlendDown
+  if (&previewwindow || &buftype=='help')
+    if hlexists('BlendDown') == v:true
+      setlocal wincolor=BlendDown
+    else
+      setlocal wincolor=NonText
+    endif
   endif
 endfunction
 
