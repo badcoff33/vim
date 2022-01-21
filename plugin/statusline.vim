@@ -1,9 +1,14 @@
 " Vim plugin files
 
-set statusline =%{unique#GetUniqueName()}%t
-set statusline+=\ %m%r%y%w%{GetSearchMode()}\ (%l,%c)
+augroup statusline
+  au!
+  au WinEnter * call unique#UpdateUniqueName()
+augroup END
+
+set statusline =\ %{unique#GetUniqueName()}%t
+set statusline+=\ %m%r%y%w%{GetSearchMode()}
 set statusline+=%=
-set statusline+=%#StatuslineNC#%{scope#GetScope()}
+set statusline+=%{scope#GetScope()}\ %l:%c
 
 function! GetSearchMode()
   if &ignorecase == 1 && &smartcase == 1

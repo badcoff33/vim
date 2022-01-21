@@ -17,7 +17,7 @@ let g:wdconfig = {
       \   'cd c:\users\prepensm\documents\workspaces\_',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,IAR/inc,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
-      \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431 IAR\\inc\\*F10AGF*.h',
+      \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431',
       \   'compiler iar'
       \ ],
       \ 'VIM':[

@@ -2,7 +2,7 @@
 "
 " List of all opened buffers during the running Vim session. Each listed buffer
 " is tested by UpdateUniqueName.
-let g:unique_name_buflist = []
+let g:unique_name_buflist = get(g: , "unique_name_buflist", [])
 
 " Description: Returns a distinguishable buffer name as a " string. If
 " two windows on a tabpage has the same base name, this function returns
@@ -35,30 +35,35 @@ endfunction
 
 
 " Description: Find the differences in buffers path name and return the
-" resulting string for the first parameter bufname_a.
-function s:FindUniqueNamePart(bufname_a, bufname_b)
-  if a:bufname_a == a:bufname_b
+" resulting string for the first parameter file_a.
+function s:FindUniqueNamePart(file_a, file_b)
+  if a:file_a == a:file_b
     return ''
-  elseif fnamemodify(a:bufname_a, ":p:t") != fnamemodify(a:bufname_b, ":p:t")
+  elseif fnamemodify(a:file_a, ":p:t") != fnamemodify(a:file_b, ":p:t")
     return ''
   else
-    let path_list_a = split(substitute(fnamemodify(a:bufname_a, ":p:h"), '\', '/', 'g'), '/')
-    let path_list_b = split(substitute(fnamemodify(a:bufname_b, ":p:h"), '\', '/', 'g'), '/')
-    while !empty(path_list_a) && !empty(path_list_b)
+    let paths_a = split(substitute(fnamemodify(a:file_a, ":p:h"), '\', '/', 'g'), '/')
+    let paths_b = split(substitute(fnamemodify(a:file_b, ":p:h"), '\', '/', 'g'), '/')
+    while !empty(paths_a) && !empty(paths_b)
       " check list index 0 of directory lists A/B
-      if (path_list_a[0] != path_list_b[0]) || (len(path_list_a) == 1)
-        return path_list_a[0]
+      if (paths_a[0] != paths_b[0]) || (len(paths_a) == 1)
+        return paths_a[0]
       endif
       " throwaway the tested directory items A/B for next iteration
-      let path_list_a = path_list_a[1:]
-      let path_list_b = path_list_b[1:]
+      let paths_a = paths_a[1:]
+      let paths_b = paths_b[1:]
     endwhile
-    return path_list_a[0]
+    return paths_a[0]
   endif
 endfunction
 
 " --- testing
 let v:errors = []
+
+call assert_equal( "vimfiles" , s:FindUniqueNamePart(
+      \ "~/vimfiles/colors/twotone.vim",
+      \ "~/AppData/Roaming/nvim/colors/twotone.vim"))
+
 call assert_equal( "", s:FindUniqueNamePart(
       \ "aaa/bbb/ccc/111.txt",
       \ "aaa/bbb/ccc/222.txt"))

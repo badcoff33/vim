@@ -5,5 +5,5 @@ syntax: glob
 spell
 undo
 backup
-pack\Github
+pack
 *swp

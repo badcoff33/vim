@@ -15,7 +15,7 @@ let s:white    = "#FFFFFF"
 let s:blue     = "#2188FF"
 let s:red      = "#FF2382"
 
-let s:silver9 = "#F2F2F4"
+let s:silver9 = "#F5F5F7"
 let s:silver8 = "#E1E1E3"
 let s:silver7 = "#D1D1D4"
 let s:silver6 = "#B5B5B7"
@@ -39,11 +39,11 @@ execute 'hi Bold' s:GuiFg(  s:white)  s:GuiAttr('bold')
 execute 'hi Italic' s:GuiFg(s:white)  s:GuiAttr('italic')
 execute 'hi NonText' s:GuiFg(s:silver6) s:GuiBg('bg')
 execute 'hi Visual' s:GuiFg(s:silver0) s:GuiBg(s:silver8)
-execute 'hi StatusLine' s:GuiFg(s:black) s:GuiBg(s:silver6) s:GuiAttr('bold')
-execute 'hi StatusLineNC' s:GuiFg(s:silver3) s:GuiBg(s:silver8) s:GuiAttr('bold')
+execute 'hi StatusLine' s:GuiFg(s:silver9) s:GuiBg(s:silver4) s:GuiAttr('NONE')
+execute 'hi StatusLineNC' s:GuiFg(s:silver4) s:GuiBg(s:silver7) s:GuiAttr('NONE')
 execute 'hi VertSplit' s:GuiFg(s:silver6) s:GuiBg('bg') s:GuiAttr('NONE')
 execute 'hi IncSearch' s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr('none')
-execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:blue) s:GuiAttr('NONE')
+execute 'hi Search' s:GuiFg(s:black) s:GuiBg(s:silver7) s:GuiAttr('NONE')
 execute 'hi MatchParen' s:GuiFg(s:silver1) s:GuiBg(s:silver9) s:GuiAttr('underline')
 execute 'hi QuickFixLine' s:GuiFg(s:white) s:GuiBg(s:red) s:GuiAttr('NONE')
 execute 'hi CursorLine' s:GuiBg(s:silver9)
@@ -69,7 +69,7 @@ highlight! link WildMenu PmenuSel
 execute 'hi Statement' s:GuiFg(s:red)  s:GuiAttr('bold')
 execute 'hi Conditional' s:GuiFg(s:red)  s:GuiAttr('bold')
 execute 'hi Type' s:GuiFg(s:blue)  s:GuiAttr('italic')
-execute 'hi Structure' s:GuiFg(s:red) s:GuiAttr('italic')
+execute 'hi Structure' s:GuiFg(s:red) s:GuiAttr('NONE')
 execute 'hi StorageClass' s:GuiFg(s:red)
 execute 'hi PreProc' s:GuiFg(s:blue) s:GuiAttr('bold')
 execute 'hi PreCondit' s:GuiFg(s:blue)  s:GuiAttr('bold')
@@ -77,8 +77,9 @@ execute 'hi Comment' s:GuiFg(s:silver6)
 execute 'hi Function' s:GuiFg(s:blue)
 execute 'hi Identifier' s:GuiFg(s:blue)
 execute 'hi Special' s:GuiFg(s:silver1)
-execute 'hi Constant' s:GuiFg(s:silver6)
-execute 'hi Number' s:GuiFg(s:silver5)
+execute 'hi Constant' s:GuiFg(s:blue)
+execute 'hi Number' s:GuiFg(s:blue)
+execute 'hi String' s:GuiFg(s:silver3)
 execute 'hi Title' s:GuiFg(s:black)  s:GuiAttr('bold')
 execute 'hi Todo' s:GuiFg(s:silver2) s:GuiBg(s:silver7)
 execute 'hi Error' s:GuiFg(s:red) s:GuiBg('bg') s:GuiAttr('underline')
@@ -95,8 +96,8 @@ execute 'hi qfLineNr' s:GuiFg(s:red)
 execute 'hi vimCommentTitle' s:GuiFg(s:blue)  s:GuiAttr('bold')
 
 " Filetype C
-execute 'hi cCppOut' s:GuiFg(s:silver3)
-execute 'hi cCppOutIf2' s:GuiFg(s:silver3)
+execute 'hi cCppOut' s:GuiBg(s:silver9) s:GuiAttr('italic')
+execute 'hi cCppOutIf2' s:GuiBg(s:silver9) s:GuiAttr('italic')
 execute 'hi cParen' s:GuiFg(s:silver3)
 execute 'hi cBlock' s:GuiFg(s:silver3)
 
@@ -114,5 +115,5 @@ execute 'hi rstStrongEmphasis' s:GuiFg(s:silver2)  s:GuiAttr('bold')
 " Diffs
 execute 'hi DiffChange' s:GuiFg(s:white) s:GuiBg(s:blue)
 execute 'hi DiffText' s:GuiFg(s:white) s:GuiBg(s:blue)
-execute 'hi DiffDelete' s:GuiFg(s:red) s:GuiBg(s:red)
+execute 'hi DiffDelete' s:GuiFg(s:white) s:GuiBg(s:red)
 execute 'hi DiffAdd' s:GuiFg(s:silver3) s:GuiBg(s:silver8)

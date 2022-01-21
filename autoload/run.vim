@@ -1,21 +1,20 @@
-function! run#Append(channel, msg)
-
-  let b = bufadd("__channel".ch_info(a:channel)['id'])
-  call bufload(b)
-  call setbufvar(b, "&buftype", "nofile")
-  call appendbufline(b, '$', a:msg)
+function! GetJobDictName(hdl)
+  return "g:run"..ch_info(a:hdl)["id"]
 endfunction
 
-function! run#Exit(channel)
-  let b = bufadd("__channel".ch_info(a:channel)['id'])
-  call bufload(b)
-  execute "cbuffer ".b
-  execute "silent bw!" b
+function! run#Append(ch, msg)
+  let list_name = GetJobDictName(a:ch).."['lines']"
+  execute "let" list_name "=" list_name "+ [a:msg]"
 endfunction
 
-function! run#HiddenError(channel,msg)
+function! run#Close(ch)
+  let dict_name = GetJobDictName(a:ch)
+  execute 'call setqflist([], "r", ' dict_name ')'
+endfunction
+
+function! run#HiddenError(ch,msg)
   echohl ErrorMsg
-  echo 'error reported by channel' ch_info(a:channel)['id'] '-->' a:msg
+  echo 'error reported by ch' ch_info(a:ch)['id'] '-->' a:msg
   echohl None
 endfunction
 
@@ -37,11 +36,13 @@ function! run#Run(dict)
   if !exists('a:dict.hidden') || (a:dict.hidden == 0)
     let options.out_cb = function("run#Append")
     let options.err_cb = function("run#Append")
-    let options.close_cb = function("run#Exit")
+    let options.close_cb = function("run#Close")
   else
     let options.err_cb = function("run#HiddenError")
   endif
   if exists('a:dict.cmd')
     let j = job_start('cmd /C '.a:dict['cmd'], options)
+    let d=#{title: a:dict["cmd"], lines:[], efm:&errorformat}
+    execute "let "..GetJobDictName(j).."= copy(d)"
   endif
 endfunction
