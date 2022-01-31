@@ -74,8 +74,8 @@ set notimeout
 set nottimeout
 
 " backspace and cursor keys wrap to previous/next line
-" keep indent level when Ctrl-U is pressed
-set backspace=eol,start,indent
+set backspace=indent,eol,start 
+set whichwrap+=<,>,[,]
 
 " Search: Some configuration for the search behavior.
 set ignorecase smartcase
@@ -144,16 +144,16 @@ tnoremap <Esc> <C-\><C-n>
 tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 " Line bubbling
-nnoremap <c-j> <cmd>move .+1<CR>==
-nnoremap <c-k> <cmd>move .-2<CR>==
-vnoremap <c-j> :move '>+1<CR>==gv=gv
-vnoremap <c-k> :move '<-2<CR>==gv=gv
+nnoremap <C-j> <cmd>move .+1<CR>==
+nnoremap <C-k> <cmd>move .-2<CR>==
+vnoremap <C-j> :move '>+1<CR>==gv=gv
+vnoremap <C-k> :move '<-2<CR>==gv=gv
 
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
 
-nnoremap + :cnext<CR>zz
-nnoremap - :cprevious<CR>zz
+nnoremap <C-j> :cnext<CR>zzzv
+nnoremap <C-k> :cprevious<CR>zzzv
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
@@ -169,7 +169,7 @@ set langmap=ü/,Ü?,ö[,ä],Ö{,Ä}
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
-let maplocalleader = "s"
+let maplocalleader = "+"
 
 " "Enclose" `current` (visual) {selection}
 vnoremap <Leader>" c"<C-r>-"<Esc>
@@ -205,15 +205,14 @@ nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 " --- quickfix
-nnoremap <Leader>c :clist<CR>
-nnoremap <Leader>C :clist ,-1<CR>
+nnoremap <Leader>c :clist!<CR>
 
 " --- command line completion
 cnoremap <C-r>. <C-r>=expand("%:h")<CR>
 
-command! -nargs=0 IgnoreCaseSensetive :set   ignorecase nosmartcase
-command! -nargs=0 CaseSensetive       :set noignorecase nosmartcase
-command! -nargs=0 SmartCase           :set   ignorecase  smartcase
+command! -nargs=0 IC :set   ignorecase nosmartcase
+command! -nargs=0 CS :set noignorecase nosmartcase
+command! -nargs=0 SC :set   ignorecase  smartcase
 
 " Description: Jump to last location. Check out :help line(). Function checks
 " if the '" marker is valid. Jump to the mark, but don't change the jumplist
