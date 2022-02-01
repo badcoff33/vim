@@ -12,9 +12,14 @@ xmap <Leader>a <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <Leader>a <Plug>(EasyAlign)
 
-let g:wdconfig = {
+let g:dircfg = {
+      \ 'HVH1x0_2_0_SW_Development': [
+      \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
+      \   'set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,',
+      \   'set tagcase=match',
+      \   'compiler ghs'
+      \ ],
       \ 'RL78EVA': [
-      \   'cd c:\users\prepensm\documents\workspaces\_',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,IAR/inc,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431',

@@ -74,8 +74,11 @@ set notimeout
 set nottimeout
 
 " backspace and cursor keys wrap to previous/next line
-set backspace=indent,eol,start 
+set backspace=indent,eol,start
 set whichwrap+=<,>,[,]
+
+" makes selecting text more consistent (at least for me)
+set virtualedit=onemore,block
 
 " Search: Some configuration for the search behavior.
 set ignorecase smartcase
@@ -122,6 +125,12 @@ vnoremap <C-a> <C-a>gv
 " visual region
 vnoremap > >gv
 vnoremap < <gv
+
+" Yank more consistent to D and dd commands
+nnoremap Y y$
+
+" replace current inner word with one key press
+nnoremap <BS> ciw
 
 " Window movement
 nnoremap <S-Right> <C-w>l
@@ -179,6 +188,14 @@ vnoremap <Leader>( c(<C-r>-)<Esc>
 vnoremap <Leader>[ c[<C-r>-]<Esc>
 vnoremap <Leader>{ c{<C-r>-}<Esc>
 
+" "Enclose" `current` (word) {bang}!
+nnoremap <Leader>" ciw"<C-r>-"<Esc>
+nnoremap <Leader>' ciw'<C-r>-'<Esc>
+nnoremap <Leader>` ciw`<C-r>-`<Esc>
+nnoremap <Leader>( ciw(<C-r>-)<Esc>
+nnoremap <Leader>[ ciw[<C-r>-]<Esc>
+nnoremap <Leader>{ ciw{<C-r>-}<Esc>
+
 let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
 nnoremap <expr> <Leader>b ':filter /' . LsFilter(&ft) . '/ ls<CR>:buffer '
@@ -205,7 +222,7 @@ nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 " --- quickfix
-nnoremap <Leader>c :clist!<CR>
+nnoremap <Leader>c :copen<CR>
 
 " --- command line completion
 cnoremap <C-r>. <C-r>=expand("%:h")<CR>
@@ -270,7 +287,7 @@ augroup init
   autocmd!
   autocmd BufReadPost  * call RestoreCursor()
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
-  autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
+  autocmd TerminalOpen * setlocal signcolumn=no nonumber norelativenumber foldcolumn=0
   autocmd VimEnter     * runtime plugins.vim
   autocmd VimResized   * wincmd =
   " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals

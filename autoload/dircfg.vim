@@ -1,11 +1,11 @@
 " Vim auoload file
 
-function! wdconfig#Read(key)
-  if !exists("g:wdconfig")
+function! dircfg#Read(key)
+  if !exists("g:dircfg")
     return
   endif
-  if g:wdconfig->has_key(a:key)
-    for v in g:wdconfig[a:key]
+  if g:dircfg->has_key(a:key)
+    for v in g:dircfg[a:key]
       echo ":execute" v
       execute v
     endfor
