@@ -102,8 +102,8 @@ set completeopt=menu
 set pumheight=7
 
 " Command line completion
-set nowildmenu
-set wildoptions=tagfile
+set wildmenu
+set wildoptions=pum,tagfile
 set wildmode=full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
@@ -222,7 +222,7 @@ nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 " --- quickfix
-nnoremap <Leader>c :copen<CR>
+nnoremap <Leader>c :clist!<CR>
 
 " --- command line completion
 cnoremap <C-r>. <C-r>=expand("%:h")<CR>
