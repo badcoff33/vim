@@ -10,6 +10,17 @@ endfunction
 function! run#Close(ch)
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
+  let text = "job done: "..eval(dict_name..'["title"]')
+  let text = text[:&columns - 2]
+  call popup_create(text, #{
+        \ line: &lines,
+        \ col: &columns - len(text),
+        \ maxwidth: len(text),
+        \ time: 2500,
+        \ tabpage: -1,
+        \ highlight: 'PmenuSel',
+        \ padding: [1,1,1,1],
+        \ })
 endfunction
 
 function! run#HiddenError(ch,msg)
