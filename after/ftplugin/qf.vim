@@ -1,44 +1,25 @@
 " Vim ftplugin file
 
-if !exists("*s:QuickfixCleanup")
-  function! s:QuickfixCleanup ()
-    "prepare cleanup
-    setlocal modifiable
-    let b:save_search = @/
+"prepare cleanup
+setlocal modifiable
+let b:save_search = @/
 
-    " get rid of Ctrl-M
-    :silent %s/\r//e
+" get rid of Ctrl-M
+:silent %s/\r//e
 
-    " cleanup
-    setlocal nomodified nomodifiable
-    let @/ =b:save_search
-    unlet b:save_search
-    call histdel("search", -1)
-
-    " shorten the Quickfix title.
-    if exists("w:quickfix_title")
-      if len(w:quickfix_title) > 50
-        let w:quickfix_title = w:quickfix_title[:60] . "..."
-      endif
-    endif
-  endfunction
-endif
-
-call s:QuickfixCleanup()
+" cleanup
+setlocal nomodified nomodifiable
+let @/ =b:save_search
+unlet b:save_search
+call histdel("search", -1)
 
 if exists("b:did_ftplugin_after")
   finish
 endif
 
-let b:undo_ftplugin = b:undo_ftplugin
+let b:undo_ftplugin = "setlocal number< relativenumber< wrap< scrolloff<"
 
-setlocal foldlevel=0
-setlocal foldmethod=expr
-setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
-setlocal nofoldenable
-setlocal nonumber norelativenumber
-setlocal wrap
-setlocal scrolloff=0
+setlocal nonumber norelativenumber nowrap scrolloff=0
 
 nnoremap <buffer> <Esc> :cclose<CR>
 
