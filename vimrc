@@ -149,14 +149,11 @@ tnoremap <S-Down>  <C-\><C-n><C-w>j
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc> <C-\><C-n>
 
-" To simulate |i_CTRL-R| in terminal-mode: >
-tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
-
 " Line bubbling
-nnoremap <C-j> <cmd>move .+1<CR>==
-nnoremap <C-k> <cmd>move .-2<CR>==
-vnoremap <C-j> :move '>+1<CR>==gv=gv
-vnoremap <C-k> :move '<-2<CR>==gv=gv
+nnoremap <A-j> <cmd>move .+1<CR>==
+nnoremap <A-k> <cmd>move .-2<CR>==
+vnoremap <A-j> :move '>+1<CR>==gv=gv
+vnoremap <A-k> :move '<-2<CR>==gv=gv
 
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
