@@ -25,4 +25,4 @@ function! CompleteDircfg(a,l,p)
   return filter(keys(g:dircfg), 'v:val =~ a:a')
 endfun
 
-command! -complete=customlist,CompleteDircfg -nargs=1 Dircfg call dircfg#Read('<args>')
+command! -complete=customlist,CompleteDircfg -nargs=1 Readcfg call dircfg#Read('<args>')
