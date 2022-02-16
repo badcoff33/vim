@@ -51,9 +51,14 @@ function! run#Run(dict)
   else
     let options.err_cb = function("run#HiddenError")
   endif
+  if !exists('a:dict.regexp')
+    let regexp = &errorformat
+  else
+    let regexp = a:dict.regexp
+  endif
   if exists('a:dict.cmd')
     let j = job_start('cmd /C '.a:dict['cmd'], options)
-    let d=#{title: a:dict["cmd"], lines:[], efm:&errorformat}
+    let d=#{title: a:dict["cmd"], lines: [], efm: regexp}
     execute "let "..GetJobDictName(j).."= copy(d)"
   endif
 endfunction

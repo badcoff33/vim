@@ -17,7 +17,7 @@ let g:dircfg = {
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,',
       \   'set tagcase=match',
-      \   'compiler ghs'
+      \   'compiler ghs', 'compiler rg'
       \ ],
       \ 'RL78EVA': [
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,IAR/inc,,',
