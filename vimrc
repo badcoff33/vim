@@ -200,9 +200,6 @@ nnoremap <expr> <Leader>b ':filter /' . LsFilter(&ft) . '/ ls<CR>:buffer '
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>t :tjump<Space>/
 nnoremap <Leader>g :silent grep<Space>
-nnoremap <Leader>+ :tabnew<CR>
-nnoremap <Leader>- :tabclose<CR>
-nnoremap <Leader>x <cmd>Lexplore<CR>
 nnoremap <expr> <Leader>e ':edit ' . expand("%:p:h") . PathSep()
 nnoremap <expr> <Leader>v ':edit '.$USERPROFILE.PathSep().'vimfiles'.PathSep()
 nnoremap <leader>m :<C-u>Make<up>
