@@ -8,7 +8,7 @@ noremap <unique> <script> <Plug>InfoHighlightAttr       <SID>InfoHighlightAttr
 noremap <unique> <script> <Plug>ToggleStickyCursorline  <SID>ToggleStickyCursorline
 noremap <unique> <script> <Plug>HighlightWord           <SID>HighlightWord
 
-noremap <SID>HighlightWord          :call visuals#HighlightWord("<C-r><C-w>")<CR>
+noremap <SID>HighlightWord          :call visuals#hl_word_on()<CR>
 noremap <SID>ToggleStickyCursorline :call visuals#ToggleStickyCursorline()<CR>
 noremap <SID>InfoHighlightAttr      :call color#InfoHighlightAttr()<CR>
 

@@ -29,7 +29,7 @@ set ruler
 set showmatch matchtime=1
 set showtabline=1
 set shortmess-=f " long form for file info
-set shortmess+=S " Yes, search count please
+set shortmess-=S " Yes, search count please
 set laststatus=2
 
 " limit number of suggestions of z=
@@ -85,6 +85,7 @@ set ignorecase smartcase
 set incsearch
 set hlsearch
 set magic
+set nowrapscan
 
 set backup
 execute 'set backupdir=' . getenv('LOCALAPPDATA') . '\vim\backup'
@@ -158,8 +159,8 @@ vnoremap <A-k> :move '<-2<CR>==gv=gv
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
 
-nnoremap <C-j> :cnext<CR>zzzv
-nnoremap <C-k> :cprevious<CR>zzzv
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprevious<CR>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
@@ -171,7 +172,7 @@ imap <C-l> <Esc><C-l>
 let PathSep = { -> has('unix')?'/':'\' }
 
 " --- make use of german keys
-set langmap=ü/,Ü?,ö[,ä],Ö{,Ä}
+set langmap=ü/,Ü?,ö],Ö[,ä},Ä{
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "

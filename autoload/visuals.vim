@@ -1,44 +1,53 @@
 
-function! visuals#HighlightWord(word)
-  let s:thisHighlightWord = get(s:, 'thisHighlightWord', "")
-  highlight HighlightWordGroup gui=underline
-  if a:word != s:thisHighlightWord
-    let s:thisHighlightWord = a:word
-    execute ":match HighlightWordGroup /\\<" . a:word . "\\>/"
+function! visuals#hl_word_on()
+  let cword = expand("<cword>")
+  highlight HlWordUnderline gui=underline
+  if matchstr(cword, "[a-zA-Z0-9_]") != ""
+    execute "match HlWordUnderline /" .. cword .. "/"
+    call timer_start(1000, function("visuals#hl_word_off"))
+    call setwinvar(winnr(), "hl_word", cword)
+  endif
+endfunction
+
+function! visuals#hl_word_off(tid)
+  let cword = expand("<cword>")
+  if cword == getwinvar(winnr(), "hl_word")
+    call timer_start(1000, function("visuals#hl_word_off"))
   else
-    let s:thisHighlightWord = ""
     match none
-  endif
+  end
 endfunction
 
-" Description: Make the actual window more obvious.
-" Active 'cursorline' option in diff buffers overrules highlighting of
-" differences. Buffers with 'diff' option shall not use 'cursorline'.
-" Note: 'cursorline' may delay cursor movement in buffer with filetype 'c'.
-" This behavior may be caused by Doxygen syntax highlighting.
-function! s:TurnCursorLineOn()
-  if g:use_sticky_cursorline !=0 && &diff == 0 && &buftype == ""
-    set cursorline
-  endif
-endfunction
+let g:blinky_cursorline_on = get(g:, "blinky_cursorline_on", 0)
 
-function! visuals#ToggleStickyCursorline()
-  if !exists("g:use_sticky_cursorline")
-    let g:use_sticky_cursorline = 0
-  endif
-  if g:use_sticky_cursorline == 0
-    let g:use_sticky_cursorline = 1
+" Description: Make the actual window more obvious by temporary turn the
+" option 'cursorline' on.
+function! visuals#toggle_blinky()
+  if g:blinky_cursorline_on == 0
+    let g:tid_cursorline = -1
+    let g:blinky_cursorline_on = 1
     set cursorline
-    augroup ToggleStickyCursorline
+    augroup StickyCursorline
       autocmd!
-      autocmd WinLeave * set nocursorline
-      autocmd BufEnter,BufWinEnter,WinEnter * call <SID>TurnCursorLineOn()
+      autocmd WinLeave             * call visuals#turn_cursorline_off()
+      autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
     augroup END
   else
-    let g:use_sticky_cursorline = 0
-    set nocursorline
-    augroup ToggleStickyCursorline
-      au!
-    augroup END
-  endif
+    let g:blinky_cursorline_on = 0
+    setlocal nocursorline
+    autocmd! StickyCursorline
+  end
 endfunction
+
+function! visuals#turn_cursorline_on()
+  if (&diff == 0) && (&buftype == "")
+    let g:tid_cursorline = timer_start(1000, function("visuals#turn_cursorline_off"))
+    setlocal cursorline
+  end
+endfunction
+
+function! visuals#turn_cursorline_off(...)
+  call timer_stop(g:tid_cursorline)
+  setlocal nocursorline
+endfunction
+

@@ -33,8 +33,8 @@ let s:green4  = '#37FF6F'
 let s:blue1   = '#5088D0'
 let s:blue2   = '#60A0E8'
 let s:blue3   = '#70B0F8'
-let s:red1    = '#C85012'
-let s:red2    = '#F86020'
+let s:red1    = '#A83062'
+let s:red2    = '#E84070'
 
 let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
 let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}
@@ -53,7 +53,7 @@ execute 'hi VertSplit' s:GuiFg(s:bg2) s:GuiBg(s:bg2) s:GuiAttr('NONE')
 execute 'hi IncSearch' s:GuiFg(s:black) s:GuiBg(s:silver4) s:GuiAttr('bold')
 execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:green1) s:GuiAttr('NONE')
 execute 'hi MatchParen' s:GuiFg(s:green3) s:GuiBg('bg') s:GuiAttr('underline')
-execute 'hi QuickFixLine'  s:GuiBg(s:black) s:GuiAttr('bold')
+execute 'hi QuickFixLine'  s:GuiBg(s:bg3) s:GuiAttr('bold')
 execute 'hi Cursor' s:GuiFg(s:black) s:GuiBg(s:green3)
 execute 'hi CursorLine'  s:GuiBg(s:bg2)
 execute 'hi CursorLineNr' s:GuiFg(s:green3) s:GuiBg(s:bg4) s:GuiAttr('bold')
@@ -125,7 +125,7 @@ execute 'hi htmlH2' s:GuiFg(s:green3)  s:GuiAttr('bold')
 execute 'hi htmlH3' s:GuiFg(s:green2)  s:GuiAttr('bold')
 
 " markdown
-execute 'hi markdownCode' s:GuiFg(s:silver2) s:GuiBg(s:bg3)
+execute 'hi markdownCode' s:GuiFg(s:silver3) s:GuiBg(s:bg3)
 execute 'hi markdownCodeBlock' s:GuiFg(s:silver2)
 execute 'hi markdownUrl' s:GuiFg(s:silver2) s:GuiBg(s:bg3) s:GuiAttr('underline')
 execute 'hi markdownLinkText' s:GuiFg(s:blue2)  s:GuiAttr('none')
@@ -137,5 +137,5 @@ execute 'hi rstStrongEmphasis' s:GuiFg(s:green2)  s:GuiAttr('bold')
 " Diffs
 execute 'hi DiffChange' s:GuiFg(s:white) s:GuiBg(s:bg4)
 execute 'hi DiffText' s:GuiFg(s:blue2) s:GuiBg(s:bg4) s:GuiAttr('bold')
-execute 'hi DiffDelete' s:GuiFg(s:red1) s:GuiBg(s:bg4)
+execute 'hi DiffDelete' s:GuiFg(s:red1) s:GuiBg(s:red1)
 execute 'hi DiffAdd' s:GuiFg(s:green2) s:GuiBg(s:bg3) s:GuiAttr('bold')

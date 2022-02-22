@@ -19,10 +19,11 @@ nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> e
 " Toggle between  `- [ ]` and `- [x]`
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 
-" Open Markdown preview
-if exists(":Start")
-  nnoremap <buffer> <silent> <LocalLeader>p :Start pandoc -f gfm -t html -o %TEMP%\preview.html <C-r>% && %TEMP%\preview.html<CR>
-endif
+" Preview in html
+command! -buffer Preview terminal pandoc -f gfm -t html % -o .preview.html
+
+" Plugin EasyAlign tables
+vnoremap <buffer> <LocalLeader><Tab> :EasyAlign *\|<CR>
 
 " Make heading underlined
 nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr=
