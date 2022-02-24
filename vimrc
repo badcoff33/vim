@@ -85,7 +85,7 @@ set ignorecase smartcase
 set incsearch
 set hlsearch
 set magic
-set nowrapscan
+set wrapscan
 
 set backup
 execute 'set backupdir=' . getenv('LOCALAPPDATA') . '\vim\backup'
@@ -159,6 +159,9 @@ vnoremap <A-k> :move '<-2<CR>==gv=gv
 nnoremap <A-+> 3<C-w>+3<C-w>>
 nnoremap <A--> 3<C-w>-3<C-w><
 
+nnoremap <A-o> :bprevious<CR>
+nnoremap <A-i> :bnext<CR>
+
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 nnoremap n nzzzv
@@ -196,14 +199,7 @@ nnoremap <Leader>{ ciw{<C-r>-}<Esc>
 
 let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
-nnoremap <expr> <Leader>b ':filter /' . LsFilter(&ft) . '/ ls<CR>:buffer '
-
-nnoremap <Leader>f :find<Space>*
-nnoremap <Leader>t :tjump<Space>/
-nnoremap <Leader>g :silent grep<Space>
-nnoremap <expr> <Leader>e ':edit ' . expand("%:p:h") . PathSep()
-nnoremap <expr> <Leader>v ':edit '.$USERPROFILE.PathSep().'vimfiles'.PathSep()
-nnoremap <leader>m :<C-u>Make<up>
+nnoremap <expr> <Leader>b ':filter /'..LsFilter(&ft)..'/ ls<CR>:buffer '
 
 " --- toggle options
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
@@ -219,21 +215,15 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 " --- quickfix
 nnoremap <Leader>c :clist!<CR>
 
-" --- command line completion
-cnoremap <C-r>. <C-r>=expand("%:h")<CR>
+" --- command line
+cnoremap <expr> <C-r>. expand("%:h")..PathSep()
+cnoremap <expr> <C-r>, $USERPROFILE..PathSep()..'vimfiles'..PathSep()
+cabbrev <expr> E 'edit '..expand("%:p:h")..PathSep()
+cabbrev <expr> V 'edit '..$USERPROFILE..PathSep()..'vimfiles'..PathSep()
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
 command! -nargs=0 SC :set   ignorecase  smartcase
-
-" Description: Jump to last location. Check out :help line(). Function checks
-" if the '" marker is valid. Jump to the mark, but don't change the jumplist
-" when jumping within the current buffer (:help g').
-function! RestoreCursor ()
-  if line("'\"") > 1 && line("'\"") <= line("$")
-    exe "normal! g`\""
-  endif
-endfunction
 
 " Description: Some minor extensions to run ripgrep or Windows own findstr.
 " Ironically, because this set 'grepprg', right now grep iteslf is not used.
@@ -242,7 +232,7 @@ endfunction
 let g:rg_glob_patterns = {
       \ 'c': '-g *.[ch]',
       \ 'cpp': '-g *.[ch]',
-      \ 'vim': '-g *.vim',
+      \ 'vim': '-g *.vim -g *vimrc',
       \ 'asm': '-g *.850',
       \ 'py': '-g *.py',
       \ 'cmake': '-g *.cmake -g CMakeLists.txt',
@@ -280,7 +270,7 @@ endif
 
 augroup init
   autocmd!
-  autocmd BufReadPost  * call RestoreCursor()
+  autocmd BufReadPost  * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal signcolumn=no nonumber norelativenumber foldcolumn=0
   autocmd VimEnter     * runtime plugins.vim

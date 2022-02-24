@@ -9,6 +9,7 @@ set statusline =\ %{unique#GetUniqueName()}%t
 set statusline+=\ %m%r%y%w%{GetSearchMode()}
 set statusline+=%=
 set statusline+=%{scope#GetScope()}\ %l:%c
+let &statusline = &statusline.." "
 
 function! GetSearchMode()
   if &ignorecase == 1 && &smartcase == 1
