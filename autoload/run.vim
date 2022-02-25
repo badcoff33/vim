@@ -12,15 +12,17 @@ function! run#Close(ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
   let text = text[:&columns - 2]
-  call popup_create(text, #{
+  let width = min([len(text), &columns / 2])
+  let winid = popup_create(text, #{
         \ line: &lines,
-        \ col: &columns - len(text),
-        \ maxwidth: len(text),
+        \ col: &columns - width,
+        \ maxwidth: width,
         \ time: 2500,
         \ tabpage: -1,
         \ highlight: 'PmenuSel',
         \ padding: [1,1,1,1],
         \ })
+  call setwinvar(winid, "&wrap", 0)
 endfunction
 
 function! run#HiddenError(ch,msg)

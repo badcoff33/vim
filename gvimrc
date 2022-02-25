@@ -6,7 +6,7 @@ nnoremap <expr> <leader>3 ':set guifont='..F(&guifont)..':h12 <CR>'
 nnoremap <expr> <leader>2 ':set guifont='..F(&guifont)..':h10 <CR>'
 nnoremap <expr> <leader>1 ':set guifont='..F(&guifont)..':h9  <CR>'
 
-colorscheme apollo
+colorscheme twotone
 
 set guifont=JetBrains_Mono:h10
 set guioptions=!a
