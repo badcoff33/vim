@@ -181,21 +181,13 @@ set langmap=ü/,Ü?,ö],Ö[,ä},Ä{
 let mapleader = " "
 let maplocalleader = "+"
 
-" "Enclose" `current` (visual) {selection}
-vnoremap <Leader>" c"<C-r>-"<Esc>
-vnoremap <Leader>' c'<C-r>-'<Esc>
-vnoremap <Leader>` c`<C-r>-`<Esc>
-vnoremap <Leader>( c(<C-r>-)<Esc>
-vnoremap <Leader>[ c[<C-r>-]<Esc>
-vnoremap <Leader>{ c{<C-r>-}<Esc>
-
 " "Enclose" `current` (word) {bang}!
-nnoremap <Leader>" ciw"<C-r>-"<Esc>
-nnoremap <Leader>' ciw'<C-r>-'<Esc>
-nnoremap <Leader>` ciw`<C-r>-`<Esc>
-nnoremap <Leader>( ciw(<C-r>-)<Esc>
-nnoremap <Leader>[ ciw[<C-r>-]<Esc>
-nnoremap <Leader>{ ciw{<C-r>-}<Esc>
+inoremap <C-Space>" <C-o>db"<C-r>-"
+inoremap <C-Space>' <C-o>db'<C-r>-'
+inoremap <C-Space>` <C-o>db`<C-r>-`
+inoremap <C-Space>( <C-o>db(<C-r>-)
+inoremap <C-Space>[ <C-o>db[<C-r>-]
+inoremap <C-Space>{ <C-o>db{<C-r>-}
 
 let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
@@ -273,13 +265,12 @@ endif
 
 augroup init
   autocmd!
-  autocmd BufReadPost  * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal signcolumn=no nonumber norelativenumber foldcolumn=0
   autocmd VimEnter     * runtime plugins.vim
   autocmd VimResized   * wincmd =
   " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
-  autocmd FocusGained * :checktime
+  autocmd BufEnter    * :checktime
 augroup END
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
