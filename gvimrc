@@ -8,7 +8,7 @@ nnoremap <expr> <leader>1 ':set guifont='..F(&guifont)..':h9  <CR>'
 
 colorscheme twotone
 
-set guifont=JetBrains_Mono:h10
+set guifont=Cascadia_Code:h10
 set guioptions=!a
 set guicursor+=a:blinkon0
 set renderoptions=

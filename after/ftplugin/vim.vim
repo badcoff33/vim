@@ -4,6 +4,8 @@ if exists("b:did_ftplugin_after")
   finish
 endif
 
+let b:undo_ftplugin = "setlocal textwidth< shiftwidth< nocindent<"
+
 setlocal textwidth=0
 setlocal shiftwidth=2
 setlocal nocindent
@@ -12,7 +14,7 @@ nnoremap <buffer> K :help <C-r><C-w><CR>
 nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 
 " source current visual region
-vnoremap <buffer> <LocalLeader>s :<C-U>call VisExecute()<CR>
+vnoremap <buffer> <LocalLeader>x :<C-U>call VisExecute()<CR>
 
 function! VisExecute() abort
   let save_selection = &selection
@@ -35,10 +37,10 @@ endif
 
 if empty(matchstr(expand("%:p:h"), "color"))
   " source Vim file
-  nnoremap <special> <buffer> <LocalLeader>s :w<bar>source%<CR>
+  nnoremap <special> <buffer> <LocalLeader>x :w<bar>source%<CR>
 else
   " source Vim color theme
-  nnoremap <special> <buffer> <LocalLeader>s :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
+  nnoremap <special> <buffer> <LocalLeader>x :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
 endif
 
 let b:did_ftplugin_after = 1
