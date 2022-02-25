@@ -174,7 +174,7 @@ imap <C-l> <Esc><C-l>
 
 let PathSep = { -> has('unix')?'/':'\' }
 
-" --- make use of german keys
+""" make use of german keys
 set langmap=ü/,Ü?,ö],Ö[,ä},Ä{
 
 " set leader and localleader keys, that works best for me
@@ -199,23 +199,26 @@ nnoremap <Leader>{ ciw{<C-r>-}<Esc>
 
 let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
-nnoremap <expr> <Leader>b ':filter /'..LsFilter(&ft)..'/ ls<CR>:buffer '
+nnoremap <expr> <Leader>b ':filter /'..LsFilter(&ft)..'/ ls<CR>'
 
-" --- toggle options
+""" quick note taking
+nnoremap <expr> <Leader>n ":edit "..strftime("~/Documents/Notes/note-%d-%m-%y.txt".."<CR>:setfiletype markdown<CR>")
+
+""" toggle options
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
 nnoremap <Leader>os :setlocal invspell spell?<CR>
 nnoremap <Leader>op :setlocal invpaste paste?<CR>
 nnoremap <Leader>ow :setlocal invwrap<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
-" --- replace command
+""" replace command
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
-" --- quickfix
+""" quickfix
 nnoremap <Leader>c :clist!<CR>
 
-" --- command line
+""" command line
 cnoremap <expr> <C-r>. expand("%:h")..PathSep()
 cnoremap <expr> <C-r>, $USERPROFILE..PathSep()..'vimfiles'..PathSep()
 cabbrev <expr> E 'edit '..expand("%:p:h")..PathSep()

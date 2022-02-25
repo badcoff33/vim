@@ -1,10 +1,11 @@
 syntax on
 
-let F = {font -> escape(matchstr(font,'^[A-Za-z_\ ]\+'), ' ')}
-nnoremap <expr> <leader>4 ':set guifont='..F(&guifont)..':h14 <CR>'
-nnoremap <expr> <leader>3 ':set guifont='..F(&guifont)..':h12 <CR>'
-nnoremap <expr> <leader>2 ':set guifont='..F(&guifont)..':h10 <CR>'
-nnoremap <expr> <leader>1 ':set guifont='..F(&guifont)..':h9  <CR>'
+let FontFamily = {-> split(&gfn, ":")[0]}
+nnoremap <expr> <leader>h13 ':set guifont='..FontFamily()..':h13<CR>'
+nnoremap <expr> <leader>h12 ':set guifont='..FontFamily()..':h12<CR>'
+nnoremap <expr> <leader>h11 ':set guifont='..FontFamily()..':h11<CR>'
+nnoremap <expr> <leader>h10 ':set guifont='..FontFamily()..':h10<CR>'
+nnoremap <expr> <leader>h9  ':set guifont='..FontFamily()..':h9<CR>'
 
 colorscheme twotone
 

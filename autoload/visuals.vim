@@ -51,3 +51,22 @@ function! visuals#turn_cursorline_off(...)
   setlocal nocursorline
 endfunction
 
+" Description: Print highlighting information at current cursor position.
+function! visuals#info_hl()
+  let synid = synID(line("."), col("."), 0)
+  let synidtrans = synIDtrans(synid)
+  echo "highlight name:" synIDattr(synidtrans, "name")
+  echo "foreground:" synIDattr(synidtrans, "fg")
+  echo "background:" synIDattr(synidtrans, "bg")
+endfunction
+
+function visuals#blend_down()
+  if (&previewwindow || &buftype=='help')
+    if hlexists('BlendDown') == v:true
+      setlocal wincolor=BlendDown
+    else
+      setlocal wincolor=NonText
+    endif
+  endif
+endfunction
+
