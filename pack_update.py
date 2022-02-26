@@ -6,7 +6,7 @@ vcs_cmd_pull = "hg pull -q"
 
 git_dict = {
         "pack/github/start/easy-align": "https://github.com/junegunn/vim-easy-align.git",
-        "pack/github/start/colorizer":  "git@github.com:chrisbra/Colorizer.git",
+        "pack/github/start/colorizer":  "git@github.com:lilydjwg/colorizer.git",
         "pack/github/opt/vista":        "https://github.com/liuchengxu/vista.vim.git",
         "pack/github/opt/signify":      "https://github.com/mhinz/vim-signify.git"}
 

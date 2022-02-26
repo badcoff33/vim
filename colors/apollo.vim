@@ -19,7 +19,7 @@ let s:white   = '#FFFFFF'
 let s:black   = '#000000'
 
 let s:bg1     = '#10203F'
-let s:bg2     = '#18284F'
+let s:bg2     = '#1A2B4F'
 let s:bg3     = '#344468'
 let s:bg4     = '#48506F'
 let s:silver1 = '#505860'
@@ -30,10 +30,11 @@ let s:green1  = '#22B363'
 let s:green2  = '#30C15F'
 let s:green3  = '#32E060'
 let s:green4  = '#37FF6F'
+let s:amber   = '#C8C020'
 let s:blue1   = '#5088D0'
 let s:blue2   = '#60A0E8'
 let s:blue3   = '#70B0F8'
-let s:red1    = '#982042'
+let s:red1    = '#B82042'
 let s:red2    = '#E84070'
 
 let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
@@ -54,10 +55,11 @@ execute 'hi IncSearch' s:GuiFg(s:black) s:GuiBg(s:silver4) s:GuiAttr('bold')
 execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:blue1) s:GuiAttr('NONE')
 execute 'hi MatchParen' s:GuiFg(s:green3) s:GuiBg('bg') s:GuiAttr('underline')
 execute 'hi QuickFixLine'  s:GuiBg(s:bg3) s:GuiAttr('bold')
-execute 'hi Cursor' s:GuiFg(s:black) s:GuiBg(s:white)
+execute 'hi Cursor' s:GuiFg(s:black) s:GuiBg(s:amber)
 execute 'hi CursorLine'  s:GuiBg(s:bg2)
-execute 'hi CursorLineNr' s:GuiFg(s:green3) s:GuiBg(s:bg4) s:GuiAttr('bold')
-execute 'hi LineNr' s:GuiFg(s:blue1) s:GuiAttr('italic')
+execute 'hi CursorLineNr' s:GuiFg(s:green3) s:GuiBg(s:bg3) s:GuiAttr('bold')
+execute 'hi LineNr' s:GuiFg(s:blue1) s:GuiBg(s:bg1)
+execute 'hi LineNrAbove' s:GuiFg(s:blue1) s:GuiBg(s:bg2)
 
 highlight! link TabLineSel Normal
 highlight! link TabLineFill Normal

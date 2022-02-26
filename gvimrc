@@ -9,13 +9,14 @@ nnoremap <expr> <leader>h9  ':set guifont='..FontFamily()..':h9<CR>'
 
 colorscheme twotone
 
-set guifont=Cascadia_Code:h10
+set guifont=Cascadia_Code:h12
 set guioptions=!a
 set guicursor+=a:blinkon0
 set renderoptions=
 set mousemodel=popup
 set nomousefocus
 set signcolumn=yes
+set columns=120
 
 tnoremap <LeftMouse> <C-w>N
 tmap <RightMouse> <C-w>N<RightMouse>
