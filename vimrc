@@ -172,6 +172,14 @@ nnoremap N Nzzzv
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
 
+" "Enclose" `current` (word) {bang}!
+inoremap <C-Space>" <C-o>db"<C-r>-"
+inoremap <C-Space>' <C-o>db'<C-r>-'
+inoremap <C-Space>` <C-o>db`<C-r>-`
+inoremap <C-Space>( <C-o>db(<C-r>-)
+inoremap <C-Space>[ <C-o>db[<C-r>-]
+inoremap <C-Space>{ <C-o>db{<C-r>-}
+
 let PathSep = { -> has('unix')?'/':'\' }
 
 """ make use of german keys
@@ -180,14 +188,6 @@ set langmap=ü/,Ü?,ö],Ö[,ä},Ä{
 " set leader and localleader keys, that works best for me
 let mapleader = " "
 let maplocalleader = "+"
-
-" "Enclose" `current` (word) {bang}!
-inoremap <C-Space>" <C-o>db"<C-r>-"
-inoremap <C-Space>' <C-o>db'<C-r>-'
-inoremap <C-Space>` <C-o>db`<C-r>-`
-inoremap <C-Space>( <C-o>db(<C-r>-)
-inoremap <C-Space>[ <C-o>db[<C-r>-]
-inoremap <C-Space>{ <C-o>db{<C-r>-}
 
 let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
@@ -220,49 +220,6 @@ command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
 command! -nargs=0 SC :set   ignorecase  smartcase
 
-" Description: Some minor extensions to run ripgrep or Windows own findstr.
-" Ironically, because this set 'grepprg', right now grep iteslf is not used.
-" Most of the time I work On Windows only.
-
-let g:rg_glob_patterns = {
-      \ 'c': '-g *.[ch]',
-      \ 'cpp': '-g *.[ch]',
-      \ 'vim': '-g *.vim -g *vimrc',
-      \ 'asm': '-g *.850',
-      \ 'py': '-g *.py',
-      \ 'cmake': '-g *.cmake -g CMakeLists.txt',
-      \ }
-
-let g:findstr_glob_patterns = {
-      \ 'c': '*.c *.h',
-      \ 'cpp': '*.c* *.h*',
-      \ 'vim': '*vimrc *.vim',
-      \ 'asm': '*.s *.asm *.850',
-      \ 'py': '*.py',
-      \ 'cmake': '*.cmake CMakeLists.txt'
-      \ }
-
-let RgGlob = {ft -> has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft] : '-g *.*'}
-let FindstrGlob = {ft -> has_key(g:findstr_glob_patterns, ft) ? g:findstr_glob_patterns[ft] : '*.*'}
-
-if executable("rg")
-  " Using links? Ripgrep supports this by th option '--follow'
-  set grepprg=rg\ --vimgrep\ $*
-  set grepformat=%f:%l:%c:%m
-  nnoremap <expr> <Leader>g ':silent grep ' . RgGlob(&ft) . ' ' . expand('<cword>')
-elseif executable("findstr")
-  set grepprg=findstr\ /S\ /N
-  set grepformat=%f:%l:%m
-  nnoremap <expr> <Leader>g ':silent grep ' . expand('<cword>') . ' ' . FindstrGlob(&ft)
-endif
-
-if executable("rg")
-  " find any file
-  command! -nargs=+ Glob :term rg --files -g <args> .
-else
-  command! -nargs=+ Glob :term dir /S /B <args>
-endif
-
 augroup init
   autocmd!
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
@@ -272,5 +229,8 @@ augroup init
   " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
   autocmd BufEnter    * :checktime
 augroup END
+
+syntax on
+colorscheme apollo
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
