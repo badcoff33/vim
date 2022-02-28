@@ -172,7 +172,7 @@ nnoremap N Nzzzv
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
 
-" "Enclose" `current` (word) {bang}!
+" Type a word, press below key squence and "Enclose" `current` (word) {bang}!
 inoremap <C-Space>" <C-o>db"<C-r>-"
 inoremap <C-Space>' <C-o>db'<C-r>-'
 inoremap <C-Space>` <C-o>db`<C-r>-`
