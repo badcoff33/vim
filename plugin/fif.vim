@@ -35,9 +35,9 @@ endif
 
 if executable("rg")
   " find any file
-  command! -nargs=+ Glob :term rg --files -g <args> .
+  command! -nargs=+ FindFile :term rg --files -g <args> .
 else
-  command! -nargs=+ Glob :term dir /S /B <args>
+  command! -nargs=+ FindFile :term dir /S /B <args>
 endif
 
 
