@@ -35,9 +35,7 @@ set laststatus=2
 " limit number of suggestions of z=
 set spellsuggest=best,10
 set spelllang=en_us,de_de
-if exists('&spelloptions')
-  set spelloptions=camel
-endif
+set spelloptions=camel
 
 " Read changed files automatically if they are changed in the background
 set autoread
@@ -176,11 +174,12 @@ imap <C-l> <Esc><C-l>
 inoremap <C-Space>" <C-o>db"<C-r>-"
 inoremap <C-Space>' <C-o>db'<C-r>-'
 inoremap <C-Space>` <C-o>db`<C-r>-`
-inoremap <C-Space>( <C-o>db(<C-r>-)
-inoremap <C-Space>[ <C-o>db[<C-r>-]
-inoremap <C-Space>{ <C-o>db{<C-r>-}
+inoremap <C-Space>) <C-o>db(<C-r>-)
+inoremap <C-Space>] <C-o>db[<C-r>-]
+inoremap <C-Space>} <C-o>db{<C-r>-}
 
-let PathSep = { -> has('unix')?'/':'\' }
+let g:vim_home = expand('<sfile>:p:h')
+let g:path_sep = has('unix') ? '/' : '\'
 
 """ make use of german keys
 set langmap=ü/,Ü?,ö],Ö[,ä},Ä{
@@ -211,10 +210,10 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 nnoremap <Leader>c :clist!<CR>
 
 """ command line
-cnoremap <expr> <C-r>. expand("%:h")..PathSep()
-cnoremap <expr> <C-r>, $USERPROFILE..PathSep()..'vimfiles'..PathSep()
-cabbrev <expr> E 'edit '..expand("%:p:h")..PathSep()
-cabbrev <expr> V 'edit '..$USERPROFILE..PathSep()..'vimfiles'..PathSep()
+cnoremap <expr> <C-r>. expand("%:h")..g:path_sep
+cnoremap <expr> <C-r>, $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
+cabbrev <expr> E 'edit '..expand("%:p:h")..g:path_sep
+cabbrev <expr> V 'edit '..$USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
