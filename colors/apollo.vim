@@ -19,7 +19,7 @@ let s:white   = '#FFFFFF'
 let s:black   = '#000000'
 
 let s:bg1     = '#10203F'
-let s:bg2     = '#1A2B4F'
+let s:bg2     = '#263154'
 let s:bg3     = '#344468'
 let s:bg4     = '#48506F'
 let s:silver1 = '#505860'
