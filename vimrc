@@ -210,8 +210,8 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 nnoremap <Leader>c :clist!<CR>
 
 """ command line
-cnoremap <expr> <C-r>. expand("%:h")..g:path_sep
-cnoremap <expr> <C-r>, $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
+cnoremap <expr> <C-Space>. expand("%:h")..g:path_sep
+cnoremap <expr> <C-Space>, $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
 cabbrev <expr> E 'edit '..expand("%:p:h")..g:path_sep
 cabbrev <expr> V 'edit '..$USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
 
