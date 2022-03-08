@@ -1,5 +1,3 @@
-syntax on
-
 let FontFamily = {-> split(&gfn, ":")[0]}
 nnoremap <expr> <leader>h13 ':set guifont='..FontFamily()..':h13<CR>'
 nnoremap <expr> <leader>h12 ':set guifont='..FontFamily()..':h12<CR>'
@@ -7,7 +5,7 @@ nnoremap <expr> <leader>h11 ':set guifont='..FontFamily()..':h11<CR>'
 nnoremap <expr> <leader>h10 ':set guifont='..FontFamily()..':h10<CR>'
 nnoremap <expr> <leader>h9  ':set guifont='..FontFamily()..':h9<CR>'
 
-set guifont=Cascadia_Code:h11
+set guifont=Fira_Code:h12
 set guioptions=!a
 set guicursor+=a:blinkon0
 set renderoptions=

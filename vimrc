@@ -116,6 +116,16 @@ if &diff
   set columns=999 lines=999
 endif
 
+" Switch to normal mode with special keys
+inoremap <Ins> <Esc>
+inoremap <k0> <Esc>
+
+" Yank more consistent to D and dd commands
+nnoremap Y y$
+
+" replace current inner word with one key press
+nnoremap <BS> ciw
+
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
 vnoremap <C-a> <C-a>gv
@@ -124,12 +134,6 @@ vnoremap <C-a> <C-a>gv
 " visual region
 vnoremap > >gv
 vnoremap < <gv
-
-" Yank more consistent to D and dd commands
-nnoremap Y y$
-
-" replace current inner word with one key press
-nnoremap <BS> ciw
 
 " Window movement
 nnoremap <S-Right> <C-w>l
@@ -208,6 +212,7 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 """ quickfix
 nnoremap <Leader>c :clist!<CR>
+nnoremap <Leader>q <C-w>o:copen 4<CR>
 
 """ command line
 cnoremap <expr> <C-Space>. expand("%:h")..g:path_sep
@@ -224,12 +229,11 @@ augroup init
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal signcolumn=no nonumber norelativenumber foldcolumn=0
   autocmd VimEnter     * runtime plugins.vim
-  autocmd VimResized   * wincmd =
   " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
   autocmd BufEnter    * :checktime
 augroup END
 
 syntax on
-colorscheme apollo
+colorscheme tron
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:

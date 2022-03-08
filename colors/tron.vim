@@ -59,9 +59,10 @@ let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
 execute "hi ColorColumn"  s:GuiBg(s:fg1)
 execute "hi Cursor" s:GuiFg("#ffffff") s:GuiBg(s:magenta) s:GuiAttr("NONE")
 execute "hi CursorLine"  s:GuiBg(s:hl_line) s:GuiAttr("NONE")
+execute "hi LineNr" s:GuiFg(s:fg2) s:GuiBg(s:bg2)
+execute 'hi LineNrAbove' s:GuiFg(s:fg4) s:GuiBg(s:bg4)
 execute "hi Error" s:GuiFg(s:red) s:GuiBg("bg")
 execute "hi iCursor" s:GuiFg(s:fg0) s:GuiBg(s:fg4)
-execute "hi LineNr" s:GuiFg(s:fg3) s:GuiBg(s:bg2)
 execute "hi MatchParen" s:GuiFg(s:green) s:GuiBg(s:bg3)
 execute "hi NonText" s:GuiFg(s:fg2)
 execute "hi Normal" s:GuiFg(s:fg0) s:GuiBg(s:bg1)
@@ -73,18 +74,14 @@ execute "hi SpellRare" s:GuiFg(s:fg4) s:GuiBg(s:bg0) s:GuiAttr("undercurl")
 execute "hi Visual"  s:GuiBg(s:bg_hl)
 execute "hi VisualNOS"  s:GuiBg(s:bg_hl)
 
-" - Neovim Support -
-execute "hi healthError" s:GuiFg(s:red) s:GuiBg(s:fg1)
-execute "hi healthSuccess" s:GuiFg(s:green) s:GuiBg(s:fg1)
-execute "hi healthWarning" s:GuiFg(s:yellow) s:GuiBg(s:fg1)
-execute "hi TermCursorNC"  s:GuiBg(s:fg1)
+execute 'hi QuickFixLine'  s:GuiFg(s:lightred) s:GuiBg('bg') s:GuiAttr('bold')
 
 " --- Gutter ---
 execute "hi CursorColumn"  s:GuiBg(s:fg1)
 execute "hi CursorLineNr" s:GuiFg(s:line_num)  s:GuiAttr("NONE")
 execute "hi Folded" s:GuiFg(s:fg3) s:GuiBg(s:fg1) s:GuiAttr("bold")
 execute "hi FoldColumn" s:GuiFg(s:fg3) s:GuiBg(s:bg0)
-execute "hi SignColumn" s:GuiFg(s:fg1) s:GuiBg(s:bg0)
+execute "hi SignColumn" s:GuiFg(s:fg1) s:GuiBg(s:bg2)
 
 " --- Navigation ---
 execute "hi Directory" s:GuiFg(s:blue)  s:GuiAttr("underline")
