@@ -4,7 +4,7 @@ function! visuals#hl_word_on()
   highlight HlWordUnderline gui=underline
   if matchstr(cword, "[a-zA-Z0-9_]") != ""
     execute "match HlWordUnderline /" .. cword .. "/"
-    call timer_start(1000, function("visuals#hl_word_off"))
+    call timer_start(1001, function("visuals#hl_word_off"))
     call setwinvar(winnr(), "hl_word", cword)
   endif
 endfunction
