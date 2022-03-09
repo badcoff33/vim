@@ -1,14 +1,17 @@
 " Vim plugin file
 
-noremap <SID>HighlightWord :call visuals#hl_word_on()<CR>
-
-if !hasmapto('<Plug>HighlightWord')
-  nmap <Leader><Leader> <Plug>HighlightWord
-endif
+command! -nargs=0 HlWord call visuals#hl_word_on()
+noremap <Leader><Leader> <cmd>HlWord<CR>
+autocmd BufEnter * call visuals#blend_down()
 
 command -nargs=0 InfoHl call visuals#info_hl()
 
-autocmd BufEnter * call visuals#blend_down()
+command -nargs=0 BlinkyOn :call visuals#enable_blinky()
+command -nargs=0 BlinkyOff :call visuals#disable_blinky()
+BlinkyOn " default to ON
 
-command -nargs=0 Blinky :call visuals#toggle_blinky()
-Blinky " default to ON
+augroup visuals
+  au!
+  autocmd InsertEnter * setlocal cursorline
+  autocmd InsertLeave * setlocal nocursorline
+augroup END

@@ -2,12 +2,12 @@ function! GetJobDictName(hdl)
   return "g:run"..ch_info(a:hdl)["id"]
 endfunction
 
-function! run#Append(ch, msg)
+function! run#append(ch, msg)
   let list_name = GetJobDictName(a:ch).."['lines']"
   execute "let" list_name "=" list_name "+ [a:msg]"
 endfunction
 
-function! run#Close(ch)
+function! run#close(ch)
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
@@ -23,21 +23,24 @@ function! run#Close(ch)
         \ padding: [1,1,1,1],
         \ })
   call setwinvar(winid, "&wrap", 0)
+  if exists("g:tid_run")
+    call timer_stop(g:tid_run)
+  endif
 endfunction
 
-function! run#HiddenError(ch,msg)
+function! run#hidden_error(ch,msg)
   echohl ErrorMsg
   echo 'error reported by ch' ch_info(a:ch)['id'] '-->' a:msg
   echohl None
 endfunction
 
-function! run#Run(dict)
+function! run#run(dict)
   let options = {}
   if &autowrite || &autowriteall
     try
       silent wall
     catch /.*/
-      echoerr "run#Run: not all modified buffers written"
+      echoerr "run#run: not all modified buffers written"
     finally
     endtry
   endif
@@ -47,11 +50,11 @@ function! run#Run(dict)
     let options.cwd = getcwd()
   endif
   if !exists('a:dict.hidden') || (a:dict.hidden == 0)
-    let options.out_cb = function("run#Append")
-    let options.err_cb = function("run#Append")
-    let options.close_cb = function("run#Close")
+    let options.out_cb = function("run#append")
+    let options.err_cb = function("run#append")
+    let options.close_cb = function("run#close")
   else
-    let options.err_cb = function("run#HiddenError")
+    let options.err_cb = function("run#hidden_error")
   endif
   if !exists('a:dict.regexp')
     let regexp = &errorformat
@@ -62,5 +65,16 @@ function! run#Run(dict)
     let j = job_start('cmd /C '.a:dict['cmd'], options)
     let d=#{title: a:dict["cmd"], lines: [], efm: regexp}
     execute "let "..GetJobDictName(j).."= copy(d)"
+    if job_status(j) == "run"
+      let g:tid_run = timer_start(1000, function("run#alive"), #{repeat: -1})
+      let g:tid_alive_sec = 0
+    else
+      unlet  g:tid_run
+    endif
   endif
+endfunction
+
+function! run#alive(...)
+  cgetexpr "running "..g:tid_alive_sec.." seconds"
+  let g:tid_alive_sec += 1
 endfunction

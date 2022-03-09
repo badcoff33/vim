@@ -15,7 +15,7 @@ let s:white    = "#FFFFFF"
 let s:blue     = "#2188FF"
 let s:red      = "#FF2382"
 
-let s:silver9 = "#F5F5F5"
+let s:silver9 = "#F5F5F8"
 let s:silver8 = "#E1E1E7"
 let s:silver7 = "#D1D1D5"
 let s:silver6 = "#B5B5BE"
@@ -38,14 +38,14 @@ execute 'hi Normal' s:GuiFg(s:silver2) s:GuiBg(s:white) s:GuiAttr('NONE')
 execute 'hi Bold' s:GuiFg(  s:white)  s:GuiAttr('bold')
 execute 'hi Italic' s:GuiFg(s:white)  s:GuiAttr('italic')
 execute 'hi NonText' s:GuiFg(s:silver6) s:GuiBg('bg')
-execute 'hi Visual' s:GuiFg(s:silver0) s:GuiBg(s:silver7)
-execute 'hi StatusLine' s:GuiFg(s:silver9) s:GuiBg(s:silver2) s:GuiAttr('NONE')
+execute 'hi Visual' s:GuiFg(s:white) s:GuiBg(s:blue)
+execute 'hi StatusLine' s:GuiFg(s:black) s:GuiBg(s:silver6) s:GuiAttr('NONE')
 execute 'hi StatusLineNC' s:GuiFg(s:silver2) s:GuiBg(s:silver7) s:GuiAttr('NONE')
-execute 'hi VertSplit' s:GuiFg(s:silver6) s:GuiBg('bg') s:GuiAttr('NONE')
+execute 'hi VertSplit' s:GuiFg(s:silver9) s:GuiBg(s:silver9) s:GuiAttr('NONE')
 execute 'hi IncSearch' s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr('none')
 execute 'hi Search' s:GuiFg(s:black) s:GuiBg(s:silver8) s:GuiAttr('NONE')
 execute 'hi MatchParen' s:GuiFg(s:silver1) s:GuiBg(s:silver9) s:GuiAttr('underline')
-execute 'hi QuickFixLine' s:GuiFg(s:white) s:GuiBg(s:red) s:GuiAttr('NONE')
+execute 'hi QuickFixLine' s:GuiFg(s:red) s:GuiBg(s:white) s:GuiAttr('bold,italic')
 execute 'hi CursorLine' s:GuiBg(s:silver9)
 execute 'hi CursorLineNr' s:GuiFg(s:silver1) s:GuiBg(s:silver7) s:GuiAttr('bold')
 execute 'hi LineNr' s:GuiFg(s:silver6) s:GuiAttr('italic')
