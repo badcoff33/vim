@@ -7,10 +7,11 @@ vcs_cmd_clone = "hg clone -q"
 vcs_cmd_pull = "hg pull -q"
 
 git_dict = {
-        "pack/github/start/easy-align": "https://github.com/junegunn/vim-easy-align.git",
+        "pack/github/start/easy-align": "git@github.com:junegunn/vim-easy-align.git",
         "pack/github/start/colorizer":  "git@github.com:lilydjwg/colorizer.git",
-        "pack/github/opt/vista":        "https://github.com/liuchengxu/vista.vim.git",
-        "pack/github/opt/signify":      "https://github.com/mhinz/vim-signify.git"}
+        "pack/github/opt/vista":        "git@github.com:liuchengxu/vista.vim.git",
+        "pack/github/opt/signify":      "git@github.com:mhinz/vim-signify.git",
+        "pack/github/opt/wordy":        "git@github.com:preservim/vim-wordy.git" }
 
 for subdir in git_dict:
     git_url = git_dict[subdir]

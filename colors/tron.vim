@@ -59,8 +59,6 @@ let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
 execute "hi ColorColumn"  s:GuiBg(s:fg1)
 execute "hi Cursor" s:GuiFg("#ffffff") s:GuiBg(s:magenta) s:GuiAttr("NONE")
 execute "hi CursorLine"  s:GuiBg(s:hl_line) s:GuiAttr("NONE")
-execute "hi LineNr" s:GuiFg(s:fg2) s:GuiBg(s:bg2)
-execute 'hi LineNrAbove' s:GuiFg(s:fg4) s:GuiBg(s:bg4)
 execute "hi Error" s:GuiFg(s:red) s:GuiBg("bg")
 execute "hi iCursor" s:GuiFg(s:fg0) s:GuiBg(s:fg4)
 execute "hi MatchParen" s:GuiFg(s:green) s:GuiBg(s:bg3)
@@ -77,11 +75,14 @@ execute "hi VisualNOS"  s:GuiBg(s:bg_hl)
 execute 'hi QuickFixLine'  s:GuiFg(s:lightred) s:GuiBg('bg') s:GuiAttr('bold')
 
 " --- Gutter ---
+execute "hi LineNr" s:GuiFg(s:fg2) s:GuiBg(s:bg2) s:GuiAttr("bold")
+execute 'hi LineNrAbove' s:GuiFg(s:fg1) s:GuiBg(s:bg0) s:GuiAttr("bold")
+execute 'hi LineNrBelow' s:GuiFg(s:fg1) s:GuiBg(s:bg0) s:GuiAttr("bold")
 execute "hi CursorColumn"  s:GuiBg(s:fg1)
 execute "hi CursorLineNr" s:GuiFg(s:line_num)  s:GuiAttr("NONE")
 execute "hi Folded" s:GuiFg(s:fg3) s:GuiBg(s:fg1) s:GuiAttr("bold")
-execute "hi FoldColumn" s:GuiFg(s:fg3) s:GuiBg(s:bg0)
-execute "hi SignColumn" s:GuiFg(s:fg1) s:GuiBg(s:bg2)
+execute "hi FoldColumn" s:GuiFg(s:fg3) s:GuiBg(s:bg0) s:GuiAttr("bold")
+execute "hi SignColumn" s:GuiFg(s:fg1) s:GuiBg(s:bg0) s:GuiAttr("bold")
 
 " --- Navigation ---
 execute "hi Directory" s:GuiFg(s:blue)  s:GuiAttr("underline")
@@ -98,8 +99,8 @@ execute "hi Question" s:GuiFg(s:fg4)
 execute "hi StatusLine" s:GuiFg(s:fg4) s:GuiBg(s:mode_line_bg) s:GuiAttr("NONE")
 execute "hi StatusLineNC" s:GuiFg(s:fg0) s:GuiBg(s:bg2) s:GuiAttr("NONE")
 execute "hi StatusLineTerm" s:GuiFg(s:blue) s:GuiBg(s:fg3) s:GuiAttr("NONE")
-execute "hi IncSearch" s:GuiFg(s:yellow) s:GuiBg(s:bg3) s:GuiAttr("bold")
-execute "hi Search" s:GuiFg(s:green) s:GuiBg(s:bg4) s:GuiAttr("NONE")
+execute "hi IncSearch" s:GuiFg(s:bg3) s:GuiBg(s:yellow) s:GuiAttr("bold")
+execute "hi Search" s:GuiFg(s:blue) s:GuiBg(s:blue_bghl) s:GuiAttr("bold")
 
 hi! link StatusLineTerm StatusLine
 hi! link StatusLineTermNC StatusLineNC
@@ -152,10 +153,10 @@ hi! link Macro Define
 hi! link PreCondit PreProc
 hi! link Define PreProc
 
-execute "hi DiffAdd" s:GuiFg(s:green) s:GuiBg(s:fg1)
-execute "hi DiffChange" s:GuiFg(s:yellow) s:GuiBg(s:fg1)
-execute "hi DiffDelete" s:GuiFg(s:red) s:GuiBg(s:fg1)
-execute "hi DiffText" s:GuiFg(s:blue) s:GuiBg(s:fg1)
+execute "hi DiffAdd" s:GuiFg(s:green) s:GuiBg(s:green_bg)
+execute "hi DiffChange" s:GuiFg(s:blue) s:GuiBg(s:blue_bghl)
+execute "hi DiffDelete" s:GuiFg(s:red_bg) s:GuiBg(s:red_bg)
+execute "hi DiffText" s:GuiFg(s:blue) s:GuiBg(s:blue_bg)
 
 execute "hi cIncluded" s:GuiFg(s:blue)
 hi! link cOperator Operator

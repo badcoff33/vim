@@ -58,8 +58,9 @@ execute 'hi QuickFixLine'  s:GuiBg(s:bg3) s:GuiAttr('bold')
 execute 'hi Cursor' s:GuiFg(s:black) s:GuiBg(s:amber)
 execute 'hi CursorLine'  s:GuiBg(s:bg2)
 execute 'hi CursorLineNr' s:GuiFg(s:green3) s:GuiBg(s:bg3) s:GuiAttr('bold')
-execute 'hi LineNr' s:GuiFg(s:blue1) s:GuiBg(s:bg1)
-execute 'hi LineNrAbove' s:GuiFg(s:blue1) s:GuiBg(s:bg2)
+execute 'hi LineNr' s:GuiFg(s:blue3) s:GuiBg(s:bg2)
+execute 'hi LineNrAbove' s:GuiFg(s:bg4) s:GuiBg('bg') s:GuiAttr('bold')
+execute 'hi LineNrBelow' s:GuiFg(s:bg4) s:GuiBg('bg') s:GuiAttr('bold')
 
 highlight! link TabLineSel Normal
 highlight! link TabLineFill Normal
@@ -75,11 +76,11 @@ highlight! link User2 StatusLine
 highlight! link User3 StatusLine
 highlight! link User4 StatusLine
 highlight! link CursorColumn CursorLine
-highlight! link FoldColumn LineNr
+highlight! link FoldColumn Normal
+highlight! link SignColumn Normal
 highlight! link Folded StatusLineNC
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link SignColumn LineNr
 highlight! link WildMenu IncSearch
 
 " Apollo specific
