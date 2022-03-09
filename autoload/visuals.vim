@@ -18,25 +18,23 @@ function! visuals#hl_word_off(tid)
   end
 endfunction
 
-let g:blinky_cursorline_on = get(g:, "blinky_cursorline_on", 0)
-
 " Description: Make the actual window more obvious by temporary turn the
 " option 'cursorline' on.
-function! visuals#toggle_blinky()
-  if g:blinky_cursorline_on == 0
-    let g:tid_cursorline = -1
-    let g:blinky_cursorline_on = 1
-    set cursorline
-    augroup StickyCursorline
-      autocmd!
-      autocmd WinLeave             * call visuals#turn_cursorline_off()
-      autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
-    augroup END
-  else
-    let g:blinky_cursorline_on = 0
-    setlocal nocursorline
-    autocmd! StickyCursorline
-  end
+function! visuals#enable_blinky()
+  let g:tid_cursorline = -1
+  setlocal cursorline
+  augroup StickyCursorline
+    autocmd!
+    autocmd WinLeave             * call visuals#turn_cursorline_off()
+    autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
+  augroup END
+endfunction
+
+" Description: Stop function and release all resources
+function! visuals#disable_blinky()
+  let g:blinky_cursorline_on = 0
+  setlocal nocursorline
+  autocmd! StickyCursorline
 endfunction
 
 function! visuals#turn_cursorline_on()

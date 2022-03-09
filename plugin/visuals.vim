@@ -6,5 +6,12 @@ autocmd BufEnter * call visuals#blend_down()
 
 command -nargs=0 InfoHl call visuals#info_hl()
 
-command -nargs=0 Blinky :call visuals#toggle_blinky()
-Blinky " default to ON
+command -nargs=0 BlinkyOn :call visuals#enable_blinky()
+command -nargs=0 BlinkyOff :call visuals#disable_blinky()
+BlinkyOn " default to ON
+
+augroup visuals
+  au!
+  autocmd InsertEnter * setlocal cursorline
+  autocmd InsertLeave * setlocal nocursorline
+augroup END
