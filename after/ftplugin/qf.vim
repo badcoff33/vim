@@ -13,14 +13,9 @@ let @/ =b:save_search
 unlet b:save_search
 call histdel("search", -1)
 
-if exists("b:did_ftplugin_after")
-  finish
-endif
-
 let b:undo_ftplugin = "setlocal number< relativenumber< wrap< scrolloff<"
 
 setlocal nonumber norelativenumber nowrap scrolloff=0
 
 nnoremap <buffer> <Esc> :cclose<CR>
 
-let b:did_ftplugin_after = 1

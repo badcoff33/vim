@@ -1,9 +1,5 @@
 " Vim ftplugin file
 
-if exists("b:did_ftplugin_after")
-  finish
-endif
-
 setlocal textwidth=78
 setlocal shiftwidth=4
 setlocal nocindent
@@ -20,10 +16,20 @@ nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> e
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 
 " Preview in html
-command! -buffer Preview terminal pandoc -f gfm -t html % -o .preview.html
+let b:css_file = expand('<sfile>:p:h')..g:path_sep.."markdown\\normalized.css"
+let b:html_template_file = expand('<sfile>:p:h')..g:path_sep.."markdown\\template.html"
+if filereadable(b:css_file)
+  command! -buffer Preview exe "terminal ++close ++hidden"
+        \ .." pandoc -f gfm -t html5"
+        \ .." --css="..b:css_file
+        \ .." --template="..b:html_template_file
+        \ .." --metadata title=\""..expand("%:t").."\""
+        \ .." -o .preview.html "
+        \ ..expand("%")
+endif
 
 " Plugin EasyAlign tables
-vnoremap <buffer> <LocalLeader><Tab> :EasyAlign *\|<CR>
+vnoremap <buffer> <Tab> :EasyAlign *\|<CR>`.
 
 " Make heading underlined
 nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr=
@@ -69,4 +75,3 @@ function! s:ToggleTodo()
   endif
 endfunction
 
-let b:did_ftplugin_after = 1

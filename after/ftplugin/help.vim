@@ -2,10 +2,6 @@
 "
 " Description: Add-on some features for Help files.
 
-if exists("b:did_ftplugin_after")
-  finish
-endif
-
 setlocal nonumber norelativenumber
 
 " Jump to links with enter
@@ -22,4 +18,3 @@ nnoremap <buffer> <LocalLeader>o :set <C-r>=substitute(expand("<cword>"), "[^a-z
 nnoremap <buffer> <silent> . :call search('\|[^\ ]\+\|', 'W')<CR>
 nnoremap <buffer> <silent> , :call search('\|[^\ ]\+\|', 'bW')<CR>
 
-let b:did_ftplugin_after = 1

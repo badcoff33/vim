@@ -1,9 +1,5 @@
 " Vim ftplugin file
 
-if exists("b:did_ftplugin_after")
-  finish
-endif
-
 let b:undo_ftplugin = "setlocal textwidth< shiftwidth< nocindent<"
 
 setlocal textwidth=0
@@ -43,4 +39,3 @@ else
   nnoremap <special> <buffer> <LocalLeader>x :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
 endif
 
-let b:did_ftplugin_after = 1

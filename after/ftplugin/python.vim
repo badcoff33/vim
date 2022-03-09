@@ -1,9 +1,5 @@
 " Vim ftplugin file
 
-if exists("b:did_ftplugin_after")
-    finish
-endif
-
 " Wrapping and tabs.
 setlocal textwidth=78
 setlocal tabstop=4
@@ -24,4 +20,3 @@ let python_highlight_all = 1
 setlocal list
 setlocal listchars=tab:>-,trail:.,extends:#
 
-let b:did_ftplugin_after = 1

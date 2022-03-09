@@ -1,10 +1,6 @@
 " reStructuredText filetype plugin file
 " A nice one: Learn RST her http://rst.ninjs.org/
 
-if exists("b:did_ftplugin_after")
-  finish
-endif
-
 setlocal textwidth=78
 setlocal shiftwidth=4
 setlocal nocindent
@@ -26,4 +22,3 @@ iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
 iabbrev <buffer> xtodo *TODO*
 iabbrev <buffer> xlink `NAME <>`_<Esc>2bea
 
-let b:did_ftplugin_after = 1
