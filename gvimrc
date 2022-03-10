@@ -5,7 +5,7 @@ nnoremap <expr> <leader>h11 ':set guifont='..FontFamily()..':h11<CR>'
 nnoremap <expr> <leader>h10 ':set guifont='..FontFamily()..':h10<CR>'
 nnoremap <expr> <leader>h9  ':set guifont='..FontFamily()..':h9<CR>'
 
-set guifont=Fira_Code:h12
+set guifont=JetBrains_Mono:h10
 set guioptions=!a
 set guicursor+=a:blinkon0
 set renderoptions=
