@@ -26,23 +26,17 @@ let g:dircfg =
       \   'compiler ghs'
       \  ],
       \ 'RL78_data_flash': [
-      \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431',
-      \   'nnoremap <F8> :Rg -tc -tcmake <C-r><C-w> .<CR>',
-      \   'imap     <F8> <Esc><F8>',
-      \   'nnoremap <C-CR> :Rg -tc -tcmake <C-r><C-w> .',
-      \   'nnoremap <F7> <cmd>Make<CR>',
-      \   'inoremap <F7> <cmd>Make<CR>',
+      \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431 FDL_EEL_RL78_Type01/FDL/lib',
+      \   'xnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
+      \   'xnoremap <leader>m :<C-u>Make -s<space>',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'compiler iar'
       \ ],
       \ 'RL78_evaluation': [
       \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431',
-      \   'nnoremap <F8> :Rg -tc -tcmake <C-r><C-w> .<CR>',
-      \   'imap     <F8> <Esc><F8>',
-      \   'nnoremap <C-CR> :Rg -tc -tcmake <C-r><C-w> .',
-      \   'nnoremap <F7> <cmd>Make<CR>',
-      \   'inoremap <F7> <cmd>Make<CR>',
+      \   'xnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
+      \   'xnoremap <leader>m :<C-u>Make -s<space>',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'compiler iar'
@@ -50,5 +44,27 @@ let g:dircfg =
       \ 'VIM':[
       \   'cd ~\vimfiles',
       \   'set path=pack/**,colors,after/**,,'
-      \ ]
-      \ }
+      \ ]}
+
+""" WORDY
+
+" Define your own ring of dictionaries, overriding the default one in your .vimrc:
+let g:wordy#ring = [
+  \ 'weak',
+  \ ['being', 'passive-voice', ],
+  \ 'business-jargon',
+  \ 'weasel',
+  \ 'puffery',
+  \ ['problematic', 'redundant', ],
+  \ 'adjectives',
+  \ 'adverbs'
+  \ ]
+
+" You can navigate the ring with the following commands:
+" :NextWordy
+" :PrevWordy
+
+" Optionally map a key such as \w in your .vimrc to it by
+
+if !&wildcharm | set wildcharm=<C-z> | endif
+execute 'nnoremap <leader>w :Wordy<space>'.nr2char(&wildcharm)
