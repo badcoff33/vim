@@ -8,6 +8,7 @@ function! run#append(ch, msg)
 endfunction
 
 function! run#close(ch)
+  call timer_stop(g:tid_run)
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
@@ -23,9 +24,6 @@ function! run#close(ch)
         \ padding: [1,1,1,1],
         \ })
   call setwinvar(winid, "&wrap", 0)
-  if exists("g:tid_run")
-    call timer_stop(g:tid_run)
-  endif
 endfunction
 
 function! run#hidden_error(ch,msg)
@@ -67,14 +65,14 @@ function! run#run(dict)
     execute "let "..GetJobDictName(j).."= copy(d)"
     if job_status(j) == "run"
       let g:tid_run = timer_start(1000, function("run#alive"), #{repeat: -1})
-      let g:tid_alive_sec = 0
+      let g:run_alive_sec = 0
     else
       unlet  g:tid_run
     endif
   endif
 endfunction
 
-function! run#alive(...)
-  cgetexpr "running "..g:tid_alive_sec.." seconds"
-  let g:tid_alive_sec += 1
+function! run#alive(tid)
+  cgetexpr "running "..g:run_alive_sec.." seconds"
+  let g:run_alive_sec += 1
 endfunction
