@@ -234,6 +234,10 @@ augroup init
 augroup END
 
 syntax on
-colorscheme tron
+if &term == "builtin_gui"
+  colorscheme twotone
+else
+  colorscheme apollo
+endif
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
