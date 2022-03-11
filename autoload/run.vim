@@ -1,13 +1,5 @@
 
-
-let s:run_animation_strs = [
-      \ "-----",
-      \ "*----",
-      \ "-*---",
-      \ "--*--",
-      \ "---*-",
-      \ "----*" ]
-
+let s:run_ani_string = '-\|/'
 
 function! GetJobDictName(hdl)
   return "g:run"..ch_info(a:hdl)["id"]
@@ -19,6 +11,9 @@ function! run#append(ch, msg)
 endfunction
 
 function! run#close(ch)
+  call timer_stop(g:run_tid)
+  call popup_close(g:run_ani_winid)
+  unlet g:run_ani_winid
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
@@ -34,10 +29,6 @@ function! run#close(ch)
         \ padding: [1,1,1,1],
         \ })
   call setwinvar(winid, "&wrap", 0)
-  call popup_close(g:run_animation_win)
-  if exists("g:tid_run")
-    call timer_stop(g:tid_run)
-  endif
 endfunction
 
 function! run#hidden_error(ch,msg)
@@ -77,27 +68,25 @@ function! run#run(dict)
     let j = job_start('cmd /C '.a:dict['cmd'], options)
     let d=#{title: a:dict["cmd"], lines: [], efm: regexp}
     execute "let "..GetJobDictName(j).."= copy(d)"
-    if job_status(j) == "run"
-      let g:tid_run = timer_start(1000, function("run#alive"), #{repeat: -1})
-      let g:run_animation_idx = 0
-      let g:run_animation_win = popup_create(s:run_animation_strs[0], #{
-            \ line: &lines,
-            \ col: 40,
+    if ( job_status(j) == "run" ) && !exists("g:run_ani_winid") && ( !exists('a:dict.hidden') || (a:dict.hidden == 0) )
+      let g:run_tid = timer_start(500, function("run#alive"), #{repeat: -1})
+      let g:run_ani_index = 0
+      let g:run_ani_winid = popup_create(s:run_ani_string[0], #{
+            \ line: 1,
+            \ col: 1,
             \ tabpage: -1,
             \ highlight: 'PmenuSel',
             \ padding: [0,0,0,0],
             \ })
-    else
-      unlet  g:tid_run
     endif
   endif
 endfunction
 
 function! run#alive(...)
-  if g:run_animation_idx >= ( len(s:run_animation_strs) - 1 )
-    let g:run_animation_idx = 0
+  if g:run_ani_index >= ( len(s:run_ani_string) - 1 )
+    let g:run_ani_index = 0
   else
-    let g:run_animation_idx += 1
+    let g:run_ani_index += 1
   endif
-  call setbufline(winbufnr(g:run_animation_win), 1, s:run_animation_strs[g:run_animation_idx])
+  call setbufline(winbufnr(g:run_ani_winid), 1, s:run_ani_string[g:run_ani_index])
 endfunction
