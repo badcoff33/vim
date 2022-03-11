@@ -1,3 +1,14 @@
+
+
+let s:run_animation_strs = [
+      \ "-----",
+      \ "*----",
+      \ "-*---",
+      \ "--*--",
+      \ "---*-",
+      \ "----*" ]
+
+
 function! GetJobDictName(hdl)
   return "g:run"..ch_info(a:hdl)["id"]
 endfunction
@@ -23,6 +34,7 @@ function! run#close(ch)
         \ padding: [1,1,1,1],
         \ })
   call setwinvar(winid, "&wrap", 0)
+  call popup_close(g:run_animation_win)
   if exists("g:tid_run")
     call timer_stop(g:tid_run)
   endif
@@ -67,7 +79,14 @@ function! run#run(dict)
     execute "let "..GetJobDictName(j).."= copy(d)"
     if job_status(j) == "run"
       let g:tid_run = timer_start(1000, function("run#alive"), #{repeat: -1})
-      let g:tid_alive_sec = 0
+      let g:run_animation_idx = 0
+      let g:run_animation_win = popup_create(s:run_animation_strs[0], #{
+            \ line: &lines,
+            \ col: 40,
+            \ tabpage: -1,
+            \ highlight: 'PmenuSel',
+            \ padding: [0,0,0,0],
+            \ })
     else
       unlet  g:tid_run
     endif
@@ -75,6 +94,10 @@ function! run#run(dict)
 endfunction
 
 function! run#alive(...)
-  cgetexpr "running "..g:tid_alive_sec.." seconds"
-  let g:tid_alive_sec += 1
+  if g:run_animation_idx >= ( len(s:run_animation_strs) - 1 )
+    let g:run_animation_idx = 0
+  else
+    let g:run_animation_idx += 1
+  endif
+  call setbufline(winbufnr(g:run_animation_win), 1, s:run_animation_strs[g:run_animation_idx])
 endfunction
