@@ -12,6 +12,7 @@ let g:colors_name = "twotone"
 
 let s:black    = "#000000"
 let s:white    = "#FFFFFF"
+
 let s:blue     = "#2188FF"
 let s:red      = "#FF2382"
 

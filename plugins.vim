@@ -64,7 +64,3 @@ let g:wordy#ring = [
 " :NextWordy
 " :PrevWordy
 
-" Optionally map a key such as \w in your .vimrc to it by
-
-if !&wildcharm | set wildcharm=<C-z> | endif
-execute 'nnoremap <leader>w :Wordy<space>'.nr2char(&wildcharm)

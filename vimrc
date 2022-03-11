@@ -229,15 +229,14 @@ augroup init
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
   autocmd TerminalOpen * setlocal signcolumn=no nonumber norelativenumber foldcolumn=0
   autocmd VimEnter     * runtime plugins.vim
+  autocmd VimEnter     * execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
   " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
-  autocmd BufEnter    * :checktime
+  autocmd BufEnter     * :checktime
 augroup END
 
+
+let g:term = &term
+
 syntax on
-if &term == "builtin_gui"
-  colorscheme twotone
-else
-  colorscheme apollo
-endif
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
