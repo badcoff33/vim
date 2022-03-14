@@ -16,10 +16,8 @@ let g:dircfg =
       \ {
       \ 'HVH1x0_2_0': [
       \   'command! -nargs=0 CtagsCommand Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1',
-      \   'nnoremap <F8> :Rg -tc -tcmake <C-r><C-w> . C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1<CR>',
-      \   'imap     <F8> <Esc><F8>',
-      \   'nnoremap <F7> <cmd>Make<CR>',
-      \   'inoremap <F7> <cmd>Make<CR>',
+      \   'nnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> . C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1<CR>',
+      \   'nnoremap <leader>m :<C-u>Make -s<space>',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,',
       \   'set tagcase=match',
@@ -27,16 +25,16 @@ let g:dircfg =
       \  ],
       \ 'RL78_data_flash': [
       \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431 FDL_EEL_RL78_Type01/FDL/lib',
-      \   'xnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
-      \   'xnoremap <leader>m :<C-u>Make -s<space>',
+      \   'nnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
+      \   'nnoremap <leader>m :<C-u>Make -s<space>',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'compiler iar'
       \ ],
       \ 'RL78_evaluation': [
       \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431',
-      \   'xnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
-      \   'xnoremap <leader>m :<C-u>Make -s<space>',
+      \   'nnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
+      \   'nnoremap <leader>m :<C-u>Make -s<space>',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'compiler iar'
