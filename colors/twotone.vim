@@ -12,6 +12,7 @@ let g:colors_name = "twotone"
 
 let s:black    = "#000000"
 let s:white    = "#FFFFFF"
+
 let s:blue     = "#2188FF"
 let s:red      = "#FF2382"
 
@@ -39,7 +40,7 @@ execute 'hi Bold' s:GuiFg(  s:white)  s:GuiAttr('bold')
 execute 'hi Italic' s:GuiFg(s:white)  s:GuiAttr('italic')
 execute 'hi NonText' s:GuiFg(s:silver6) s:GuiBg('bg')
 execute 'hi Visual' s:GuiFg(s:white) s:GuiBg(s:blue)
-execute 'hi StatusLine' s:GuiFg(s:black) s:GuiBg(s:silver6) s:GuiAttr('NONE')
+execute 'hi StatusLine' s:GuiFg(s:white) s:GuiBg(s:silver3) s:GuiAttr('NONE')
 execute 'hi StatusLineNC' s:GuiFg(s:silver2) s:GuiBg(s:silver7) s:GuiAttr('NONE')
 execute 'hi VertSplit' s:GuiFg(s:silver9) s:GuiBg(s:silver9) s:GuiAttr('NONE')
 execute 'hi IncSearch' s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr('none')
