@@ -82,7 +82,7 @@ execute "hi CursorColumn"  s:GuiBg(s:fg1)
 execute "hi CursorLineNr" s:GuiFg(s:line_num)  s:GuiAttr("NONE")
 execute "hi Folded" s:GuiFg(s:fg3) s:GuiBg(s:fg1) s:GuiAttr("bold")
 execute "hi FoldColumn" s:GuiFg(s:fg3) s:GuiBg(s:bg0) s:GuiAttr("bold")
-execute "hi SignColumn" s:GuiFg(s:fg1) s:GuiBg(s:bg0) s:GuiAttr("bold")
+execute "hi SignColumn" s:GuiFg(s:fg1) s:GuiBg("bg") s:GuiAttr("bold")
 
 " --- Navigation ---
 execute "hi Directory" s:GuiFg(s:blue)  s:GuiAttr("underline")
@@ -98,14 +98,13 @@ execute "hi Question" s:GuiFg(s:fg4)
 " --- Decorations ---
 execute "hi StatusLine" s:GuiFg(s:fg4) s:GuiBg(s:mode_line_bg) s:GuiAttr("NONE")
 execute "hi StatusLineNC" s:GuiFg(s:fg0) s:GuiBg(s:bg2) s:GuiAttr("NONE")
-execute "hi StatusLineTerm" s:GuiFg(s:blue) s:GuiBg(s:fg3) s:GuiAttr("NONE")
+execute "hi VertSplit"  s:GuiFg(s:bg2) s:GuiBg(s:bg2) s:GuiAttr("NONE")
 execute "hi IncSearch" s:GuiFg(s:bg3) s:GuiBg(s:yellow) s:GuiAttr("bold")
-execute "hi Search" s:GuiFg(s:blue) s:GuiBg(s:blue_bghl) s:GuiAttr("bold")
+execute "hi Search" s:GuiFg(s:blue_bghl) s:GuiBg(s:blue) s:GuiAttr("bold")
 
 hi! link StatusLineTerm StatusLine
 hi! link StatusLineTermNC StatusLineNC
 hi! link WildMenu IncSearch
-hi! link VertSplit StatusLineNC
 
 execute "hi PmenuSbar" s:GuiFg(s:fg3) s:GuiBg(s:bg2)
 execute "hi PmenuThumb" s:GuiFg(s:fg4) s:GuiBg(s:bg3)
