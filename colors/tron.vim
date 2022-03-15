@@ -12,7 +12,7 @@ hi clear
 let g:colors_name = "frost"
 set background=dark
 
-let s:fg0              ="#90ACBC"
+let s:fg0              ="#435E77"
 let s:fg1              ="#5A7387"
 let s:fg2              ="#BBCCDD"
 let s:fg3              ="#BBF0EF"
@@ -57,13 +57,13 @@ let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
 
 " --- Editor ---
 execute "hi ColorColumn"  s:GuiBg(s:fg1)
-execute "hi Cursor" s:GuiFg("#ffffff") s:GuiBg(s:magenta) s:GuiAttr("NONE")
+execute "hi Cursor" s:GuiFg(s:accent) s:GuiBg(s:magenta) s:GuiAttr("NONE")
 execute "hi CursorLine"  s:GuiBg(s:hl_line) s:GuiAttr("NONE")
 execute "hi Error" s:GuiFg(s:red) s:GuiBg("bg")
 execute "hi iCursor" s:GuiFg(s:fg0) s:GuiBg(s:fg4)
 execute "hi MatchParen" s:GuiFg(s:green) s:GuiBg(s:bg3)
 execute "hi NonText" s:GuiFg(s:fg2)
-execute "hi Normal" s:GuiFg(s:fg0) s:GuiBg(s:bg1)
+execute "hi Normal" s:GuiFg(s:fg2) s:GuiBg(s:bg1)
 execute "hi SpecialKey" s:GuiFg(s:fg3)
 execute "hi SpellBad" s:GuiFg(s:red) s:GuiBg(s:bg0) s:GuiAttr("undercurl")
 execute "hi SpellCap" s:GuiFg(s:yellow) s:GuiBg(s:bg0) s:GuiAttr("undercurl")
@@ -75,11 +75,11 @@ execute "hi VisualNOS"  s:GuiBg(s:bg_hl)
 execute 'hi QuickFixLine'  s:GuiFg(s:lightred) s:GuiBg('bg') s:GuiAttr('bold')
 
 " --- Gutter ---
-execute "hi LineNr" s:GuiFg(s:fg2) s:GuiBg(s:bg2) s:GuiAttr("bold")
-execute 'hi LineNrAbove' s:GuiFg(s:fg1) s:GuiBg(s:bg0) s:GuiAttr("bold")
-execute 'hi LineNrBelow' s:GuiFg(s:fg1) s:GuiBg(s:bg0) s:GuiAttr("bold")
+execute "hi LineNr" s:GuiFg(s:fg2) s:GuiBg("bg") s:GuiAttr("bold")
+execute 'hi LineNrAbove' s:GuiFg(s:fg0) s:GuiBg("bg") s:GuiAttr("bold")
+execute 'hi LineNrBelow' s:GuiFg(s:fg0) s:GuiBg("bg") s:GuiAttr("bold")
 execute "hi CursorColumn"  s:GuiBg(s:fg1)
-execute "hi CursorLineNr" s:GuiFg(s:line_num)  s:GuiAttr("NONE")
+execute "hi CursorLineNr" s:GuiFg(s:line_num) s:GuiBg("bg") s:GuiAttr("NONE")
 execute "hi Folded" s:GuiFg(s:fg3) s:GuiBg(s:fg1) s:GuiAttr("bold")
 execute "hi FoldColumn" s:GuiFg(s:fg3) s:GuiBg(s:bg0) s:GuiAttr("bold")
 execute "hi SignColumn" s:GuiFg(s:fg1) s:GuiBg("bg") s:GuiAttr("bold")
@@ -141,7 +141,7 @@ execute "hi StorageClass" s:GuiFg(s:blue)
 execute "hi String" s:GuiFg(s:fg3)
 execute "hi Structure" s:GuiFg(s:magenta)
 execute "hi Tag" s:GuiFg(s:fg4)
-execute "hi Todo" s:GuiFg(s:fg3) s:GuiBg(s:red) s:GuiAttr("NONE")
+execute "hi Todo" s:GuiFg(s:red) s:GuiBg("bg") s:GuiAttr("bold")
 execute "hi Type" s:GuiFg(s:red)  s:GuiAttr("NONE")
 execute "hi Typedef" s:GuiFg(s:blue)
 execute "hi Delimiter" s:GuiFg(s:fg4)
