@@ -17,12 +17,10 @@ function! run#close(ch)
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
-  let text = text[:&columns - 2]
-  let width = min([len(text), &columns / 2])
   let winid = popup_create(text, #{
-        \ line: &lines,
-        \ col: &columns - width,
-        \ maxwidth: width,
+        \ line: 1,
+        \ col: 1,
+        \ maxwidth: min([len(text), &columns / 2]),
         \ time: 2500,
         \ tabpage: -1,
         \ highlight: 'PmenuSel',
