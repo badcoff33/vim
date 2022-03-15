@@ -5,13 +5,27 @@ function! lib#popup#bottom_right(text)
       let w = max([w, e])
     endfor
     return popup_create(a:text, #{
-          \ line: &lines,
-          \ col: &columns - w,
+          \ pos: "botright",
+          \ line: &lines - 2,
+          \ col: &columns,
           \ time: 2500,
           \ tabpage: -1,
           \ highlight: 'PmenuSel',
-          \ padding: [1,1,1,1],
+          \ padding: [1,1,1,1]
           \ })
   endif
+endfunction
+
+function! lib#popup#bottom_left(text)
+  return popup_create(a:text, #{
+        \ pos: "botleft",
+        \ line: &lines - 2,
+        \ col: 1,
+        \ time: 2500,
+        \ tabpage: -1,
+        \ highlight: 'PmenuSel',
+        \ padding: [1,1,1,1],
+        \ maxwidth: (&columns * 2) / 3
+        \ })
 endfunction
 

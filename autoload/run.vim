@@ -17,15 +17,7 @@ function! run#close(ch)
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
-  let winid = popup_create(text, #{
-        \ line: 1,
-        \ col: 1,
-        \ maxwidth: min([len(text), &columns / 2]),
-        \ time: 2500,
-        \ tabpage: -1,
-        \ highlight: 'PmenuSel',
-        \ padding: [1,1,1,1],
-        \ })
+  let winid = lib#popup#bottom_left(text)
   call setwinvar(winid, "&wrap", 0)
 endfunction
 
@@ -70,7 +62,7 @@ function! run#run(dict)
       let g:run_tid = timer_start(500, function("run#alive"), #{repeat: -1})
       let g:run_ani_index = 0
       let g:run_ani_winid = popup_create(s:run_ani_string[0], #{
-            \ line: 1,
+            \ line: &lines - 1,
             \ col: 1,
             \ tabpage: -1,
             \ highlight: 'PmenuSel',

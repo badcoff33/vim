@@ -215,8 +215,8 @@ nnoremap <Leader>c :clist!<CR>
 nnoremap <Leader>q <C-w>o:copen 4<CR>
 
 """ command line
-cnoremap <expr> <A-,> expand("%:h")..g:path_sep
-cnoremap <expr> <A-.> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
+cnoremap <expr> <A-.> expand("%:h")..g:path_sep
+cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase

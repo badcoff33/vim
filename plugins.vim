@@ -29,6 +29,7 @@ let g:dircfg =
       \   'nnoremap <leader>m :<C-u>Make -s<space>',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
+      \   'set relativenumber',
       \   'compiler iar'
       \ ],
       \ 'RL78_evaluation': [
@@ -37,11 +38,13 @@ let g:dircfg =
       \   'nnoremap <leader>m :<C-u>Make -s<space>',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
+      \   'set relativenumber',
       \   'compiler iar'
       \ ],
       \ 'VIM':[
       \   'cd ~\vimfiles',
-      \   'set path=pack/**,colors,after/**,,'
+      \   'set path=pack/**,colors,after/**,,',
+      \   'set relativenumber'
       \ ]}
 
 """ WORDY

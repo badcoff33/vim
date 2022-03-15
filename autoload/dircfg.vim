@@ -5,7 +5,7 @@ function! dircfg#Read(key)
     return
   endif
   if g:dircfg->has_key(a:key)
-    let winid = lib#popup#bottom_right(g:dircfg[a:key])
+    let winid = lib#popup#bottom_left(g:dircfg[a:key])
     call setwinvar(winid, "&wrap", 0)
     for v in g:dircfg[a:key]
       execute v
