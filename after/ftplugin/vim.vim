@@ -9,8 +9,16 @@ setlocal nocindent
 nnoremap <buffer> K :help <C-r><C-w><CR>
 nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 
+if empty(matchstr(expand("%:p:h"), "color"))
+  " source Vim file
+  nnoremap <special> <buffer> <CR> :w<bar>source%<CR>
+else
+  " source Vim color theme
+  nnoremap <special> <buffer> <CR> :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
+endif
+
 " source current visual region
-vnoremap <buffer> <LocalLeader>x :<C-U>call VisExecute()<CR>
+vnoremap <buffer> <CR> :<C-U>call VisExecute()<CR>
 
 function! VisExecute() abort
   let save_selection = &selection
@@ -31,11 +39,4 @@ function! LogError(t)
 endfunction
 endif
 
-if empty(matchstr(expand("%:p:h"), "color"))
-  " source Vim file
-  nnoremap <special> <buffer> <LocalLeader>x :w<bar>source%<CR>
-else
-  " source Vim color theme
-  nnoremap <special> <buffer> <LocalLeader>x :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
-endif
 
