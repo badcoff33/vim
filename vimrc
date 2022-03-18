@@ -212,7 +212,8 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 """ quickfix
 nnoremap <Leader>c :clist!<CR>
-nnoremap <Leader>q <C-w>o:copen 4<CR>
+nnoremap <Leader>q :botright copen<CR>
+nnoremap <Leader>Q :cclose<CR>
 
 """ command line
 cnoremap <expr> <A-.> expand("%:h")..g:path_sep
