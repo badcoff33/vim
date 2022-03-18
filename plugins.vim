@@ -17,7 +17,6 @@ let g:dircfg =
       \ 'HVH1x0_2_0': [
       \   'command! -nargs=0 CtagsCommand Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1',
       \   'nnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> . C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1<CR>',
-      \   'nnoremap <leader>m :<C-u>Make -s<space>',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,',
       \   'set tagcase=match',
@@ -26,8 +25,7 @@ let g:dircfg =
       \ 'RL78_data_flash': [
       \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431 FDL_EEL_RL78_Type01/FDL/lib',
       \   'nnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
-      \   'nnoremap <leader>m :<C-u>Make -s<space>',
-      \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
+      \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,FDL_EEL_RL78_Type01/FDL/lib,NvmDriver,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'set relativenumber',
       \   'compiler iar'
@@ -35,7 +33,6 @@ let g:dircfg =
       \ 'RL78_evaluation': [
       \   'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431',
       \   'nnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
-      \   'nnoremap <leader>m :<C-u>Make -s<space>',
       \   'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
       \   'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
       \   'set relativenumber',
