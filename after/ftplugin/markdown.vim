@@ -32,9 +32,9 @@ endif
 vnoremap <buffer> <Tab> :EasyAlign *\|<CR>`.
 
 " Make heading underlined
-nnoremap <buffer> <LocalLeader>h1 0v$beyo<Esc>PVr=
-nnoremap <buffer> <LocalLeader>h2 0v$beyo<Esc>PVr-
-nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr~
+nnoremap <buffer> <localleader>1 yypVr=k
+nnoremap <buffer> <localleader>2 yypVr-k
+nnoremap <buffer> <localleader>2 yypVr~k
 
 " More molecular undo of text
 inoremap <buffer> , ,<C-g>u

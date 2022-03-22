@@ -31,6 +31,7 @@ set showtabline=1
 set shortmess-=f " long form for file info
 set shortmess-=S " Yes, search count please
 set laststatus=2
+set relativenumber numberwidth=2
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
