@@ -45,7 +45,7 @@ execute 'hi StatusLineNC' s:GuiFg(s:silver2) s:GuiBg(s:silver7) s:GuiAttr('NONE'
 execute 'hi VertSplit' s:GuiFg(s:silver9) s:GuiBg(s:silver9) s:GuiAttr('NONE')
 execute 'hi IncSearch' s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr('none')
 execute 'hi Search' s:GuiFg(s:black) s:GuiBg(s:silver8) s:GuiAttr('NONE')
-execute 'hi MatchParen' s:GuiFg(s:silver1) s:GuiBg(s:silver9) s:GuiAttr('underline')
+execute 'hi MatchParen' s:GuiFg(s:blue) s:GuiBg('bg') s:GuiAttr('bold')
 execute 'hi QuickFixLine' s:GuiFg(s:red) s:GuiBg(s:white) s:GuiAttr('bold,italic')
 execute 'hi CursorLine' s:GuiBg(s:silver9)
 execute 'hi CursorLineNr' s:GuiFg(s:silver1) s:GuiBg(s:silver7) s:GuiAttr('bold')

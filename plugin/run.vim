@@ -5,5 +5,5 @@ command! -complete=file -nargs=* Make call run#run({'cmd':'make <args>', 'hidden
 command! -complete=file -nargs=* Rg call run#run({'cmd':'rg --vimgrep <args>', 'hidden':0, 'regexp':&grepformat})
 
 nnoremap <leader><f7> :<C-u>Make -s<space>
-nnoremap <f7> <cmd>:Make -s<up><cr>
+nnoremap <f7> :<C-u>Make -s<up><cr>
 imap <f7> <Esc><f7>,

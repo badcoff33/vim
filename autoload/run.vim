@@ -17,7 +17,7 @@ function! run#close(ch)
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
-  let winid = lib#popup#bottom_left(text)
+  let winid = lib#popup#top_right(text)
   call setwinvar(winid, "&wrap", 0)
 endfunction
 

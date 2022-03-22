@@ -185,8 +185,9 @@ inoremap <C-Space>} <C-o>db{<C-r>-}
 let g:vim_home = expand('<sfile>:p:h')
 let g:path_sep = has('unix') ? '/' : '\'
 
-""" make use of german keys
-set langmap=ü/,Ü?,ö],Ö[,ä},Ä{
+""" make use of Umlaut keys
+"set langmap=ü/,Ü?,ö],Ö[,ä},Ä{
+set langmap=Ö\",ö:
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
@@ -197,7 +198,7 @@ let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
 nnoremap <expr> <Leader>b ':filter /'..LsFilter(&ft)..'/ ls<CR>'
 
 """ quick note taking
-nnoremap <expr> <Leader>n ":edit "..strftime("~/Documents/Notes/note-%d-%m-%y.txt".."<CR>:setfiletype markdown<CR>")
+nnoremap <expr> <Leader>n ":drop "..strftime("~/Documents/Notes/note-%d-%m-%y.txt".."<CR>:setfiletype markdown<CR>")
 
 """ toggle options
 nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
@@ -218,6 +219,12 @@ nnoremap <Leader>Q :cclose<CR>
 """ command line
 cnoremap <expr> <A-.> expand("%:h")..g:path_sep
 cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
+
+""" command line abbreviations
+cabbrev E edit
+cabbrev T tabedit
+cabbrev F find
+cabbrev J tjump
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
