@@ -45,3 +45,12 @@ export def HighlightTags(what: string)
   highlight def link ctagsType Type
 enddef
 
+export def RunUpdate(tid: number)
+  CtagsCommand
+enddef
+
+export def Update()
+  if exists(":CtagsCommand") == 2
+    timer_start(1000, "ctags#RunUpdate", {'repeat': 1})
+  endif
+enddef

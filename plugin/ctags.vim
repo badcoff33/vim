@@ -19,3 +19,8 @@ import autoload "ctags.vim"
 
 #command! -complete=customlist,CtagsHighlightingCpl -nargs=1 CtagsHighlighting ctags.HighlightTags(<q-args>)
 command! -nargs=1 CtagsHighlighting ctags.HighlightTags(<q-args>)
+
+augroup CTAGS
+  autocmd!
+  autocmd BufWritePost *.c,*.h ctags.Update()
+augroup END
