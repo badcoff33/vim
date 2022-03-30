@@ -116,10 +116,12 @@ set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler
 if &diff
   set columns=999 lines=999
 endif
+command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
 " Switch to normal mode with special keys
 inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
+inoremap <C-Space> <Esc>
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
@@ -141,10 +143,6 @@ nnoremap <S-Right> <C-w>l
 nnoremap <S-Left> <C-w>h
 nnoremap <S-Up> <C-w>k
 nnoremap <S-Down> <C-w>j
-imap     <S-Right> <Esc><S-Right>
-imap     <S-Left> <Esc><S-Left>
-imap     <S-Up> <Esc><S-Up>
-imap     <S-Down> <Esc><S-Down>
 tnoremap <S-Right> <C-\><C-n><C-w>l
 tnoremap <S-Left>  <C-\><C-n><C-w>h
 tnoremap <S-Up>    <C-\><C-n><C-w>k
@@ -159,11 +157,16 @@ nnoremap <A-k> <cmd>move .-2<CR>==
 vnoremap <A-j> :move '>+1<CR>==gv=gv
 vnoremap <A-k> :move '<-2<CR>==gv=gv
 
-nnoremap <A-+> 3<C-w>+3<C-w>>
-nnoremap <A--> 3<C-w>-3<C-w><
-
 nnoremap <A-o> :bprevious<CR>
 nnoremap <A-i> :bnext<CR>
+
+" command line
+cnoremap <expr> <A-.> expand("%:h")..g:path_sep
+cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
+
+" Expand abbreviations (without trailing space)
+imap <C-CR> <C-]>
+cmap <C-CR> <C-]>
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
@@ -176,27 +179,22 @@ nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
 
 " Type a word, press below key squence and "Enclose" `current` (word) {bang}!
-inoremap <C-Space>" <C-o>db"<C-r>-"
-inoremap <C-Space>' <C-o>db'<C-r>-'
-inoremap <C-Space>` <C-o>db`<C-r>-`
-inoremap <C-Space>) <C-o>db(<C-r>-)
-inoremap <C-Space>] <C-o>db[<C-r>-]
-inoremap <C-Space>} <C-o>db{<C-r>-}
+inoremap <A-Space>" <C-o>db"<C-r>-"
+inoremap <A-Space>' <C-o>db'<C-r>-'
+inoremap <A-Space>` <C-o>db`<C-r>-`
+inoremap <A-Space>) <C-o>db(<C-r>-)
+inoremap <A-Space>] <C-o>db[<C-r>-]
+inoremap <A-Space>} <C-o>db{<C-r>-}
 
 let g:vim_home = expand('<sfile>:p:h')
 let g:path_sep = has('unix') ? '/' : '\'
 
 """ make use of Umlaut keys
-"set langmap=ü/,Ü?,ö],Ö[,ä},Ä{
-set langmap=Ö\",ö:
+set langmap=Ö\",ö:,ü{,ä},Ü[,Ä]
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
-let maplocalleader = "+"
-
-let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
-let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
-nnoremap <expr> <Leader>b ':filter /'..LsFilter(&ft)..'/ ls<CR>'
+let maplocalleader = "-"
 
 """ quick note taking
 nnoremap <expr> <Leader>n ":drop "..strftime("~/Documents/Notes/note-%d-%m-%y.txt".."<CR>:setfiletype markdown<CR>")
@@ -214,18 +212,18 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 """ quickfix
 nnoremap <Leader>c :clist!<CR>
-nnoremap <Leader>q :botright copen<CR>
+nnoremap <Leader>q :botright copen<CR>G
 nnoremap <Leader>Q :cclose<CR>
 
-""" command line
-cnoremap <expr> <A-.> expand("%:h")..g:path_sep
-cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
-
 """ command line abbreviations
-cabbrev E edit
-cabbrev T tabedit
-cabbrev F find
-cabbrev J tjump
+cabbrev e edit
+cabbrev t tabedit
+cabbrev f find
+cabbrev j tjump
+cabbrev b buffer
+let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
+let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
+cabbrev <expr> B 'filter /'..LsFilter(&ft)..'/ ls<CR>'
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase

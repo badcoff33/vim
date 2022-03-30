@@ -7,14 +7,14 @@ let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
 
 " iabbrev did not work when 'cpoptions' has '>'
 if match(&cpoptions, '>') < 0
-iabbrev <buffer> xswitch switch ()<Left><C-f>
-iabbrev <buffer> xcase   case :<C-f><CR>break;<CR><Up><Up><End><Left>
-iabbrev <buffer> xop     {<C-f><CR><CR>}<CR><Up><Up><C-f>
-iabbrev <buffer> xif     if ()<Left><C-f>
-iabbrev <buffer> xelse   else<C-f><CR>{<C-f><CR><CR>}<CR><Up><Up><C-f>
-iabbrev <buffer> xinc    #include ".h"<Left><Left><Left>
-iabbrev <buffer> xdef    #define
-iabbrev <buffer> xdbg    #warning DEBUG CODE:
+iabbrev <buffer> _switch switch ()<Left><C-f>
+iabbrev <buffer> _case   case :<C-f><CR>break;<CR><Up><Up><End><Left>
+iabbrev <buffer> _op     {<C-f><CR><CR>}<CR><Up><Up><C-f>
+iabbrev <buffer> _if     if ()<Left><C-f>
+iabbrev <buffer> _else   else<C-f><CR>{<C-f><CR><CR>}<CR><Up><Up><C-f>
+iabbrev <buffer> _inc    #include ".h"<Left><Left><Left>
+iabbrev <buffer> _def    #define
+iabbrev <buffer> _dbg    #warning DEBUG CODE:
 endif
 
 " quick preview of tags

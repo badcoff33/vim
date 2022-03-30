@@ -16,8 +16,11 @@ function! run#close(ch)
   unlet g:run_ani_winid
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
+  if !empty(getqflist())
+    clast
+  endif
   let text = "job done: "..eval(dict_name..'["title"]')
-  let winid = lib#popup#top_right(text)
+  let winid = lib#popup#top_left(text)
   call setwinvar(winid, "&wrap", 0)
 endfunction
 
@@ -59,10 +62,10 @@ function! run#run(dict)
     let d=#{title: a:dict["cmd"], lines: [], efm: regexp}
     execute "let "..GetJobDictName(j).."= copy(d)"
     if ( job_status(j) == "run" ) && !exists("g:run_ani_winid") && ( !exists('a:dict.hidden') || (a:dict.hidden == 0) )
-      let g:run_tid = timer_start(500, function("run#alive"), #{repeat: -1})
+      let g:run_tid = timer_start(200, function("run#alive"), #{repeat: -1})
       let g:run_ani_index = 0
       let g:run_ani_winid = popup_create(s:run_ani_string[0], #{
-            \ line: &lines - 1,
+            \ line: 1,
             \ col: 1,
             \ tabpage: -1,
             \ highlight: 'PmenuSel',

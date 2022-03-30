@@ -1,3 +1,16 @@
+function! lib#popup#top_left(text)
+  return popup_create(a:text, #{
+        \ pos: "topleft",
+        \ line: 1,
+        \ col: 1,
+        \ time: 2500,
+        \ tabpage: -1,
+        \ highlight: 'PmenuSel',
+        \ padding: [1,1,1,1],
+        \ maxwidth: (&columns * 2) / 3
+        \ })
+endfunction
+
 function! lib#popup#top_right(text)
   return popup_create(a:text, #{
         \ pos: "topright",

@@ -5,14 +5,15 @@ nnoremap <expr> <leader>h11 ':set guifont='..FontFamily()..':h11<CR>'
 nnoremap <expr> <leader>h10 ':set guifont='..FontFamily()..':h10<CR>'
 nnoremap <expr> <leader>h9  ':set guifont='..FontFamily()..':h9<CR>'
 
-set guifont=Courier_Prime:h11 linespace=2
+"set guifont=JetBrains_Mono
+set guifont=Courier_Prime:h11
 set guioptions=!a
 set guicursor+=a:blinkon0
 set renderoptions=
 set mousemodel=popup
 set nomousefocus
 set signcolumn=yes
-set columns=120
+set columns=100
 
 tnoremap <LeftMouse> <C-w>N
 tmap <RightMouse> <C-w>N<RightMouse>
