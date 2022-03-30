@@ -83,9 +83,6 @@ highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link WildMenu IncSearch
 
-" Apollo specific
-execute 'hi BlendDown' s:GuiFg(s:white) s:GuiBg(s:bg2)
-
 " Code
 execute 'hi Statement' s:GuiFg(s:blue3)
 execute 'hi Conditional' s:GuiFg(s:blue3)  s:GuiAttr('bold')

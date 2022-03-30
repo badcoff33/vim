@@ -113,9 +113,6 @@ let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
 let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}
 let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
 
-" Color scheme specific
-execute 'hi BlendDown' s:GuiFg(s:white) s:GuiBg(s:grey_8)
-
 " Basics
 execute 'hi Normal' s:GuiFg(s:grey_2) s:GuiBg(s:white) s:GuiAttr('NONE')
 execute 'hi Bold' s:GuiFg(  s:white)  s:GuiAttr('bold')
@@ -147,9 +144,6 @@ highlight! link TabLineFill Normal
 highlight! link TabLine StatusLineNC
 highlight! link TabLineSel StatusLine
 highlight! link WildMenu PmenuSel
-
-" Breeze specific
-execute 'hi BlendDown' s:GuiFg(s:grey_0) s:GuiBg(s:grey_8)
 
 " Code
 execute 'hi Statement' s:GuiFg(s:pink_3)  s:GuiAttr('bold')

@@ -59,12 +59,8 @@ function! visuals#info_hl()
 endfunction
 
 function visuals#blend_down()
-  if (&previewwindow || &buftype=='help')
-    if hlexists('BlendDown') == v:true
-      setlocal wincolor=BlendDown
-    else
-      setlocal wincolor=NonText
-    endif
+  if (&previewwindow || &bt=='help' || &ft == 'netrw' || &ft == 'qf')
+    setlocal wincolor=NonText
   endif
 endfunction
 

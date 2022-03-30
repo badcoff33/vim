@@ -49,9 +49,6 @@ execute 'hi Whitespace' s:GuiFg(s:silver)
 hi! link PMenuSel IncSearch
 hi! link CursorColumn CursorLine
 
-" Frost specific
-execute 'hi BlendDown' s:GuiFg(s:light_silver) s:GuiBg(s:background_plus)
-
 " Neovim Support
 execute 'hi healthError' s:GuiFg(s:red) s:GuiBg(s:light_silver)
 execute 'hi healthSuccess' s:GuiFg(s:green) s:GuiBg(s:light_silver)
@@ -183,3 +180,5 @@ hi! link markdownLinkTextDelimiter Keyword
 hi! link markdownListMarker Keyword
 hi! link markdownRule Keyword
 hi! link markdownHeadingDelimiter Keyword
+hi! link markdownCodeBlock Keyword
+hi! link markdownCode Keyword

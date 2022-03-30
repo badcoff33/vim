@@ -48,9 +48,6 @@ execute "hi VisualNOS"  s:GuiBg(s:frost2)
 execute "hi Whitespace" s:GuiFg(s:frost3)
 hi! link PMenuSel IncSearch
 
-" Frost specific
-execute "hi BlendDown" s:GuiBg(s:frost1)
-
 " Neovim Support
 execute "hi healthError" s:GuiFg(s:frostRed) s:GuiBg(s:frost1)
 execute "hi healthSuccess" s:GuiFg(s:frostGreen) s:GuiBg(s:frost1)
