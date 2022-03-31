@@ -20,8 +20,10 @@ function! run#close(ch)
     clast
   endif
   let text = "job done: "..eval(dict_name..'["title"]')
-  let winid = lib#popup#top_left(text)
-  call setwinvar(winid, "&wrap", 0)
+  if eval(dict_name..'["popup"]') == 1
+    let winid = lib#popup#top_left(text)
+    call setwinvar(winid, "&wrap", 0)
+  endif
 endfunction
 
 function! run#hidden_error(ch,msg)
@@ -31,7 +33,7 @@ function! run#hidden_error(ch,msg)
 endfunction
 
 function! run#run(dict)
-  let options = {}
+  let job_opts = {}
   if &autowrite || &autowriteall
     try
       silent wall
@@ -41,25 +43,30 @@ function! run#run(dict)
     endtry
   endif
   if exists('a:dict.cwd')
-    let options.cwd = a:dict.cwd
+    let job_opts.cwd = a:dict.cwd
   else
-    let options.cwd = getcwd()
+    let job_opts.cwd = getcwd()
   endif
   if !exists('a:dict.hidden') || (a:dict.hidden == 0)
-    let options.out_cb = function("run#append")
-    let options.err_cb = function("run#append")
-    let options.close_cb = function("run#close")
+    let job_opts.out_cb = function("run#append")
+    let job_opts.err_cb = function("run#append")
+    let job_opts.close_cb = function("run#close")
   else
-    let options.err_cb = function("run#hidden_error")
+    let job_opts.err_cb = function("run#hidden_error")
   endif
   if !exists('a:dict.regexp')
     let regexp = &errorformat
   else
     let regexp = a:dict.regexp
   endif
+  if exists('a:dict.popup_end') && (a:dict.popup_end != 0)
+    let close_popup = 1
+  else
+    let close_popup = 0
+  endif
   if exists('a:dict.cmd')
-    let j = job_start('cmd /C '.a:dict['cmd'], options)
-    let d=#{title: a:dict["cmd"], lines: [], efm: regexp}
+    let j = job_start('cmd /C '.a:dict['cmd'], job_opts)
+    let d = #{title: a:dict["cmd"], lines: [], efm: regexp, popup: close_popup}
     execute "let "..GetJobDictName(j).."= copy(d)"
     if ( job_status(j) == "run" ) && !exists("g:run_ani_winid") && ( !exists('a:dict.hidden') || (a:dict.hidden == 0) )
       let g:run_tid = timer_start(200, function("run#alive"), #{repeat: -1})
