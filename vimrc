@@ -168,6 +168,8 @@ cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
 imap <C-CR> <C-]>
 cmap <C-CR> <C-]>
 
+nnoremap <PageDown> :cnext<CR>
+nnoremap <PageUp> :cprevious<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 nnoremap n nzzzv
@@ -194,7 +196,7 @@ set langmap=Ö\",ö:,ü{,ä},Ü[,Ä]
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
-let maplocalleader = "-"
+let maplocalleader = "+"
 
 """ quick note taking
 nnoremap <expr> <Leader>n ":drop "..strftime("~/Documents/Notes/note-%d-%m-%y.txt".."<CR>:setfiletype markdown<CR>")
@@ -215,9 +217,12 @@ nnoremap <Leader>c :clist!<CR>
 nnoremap <Leader>q :botright copen<CR>G
 nnoremap <Leader>Q :cclose<CR>
 
+""" zoom current buffer in seperate tab
+nnoremap <Leader>z :tabedit %<CR>
+nnoremap <Leader>x :tabclose<CR>
+
 """ command line abbreviations
 cabbrev e edit
-cabbrev t tabedit
 cabbrev f find
 cabbrev j tjump
 cabbrev b buffer

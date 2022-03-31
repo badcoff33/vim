@@ -18,4 +18,5 @@ let b:undo_ftplugin = "setlocal number< relativenumber< wrap< scrolloff<"
 setlocal nonumber norelativenumber nowrap scrolloff=0
 
 nnoremap <buffer> <Esc> :cclose<CR>
+nnoremap <buffer> q     :cclose<CR>
 

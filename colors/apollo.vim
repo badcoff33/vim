@@ -42,7 +42,7 @@ let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}
 let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
 
 " Basics
-execute 'hi Normal' s:GuiFg(s:silver3) s:GuiBg(s:bg1) s:GuiAttr('NONE')
+execute 'hi Normal' s:GuiFg(s:silver4) s:GuiBg(s:bg1) s:GuiAttr('NONE')
 execute 'hi Bold' s:GuiFg(s:silver2)  s:GuiAttr('bold')
 execute 'hi Italic' s:GuiFg(s:silver2)  s:GuiAttr('italic')
 execute 'hi NonText' s:GuiFg(s:blue1) s:GuiBg(s:bg1)
