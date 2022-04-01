@@ -18,24 +18,26 @@ let g:colors_name = 'apollo'
 let s:white   = '#FFFFFF'
 let s:black   = '#000000'
 
-let s:bg1     = '#10203F'
-let s:bg2     = '#263154'
-let s:bg3     = '#344468'
-let s:bg4     = '#48506F'
-let s:silver1 = '#505860'
-let s:silver2 = '#9098A0'
-let s:silver3 = '#C0CBDF'
-let s:silver4 = '#E0E8FE'
-let s:green1  = '#22B363'
-let s:green2  = '#30C15F'
-let s:green3  = '#32E060'
-let s:green4  = '#37FF6F'
-let s:amber   = '#C8C020'
-let s:blue1   = '#5088D0'
-let s:blue2   = '#60A0E8'
-let s:blue3   = '#70B0F8'
-let s:red1    = '#B82042'
-let s:red2    = '#E84070'
+let s:bg1      = "#10203F"
+let s:bg2      = "#263154"
+let s:bg3      = "#344468"
+let s:bg4      = "#48506F"
+let s:silver1  = "#505860"
+let s:silver2  = "#9098A0"
+let s:silver3  = "#C0CBDF"
+let s:silver4  = "#E0E8FE"
+let s:green_bg = "#226333"
+let s:green1   = "#22B363"
+let s:green2   = "#30C15F"
+let s:green3   = "#32E070"
+let s:green4   = "#37FF8F"
+let s:blue_bg  = "#2E4368"
+let s:blue1    = "#5088D0"
+let s:blue2    = "#60A0E8"
+let s:blue3    = "#70B0F8"
+let s:red1     = "#B82042"
+let s:red2     = "#E84070"
+let s:amber    = "#C8C020"
 
 let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
 let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}
@@ -51,8 +53,8 @@ execute 'hi Terminal' s:GuiFg(s:blue2) s:GuiBg(s:bg2)
 execute 'hi StatusLine' s:GuiFg(s:white) s:GuiBg(s:blue1) s:GuiAttr('NONE')
 execute 'hi StatusLineNC' s:GuiFg(s:silver3) s:GuiBg(s:bg4) s:GuiAttr('NONE')
 execute 'hi VertSplit' s:GuiFg(s:bg2) s:GuiBg(s:bg2) s:GuiAttr('NONE')
-execute 'hi IncSearch' s:GuiFg(s:black) s:GuiBg(s:silver4) s:GuiAttr('bold')
-execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:blue1) s:GuiAttr('NONE')
+execute 'hi IncSearch' s:GuiFg(s:green3) s:GuiBg(s:green_bg) s:GuiAttr('bold')
+execute 'hi Search' s:GuiFg(s:blue3) s:GuiBg(s:blue_bg) s:GuiAttr('NONE')
 execute 'hi MatchParen' s:GuiFg(s:green3) s:GuiBg('bg') s:GuiAttr('underline')
 execute 'hi QuickFixLine'  s:GuiFg(s:amber) s:GuiBg("bg") s:GuiAttr('bold')
 execute 'hi Cursor' s:GuiFg(s:black) s:GuiBg(s:amber)

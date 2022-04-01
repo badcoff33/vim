@@ -9,7 +9,9 @@ g:netrw_winsize = 25
 g:netrw_preview = 1
 
 # BUFFERGATOR
+g:buffergator_suppress_keymaps = 1
 g:buffergator_autoexpand_on_split = 0
+nnoremap <silent> <Leader>b <cmd>BuffergatorToggle<CR>
 
 # EASYALIGN
 # Start interactive EasyAlign in visual mode (e.g. vipga)

@@ -7,6 +7,7 @@ vcs_cmd_clone = "hg clone -q"
 vcs_cmd_pull = "hg pull -q"
 
 git_dict = {
+        "pack/github/opt/bufstop":       "git@github.com:mihaifm/bufstop.git",
         "pack/github/start/buffergator": "git@github.com:jeetsukumaran/vim-buffergator.git",
         "pack/github/start/easy-align":  "git@github.com:junegunn/vim-easy-align.git",
         "pack/github/opt/colorizer":     "git@github.com:lilydjwg/colorizer.git",

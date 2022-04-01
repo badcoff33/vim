@@ -16,9 +16,6 @@ function! run#close(ch)
   unlet g:run_ani_winid
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
-  if !empty(getqflist())
-    clast
-  endif
   let text = "job done: "..eval(dict_name..'["title"]')
   if eval(dict_name..'["popup"]') == 1
     let winid = lib#popup#top_left(text)

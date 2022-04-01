@@ -168,8 +168,6 @@ cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
 imap <C-CR> <C-]>
 cmap <C-CR> <C-]>
 
-nnoremap <PageDown> :cnext<CR>
-nnoremap <PageUp> :cprevious<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 nnoremap n nzzzv
@@ -214,8 +212,8 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 """ quickfix
 nnoremap <Leader>c :clist!<CR>
-nnoremap <Leader>q :botright copen<CR>G
-nnoremap <Leader>Q :cclose<CR>
+nnoremap <Leader>q :botright copen<CR>
+nnoremap <Leader>Q :botright copen<CR>G
 
 """ zoom current buffer in seperate tab
 nnoremap <Leader>z :tabedit %<CR>
