@@ -1,4 +1,8 @@
 vim9script
+
+# My own stuff
+nnoremap <A-CR> :FindFile<space>
+
 # NETRW variables
 g:netrw_use_errorwindow = 0
 g:netrw_banner = 0
@@ -11,7 +15,10 @@ g:netrw_preview = 1
 # BUFFERGATOR
 g:buffergator_suppress_keymaps = 1
 g:buffergator_autoexpand_on_split = 0
-nnoremap <silent> <Leader>b <cmd>BuffergatorToggle<CR>
+g:buffergator_viewport_split_policy = "b"
+g:buffergator_split_size = 20
+nnoremap <silent> <F2> <cmd>BuffergatorToggle<CR>
+imap <F2> <Esc><F2>
 
 # EASYALIGN
 # Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -32,7 +39,6 @@ g:dircfg =
         ],
        'RL78_data_flash': [
          'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431 NvmDriver',
-         'nnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
          'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,NvmDriver,NvmDriver/**,,',
          'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
          'set relativenumber',
