@@ -153,6 +153,7 @@ tnoremap <S-Down>  <C-\><C-n><C-w>j
 
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc> <C-\><C-n>
+tnoremap <LeftMouse> <C-\><C-n>
 
 " Line bubbling
 nnoremap <A-j> <cmd>move .+1<CR>==
@@ -243,16 +244,13 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 augroup init
   autocmd!
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
-  autocmd TerminalOpen * setlocal signcolumn=no nonumber norelativenumber foldcolumn=0
-  autocmd SourcePost   vimrc runtime plugins.vim
   autocmd VimEnter     * execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
   " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
   autocmd BufEnter     * :checktime
 augroup END
 
-
 let g:term = &term
-
 syntax on
 
+runtime plugins.vim
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
