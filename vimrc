@@ -116,7 +116,7 @@ set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler
 if &diff
   set columns=999 lines=999
 endif
-command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
 " Switch to normal mode with special keys
 inoremap <Ins> <Esc>
@@ -128,6 +128,9 @@ nnoremap Y y$
 
 " replace current inner word with one key press
 nnoremap <BS> ciw
+
+" Yank word under cursor
+nnoremap <C-Insert> yiw
 
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
@@ -150,6 +153,7 @@ tnoremap <S-Down>  <C-\><C-n><C-w>j
 
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc> <C-\><C-n>
+tnoremap <LeftMouse> <C-\><C-n>
 
 " Line bubbling
 nnoremap <A-j> <cmd>move .+1<CR>==
@@ -168,6 +172,8 @@ cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
 imap <C-CR> <C-]>
 cmap <C-CR> <C-]>
 
+nnoremap <C-Down> :cnext<CR>
+nnoremap <C-Up> :cprevious<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 nnoremap n nzzzv
@@ -191,6 +197,9 @@ let g:path_sep = has('unix') ? '/' : '\'
 
 """ make use of Umlaut keys
 set langmap=Ö\",ö:,ü{,ä},Ü[,Ä]
+
+nnoremap <C-down> :cnext<cr>
+nnoremap <C-up> :cprev<cr>
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
@@ -222,7 +231,7 @@ nnoremap <Leader>q :botright copen<CR>
 nnoremap <Leader>Q :botright copen<CR>G
 
 """ zoom current buffer in seperate tab
-nnoremap <Leader>z :tabedit %<CR>
+nnoremap <Leader>t :tabedit %<CR>
 nnoremap <Leader>x :tabclose<CR>
 
 """ command line abbreviations
@@ -237,16 +246,13 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 augroup init
   autocmd!
   autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
-  autocmd TerminalOpen * setlocal signcolumn=no nonumber norelativenumber foldcolumn=0
-  autocmd VimEnter     * runtime plugins.vim
   autocmd VimEnter     * execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
   " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
   autocmd BufEnter     * :checktime
 augroup END
 
-
 let g:term = &term
-
 syntax on
 
+runtime plugins.vim
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:

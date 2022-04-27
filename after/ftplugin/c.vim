@@ -27,6 +27,9 @@ nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <b
 nnoremap <buffer> <LocalLeader>f :silent call FormatC()<cr>
 vnoremap <buffer> <LocalLeader>f :silent call FormatC()<cr>
 
+" switch between header/source
+nnoremap <buffer> <LocalLeader><Tab> :call swap#OtherFileC()<CR>
+
 function! FormatC() range
     let save_cursor = getcurpos()
     noautocmd execute "cd" expand("%:p:h")
@@ -45,6 +48,9 @@ let g:c_comment_strings = 0
 let g:c_space_errors = 1
 let g:c_syntax_for_h = 1
 
+" Customize the c indent style
+setlocal cinoptions=(0,W4,gN
+
 setlocal textwidth=80
 setlocal expandtab
 setlocal formatoptions+=j
@@ -60,7 +66,4 @@ else
   setlocal list
 endif
 setlocal listchars=tab:>-,trail:.,extends:#
-
-" Customize the c indent style
-setlocal cinoptions=(0,W4,gN
 

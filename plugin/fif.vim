@@ -35,7 +35,7 @@ endif
 
 if executable("rg")
   " find any file
-  command! -nargs=+ FindFile :term rg --files -g <args> .
+  command! -nargs=+ FindFile :term rg --files --glob-case-insensitive --glob *<args>* .
 else
   command! -nargs=+ FindFile :term dir /S /B <args>
 endif
