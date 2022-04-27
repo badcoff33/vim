@@ -210,6 +210,12 @@ nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
+""" commands
+nnoremap <Leader>e :edit <C-r>=expand("%:h")..g:path_sep<CR>
+nnoremap <Leader>f :find *
+nnoremap <Leader>j :tjump /
+nnoremap <Leader>b :buffer<Space>
+
 """ quickfix
 nnoremap <Leader>c :clist!<CR>
 nnoremap <Leader>q :botright copen<CR>
@@ -220,10 +226,6 @@ nnoremap <Leader>z :tabedit %<CR>
 nnoremap <Leader>x :tabclose<CR>
 
 """ command line abbreviations
-cabbrev e edit
-cabbrev f find
-cabbrev j tjump
-cabbrev b buffer
 let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
 let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
 cabbrev <expr> B 'filter /'..LsFilter(&ft)..'/ ls<CR>'
