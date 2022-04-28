@@ -20,6 +20,3 @@ setlocal nonumber norelativenumber nowrap scrolloff=0
 nnoremap <buffer> <Esc> :cclose<CR>
 nnoremap <buffer> q     :cclose<CR>
 nnoremap <buffer> o     :wincmd o<CR>
-
-nnoremap <buffer> <up> :cprevious<CR>zz<C-w>p
-nnoremap <buffer> <down> :cnext<CR>zz<C-w>p

@@ -253,4 +253,5 @@ let g:term = &term
 syntax on
 
 runtime plugins.vim
+
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
