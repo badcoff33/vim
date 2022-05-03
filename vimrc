@@ -122,6 +122,7 @@ command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wi
 inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
 inoremap <C-Space> <Esc>
+inoremap <End> <Esc>
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
@@ -143,16 +144,16 @@ vnoremap < <gv
 
 " Window movement
 nnoremap <S-Right> <C-w>l
-nnoremap <S-Left> <C-w>h
-nnoremap <S-Up> <C-w>k
-nnoremap <S-Down> <C-w>j
+nnoremap <S-Left>  <C-w>h
+nnoremap <S-Up>    <C-w>k
+nnoremap <S-Down>  <C-w>j
 tnoremap <S-Right> <C-\><C-n><C-w>l
 tnoremap <S-Left>  <C-\><C-n><C-w>h
 tnoremap <S-Up>    <C-\><C-n><C-w>k
 tnoremap <S-Down>  <C-\><C-n><C-w>j
 
 " To map <Esc> to exit terminal-mode: >
-tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc>       <C-\><C-n>
 tnoremap <LeftMouse> <C-\><C-n>
 
 " Line bubbling
@@ -172,8 +173,8 @@ cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
 imap <C-CR> <C-]>
 cmap <C-CR> <C-]>
 
-nnoremap <C-Down> :cnext<CR>
-nnoremap <C-Up> :cprevious<CR>
+nnoremap <F12> :cnext<CR>
+nnoremap <F11> :cprevious<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 nnoremap n nzzzv
