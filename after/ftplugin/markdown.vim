@@ -18,10 +18,11 @@ nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> e
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 
 " Preview in html
-let b:css_file = expand('<sfile>:p:h')..g:path_sep.."markdown\\normalized.css"
-let b:html_template_file = expand('<sfile>:p:h')..g:path_sep.."markdown\\template.html"
+let b:css_file = expand('<sfile>:p:h').."\\markdown\\normalized.css"
 if filereadable(b:css_file)
-  command! -buffer Preview exe "terminal ++close ++hidden"
+  let b:html_template_file = expand('<sfile>:p:h').."\\markdown\\template.html"
+  command! -buffer PreviewHTML terminal ++close ++hidden cmd /C start .preview.html
+  command! -buffer MakeHTML exe "terminal ++close ++hidden"
         \ .." pandoc -f gfm -t html5"
         \ .." --css="..b:css_file
         \ .." --template="..b:html_template_file

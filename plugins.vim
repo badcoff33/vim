@@ -38,8 +38,8 @@ g:dircfg =
          'compiler ghs'
         ],
        'RL78_data_flash': [
-         'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431 NvmDriver',
-         'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,NvmDriver,NvmDriver/**,,',
+         'command! -nargs=0 CtagsCommand Ctags -R NvmDriverT01 Software',
+         'set path=Software,Software\**,NvmDriverT01,NvmDriverT01/**,,',
          'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
          'set relativenumber',
          'compiler iar'
