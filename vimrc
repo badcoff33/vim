@@ -167,6 +167,8 @@ nnoremap <A-i> :bnext<CR>
 " command line
 cnoremap <expr> <A-.> expand("%:h")..g:path_sep
 cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
+cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
+cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
 " Expand abbreviations (without trailing space)
 imap <C-CR> <C-]>
@@ -245,10 +247,13 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 
 augroup init
   autocmd!
-  autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
-  autocmd VimEnter     * execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
-  " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
-  autocmd BufEnter     * :checktime
+  " Reload changed buffers. Command rely on 'autoread'. FocusedGained works
+  " only on same terminals
+  autocmd BufEnter        *    checktime
+  autocmd BufEnter        *    if &pvw | setlocal nonu nornu | endif
+  autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
+  autocmd QuickFixCmdPost make cwindow
+  autocmd QuickFixCmdPost grep copen
 augroup END
 
 let g:term = &term
