@@ -26,11 +26,13 @@ if executable("rg")
   " Using links? Ripgrep supports this by th option '--follow'
   set grepprg=rg\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
-  nnoremap <expr> <Leader>g ':silent grep ' . RgGlob(&ft) . ' ' . expand('<cword>')
+  nnoremap <expr> <Leader>g ':silent grep '..RgGlob(&ft)..' '.. expand('<cword>')..'<CR>'
+  nnoremap <expr> <Leader>G ':silent grep '..RgGlob(&ft)..' '.. expand('<cword>')
 elseif executable("findstr")
   set grepprg=findstr\ /S\ /N
   set grepformat=%f:%l:%m
-  nnoremap <expr> <Leader>g ':silent grep ' . expand('<cword>') . ' ' . FindstrGlob(&ft)
+  nnoremap <expr> <Leader>g ':silent grep '..expand('<cword>')..' '..FindstrGlob(&ft)..'<CR>'
+  nnoremap <expr> <Leader>G ':silent grep '..expand('<cword>')..' '..FindstrGlob(&ft)
 endif
 
 if executable("rg")

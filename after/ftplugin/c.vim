@@ -17,8 +17,11 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> _tod #warning TODO
 endif
 
-" quick preview of tags
+" like :tjump
 nnoremap <buffer> <CR> g<C-]>
+
+" open tag preview
+nnoremap <buffer> K <C-w>}
 
 " Toggle automatic comment formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>

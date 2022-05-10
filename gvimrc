@@ -6,7 +6,8 @@ nnoremap <expr> <leader>h10 ':set guifont='..FontFamily()..':h10<CR>'
 nnoremap <expr> <leader>h9  ':set guifont='..FontFamily()..':h9<CR>'
 
 "set guifont=JetBrains_Mono
-set guifont=JetBrains\ Mono:h11
+set guifont=JetBrains\ Mono:h9
+set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
 set guioptions=!a
 set guicursor+=a:blinkon0
 set renderoptions=

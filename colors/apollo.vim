@@ -37,7 +37,7 @@ let s:blue2    = "#60A0E8"
 let s:blue3    = "#70B0F8"
 let s:red1     = "#B82042"
 let s:red2     = "#E84070"
-let s:amber    = "#C8C020"
+let s:amber    = "#E0EF20"
 
 let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
 let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}

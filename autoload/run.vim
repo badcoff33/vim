@@ -51,12 +51,15 @@ function! run#run(dict)
   else
     let job_opts.err_cb = function("run#hidden_error")
   endif
+  if exists('a:dict.cwd')
+    let job_opts.cwd = a:dict.cwd
+  endif
   if !exists('a:dict.regexp')
     let regexp = &errorformat
   else
     let regexp = a:dict.regexp
   endif
-  if exists('a:dict.popup_end') && (a:dict.popup_end != 0)
+  if exists('a:dict.notify') && (a:dict.notify != 0)
     let close_popup = 1
   else
     let close_popup = 0

@@ -39,6 +39,7 @@ execute 'hi NonText' s:GuiFg(s:silver6) s:GuiBg(s:silver9)
 execute 'hi Visual' s:GuiFg(s:white) s:GuiBg(s:blue)
 execute 'hi StatusLine' s:GuiFg(s:white) s:GuiBg(s:silver1) s:GuiAttr('bold')
 execute 'hi StatusLineNC' s:GuiFg(s:silver2) s:GuiBg(s:silver7) s:GuiAttr('NONE')
+execute 'hi StatusLineTerm' s:GuiFg(s:white) s:GuiBg(s:red) s:GuiAttr('bold')
 execute 'hi VertSplit' s:GuiFg(s:silver9) s:GuiBg(s:silver9) s:GuiAttr('NONE')
 execute 'hi IncSearch' s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr('none')
 execute 'hi Search' s:GuiFg(s:black) s:GuiBg(s:silver8) s:GuiAttr('NONE')
@@ -51,7 +52,6 @@ highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr
 highlight! link FoldColumn LineNr
 highlight! link Folded Comment
-highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link PmenuSel IncSearch
 highlight! link Pmenu Search

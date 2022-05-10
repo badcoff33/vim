@@ -122,7 +122,6 @@ command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wi
 inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
 inoremap <C-Space> <Esc>
-inoremap <End> <Esc>
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
@@ -229,7 +228,7 @@ nnoremap <Leader>b :buffer<Space>
 """ quickfix
 nnoremap <Leader>c :clist!<CR>
 nnoremap <Leader>q :botright copen<CR>
-nnoremap <Leader>Q :botright copen<CR>G
+nnoremap <Leader>Q :cclose<CR>
 
 """ zoom current buffer in seperate tab
 nnoremap <Leader>t :tabedit %<CR>

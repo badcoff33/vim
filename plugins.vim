@@ -3,6 +3,10 @@ vim9script
 # My own stuff
 nnoremap <A-CR> :FindFile<space>
 
+# FZF
+nnoremap <silent> <F3> <cmd>Files<CR>
+imap <F3> <Esc><F3>
+
 # NETRW variables
 g:netrw_use_errorwindow = 0
 g:netrw_banner = 0
@@ -31,24 +35,31 @@ g:dircfg =
        {
        'HVH1x0_2_0': [
          'command! -nargs=0 CtagsCommand Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1',
-         'nnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> . C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1<CR>',
          'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
          'set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,',
          'set tagcase=match',
          'compiler ghs'
         ],
-       'RL78_data_flash': [
+       'RL78_DF_T01': [
          'command! -nargs=0 CtagsCommand Ctags -R NvmDriverT01 Software',
+         'command! -nargs=* Make call run#run({"cmd":"make <args>", "hidden":0, "notify":1, "cwd":"Software"})',
          'set path=Software,Software\**,NvmDriverT01,NvmDriverT01/**,,',
-         'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
+         'set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g !NvmDriverT02\ -g\ *.[ch]\ $*',
+         'set relativenumber',
+         'compiler iar'
+       ],
+       'RL78_DF_T02': [
+         'command! -nargs=0 CtagsCommand Ctags -R NvmDriverT02 Software',
+         'command! -nargs=* Make call run#run({"cmd":"make <args>", "hidden":0, "notify":1, "cwd":"Software"})',
+         'set path=Software,Software\**,NvmDriverT02,NvmDriverT02/**,,',
+         'set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ !NvmDriverT01\ -g\ *.[ch]\ $*',
          'set relativenumber',
          'compiler iar'
        ],
        'RL78_evaluation': [
          'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431',
-         'nnoremap <C-CR> :<C-u>Rg -tc -tcmake <C-r><C-w> .',
          'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
-         'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
+         'set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ *.[ch]\ $*',
          'set relativenumber',
          'compiler iar'
        ],
