@@ -88,7 +88,7 @@ execute 'hi ErrorMsg' s:GuiFg(s:red) s:GuiBg('bg')
 execute 'hi WarningMsg' s:GuiFg(s:silver0) s:GuiBg('bg')
 execute 'hi ModeMsg' s:GuiFg(s:blue) s:GuiBg('bg') s:GuiAttr('bold')
 execute 'hi Question' s:GuiFg(s:silver1) s:GuiBg('bg')
-execute 'hi QuickFixLine' s:GuiFg(s:blue) s:GuiBg(s:silver8) s:GuiAttr('bold')
+execute 'hi QuickFixLine' s:GuiFg(s:red) s:GuiBg('bg') s:GuiAttr('bold')
 execute 'hi qfFileName' s:GuiFg(s:blue)
 execute 'hi qfLineNr' s:GuiFg(s:red)
 highlight! link qfSeparator Normal

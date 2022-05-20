@@ -32,6 +32,6 @@ set makeprg=make
 "set errorformat=\"%f\"\\,%l\ %m
 
 " multiline
-set errorformat=%E\"%f\"\\,%l\ \ Error%m,%C%m,%Z
-set errorformat+=%E\"%f\"\\,%l\ \ Fatal\ error%m,%C%m,%Z
-set errorformat+=%W\"%f\"\\,%l\ \ Warning%m,%C%m,%Z
+set errorformat=%E\"%f\"\\,%l\ \ Error%m,%Z%m
+set errorformat+=%W\"%f\"\\,%l\ \ Warning%m,%Z%m
+set errorformat+=%E\"%f\"\\,%l\ \ Fatal\ error%m,%Z%m

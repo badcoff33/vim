@@ -2,12 +2,12 @@
 " Description: Some minor extensions to run ripgrep or Windows own findstr.
 
 let g:rg_glob_patterns = {
-      \ 'c': '-g *.[ch]',
-      \ 'cpp': '-g *.[ch]',
+      \ 'c': '-tc',
+      \ 'cpp': '-tcpp',
       \ 'vim': '-g *.vim -g *vimrc',
       \ 'asm': '-g *.850',
-      \ 'py': '-g *.py',
-      \ 'cmake': '-g *.cmake -g CMakeLists.txt',
+      \ 'py': '-tpy',
+      \ 'cmake': '-tcmake',
       \ }
 
 let g:findstr_glob_patterns = {
@@ -26,13 +26,11 @@ if executable("rg")
   " Using links? Ripgrep supports this by th option '--follow'
   set grepprg=rg\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
-  nnoremap <expr> <Leader>g ':silent grep '..RgGlob(&ft)..' '.. expand('<cword>')..'<CR>'
-  nnoremap <expr> <Leader>G ':silent grep '..RgGlob(&ft)..' '.. expand('<cword>')
+  command! -complete=file -nargs=* Rg call run#run({'cmd':'rg --vimgrep <args>', 'hidden':0, 'regexp':&grepformat})
+  command! -complete=file -nargs=* RgFiles call run#run({'cmd':"rg --files --glob-case-insensitive --glob *<args>*"})
 elseif executable("findstr")
   set grepprg=findstr\ /S\ /N
   set grepformat=%f:%l:%m
-  nnoremap <expr> <Leader>g ':silent grep '..expand('<cword>')..' '..FindstrGlob(&ft)..'<CR>'
-  nnoremap <expr> <Leader>G ':silent grep '..expand('<cword>')..' '..FindstrGlob(&ft)
 endif
 
 if executable("rg")

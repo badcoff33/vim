@@ -1,28 +1,22 @@
-
-" Description: Execute commands for key, found in the dictionary g:dircfg
-" Dictionary required with this structured required:
+" Description: Execute function, found in the list g:dircfg_functions
 "
-" let g:dircfg = {
-"      \ '<NAME-A>':
-"      \ [
-"      \   '<command-a1>',
-"      \   '<command-a2>',
-"      \   '...'
-"      \ ],
-"      \ '<NAME-B>':
-"      \ [
-"      \   '<command-b1>',
-"      \   '<command-b2>',
-"      \   '...'
-"      \ ]
+" let g:dircfg_functions = [
+"      \ 'cfg-func_A',
+"      \ ...
 "      \ }
 
 function! CompleteDircfg(a,l,p)
-  let g:dircfg = get(g:, 'dircfg', {})
-  if (type(g:dircfg) != v:t_dict) && (len(g:rc) == 0)
-    echomsg "variable g:dircfg is no dictionary or empty"
+  let g:dircfg_functions = get(g:, 'dircfg_functions', {})
+  if (type(g:dircfg_functions) != v:t_list) && (len(g:dircfg_functions) == 0)
+    echomsg "variable g:dircfg_functions is not a list or empty"
   endif
-  return filter(keys(g:dircfg), 'v:val =~ a:a')
+  return filter(g:dircfg_functions, 'v:val =~ a:a')
 endfun
 
-command! -complete=customlist,CompleteDircfg -nargs=1 Readcfg call dircfg#Read('<args>')
+function! SourceFunction(func_name)
+  let Fref = function(a:func_name)
+  execute "verbose function" a:func_name
+  call Fref()
+endfunction
+
+command! -complete=customlist,CompleteDircfg -nargs=1 Readcfg call SourceFunction("<args>")

@@ -19,7 +19,7 @@ function! lib#popup#top_right(text)
         \ time: 2500,
         \ tabpage: -1,
         \ highlight: 'PmenuSel',
-        \ padding: [1,1,1,1],
+        \ padding: [0,1,0,1],
         \ maxwidth: (&columns * 2) / 3
         \ })
 endfunction
@@ -32,7 +32,7 @@ function! lib#popup#bottom_right(text)
         \ time: 2500,
         \ tabpage: -1,
         \ highlight: 'PmenuSel',
-        \ padding: [1,1,1,1],
+        \ padding: [0,1,0,1],
         \ maxwidth: (&columns * 2) / 3
         \ })
 endfunction
@@ -45,7 +45,7 @@ function! lib#popup#bottom_left(text)
         \ time: 2500,
         \ tabpage: -1,
         \ highlight: 'PmenuSel',
-        \ padding: [1,1,1,1],
+        \ padding: [0,1,0,1],
         \ maxwidth: (&columns * 2) / 3
         \ })
 endfunction

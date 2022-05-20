@@ -18,9 +18,10 @@ function! run#close(ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
   if eval(dict_name..'["popup"]') == 1
-    let winid = lib#popup#top_left(text)
+    let winid = lib#popup#bottom_left(text)
     call setwinvar(winid, "&wrap", 0)
   endif
+  doautocmd QuickFixCmdPost make
 endfunction
 
 function! run#hidden_error(ch,msg)
@@ -72,7 +73,7 @@ function! run#run(dict)
       let g:run_tid = timer_start(200, function("run#alive"), #{repeat: -1})
       let g:run_ani_index = 0
       let g:run_ani_winid = popup_create(s:run_ani_string[0], #{
-            \ line: 1,
+            \ line: &lines - 1,
             \ col: 1,
             \ tabpage: -1,
             \ highlight: 'PmenuSel',

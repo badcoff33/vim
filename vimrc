@@ -141,16 +141,6 @@ vnoremap <C-a> <C-a>gv
 vnoremap > >gv
 vnoremap < <gv
 
-" Window movement
-nnoremap <S-Right> <C-w>l
-nnoremap <S-Left>  <C-w>h
-nnoremap <S-Up>    <C-w>k
-nnoremap <S-Down>  <C-w>j
-tnoremap <S-Right> <C-\><C-n><C-w>l
-tnoremap <S-Left>  <C-\><C-n><C-w>h
-tnoremap <S-Up>    <C-\><C-n><C-w>k
-tnoremap <S-Down>  <C-\><C-n><C-w>j
-
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc>       <C-\><C-n>
 tnoremap <LeftMouse> <C-\><C-n>
@@ -167,6 +157,8 @@ nnoremap <A-i> :bnext<CR>
 " command line
 cnoremap <expr> <A-.> expand("%:h")..g:path_sep
 cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
+cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
+cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
 " Expand abbreviations (without trailing space)
 imap <C-CR> <C-]>
@@ -215,6 +207,10 @@ nnoremap <Leader>op :setlocal invpaste paste?<CR>
 nnoremap <Leader>ow :setlocal invwrap<CR>
 nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
+""" CUA tag movement
+nnoremap <A-right> g<C-]>
+nnoremap <A-left> <C-t>
+
 """ replace command
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
@@ -245,10 +241,13 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 
 augroup init
   autocmd!
-  autocmd BufEnter     * if &pvw | setlocal nonu nornu | endif
-  autocmd VimEnter     * execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
-  " Reload changed buffers. Command rely on 'autoread'. FocusedGained works only on same terminals
-  autocmd BufEnter     * :checktime
+  " Reload changed buffers. Command rely on 'autoread'. FocusedGained works
+  " only on same terminals
+  autocmd BufEnter        *    checktime
+  autocmd BufEnter        *    if &pvw | setlocal nonu nornu | endif
+  autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
+  autocmd QuickFixCmdPost make botright cwindow
+  autocmd QuickFixCmdPost grep botright copen
 augroup END
 
 let g:term = &term
