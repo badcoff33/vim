@@ -62,6 +62,7 @@ endif
 iabbrev <buffer> _link []()<Esc>2hi
 iabbrev <buffer> _date <C-r>=strftime("%Y-%m-%d")<CR>
 iabbrev <buffer> _py   ``` python<CR><CR>```<Up>
+iabbrev <buffer> _todo - [ ]
 
 function! s:ToggleTodo()
   let stop_at_line = search('^\s*$','nbW')

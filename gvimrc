@@ -1,10 +1,9 @@
 let FontFamily = {-> split(&gfn, ":")[0]}
-nnoremap <expr> <leader>h14 ':set guifont='..FontFamily()..':h14<CR>'
-nnoremap <expr> <leader>h13 ':set guifont='..FontFamily()..':h13<CR>'
-nnoremap <expr> <leader>h12 ':set guifont='..FontFamily()..':h12<CR>'
-nnoremap <expr> <leader>h11 ':set guifont='..FontFamily()..':h11<CR>'
-nnoremap <expr> <leader>h10 ':set guifont='..FontFamily()..':h10<CR>'
-nnoremap <expr> <leader>h9  ':set guifont='..FontFamily()..':h9<CR>'
+let IncFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) + 1)}
+let DecFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) - 1)}
+
+nnoremap <expr> <leader>+ ":set guifont="..FontFamily()..":h"..IncFontHeight().."<CR>"
+nnoremap <expr> <leader>- ":set guifont="..FontFamily()..":h"..DecFontHeight().."<CR>"
 
 "set guifont=JetBrains\ Mono:h9
 set guifont=Courier_Prime:h14
@@ -15,7 +14,6 @@ set renderoptions=
 set mousemodel=popup
 set nomousefocus
 set signcolumn=yes
-set columns=100
 
 tnoremap <LeftMouse> <C-w>N
 tmap <RightMouse> <C-w>N<RightMouse>
