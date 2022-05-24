@@ -1,12 +1,6 @@
-let FontFamily = {-> split(&gfn, ":")[0]}
-let IncFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) + 1)}
-let DecFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) - 1)}
-
-nnoremap <expr> <leader>+ ":set guifont="..FontFamily()..":h"..IncFontHeight().."<CR>"
-nnoremap <expr> <leader>- ":set guifont="..FontFamily()..":h"..DecFontHeight().."<CR>"
-
-"set guifont=JetBrains\ Mono:h9
-set guifont=Courier_Prime:h14
+"set guifont=JetBrains\ Mono:h10
+"set guifont=Courier\ Prime:h14
+set guifont=Victor\ Mono:h14 linespace=5
 set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
 set guioptions=!a
 set guicursor+=a:blinkon0
@@ -14,6 +8,13 @@ set renderoptions=
 set mousemodel=popup
 set nomousefocus
 set signcolumn=yes
+
+let FontFamily = {-> escape(split(&gfn, ":")[0], ' ')}
+let IncFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) + 1)}
+let DecFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) - 1)}
+
+nnoremap <expr> <leader>+ ":set guifont="..FontFamily()..":h"..IncFontHeight().."<CR>"
+nnoremap <expr> <leader>- ":set guifont="..FontFamily()..":h"..DecFontHeight().."<CR>"
 
 tnoremap <LeftMouse> <C-w>N
 tmap <RightMouse> <C-w>N<RightMouse>
