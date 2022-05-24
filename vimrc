@@ -166,8 +166,8 @@ cmap <C-CR> <C-]>
 
 nnoremap <F12> :cnext<CR>
 nnoremap <F11> :cprevious<CR>
-nnoremap <C-j> :cnext<CR>
-nnoremap <C-k> :cprevious<CR>
+nnoremap <A-.> :cnext<CR>
+nnoremap <A-,> :cprevious<CR>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
