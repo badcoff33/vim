@@ -32,7 +32,7 @@ g:dircfg_functions = [
  "Dircfg_T02",
  "Dircfg_RL78",
  "Dircfg_Vim",
- "Dircfg_TEST"
+ "Dircfg_C234"
 ]
 
 def g:Dircfg_Hvh()
@@ -46,24 +46,25 @@ enddef
 def g:Dircfg_T01()
   command! -nargs=0 CtagsCommand Ctags -R NvmDriverT01 Software
   command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
-  set path=Software,Software\**,NvmDriverT01,NvmDriverT01/**,,
+  set path=Software,Software/**,NvmDriverT01,NvmDriverT01/**,,
   set relativenumber
   compiler iar
-  let g:rg_paths = ["Software", "NvmDriverT01"]
-  let g:rg_excludes = ["NvmDriverT02"]
+  g:rg_paths = ["Software", "NvmDriverT01"]
+  g:rg_excludes = ["NvmDriverT02"]
 enddef
 
 def g:Dircfg_T02()
   command! -nargs=0 CtagsCommand Ctags -R NvmDriverT02 Software
   command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
-  set path=Software,Software\**,NvmDriverT02,NvmDriverT02/**,,
+  set path=Software,Software/**,NvmDriverT02,NvmDriverT02/**,,
   set relativenumber
   compiler iar
-  let g:rg_paths = ["Software", "NvmDriverT01"]
-  let g:rg_excludes = ["NvmDriverT02"]
+  g:rg_paths = ["Software", "NvmDriverT01"]
+  g:rg_excludes = ["NvmDriverT02"]
 enddef
 
 def g:Dircfg_C234()
+  set path=C234_Beta_5_17_2022/**,workspace_5_17_2022/**,,
   g:rg_excludes = ["html"]
   g:rg_paths = ["C234_Beta_5_17_2022", "workspace_5_17_2022"]
 enddef

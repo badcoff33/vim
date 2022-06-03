@@ -121,7 +121,7 @@ command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wi
 " Switch to normal mode with special keys
 inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
-inoremap <C-Space> <Esc>
+inoremap <C-Space> <C-o>
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
@@ -140,6 +140,10 @@ vnoremap <C-a> <C-a>gv
 " visual region
 vnoremap > >gv
 vnoremap < <gv
+
+" next/prev match, expand fold and recenter
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc>       <C-\><C-n>
@@ -164,12 +168,8 @@ cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? '
 imap <C-CR> <C-]>
 cmap <C-CR> <C-]>
 
-nnoremap <F12> :cnext<CR>
-nnoremap <F11> :cprevious<CR>
-nnoremap <A-.> :cnext<CR>
-nnoremap <A-,> :cprevious<CR>
-nnoremap n nzzzv
-nnoremap N Nzzzv
+nnoremap <char-228> :cnext<cr>
+nnoremap <char-246> :cprev<cr>
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -186,12 +186,6 @@ inoremap <A-Space>} <C-o>db{<C-r>-}
 
 let g:vim_home = expand('<sfile>:p:h')
 let g:path_sep = has('unix') ? '/' : '\'
-
-""" make use of Umlaut keys
-set langmap=Ö\",ö:,ü{,ä},Ü[,Ä]
-
-nnoremap <C-down> :cnext<cr>
-nnoremap <C-up> :cprev<cr>
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
@@ -218,8 +212,8 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 """ commands
 nnoremap <Leader>e :edit <C-r>=expand("%:h")..g:path_sep<CR>
 nnoremap <Leader>f :find *
-nnoremap <Leader>j :tjump /
 nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader><C-]> :tjump /
 
 """ quickfix
 nnoremap <Leader>c :clist!<CR>
@@ -254,5 +248,31 @@ let g:term = &term
 syntax on
 
 runtime plugins.vim
-
+function! BlinkOnYank()
+  let ml = getmarklist("%")
+  for e in ml
+    if e["mark"] == "'["
+      let lead_pos = e["pos"]
+    endif
+    if e["mark"] == "']"
+      let trail_pos = e["pos"]
+    endif
+  endfor
+  call prop_type_delete('TP_Visual')
+  call prop_type_add('TP_Visual', #{ highlight: 'Visual' })
+  if trail_pos[2] == -2147483648
+    let sp = len(getline(trail_pos[1]))
+  else
+    let sp = trail_pos[2]
+  endif
+  call prop_add_list(#{bufnr: bufnr("%"), id: 1, type: 'TP_Visual'}, [[lead_pos[1], lead_pos[2], trail_pos[1], sp + 1]])
+  call timer_start(200, "BlinkOffYank", {'repeat': 1})
+endfunction
+function! BlinkOffYank(tid)
+  call prop_clear(1, line("$"))
+  call prop_type_delete('TP_Visual')
+endfunction
+autocmd! TextYankPost
+autocmd TextYankPost *  call BlinkOnYank()
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
+

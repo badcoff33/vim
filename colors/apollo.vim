@@ -18,7 +18,7 @@ let g:colors_name = 'apollo'
 let s:white   = '#FFFFFF'
 let s:black   = '#000000'
 
-let s:bg1      = "#10203F"
+let s:bg1      = "#132443"
 let s:bg2      = "#263154"
 let s:bg3      = "#344468"
 let s:bg4      = "#48506F"

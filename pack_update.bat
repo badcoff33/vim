@@ -7,14 +7,13 @@ vcs_cmd_clone = "hg clone -q"
 vcs_cmd_pull = "hg pull -q"
 
 git_dict = {
-        "pack/github/start/fzf.git":     "git@github.com:junegunn/fzf.git",
-        "pack/github/start/fzf.vim":     "git@github.com:junegunn/fzf.vim.git",
-        "pack/github/start/buffergator": "git@github.com:jeetsukumaran/vim-buffergator.git",
-        "pack/github/start/easy-align":  "git@github.com:junegunn/vim-easy-align.git",
-        "pack/github/opt/colorizer":     "git@github.com:lilydjwg/colorizer.git",
-        "pack/github/opt/vista":         "git@github.com:liuchengxu/vista.vim.git",
-        "pack/github/start/signify":     "git@github.com:mhinz/vim-signify.git",
-        "pack/github/opt/wordy":         "git@github.com:preservim/vim-wordy.git" }
+        "pack/gh/start/signify":     "git@github.com:mhinz/vim-signify.git",
+        "pack/gh/start/easy-align":  "git@github.com:junegunn/vim-easy-align.git",
+        "pack/gh/start/fzf.git":     "git@github.com:junegunn/fzf.git",
+        "pack/gh/start/fzf.vim":     "git@github.com:junegunn/fzf.vim.git",
+        "pack/gh/opt/colorizer":     "git@github.com:lilydjwg/colorizer.git",
+        "pack/gh/opt/vista":         "git@github.com:liuchengxu/vista.vim.git",
+        "pack/gh/opt/wordy":         "git@github.com:preservim/vim-wordy.git" }
 
 for subdir in git_dict:
     git_url = git_dict[subdir]

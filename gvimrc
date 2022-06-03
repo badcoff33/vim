@@ -1,6 +1,6 @@
 "set guifont=JetBrains\ Mono:h10
 "set guifont=Courier\ Prime:h14
-set guifont=Victor\ Mono:h14 linespace=5
+set guifont=Victor\ Mono:h12 linespace=3
 set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
 set guioptions=!a
 set guicursor+=a:blinkon0

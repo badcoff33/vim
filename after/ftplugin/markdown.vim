@@ -1,10 +1,13 @@
 " Vim ftplugin file
 
+setlocal formatoptions=tacqw
 setlocal textwidth=78
 setlocal shiftwidth=4
+setlocal autoindent
 setlocal nocindent
 setlocal foldexpr=MarkdownFold()
 setlocal foldmethod=expr
+
 if has("conceal")
   setlocal conceallevel=0 concealcursor=nc
 endif
@@ -16,6 +19,9 @@ nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> e
 
 " Toggle between  `- [ ]` and `- [x]`
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
+
+" some math calculation
+nnoremap g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
 " Preview in html
 let b:css_file = expand('<sfile>:p:h').."\\markdown\\normalized.css"
