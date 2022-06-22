@@ -13,6 +13,6 @@ augroup END
 noremap <Leader><Leader> <cmd>HlWord<CR>
 
 autocmd! TextYankPost
-autocmd TextYankPost *  call visuals#blink_on_yank_now()
+autocmd TextYankPost *  call visuals#blink_on_yank_now(getpos("'["), getpos("']"))
 
 BlinkyOn " default to ON

@@ -248,31 +248,6 @@ let g:term = &term
 syntax on
 
 runtime plugins.vim
-function! BlinkOnYank()
-  let ml = getmarklist("%")
-  for e in ml
-    if e["mark"] == "'["
-      let lead_pos = e["pos"]
-    endif
-    if e["mark"] == "']"
-      let trail_pos = e["pos"]
-    endif
-  endfor
-  call prop_type_delete('TP_Visual')
-  call prop_type_add('TP_Visual', #{ highlight: 'Visual' })
-  if trail_pos[2] == -2147483648
-    let sp = len(getline(trail_pos[1]))
-  else
-    let sp = trail_pos[2]
-  endif
-  call prop_add_list(#{bufnr: bufnr("%"), id: 1, type: 'TP_Visual'}, [[lead_pos[1], lead_pos[2], trail_pos[1], sp + 1]])
-  call timer_start(200, "BlinkOffYank", {'repeat': 1})
-endfunction
-function! BlinkOffYank(tid)
-  call prop_clear(1, line("$"))
-  call prop_type_delete('TP_Visual')
-endfunction
-autocmd! TextYankPost
-autocmd TextYankPost *  call BlinkOnYank()
+
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
 

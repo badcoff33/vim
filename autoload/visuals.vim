@@ -64,22 +64,26 @@ function visuals#blend_down()
   endif
 endfunction
 
-function! visuals#blink_on_yank_now()
-  call prop_type_delete('TP_Visual')
-  call prop_type_add('TP_Visual', #{ highlight: 'Visual' })
-  let al = getpos("'[")[1]
-  let ac = getpos("'[")[2]
-  let bl = getpos("']")[1]
-  let bc = getpos("']")[2]
-  let ac = (ac > 1000) ? 1 : ac
-  let bc = (bc > 1000) ?  len(getline(bl)) : bc
-  call prop_add_list(
-        \ #{bufnr: bufnr("%"), id: 1, type: 'TP_Visual'},
-        \ [[al, ac, bl, bc + 1]])
-  call timer_start(200, "BlinkOffYank", {'repeat': 1})
+" avoid error 2nd from prop_type_add by delete it first
+call prop_type_delete('text_prop_yank')
+call prop_type_add('text_prop_yank', #{ highlight: 'CursorLine' })
+
+function! visuals#blink_on_yank_now(lead_pos, trail_pos)
+  if v:event['visual'] == v:true
+    return
+  endif
+  if v:event['operator'] == 'd'
+    return
+  endif
+  if a:trail_pos[2] == 0x7fffffff
+    let sp = len(getline(a:trail_pos[1]))
+  else
+    let sp = a:trail_pos[2]
+  endif
+  call prop_add_list(#{bufnr: bufnr("%"), id: 1, type: 'text_prop_yank'}, [[a:lead_pos[1], a:lead_pos[2], a:trail_pos[1], sp + 1]])
+  call timer_start(200, "visuals#blink_on_yank_off", {'repeat': 1})
 endfunction
 
 function! visuals#blink_on_yank_off(tid)
   call prop_clear(1, line("$"))
-  call prop_type_delete('TP_Visual')
 endfunction
