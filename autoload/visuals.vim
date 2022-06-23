@@ -22,7 +22,6 @@ endfunction
 " option 'cursorline' on.
 function! visuals#enable_blinky()
   let g:tid_cursorline = -1
-  setlocal cursorline
   augroup StickyCursorline
     autocmd!
     autocmd WinLeave             * call visuals#turn_cursorline_off()
@@ -38,7 +37,7 @@ function! visuals#disable_blinky()
 endfunction
 
 function! visuals#turn_cursorline_on()
-  if (&diff == 0) && (&buftype == "")
+  if (&diff == 0) && (&buftype == "") && !empty(bufname("%"))
     let g:tid_cursorline = timer_start(1000, function("visuals#turn_cursorline_off"))
     setlocal cursorline
   end
