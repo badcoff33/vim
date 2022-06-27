@@ -30,7 +30,8 @@ g:dircfg_functions = [
  "Dircfg_Hvh",
  "Dircfg_T01",
  "Dircfg_T02",
- "Dircfg_RL78",
+ "Dircfg_RL78_AAE",
+ "Dircfg_RL78_AGF",
  "Dircfg_Vim",
  "Dircfg_C234"
 ]
@@ -69,7 +70,16 @@ def g:Dircfg_C234()
   g:rg_paths = ["C234_Beta_5_17_2022", "workspace_5_17_2022"]
 enddef
 
-def g:Dircfg_RL78()
+def g:Dircfg_RL78_AAE()
+  command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10aae sbcata663431 "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae.h" "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae_ext.h"
+  set path=main,xcpbasicdrv,mcur5f10aae,sbcata663431,,
+  g:rg_paths = ["main", "mcur5f10aae", "xcpbasicdrv", "sbcata663431"]
+  g:rg_excludes = ["Debug"]
+  set relativenumber
+  compiler iar
+enddef
+
+def g:Dircfg_RL78_AGF()
   command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431
   set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,
   set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ *.[ch]\ $*

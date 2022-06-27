@@ -47,7 +47,7 @@ endfunction
 
 let b:load_doxygen_syntax = 0
 let g:c_no_comment_fold = 1
-let g:c_comment_strings = 0
+if exists("g:c_comment_strings") | unlet g:c_comment_strings | endif
 let g:c_space_errors = 1
 let g:c_syntax_for_h = 1
 

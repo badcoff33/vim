@@ -168,8 +168,8 @@ cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? '
 imap <C-CR> <C-]>
 cmap <C-CR> <C-]>
 
-nnoremap <char-228> :cnext<cr>
-nnoremap <char-246> :cprev<cr>
+nnoremap <char-228> <cmd>cnext<cr>
+nnoremap <char-246> <cmd>cprevious<cr>
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.

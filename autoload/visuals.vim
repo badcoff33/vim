@@ -58,8 +58,10 @@ function! visuals#info_hl()
 endfunction
 
 function visuals#blend_down()
-  if (&previewwindow || &bt=='help' || &ft == 'netrw' || &ft == 'qf')
-    setlocal wincolor=NonText
+  if ((&previewwindow) || (&bt=='help') || (&ft == 'netrw'))
+    set wincolor=CursorLine
+  else
+    set wincolor=
   endif
 endfunction
 
@@ -71,16 +73,16 @@ function! visuals#blink_on_yank_now(lead_pos, trail_pos)
   if v:event['visual'] == v:true
     return
   endif
-  if v:event['operator'] == 'd'
-    return
+  if v:event['operator'] == 'y'
+    " we want this only for yank operations
+    if a:trail_pos[2] == 0x7fffffff
+      let sp = len(getline(a:trail_pos[1]))
+    else
+      let sp = a:trail_pos[2]
+    endif
+    call prop_add_list(#{bufnr: bufnr("%"), id: 1, type: 'text_prop_yank'}, [[a:lead_pos[1], a:lead_pos[2], a:trail_pos[1], sp + 1]])
+    call timer_start(200, "visuals#blink_on_yank_off", {'repeat': 1})
   endif
-  if a:trail_pos[2] == 0x7fffffff
-    let sp = len(getline(a:trail_pos[1]))
-  else
-    let sp = a:trail_pos[2]
-  endif
-  call prop_add_list(#{bufnr: bufnr("%"), id: 1, type: 'text_prop_yank'}, [[a:lead_pos[1], a:lead_pos[2], a:trail_pos[1], sp + 1]])
-  call timer_start(200, "visuals#blink_on_yank_off", {'repeat': 1})
 endfunction
 
 function! visuals#blink_on_yank_off(tid)
