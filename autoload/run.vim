@@ -91,3 +91,11 @@ function! run#alive(...)
   endif
   call setbufline(winbufnr(g:run_ani_winid), 1, s:run_ani_string[g:run_ani_index])
 endfunction
+
+function run#popup_terminal()
+  let buf = term_start(['cmd'], #{hidden: 1, term_finish: 'close'})
+  let winopts = #{minwidth: &columns - 10 , minheight: 10, maxheight: &lines - 10 }
+  let g:popup_terminal_winid = popup_create(buf, winopts)
+  set wincolor=Terminal
+  autocmd VimResized <buffer> call popup_move(g:popup_terminal_winid, winopts)
+endfunction
