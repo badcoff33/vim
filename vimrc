@@ -176,6 +176,7 @@ nnoremap <char-246> <cmd>cprevious<cr>
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
 
+
 " Type a word, press below key squence and "Enclose" `current` (word) {bang}!
 inoremap <A-Space>" <C-o>db"<C-r>-"
 inoremap <A-Space>' <C-o>db'<C-r>-'
@@ -191,43 +192,42 @@ let g:path_sep = has('unix') ? '/' : '\'
 let mapleader = " "
 let maplocalleader = "+"
 
-""" quick note taking
+" quick note taking
 nnoremap <expr> <Leader>n ":drop "..strftime("~/Documents/Notes/note-%d-%m-%y.txt".."<CR>:setfiletype markdown<CR>")
 
-""" toggle options
-nnoremap <Leader>oh :set invhlsearch hlsearch?<CR>
-nnoremap <Leader>os :setlocal invspell spell?<CR>
-nnoremap <Leader>op :setlocal invpaste paste?<CR>
-nnoremap <Leader>ow :setlocal invwrap<CR>
-nnoremap <Leader>og :set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
+" toggle options
+nnoremap <Leader>os <cmd>setlocal invspell spell?<CR>
+nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
+nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
+nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
-""" CUA tag movement
+" CUA tag movement
 nnoremap <A-right> g<C-]>
 nnoremap <A-left> <C-t>
 
-""" replace command
+" replace command
 nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
-""" commands
+" commands
 nnoremap <Leader>e :edit <C-r>=expand("%:h")..g:path_sep<CR>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader><C-]> :tjump /
 
-""" quickfix
+" quickfix
 nnoremap <Leader>c :clist!<CR>
 nnoremap <Leader>q :botright copen<CR>
 nnoremap <Leader>Q :cclose<CR>
 
-""" zoom current buffer in seperate tab
+" zoom current buffer in seperate tab
 nnoremap <Leader>t :tabedit %<CR>
 nnoremap <Leader>x :tabclose<CR>
 
-""" command line abbreviations
-let g:ft2regex = { 'c':'\.[ch]$', 'vim':'vim', 'py':'\.py$', 'cmake':'\(\.cmake\|CMakeLists.txt\)' }
-let LsFilter = { ft -> has_key(g:ft2regex, ft) ? g:ft2regex[ft] : ''}
-cabbrev <expr> B 'filter /'..LsFilter(&ft)..'/ ls<CR>'
+" command line abbreviations
+let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
+let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
+nnoremap <expr> <Leader>v ':silent vimgrep /'..expand("<cword>")..'/ '..expand("%:h")..g:path_sep..LsFilter(&ft)
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
@@ -238,8 +238,11 @@ augroup init
   " Reload changed buffers. Command rely on 'autoread'. FocusedGained works
   " only on same terminals
   autocmd BufEnter        *    checktime
+
+  autocmd FocusLost       *    try | wall | catch | endtry
   autocmd BufEnter        *    if &pvw | setlocal nonu nornu | endif
   autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
+  autocmd VimLeave        *    mksession ~\_vimsession
   autocmd QuickFixCmdPost make botright cwindow
   autocmd QuickFixCmdPost grep botright copen
 augroup END

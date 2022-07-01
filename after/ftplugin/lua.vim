@@ -4,8 +4,8 @@ let b:undo_ftplugin = "setlocal smartindent< tabstop< shiftwidth<"
 
 setlocal smartindent tabstop=2 shiftwidth=2
 
-nnoremap <special> <buffer> <LocalLeader>s :w<bar>luafile %<CR>
-vnoremap <buffer> <LocalLeader>s y:lua <C-r>"<CR>
+nnoremap <special> <buffer> <CR> :w<bar>luafile %<CR>
+vnoremap <buffer> <CR> y:lua <C-r>"<CR>
 
 nnoremap <buffer> K :help <C-r><C-w><CR>
 
