@@ -37,7 +37,7 @@ g:dircfg_functions = [
 ]
 
 def g:Dircfg_Hvh()
-  command! -nargs=0 CtagsCommand Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1
+  command! -nargs=0 BuildCtags Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1
   set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*
   set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,
   set tagcase=match
@@ -45,7 +45,7 @@ def g:Dircfg_Hvh()
 enddef
 
 def g:Dircfg_T01()
-  command! -nargs=0 CtagsCommand Ctags -R NvmDriverT01 Software
+  command! -nargs=0 BuildCtags Ctags -R NvmDriverT01 Software
   command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
   set path=Software,Software/**,NvmDriverT01,NvmDriverT01/**,,
   set relativenumber
@@ -55,7 +55,7 @@ def g:Dircfg_T01()
 enddef
 
 def g:Dircfg_T02()
-  command! -nargs=0 CtagsCommand Ctags -R NvmDriverT02 Software
+  command! -nargs=0 BuildCtags Ctags -R NvmDriverT02 Software
   command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
   set path=Software,Software/**,NvmDriverT02,NvmDriverT02/**,,
   set relativenumber
@@ -71,7 +71,7 @@ def g:Dircfg_C234()
 enddef
 
 def g:Dircfg_RL78_AAE()
-  command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10aae sbcata663431 "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae.h" "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae_ext.h"
+  command! -nargs=0 BuildCtags Ctags -R main xcpbasicdrv mcur5f10aae sbcata663431 "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae.h" "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae_ext.h"
   set path=main,xcpbasicdrv,mcur5f10aae,sbcata663431,,
   g:rg_paths = ["main", "mcur5f10aae", "xcpbasicdrv", "sbcata663431"]
   g:rg_excludes = ["Debug"]
@@ -80,7 +80,7 @@ def g:Dircfg_RL78_AAE()
 enddef
 
 def g:Dircfg_RL78_AGF()
-  command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431
+  command! -nargs=0 BuildCtags Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431
   set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,
   set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ *.[ch]\ $*
   set relativenumber
@@ -92,52 +92,6 @@ def g:Dircfg_Vim()
   set path=pack/**,colors,after/**,,
   set relativenumber
 enddef
-
-
-
-
-
-# g:dircfg =
-#        {
-#        'HVH1x0_2_0': [
-#          'command! -nargs=0 CtagsCommand Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1',
-#          'set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*',
-#          'set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,',
-#          'set tagcase=match',
-#          'compiler ghs'
-#         ],
-#        'RL78_DF_T01': [
-#          'command! -nargs=0 CtagsCommand Ctags -R NvmDriverT01 Software',
-#          'command! -nargs=* Make call run#run({"cmd":"make <args>", "hidden":0, "notify":1, "cwd":"Software"})',
-#          'nnoremap <Leader>G :Rg -tc <C-r><C-w> Software NvmDriverT01',
-#          'nmap <Leader>g <Leader>G<CR>',
-#          'set path=Software,Software\**,NvmDriverT01,NvmDriverT01/**,,',
-#          'set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ !NvmDriverT02\ -g\ *.[ch]\ $*',
-#          'set relativenumber',
-#          'compiler iar'
-#        ],
-#        'RL78_DF_T02': [
-#          'command! -nargs=0 CtagsCommand Ctags -R NvmDriverT02 Software',
-#          'command! -nargs=* Make call run#run({"cmd":"make <args>", "hidden":0, "notify":1, "cwd":"Software"})',
-#          'nnoremap <Leader>G :Rg -tc <C-r><C-w> Software NvmDriverT02',
-#          'nmap <Leader>g <Leader>G<CR>',
-#          'set path=Software,Software\**,NvmDriverT02,NvmDriverT02/**,,',
-#          'set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ !NvmDriverT01\ -g\ *.[ch]\ $*',
-#          'set relativenumber',
-#          'compiler iar'
-#        ],
-#        'RL78_evaluation': [
-#          'command! -nargs=0 CtagsCommand Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431',
-#          'set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,',
-#          'set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ *.[ch]\ $*',
-#          'set relativenumber',
-#          'compiler iar'
-#        ],
-#        'VIM': [
-#          'cd ~\vimfiles',
-#          'set path=pack/**,colors,after/**,,',
-#          'set relativenumber'
-#        ]}
 
 # WORDY
 
