@@ -53,6 +53,7 @@ highlight! link SignColumn LineNr
 highlight! link FoldColumn LineNr
 highlight! link Folded Comment
 highlight! link StatusLineTermNC StatusLineNC
+highlight! link Terminal StatusLineNC
 highlight! link PmenuSel IncSearch
 highlight! link Pmenu Search
 highlight! link PmenuSbar Search

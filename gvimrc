@@ -1,4 +1,4 @@
-set guifont=JetBrains\ Mono:h12
+set guifont=JetBrains\ Mono:h11
 "set guifont=Courier\ Prime:h14
 "set guifont=Victor\ Mono:h12 linespace=3
 set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
