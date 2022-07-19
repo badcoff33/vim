@@ -1,6 +1,5 @@
-set guifont=JetBrains\ Mono:h11
-"set guifont=Courier\ Prime:h14
-"set guifont=Victor\ Mono:h12 linespace=3
+set guifont=JetBrains\ Mono:h12
+"set guifont=Courier\ Prime:h13
 set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
 set guioptions=!a
 set guicursor+=a:blinkon0
@@ -13,8 +12,8 @@ let FontFamily = {-> escape(split(&gfn, ":")[0], ' ')}
 let IncFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) + 1)}
 let DecFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) - 1)}
 
-nnoremap <expr> <leader>+ ":set guifont="..FontFamily()..":h"..IncFontHeight().."<CR>"
-nnoremap <expr> <leader>- ":set guifont="..FontFamily()..":h"..DecFontHeight().."<CR>"
+nnoremap <expr> <C-ScrollWheelUp> ":set guifont="..FontFamily()..":h"..IncFontHeight().."<CR>"
+nnoremap <expr> <C-ScrollWheelDown> ":set guifont="..FontFamily()..":h"..DecFontHeight().."<CR>"
 
 tnoremap <LeftMouse> <C-w>N
 tmap <RightMouse> <C-w>N<RightMouse>
@@ -27,5 +26,9 @@ else
 endif
 nnoremenu 1.320 PopUp.-SEP4- <NOP>
 nnoremenu 1.321 PopUp.Set\ font  :set guifont=*<CR>
+
+" Vim9: since C-] is no longer mapped on German keyboards, use this
+nmap <A-.> g<C-]>
+nmap <A-,> <C-t>
 
 " vim:ft=vim

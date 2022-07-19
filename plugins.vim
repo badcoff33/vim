@@ -71,9 +71,9 @@ def g:Dircfg_C234()
 enddef
 
 def g:Dircfg_RL78_AAE()
-  command! -nargs=0 BuildCtags Ctags -R main xcpbasicdrv mcur5f10aae sbcata663431 "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae.h" "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae_ext.h"
-  set path=main,xcpbasicdrv,mcur5f10aae,sbcata663431,,
-  g:rg_paths = ["main", "mcur5f10aae", "xcpbasicdrv", "sbcata663431"]
+  command! -nargs=0 BuildCtags Ctags -R main xcpbasicdrv mcur5f10aae sbcata663X31 "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae.h" "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae_ext.h"
+  set path=main,xcpbasicdrv,mcur5f10aae,sbcata663X31,,
+  g:rg_paths = ["main", "mcur5f10aae", "xcpbasicdrv", "sbcata663X31"]
   g:rg_excludes = ["Debug"]
   set relativenumber
   compiler iar

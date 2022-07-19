@@ -9,7 +9,7 @@ filetype plugin on
 filetype indent on
 
 set termguicolors
-set clipboard=unnamed
+set clipboard=
 set selection=inclusive
 set mouse=a
 set keymodel=
@@ -31,7 +31,7 @@ set showtabline=1
 set shortmess-=f " long form for file info
 set shortmess-=S " Yes, search count please
 set laststatus=2
-set relativenumber numberwidth=2
+set norelativenumber numberwidth=2
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
@@ -103,7 +103,7 @@ set pumheight=7
 
 " Command line completion
 set wildmenu
-set wildoptions=pum,tagfile
+set wildoptions=pum,tagfile,fuzzy
 set wildmode=full
 set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
@@ -161,6 +161,7 @@ nnoremap <A-i> :bnext<CR>
 " command line
 cnoremap <expr> <A-.> expand("%:h")..g:path_sep
 cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
+cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
@@ -217,8 +218,8 @@ nnoremap <Leader><C-]> :tjump /
 
 " quickfix
 nnoremap <Leader>c :clist!<CR>
-nnoremap <Leader>q :botright copen<CR>
-nnoremap <Leader>Q :cclose<CR>
+nnoremap <Leader>q :botright copen<CR>:clast<CR>
+nnoremap <Leader>Q :if (winnr("$") == 1 && &buftype=="quickfix") <bar> bprevious <bar> else <bar> cclose <bar> endif <CR>
 
 " zoom current buffer in seperate tab
 nnoremap <Leader>t :tabedit %<CR>
