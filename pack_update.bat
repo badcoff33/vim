@@ -8,6 +8,7 @@ vcs_cmd_pull = "hg pull -q"
 
 git_dict = {
         "pack/gh/start/signify":     "git@github.com:mhinz/vim-signify.git",
+        "pack/gh/start/dirvish":     "git@github.com:justinmk/vim-dirvish.git",
         "pack/gh/start/easy-align":  "git@github.com:junegunn/vim-easy-align.git",
         "pack/gh/start/fzf.git":     "git@github.com:junegunn/fzf.git",
         "pack/gh/start/fzf.vim":     "git@github.com:junegunn/fzf.vim.git",
