@@ -24,18 +24,27 @@ nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 nnoremap g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
 " Preview in html
-let b:css_file = expand('<sfile>:p:h').."\\markdown\\normalized.css"
+let b:css_file = expand('<sfile>:p:h').."\\markdown\\simple.css"
 if filereadable(b:css_file)
   let b:html_template_file = expand('<sfile>:p:h').."\\markdown\\template.html"
-  command! -buffer PreviewHTML terminal ++close ++hidden cmd /C start .preview.html
-  command! -buffer MakeHTML exe "terminal ++close ++hidden"
-        \ .." pandoc -f gfm -t html5"
+  command! -buffer OpenHTML call OpenHTML()
+  command! -buffer MakeHTML call MakeHTML()
+endif
+
+function! OpenHTML()
+    let open_cmd = "start "..getenv("TEMP")..g:path_sep.."md_preview.html"
+    exe "terminal ++close ++hidden cmd /C" open_cmd
+endfunction
+
+function! MakeHTML()
+  let md_to_hml_cmd = "pandoc -f gfm -t html5"
         \ .." --css="..b:css_file
         \ .." --template="..b:html_template_file
         \ .." --metadata title=\""..expand("%:t").."\""
-        \ .." -o .preview.html "
+        \ .." -o "..getenv("TEMP")..g:path_sep.."md_preview.html "
         \ ..expand("%")
-endif
+  exe "terminal ++close ++hidden cmd /C" md_to_hml_cmd
+endfunction
 
 " Plugin EasyAlign tables
 vnoremap <buffer> <Tab> :EasyAlign *\|<CR>`.
