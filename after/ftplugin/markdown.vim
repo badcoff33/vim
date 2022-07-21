@@ -21,29 +21,38 @@ nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> e
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 
 " some math calculation
-nnoremap g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
+nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
 " Preview in html
-let b:css_file = expand('<sfile>:p:h').."\\markdown\\simple.css"
-if filereadable(b:css_file)
-  let b:html_template_file = expand('<sfile>:p:h').."\\markdown\\template.html"
+let b:md_preview_file = getenv("TEMP")..g:path_sep..expand("%:t")..".html"
+let b:md_shadow_file = getenv("TEMP")..g:path_sep..expand("%:t")
+let b:md_title = expand("%:t")
+let b:md_css_file = expand('<sfile>:p:h').."\\markdown\\simple.css"
+let b:html_template_file = expand('<sfile>:p:h').."\\markdown\\template.html"
+
+if filereadable(b:md_css_file)
   command! -buffer OpenHTML call OpenHTML()
   command! -buffer MakeHTML call MakeHTML()
+  nnoremap <buffer> <C-F7> <cmd>write<bar>MakeHTML<CR>
+  nnoremap <buffer> <F7> <cmd>OpenHTML<CR>
+  autocmd InsertLeave <buffer> MakeHTML
+else
+  echomsg expand("<sfile>")..": No CSS file found"
 endif
 
 function! OpenHTML()
-    let open_cmd = "start "..getenv("TEMP")..g:path_sep.."md_preview.html"
-    exe "terminal ++close ++hidden cmd /C" open_cmd
+    exe "terminal ++close ++hidden cmd /C start" b:md_preview_file
 endfunction
 
 function! MakeHTML()
-  let md_to_hml_cmd = "pandoc -f gfm -t html5"
-        \ .." --css="..b:css_file
+  exe "write!" b:md_shadow_file
+  let md_to_html_cmd = "pandoc -f gfm -t html5"
+        \ .." --css="..b:md_css_file
         \ .." --template="..b:html_template_file
-        \ .." --metadata title=\""..expand("%:t").."\""
-        \ .." -o "..getenv("TEMP")..g:path_sep.."md_preview.html "
-        \ ..expand("%")
-  exe "terminal ++close ++hidden cmd /C" md_to_hml_cmd
+        \ .." --metadata title=\""..b:md_title."\""
+        \ .." -o "..b:md_preview_file
+        \ .." "..b:md_shadow_file
+  exe "terminal ++close ++hidden cmd /C" md_to_html_cmd
 endfunction
 
 " Plugin EasyAlign tables
