@@ -8,30 +8,31 @@
 filetype plugin on
 filetype indent on
 
-set termguicolors
-set clipboard=
-set selection=inclusive
-set mouse=a
-set keymodel=
-set selectmode=
 
-set nowrap
-set tabstop=2
-set shiftwidth=2
+set belloff=all
+set clipboard=
 set expandtab
 set history=200
-set belloff=all
-set novisualbell
+set keymodel=
+set laststatus=2
+set mouse=a
 set noerrorbells
+set nomore
+set norelativenumber numberwidth=2
 set noswapfile
+set novisualbell
+set nowrap
 set report=0
 set ruler
+set selection=inclusive
+set selectmode=
+set shiftwidth=2
+set shortmess-=S " Yes, search count please
+set shortmess-=f " long form for file info
 set showmatch matchtime=1
 set showtabline=1
-set shortmess-=f " long form for file info
-set shortmess-=S " Yes, search count please
-set laststatus=2
-set norelativenumber numberwidth=2
+set tabstop=2
+set termguicolors
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
@@ -165,10 +166,6 @@ cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
-" Expand abbreviations (without trailing space)
-imap <C-CR> <C-]>
-cmap <C-CR> <C-]>
-
 nnoremap <char-228> <cmd>cnext<cr>
 nnoremap <char-246> <cmd>cprevious<cr>
 
@@ -179,12 +176,12 @@ imap <C-l> <Esc><C-l>
 
 
 " Type a word, press below key squence and "Enclose" `current` (word) {bang}!
-inoremap <A-Space>" <C-o>db"<C-r>-"
-inoremap <A-Space>' <C-o>db'<C-r>-'
-inoremap <A-Space>` <C-o>db`<C-r>-`
-inoremap <A-Space>) <C-o>db(<C-r>-)
-inoremap <A-Space>] <C-o>db[<C-r>-]
-inoremap <A-Space>} <C-o>db{<C-r>-}
+inoremap <C-s>" <C-o>b"<Esc>ea"
+inoremap <C-s>' <C-o>b'<Esc>ea'
+inoremap <C-s>` <C-o>b`<Esc>ea`
+inoremap <C-s>) <C-o>b(<Esc>ea)
+inoremap <C-s>] <C-o>b[<Esc>ea]
+inoremap <C-s>} <C-o>b{<Esc>ea}
 
 let g:vim_home = expand('<sfile>:p:h')
 let g:path_sep = has('unix') ? '/' : '\'
@@ -240,7 +237,6 @@ augroup init
   " only on same terminals
   autocmd BufEnter        *    checktime
 
-  autocmd FocusLost       *    try | wall | catch | endtry
   autocmd BufEnter        *    if &pvw | setlocal nonu nornu | endif
   autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
   autocmd VimLeave        *    mksession ~\_vimsession
