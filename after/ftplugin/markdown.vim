@@ -1,6 +1,6 @@
 " Vim ftplugin file
 
-setlocal formatoptions=tacqw
+setlocal formatoptions=tcqw
 setlocal textwidth=78
 setlocal shiftwidth=4
 setlocal autoindent
@@ -25,17 +25,18 @@ nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
 " Preview in html
 let b:md_preview_file = getenv("TEMP")..g:path_sep..expand("%:t")..".html"
-let b:md_shadow_file = getenv("TEMP")..g:path_sep..expand("%:t")
-let b:md_title = expand("%:t")
+let b:md_source_file = expand("%")
+let b:md_title = expand("%:t:r")
 let b:md_css_file = expand('<sfile>:p:h').."\\markdown\\simple.css"
 let b:html_template_file = expand('<sfile>:p:h').."\\markdown\\template.html"
 
 if filereadable(b:md_css_file)
   command! -buffer OpenHTML call OpenHTML()
   command! -buffer MakeHTML call MakeHTML()
-  nnoremap <buffer> <C-F7> <cmd>write<bar>MakeHTML<CR>
+  nnoremap <buffer> <C-F7> <cmd>MakeHTML<CR>
   nnoremap <buffer> <F7> <cmd>OpenHTML<CR>
-  autocmd InsertLeave <buffer> MakeHTML
+  autocmd InsertLeave <buffer> write | call timer_start(2000, "MakeHTML")
+  autocmd TextChanged <buffer> write | call timer_start(2000, "MakeHTML")
 else
   echomsg expand("<sfile>")..": No CSS file found"
 endif
@@ -44,15 +45,15 @@ function! OpenHTML()
     exe "terminal ++close ++hidden cmd /C start" b:md_preview_file
 endfunction
 
-function! MakeHTML()
-  exe "write!" b:md_shadow_file
+function! MakeHTML(...)
   let md_to_html_cmd = "pandoc -f gfm -t html5"
         \ .." --css="..b:md_css_file
         \ .." --template="..b:html_template_file
         \ .." --metadata title=\""..b:md_title."\""
         \ .." -o "..b:md_preview_file
-        \ .." "..b:md_shadow_file
-  exe "terminal ++close ++hidden cmd /C" md_to_html_cmd
+        \ .." "..b:md_source_file
+  call run#run({'cmd': md_to_html_cmd, 'hidden': 0})
+  "exe "terminal ++hidden cmd /C" md_to_html_cmd
 endfunction
 
 " Plugin EasyAlign tables
