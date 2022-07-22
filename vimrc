@@ -233,11 +233,9 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 
 augroup init
   autocmd!
-  " Reload changed buffers. Command rely on 'autoread'. FocusedGained works
-  " only on same terminals
-  autocmd BufEnter        *    checktime
+  " Reload changed buffers. :checktime relies on 'autoread'.
+  autocmd WinEnter Enter  *    checktime
 
-  autocmd BufEnter        *    if &pvw | setlocal nonu nornu | endif
   autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
   autocmd VimLeave        *    mksession ~\_vimsession
   autocmd QuickFixCmdPost make botright cwindow

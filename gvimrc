@@ -1,5 +1,5 @@
-set guifont=JetBrains\ Mono:h12
-"set guifont=Courier\ Prime:h13
+"set guifont=JetBrains\ Mono:h12
+set guifont=Courier\ Prime:h13
 set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
 set guioptions=!a
 set guicursor+=a:blinkon0

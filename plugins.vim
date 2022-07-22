@@ -27,16 +27,16 @@ nmap <Leader>a <Plug>(EasyAlign)
 # DIRCFG
 
 g:dircfg_functions = [
- "Dircfg_Hvh",
- "Dircfg_T01",
- "Dircfg_T02",
- "Dircfg_RL78_AAE",
- "Dircfg_RL78_AGF",
- "Dircfg_Vim",
- "Dircfg_C234"
+ "Cfg_Hvh",
+ "Cfg_T01",
+ "Cfg_T02",
+ "Cfg_RL78_AAE",
+ "Cfg_RL78_AGF",
+ "Cfg_Vim",
+ "Cfg_C234"
 ]
 
-def g:Dircfg_Hvh()
+def g:Cfg_Hvh()
   command! -nargs=0 BuildCtags Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1
   set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*
   set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,
@@ -44,7 +44,7 @@ def g:Dircfg_Hvh()
   compiler ghs
 enddef
 
-def g:Dircfg_T01()
+def g:Cfg_T01()
   command! -nargs=0 BuildCtags Ctags -R NvmDriverT01 Software
   command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
   set path=Software,Software/**,NvmDriverT01,NvmDriverT01/**,,
@@ -54,7 +54,7 @@ def g:Dircfg_T01()
   g:rg_excludes = ["NvmDriverT02"]
 enddef
 
-def g:Dircfg_T02()
+def g:Cfg_T02()
   command! -nargs=0 BuildCtags Ctags -R NvmDriverT02 Software
   command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
   set path=Software,Software/**,NvmDriverT02,NvmDriverT02/**,,
@@ -64,13 +64,13 @@ def g:Dircfg_T02()
   g:rg_excludes = ["NvmDriverT02"]
 enddef
 
-def g:Dircfg_C234()
+def g:Cfg_C234()
   set path=C234_Beta_5_17_2022/**,workspace_5_17_2022/**,,
   g:rg_excludes = ["html"]
   g:rg_paths = ["C234_Beta_5_17_2022", "workspace_5_17_2022"]
 enddef
 
-def g:Dircfg_RL78_AAE()
+def g:Cfg_RL78_AAE()
   command! -nargs=0 BuildCtags Ctags -R main xcpbasicdrv mcur5f10aae sbcata663X31 "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae.h" "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae_ext.h"
   set path=main,xcpbasicdrv,mcur5f10aae,sbcata663X31,,
   g:rg_paths = ["main", "mcur5f10aae", "xcpbasicdrv", "sbcata663X31"]
@@ -79,7 +79,7 @@ def g:Dircfg_RL78_AAE()
   compiler iar
 enddef
 
-def g:Dircfg_RL78_AGF()
+def g:Cfg_RL78_AGF()
   command! -nargs=0 BuildCtags Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431
   set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,
   set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ *.[ch]\ $*
@@ -87,7 +87,7 @@ def g:Dircfg_RL78_AGF()
   compiler iar
 enddef
 
-def g:Dircfg_Vim()
+def g:Cfg_Vim()
   cd ~\vimfiles
   set path=pack/**,colors,after/**,,
   set relativenumber
