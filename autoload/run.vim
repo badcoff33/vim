@@ -12,8 +12,10 @@ endfunction
 
 function! run#close(ch)
   call timer_stop(g:run_tid)
-  call popup_close(g:run_ani_winid)
-  unlet g:run_ani_winid
+  if exists("g:run_ani_winid")
+    call popup_close(g:run_ani_winid)
+    unlet g:run_ani_winid
+  endif
   let dict_name = GetJobDictName(a:ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
