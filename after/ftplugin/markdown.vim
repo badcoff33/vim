@@ -1,7 +1,7 @@
 " Vim ftplugin file
 
-setlocal formatoptions=tcqw
-setlocal textwidth=78
+setlocal formatoptions=q
+setlocal textwidth=80
 setlocal shiftwidth=4
 setlocal autoindent
 setlocal nocindent
@@ -23,41 +23,46 @@ nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 " some math calculation
 nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
-" Preview in html
-let b:md_preview_file = getenv("TEMP")..g:path_sep..expand("%:t")..".html"
-let b:md_source_file = expand("%")
-let b:md_title = expand("%:t:r")
-let b:md_css_file = expand('<sfile>:p:h').."\\markdown\\simple.css"
-let b:html_template_file = expand('<sfile>:p:h').."\\markdown\\template.html"
-
-if filereadable(b:md_css_file)
+" Preview in HTML
+if filereadable(expand('<sfile>:p:h').."\\CSS\\simple.css")
   command! -buffer OpenHTML call OpenHTML()
   command! -buffer MakeHTML call MakeHTML()
   nnoremap <buffer> <C-F7> <cmd>MakeHTML<CR>
   nnoremap <buffer> <F7> <cmd>OpenHTML<CR>
-  autocmd InsertLeave <buffer> write | call timer_start(2000, "MakeHTML")
-  autocmd TextChanged <buffer> write | call timer_start(2000, "MakeHTML")
-else
-  echomsg expand("<sfile>")..": No CSS file found"
+  autocmd InsertLeave <buffer> call UpdateShadowFile()
+  autocmd TextChanged <buffer> call UpdateShadowFile()
+  autocmd InsertLeave <buffer> call timer_start(2000, "MakeHTML")
+  autocmd TextChanged <buffer> call timer_start(2000, "MakeHTML")
+  let b:md_to_html_cmd = "pandoc -f gfm -t html5 --toc --toc-depth=3"
+        \ .." --css="..expand('<sfile>:p:h').."\\CSS\\simple.css"
+        \ .." --template="..expand('<sfile>:p:h').."\\CSS\\template.html"
+        \ .." --metadata title=\""..expand("%:t:r").."\""
+        \ .." -o "..getenv("TEMP")..g:path_sep..expand("%:t")..".html"
+        \ .." "..getenv("TEMP")..g:path_sep.."_"..expand("%:t")..".html"
 endif
 
+function! UpdateShadowFile()
+  silent exe "write!" getenv("TEMP")..g:path_sep.."_"..expand("%:t")..".html"
+endfunction
+
 function! OpenHTML()
-    exe "terminal ++close ++hidden cmd /C start" b:md_preview_file
+    exe "terminal ++close ++hidden cmd /C start" getenv("TEMP")..g:path_sep..expand("%:t")..".html"
 endfunction
 
 function! MakeHTML(...)
-  let md_to_html_cmd = "pandoc -f gfm -t html5"
-        \ .." --css="..b:md_css_file
-        \ .." --template="..b:html_template_file
-        \ .." --metadata title=\""..b:md_title."\""
-        \ .." -o "..b:md_preview_file
-        \ .." "..b:md_source_file
-  call run#run({'cmd': md_to_html_cmd, 'hidden': 0})
-  "exe "terminal ++hidden cmd /C" md_to_html_cmd
+  if exists("b:md_to_html_cmd")
+    call run#run({
+          \ 'cmd': b:md_to_html_cmd,
+          \ 'hidden': 1,
+          \ 'nowrite': 1
+          \ })
+  endif
 endfunction
 
 " Plugin EasyAlign tables
-vnoremap <buffer> <Tab> :EasyAlign *\|<CR>`.
+if exists(":EasyAlign")
+  vnoremap <buffer> <Tab> :EasyAlign *\|<CR>`.
+endif
 
 " Make heading underlined
 nnoremap <buffer> <localleader>1 yypVr=k

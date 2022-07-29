@@ -34,9 +34,10 @@ endfunction
 
 function! run#run(dict)
   let job_opts = {}
-  if &autowrite || &autowriteall
+  if exists('a:dict.nowrite') && (a:dict.nowrite == 1)
+  elseif (&autowrite || &autowriteall)
     try
-      silent wall
+      "silent wall
     catch /.*/
       echoerr "run#run: not all modified buffers written"
     finally

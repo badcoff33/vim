@@ -20,6 +20,10 @@ endif
 " source current visual region
 vnoremap <buffer> <CR> :<C-U>call VisExecute()<CR>
 
+iabbrev <buffer> _fun function!<CR>endfunction<Up>
+iabbrev <buffer> _aug augroup NAME<CR>au!<CR>augroup END<Up><Up><End>
+
+if !exists("*VisExecute")
 function! VisExecute() abort
   let save_selection = &selection
   let save_reg_x = @x
@@ -29,6 +33,7 @@ function! VisExecute() abort
   let @x = save_reg_x
   let &selection = save_selection
 endfunction
+endif
 
 if !exists('*LogError')
 " Description: Support testing with Vim's assert functions

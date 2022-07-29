@@ -17,7 +17,7 @@ set keymodel=
 set laststatus=2
 set mouse=a
 set noerrorbells
-set nomore
+set more
 set norelativenumber numberwidth=2
 set noswapfile
 set novisualbell
@@ -122,7 +122,9 @@ command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wi
 " Switch to normal mode with special keys
 inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
-inoremap <C-Space> <C-o>
+
+" expand abbreviations w/o trailing space
+inoremap <C-Space> <C-]>
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
