@@ -1,5 +1,5 @@
 "set guifont=JetBrains\ Mono:h12
-set guifont=Courier\ Prime:h13
+set guifont=Courier\ Prime:h14
 set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
 set guioptions=!a
 set guicursor+=a:blinkon0
@@ -28,7 +28,8 @@ nnoremenu 1.320 PopUp.-SEP4- <NOP>
 nnoremenu 1.321 PopUp.Set\ font  :set guifont=*<CR>
 
 " Vim9: since C-] is no longer mapped on German keyboards, use this
-nmap <A-.> g<C-]>
-nmap <A-,> <C-t>
+nmap <C-+> g<C-]>
+imap <C-Char-252> <C-[>
+cmap <C-Char-252> <C-[>
 
 " vim:ft=vim
