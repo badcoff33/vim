@@ -9,7 +9,7 @@ let g:rg_glob_patterns = {
       \ 'c': '-tc',
       \ 'cpp': '-tcpp',
       \ 'vim': '-g *.vim -g *vimrc',
-      \ 'asm': '-g *.850',
+      \ 'asm850': '-g *.850 -tc',
       \ 'py': '-tpy',
       \ 'cmake': '-tcmake',
       \ }

@@ -33,8 +33,19 @@ g:dircfg_functions = [
  "Cfg_RL78_AAE",
  "Cfg_RL78_AGF",
  "Cfg_Vim",
- "Cfg_C234"
+ "Cfg_C234",
+ "Cfg_FUSA"
 ]
+
+def g:Cfg_FUSA()
+  command! -nargs=0 BuildCtags Ctags -R Software
+  set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*\ Software
+  set path=Software/**,,
+  set tagcase=match
+  compiler ghs
+  g:rg_paths = ["Software"]
+  g:rg_excludes = ["Build"]
+enddef
 
 def g:Cfg_Hvh()
   command! -nargs=0 BuildCtags Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1
@@ -60,8 +71,8 @@ def g:Cfg_T02()
   set path=Software,Software/**,NvmDriverT02,NvmDriverT02/**,,
   set relativenumber
   compiler iar
-  g:rg_paths = ["Software", "NvmDriverT01"]
-  g:rg_excludes = ["NvmDriverT02"]
+  g:rg_paths = ["Software", "NvmDriverT02"]
+  g:rg_excludes = ["NvmDriverT01"]
 enddef
 
 def g:Cfg_C234()

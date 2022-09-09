@@ -7,6 +7,12 @@ set renderoptions=
 set mousemodel=popup
 set nomousefocus
 set signcolumn=yes
+set laststatus=2
+
+augroup gvimrc
+  autocmd!
+  autocmd FocusLost * silent wall
+augroup END
 
 let FontFamily = {-> escape(split(&gfn, ":")[0], ' ')}
 let IncFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) + 1)}

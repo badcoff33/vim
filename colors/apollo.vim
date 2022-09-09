@@ -39,9 +39,10 @@ let s:red1     = "#B82042"
 let s:red2     = "#E84070"
 let s:amber    = "#E0EF20"
 
-let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
-let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}
-let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
+let s:GuiFg = {str -> empty(str) ? "":"guifg="..str}
+let s:GuiBg = {str -> empty(str) ? "":"guibg="..str}
+let s:GuiAttr = {str -> empty(str) ? "":"gui="..str}
+let s:Cterm = {str -> empty(str) ? "":"cterm="..str}
 
 " Basics
 execute 'hi Normal' s:GuiFg(s:silver4) s:GuiBg(s:bg1) s:GuiAttr('NONE')
@@ -58,7 +59,7 @@ execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:blue2) s:GuiAttr('NONE')
 execute 'hi MatchParen' s:GuiFg(s:green3) s:GuiBg('bg') s:GuiAttr('underline')
 execute 'hi QuickFixLine'  s:GuiFg(s:amber) s:GuiBg("bg") s:GuiAttr('bold')
 execute 'hi Cursor' s:GuiFg(s:white) s:GuiBg(s:green2)
-execute 'hi CursorLine'  s:GuiBg(s:bg3)
+execute 'hi CursorLine'  s:GuiBg(s:bg3) s:Cterm('NONE')
 execute 'hi CursorLineNr' s:GuiFg(s:green3) s:GuiBg(s:bg3) s:GuiAttr('bold')
 execute 'hi LineNr' s:GuiFg(s:blue3) s:GuiBg(s:bg2)
 execute 'hi LineNrAbove' s:GuiFg(s:bg4) s:GuiBg('bg') s:GuiAttr('bold')

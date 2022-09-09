@@ -17,6 +17,12 @@ let b:undo_ftplugin = "setlocal number< relativenumber< wrap< scrolloff<"
 
 setlocal nonumber norelativenumber nowrap scrolloff=0
 
+" a auto-close feature
+augroup QfAutoclose
+  autocmd!
+  autocmd WinLeave <buffer> if winnr("$") > 1 | wincmd c | endif
+augroup END
+
+nnoremap <buffer> s     :autocmd! QfAutoclose WinLeave <buffer><CR>
 nnoremap <buffer> <Esc> :cclose<CR>
-nnoremap <buffer> q     :cclose<CR>
 nnoremap <buffer> o     :wincmd o<CR>

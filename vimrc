@@ -14,7 +14,6 @@ set clipboard=
 set expandtab
 set history=200
 set keymodel=
-set laststatus=2
 set mouse=a
 set noerrorbells
 set more
@@ -176,7 +175,6 @@ nnoremap <char-246> <cmd>cprevious<cr>
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
 
-
 " Type a word, press below key squence and "Enclose" `current` (word) {bang}!
 inoremap <C-s>" <C-o>b"<Esc>ea"
 inoremap <C-s>' <C-o>b'<Esc>ea'
@@ -217,7 +215,7 @@ nnoremap <Leader><C-]> :tjump /
 
 " quickfix
 nnoremap <Leader>c :clist!<CR>
-nnoremap <Leader>q :botright copen<CR>:clast<CR>
+nnoremap <Leader>q :botright copen<CR>
 nnoremap <Leader>Q :if (winnr("$") == 1 && &buftype=="quickfix") <bar> bprevious <bar> else <bar> cclose <bar> endif <CR>
 
 " zoom current buffer in seperate tab
@@ -233,15 +231,16 @@ command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
 command! -nargs=0 SC :set   ignorecase  smartcase
 
-augroup init
+augroup vimrc
   autocmd!
   " Reload changed buffers. :checktime relies on 'autoread'.
-  autocmd WinEnter Enter  *    checktime
+  autocmd WinEnter        *    checktime
 
+  " Choose color theme dependent on term type
   autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
-  autocmd VimLeave        *    mksession ~\_vimsession
+
+  " Popup quickfix window after make with errros
   autocmd QuickFixCmdPost make botright cwindow
-  autocmd QuickFixCmdPost grep botright copen
 augroup END
 
 let g:term = &term
