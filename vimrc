@@ -125,11 +125,21 @@ inoremap <k0> <Esc>
 " expand abbreviations w/o trailing space
 inoremap <C-Space> <C-]>
 
-" Yank more consistent to D and dd commands
-nnoremap Y y$
+" more word-processor like key mappings in insert mode
+inoremap <C-BS> <C-w>
+inoremap <A-BS> <C-w>
+inoremap <C-Del> <C-Right><C-w>
+inoremap <A-Del> <C-Right><C-w>
+
+" more word-processor like key mappings in normal mode
+nnoremap <A-BS> db
+nnoremap <C-Del> de
 
 " replace current inner word with one key press
 nnoremap <BS> ciw
+
+" Yank more consistent to D and dd commands
+nnoremap Y y$
 
 " Yank word under cursor
 nnoremap <C-Insert> yiw
@@ -143,7 +153,7 @@ vnoremap <C-a> <C-a>gv
 vnoremap > >gv
 vnoremap < <gv
 
-" next/prev match, expand fold and recenter
+" next/prev match with fold and recenter
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
@@ -167,6 +177,9 @@ cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
+" make Vim register easier access
+nmap <char-252> "
+
 nnoremap <char-228> <cmd>cnext<cr>
 nnoremap <char-246> <cmd>cprevious<cr>
 
@@ -175,7 +188,7 @@ nnoremap <char-246> <cmd>cprevious<cr>
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
 
-" Type a word, press below key squence and "Enclose" `current` (word) {bang}!
+" Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
 inoremap <C-s>" <C-o>b"<Esc>ea"
 inoremap <C-s>' <C-o>b'<Esc>ea'
 inoremap <C-s>` <C-o>b`<Esc>ea`
