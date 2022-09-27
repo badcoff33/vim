@@ -125,15 +125,11 @@ inoremap <k0> <Esc>
 " expand abbreviations w/o trailing space
 inoremap <C-Space> <C-]>
 
-" more word-processor like key mappings in insert mode
+" more word-processor like key mappings
 inoremap <C-BS> <C-w>
-inoremap <A-BS> <C-w>
-inoremap <C-Del> <C-Right><C-w>
-inoremap <A-Del> <C-Right><C-w>
-
-" more word-processor like key mappings in normal mode
-nnoremap <A-BS> db
-nnoremap <C-Del> de
+inoremap <C-Del> <C-o>dw
+nmap <C-BS> i<C-BS>
+nmap <C-Del> i<C-Del>
 
 " replace current inner word with one key press
 nnoremap <BS> ciw
@@ -152,10 +148,6 @@ vnoremap <C-a> <C-a>gv
 " visual region
 vnoremap > >gv
 vnoremap < <gv
-
-" next/prev match with fold and recenter
-nnoremap n nzzzv
-nnoremap N Nzzzv
 
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc>       <C-\><C-n>
