@@ -3,8 +3,8 @@
 import os
 
 # access Git repos via hg-git and dulwich.io
-vcs_cmd_clone = "hg clone -q"
-vcs_cmd_pull = "hg pull -q"
+vcs_cmd_clone = "git clone --quiet"
+vcs_cmd_pull = "git pull --quiet origin master"
 
 git_dict = {
         "pack/gh/start/signify":     "git@github.com:mhinz/vim-signify.git",
@@ -29,7 +29,7 @@ for subdir in git_dict:
         print("update %s in %s" % (git_url, subdir))
         pop_back_dir = os.getcwd()
         os.chdir(subdir)
-        os.system(" ".join([vcs_cmd_pull,git_url,"."]))
+        os.system(vcs_cmd_pull)
         os.chdir(pop_back_dir)
 
 # vim:ft=python:
