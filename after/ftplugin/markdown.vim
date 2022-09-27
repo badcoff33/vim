@@ -25,24 +25,25 @@ nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
 " Preview in HTML
 if filereadable(expand('<sfile>:p:h').."\\CSS\\simple.css")
-  command! -buffer OpenHTML call OpenHTML()
-  command! -buffer MakeHTML call MakeHTML()
+  command! -buffer MarkdownOpenPreview call OpenHTML()
+  command! -buffer MarkdownMakePreview call MakeHTML()
   nnoremap <buffer> <C-F7> <cmd>MakeHTML<CR>
   nnoremap <buffer> <F7> <cmd>OpenHTML<CR>
   autocmd InsertLeave <buffer> call UpdateShadowFile()
   autocmd TextChanged <buffer> call UpdateShadowFile()
   autocmd InsertLeave <buffer> call timer_start(2000, "MakeHTML")
   autocmd TextChanged <buffer> call timer_start(2000, "MakeHTML")
-  let b:md_to_html_cmd = "pandoc -f gfm -t html5 --toc --toc-depth=3"
+  let b:markdown_to_html_cmd = "pandoc -f gfm -t html5 --toc --toc-depth=3"
         \ .." --css="..expand('<sfile>:p:h').."\\CSS\\simple.css"
         \ .." --template="..expand('<sfile>:p:h').."\\CSS\\template.html"
         \ .." --metadata title=\""..expand("%:t:r").."\""
         \ .." -o "..getenv("TEMP")..g:path_sep..expand("%:t")..".html"
-        \ .." "..getenv("TEMP")..g:path_sep.."_"..expand("%:t")..".html"
+        \ .." "..getenv("TEMP")..g:path_sep.."_"..expand("%:t")
 endif
 
 function! UpdateShadowFile()
-  silent exe "write!" getenv("TEMP")..g:path_sep.."_"..expand("%:t")..".html"
+  silent exe "write!" getenv("TEMP")..g:path_sep.."_"..expand("%:t")
+  silent exe "bwipeout!" getenv("TEMP")..g:path_sep.."_"..expand("%:t")
 endfunction
 
 function! OpenHTML()
@@ -50,9 +51,9 @@ function! OpenHTML()
 endfunction
 
 function! MakeHTML(...)
-  if exists("b:md_to_html_cmd")
+  if exists("b:markdown_to_html_cmd")
     call run#run({
-          \ 'cmd': b:md_to_html_cmd,
+          \ 'cmd': b:markdown_to_html_cmd,
           \ 'hidden': 1,
           \ 'nowrite': 1
           \ })
