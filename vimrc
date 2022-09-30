@@ -105,7 +105,7 @@ set pumheight=7
 set wildmenu
 set wildoptions=pum,tagfile,fuzzy
 set wildmode=full
-set wildignorecase
+set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
 set tagcase=match
@@ -163,8 +163,8 @@ nnoremap <A-o> :bprevious<CR>
 nnoremap <A-i> :bnext<CR>
 
 " command line
-cnoremap <expr> <A-.> expand("%:h")..g:path_sep
-cnoremap <expr> <A-,> $USERPROFILE..g:path_sep..'vimfiles'..g:path_sep
+cnoremap <expr> <A-.> expand("%:h")..g:slash
+cnoremap <expr> <A-,> $USERPROFILE..g:slash..'vimfiles'..g:slash
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
@@ -189,7 +189,7 @@ inoremap <C-s>] <C-o>b[<Esc>ea]
 inoremap <C-s>} <C-o>b{<Esc>ea}
 
 let g:vim_home = expand('<sfile>:p:h')
-let g:path_sep = has('unix') ? '/' : '\'
+let g:slash = exists('&shellslash') ? '\' : '/'
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
@@ -213,7 +213,7 @@ nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>e :edit <C-r>=expand("%:h")..g:path_sep<CR>
+nnoremap <Leader>e :edit <C-r>=expand("%:h")..g:slash<CR>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader><C-]> :tjump /
@@ -230,7 +230,7 @@ nnoremap <Leader>x :tabclose<CR>
 " command line abbreviations
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
-nnoremap <expr> <Leader>v ':silent vimgrep /'..expand("<cword>")..'/ '..expand("%:h")..g:path_sep..LsFilter(&ft)
+nnoremap <expr> <Leader>v ':silent vimgrep /'..expand("<cword>")..'/ '..expand("%:h")..g:slash..LsFilter(&ft)
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase

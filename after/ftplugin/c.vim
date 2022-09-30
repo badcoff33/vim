@@ -27,13 +27,13 @@ nnoremap <buffer> K <C-w>}
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
 
 " run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
-nnoremap <buffer> <LocalLeader>f :silent call FormatC()<cr>
-vnoremap <buffer> <LocalLeader>f :silent call FormatC()<cr>
+nnoremap <buffer> <LocalLeader>f :silent call <SID>FormatC()<cr>
+vnoremap <buffer> <LocalLeader>f :silent call <SID>FormatC()<cr>
 
 " switch between header/source
 nnoremap <buffer> <LocalLeader><Tab> :call swap#OtherFileC()<CR>
 
-function! FormatC() range
+function! s:FormatC() range
     let save_cursor = getcurpos()
     noautocmd execute "cd" expand("%:p:h")
     if a:firstline == a:lastline

@@ -54,3 +54,22 @@ function! lib#popup#bottom_left(text)
         \ })
 endfunction
 
+function! lib#popup#over_statusline(text)
+  if type(a:text) == v:t_list
+    let text = a:text[0]
+  elseif type(a:text) == v:t_string
+    let text = a:text
+  else
+    return 0
+  endif
+  return popup_create(text, #{
+        \ pos: "botleft",
+        \ line: &lines - 1,
+        \ col: 1,
+        \ time: (2*g:popup_close_win_time)/3,
+        \ tabpage: -1,
+        \ highlight: 'PmenuSel',
+        \ padding: [0,0,0,0],
+        \ minwidth: &columns
+        \ })
+endfunction

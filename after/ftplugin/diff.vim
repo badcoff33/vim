@@ -8,13 +8,13 @@ if exists("b:did_diff_ftplugin")
 endif
 let b:did_diff_ftplugin = 1
 
-setlocal foldexpr=Diff_FoldLevel()
+setlocal foldexpr=<SID>Diff_FoldLevel()
 setlocal foldmethod=expr
 
 " use 'zi' to fold diffs output
 setlocal nofoldenable
 
-function! Diff_FoldLevel()
+function! s:Diff_FoldLevel()
   let curr_line = getline(v:lnum)
   if match(curr_line, '^===\s\+') != -1
     return '>1'

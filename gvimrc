@@ -11,7 +11,7 @@ set laststatus=2
 
 augroup gvimrc
   autocmd!
-  autocmd FocusLost * silent wall
+  autocmd FocusLost * try | wall | catch /.*/ | endtry
 augroup END
 
 let FontFamily = {-> escape(split(&gfn, ":")[0], ' ')}

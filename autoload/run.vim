@@ -20,7 +20,7 @@ function! run#close(ch)
   execute 'call setqflist([], "r", ' dict_name ')'
   let text = "job done: "..eval(dict_name..'["title"]')
   if eval(dict_name..'["popup"]') == 1
-    let winid = lib#popup#bottom_left(text)
+    let winid = lib#popup#over_statusline(text)
     call setwinvar(winid, "&wrap", 0)
   endif
   doautocmd QuickFixCmdPost make
@@ -37,7 +37,7 @@ function! run#run(dict)
   if exists('a:dict.nowrite') && (a:dict.nowrite == 1)
   elseif (&autowrite || &autowriteall)
     try
-      "silent wall
+      silent wall
     catch /.*/
       echoerr "run#run: not all modified buffers written"
     finally

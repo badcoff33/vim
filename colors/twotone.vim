@@ -32,28 +32,30 @@ let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}
 let s:GuiAttr = {str -> empty(str) ? "":"gui=".str}
 
 " Basics
-execute "hi Normal" s:GuiFg(s:silver2) s:GuiBg(s:white) s:GuiAttr("NONE")
+
 execute "hi Bold" s:GuiAttr("bold")
-execute "hi Italic" s:GuiAttr("italic")
-execute "hi NonText" s:GuiFg(s:silver6) s:GuiBg("bg")
-execute "hi Visual" s:GuiFg(s:white) s:GuiBg(s:blue)
-execute "hi StatusLine" s:GuiFg(s:white) s:GuiBg(s:silver1) s:GuiAttr("NONE")
-execute "hi StatusLineNC" s:GuiFg(s:white) s:GuiBg(s:silver5) s:GuiAttr("NONE")
-execute "hi StatusLineTerm" s:GuiFg(s:white) s:GuiBg(s:blue) s:GuiAttr("bold")
-execute "hi VertSplit" s:GuiFg(s:silver9) s:GuiBg(s:silver9) s:GuiAttr("NONE")
-execute "hi IncSearch" s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr("none")
-execute "hi Search" s:GuiFg(s:black) s:GuiBg(s:silver8) s:GuiAttr("NONE")
-execute "hi MatchParen" s:GuiFg(s:blue) s:GuiBg("bg") s:GuiAttr("bold")
 execute "hi CursorLine" s:GuiBg(s:silver9)
 execute "hi CursorLineNr" s:GuiFg(s:silver4) s:GuiAttr("bold")
+execute "hi IncSearch" s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr("none")
+execute "hi Italic" s:GuiAttr("italic")
 execute "hi LineNr" s:GuiFg(s:silver8) s:GuiAttr("bold")
+execute "hi MatchParen" s:GuiFg(s:blue) s:GuiBg("bg") s:GuiAttr("bold")
+execute "hi NonText" s:GuiFg(s:silver6) s:GuiBg("bg")
+execute "hi Normal" s:GuiFg(s:silver2) s:GuiBg(s:white) s:GuiAttr("NONE")
+execute "hi Search" s:GuiFg(s:black) s:GuiBg(s:silver8) s:GuiAttr("NONE")
+execute "hi StatusLine" s:GuiFg(s:black) s:GuiBg(s:silver8) s:GuiAttr("NONE")
+execute "hi StatusLineNC" s:GuiFg(s:silver4) s:GuiBg(s:silver9) s:GuiAttr("NONE")
+execute "hi StatusLineTerm" s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr("bold")
+execute "hi TabLineSel" s:GuiAttr("underline,bold")
+execute "hi Terminal" s:GuiFg(s:white) s:GuiBg(s:blue)
+execute "hi VertSplit" s:GuiFg(s:silver7) s:GuiBg("bg") s:GuiAttr("NONE")
+execute "hi Visual" s:GuiFg(s:white) s:GuiBg(s:blue)
 
 highlight! link CursorColumn CursorLine
 highlight! link SignColumn LineNr
 highlight! link FoldColumn LineNr
 highlight! link Folded Comment
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link Terminal Normal
 highlight! link PmenuSel IncSearch
 highlight! link Pmenu Search
 highlight! link PmenuSbar Search
@@ -63,8 +65,6 @@ highlight! link WildMenu PmenuSel
 highlight! link TabLineSel Normal
 highlight! link TabLineFill Normal
 highlight! link TabLine Normal
-
-execute "hi TabLineSel" s:GuiAttr("underline,bold")
 
 " Code
 execute "hi Statement" s:GuiFg(s:red)  s:GuiAttr("bold")
