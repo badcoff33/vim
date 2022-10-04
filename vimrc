@@ -219,9 +219,21 @@ nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader><C-]> :tjump /
 
 " quickfix
+function! ToggleQuickfix()
+  let is_open = v:false
+  windo if &buftype== "quickfix" | let is_open = v:true | endif
+  if is_open == v:false
+    botright copen
+  else
+    if (winnr("$") == 1) && (&buftype=="quickfix")
+      buffer #
+    else
+      cclose
+    endif
+  endif
+endfunction
+nnoremap <Leader><Leader> <cmd>call ToggleQuickfix()<CR>
 nnoremap <Leader>c :clist!<CR>
-nnoremap <Leader>q :botright copen<CR>
-nnoremap <Leader>Q :if (winnr("$") == 1 && &buftype=="quickfix") <bar> bprevious <bar> else <bar> cclose <bar> endif <CR>
 
 " zoom current buffer in seperate tab
 nnoremap <Leader>t :tabedit %<CR>
