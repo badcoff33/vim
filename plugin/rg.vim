@@ -29,8 +29,7 @@ set grepformat=%f:%l:%c:%m
 command! -complete=file -nargs=* Rg
       \ call run#run({'cmd':'rg --vimgrep '..RgExcludes0()..RgExcludes1()..RgIncludes(&ft)..' <args> '..RgPaths(), 'hidden':0, 'regexp':&grepformat})
 
-command! -complete=file -nargs=* RgFiles
-      \ call run#run({'cmd':"rg --files --glob-case-insensitive --glob *<args>*"})
+command! -complete=file -nargs=* RgFiles enew | read !rg --files --glob-case-insensitive --glob <args>
 
 nnoremap <Leader>G :Rg <C-r><C-W>
 nmap <Leader>g :let @/="<C-r><C-w>"<CR><Leader>G<CR>
