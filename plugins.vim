@@ -26,18 +26,18 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 # DIRCFG
 
-g:dircfg_functions = [
- "Cfg_Hvh",
- "Cfg_T01",
- "Cfg_T02",
- "Cfg_RL78_AAE",
- "Cfg_RL78_AGF",
- "Cfg_Vim",
- "Cfg_C234",
- "Cfg_FUSA"
+g:config_functions = [
+ "Config_Hvh",
+ "Config_T01",
+ "Config_T02",
+ "Config_RL78_AAE",
+ "Config_RL78_AGF",
+ "Config_Vim",
+ "Config_C234",
+ "Config_FUSA"
 ]
 
-def g:Cfg_FUSA()
+def g:Config_FUSA()
   command! -nargs=0 CtagsUpdate Ctags -R Software
   set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*\ Software
   set path=Software/**,,
@@ -47,7 +47,7 @@ def g:Cfg_FUSA()
   g:rg_excludes = ["Build"]
 enddef
 
-def g:Cfg_Hvh()
+def g:Config_Hvh()
   command! -nargs=0 CtagsUpdate Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1
   set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*
   set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,
@@ -55,7 +55,7 @@ def g:Cfg_Hvh()
   compiler ghs
 enddef
 
-def g:Cfg_T01()
+def g:Config_T01()
   command! -nargs=0 CtagsUpdate Ctags -R NvmDriverT01 Software
   command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
   set path=Software,Software/**,NvmDriverT01,NvmDriverT01/**,,
@@ -65,7 +65,7 @@ def g:Cfg_T01()
   g:rg_excludes = ["NvmDriverT02"]
 enddef
 
-def g:Cfg_T02()
+def g:Config_T02()
   command! -nargs=0 CtagsUpdate Ctags -R NvmDriverT02 Software
   command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
   set path=Software,Software/**,NvmDriverT02,NvmDriverT02/**,,
@@ -75,13 +75,13 @@ def g:Cfg_T02()
   g:rg_excludes = ["NvmDriverT01"]
 enddef
 
-def g:Cfg_C234()
+def g:Config_C234()
   set path=C234_Beta_5_17_2022/**,workspace_5_17_2022/**,,
   g:rg_excludes = ["html"]
   g:rg_paths = ["C234_Beta_5_17_2022", "workspace_5_17_2022"]
 enddef
 
-def g:Cfg_RL78_AAE()
+def g:Config_RL78_AAE()
   command! -nargs=0 CtagsUpdate Ctags -R main xcpbasicdrv mcur5f10aae sbcata663X31 "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae.h" "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae_ext.h"
   set path=main,xcpbasicdrv,mcur5f10aae,sbcata663X31,,
   g:rg_paths = ["main", "mcur5f10aae", "xcpbasicdrv", "sbcata663X31"]
@@ -90,7 +90,7 @@ def g:Cfg_RL78_AAE()
   compiler iar
 enddef
 
-def g:Cfg_RL78_AGF()
+def g:Config_RL78_AGF()
   command! -nargs=0 CtagsUpdate Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431
   set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,
   set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ *.[ch]\ $*
@@ -98,7 +98,7 @@ def g:Cfg_RL78_AGF()
   compiler iar
 enddef
 
-def g:Cfg_Vim()
+def g:Config_Vim()
   cd ~\vimfiles
   set path=pack/**,colors,after/**,,
   set relativenumber
