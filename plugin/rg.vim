@@ -6,8 +6,8 @@ if !executable("rg")
 endif
 
 let g:rg_glob_patterns = {
-      \ 'c': '-tc',
-      \ 'cpp': '-tcpp',
+      \ 'c': '-g *.c -g *.h -g *.850 -g *.s',
+      \ 'cpp': '-tcpp -tc',
       \ 'vim': '-g *.vim -g *vimrc',
       \ 'asm850': '-g *.850 -g *.c -g *.h',
       \ 'py': '-tpy',
@@ -17,7 +17,7 @@ let g:rg_glob_patterns = {
 let g:rg_excludes = get(g:, "rg_excludes", [])
 let g:rg_paths = get(g:, "rg_paths", ["."])
 
-let RgIncludes =  {ft -> has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft].." " : "-g *.* "}
+let RgIncludes =  {ft -> has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft].." " : " "}
 let RgExcludes0 = { -> (len(g:rg_excludes)==0)?"":"-g !" }
 let RgExcludes1 = { -> join(g:rg_excludes, " -g !").." "}
 let RgPaths =     { -> join(g:rg_paths, " ")}

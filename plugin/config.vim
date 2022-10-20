@@ -19,4 +19,4 @@ function! SourceFunction(func_name)
   call Fref()
 endfunction
 
-command! -complete=customlist,CompleteConfigFunc -nargs=1 ConfigRead call SourceFunction("<args>")
+command! -complete=customlist,CompleteConfigFunc -nargs=1 ReadConfig call SourceFunction("<args>")

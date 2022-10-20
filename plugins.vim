@@ -8,6 +8,21 @@ nnoremap <silent> <F3> <cmd>Buffers<CR>
 imap <F3> <Esc><F3>
 nnoremap <silent> <F2> <cmd>Files<CR>
 imap <F2> <Esc><F2>
+g:fzf_colors = {
+  'fg':      ['fg', 'Normal'],
+  'bg':      ['bg', 'Normal'],
+  'hl':      ['fg', 'Comment'],
+  'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  'hl+':     ['fg', 'Statement'],
+  'info':    ['fg', 'PreProc'],
+  'border':  ['fg', 'Ignore'],
+  'prompt':  ['fg', 'Conditional'],
+  'pointer': ['fg', 'Exception'],
+  'marker':  ['fg', 'Keyword'],
+  'spinner': ['fg', 'Label'],
+  'header':  ['fg', 'Comment']
+}
 
 # NETRW variables
 g:netrw_use_errorwindow = 0
@@ -38,17 +53,17 @@ g:config_functions = [
 ]
 
 def g:Config_FUSA()
-  command! -nargs=0 CtagsUpdate Ctags -R Software
+  command! -nargs=0 UpdateCtags Ctags -R Software
   set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*\ Software
   set path=Software/**,,
   set tagcase=match
   compiler ghs
-  g:rg_paths = ["Software"]
+  g:rg_paths = ["Software", "Build\\Fusa", "\\Daten\\Tools\\MCAL_SPAL\\ASR_RH850_F1KM_42.06.00"]
   g:rg_excludes = ["Build"]
 enddef
 
 def g:Config_Hvh()
-  command! -nargs=0 CtagsUpdate Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1
+  command! -nargs=0 UpdateCtags Ctags -R C_Application C_CDD C_AUTOSAR/Sources C:/Daten/Common_3P/comp_SBC_UJA116x/1.3.1
   set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*
   set path=C_AUTOSAR/**,C_Application/**,C_CDD/**,C_HvUnit/**,,
   set tagcase=match
@@ -56,23 +71,21 @@ def g:Config_Hvh()
 enddef
 
 def g:Config_T01()
-  command! -nargs=0 CtagsUpdate Ctags -R NvmDriverT01 Software
-  command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
-  set path=Software,Software/**,NvmDriverT01,NvmDriverT01/**,,
-  set relativenumber
+  command! -nargs=0 UpdateCtags Ctags -R NvmDriverT01 DemoAppT01
+  command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "DemoAppT01"})
+  set path=DemoAppT01,DemoAppT01/**,NvmDriverT01,NvmDriverT01/**,,
   compiler iar
-  g:rg_paths = ["Software", "NvmDriverT01"]
-  g:rg_excludes = ["NvmDriverT02"]
+  g:rg_paths = ["DemoAppT01", "NvmDriverT01"]
+  g:rg_excludes = ["NvmDriverT02", "DemoAppT02"]
 enddef
 
 def g:Config_T02()
-  command! -nargs=0 CtagsUpdate Ctags -R NvmDriverT02 Software
-  command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "Software"})
-  set path=Software,Software/**,NvmDriverT02,NvmDriverT02/**,,
-  set relativenumber
+  command! -nargs=0 UpdateCtags Ctags -R NvmDriverT02 DemoAppT02
+  command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "DemoAppT02"})
+  set path=DemoAppT02,DemoAppT02/**,NvmDriverT02,NvmDriverT02/**,,
   compiler iar
-  g:rg_paths = ["Software", "NvmDriverT02"]
-  g:rg_excludes = ["NvmDriverT01"]
+  g:rg_paths = ["DemoAppT02", "NvmDriverT02"]
+  g:rg_excludes = ["NvmDriverT01", "DemoAppT01"]
 enddef
 
 def g:Config_C234()
@@ -82,7 +95,7 @@ def g:Config_C234()
 enddef
 
 def g:Config_RL78_AAE()
-  command! -nargs=0 CtagsUpdate Ctags -R main xcpbasicdrv mcur5f10aae sbcata663X31 "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae.h" "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae_ext.h"
+  command! -nargs=0 UpdateCtags Ctags -R main xcpbasicdrv mcur5f10aae sbcata663X31 "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae.h" "c:\Program Files (x86)\IAR Systems\Embedded Workbench 8.5\rl78\inc\ior5f10aae_ext.h"
   set path=main,xcpbasicdrv,mcur5f10aae,sbcata663X31,,
   g:rg_paths = ["main", "mcur5f10aae", "xcpbasicdrv", "sbcata663X31"]
   g:rg_excludes = ["Debug"]
@@ -91,7 +104,7 @@ def g:Config_RL78_AAE()
 enddef
 
 def g:Config_RL78_AGF()
-  command! -nargs=0 CtagsUpdate Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431
+  command! -nargs=0 UpdateCtags Ctags -R main xcpbasicdrv mcur5f10agf sbcata663431
   set path=main,xcpbasicdrv,mcur5f10agf,sbcata663431,,
   set grepprg=rg\ --vimgrep\ -g\ !Debug\ -g\ *.[ch]\ $*
   set relativenumber

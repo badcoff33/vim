@@ -97,7 +97,7 @@ endfunction
 
 function run#popup_terminal()
   let buf = term_start(['cmd'], #{hidden: 1, term_finish: 'close'})
-  let winopts = #{minwidth: &columns - 10 , minheight: 10, maxheight: &lines - 10 }
+  let winopts = #{minwidth: &columns - 10 , minheight: 10, maxheight: &lines - 10, border:[1,1,1,1], padding:[1,1,1,1]}
   let g:popup_terminal_winid = popup_create(buf, winopts)
   set wincolor=Terminal
   autocmd VimResized <buffer> call popup_move(g:popup_terminal_winid, winopts)

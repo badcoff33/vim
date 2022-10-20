@@ -121,15 +121,7 @@ command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wi
 " Switch to normal mode with special keys
 inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
-
-" expand abbreviations w/o trailing space
-inoremap <C-Space> <C-]>
-
-" more word-processor like key mappings
-inoremap <C-BS> <C-w>
-inoremap <C-Del> <C-o>dw
-nmap <C-BS> i<C-BS>
-nmap <C-Del> i<C-Del>
+inoremap <C-Space> <Esc>
 
 " replace current inner word with one key press
 nnoremap <BS> ciw
@@ -202,6 +194,7 @@ nnoremap <expr> <Leader>n ":drop "..strftime("~/Documents/Notes/note-%d-%m-%y.tx
 nnoremap <Leader>os <cmd>setlocal invspell spell?<CR>
 nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
 nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
+nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
 nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " CUA tag movement
@@ -216,28 +209,37 @@ vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
 nnoremap <Leader>e :edit <C-r>=expand("%:h")..g:slash<CR>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader><C-]> :tjump /
+nnoremap <Leader>t :tjump /
 
 " quickfix
-function! ToggleQuickfix()
+function! s:ToggleQuickfix()
   let is_open = v:false
+  let save_winnr = winnr()
   windo if &buftype== "quickfix" | let is_open = v:true | endif
   if is_open == v:false
-    botright copen
+    if winnr("$") == 1 && &columns >= 140
+      vert copen
+      wincmd =
+      wincmd H
+      wincmd l
+    else
+      botright copen
+    endif
+    execute save_winnr.."wincmd w"
   else
     if (winnr("$") == 1) && (&buftype=="quickfix")
       buffer #
     else
       cclose
+      wincmd p
     endif
   endif
 endfunction
-nnoremap <Leader><Leader> <cmd>call ToggleQuickfix()<CR>
+nnoremap <C-CR> <cmd>call <SID>ToggleQuickfix()<CR>
 nnoremap <Leader>c :clist!<CR>
 
 " zoom current buffer in seperate tab
-nnoremap <Leader>t :tabedit %<CR>
-nnoremap <Leader>x :tabclose<CR>
+nnoremap <Leader><Tab> <cmd>tabnew<CR>
 
 " command line abbreviations
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
@@ -257,7 +259,7 @@ augroup vimrc
   autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
 
   " Popup quickfix window after make with errros
-  autocmd QuickFixCmdPost make botright cwindow
+  " autocmd QuickFixCmdPost make botright cwindow
 augroup END
 
 let g:term = &term

@@ -43,11 +43,11 @@ execute "hi MatchParen" s:GuiFg(s:blue) s:GuiBg("bg") s:GuiAttr("bold")
 execute "hi NonText" s:GuiFg(s:silver6) s:GuiBg("bg")
 execute "hi Normal" s:GuiFg(s:silver2) s:GuiBg(s:white) s:GuiAttr("NONE")
 execute "hi Search" s:GuiFg(s:black) s:GuiBg(s:silver8) s:GuiAttr("NONE")
-execute "hi StatusLine" s:GuiFg(s:black) s:GuiBg(s:silver8) s:GuiAttr("NONE")
+execute "hi StatusLine" s:GuiFg(s:white) s:GuiBg(s:blue) s:GuiAttr("NONE")
 execute "hi StatusLineNC" s:GuiFg(s:silver4) s:GuiBg(s:silver9) s:GuiAttr("NONE")
 execute "hi StatusLineTerm" s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr("bold")
 execute "hi TabLineSel" s:GuiAttr("underline,bold")
-execute "hi Terminal" s:GuiFg(s:white) s:GuiBg(s:blue)
+execute "hi Terminal" s:GuiFg(s:white) s:GuiBg(s:black)
 execute "hi VertSplit" s:GuiFg(s:silver7) s:GuiBg("bg") s:GuiAttr("NONE")
 execute "hi Visual" s:GuiFg(s:white) s:GuiBg(s:blue)
 
@@ -62,7 +62,6 @@ highlight! link PmenuSbar Search
 highlight! link PmenuThumb IncSearch
 highlight! link WildMenu PmenuSel
 
-highlight! link TabLineSel Normal
 highlight! link TabLineFill Normal
 highlight! link TabLine Normal
 

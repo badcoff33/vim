@@ -26,20 +26,20 @@ let s:silver1  = "#505860"
 let s:silver2  = "#9098A0"
 let s:silver3  = "#C0CBDF"
 let s:silver4  = "#E0E8FE"
-let s:green_bg = "#226358"
-let s:green1   = "#22B363"
-let s:green2   = "#30C15F"
-let s:green3   = "#32E070"
-let s:green4   = "#37FF8F"
-let s:blue_bg  = "#2E5368"
+let s:green_bg = "#206358"
+let s:green1   = "#02B360"
+let s:green2   = "#07C168"
+let s:green3   = "#07E070"
+let s:green4   = "#07FF8F"
+let s:blue_bg  = "#2E4388"
 let s:blue1    = "#5088D0"
 let s:blue2    = "#60A0E8"
 let s:blue3    = "#70B0F8"
 let s:red1     = "#B82042"
 let s:red2     = "#E84070"
-let s:amber    = "#E0EF20"
+let s:amber    = "#D0CF20"
 
-let s:GuiFg = {str -> empty(str) ? "":"guifg="..str}
+let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
 let s:GuiBg = {str -> empty(str) ? "":"guibg="..str}
 let s:GuiAttr = {str -> empty(str) ? "":"gui="..str}
 let s:Cterm = {str -> empty(str) ? "":"cterm="..str}
@@ -49,16 +49,16 @@ execute 'hi Normal' s:GuiFg(s:silver4) s:GuiBg(s:bg1) s:GuiAttr('NONE')
 execute 'hi Bold' s:GuiFg(s:silver2)  s:GuiAttr('bold')
 execute 'hi Italic' s:GuiFg(s:silver2)  s:GuiAttr('italic')
 execute 'hi NonText' s:GuiFg(s:blue1) s:GuiBg(s:bg1)
-execute 'hi Visual' s:GuiFg(s:white) s:GuiBg(s:green_bg)
-execute 'hi Terminal' s:GuiFg(s:blue2) s:GuiBg(s:bg2)
-execute 'hi StatusLine' s:GuiFg(s:white) s:GuiBg(s:blue1) s:GuiAttr('NONE')
-execute 'hi StatusLineNC' s:GuiFg(s:silver3) s:GuiBg(s:bg4) s:GuiAttr('NONE')
+execute 'hi Visual' s:GuiFg(s:white) s:GuiBg(s:blue_bg)
+execute 'hi Terminal' s:GuiFg(s:green2) s:GuiBg(s:green_bg)
+execute 'hi StatusLine' s:GuiFg(s:white) s:GuiBg(s:bg4) s:GuiAttr('NONE')
+execute 'hi StatusLineNC' s:GuiFg(s:silver3) s:GuiBg(s:bg2) s:GuiAttr('NONE')
 execute 'hi VertSplit' s:GuiFg(s:bg2) s:GuiBg(s:bg2) s:GuiAttr('NONE')
 execute 'hi IncSearch' s:GuiFg(s:black) s:GuiBg(s:amber) s:GuiAttr('bold')
 execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:blue2) s:GuiAttr('NONE')
 execute 'hi MatchParen' s:GuiFg(s:green3) s:GuiBg('bg') s:GuiAttr('underline')
 execute 'hi QuickFixLine'  s:GuiFg(s:amber) s:GuiBg("bg") s:GuiAttr('bold')
-execute 'hi Cursor' s:GuiFg(s:white) s:GuiBg(s:green2)
+execute 'hi Cursor' s:GuiFg(s:black) s:GuiBg(s:white)
 execute 'hi CursorLine'  s:GuiBg(s:bg3) s:Cterm('NONE')
 execute 'hi CursorLineNr' s:GuiFg(s:green3) s:GuiBg(s:bg3) s:GuiAttr('bold')
 execute 'hi LineNr' s:GuiFg(s:blue3) s:GuiBg(s:bg2)
@@ -142,3 +142,9 @@ execute 'hi DiffChange' s:GuiFg(s:white) s:GuiBg(s:bg4)
 execute 'hi DiffText' s:GuiFg(s:blue2) s:GuiBg(s:bg4) s:GuiAttr('bold')
 execute 'hi DiffDelete' s:GuiFg(s:red1) s:GuiBg(s:red1)
 execute 'hi DiffAdd' s:GuiFg(s:green2) s:GuiBg(s:bg3) s:GuiAttr('bold')
+
+" clean up
+unlet s:GuiFg s:GuiBg s:GuiAttr s:Cterm
+unlet s:white s:black s:bg1 s:bg2 s:bg3 s:bg4 s:silver1 s:silver2 s:silver3 s:silver4
+unlet s:green_bg s:green1 s:green2 s:green3 s:green4
+unlet s:blue_bg s:blue1 s:blue2 s:blue3 s:red1 s:red2 s:amber
