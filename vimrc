@@ -130,8 +130,10 @@ nnoremap <BS> ciw
 nnoremap Y y$
 
 " Resizing window
-nnoremap <A-+> 3<C-w>+5<C-w>>
-nnoremap <A--> 3<C-w>-5<C-w><
+let GrowWin = { -> "3wincmd + | 5wincmd >" }
+let ShrinkWin = { -> winnr("j")==winnr() ? "5wincmd <" : "3wincmd - | 5wincmd <" }
+nnoremap <A-+> :<C-r>=GrowWin()<CR><CR>
+nnoremap <A--> :<C-r>=ShrinkWin()<CR><CR>
 
 " Yank word under cursor
 nnoremap <C-Insert> yiw
@@ -173,8 +175,8 @@ execute "set langmap+=\<Char-228>]"
 execute "set langmap+=\<Char-214>{"
 execute "set langmap+=\<Char-196>}"
 
-nnoremap <A-k> <cmd>cprevious<cr>
-nnoremap <A-j> <cmd>cnext<cr>
+nnoremap <C-k> <cmd>cprevious<cr>
+nnoremap <C-j> <cmd>cnext<cr>
 nnoremap <C-Up> <cmd>cprevious<cr>
 nnoremap <C-Down> <cmd>cnext<cr>
 nnoremap <A-Up> <cmd>cfirst<CR>
