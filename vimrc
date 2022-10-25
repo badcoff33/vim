@@ -123,11 +123,15 @@ inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
 inoremap <C-Space> <Esc>
 
-" replace current inner word with one key press
+" Replace current inner word with one key press
 nnoremap <BS> ciw
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
+
+" Resizing window
+nnoremap <A-+> 3<C-w>+5<C-w>>
+nnoremap <A--> 3<C-w>-5<C-w><
 
 " Yank word under cursor
 nnoremap <C-Insert> yiw
