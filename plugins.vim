@@ -4,10 +4,6 @@ vim9script
 nnoremap <A-CR> :FindFile<space>
 
 # FZF
-nnoremap <silent> <F3> <cmd>Buffers<CR>
-imap <F3> <Esc><F3>
-nnoremap <silent> <F2> <cmd>Files<CR>
-imap <F2> <Esc><F2>
 g:fzf_colors = {
   'fg':      ['fg', 'Normal'],
   'bg':      ['bg', 'Normal'],

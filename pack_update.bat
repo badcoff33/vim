@@ -3,18 +3,18 @@
 import os
 
 # access Git repos via hg-git and dulwich.io
-vcs_cmd_clone = "git clone --quiet"
-vcs_cmd_pull = "git pull --quiet origin master"
+vcs_cmd_clone = "hg clone --quiet"
+vcs_cmd_pull = "hg pull --quiet origin master"
 
 git_dict = {
-        "pack/gh/start/signify":     "git@github.com:mhinz/vim-signify.git",
-        "pack/gh/opt/dirvish":       "git@github.com:justinmk/vim-dirvish.git",
-        "pack/gh/start/easy-align":  "git@github.com:junegunn/vim-easy-align.git",
-        "pack/gh/start/fzf.git":     "git@github.com:junegunn/fzf.git",
-        "pack/gh/start/fzf.vim":     "git@github.com:junegunn/fzf.vim.git",
-        "pack/gh/opt/colorizer":     "git@github.com:lilydjwg/colorizer.git",
-        "pack/gh/opt/vista":         "git@github.com:liuchengxu/vista.vim.git",
-        "pack/gh/opt/wordy":         "git@github.com:preservim/vim-wordy.git" }
+        "pack/gh/start/signify":    "git@github.com:mhinz/vim-signify.git",
+        "pack/gh/start/easy-align": "git@github.com:junegunn/vim-easy-align.git",
+        "pack/gh/opt/dirvish":      "git@github.com:justinmk/vim-dirvish.git",
+        "pack/gh/opt/fzf.git":      "git@github.com:junegunn/fzf.git",
+        "pack/gh/opt/fzf.vim":      "git@github.com:junegunn/fzf.vim.git",
+        "pack/gh/opt/colorizer":    "git@github.com:lilydjwg/colorizer.git",
+        "pack/gh/opt/vista":        "git@github.com:liuchengxu/vista.vim.git",
+        "pack/gh/opt/wordy":        "git@github.com:preservim/vim-wordy.git" }
 
 for subdir in git_dict:
     git_url = git_dict[subdir]

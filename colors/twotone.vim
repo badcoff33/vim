@@ -48,7 +48,7 @@ execute "hi StatusLineNC" s:GuiFg(s:silver4) s:GuiBg(s:silver9) s:GuiAttr("NONE"
 execute "hi StatusLineTerm" s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr("bold")
 execute "hi TabLineSel" s:GuiAttr("underline,bold")
 execute "hi Terminal" s:GuiFg(s:white) s:GuiBg(s:black)
-execute "hi VertSplit" s:GuiFg(s:silver7) s:GuiBg("bg") s:GuiAttr("NONE")
+execute "hi VertSplit" s:GuiFg(s:silver9) s:GuiBg(s:silver9) s:GuiAttr("NONE")
 execute "hi Visual" s:GuiFg(s:white) s:GuiBg(s:blue)
 
 highlight! link CursorColumn CursorLine

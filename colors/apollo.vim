@@ -30,7 +30,7 @@ let s:green_bg = "#206358"
 let s:green1   = "#02B360"
 let s:green2   = "#07C168"
 let s:green3   = "#07E070"
-let s:green4   = "#07FF8F"
+let s:green4   = "#07F88F"
 let s:blue_bg  = "#2E4388"
 let s:blue1    = "#5088D0"
 let s:blue2    = "#60A0E8"
@@ -45,47 +45,52 @@ let s:GuiAttr = {str -> empty(str) ? "":"gui="..str}
 let s:Cterm = {str -> empty(str) ? "":"cterm="..str}
 
 " Basics
-execute 'hi Normal' s:GuiFg(s:silver4) s:GuiBg(s:bg1) s:GuiAttr('NONE')
 execute 'hi Bold' s:GuiFg(s:silver2)  s:GuiAttr('bold')
-execute 'hi Italic' s:GuiFg(s:silver2)  s:GuiAttr('italic')
-execute 'hi NonText' s:GuiFg(s:blue1) s:GuiBg(s:bg1)
-execute 'hi Visual' s:GuiFg(s:white) s:GuiBg(s:blue_bg)
-execute 'hi Terminal' s:GuiFg(s:green2) s:GuiBg(s:green_bg)
-execute 'hi StatusLine' s:GuiFg(s:white) s:GuiBg(s:bg4) s:GuiAttr('NONE')
-execute 'hi StatusLineNC' s:GuiFg(s:silver3) s:GuiBg(s:bg2) s:GuiAttr('NONE')
-execute 'hi VertSplit' s:GuiFg(s:bg2) s:GuiBg(s:bg2) s:GuiAttr('NONE')
-execute 'hi IncSearch' s:GuiFg(s:black) s:GuiBg(s:amber) s:GuiAttr('bold')
-execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:blue2) s:GuiAttr('NONE')
-execute 'hi MatchParen' s:GuiFg(s:green3) s:GuiBg('bg') s:GuiAttr('underline')
-execute 'hi QuickFixLine'  s:GuiFg(s:amber) s:GuiBg("bg") s:GuiAttr('bold')
 execute 'hi Cursor' s:GuiFg(s:black) s:GuiBg(s:white)
 execute 'hi CursorLine'  s:GuiBg(s:bg3) s:Cterm('NONE')
 execute 'hi CursorLineNr' s:GuiFg(s:green3) s:GuiBg(s:bg3) s:GuiAttr('bold')
+execute 'hi ErrorMsg' s:GuiFg(s:red2) s:GuiBg('bg')
+execute 'hi IncSearch' s:GuiFg(s:black) s:GuiBg(s:amber) s:GuiAttr('bold')
+execute 'hi Italic' s:GuiFg(s:silver2)  s:GuiAttr('italic')
 execute 'hi LineNr' s:GuiFg(s:blue3) s:GuiBg(s:bg2)
 execute 'hi LineNrAbove' s:GuiFg(s:bg4) s:GuiBg('bg') s:GuiAttr('bold')
 execute 'hi LineNrBelow' s:GuiFg(s:bg4) s:GuiBg('bg') s:GuiAttr('bold')
-
-highlight! link TabLineSel Normal
-highlight! link TabLineFill Normal
-highlight! link TabLine Normal
-execute 'hi TabLineSel' s:GuiAttr('underline,bold')
-
-execute 'hi PMenuSel' s:GuiFg(s:white) s:GuiBg(s:green1) s:GuiAttr('NONE')
-execute 'hi PMenu' s:GuiFg(s:white) s:GuiBg(s:bg4) s:GuiAttr('NONE')
+execute 'hi MatchParen' s:GuiFg(s:green3) s:GuiBg('bg') s:GuiAttr('underline')
+execute 'hi ModeMsg' s:GuiFg(s:silver2) s:GuiBg('bg')
+execute 'hi NonText' s:GuiFg(s:blue1) s:GuiBg(s:bg1)
+execute 'hi Normal' s:GuiFg(s:silver4) s:GuiBg(s:bg1) s:GuiAttr('NONE')
+execute 'hi PMenu' s:GuiFg(s:white) s:GuiBg(s:blue_bg) s:GuiAttr('NONE')
 execute 'hi PMenuSbar' s:GuiFg(s:silver3) s:GuiBg(s:bg3)
+execute 'hi PMenuSel' s:GuiFg(s:white) s:GuiBg(s:green1) s:GuiAttr('NONE')
 execute 'hi PMenuThumb' s:GuiFg(s:blue2) s:GuiBg(s:bg4)
+execute 'hi Question' s:GuiFg(s:green2) s:GuiBg('bg')
+execute 'hi QuickFixLine'  s:GuiFg(s:amber) s:GuiBg("bg") s:GuiAttr('bold')
+execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:blue2) s:GuiAttr('NONE')
+execute 'hi StatusLine' s:GuiFg(s:white) s:GuiBg(s:bg4) s:GuiAttr('NONE')
+execute 'hi StatusLineNC' s:GuiFg(s:silver3) s:GuiBg(s:bg2) s:GuiAttr('NONE')
+execute 'hi TabLineSel' s:GuiAttr('underline,bold')
+execute 'hi Terminal' s:GuiFg(s:green2) s:GuiBg(s:green_bg)
+execute 'hi Title' s:GuiFg(s:green3)
+execute 'hi VertSplit' s:GuiFg(s:bg2) s:GuiBg(s:bg2) s:GuiAttr('NONE')
+execute 'hi Visual' s:GuiFg(s:white) s:GuiBg(s:blue_bg)
+execute 'hi WarningMsg' s:GuiFg(s:blue1) s:GuiBg('bg')
+execute 'hi qfFileName' s:GuiFg(s:blue2)
+execute 'hi qfSeparator' s:GuiFg('fg')
+highlight! link CursorColumn CursorLine
+highlight! link FoldColumn Normal
+highlight! link Folded StatusLineNC
+highlight! link SignColumn Normal
+highlight! link StatusLineTerm StatusLine
+highlight! link StatusLineTermNC StatusLineNC
+highlight! link TabLine Normal
+highlight! link TabLineFill Normal
+highlight! link TabLineSel Normal
 highlight! link User1 StatusLine
 highlight! link User2 StatusLine
 highlight! link User3 StatusLine
 highlight! link User4 StatusLine
-highlight! link CursorColumn CursorLine
-highlight! link FoldColumn Normal
-highlight! link SignColumn Normal
-highlight! link Folded StatusLineNC
-highlight! link StatusLineTerm StatusLine
-highlight! link StatusLineTermNC StatusLineNC
 highlight! link WildMenu IncSearch
-
+highlight! link qfLineNr    LineNr
 " Code
 execute 'hi Statement' s:GuiFg(s:blue3)
 execute 'hi Conditional' s:GuiFg(s:blue3)  s:GuiAttr('bold')
@@ -101,17 +106,9 @@ execute 'hi Identifier' s:GuiFg(s:silver3)
 execute 'hi Special' s:GuiFg(s:green2)
 execute 'hi Constant' s:GuiFg(s:white)
 execute 'hi Number' s:GuiFg(s:white)
-execute 'hi Title' s:GuiFg(s:green3)
 execute 'hi Todo' s:GuiFg(s:silver2) s:GuiBg(s:bg3)
 execute 'hi Error' s:GuiFg(s:red2) s:GuiBg(s:bg3)
 execute 'hi Directory' s:GuiFg(s:silver4)  s:GuiAttr('underline')
-execute 'hi ErrorMsg' s:GuiFg(s:red2) s:GuiBg('bg')
-execute 'hi WarningMsg' s:GuiFg(s:blue1) s:GuiBg('bg')
-execute 'hi ModeMsg' s:GuiFg(s:silver2) s:GuiBg('bg')
-execute 'hi Question' s:GuiFg(s:green2) s:GuiBg('bg')
-execute 'hi qfFileName' s:GuiFg(s:blue2)
-execute 'hi qfSeparator' s:GuiFg('fg')
-highlight! link qfLineNr    LineNr
 
 " Filetype VIM
 execute 'hi vimCommentTitle' s:GuiFg(s:white)  s:GuiAttr('bold')

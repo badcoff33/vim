@@ -161,16 +161,29 @@ cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
-" make Vim register easier access
-nmap <char-252> "
+" Living with QWERTZ keyboards
+execute "set langmap=\<Char-252>/"
+execute "set langmap+=\<Char-220>?"
+execute "set langmap+=\<Char-246>["
+execute "set langmap+=\<Char-228>]"
+execute "set langmap+=\<Char-214>{"
+execute "set langmap+=\<Char-196>}"
 
-nnoremap <char-228> <cmd>cnext<cr>
-nnoremap <char-246> <cmd>cprevious<cr>
+nnoremap <A-k> <cmd>cprevious<cr>
+nnoremap <A-j> <cmd>cnext<cr>
+nnoremap <C-Up> <cmd>cprevious<cr>
+nnoremap <C-Down> <cmd>cnext<cr>
+nnoremap <A-Up> <cmd>cfirst<CR>
+nnoremap <A-DOWN> <cmd>clast<CR>
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
+
+" search on current line without changing modes
+imap <f3> <C-o>F
+imap <f4> <C-o>f
 
 " Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
 inoremap <C-s>" <C-o>b"<Esc>ea"
@@ -214,7 +227,6 @@ nnoremap <Leader>t :tjump /
 " quickfix
 function! s:ToggleQuickfix()
   let is_open = v:false
-  let save_winnr = winnr()
   windo if &buftype== "quickfix" | let is_open = v:true | endif
   if is_open == v:false
     if winnr("$") == 1 && &columns >= 140
@@ -225,7 +237,6 @@ function! s:ToggleQuickfix()
     else
       botright copen
     endif
-    execute save_winnr.."wincmd w"
   else
     if (winnr("$") == 1) && (&buftype=="quickfix")
       buffer #
