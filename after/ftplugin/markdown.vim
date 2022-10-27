@@ -25,8 +25,8 @@ nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
 " Preview in HTML
 if filereadable(expand('<sfile>:p:h').."\\CSS\\simple.css")
-  command! -buffer MarkdownOpenPreview call <SID>OpenHTML()
-  command! -buffer MarkdownMakePreview call <SID>MakeHTML()
+  command! -buffer ShowMarkdownPreview call <SID>OpenHTML()
+  command! -buffer UpdateMarkdownPreview call <SID>MakeHTML()
   autocmd InsertLeave <buffer> call <SID>UpdateShadowFile()
   autocmd TextChanged <buffer> call <SID>UpdateShadowFile()
   autocmd InsertLeave <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")

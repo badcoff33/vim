@@ -187,10 +187,6 @@ nnoremap <A-DOWN> <cmd>clast<CR>
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
 
-" search on current line without changing modes
-imap <f3> <C-o>F
-imap <f4> <C-o>f
-
 " Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
 inoremap <C-s>" <C-o>b"<Esc>ea"
 inoremap <C-s>' <C-o>b'<Esc>ea'

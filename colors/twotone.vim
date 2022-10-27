@@ -16,16 +16,16 @@ let s:white    = "#FFFFFF"
 let s:blue     = "#2188FF"
 let s:red      = "#FF2382"
 
-let s:silver9 = "#F5F5F8"
-let s:silver8 = "#E1E1E7"
-let s:silver7 = "#D1D1D5"
-let s:silver6 = "#B5B5BE"
-let s:silver5 = "#959598"
-let s:silver4 = "#78787A"
-let s:silver3 = "#58585A"
-let s:silver2 = "#444447"
-let s:silver1 = "#333335"
-let s:silver0 = "#252528"
+let s:silver9 = "#F8F5F8"
+let s:silver8 = "#E7E1E7"
+let s:silver7 = "#D5D1D5"
+let s:silver6 = "#BEB5BE"
+let s:silver5 = "#989598"
+let s:silver4 = "#7A787A"
+let s:silver3 = "#5A585A"
+let s:silver2 = "#474447"
+let s:silver1 = "#353335"
+let s:silver0 = "#282528"
 
 let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
 let s:GuiBg = {str -> empty(str) ? "":"guibg=".str}
@@ -43,37 +43,38 @@ execute "hi MatchParen" s:GuiFg(s:blue) s:GuiBg("bg") s:GuiAttr("bold")
 execute "hi NonText" s:GuiFg(s:silver6) s:GuiBg("bg")
 execute "hi Normal" s:GuiFg(s:silver2) s:GuiBg(s:white) s:GuiAttr("NONE")
 execute "hi Search" s:GuiFg(s:black) s:GuiBg(s:silver8) s:GuiAttr("NONE")
-execute "hi StatusLine" s:GuiFg(s:white) s:GuiBg(s:blue) s:GuiAttr("NONE")
+execute "hi StatusLine" s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr("NONE")
 execute "hi StatusLineNC" s:GuiFg(s:silver4) s:GuiBg(s:silver9) s:GuiAttr("NONE")
 execute "hi StatusLineTerm" s:GuiFg(s:white) s:GuiBg(s:black) s:GuiAttr("bold")
-execute "hi TabLineSel" s:GuiAttr("underline,bold")
+"execute "hi TabLineSel" s:GuiAttr("underline,bold")
 execute "hi Terminal" s:GuiFg(s:white) s:GuiBg(s:black)
 execute "hi VertSplit" s:GuiFg(s:silver9) s:GuiBg(s:silver9) s:GuiAttr("NONE")
 execute "hi Visual" s:GuiFg(s:white) s:GuiBg(s:blue)
 
+
 highlight! link CursorColumn CursorLine
-highlight! link SignColumn LineNr
 highlight! link FoldColumn LineNr
 highlight! link Folded Comment
-highlight! link StatusLineTermNC StatusLineNC
-highlight! link PmenuSel IncSearch
 highlight! link Pmenu Search
 highlight! link PmenuSbar Search
+highlight! link PmenuSel IncSearch
 highlight! link PmenuThumb IncSearch
-highlight! link WildMenu PmenuSel
-
-highlight! link TabLineFill Normal
+highlight! link SignColumn LineNr
+highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Normal
+highlight! link TabLineFill Normal
+highlight! link TabLineSel StatusLine
+highlight! link WildMenu PmenuSel
 
 " Code
 execute "hi Statement" s:GuiFg(s:red)  s:GuiAttr("bold")
 execute "hi Conditional" s:GuiFg(s:red)  s:GuiAttr("bold")
-execute "hi Type" s:GuiFg(s:blue)  s:GuiAttr("italic")
+execute "hi Type" s:GuiFg(s:blue) s:GuiAttr("NONE")
 execute "hi Structure" s:GuiFg(s:red) s:GuiAttr("NONE")
 execute "hi StorageClass" s:GuiFg(s:red)
 execute "hi PreProc" s:GuiFg(s:blue) s:GuiAttr("bold")
 execute "hi PreCondit" s:GuiFg(s:blue)  s:GuiAttr("bold")
-execute "hi Comment" s:GuiFg(s:silver5) s:GuiAttr("italic")
+execute "hi Comment" s:GuiFg(s:silver5) s:GuiAttr("NONE")
 execute "hi Function" s:GuiFg(s:blue)
 execute "hi Identifier" s:GuiFg(s:blue)
 execute "hi Special" s:GuiFg(s:silver1)
@@ -97,8 +98,8 @@ highlight! link qfSeparator Normal
 execute "hi vimCommentTitle" s:GuiFg(s:blue)  s:GuiAttr("bold")
 
 " Filetype C
-execute "hi cCppOut" s:GuiBg(s:silver9) s:GuiAttr("italic")
-execute "hi cCppOutIf2" s:GuiBg(s:silver9) s:GuiAttr("italic")
+execute "hi cCppOut" s:GuiBg(s:silver9) s:GuiAttr("NONE")
+execute "hi cCppOutIf2" s:GuiBg(s:silver9) s:GuiAttr("NONE")
 execute "hi cParen" s:GuiFg(s:silver3)
 execute "hi cBlock" s:GuiFg(s:silver3)
 

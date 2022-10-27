@@ -68,7 +68,6 @@ enddef
 
 def g:Config_T01()
   command! -nargs=0 UpdateCtags Ctags -R NvmDriverT01 DemoAppT01
-  command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "DemoAppT01"})
   set path=DemoAppT01,DemoAppT01/**,NvmDriverT01,NvmDriverT01/**,,
   compiler iar
   g:rg_paths = ["DemoAppT01", "NvmDriverT01"]
@@ -77,7 +76,6 @@ enddef
 
 def g:Config_T02()
   command! -nargs=0 UpdateCtags Ctags -R NvmDriverT02 DemoAppT02
-  command! -nargs=* Make call run#run({"cmd": "make <args>", "hidden": 0, "notify": 1, "cwd": "DemoAppT02"})
   set path=DemoAppT02,DemoAppT02/**,NvmDriverT02,NvmDriverT02/**,,
   compiler iar
   g:rg_paths = ["DemoAppT02", "NvmDriverT02"]
