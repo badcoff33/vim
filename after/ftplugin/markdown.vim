@@ -24,20 +24,31 @@ nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
 " Preview in HTML
-if filereadable(expand('<sfile>:p:h').."\\CSS\\simple.css")
-  command! -buffer ShowMarkdownPreview call <SID>OpenHTML()
-  command! -buffer UpdateMarkdownPreview call <SID>MakeHTML()
-  autocmd InsertLeave <buffer> call <SID>UpdateShadowFile()
-  autocmd TextChanged <buffer> call <SID>UpdateShadowFile()
-  autocmd InsertLeave <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
-  autocmd TextChanged <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
-  let b:markdown_to_html_cmd = "pandoc -f gfm -t html5 --toc --toc-depth=3"
-        \ .." --css="..expand('<sfile>:p:h').."\\CSS\\simple.css"
-        \ .." --template="..expand('<sfile>:p:h').."\\CSS\\template.html"
-        \ .." --metadata title=\""..expand("%:t:r").."\""
-        \ .." -o "..getenv("TEMP")..g:slash..expand("%:t")..".html"
-        \ .." "..getenv("TEMP")..g:slash.."_"..expand("%:t")
+
+let b:markdown_css_file = " --css=" .. g:vim_home .. "\\CSS\\simple.css"
+if !filereadable(b:markdown_css_file)
+  let b:markdown_css_file =  ""
 endif
+
+let b:markdown_template_file = " --template=" .. g:vim_home .. "\\CSS\\template.html"
+if !filereadable(b:markdown_template_file)
+ let b:markdown_template_file = ""
+endif
+
+let b:markdown_command = "pandoc -f gfm -t html5 --toc --toc-depth=3"
+      \ .. b:markdown_css_file
+      \ .. b:markdown_template_file
+      \ .." --metadata title=\""..expand("%:t:r").."\""
+      \ .." -o "..getenv("TEMP")..g:slash..expand("%:t")..".html"
+      \ .." "..getenv("TEMP")..g:slash.."_"..expand("%:t")
+
+command! -buffer ShowMarkdownPreview call <SID>OpenHTML()
+command! -buffer UpdateMarkdownPreview call <SID>MakeHTML()
+
+autocmd InsertLeave <buffer> call <SID>UpdateShadowFile()
+autocmd TextChanged <buffer> call <SID>UpdateShadowFile()
+autocmd InsertLeave <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
+autocmd TextChanged <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
 
 function! s:UpdateShadowFile()
   silent exe "write!" getenv("TEMP")..g:slash.."_"..expand("%:t")
@@ -49,9 +60,9 @@ function! s:OpenHTML()
 endfunction
 
 function! s:MakeHTML(...)
-  if exists("b:markdown_to_html_cmd")
+  if exists("b:markdown_command")
     call run#run({
-          \ 'cmd': b:markdown_to_html_cmd,
+          \ 'cmd': b:markdown_command,
           \ 'hidden': 1,
           \ 'nowrite': 1
           \ })
@@ -60,6 +71,7 @@ endfunction
 
 " Plugin EasyAlign tables
 if exists(":EasyAlign")
+  nnoremap <buffer> <LocalLeader><Tab> vap:EasyAlign *\|<CR>`.
   vnoremap <buffer> <Tab> :EasyAlign *\|<CR>`.
 endif
 

@@ -23,20 +23,30 @@ iabbrev <buffer> _todo *TODO*
 iabbrev <buffer> _link `NAME <>`_<Esc>2bea
 
 " Preview in HTML
-if filereadable(expand('<sfile>:p:h').."\\CSS\\simple.css")
-  command! -buffer RstOpenPreview call <SID>OpenHTML()
-  command! -buffer RstMakePreview call <SID>MakeHTML()
-  autocmd InsertLeave <buffer> call <SID>UpdateShadowFile()
-  autocmd TextChanged <buffer> call <SID>UpdateShadowFile()
-  autocmd InsertLeave <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
-  autocmd TextChanged <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
-  let b:markdown_to_html_cmd = "pandoc -f rst -t html5 --toc --toc-depth=3"
-        \ .." --css="..expand('<sfile>:p:h').."\\CSS\\simple.css"
-        \ .." --template="..expand('<sfile>:p:h').."\\CSS\\template.html"
-        \ .." --metadata title=\""..expand("%:t:r").."\""
-        \ .." -o "..getenv("TEMP")..g:slash..expand("%:t")..".html"
-        \ .." "..getenv("TEMP")..g:slash.."_"..expand("%:t")
+let b:rst_css_file = " --css=" .. g:vim_home .. "\\CSS\\simple.css"
+if !filereadable(b:rst_css_file)
+  let b:rst_css_file =  ""
 endif
+
+let b:rst_template_file = " --template=" .. g:vim_home .. "\\CSS\\template.html"
+if !filereadable(b:rst_template_file)
+ let b:rst_template_file = ""
+endif
+
+let b:rst_command = "pandoc -f rst -t html5 --toc --toc-depth=3"
+      \ .. b:rst_css_file
+      \ .. b:rst_template_file
+      \ .." --metadata title=\""..expand("%:t:r").."\""
+      \ .." -o "..getenv("TEMP")..g:slash..expand("%:t")..".html"
+      \ .." "..getenv("TEMP")..g:slash.."_"..expand("%:t")
+
+command! -buffer OpenRstPreview call <SID>OpenHTML()
+command! -buffer UpdateRsPreview call <SID>MakeHTML()
+
+autocmd InsertLeave <buffer> call <SID>UpdateShadowFile()
+autocmd TextChanged <buffer> call <SID>UpdateShadowFile()
+autocmd InsertLeave <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
+autocmd TextChanged <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
 
 function! s:UpdateShadowFile()
   silent exe "write!" getenv("TEMP")..g:slash.."_"..expand("%:t")
@@ -48,9 +58,9 @@ function! s:OpenHTML()
 endfunction
 
 function! s:MakeHTML(...)
-  if exists("b:markdown_to_html_cmd")
+  if exists("b:rst_command")
     call run#run({
-          \ 'cmd': b:markdown_to_html_cmd,
+          \ 'cmd': b:rst_command,
           \ 'hidden': 1,
           \ 'nowrite': 1
           \ })

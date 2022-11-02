@@ -17,8 +17,9 @@ let g:rg_glob_patterns = {
 let g:rg_excludes = get(g:, "rg_excludes", [])
 let g:rg_paths = get(g:, "rg_paths", ["."])
 
-let RgIncludes =  {ft -> has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft].." " : " "}
-let RgPaths =     { -> join(g:rg_paths, " ")}
+let RgIncludes = {ft -> has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft].." " : " "}
+let RgPaths = { -> join(g:rg_paths, " ")}
+let RgPattern = { ->  len(expand("<cword>")) ? "PATTERN" : expand("<cword>") }
 
 function RgExcludes()
   let exclude_string = ""
@@ -31,10 +32,12 @@ endfunction
 set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
+command! -complete=file -nargs=* RgFiles enew | read !rg --files --glob-case-insensitive --glob *<args>*
+
+nnoremap <Leader>rf :RgFiles <C-r><C-w>
+
 command! -complete=file -nargs=* Rg
       \ call run#run({'cmd':'rg --vimgrep '..' <args>', 'hidden':0, 'regexp':&grepformat})
 
-command! -complete=file -nargs=* RgFiles enew | read !rg --files --glob-case-insensitive --glob *<args>*
-
-nnoremap <Leader>G :Rg <C-r>=RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r><C-W> <C-r>=RgPaths()<CR>
-nmap <Leader>g :let @/="<C-r><C-w>"<CR><Leader>G<CR>
+nnoremap <Leader>rG :Rg <C-r>=RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR> <C-r>=RgPaths()<CR>
+nmap <Leader>rg <Leader>G<CR>

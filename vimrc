@@ -216,9 +216,9 @@ nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 nnoremap <A-right> g<C-]>
 nnoremap <A-left> <C-t>
 
-" replace command
-nnoremap <Leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
-vnoremap <Leader>r :s///gI<Left><Left><Left><Left>
+" Substitute command
+nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
+vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
 nnoremap <Leader>e :edit <C-r>=expand("%:h")..g:slash<CR>
@@ -248,7 +248,7 @@ function! s:ToggleQuickfix()
     endif
   endif
 endfunction
-nnoremap <C-CR> <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap <Leader>q <cmd>call <SID>ToggleQuickfix()<CR>
 nnoremap <Leader>c :clist!<CR>
 
 " zoom current buffer in seperate tab

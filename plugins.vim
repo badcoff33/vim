@@ -1,8 +1,5 @@
 vim9script
 
-# My own stuff
-nnoremap <A-CR> :FindFile<space>
-
 # FZF
 g:fzf_colors = {
   'fg':      ['fg', 'Normal'],
@@ -41,6 +38,7 @@ g:config_functions = [
  "Config_Hvh",
  "Config_T01",
  "Config_T02",
+ "Config_T0X",
  "Config_RL78_AAE",
  "Config_RL78_AGF",
  "Config_Vim",
@@ -80,6 +78,14 @@ def g:Config_T02()
   compiler iar
   g:rg_paths = ["DemoAppT02", "NvmDriverT02"]
   g:rg_excludes = ["NvmDriverT01", "DemoAppT01"]
+enddef
+
+def g:Config_T0X()
+  command! -nargs=0 UpdateCtags Ctags -R NvmDriverT02 NvmDriverT01 DemoUscT0X
+  set path=DemoUscT0X,DemoUscT0X/**,NvmDriverT02,NvmDriverT02/**,NvmDriverT01,NvmDriverT01/**,,
+  compiler iar
+  g:rg_paths = ["DemoUscT0X", "NvmDriverT02", "NvmDriverT01"]
+  g:rg_excludes = ["DemoAppT02", "DemoAppT01"]
 enddef
 
 def g:Config_C234()
