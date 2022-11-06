@@ -46,7 +46,7 @@ let b:markdown_command = "pandoc -f gfm -t html5 --toc --toc-depth=3"
       \ .." -o "..getenv("TEMP")..g:slash..expand("%:t")..".html"
       \ .." "..getenv("TEMP")..g:slash.."_"..expand("%:t")
 
-command! -buffer ShowMarkdownPreview call <SID>OpenHTML()
+command! -buffer OpenMarkdownPreview call <SID>OpenHTML()
 command! -buffer UpdateMarkdownPreview call <SID>MakeHTML()
 
 autocmd InsertLeave <buffer> call <SID>UpdateShadowFile()

@@ -123,6 +123,9 @@ inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
 inoremap <C-Space> <Esc>
 
+" Use the minus key for something useful
+nnoremap - :
+
 " Replace current inner word with one key press
 nnoremap <BS> ciw
 
@@ -151,14 +154,17 @@ vnoremap < <gv
 tnoremap <Esc>       <C-\><C-n>
 tnoremap <LeftMouse> <C-\><C-n>
 
-" Line bubbling
-nnoremap <A-j> <cmd>move .+1<CR>==
-nnoremap <A-k> <cmd>move .-2<CR>==
-vnoremap <A-j> :move '>+1<CR>==gv=gv
-vnoremap <A-k> :move '<-2<CR>==gv=gv
+" Line bubbling, key mapping leant to scrolling keys C-e C-y
+nnoremap <A-y> <cmd>move .+1<CR>==
+nnoremap <A-e> <cmd>move .-2<CR>==
+vnoremap <A-y> :move '>+1<CR>==gv=gv
+vnoremap <A-e> :move '<-2<CR>==gv=gv
 
 nnoremap <A-o> :bprevious<CR>
 nnoremap <A-i> :bnext<CR>
+
+nnoremap <silent> <A-.> <cmd>FF<CR>
+nnoremap <silent> <A-,> <cmd>FR<CR>
 
 " command line
 cnoremap <expr> <A-.> expand("%:h")..g:slash
@@ -179,8 +185,6 @@ nnoremap <C-k> <cmd>cprevious<cr>
 nnoremap <C-j> <cmd>cnext<cr>
 nnoremap <C-Up> <cmd>cprevious<cr>
 nnoremap <C-Down> <cmd>cnext<cr>
-nnoremap <A-Up> <cmd>cfirst<CR>
-nnoremap <A-DOWN> <cmd>clast<CR>
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.

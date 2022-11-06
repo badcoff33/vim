@@ -36,8 +36,6 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 g:config_functions = [
  "Config_Hvh",
- "Config_T01",
- "Config_T02",
  "Config_T0X",
  "Config_RL78_AAE",
  "Config_RL78_AGF",
@@ -85,7 +83,7 @@ def g:Config_T0X()
   set path=DemoUscT0X,DemoUscT0X/**,NvmDriverT02,NvmDriverT02/**,NvmDriverT01,NvmDriverT01/**,,
   compiler iar
   g:rg_paths = ["DemoUscT0X", "NvmDriverT02", "NvmDriverT01"]
-  g:rg_excludes = ["DemoAppT02", "DemoAppT01"]
+  g:rg_excludes = ["Debug"]
 enddef
 
 def g:Config_C234()

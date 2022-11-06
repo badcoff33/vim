@@ -19,7 +19,7 @@ let g:rg_paths = get(g:, "rg_paths", ["."])
 
 let RgIncludes = {ft -> has_key(g:rg_glob_patterns, ft) ? g:rg_glob_patterns[ft].." " : " "}
 let RgPaths = { -> join(g:rg_paths, " ")}
-let RgPattern = { ->  len(expand("<cword>")) ? "PATTERN" : expand("<cword>") }
+let RgPattern = { ->  len(expand("<cword>")) == 0 ? "PATTERN" : expand("<cword>") }
 
 function RgExcludes()
   let exclude_string = ""
@@ -40,4 +40,4 @@ command! -complete=file -nargs=* Rg
 
 nnoremap <Leader>rf :RgFiles <C-r>=RgExcludes()<CR> -g <C-r><C-w>
 nnoremap <Leader>rG :Rg <C-r>=RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR> <C-r>=RgPaths()<CR>
-nmap <Leader>rg <Leader>G<CR>
+nmap <Leader>rg <Leader>rG<CR>

@@ -23,14 +23,18 @@ iabbrev <buffer> _todo *TODO*
 iabbrev <buffer> _link `NAME <>`_<Esc>2bea
 
 " Preview in HTML
-let b:rst_css_file = " --css=" .. g:vim_home .. "\\CSS\\simple.css"
+let b:rst_css_file = g:vim_home .. "\\CSS\\simple.css"
 if !filereadable(b:rst_css_file)
   let b:rst_css_file =  ""
+else
+  let b:rst_css_file = " --css=" .. b:rst_css_file
 endif
 
-let b:rst_template_file = " --template=" .. g:vim_home .. "\\CSS\\template.html"
+let b:rst_template_file = g:vim_home .. "\\CSS\\template.html"
 if !filereadable(b:rst_template_file)
  let b:rst_template_file = ""
+else
+  let b:rst_template_file = " --template=" .. b:rst_template_file
 endif
 
 let b:rst_command = "pandoc -f rst -t html5 --toc --toc-depth=3"

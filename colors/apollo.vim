@@ -39,43 +39,43 @@ let s:red1     = "#B82042"
 let s:red2     = "#E84070"
 let s:amber    = "#D0CF20"
 
-let s:GuiFg = {str -> empty(str) ? "":"guifg=".str}
-let s:GuiBg = {str -> empty(str) ? "":"guibg="..str}
-let s:GuiAttr = {str -> empty(str) ? "":"gui="..str}
+let s:Fg = {str -> empty(str) ? "":"guifg=".str}
+let s:Bg = {str -> empty(str) ? "":"guibg="..str}
+let s:Attr = {str -> empty(str) ? "":"gui="..str}
 let s:Cterm = {str -> empty(str) ? "":"cterm="..str}
 
 " Basics
-execute 'hi Bold' s:GuiFg(s:silver2)  s:GuiAttr('bold')
-execute 'hi Cursor' s:GuiFg(s:black) s:GuiBg(s:white)
-execute 'hi CursorLine'  s:GuiBg(s:bg3) s:Cterm('NONE')
-execute 'hi CursorLineNr' s:GuiFg(s:green3) s:GuiBg(s:bg3) s:GuiAttr('bold')
-execute 'hi ErrorMsg' s:GuiFg(s:red2) s:GuiBg('bg')
-execute 'hi IncSearch' s:GuiFg(s:black) s:GuiBg(s:amber) s:GuiAttr('bold')
-execute 'hi Italic' s:GuiFg(s:silver2)  s:GuiAttr('italic')
-execute 'hi LineNr' s:GuiFg(s:blue3) s:GuiBg(s:bg2)
-execute 'hi LineNrAbove' s:GuiFg(s:bg4) s:GuiBg('bg') s:GuiAttr('bold')
-execute 'hi LineNrBelow' s:GuiFg(s:bg4) s:GuiBg('bg') s:GuiAttr('bold')
-execute 'hi MatchParen' s:GuiFg(s:green3) s:GuiBg('bg') s:GuiAttr('underline')
-execute 'hi ModeMsg' s:GuiFg(s:silver2) s:GuiBg('bg')
-execute 'hi NonText' s:GuiFg(s:blue1) s:GuiBg(s:bg1)
-execute 'hi Normal' s:GuiFg(s:silver4) s:GuiBg(s:bg1) s:GuiAttr('NONE')
-execute 'hi PMenu' s:GuiFg(s:white) s:GuiBg(s:blue_bg) s:GuiAttr('NONE')
-execute 'hi PMenuSbar' s:GuiFg(s:silver3) s:GuiBg(s:bg3)
-execute 'hi PMenuSel' s:GuiFg(s:white) s:GuiBg(s:green1) s:GuiAttr('NONE')
-execute 'hi PMenuThumb' s:GuiFg(s:blue2) s:GuiBg(s:bg4)
-execute 'hi Question' s:GuiFg(s:green2) s:GuiBg('bg')
-execute 'hi QuickFixLine'  s:GuiFg(s:amber) s:GuiBg("bg") s:GuiAttr('bold')
-execute 'hi Search' s:GuiFg(s:white) s:GuiBg(s:blue2) s:GuiAttr('NONE')
-execute 'hi StatusLine' s:GuiFg(s:white) s:GuiBg(s:bg4) s:GuiAttr('NONE')
-execute 'hi StatusLineNC' s:GuiFg(s:silver3) s:GuiBg(s:bg2) s:GuiAttr('NONE')
-execute 'hi TabLineSel' s:GuiAttr('underline,bold')
-execute 'hi Terminal' s:GuiFg(s:green2) s:GuiBg(s:green_bg)
-execute 'hi Title' s:GuiFg(s:green3)
-execute 'hi VertSplit' s:GuiFg(s:bg2) s:GuiBg(s:bg2) s:GuiAttr('NONE')
-execute 'hi Visual' s:GuiFg(s:white) s:GuiBg(s:blue_bg)
-execute 'hi WarningMsg' s:GuiFg(s:blue1) s:GuiBg('bg')
-execute 'hi qfFileName' s:GuiFg(s:blue2)
-execute 'hi qfSeparator' s:GuiFg('fg')
+execute 'hi Bold' s:Fg(s:silver2)  s:Attr('bold')
+execute 'hi Cursor' s:Fg(s:black) s:Bg(s:white)
+execute 'hi CursorLine'  s:Bg(s:bg3) s:Cterm('NONE')
+execute 'hi CursorLineNr' s:Fg(s:green3) s:Bg(s:bg3) s:Attr('bold')
+execute 'hi ErrorMsg' s:Fg(s:red2) s:Bg('bg')
+execute 'hi IncSearch' s:Fg(s:black) s:Bg(s:amber) s:Attr('bold')
+execute 'hi Italic' s:Fg(s:silver2)  s:Attr('NONE')
+execute 'hi LineNr' s:Fg(s:blue3) s:Bg(s:bg2)
+execute 'hi LineNrAbove' s:Fg(s:bg4) s:Bg('bg') s:Attr('bold')
+execute 'hi LineNrBelow' s:Fg(s:bg4) s:Bg('bg') s:Attr('bold')
+execute 'hi MatchParen' s:Fg(s:green3) s:Bg('bg') s:Attr('underline')
+execute 'hi ModeMsg' s:Fg(s:silver2) s:Bg('bg')
+execute 'hi NonText' s:Fg(s:blue1) s:Bg(s:bg1)
+execute 'hi Normal' s:Fg(s:silver4) s:Bg(s:bg1) s:Attr('NONE')
+execute 'hi PMenu' s:Fg(s:white) s:Bg(s:blue_bg) s:Attr('NONE')
+execute 'hi PMenuSbar' s:Fg(s:silver3) s:Bg(s:bg3)
+execute 'hi PMenuSel' s:Fg(s:white) s:Bg(s:green1) s:Attr('NONE')
+execute 'hi PMenuThumb' s:Fg(s:blue2) s:Bg(s:bg4)
+execute 'hi Question' s:Fg(s:green2) s:Bg('bg')
+execute 'hi QuickFixLine'  s:Fg(s:amber) s:Bg("bg") s:Attr('bold')
+execute 'hi Search' s:Fg(s:white) s:Bg(s:blue2) s:Attr('NONE')
+execute 'hi StatusLine' s:Fg(s:white) s:Bg(s:bg4) s:Attr('NONE')
+execute 'hi StatusLineNC' s:Fg(s:silver3) s:Bg(s:bg2) s:Attr('NONE')
+execute 'hi TabLineSel' s:Attr('underline,bold')
+execute 'hi Terminal' s:Fg(s:green2) s:Bg(s:green_bg)
+execute 'hi Title' s:Fg(s:green3)
+execute 'hi VertSplit' s:Fg(s:bg2) s:Bg(s:bg2) s:Attr('NONE')
+execute 'hi Visual' s:Fg(s:white) s:Bg(s:blue_bg)
+execute 'hi WarningMsg' s:Fg(s:blue1) s:Bg('bg')
+execute 'hi qfFileName' s:Fg(s:blue2)
+execute 'hi qfSeparator' s:Fg('fg')
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn Normal
 highlight! link Folded StatusLineNC
@@ -92,56 +92,56 @@ highlight! link User4 StatusLine
 highlight! link WildMenu IncSearch
 highlight! link qfLineNr    LineNr
 " Code
-execute 'hi Statement' s:GuiFg(s:blue3)
-execute 'hi Conditional' s:GuiFg(s:blue3)  s:GuiAttr('bold')
-execute 'hi Type' s:GuiFg(s:blue2)  s:GuiAttr('italic')
-execute 'hi Structure' s:GuiFg(s:blue2)
-execute 'hi StorageClass' s:GuiFg(s:blue3)
-execute 'hi PreProc' s:GuiFg(s:white)  s:GuiAttr('bold')
-execute 'hi PreCondit' s:GuiFg(s:blue1)  s:GuiAttr('bold')
-execute 'hi Define' s:GuiFg(s:blue2)  s:GuiAttr('NONE')
-execute 'hi Comment' s:GuiFg(s:green3)
-execute 'hi Function' s:GuiFg(s:blue3) s:GuiAttr('bold')
-execute 'hi Identifier' s:GuiFg(s:silver3)
-execute 'hi Special' s:GuiFg(s:green2)
-execute 'hi Constant' s:GuiFg(s:white)
-execute 'hi Number' s:GuiFg(s:white)
-execute 'hi Todo' s:GuiFg(s:silver2) s:GuiBg(s:bg3)
-execute 'hi Error' s:GuiFg(s:red2) s:GuiBg(s:bg3)
-execute 'hi Directory' s:GuiFg(s:silver4)  s:GuiAttr('underline')
+execute 'hi Statement' s:Fg(s:blue3)
+execute 'hi Conditional' s:Fg(s:blue3)  s:Attr('bold')
+execute 'hi Type' s:Fg(s:blue2)  s:Attr('NONE')
+execute 'hi Structure' s:Fg(s:blue2)
+execute 'hi StorageClass' s:Fg(s:blue3)
+execute 'hi PreProc' s:Fg(s:white)  s:Attr('bold')
+execute 'hi PreCondit' s:Fg(s:blue1)  s:Attr('bold')
+execute 'hi Define' s:Fg(s:blue2)  s:Attr('NONE')
+execute 'hi Comment' s:Fg(s:green3)
+execute 'hi Function' s:Fg(s:blue3) s:Attr('bold')
+execute 'hi Identifier' s:Fg(s:silver3)
+execute 'hi Special' s:Fg(s:green2)
+execute 'hi Constant' s:Fg(s:white)
+execute 'hi Number' s:Fg(s:white)
+execute 'hi Todo' s:Fg(s:silver2) s:Bg(s:bg3)
+execute 'hi Error' s:Fg(s:red2) s:Bg(s:bg3)
+execute 'hi Directory' s:Fg(s:silver4)  s:Attr('underline')
 
 " Filetype VIM
-execute 'hi vimCommentTitle' s:GuiFg(s:white)  s:GuiAttr('bold')
+execute 'hi vimCommentTitle' s:Fg(s:white)  s:Attr('bold')
 
 " Filetype C
-execute 'hi cCppOut' s:GuiFg(s:silver3)
-execute 'hi cCppOutIf2' s:GuiFg(s:silver3)
-execute 'hi cParen' s:GuiFg(s:silver3)
-execute 'hi cBlock' s:GuiFg(s:silver3)
+execute 'hi cCppOut' s:Fg(s:silver3)
+execute 'hi cCppOutIf2' s:Fg(s:silver3)
+execute 'hi cParen' s:Fg(s:silver3)
+execute 'hi cBlock' s:Fg(s:silver3)
 
 " filetype HTML
-execute 'hi htmlH1' s:GuiFg(s:green4)  s:GuiAttr('bold')
-execute 'hi htmlH2' s:GuiFg(s:green3)  s:GuiAttr('bold')
-execute 'hi htmlH3' s:GuiFg(s:green2)  s:GuiAttr('bold')
+execute 'hi htmlH1' s:Fg(s:green4)  s:Attr('bold')
+execute 'hi htmlH2' s:Fg(s:green3)  s:Attr('bold')
+execute 'hi htmlH3' s:Fg(s:green2)  s:Attr('bold')
 
 " markdown
-execute 'hi markdownCode' s:GuiFg(s:silver3) s:GuiBg(s:bg3)
-execute 'hi markdownCodeBlock' s:GuiFg(s:silver2)
-execute 'hi markdownUrl' s:GuiFg(s:silver2) s:GuiBg(s:bg3) s:GuiAttr('underline')
-execute 'hi markdownLinkText' s:GuiFg(s:blue2)  s:GuiAttr('none')
+execute 'hi markdownCode' s:Fg(s:silver3) s:Bg(s:bg3)
+execute 'hi markdownCodeBlock' s:Fg(s:silver2)
+execute 'hi markdownUrl' s:Fg(s:silver2) s:Bg(s:bg3) s:Attr('underline')
+execute 'hi markdownLinkText' s:Fg(s:blue2)  s:Attr('NONE')
 
 " restructured text
-execute 'hi rstEmphasis' s:GuiFg(s:green2)
-execute 'hi rstStrongEmphasis' s:GuiFg(s:green2)  s:GuiAttr('bold')
+execute 'hi rstEmphasis' s:Fg(s:green2)
+execute 'hi rstStrongEmphasis' s:Fg(s:green2)  s:Attr('bold')
 
 " Diffs
-execute 'hi DiffChange' s:GuiFg(s:white) s:GuiBg(s:bg4)
-execute 'hi DiffText' s:GuiFg(s:blue2) s:GuiBg(s:bg4) s:GuiAttr('bold')
-execute 'hi DiffDelete' s:GuiFg(s:red1) s:GuiBg(s:red1)
-execute 'hi DiffAdd' s:GuiFg(s:green2) s:GuiBg(s:bg3) s:GuiAttr('bold')
+execute 'hi DiffChange' s:Fg(s:white) s:Bg(s:bg4)
+execute 'hi DiffText' s:Fg(s:blue2) s:Bg(s:bg4) s:Attr('bold')
+execute 'hi DiffDelete' s:Fg(s:red1) s:Bg(s:red1)
+execute 'hi DiffAdd' s:Fg(s:green2) s:Bg(s:bg3) s:Attr('bold')
 
 " clean up
-unlet s:GuiFg s:GuiBg s:GuiAttr s:Cterm
+unlet s:Fg s:Bg s:Attr s:Cterm
 unlet s:white s:black s:bg1 s:bg2 s:bg3 s:bg4 s:silver1 s:silver2 s:silver3 s:silver4
 unlet s:green_bg s:green1 s:green2 s:green3 s:green4
 unlet s:blue_bg s:blue1 s:blue2 s:blue3 s:red1 s:red2 s:amber
