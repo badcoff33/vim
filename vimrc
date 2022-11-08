@@ -163,8 +163,8 @@ vnoremap <A-e> :move '<-2<CR>==gv=gv
 nnoremap <A-o> :bprevious<CR>
 nnoremap <A-i> :bnext<CR>
 
-nnoremap <silent> <A-.> <cmd>FF<CR>
-nnoremap <silent> <A-,> <cmd>FR<CR>
+nnoremap <silent> + <cmd>FF<CR>
+nnoremap <silent> - <cmd>FR<CR>
 
 " command line
 cnoremap <expr> <A-.> expand("%:h")..g:slash
@@ -204,7 +204,7 @@ let g:slash = exists('&shellslash') ? '\' : '/'
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
-let maplocalleader = "+"
+let maplocalleader = "!"
 
 " quick note taking
 nnoremap <expr> <Leader>n ":drop "..strftime("~/Documents/Notes/note-%d-%m-%y.txt".."<CR>:setfiletype markdown<CR>")

@@ -50,7 +50,7 @@ execute 'hi Cursor' s:Fg(s:black) s:Bg(s:white)
 execute 'hi CursorLine'  s:Bg(s:bg3) s:Cterm('NONE')
 execute 'hi CursorLineNr' s:Fg(s:green3) s:Bg(s:bg3) s:Attr('bold')
 execute 'hi ErrorMsg' s:Fg(s:red2) s:Bg('bg')
-execute 'hi IncSearch' s:Fg(s:black) s:Bg(s:amber) s:Attr('bold')
+execute 'hi IncSearch' s:Fg(s:black) s:Bg(s:white) s:Attr('bold')
 execute 'hi Italic' s:Fg(s:silver2)  s:Attr('NONE')
 execute 'hi LineNr' s:Fg(s:blue3) s:Bg(s:bg2)
 execute 'hi LineNrAbove' s:Fg(s:bg4) s:Bg('bg') s:Attr('bold')
@@ -59,16 +59,15 @@ execute 'hi MatchParen' s:Fg(s:green3) s:Bg('bg') s:Attr('underline')
 execute 'hi ModeMsg' s:Fg(s:silver2) s:Bg('bg')
 execute 'hi NonText' s:Fg(s:blue1) s:Bg(s:bg1)
 execute 'hi Normal' s:Fg(s:silver4) s:Bg(s:bg1) s:Attr('NONE')
-execute 'hi PMenu' s:Fg(s:white) s:Bg(s:blue_bg) s:Attr('NONE')
-execute 'hi PMenuSbar' s:Fg(s:silver3) s:Bg(s:bg3)
-execute 'hi PMenuSel' s:Fg(s:white) s:Bg(s:green1) s:Attr('NONE')
-execute 'hi PMenuThumb' s:Fg(s:blue2) s:Bg(s:bg4)
+execute 'hi Pmenu' s:Fg(s:white) s:Bg(s:blue_bg) s:Attr('NONE')
+execute 'hi PmenuSbar' s:Fg(s:silver3) s:Bg(s:bg3)
+execute 'hi PmenuSel' s:Fg(s:white) s:Bg(s:blue1) s:Attr('NONE')
+execute 'hi PmenuThumb' s:Fg(s:blue2) s:Bg(s:bg4)
 execute 'hi Question' s:Fg(s:green2) s:Bg('bg')
 execute 'hi QuickFixLine'  s:Fg(s:amber) s:Bg("bg") s:Attr('bold')
 execute 'hi Search' s:Fg(s:white) s:Bg(s:blue2) s:Attr('NONE')
 execute 'hi StatusLine' s:Fg(s:white) s:Bg(s:bg4) s:Attr('NONE')
 execute 'hi StatusLineNC' s:Fg(s:silver3) s:Bg(s:bg2) s:Attr('NONE')
-execute 'hi TabLineSel' s:Attr('underline,bold')
 execute 'hi Terminal' s:Fg(s:green2) s:Bg(s:green_bg)
 execute 'hi Title' s:Fg(s:green3)
 execute 'hi VertSplit' s:Fg(s:bg2) s:Bg(s:bg2) s:Attr('NONE')
@@ -82,9 +81,9 @@ highlight! link Folded StatusLineNC
 highlight! link SignColumn Normal
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine Normal
-highlight! link TabLineFill Normal
-highlight! link TabLineSel Normal
+highlight! link TabLineSel StatusLine
+highlight! link TabLine StatusLineNC
+highlight! link TabLineFill StatusLineNC
 highlight! link User1 StatusLine
 highlight! link User2 StatusLine
 highlight! link User3 StatusLine
