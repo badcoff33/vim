@@ -166,7 +166,7 @@ nnoremap <A-i> :bnext<CR>
 nnoremap <silent> + <cmd>FF<CR>
 nnoremap <silent> - <cmd>FR<CR>
 
-" command line
+" command line abbreviations
 cnoremap <expr> <A-.> expand("%:h")..g:slash
 cnoremap <expr> <A-,> $USERPROFILE..g:slash..'vimfiles'..g:slash
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
@@ -174,17 +174,16 @@ cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? '
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
 " Living with QWERTZ keyboards
-execute "set langmap=\<Char-252>/"
-execute "set langmap+=\<Char-220>?"
+execute "set langmap+=\<Char-196>}"
 execute "set langmap+=\<Char-246>["
 execute "set langmap+=\<Char-228>]"
 execute "set langmap+=\<Char-214>{"
-execute "set langmap+=\<Char-196>}"
 
-nnoremap <C-k> <cmd>cprevious<cr>
-nnoremap <C-j> <cmd>cnext<cr>
-nnoremap <C-Up> <cmd>cprevious<cr>
-nnoremap <C-Down> <cmd>cnext<cr>
+nnoremap <C-j> <cmd>cnext<CR>
+nnoremap <C-k> <cmd>cprevious<CR>
+" Living with QWERTZ keyboards
+nnoremap <Char-252> <cmd>cnext<CR>
+nnoremap <Char-220> <cmd>cprevious<CR>
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -258,7 +257,6 @@ nnoremap <Leader>c :clist!<CR>
 " zoom current buffer in seperate tab
 nnoremap <Leader><Tab> <cmd>tabnew<CR>
 
-" command line abbreviations
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
 nnoremap <expr> <Leader>v ':silent vimgrep /'..expand("<cword>")..'/ '..expand("%:h")..g:slash..LsFilter(&ft)
