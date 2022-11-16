@@ -1,40 +1,43 @@
 
-let s:run_ani_string = '-\|/'
+vim9script
 
-function! GetJobDictName(hdl)
-  return "g:run"..ch_info(a:hdl)["id"]
-endfunction
+import autoload "lib/popup.vim"
 
-function! run#append(ch, msg)
-  let list_name = GetJobDictName(a:ch).."['lines']"
-  execute "let" list_name "=" list_name "+ [a:msg]"
-endfunction
+var run_animation_string = '-\|/'
+var run_job_dict: dict<any>
+var run_tid: number
+var run_animation_winid: number
+var run_animation_index: number
 
-function! run#close(ch)
-  call timer_stop(g:run_tid)
-  if exists("g:run_ani_winid")
-    call popup_close(g:run_ani_winid)
-    unlet g:run_ani_winid
+export def Append(ch: channel, msg: string)
+  call add(run_job_dict['lines'], msg)
+enddef
+
+export def Close(ch: channel)
+  timer_stop(run_tid)
+  if run_animation_winid > 0
+    popup_close(run_animation_winid)
   endif
-  let dict_name = GetJobDictName(a:ch)
-  execute 'call setqflist([], "r", ' dict_name ')'
-  let text = "job done: "..eval(dict_name..'["title"]')
-  if eval(dict_name..'["popup"]') == 1
-    let winid = lib#popup#over_statusline(text)
-    call setwinvar(winid, "&wrap", 0)
+  call setqflist([], "r", run_job_dict)
+  var text = "job done: " .. run_job_dict["title"]
+  if run_job_dict["popup"] == 1
+    var winid = popup.over_statusline(text)
+    setwinvar(winid, "&wrap", 0)
   endif
   doautocmd QuickFixCmdPost make
-endfunction
+enddef
 
-function! run#hidden_error(ch,msg)
+export def HiddenError(ch: channel,  msg: string)
   echohl ErrorMsg
-  echo 'error reported by ch' ch_info(a:ch)['id'] '-->' a:msg
+  #echo 'error reported by ch' ch_info(ch)['id'] '-->' msg
   echohl None
-endfunction
+enddef
 
-function! run#run(dict)
-  let job_opts = {}
-  if exists('a:dict.nowrite') && (a:dict.nowrite == 1)
+export def Run(dict: dict<any>)
+  var job_opts = {}
+  var regexp: string
+  var close_popup: number
+  if has_key(dict, "nowrite") && (dict.nowrite == 1)
   elseif (&autowrite || &autowriteall)
     try
       silent wall
@@ -43,62 +46,66 @@ function! run#run(dict)
     finally
     endtry
   endif
-  if exists('a:dict.cwd')
-    let job_opts.cwd = a:dict.cwd
+  if has_key(dict, "cwd")
+    job_opts.cwd = dict.cwd
   else
-    let job_opts.cwd = getcwd()
+    job_opts.cwd = getcwd()
   endif
-  if !exists('a:dict.hidden') || (a:dict.hidden == 0)
-    let job_opts.out_cb = function("run#append")
-    let job_opts.err_cb = function("run#append")
-    let job_opts.close_cb = function("run#close")
+  if has_key(dict, "hidden") || (dict.hidden == 0)
+    job_opts.out_cb = function("run#Append")
+    job_opts.err_cb = function("run#Append")
+    job_opts.close_cb = function("run#Close")
   else
-    let job_opts.err_cb = function("run#hidden_error")
+    job_opts.err_cb = function("run#HiddenError")
   endif
-  if exists('a:dict.cwd')
-    let job_opts.cwd = a:dict.cwd
+  if has_key(dict, "cwd")
+    job_opts.cwd = dict.cwd
   endif
-  if !exists('a:dict.regexp')
-    let regexp = &errorformat
+  if has_key(dict, "regexp")
+    regexp = dict.regexp
   else
-    let regexp = a:dict.regexp
+    regexp = &errorformat
   endif
-  if exists('a:dict.notify') && (a:dict.notify != 0)
-    let close_popup = 1
+  if has_key(dict, "notify") && (dict.notify != 0)
+    close_popup = 1
   else
-    let close_popup = 0
+    close_popup = 0
   endif
-  if exists('a:dict.cmd')
-    let j = job_start('cmd /C '.a:dict['cmd'], job_opts)
-    let d = #{title: a:dict["cmd"], lines: [], efm: regexp, popup: close_popup}
-    execute "let "..GetJobDictName(j).."= copy(d)"
-    if ( job_status(j) == "run" ) && !exists("g:run_ani_winid") && ( !exists('a:dict.hidden') || (a:dict.hidden == 0) )
-      let g:run_tid = timer_start(200, function("run#alive"), #{repeat: -1})
-      let g:run_ani_index = 0
-      let g:run_ani_winid = popup_create(s:run_ani_string[0], #{
-            \ line: &lines - 1,
-            \ col: 1,
-            \ tabpage: -1,
-            \ highlight: 'PmenuSel',
-            \ padding: [0,0,0,0],
-            \ })
+
+  if has_key(dict, "cmd")
+    var j = job_start('cmd /C ' .. dict['cmd'], job_opts)
+    if ( job_status(j) == "run" ) && ( !exists('dict.hidden') || (dict.hidden == "0") )
+      run_tid = timer_start(200, function("run#Alive"), {repeat: -1})
+      run_animation_index = 0
+      run_animation_winid = popup_create(run_animation_string[0], {
+        line: &lines - 1,
+        col: 1,
+        tabpage: -1,
+        highlight: 'PmenuSel',
+        padding: [0, 0, 0, 0]
+      })
+    else
+      run_animation_winid = 0
     endif
-  endif
-endfunction
-
-function! run#alive(...)
-  if g:run_ani_index >= ( len(s:run_ani_string) - 1 )
-    let g:run_ani_index = 0
+    run_job_dict = {title: dict["cmd"], lines: [], efm: regexp, popup: close_popup}
   else
-    let g:run_ani_index += 1
+    echoerr "no command"
   endif
-  call setbufline(winbufnr(g:run_ani_winid), 1, s:run_ani_string[g:run_ani_index])
-endfunction
+enddef
 
-function run#popup_terminal()
-  let buf = term_start(['cmd'], #{hidden: 1, term_finish: 'close'})
-  let winopts = #{minwidth: &columns - 10 , minheight: 10, maxheight: &lines - 10, border:[1,1,1,1], padding:[1,1,1,1]}
-  let g:popup_terminal_winid = popup_create(buf, winopts)
+export def Alive(tid: number)
+  if run_animation_index >= ( len(run_animation_string) - 1 )
+    run_animation_index = 0
+  else
+    run_animation_index += 1
+  endif
+  setbufline(winbufnr(run_animation_winid), 1, run_animation_string[run_animation_index])
+enddef
+
+export def PopupTerminal()
+  buf = term_start(['cmd'], {hidden: 1, term_finish: 'close'})
+  winopts = {minwidth: &columns - 10 , minheight: 10, maxheight: &lines - 10, border:[1,1,1,1], padding:[1,1,1,1]}
+  g:popup_terminal_winid = popup_create(buf, winopts)
   set wincolor=Terminal
-  autocmd VimResized <buffer> call popup_move(g:popup_terminal_winid, winopts)
-endfunction
+  autocmd VimResized <buffer> popup_move(g:popup_terminal_winid, winopts)
+enddef

@@ -18,7 +18,8 @@ import autoload "ctags.vim"
 # endfun
 
 #command! -complete=customlist,CtagsHighlightingCpl -nargs=1 CtagsHighlighting ctags.HighlightTags(<q-args>)
-command! -nargs=1 CtagsHighlighting ctags.HighlightTags(<q-args>)
+command! -nargs=1 CtagsHighlighting Ctags.HighlightTags(<q-args>)
+command! -complete=file -nargs=* Ctags Run.Run({'cmd':'ctags <args>','hidden':1})
 
 augroup CTAGS
   autocmd!
