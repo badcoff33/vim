@@ -64,7 +64,7 @@ function! lib#popup#over_statusline(text)
   endif
   return popup_create(text, #{
         \ pos: "botleft",
-        \ line: &lines - 1,
+        \ line: &lines - 2,
         \ col: 1,
         \ time: (2*g:popup_close_win_time)/3,
         \ tabpage: -1,

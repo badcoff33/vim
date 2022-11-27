@@ -25,14 +25,18 @@ nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
 " Preview in HTML
 
-let b:markdown_css_file = " --css=" .. g:vim_home .. "\\CSS\\simple.css"
+let b:markdown_css_file = g:vim_home .. "\\CSS\\simple.css"
 if !filereadable(b:markdown_css_file)
   let b:markdown_css_file =  ""
+else
+  let b:markdown_css_file = " --css=" .. b:markdown_css_file
 endif
 
-let b:markdown_template_file = " --template=" .. g:vim_home .. "\\CSS\\template.html"
+let b:markdown_template_file = g:vim_home .. "\\CSS\\template.html"
 if !filereadable(b:markdown_template_file)
  let b:markdown_template_file = ""
+else
+  let b:markdown_template_file = " --template=" .. b:markdown_template_file
 endif
 
 let b:markdown_command = "pandoc -f gfm -t html5 --toc --toc-depth=3"
@@ -42,7 +46,7 @@ let b:markdown_command = "pandoc -f gfm -t html5 --toc --toc-depth=3"
       \ .." -o "..getenv("TEMP")..g:slash..expand("%:t")..".html"
       \ .." "..getenv("TEMP")..g:slash.."_"..expand("%:t")
 
-command! -buffer ShowMarkdownPreview call <SID>OpenHTML()
+command! -buffer OpenMarkdownPreview call <SID>OpenHTML()
 command! -buffer UpdateMarkdownPreview call <SID>MakeHTML()
 
 autocmd InsertLeave <buffer> call <SID>UpdateShadowFile()

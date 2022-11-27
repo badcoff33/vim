@@ -46,8 +46,8 @@ export def HighlightTags(what: string)
 enddef
 
 export def RunUpdate(tid: number)
-  if exists(":UpdateCtags") == 2
-    UpdateCtags
+  if exists(":CtagsUpdate") == 2
+    CtagsUpdate
   endif
 enddef
 
