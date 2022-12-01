@@ -1,5 +1,6 @@
-
 vim9script
+
+# TODO: Only one job at a time
 
 import autoload "lib/popup.vim"
 
@@ -29,7 +30,7 @@ enddef
 
 export def HiddenError(ch: channel,  msg: string)
   echohl ErrorMsg
-  #echo 'error reported by ch' ch_info(ch)['id'] '-->' msg
+  echo "error reported by channel" ch_info(ch)["id"] "-->" msg
   echohl None
 enddef
 
@@ -37,7 +38,14 @@ export def Run(dict: dict<any>)
   var job_opts = {}
   var regexp: string
   var close_popup: number
+
+  if !has_key(dict, 'cmd')
+    echoerr "no command"
+    return
+  endif
+
   if has_key(dict, "nowrite") && (dict.nowrite == 1)
+    # default: do nothing
   elseif (&autowrite || &autowriteall)
     try
       silent wall
@@ -46,11 +54,13 @@ export def Run(dict: dict<any>)
     finally
     endtry
   endif
+
   if has_key(dict, "cwd")
     job_opts.cwd = dict.cwd
   else
     job_opts.cwd = getcwd()
   endif
+
   if has_key(dict, "hidden") || (dict.hidden == 0)
     job_opts.out_cb = function("run#Append")
     job_opts.err_cb = function("run#Append")
@@ -58,9 +68,11 @@ export def Run(dict: dict<any>)
   else
     job_opts.err_cb = function("run#HiddenError")
   endif
+
   if has_key(dict, "cwd")
     job_opts.cwd = dict.cwd
   endif
+
   if has_key(dict, "regexp")
     regexp = dict.regexp
   else
@@ -72,24 +84,21 @@ export def Run(dict: dict<any>)
     close_popup = 0
   endif
 
-  if has_key(dict, "cmd")
-    var j = job_start('cmd /C ' .. dict['cmd'], job_opts)
-    if ( job_status(j) == "run" ) && ( !exists('dict.hidden') || (dict.hidden == "0") )
-      run_tid = timer_start(200, function("run#Alive"), {repeat: -1})
-      run_animation_index = 0
-      run_animation_winid = popup_create(run_animation_string[0], {
-        line: &lines - 1,
-        col: 1,
-        tabpage: -1,
-        highlight: 'PmenuSel',
-        padding: [0, 0, 0, 0]
-      })
-    else
-      run_animation_winid = 0
-    endif
-    run_job_dict = {title: dict["cmd"], lines: [], efm: regexp, popup: close_popup}
+  run_job_dict = {title: dict["cmd"], lines: [], efm: regexp, popup: close_popup}
+
+  var j = job_start('cmd /C ' .. dict['cmd'], job_opts)
+  if ( job_status(j) == "run" ) && ( !exists('dict.hidden') || (dict.hidden == "0") )
+    run_tid = timer_start(200, function("run#Alive"), {repeat: -1})
+    run_animation_index = 0
+    run_animation_winid = popup_create(run_animation_string[0], {
+      line: &lines - 1,
+      col: 1,
+      tabpage: -1,
+      highlight: 'PmenuSel',
+      padding: [0, 0, 0, 0]
+    })
   else
-    echoerr "no command"
+    run_animation_winid = 0
   endif
 enddef
 

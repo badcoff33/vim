@@ -167,8 +167,8 @@ nnoremap <silent> + <cmd>FF<CR>
 nnoremap <silent> - <cmd>FR<CR>
 
 " command line abbreviations
-cnoremap <expr> <A-.> expand("%:h")..g:slash
-cnoremap <expr> <A-,> $USERPROFILE..g:slash..'vimfiles'..g:slash
+cnoremap <expr> <A-.> expand("%:h") == "." ? "" : expand("%:h") .. g:slash
+cnoremap <expr> <A-,> $USERPROFILE .. g:slash .. 'vimfiles' .. g:slash
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
@@ -224,7 +224,7 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>e :edit <C-r>=expand("%:h")..g:slash<CR>
+nnoremap <Leader>e :edit<Space>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>t :tjump /
