@@ -25,14 +25,14 @@ nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
 " Preview in HTML
 
-let b:markdown_css_file = g:vim_home .. "\\CSS\\simple.css"
+let b:markdown_css_file = g:vim_home .. "\\templates\\simple.css"
 if !filereadable(b:markdown_css_file)
   let b:markdown_css_file =  ""
 else
   let b:markdown_css_file = " --css=" .. b:markdown_css_file
 endif
 
-let b:markdown_template_file = g:vim_home .. "\\CSS\\template.html"
+let b:markdown_template_file = g:vim_home .. "\\templates\\template.html"
 if !filereadable(b:markdown_template_file)
  let b:markdown_template_file = ""
 else

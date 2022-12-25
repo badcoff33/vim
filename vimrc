@@ -8,7 +8,6 @@
 filetype plugin on
 filetype indent on
 
-
 set belloff=all
 set clipboard=
 set expandtab
@@ -103,9 +102,9 @@ set pumheight=7
 
 " Command line completion
 set wildmenu
-set wildoptions=pum,tagfile,fuzzy
+set wildoptions=pum,tagfile
 set wildmode=full
-set nowildignorecase
+set wildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
 set tagcase=match

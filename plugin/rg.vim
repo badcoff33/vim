@@ -33,11 +33,11 @@ set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 command! -complete=file -nargs=* RgFiles
-      \ call run#run({'cmd':'rg --files '..' <args>', 'hidden':0, 'regexp':'%f'})
+      \ call run#Run({'cmd':'rg --files '..' <args>', 'hidden':0, 'regexp':'%f'})
 
 command! -complete=file -nargs=* Rg
-      \ call run#run({'cmd':'rg --vimgrep '..' <args>', 'hidden':0, 'regexp':&grepformat})
+      \ call run#Run({'cmd':'rg --vimgrep '..' <args>', 'hidden':0, 'regexp':&grepformat})
 
-nnoremap <Leader>rf :RgFiles <C-r>=RgExcludes()<CR> -g <C-r><C-w>
-nnoremap <Leader>rG :Rg <C-r>=RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR> <C-r>=RgPaths()<CR>
-nmap <Leader>rg <Leader>rG<CR>
+nnoremap <Leader>F :RgFiles <C-r>=RgExcludes()<CR> -g <C-r><C-w>
+nnoremap <Leader>R :Rg <C-r>=RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR> <C-r>=RgPaths()<CR>
+nmap <Leader>r <Leader>R<CR>
