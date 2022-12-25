@@ -166,8 +166,8 @@ nnoremap <silent> + <cmd>FF<CR>
 nnoremap <silent> - <cmd>FR<CR>
 
 " command line abbreviations
-cnoremap <expr> <A-.> expand("%:h")..g:slash
-cnoremap <expr> <A-,> $USERPROFILE..g:slash..'vimfiles'..g:slash
+cnoremap <expr> <A-.> expand("%:h") == "." ? "" : expand("%:h") .. g:slash
+cnoremap <expr> <A-,> $USERPROFILE .. g:slash .. 'vimfiles' .. g:slash
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
@@ -178,8 +178,10 @@ execute "set langmap+=\<Char-246>["
 execute "set langmap+=\<Char-228>]"
 execute "set langmap+=\<Char-214>{"
 
-nnoremap <C-j> <cmd>cnext<CR>
-nnoremap <C-k> <cmd>cprevious<CR>
+nnoremap <A-j> <cmd>cnext<CR>
+nnoremap <A-k> <cmd>cprevious<CR>
+nnoremap <A-h> <cmd>colder<CR>
+nnoremap <A-l> <cmd>cnewer<CR>
 " Living with QWERTZ keyboards
 nnoremap <Char-252> <cmd>cnext<CR>
 nnoremap <Char-220> <cmd>cprevious<CR>
@@ -223,7 +225,7 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>e :edit <C-r>=expand("%:h")..g:slash<CR>
+nnoremap <Leader>e :edit<Space>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>t :tjump /
@@ -250,8 +252,9 @@ function! s:ToggleQuickfix()
     endif
   endif
 endfunction
-nnoremap <Leader>q <cmd>call <SID>ToggleQuickfix()<CR>
-nnoremap <Leader>c :clist!<CR>
+nnoremap <Leader><Leader> <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap <Leader>g <cmd>cfirst<CR>
+nnoremap <Leader>G <cmd>clast<CR>
 
 " zoom current buffer in seperate tab
 nnoremap <Leader><Tab> <cmd>tabnew<CR>

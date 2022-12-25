@@ -5,7 +5,7 @@ command -nargs=0 HlWord call visuals#hl_word_on()
 command -nargs=0 BlinkyOn :call visuals#enable_blinky()
 command -nargs=0 BlinkyOff :call visuals#disable_blinky()
 
-noremap <Leader><Leader> <cmd>HlWord<CR>
+noremap <Leader>h <cmd>HlWord<CR>
 
 augroup visuals
   au!
