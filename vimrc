@@ -272,8 +272,8 @@ augroup vimrc
   " Choose color theme dependent on term type
   autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
 
-  " Popup quickfix window after make with errros
-  " autocmd QuickFixCmdPost make botright cwindow
+  " Copy a template as local .vimrc
+  :autocmd BufNewFile  .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
 augroup END
 
 let g:term = &term
