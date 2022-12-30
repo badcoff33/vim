@@ -1,21 +1,24 @@
 
-function! visuals#hl_word_on()
-  let cword = expand("<cword>")
+function! visuals#hl_word_toggle()
   highlight HlWordUnderline gui=underline
-  if matchstr(cword, "[a-zA-Z0-9_]") != ""
-    execute "match HlWordUnderline /" .. cword .. "/"
-    call timer_start(1001, function("visuals#hl_word_off"))
-    call setwinvar(winnr(), "hl_word", cword)
+  if !exists("g:hl_word_timer")
+    let g:hl_word_timer = timer_start(1000, function("visuals#hl_word_cyclic"), #{repeat: -1})
+  else
+    let save_winid = winnr()
+    noautocmd windo match none
+    call timer_stop(g:hl_word_timer)
+    unlet g:hl_word_timer
+    execute save_winid "wincmd w"
   endif
 endfunction
 
-function! visuals#hl_word_off(tid)
+function! visuals#hl_word_cyclic(tid)
   let cword = expand("<cword>")
-  if cword == getwinvar(winnr(), "hl_word")
-    call timer_start(1000, function("visuals#hl_word_off"))
+  if matchstr(cword, "[a-zA-Z0-9_]") != ""
+    execute "match HlWordUnderline /\\<" .. cword .. "\\>/"
   else
     match none
-  end
+  endif
 endfunction
 
 " Description: Make the actual window more obvious by temporary turn the
