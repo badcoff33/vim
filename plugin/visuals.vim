@@ -1,11 +1,11 @@
 " Vim plugin file
 
-command -nargs=0 InfoHl call visuals#info_hl()
-command -nargs=0 HlWord call visuals#hl_word_on()
+command -nargs=0 ShowHighlighting call visuals#info_hl()
+command -nargs=0 HlWordToggle call visuals#hl_word_toggle()
 command -nargs=0 BlinkyOn :call visuals#enable_blinky()
 command -nargs=0 BlinkyOff :call visuals#disable_blinky()
 
-noremap <Leader><Leader> <cmd>HlWord<CR>
+nnoremap <Leader>h <cmd>HlWordToggle<CR>
 
 augroup visuals
   au!
