@@ -1,5 +1,3 @@
-"set guifont=JuliaMono:h11
-set guifont=Courier\ Prime:h12
 set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
 set guioptions=!a
 set guicursor+=a:blinkon0

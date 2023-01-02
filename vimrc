@@ -278,10 +278,13 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 augroup vimrc
   autocmd!
   " Reload changed buffers. :checktime relies on 'autoread'.
-  autocmd WinEnter        *    checktime
+  autocmd WinEnter * checktime
 
   " Choose color theme dependent on term type
-  autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
+  autocmd VimEnter * execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
+  
+  " Copy a template as local .vimrc
+  :autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
 
 augroup END
 

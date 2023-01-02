@@ -1,19 +1,21 @@
+vim9script
 
+g:popup_close_win_time = get(g:, 'popup_close_win_time', 1000)
 
-let g:popup_close_win_time = get(g:, 'popup_close_win_time', 1000)
-
-function! lib#popup#top_left(text)
-  return popup_create(a:text, #{
-        \ pos: "topleft",
-        \ line: 1,
-        \ col: 1,
-        \ time: g:popup_close_win_time,
-        \ tabpage: -1,
-        \ highlight: 'PmenuSel',
-        \ padding: [1,1,1,1],
-        \ maxwidth: (&columns * 2) / 3
-        \ })
-endfunction
+export def TopLeft(text: string)
+  puopt =
+  {
+      pos: "topleft",
+      line: 1,
+      col: 1,
+      time: g:popup_close_win_time,
+      tabpage: -1,
+      highlight: 'PmenuSel',
+      padding: [1,1,1,1],
+      maxwidth: (&columns * 2) / 3,
+      }
+      return popup_create( text, puopt)
+    enddef
 
 function! lib#popup#top_right(text)
   return popup_create(a:text, #{
