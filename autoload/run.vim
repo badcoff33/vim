@@ -15,13 +15,22 @@ export def Append(ch: channel, msg: string)
 enddef
 
 export def Close(ch: channel)
+  var errors = 0
+  var warnings = 0
   timer_stop(run_tid)
   if run_animation_winid > 0
     popup_close(run_animation_winid)
+    run_animation_winid = 0
   endif
   call setqflist([], "r", run_job_dict)
-  var text = "job done: " .. run_job_dict["title"]
-  if run_job_dict["popup"] == 1
+  for entry in run_job_dict
+    if has_key(entry, "type")
+      errors = errors + (entry["type"] == e)?1:0
+      warnings = warnings + (entry["type"] == w)?1:0
+    endif
+  endfor
+  var text = "[" .. len(run_job_dict) .. " lines | " .. warnings .. " warnings | " .. errors .. " errors]"
+  if has_key(run_job_dict, "popup") && run_job_dict["popup"] == 1
     var winid = popup.over_statusline(text)
     setwinvar(winid, "&wrap", 0)
   endif
@@ -90,7 +99,8 @@ export def Run(dict: dict<any>)
   if ( job_status(j) == "run" ) && ( !exists('dict.hidden') || (dict.hidden == "0") )
     run_tid = timer_start(200, function("run#Alive"), {repeat: -1})
     run_animation_index = 0
-    run_animation_winid = popup_create(run_animation_string[0], {
+    #run_animation_winid = popup_create(run_animation_string[0], {
+    run_animation_winid = popup_create("[0]", {
       line: &lines - 1,
       col: 1,
       tabpage: -1,
@@ -103,12 +113,13 @@ export def Run(dict: dict<any>)
 enddef
 
 export def Alive(tid: number)
-  if run_animation_index >= ( len(run_animation_string) - 1 )
-    run_animation_index = 0
-  else
-    run_animation_index += 1
-  endif
-  setbufline(winbufnr(run_animation_winid), 1, run_animation_string[run_animation_index])
+  # if run_animation_index >= ( len(run_animation_string) - 1 )
+  #   run_animation_index = 0
+  # else
+  #   run_animation_index += 1
+  # endif
+  setbufline(winbufnr(run_animation_winid), 1, len(run_job_dict))
+  #run_animation_string[run_animation_index])
 enddef
 
 export def PopupTerminal()

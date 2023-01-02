@@ -8,7 +8,6 @@
 filetype plugin on
 filetype indent on
 
-
 set belloff=all
 set clipboard=
 set expandtab
@@ -167,7 +166,7 @@ nnoremap <silent> + <cmd>FF<CR>
 nnoremap <silent> - <cmd>FR<CR>
 
 " command line abbreviations
-cnoremap <expr> <A-.> expand("%:h") == "." ? "" : expand("%:h") .. g:slash
+cnoremap <expr> <A-.> (expand("%:h") == "." ? "." : expand("%:h") ) .. g:slash
 cnoremap <expr> <A-,> $USERPROFILE .. g:slash .. 'vimfiles' .. g:slash
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
@@ -179,11 +178,19 @@ execute "set langmap+=\<Char-246>["
 execute "set langmap+=\<Char-228>]"
 execute "set langmap+=\<Char-214>{"
 
-nnoremap <C-j> <cmd>cnext<CR>
-nnoremap <C-k> <cmd>cprevious<CR>
+" Surfing the quickfix matches
+nnoremap <A-h> :colder<CR>
+nnoremap <A-l> :cnewer<CR>
+nnoremap <A-j> <cmd>cnext<CR>
+nnoremap <A-k> <cmd>cprevious<CR>
 " Living with QWERTZ keyboards
 nnoremap <Char-252> <cmd>cnext<CR>
 nnoremap <Char-220> <cmd>cprevious<CR>
+" Window movement
+nnoremap <A-Right> <C-w>l
+nnoremap <A-Left> <C-w>h
+nnoremap <A-Down> <C-w>j
+nnoremap <A-Up> <C-w>k
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -225,6 +232,8 @@ vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
 nnoremap <Leader>e :edit<Space>
+nnoremap ^1 :edit <C-r>=$USERPROFILE .. g:slash .. 'vimfiles' .. g:slash<CR>
+nnoremap ^2 :edit <C-r>=expand("%:h") == "." ? "" : expand("%:h") .. g:slash<CR>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>t :tjump /
@@ -251,8 +260,9 @@ function! s:ToggleQuickfix()
     endif
   endif
 endfunction
-nnoremap <Leader>q <cmd>call <SID>ToggleQuickfix()<CR>
-nnoremap <Leader>c :clist!<CR>
+nnoremap <Leader><Leader> <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap <Leader>g <cmd>cfirst<CR>
+nnoremap <Leader>G <cmd>clast<CR>
 
 " zoom current buffer in seperate tab
 nnoremap <Leader><Tab> <cmd>tabnew<CR>
@@ -273,8 +283,6 @@ augroup vimrc
   " Choose color theme dependent on term type
   autocmd VimEnter        *    execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
 
-  " Popup quickfix window after make with errros
-  " autocmd QuickFixCmdPost make botright cwindow
 augroup END
 
 let g:term = &term
