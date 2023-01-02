@@ -5,13 +5,15 @@ import autoload "lib/popup.vim" as popup
 
 var run_tid: number
 var run_live_update_winid: number
+var run_live_update_bufnr: number
 var run_qflist_nr: number
+var FnRef: func
 
 export def Append(ch: channel, msg: string)
   setqflist([], "a", {nr: run_qflist_nr, lines: [msg] })
 enddef
 
-export def CbAlive(timer: number)
+def UpdateBuf()
   var errors = 0
   var warnings = 0
   var items = getqflist({nr: run_qflist_nr, items: 0}).items
@@ -27,15 +29,14 @@ export def CbAlive(timer: number)
     text = text .. " | " .. errors
   endif
   text = text ..    " ]"
-  setbufline(winbufnr(run_live_update_winid), 1, text)
+  setbufline(run_live_update_bufnr, 1, text)
 enddef
 
 export def Close(ch: channel)
   timer_stop(run_tid)
-  CbAlive(run_tid)
+  UpdateBuf()
   timer_start(2000, (_) => {
     popup_close(run_live_update_winid)
-    run_live_update_winid = 0
   }, {repeat: 1})
   silent doautocmd QuickFixCmdPost make
 enddef
@@ -107,7 +108,10 @@ export def Run(dict: dict<any>)
         padding: [0, 1, 0, 1],
         maxwidth: (&columns * 2) / 3,
         })
-    run_tid = timer_start(500, run#CbAlive, {repeat: -1})
+    run_live_update_bufnr = winbufnr(run_live_update_winid)
+    run_tid = timer_start(100, (_) => {
+      UpdateBuf()
+    }, {repeat: -1})
     setqflist([], " ", { nr: "$", title:  dict.cmd, efm: regexp })
     run_qflist_nr = getqflist({nr: "$"}).nr
   else
