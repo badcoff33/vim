@@ -1,40 +1,43 @@
 vim9script
-
 # TODO: Only one job at a time
 
-import autoload "lib/popup.vim"
+import autoload "lib/popup.vim" as popup
 
-var run_animation_string = '-\|/'
-var run_job_dict: dict<any>
 var run_tid: number
-var run_animation_winid: number
-var run_animation_index: number
+var run_live_update_winid: number
+var run_qflist_nr: number
 
 export def Append(ch: channel, msg: string)
-  call add(run_job_dict['lines'], msg)
+  setqflist([], "a", {nr: run_qflist_nr, lines: [msg] })
+enddef
+
+export def CbAlive(timer: number)
+  var errors = 0
+  var warnings = 0
+  var items = getqflist({nr: run_qflist_nr, items: 0}).items
+  for entry in items
+    errors = errors + ((entry.type == "e") ? 1 : 0)
+    warnings = warnings + ((entry.type == "w") ? 1 : 0)
+  endfor
+  var text = "[ " .. len(items)
+  if warnings > 0
+    text = text .. " | " .. warnings
+  endif
+  if errors > 0
+    text = text .. " | " .. errors
+  endif
+  text = text ..    " ]"
+  setbufline(winbufnr(run_live_update_winid), 1, text)
 enddef
 
 export def Close(ch: channel)
-  var errors = 0
-  var warnings = 0
   timer_stop(run_tid)
-  if run_animation_winid > 0
-    popup_close(run_animation_winid)
-    run_animation_winid = 0
-  endif
-  call setqflist([], "r", run_job_dict)
-  for entry in run_job_dict
-    if has_key(entry, "type")
-      errors = errors + (entry["type"] == e)?1:0
-      warnings = warnings + (entry["type"] == w)?1:0
-    endif
-  endfor
-  var text = "[" .. len(run_job_dict) .. " lines | " .. warnings .. " warnings | " .. errors .. " errors]"
-  if has_key(run_job_dict, "popup") && run_job_dict["popup"] == 1
-    var winid = popup.over_statusline(text)
-    setwinvar(winid, "&wrap", 0)
-  endif
-  doautocmd QuickFixCmdPost make
+  CbAlive(run_tid)
+  timer_start(2000, (_) => {
+    popup_close(run_live_update_winid)
+    run_live_update_winid = 0
+  }, {repeat: 1})
+  silent doautocmd QuickFixCmdPost make
 enddef
 
 export def HiddenError(ch: channel,  msg: string)
@@ -93,39 +96,37 @@ export def Run(dict: dict<any>)
     close_popup = 0
   endif
 
-  run_job_dict = {title: dict["cmd"], lines: [], efm: regexp, popup: close_popup}
-
-  var j = job_start('cmd /C ' .. dict['cmd'], job_opts)
+  var j = job_start('cmd /C ' .. dict.cmd, job_opts)
   if ( job_status(j) == "run" ) && ( !exists('dict.hidden') || (dict.hidden == "0") )
-    run_tid = timer_start(200, function("run#Alive"), {repeat: -1})
-    run_animation_index = 0
-    #run_animation_winid = popup_create(run_animation_string[0], {
-    run_animation_winid = popup_create("[0]", {
-      line: &lines - 1,
-      col: 1,
-      tabpage: -1,
-      highlight: 'PmenuSel',
-      padding: [0, 0, 0, 0]
-    })
+    run_live_update_winid = popup_create("Waiting", {
+        pos: "botright",
+        line: &lines - 2,
+        col: &columns,
+        tabpage: -1,
+        highlight: 'PmenuSel',
+        padding: [0, 1, 0, 1],
+        maxwidth: (&columns * 2) / 3,
+        })
+    run_tid = timer_start(500, run#CbAlive, {repeat: -1})
+    setqflist([], " ", { nr: "$", title:  dict.cmd, efm: regexp })
+    run_qflist_nr = getqflist({nr: "$"}).nr
   else
-    run_animation_winid = 0
+    run_live_update_winid = 0
   endif
 enddef
 
-export def Alive(tid: number)
-  # if run_animation_index >= ( len(run_animation_string) - 1 )
-  #   run_animation_index = 0
-  # else
-  #   run_animation_index += 1
-  # endif
-  setbufline(winbufnr(run_animation_winid), 1, len(run_job_dict))
-  #run_animation_string[run_animation_index])
-enddef
-
 export def PopupTerminal()
-  buf = term_start(['cmd'], {hidden: 1, term_finish: 'close'})
-  winopts = {minwidth: &columns - 10 , minheight: 10, maxheight: &lines - 10, border:[1,1,1,1], padding:[1,1,1,1]}
+  var buf = term_start(['cmd'], {hidden: 1, term_finish: 'close'})
+  var winopts = {
+    minwidth: &columns - 10,
+    minheight: 10,
+    maxheight: &lines - 10,
+    border: [1, 1, 1, 1],
+    padding: [1, 1, 1, 1]
+  }
   g:popup_terminal_winid = popup_create(buf, winopts)
   set wincolor=Terminal
   autocmd VimResized <buffer> popup_move(g:popup_terminal_winid, winopts)
 enddef
+
+defcompile
