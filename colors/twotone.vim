@@ -40,12 +40,13 @@ execute "hi CursorLine" s:Bg(s:silver9) s:Cterm("NONE")
 execute "hi CursorLineNr" s:Fg(s:silver4) s:Attr("bold")
 execute "hi IncSearch" s:Fg(s:white) s:Bg(s:black) s:Attr("NONE")
 execute "hi Italic" s:Attr("italic")
-execute "hi LineNr" s:Fg(s:silver8) s:Attr("bold")
+execute "hi LineNr" s:Fg(s:silver4) s:Attr("bold")
 execute "hi MatchParen" s:Fg(s:blue) s:Bg("bg") s:Attr("bold")
 execute "hi NonText" s:Fg(s:silver6) s:Bg("bg")
 execute "hi Normal" s:Fg(s:silver2) s:Bg(s:white) s:Attr("NONE")
 execute "hi Pmenu" s:Fg(s:white) s:Bg(s:silver4)
 execute "hi PmenuSel" s:Fg(s:white) s:Bg(s:blue)
+execute "hi PmenuThumb" s:Fg(s:silver2) s:Bg(s:silver7)
 execute "hi Search" s:Fg(s:black) s:Bg(s:silver8) s:Attr("NONE")
 execute "hi StatusLine" s:Fg(s:white) s:Bg(s:black) s:Attr("NONE")
 execute "hi StatusLineNC" s:Fg(s:silver2) s:Bg(s:silver9) s:Attr("NONE")
@@ -58,7 +59,6 @@ highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link Folded Comment
 highlight! link PmenuSbar Pmenu
-highlight! link PmenuThumb PmenuSel
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Normal
@@ -76,7 +76,7 @@ execute "hi PreProc" s:Fg(s:blue) s:Attr("bold")
 execute "hi PreCondit" s:Fg(s:blue)  s:Attr("bold")
 execute "hi Comment" s:Fg(s:silver5) s:Attr("NONE")
 execute "hi Function" s:Fg(s:blue)
-execute "hi Identifier" s:Fg(s:blue)
+execute "hi Identifier" s:Fg(s:silver4)
 execute "hi Special" s:Fg(s:silver1)
 execute "hi Constant" s:Fg(s:blue)
 execute "hi Number" s:Fg(s:blue)
