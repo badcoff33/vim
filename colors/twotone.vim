@@ -50,7 +50,7 @@ execute "hi Search" s:Fg(s:black) s:Bg(s:silver8) s:Attr("NONE")
 execute "hi StatusLine" s:Fg(s:white) s:Bg(s:black) s:Attr("NONE")
 execute "hi StatusLineNC" s:Fg(s:silver2) s:Bg(s:silver9) s:Attr("NONE")
 execute "hi StatusLineTerm" s:Fg(s:white) s:Bg(s:black) s:Attr("bold")
-execute "hi Terminal" s:Fg(s:white) s:Bg(s:black)
+execute "hi Terminal" s:Fg(s:black) s:Bg(s:silver8)
 execute "hi VertSplit" s:Fg(s:silver9) s:Bg(s:silver9) s:Attr("NONE")
 execute "hi Visual" s:Fg(s:white) s:Bg(s:blue)
 

@@ -122,6 +122,12 @@ inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
 inoremap <C-Space> <Esc>
 
+" Consistent line movement in modes
+noremap! <A-Left> <Home>
+noremap! <A-Right> <End>
+nnoremap <A-Left> 0
+nnoremap <A-Right> $
+
 " Use the minus key for something useful
 nnoremap - :
 
@@ -187,10 +193,10 @@ nnoremap <A-k> <cmd>cprevious<CR>
 nnoremap <Char-252> <cmd>cnext<CR>
 nnoremap <Char-220> <cmd>cprevious<CR>
 " Window movement
-nnoremap <A-Right> <C-w>l
-nnoremap <A-Left> <C-w>h
-nnoremap <A-Down> <C-w>j
-nnoremap <A-Up> <C-w>k
+nnoremap <S-Right> <C-w>l
+nnoremap <S-Left> <C-w>h
+nnoremap <S-Down> <C-w>j
+nnoremap <S-Up> <C-w>k
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -221,10 +227,6 @@ nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
 nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
 nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
 nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
-
-" CUA tag movement
-nnoremap <A-right> g<C-]>
-nnoremap <A-left> <C-t>
 
 " Substitute command
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
@@ -282,7 +284,7 @@ augroup vimrc
 
   " Choose color theme dependent on term type
   autocmd VimEnter * execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
-  
+
   " Copy a template as local .vimrc
   :autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
 

@@ -18,24 +18,22 @@ def UpdateBuf()
   var warnings = 0
   var items = getqflist({nr: run_qflist_nr, items: 0}).items
   for entry in items
-    errors = errors + ((entry.type == "e") ? 1 : 0)
-    warnings = warnings + ((entry.type == "w") ? 1 : 0)
+    errors = errors + ((entry.type == "E") ? 1 : 0)
+    warnings = warnings + ((entry.type == "W") ? 1 : 0)
   endfor
-  var text = "[ " .. len(items)
-  if warnings > 0
-    text = text .. " | " .. warnings
+  var text = "/" .. len(items)
+  if (warnings + errors) > 0
+    text = text .. "/" .. warnings .. "/" .. errors
   endif
-  if errors > 0
-    text = text .. " | " .. errors
-  endif
-  text = text ..    " ]"
+  text = text .. "/"
   setbufline(run_live_update_bufnr, 1, text)
 enddef
 
 export def Close(ch: channel)
   timer_stop(run_tid)
+  setwinvar(run_live_update_winid, "&wincolor", "PmenuSel")
   UpdateBuf()
-  timer_start(2000, (_) => {
+  timer_start(5000, (_) => {
     popup_close(run_live_update_winid)
   }, {repeat: 1})
   silent doautocmd QuickFixCmdPost make
@@ -97,14 +95,14 @@ export def Run(dict: dict<any>)
     close_popup = 0
   endif
 
-  var j = job_start('cmd /C ' .. dict.cmd, job_opts)
+  var j = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
   if ( job_status(j) == "run" ) && ( !exists('dict.hidden') || (dict.hidden == "0") )
     run_live_update_winid = popup_create("Waiting", {
         pos: "botright",
         line: &lines - 2,
         col: &columns,
         tabpage: -1,
-        highlight: 'PmenuSel',
+        highlight: 'Pmenu',
         padding: [0, 1, 0, 1],
         maxwidth: (&columns * 2) / 3,
         })
