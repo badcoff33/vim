@@ -3,7 +3,7 @@ vim9script
 
 import autoload "run.vim"
 
-command! -complete=file -nargs=* Make run.Run({cmd: &makeprg .. " <args>", hidden: 0, notify: 1})
+command! -complete=file -nargs=* Make run.Run({ cmd: &makeprg .. " " .. escape('<args>', '\'), hidden: 0, notify: 1 })
 
 nnoremap <leader>M :<C-u>Make<Space><Up>
 nnoremap <leader>m :<C-u>Make<Up><cr>
