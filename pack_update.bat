@@ -1,35 +1,34 @@
 @setlocal enableextensions & python -x %~f0 %* & goto :EOF
 ### Python code:
+
 import os
+import requests
+import zipfile
 
-# access Git repos via hg-git and dulwich.io
-vcs_cmd_clone = "hg clone --quiet"
-vcs_cmd_pull = "hg pull --quiet origin master"
+gh_dict = {
+        "https://github.com/nvim-treesitter/nvim-treesitter/archive/refs/tags/v0.8.1.zip":  "pack/gh/start",
+        "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip":               "pack/gh/start", 
+        "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip":         "pack/gh/start",
+        "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip":            "pack/gh/opt",
+        "https://github.com/lilydjwg/colorizer/archive/refs/heads/master.zip":              "pack/gh/opt",
+        "https://github.com/liuchengxu/vista.vim/archive/refs/heads/master.zip":            "pack/gh/opt",
+        }
 
-git_dict = {
-        "pack/gh/start/signify":    "git@github.com:mhinz/vim-signify.git",
-        "pack/gh/start/easy-align": "git@github.com:junegunn/vim-easy-align.git",
-        "pack/gh/opt/dirvish":      "git@github.com:justinmk/vim-dirvish.git",
-        "pack/gh/opt/fzf.git":      "git@github.com:junegunn/fzf.git",
-        "pack/gh/opt/fzf.vim":      "git@github.com:junegunn/fzf.vim.git",
-        "pack/gh/opt/colorizer":    "git@github.com:lilydjwg/colorizer.git",
-        "pack/gh/opt/vista":        "git@github.com:liuchengxu/vista.vim.git",
-        "pack/gh/opt/wordy":        "git@github.com:preservim/vim-wordy.git" }
+zip_fname = os.getenv("TEMP") + os.sep + "pack_download.zip"
+pop_back_dir = os.getcwd()
 
-for subdir in git_dict:
-    git_url = git_dict[subdir]
+for url in gh_dict:
+    subdir = gh_dict[url]
     if not os.path.isdir(subdir):
-        print("clone %s to %s" % (git_url, subdir))
+        print("-- creating directory %s" % (subdir))
         os.makedirs(subdir)
-        pop_back_dir = os.getcwd()
-        os.chdir(subdir)
-        os.system(" ".join([vcs_cmd_clone,git_url,"."]))
-        os.chdir(pop_back_dir)
-    else:
-        print("update %s in %s" % (git_url, subdir))
-        pop_back_dir = os.getcwd()
-        os.chdir(subdir)
-        os.system(vcs_cmd_pull)
-        os.chdir(pop_back_dir)
+    print("-- fetching %s" % (url))
+    r = requests.get(url)
+    print("-- extract file in %s" % (subdir))
+    if os.path.isfile(zip_fname):
+        os.remove(zip_fname)
+    open(zip_fname, 'wb').write(r.content)
+    with zipfile.ZipFile(zip_fname, 'r') as zip_ref:
+        zip_ref.extractall(subdir)
 
 # vim:ft=python:
