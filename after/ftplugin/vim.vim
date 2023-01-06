@@ -3,7 +3,7 @@
 let b:undo_ftplugin = "setlocal textwidth< shiftwidth< nocindent<"
 
 setlocal textwidth=0
-setlocal shiftwidth=2
+setlocal shiftwidth=4
 setlocal nocindent
 
 nnoremap <buffer> K :help <C-r><C-w><CR>

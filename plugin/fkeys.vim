@@ -13,6 +13,3 @@ imap <F7> <Esc><F7>
 nmap <C-F7> <Leader>M
 imap <C-F7> <Esc><C-F7>
 
-nnoremap <F5> <cmd>call run#popup_terminal()<CR>
-imap     <F5> <Esc><F5>
-
