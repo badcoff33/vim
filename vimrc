@@ -173,7 +173,7 @@ nnoremap <silent> - <cmd>FR<CR>
 
 " command line abbreviations
 cnoremap <expr> <A-.> (expand("%:h") == "." ? "." : expand("%:h") ) .. g:slash
-cnoremap <expr> <A-,> $USERPROFILE .. g:slash .. 'vimfiles' .. g:slash
+cnoremap <expr> <A-,> $HOME .. g:slash .. 'vimfiles' .. g:slash
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
@@ -234,7 +234,7 @@ vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
 nnoremap <Leader>e :edit<Space>
-nnoremap ^1 :edit <C-r>=$USERPROFILE .. g:slash .. 'vimfiles' .. g:slash<CR>
+nnoremap ^1 :edit <C-r>=$HOME .. g:slash .. 'vimfiles' .. g:slash<CR>
 nnoremap ^2 :edit <C-r>=expand("%:h") == "." ? "" : expand("%:h") .. g:slash<CR>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
@@ -294,7 +294,6 @@ let g:term = &term
 syntax on
 
 runtime plugins.vim
-runtime local.vim
 
 " vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
 
