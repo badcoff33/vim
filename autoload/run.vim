@@ -119,4 +119,3 @@ export def Run(dict: dict<any>)
         run_update_winid = 0
     endif
 enddef
-
