@@ -9,3 +9,4 @@ backup
 pack
 doc/tags
 *swp
+local.vim 
