@@ -172,7 +172,8 @@ nnoremap <silent> + <cmd>FF<CR>
 nnoremap <silent> - <cmd>FR<CR>
 
 " command line abbreviations
-cnoremap <expr> <A-.> (expand("%:h") == "." ? "." : expand("%:h") ) .. g:slash
+let FilePath = { -> expand("%:h") == "" ? "" : expand("%:h") .. g:slash }
+cnoremap <expr> <A-.> (FilePath() == ".") ? "." : FilePath()
 cnoremap <expr> <A-,> $USERPROFILE .. g:slash .. 'vimfiles' .. g:slash
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
