@@ -1,19 +1,25 @@
 vim9script
 
-# Uncomment when testing
-defcompile
-
-import autoload "lib/popup.vim" as popup
-
-var run_tid: number
 var run_update_winid: number
 var run_update_bufnr: number
 var run_qflist_nr: number
-var FnRef: func
+
+def g:Winopts(): dict<any>
+    return { pos: "botright",
+        line: &lines,
+        col: &columns,
+        tabpage: -1,
+        highlight: 'Pmenu',
+        padding: [0, 1, 0, 1],
+        maxwidth: (&columns * 2) / 3
+    }
+enddef
+
 
 export def AppendCb(ch: channel, msg: string)
     setqflist([], "a", {
         nr: run_qflist_nr,
+        efm: g:run_efm,
         lines: [msg]
     })
 enddef
@@ -33,14 +39,17 @@ def UpdateBufCb()
         text = text .. "/" .. warnings .. "/" .. errors
     endif
     text = text .. "/"
-    setbufline(run_update_bufnr, 1, text)
+    noautocmd setbufline(run_update_bufnr, 1, text)
 enddef
 
 export def CloseCb(ch: channel)
-    timer_stop(run_tid)
+    if exists("g:run_tid")
+        if !empty(timer_info(g:run_tid))
+            timer_stop(g:run_tid)
+        endif
+    endif
     setwinvar(run_update_winid, "&wincolor", "PmenuSel")
-    UpdateBufCb()
-    timer_start(5000, (_) => {
+    g:run_2_tid = timer_start(5000, (_) => {
         popup_close(run_update_winid)
     }, {repeat: 1})
     silent doautocmd QuickFixCmdPost make
@@ -54,8 +63,9 @@ enddef
 
 def ConditionalWriteAll(dict: dict<any>)
     if has_key(dict, "nowrite") && (dict.nowrite == 1)
-    # default: do nothing
-    elseif (&autowrite || &autowriteall)
+        return
+    endif
+    if (&autowrite || &autowriteall)
         try
             silent wall
         catch /.*/
@@ -66,20 +76,9 @@ def ConditionalWriteAll(dict: dict<any>)
 enddef
 
 export def Run(dict: dict<any>)
-    var job_opts = {}
     var job: job
-    var regexp: string
+    var job_opts = {}
     var run_hidden = has_key(dict, "hidden") && (dict.hidden == "0") ? true : false
-    var winopts = {
-        pos: "botright",
-        line: &lines - 2,
-        col: &columns,
-        tabpage: -1,
-        highlight: 'Pmenu',
-        padding: [0, 1, 0, 1],
-        maxwidth: (&columns * 2) / 3,
-    }
-
     if !has_key(dict, 'cmd')
         echoerr "no command"
         return
@@ -87,12 +86,18 @@ export def Run(dict: dict<any>)
 
     ConditionalWriteAll(dict)
 
+    if has_key(dict, "regexp")
+        g:run_efm = dict.regexp
+    else
+        g:run_efm = &errorformat
+    endif
+
     job_opts.cwd = getcwd()
     if has_key(dict, "cwd")
         job_opts.cwd = dict.cwd
     endif
 
-    if run_hidden == false
+    if run_hidden == true
         job_opts.err_cb = function("run#HiddenErrorCb")
     else
         job_opts.out_cb = function("run#AppendCb")
@@ -103,16 +108,16 @@ export def Run(dict: dict<any>)
     job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
 
     if ( job_status(job) == "run" ) && ( run_hidden == false )
-        run_update_winid = popup_create("Waiting", winopts)
+        run_update_winid = popup_create("Waiting", g:Winopts())
         run_update_bufnr = winbufnr(run_update_winid)
-        run_tid = timer_start(100, (_) => {
-            UpdateBufCb()
+        execute "autocmd VimResized" run_update_bufnr "call popup_setoptions(run_update_winid, g:Winopts())"
+        g:run_tid = timer_start(300, (_) => {
+             UpdateBufCb()
         }, {repeat: -1})
 
         setqflist([], " ", {
             nr: "$",
             title:  dict.cmd,
-            efm: has_key(dict, "regexp") ? dict.regexp : &errorformat
         })
         run_qflist_nr = getqflist({nr: "$"}).nr
     else
@@ -120,18 +125,6 @@ export def Run(dict: dict<any>)
     endif
 enddef
 
-(??)export def PopupTerminal()
-(??)  var buf = term_start(['cmd'], {hidden: 1, term_finish: 'close'})
-(??)  var winopts = {
-(??)    minwidth: &columns - 10,
-(??)    minheight: 10,
-(??)    maxheight: &lines - 10,
-(??)    border: [1, 1, 1, 1],
-(??)    padding: [1, 1, 1, 1]
-(??)  }
-(??)  g:popup_terminal_winid = popup_create(buf, winopts)
-(??)  set wincolor=Terminal
-(??)  autocmd VimResized <buffer> popup_move(g:popup_terminal_winid, winopts)
-(??)enddef
-(??)
-(??)defcompile
+# Uncomment when testing
+defcompile
+
