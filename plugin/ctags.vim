@@ -11,6 +11,7 @@ vim9script
 #
 # Maintainer: markus prepens (markus dot prepens at gmail dot com)
 
+import autoload "run.vim"
 import autoload "ctags.vim"
 
 # def CtagsHighlightingCpl(a,l,p)
@@ -19,7 +20,7 @@ import autoload "ctags.vim"
 
 #command! -complete=customlist,CtagsHighlightingCpl -nargs=1 CtagsHighlighting ctags.HighlightTags(<q-args>)
 command! -nargs=1 CtagsHighlighting Ctags.HighlightTags(<q-args>)
-command! -complete=file -nargs=* Ctags Run.Run({cmd: 'ctags <args>', hidden: 1})
+command! -complete=file -nargs=* Ctags run.Run({cmd: 'ctags <args>', hidden: true})
 
 augroup CTAGS
   autocmd!

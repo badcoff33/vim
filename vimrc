@@ -235,8 +235,8 @@ vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
 nnoremap <Leader>e :edit<Space>
-nnoremap ^1 :edit <C-r>=$USERPROFILE .. g:slash .. 'vimfiles' .. g:slash<CR>
-nnoremap ^2 :edit <C-r>=expand("%:h") == "." ? "" : expand("%:h") .. g:slash<CR>
+nnoremap <Leader>, :edit <C-r>=$HOME .. g:slash .. 'vimfiles' .. g:slash<CR>
+nnoremap <Leader>. :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>t :tjump /
