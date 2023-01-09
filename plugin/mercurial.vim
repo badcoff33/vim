@@ -1,6 +1,6 @@
 command -nargs=+ -complete=file Hg terminal ++curwin hg -v <args>
 
-autocmd WinLeave !hg* :bw!
+autocmd BufWinLeave !hg* :bw!
 
 cabbrev hgst Hg status
 cabbrev hgci Hg commit -m ""
