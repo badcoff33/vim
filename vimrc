@@ -86,11 +86,11 @@ set magic
 set wrapscan
 
 set backup
-execute 'set backupdir=' . getenv('LOCALAPPDATA') . '\vim\backup'
+execute 'set backupdir=' .. getenv('LOCALAPPDATA') .. '\vim\backup'
 set wildignore+=*/backup/*
 
 set undofile
-execute 'set undodir=' . getenv('LOCALAPPDATA') . '\vim\undo'
+execute 'set undodir=' .. getenv('LOCALAPPDATA') .. '\vim\undo'
 set wildignore+=*/undo/*
 
 " Insert mode completion
@@ -284,10 +284,13 @@ augroup vimrc
   autocmd WinEnter * checktime
 
   " Choose color theme dependent on term type
-  autocmd VimEnter * execute "colorscheme "..( (&term == "builtin_gui") ? "twotone" : "apollo" )
+  autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
+
+  " Write session file
+  autocmd VimLeave * execute "mksession!" getenv('LOCALAPPDATA') .. "\\vim\\session.vim"
 
   " Copy a template as local .vimrc
-  :autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
+  autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
 
 augroup END
 
