@@ -240,6 +240,7 @@ nnoremap <Leader>. :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>t :tjump /
+nnoremap <Leader>x :Lexplore<Space>
 
 " quickfix
 function! s:ToggleQuickfix()
