@@ -117,16 +117,18 @@ if &diff
 endif
 command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
-" Switch to normal mode with special keys
+" Switching modes
 inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
 inoremap <C-Space> <Esc>
+noremap! <A-Space> <Esc>:
+xnoremap <A-Space> :
 
-" Consistent line movement in modes
+" Consistent cursor movement
 noremap! <A-Left> <Home>
 noremap! <A-Right> <End>
-nnoremap <A-Left> 0
-nnoremap <A-Right> $
+xnoremap <A-Left> 0
+xnoremap <A-Right> $
 
 " Use the minus key for something useful
 nnoremap - :

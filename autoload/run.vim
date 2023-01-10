@@ -69,8 +69,8 @@ export def Run(dict: dict<any>)
 
     ConditionalWriteAll(dict)
 
-    var to_buffer = has_key(dict, "as_buffer") && (dict.as_buffer == true) ? true : false
-    var regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
+    var v_out_buf = has_key(dict, "out_buf") && (dict.out_buf == true) ? true : false
+    var v_regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
     var cmd = dict.cmd
 
     job_opts.cwd = getcwd()
@@ -82,26 +82,26 @@ export def Run(dict: dict<any>)
         job_opts.err_cb = function("run#HiddenErrorCb")
         var job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
     else
-        var bufnr: number
+        var v_bufnr: number
         var bufname = substitute(dict.cmd, '\', '', 'g')
-        if to_buffer == true
+        if v_out_buf == true
             if bufexists(bufname)
-                bufnr = bufnr(bufname)
-                setbufvar(bufnr, "&readonly", 0)
-                setbufvar(bufnr, "&modified", 0)
-                setbufvar(bufnr, "&modifiable", 1)
+                v_bufnr = bufnr(bufname)
+                setbufvar(v_bufnr, "&readonly", 0)
+                setbufvar(v_bufnr, "&modified", 0)
+                setbufvar(v_bufnr, "&modifiable", 1)
             else
-                bufnr = bufadd(bufname)
+                v_bufnr = bufadd(bufname)
             endif
-            execute "buffer" bufnr
+            execute "buffer" v_bufnr
             nnoremap <buffer> <Esc> <Cmd>bw!<CR>
-            setbufline(bufnr, "$", "____ " .. strftime("%X") .. " ____ " .. dict.cmd .. " ____")
+            setbufline(v_bufnr, "$", "____ " .. strftime("%X") .. " ____ " .. dict.cmd .. " ____")
         else
-            bufnr = bufadd(bufname)
+            v_bufnr = bufadd(bufname)
         endif
 
-        job_opts.err_buf = bufnr
-        job_opts.out_buf = bufnr
+        job_opts.err_buf = v_bufnr
+        job_opts.out_buf = v_bufnr
         job_opts.err_io = "buffer"
         job_opts.out_io = "buffer"
         job_opts.close_cb = function("run#CloseCb")
@@ -109,11 +109,11 @@ export def Run(dict: dict<any>)
         var job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
         var channel = split(string(job_getchannel(job)), " ")[1]
 
-        var winid = popup_create("Run " .. dict.cmd, g:Winopts())
-        g:run_dict[channel] = { winid: winid, cmd: dict.cmd, regexp: regexp, out_buf: to_buffer, bufnr: bufnr }
+        var v_winid = popup_create("Run " .. dict.cmd, g:Winopts())
+        g:run_dict[channel] = { winid: v_winid, cmd: dict.cmd, regexp: v_regexp, out_buf: v_out_buf, bufnr: v_bufnr }
         augroup GroupRun
             autocmd!
-            autocmd VimResized * call popup_setoptions(g:run_winid, g:Winopts())
+            autocmd VimResized * call popup_setoptions(v_winid, g:Winopts())
         augroup END
     endif
 enddef
