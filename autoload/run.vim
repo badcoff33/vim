@@ -1,7 +1,6 @@
 vim9script
 
-var run_update_winid: number
-var run_update_bufnr: number
+g:run_dict = {}
 
 def g:Winopts(): dict<any>
     return { pos: "botright",
@@ -14,23 +13,27 @@ def g:Winopts(): dict<any>
     }
 enddef
 
-
 export def CloseCb(ch: channel)
-    if g:run_to_buffer == false
+    var ch_nr = split(string(ch), " ")[1]
+    var d = g:run_dict[ch_nr]
+    if d.out_buf == false
         var save_errorformat = &errorformat
-        execute "set errorformat=" .. g:run_efm
-        execute "cgetbuffer" g:run_bufnr
-        execute "set errorformat=" .. save_errorformat
-        w:quickfix_title = g:run_cmd
+        execute "set errorformat=" .. escape(d.regexp, ' \')
+        execute "cgetbuffer" d.bufnr
+        execute "set errorformat=" .. escape(save_errorformat, ' \')
+        w:quickfix_title = d.cmd
     else
-        setbufvar(g:run_bufnr, "&readonly", 1)
-        setbufvar(g:run_bufnr, "&modified", 0)
-        setbufvar(g:run_bufnr, "&modifiable", 0)
+        setbufvar(d.bufnr, "&readonly", 1)
+        setbufvar(d.bufnr, "&modified", 0)
+        setbufvar(d.bufnr, "&modifiable", 0)
     endif
     silent doautocmd QuickFixCmdPost make
-    setwinvar(run_update_winid, "&wincolor", "PmenuSel")
+    setwinvar(d.winid, "&wincolor", "PmenuSel")
     g:run_2_tid = timer_start(3000, (_) => {
-        popup_close(run_update_winid)
+        popup_close(d.winid)
+        augroup GroupRun
+            autocmd!
+        augroup END
     }, {repeat: 1})
 enddef
 
@@ -55,7 +58,6 @@ def ConditionalWriteAll(dict: dict<any>)
 enddef
 
 export def Run(dict: dict<any>)
-    var job: job
     var job_opts = {}
 
     if !has_key(dict, 'cmd')
@@ -65,9 +67,9 @@ export def Run(dict: dict<any>)
 
     ConditionalWriteAll(dict)
 
-    g:run_to_buffer = has_key(dict, "as_buffer") && (dict.as_buffer == true) ? true : false
-    g:run_efm = has_key(dict, "regexp") ? dict.regexp : &errorformat
-    g:run_cmd = dict.cmd
+    var to_buffer = has_key(dict, "as_buffer") && (dict.as_buffer == true) ? true : false
+    var regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
+    var cmd = dict.cmd
 
     job_opts.cwd = getcwd()
     if has_key(dict, "cwd")
@@ -76,21 +78,28 @@ export def Run(dict: dict<any>)
 
     if has_key(dict, "hidden") && (dict.hidden == true)
         job_opts.err_cb = function("run#HiddenErrorCb")
-        job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
+        var job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
     else
-        g:run_bufnr = bufadd(dict.cmd)
-        job_opts.out_buf = g:run_bufnr
+        var bufnr = bufadd(dict.cmd)
+        job_opts.err_buf = bufnr
+        job_opts.out_buf = bufnr
+        job_opts.err_io = "buffer"
         job_opts.out_io = "buffer"
         job_opts.close_cb = function("run#CloseCb")
-        if g:run_to_buffer == true
-            execute "buffer" g:run_bufnr
+        if to_buffer == true
+            execute "buffer" bufnr
+            nnoremap <buffer> <Esc> <Cmd>bw!<CR>
         endif
 
-        job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
+        var job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
+        var channel = split(string(job_getchannel(job)), " ")[1]
 
-        run_update_winid = popup_create("Run " .. g:run_cmd, g:Winopts())
-        run_update_bufnr = winbufnr(run_update_winid)
-        execute "autocmd VimResized" run_update_bufnr "call popup_setoptions(run_update_winid, g:Winopts())"
+        var winid = popup_create("Run " .. dict.cmd, g:Winopts())
+        g:run_dict[channel] = { winid: winid, cmd: dict.cmd, regexp: regexp, out_buf: to_buffer, bufnr: bufnr }
+        augroup GroupRun
+            autocmd!
+            autocmd VimResized * call popup_setoptions(g:run_winid, g:Winopts())
+        augroup END
     endif
 enddef
 
