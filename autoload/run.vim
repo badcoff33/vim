@@ -95,7 +95,7 @@ export def Run(dict: dict<any>)
             endif
             execute "buffer" bufnr
             nnoremap <buffer> <Esc> <Cmd>bw!<CR>
-            setbufline(bufnr, "$", "---- " .. strftime("%X") .. " ------------------------------------ " .. dict.cmd)
+            setbufline(bufnr, "$", "____ " .. strftime("%X") .. " ____ " .. dict.cmd .. " ____")
         else
             bufnr = bufadd(bufname)
         endif
