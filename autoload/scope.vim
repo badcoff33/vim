@@ -20,30 +20,28 @@ endfunction
 " Description: A scope parser for C files.
 function! scope#ParserC() abort
   " Regular expressions to find head and bottom lines of a C function.
-  let regexpFindFuncHead = '^\w\+.*('
-  let regexpFindFuncBottom = '^}.*$'
-  " Regular expression to find the function name. Group 1 holds the function
-  " name.
-  let regexpExtractFunctionName = '.*\(\<[0-9a-zA-Z_]\+\)\s*(.*'
+  let regexpHead = '.*\(\<[0-9a-zA-Z_]\+\)\s*(.*'
+  let regexpTail = '^}.*$'
   " Get the line numbers, starting from current cursor line.
   " (search backward, do not move cursor, do not wrap at head of buffer)
-  let  lineFuncHead = search(regexpFindFuncHead, 'bnW')
-  let  lineFuncBottom = search(regexpFindFuncBottom, 'bnW')
+  let  lineHead = search(regexpHead, 'bnW')
+  let  lineTail = search(regexpTail, 'bnW')
   " Where is the cursor?
-  if lineFuncHead > lineFuncBottom
+  if lineHead > lineTail
     " Cursor is inside of function
-    let cFunctionName = substitute(getline(lineFuncHead), regexpExtractFunctionName, '\1()', '')
+    let funcName = substitute(getline(lineHead), regexpHead, '\1()', '')
   else
-    let cFunctionName = ''
+    let funcName = ''
   endif
-  return cFunctionName[:48]
+  return funcName[:48]
 endfun
 
 " Description: A simple scope parser for Python files.
 function! scope#ParserPython() abort
-    let fNum = search('^\s*\(class\|def\)\s\+.*:$', 'bnWe')
-    if fNum > 0
-      return substitute(getline(fNum), '^\s*\(class\|def\)\s\+\(\w\+\).*$', '\1 \2', '')[:30]
+    let regexpHead = '^\s*\(class\|def\)\s\+\(\w\+\).*$'
+    let lineHead = search(regexpHead, 'bnWe')
+    if lineHead > 0
+      return substitute(getline(lineHead), regexpHead, '\1 \2', '')[:30]
     else
       return ""
     endif
@@ -67,23 +65,20 @@ endfun
 " Description: A scope parser for Vim files.
 function! scope#ParserVim() abort
   " Regular expressions to find head and bottom lines of a Vim function.
-  let regexpFindFuncHead = '^fun.*\s\+[A-Za-z0-9#:<>]\+\s*(.*)'
-  let regexpFindFuncBottom = '^endf.*$'
-  " Regular expression to find the function name. Group 1 holds the function
-  " name plus its parameters.
-  let regexpExtractFunctionName = '^fun.*\s\+\([A-Za-z0-9#:<>]\+\s*(.*)\)'
+  let regexpHead = '^func.*\ \+\([A-Za-z0-9#:<>]\+\)(.*$'
+  let regexpTail = '^endf.*$'
   " Get the line numbers, starting from current cursor line.
   " (search backward, do not move cursor, do not wrap at head of buffer)
-  let  lineFuncHead = search(regexpFindFuncHead, 'bnW')
-  let  lineFuncBottom = search(regexpFindFuncBottom, 'bnW')
+  let  lineHead = search(regexpHead, 'bnW')
+  let  lineTail = search(regexpTail, 'bnW')
   " Where is the cursor?
-  if lineFuncHead > lineFuncBottom
+  if lineHead > lineTail
     " Cursor is inside of function
-    let vimFunctionName = substitute(getline(lineFuncHead), regexpExtractFunctionName, '\1', '')
+    let funcName = substitute(getline(lineHead), regexpHead, '\=submatch(1)', '')
   else
-    let vimFunctionName = ''
+    let funcName = ''
   endif
-  return vimFunctionName[:30]
+  return funcName[:30]
 endfun
 
 
