@@ -16,6 +16,7 @@ enddef
 export def CloseCb(ch: channel)
     var ch_nr = split(string(ch), " ")[1]
     var d = g:run_dict[ch_nr]
+    g:run_dict = remove(g:run_dict, ch_nr)
     if d.out_buf == false
         var save_errorformat = &errorformat
         execute "set errorformat=" .. escape(d.regexp, ' \')
@@ -80,18 +81,29 @@ export def Run(dict: dict<any>)
         job_opts.err_cb = function("run#HiddenErrorCb")
         var job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
     else
-        var bufnr = bufadd(dict.cmd)
+        var bufnr: number
+        var bufname = substitute(dict.cmd, '\', '', 'g')
+        if bufexists(bufname)
+            bufnr = bufnr(bufname)
+            setbufvar(bufnr, "&readonly", 0)
+            setbufvar(bufnr, "&modified", 0)
+            setbufvar(bufnr, "&modifiable", 1)
+            setbufline(bufnr, "$", "")
+            setbufline(bufnr, "$", "-----------< " .. strftime("%X") .. " >-----------")
+        else
+            bufnr = bufadd(bufname)
+        endif
+        if to_buffer == true
+            execute "buffer" bufnr
+            nnoremap <buffer> <Esc> <Cmd>bw!<CR>
+        endif
         job_opts.err_buf = bufnr
         job_opts.out_buf = bufnr
         job_opts.err_io = "buffer"
         job_opts.out_io = "buffer"
         job_opts.close_cb = function("run#CloseCb")
-        if to_buffer == true
-            execute "buffer" bufnr
-            nnoremap <buffer> <Esc> <Cmd>bw!<CR>
-        endif
 
-        var job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
+        var job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
         var channel = split(string(job_getchannel(job)), " ")[1]
 
         var winid = popup_create("Run " .. dict.cmd, g:Winopts())

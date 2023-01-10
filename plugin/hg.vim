@@ -1,5 +1,5 @@
 command! -complete=file -nargs=+ Hg call run#Run(#{cmd: 'hg <args> -v', as_buffer: v:true})
 command! -nargs=0 HgStatus call run#Run(#{cmd: 'hg status', as_buffer: v:true})
-command! -nargs=0 HgLast3 call run#Run(#{cmd: 'hg log -r "tip~3:tip"<CR>', as_buffer: v:true})
+command! -nargs=0 HgLast3 call run#Run(#{cmd: 'hg log -r "tip~3:tip"', as_buffer: v:true})
 command! -nargs=0 HgList call run#Run(#{cmd: 'hg log --limit 6 --template "{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n"', as_buffer: v:true})
 command! -complete=file -nargs=+ HgCommit call run#Run(#{cmd: 'hg commit -v -m "' .. input("Message? ") .. '" <args>', as_buffer: v:true})
