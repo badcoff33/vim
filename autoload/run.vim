@@ -4,7 +4,7 @@ g:run_dict = {}
 
 def g:Winopts(): dict<any>
     return { pos: "botright",
-        line: &lines,
+        line: &lines - 2,
         col: &columns,
         tabpage: -1,
         highlight: 'Pmenu',
@@ -23,6 +23,7 @@ export def CloseCb(ch: channel)
         execute "cgetbuffer" d.bufnr
         execute "set errorformat=" .. escape(save_errorformat, ' \')
         w:quickfix_title = d.cmd
+        execute "bwipe" d.bufnr
     else
         setbufvar(d.bufnr, "&readonly", 1)
         setbufvar(d.bufnr, "&modified", 0)
@@ -83,20 +84,22 @@ export def Run(dict: dict<any>)
     else
         var bufnr: number
         var bufname = substitute(dict.cmd, '\', '', 'g')
-        if bufexists(bufname)
-            bufnr = bufnr(bufname)
-            setbufvar(bufnr, "&readonly", 0)
-            setbufvar(bufnr, "&modified", 0)
-            setbufvar(bufnr, "&modifiable", 1)
-            setbufline(bufnr, "$", "")
-            setbufline(bufnr, "$", "-----------< " .. strftime("%X") .. " >-----------")
+        if to_buffer == true
+            if bufexists(bufname)
+                bufnr = bufnr(bufname)
+                setbufvar(bufnr, "&readonly", 0)
+                setbufvar(bufnr, "&modified", 0)
+                setbufvar(bufnr, "&modifiable", 1)
+            else
+                bufnr = bufadd(bufname)
+            endif
+            execute "buffer" bufnr
+            nnoremap <buffer> <Esc> <Cmd>bw!<CR>
+            setbufline(bufnr, "$", "---- " .. strftime("%X") .. " ------------------------------------ " .. dict.cmd)
         else
             bufnr = bufadd(bufname)
         endif
-        if to_buffer == true
-            execute "buffer" bufnr
-            nnoremap <buffer> <Esc> <Cmd>bw!<CR>
-        endif
+
         job_opts.err_buf = bufnr
         job_opts.out_buf = bufnr
         job_opts.err_io = "buffer"
