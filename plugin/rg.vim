@@ -36,7 +36,7 @@ enddef
 set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
-command! -complete=file -nargs=* RgFiles run.Run({cmd: 'rg --files ' .. ' <args>', out_buf: true})
+command! -complete=file -nargs=* RgFiles run.Run({cmd: 'rg --files ' .. ' <args>', name: "RG-OUTPUT"})
 command! -complete=file -nargs=* Rg run.Run({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat})
 
 nnoremap <Leader>F :RgFiles <C-r>=g:RgExcludes()<CR> --iglob **<Left>

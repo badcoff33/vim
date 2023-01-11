@@ -17,7 +17,7 @@ export def CloseCb(ch: channel)
     var ch_nr = split(string(ch), " ")[1]
     var d = g:run_dict[ch_nr]
     g:run_dict = remove(g:run_dict, ch_nr)
-    if d.out_buf == false
+    if d.bufname == ""
         var save_errorformat = &errorformat
         execute "set errorformat=" .. escape(d.regexp, ' \')
         execute "cgetbuffer" d.bufnr
@@ -60,46 +60,45 @@ def ConditionalWriteAll(dict: dict<any>)
 enddef
 
 export def Run(dict: dict<any>)
+    var v_bufnr: number
+    var v_winid: number
+    var v_bufname: string
+    var v_regexp: string
+
     var job_opts = {}
 
     if !has_key(dict, 'cmd')
-        echoerr "no command"
+        echoerr "run.vim: key 'cmd' required"
         return
     endif
 
     ConditionalWriteAll(dict)
 
-    var v_out_buf = has_key(dict, "out_buf") && (dict.out_buf == true) ? true : false
-    var v_regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
-    var cmd = dict.cmd
-
-    job_opts.cwd = getcwd()
-    if has_key(dict, "cwd")
-        job_opts.cwd = dict.cwd
-    endif
+    v_bufname = has_key(dict, "name") ? dict.name : ""
+    v_regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
 
     if has_key(dict, "hidden") && (dict.hidden == true)
+        job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
         job_opts.err_cb = function("run#HiddenErrorCb")
         var job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
     else
-        var v_bufnr: number
-        var bufname = substitute(dict.cmd, '\', '', 'g')
-        if v_out_buf == true
-            if bufexists(bufname)
-                v_bufnr = bufnr(bufname)
+        if v_bufname == ""
+            v_bufnr = bufadd(dict.cmd)
+        else
+            if bufexists(v_bufname)
+                v_bufnr = bufnr(v_bufname)
                 setbufvar(v_bufnr, "&readonly", 0)
                 setbufvar(v_bufnr, "&modified", 0)
                 setbufvar(v_bufnr, "&modifiable", 1)
             else
-                v_bufnr = bufadd(bufname)
+                v_bufnr = bufadd(v_bufname)
             endif
             execute "buffer" v_bufnr
             nnoremap <buffer> <Esc> <Cmd>bw!<CR>
             setbufline(v_bufnr, "$", "____ " .. strftime("%X") .. " ____ " .. dict.cmd .. " ____")
-        else
-            v_bufnr = bufadd(bufname)
         endif
 
+        job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
         job_opts.err_buf = v_bufnr
         job_opts.out_buf = v_bufnr
         job_opts.err_io = "buffer"
@@ -109,12 +108,19 @@ export def Run(dict: dict<any>)
         var job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
         var channel = split(string(job_getchannel(job)), " ")[1]
 
-        var v_winid = popup_create("Run " .. dict.cmd, g:Winopts())
-        g:run_dict[channel] = { winid: v_winid, cmd: dict.cmd, regexp: v_regexp, out_buf: v_out_buf, bufnr: v_bufnr }
+        v_winid = popup_create("Run " .. dict.cmd, g:Winopts())
         augroup GroupRun
             autocmd!
             autocmd VimResized * call popup_setoptions(v_winid, g:Winopts())
         augroup END
+
+        g:run_dict[channel] = {
+            winid: v_winid,
+            cmd: dict.cmd,
+            regexp: v_regexp,
+            bufname: v_bufname,
+            bufnr: v_bufnr
+        }
     endif
 enddef
 
