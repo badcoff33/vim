@@ -103,7 +103,7 @@ set pumheight=7
 " Command line completion
 set wildmenu
 set wildoptions=pum,tagfile,fuzzy
-set wildmode=full
+set wildmode=full:lastused
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
@@ -190,14 +190,26 @@ nnoremap <A-h> :colder<CR>
 nnoremap <A-l> :cnewer<CR>
 nnoremap <A-j> <cmd>cnext<CR>
 nnoremap <A-k> <cmd>cprevious<CR>
-" Living with QWERTZ keyboards
-nnoremap <Char-252> <cmd>cnext<CR>
-nnoremap <Char-220> <cmd>cprevious<CR>
-" Window movement
-nnoremap <S-Right> <C-w>l
-nnoremap <S-Left> <C-w>h
-nnoremap <S-Down> <C-w>j
-nnoremap <S-Up> <C-w>k
+
+" Move between windows - This is boring {{{
+nnoremap <C-Tab> <C-w>w
+nnoremap <CS-Tab> <C-w>W
+tnoremap <C-Tab> <C-w>w
+tnoremap <CS-Tab> <C-w>W
+
+nnoremap <S-left> <C-w>h
+nnoremap <S-right> <C-w>l
+nnoremap <S-up> <C-w>k
+nnoremap <S-down> <C-w>j
+inoremap <S-left> <Esc><C-w>h
+inoremap <S-right> <Esc><C-w>l
+inoremap <S-up> <Esc><C-w>k
+inoremap <S-down> <Esc><C-w>j
+tnoremap <S-left> <Esc><C-w>h
+tnoremap <S-right> <Esc><C-w>l
+tnoremap <S-up> <Esc><C-w>k
+tnoremap <S-down> <Esc><C-w>j
+" }}}1
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -241,6 +253,7 @@ nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>t :tjump /
 nnoremap <Leader>x :Lexplore<Space>
+nnoremap <Leader><Tab> <cmd>tabnew<CR>
 
 " quickfix
 function! s:ToggleQuickfix()
@@ -264,12 +277,9 @@ function! s:ToggleQuickfix()
     endif
   endif
 endfunction
-nnoremap <Leader><Leader> <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap @ <cmd>call <SID>ToggleQuickfix()<CR>
 nnoremap <Leader>g <cmd>cfirst<CR>
 nnoremap <Leader>G <cmd>clast<CR>
-
-" zoom current buffer in seperate tab
-nnoremap <Leader><Tab> <cmd>tabnew<CR>
 
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
@@ -301,5 +311,5 @@ syntax on
 runtime plugins.vim
 runtime local.vim
 
-" vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:
+" vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:foldenable:
 
