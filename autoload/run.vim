@@ -97,7 +97,7 @@ export def Run(dict: dict<any>)
             endif
             execute "buffer" v_bufnr
             nnoremap <buffer> <Esc> <Cmd>bw!<CR>
-            setbufline(v_bufnr, "$", "____ " .. strftime("%X") .. " ____ " .. dict.cmd .. " ____")
+            appendbufline(v_bufnr, "$", "____ " .. strftime("%X") .. " ____ " .. dict.cmd .. " ____")
         endif
 
         job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
