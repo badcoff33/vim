@@ -1,5 +1,26 @@
-command! -complete=file -nargs=+ Hg call run#Run(#{cmd: 'hg <args> -v', as_buffer: v:true})
-command! -nargs=0 HgStatus call run#Run(#{cmd: 'hg status', as_buffer: v:true})
-command! -nargs=0 HgLast3 call run#Run(#{cmd: 'hg log -r "tip~3:tip"', as_buffer: v:true})
-command! -nargs=0 HgList call run#Run(#{cmd: 'hg log --limit 6 --template "{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n"', as_buffer: v:true})
-command! -complete=file -nargs=+ HgCommit call run#Run(#{cmd: 'hg commit -v -m "' .. input("Message? ") .. '" <args>', as_buffer: v:true})
+vim9script
+
+import autoload 'run.vim' as run
+
+def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): string
+    var matching_keys = ""
+    var options: list<string>
+    var filename: string
+
+    options = ["commit", "status", "heads", "resolve", "bookmark", "last", "log"]
+    for e in systemlist("hg st")
+        filename = split(e, " ")[1]
+        options = add(options, filename)
+    endfor
+    for k in sort(options)
+        if match(k, arg_lead) >= 0
+            matching_keys = matching_keys .. k .. "\n"
+        endif
+    endfor
+    return matching_keys
+enddef
+
+command! -complete=custom,CompleteHg -nargs=+ Hg run.Run({cmd: 'hg <args>', name: "HG-OUTPUT"})
+
+nnoremap <A-v> :<C-u>Hg<Space>
+
