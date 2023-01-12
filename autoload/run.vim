@@ -9,14 +9,21 @@ def g:Winopts(): dict<any>
         tabpage: -1,
         highlight: 'Pmenu',
         padding: [0, 1, 0, 1],
-        maxwidth: (&columns * 2) / 3
     }
 enddef
 
 export def CloseCb(ch: channel)
     var ch_nr = split(string(ch), " ")[1]
     var d = g:run_dict[ch_nr]
-    g:run_dict = remove(g:run_dict, ch_nr)
+
+    setwinvar(d.winid, "&wincolor", "PmenuSel")
+    g:run_2_tid = timer_start(3000, (_) => {
+        popup_close(d.winid)
+        augroup GroupRun
+            autocmd!
+        augroup END
+    }, {repeat: 1})
+
     if d.bufname == ""
         var save_errorformat = &errorformat
         execute "set errorformat=" .. escape(d.regexp, ' \')
@@ -30,13 +37,7 @@ export def CloseCb(ch: channel)
         setbufvar(d.bufnr, "&modifiable", 0)
     endif
     silent doautocmd QuickFixCmdPost make
-    setwinvar(d.winid, "&wincolor", "PmenuSel")
-    g:run_2_tid = timer_start(3000, (_) => {
-        popup_close(d.winid)
-        augroup GroupRun
-            autocmd!
-        augroup END
-    }, {repeat: 1})
+    g:run_dict = remove(g:run_dict, ch_nr)
 enddef
 
 export def HiddenErrorCb(ch: channel,  msg: string)
@@ -109,8 +110,14 @@ export def Run(dict: dict<any>)
 
         var job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
         var channel = split(string(job_getchannel(job)), " ")[1]
+        var popup_text: string
 
-        v_winid = popup_create("Run " .. dict.cmd, g:Winopts())
+        if len(dict.cmd) > 40
+            popup_text = dict.cmd[0 : 40] .. "..."
+        else
+            popup_text = dict.cmd
+        endif
+        v_winid = popup_create("Run " .. popup_text, g:Winopts())
         augroup GroupRun
             autocmd!
             autocmd VimResized * call popup_setoptions(v_winid, g:Winopts())
