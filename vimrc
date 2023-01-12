@@ -113,7 +113,7 @@ set tagcase=match
 set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler
 " When starting in 'diff' mode, go full screen.
 if &diff
-  set columns=999 lines=999
+    set columns=999 lines=999
 endif
 command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
@@ -257,25 +257,25 @@ nnoremap <Leader><Tab> <cmd>tabnew<CR>
 
 " quickfix
 function! s:ToggleQuickfix()
-  let is_open = v:false
-  windo if &buftype== "quickfix" | let is_open = v:true | endif
-  if is_open == v:false
-    if winnr("$") == 1 && &columns >= 140
-      vert copen
-      wincmd =
-      wincmd H
-      wincmd l
+    let is_open = v:false
+    windo if &buftype== "quickfix" | let is_open = v:true | endif
+    if is_open == v:false
+        if winnr("$") == 1 && &columns >= 140
+            vert copen
+            wincmd =
+                wincmd H
+            wincmd l
+        else
+            botright copen
+        endif
     else
-      botright copen
+        if (winnr("$") == 1) && (&buftype=="quickfix")
+            buffer #
+        else
+            cclose
+            wincmd p
+        endif
     endif
-  else
-    if (winnr("$") == 1) && (&buftype=="quickfix")
-      buffer #
-    else
-      cclose
-      wincmd p
-    endif
-  endif
 endfunction
 nnoremap @ <cmd>call <SID>ToggleQuickfix()<CR>
 nnoremap <Leader>g <cmd>cfirst<CR>
@@ -290,18 +290,19 @@ command! -nargs=0 CS :set noignorecase nosmartcase
 command! -nargs=0 SC :set   ignorecase  smartcase
 
 augroup vimrc
-  autocmd!
-  " Reload changed buffers. :checktime relies on 'autoread'.
-  autocmd WinEnter * checktime
+    autocmd!
+    " Reload changed buffers. :checktime relies on 'autoread'.
+    autocmd WinEnter * checktime
 
-  " Choose color theme dependent on term type
-  autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
+    " Choose color theme dependent on term type
+    autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
 
-  " Write session file
-  autocmd VimLeave * execute "mksession!" getenv('LOCALAPPDATA') .. "\\vim\\session.vim"
+    " Autosave
+    autocmd Textchanged * if &buftype == "" | silent update | endif
+    autocmd InsertLeave * if &buftype == "" | silent update | endif
 
-  " Copy a template as local .vimrc
-  autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
+    " Copy a template as local .vimrc
+    autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
 
 augroup END
 
@@ -311,5 +312,5 @@ syntax on
 runtime plugins.vim
 runtime local.vim
 
-" vim:sw=2:tw=78:nocindent:foldmethod=marker:nofen:foldenable:
+" vim:nocindent:foldmethod=marker:foldenable:
 
