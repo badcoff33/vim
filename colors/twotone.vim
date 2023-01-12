@@ -14,7 +14,9 @@ let s:black    = "#000000"
 let s:white    = "#FFFFFF"
 
 let s:blue     = "#2188FF"
+let s:blue_hl  = "#D1D8EF"
 let s:red      = "#FF2382"
+let s:red_hl   = "#EFD3D2"
 
 let s:silver9 = "#F8F5F8"
 let s:silver8 = "#E7E1E7"
@@ -34,7 +36,6 @@ let s:Cterm = {str -> empty(str) ? "":"cterm="..str}
 
 " Basics
 
-execute "hi TabLineSel" s:Attr("underline,bold")
 execute "hi Bold" s:Attr("bold")
 execute "hi CursorLine" s:Bg(s:silver9) s:Cterm("NONE")
 execute "hi CursorLineNr" s:Fg(s:silver4) s:Attr("bold")
@@ -61,7 +62,7 @@ highlight! link Folded Comment
 highlight! link PmenuSbar Pmenu
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine Normal
+highlight! link TabLine StatusLineNC
 highlight! link TabLineFill Normal
 highlight! link TabLineSel StatusLine
 highlight! link WildMenu PmenuSel
@@ -72,11 +73,11 @@ execute "hi Conditional" s:Fg(s:red)  s:Attr("bold")
 execute "hi Type" s:Fg(s:blue) s:Attr("NONE")
 execute "hi Structure" s:Fg(s:red) s:Attr("NONE")
 execute "hi StorageClass" s:Fg(s:red)
-execute "hi PreProc" s:Fg(s:blue) s:Attr("bold")
+execute "hi PreProc" s:Fg(s:blue) s:Attr("NONE")
 execute "hi PreCondit" s:Fg(s:blue)  s:Attr("bold")
 execute "hi Comment" s:Fg(s:silver5) s:Attr("NONE")
 execute "hi Function" s:Fg(s:blue)
-execute "hi Identifier" s:Fg(s:silver4)
+execute "hi Identifier" s:Fg(s:blue)
 execute "hi Special" s:Fg(s:silver1)
 execute "hi Constant" s:Fg(s:blue)
 execute "hi Number" s:Fg(s:blue)
@@ -85,11 +86,11 @@ execute "hi Title" s:Fg(s:black)  s:Attr("bold")
 execute "hi Todo" s:Fg(s:silver2) s:Bg(s:silver7)
 execute "hi Error" s:Fg(s:red) s:Bg("bg") s:Attr("underline")
 execute "hi Directory" s:Fg(s:silver2)
-execute "hi ErrorMsg" s:Fg(s:red) s:Bg("bg")
-execute "hi WarningMsg" s:Fg(s:silver0) s:Bg("bg")
-execute "hi ModeMsg" s:Fg(s:blue) s:Bg("bg") s:Attr("bold")
+execute "hi ErrorMsg" s:Fg(s:red) s:Bg(s:red_hl) s:Attr("NONE")
+execute "hi WarningMsg" s:Fg(s:silver0) s:Bg(s:silver8)
+execute "hi ModeMsg" s:Fg(s:blue) s:Bg(s:blue_hl) s:Attr("NONE")
 execute "hi Question" s:Fg(s:silver1) s:Bg("bg")
-execute "hi QuickFixLine" s:Fg(s:red) s:Bg("bg") s:Attr("bold")
+execute "hi QuickFixLine" s:Fg(s:blue) s:Bg(s:blue_hl) s:Attr("NONE")
 execute "hi qfFileName" s:Fg(s:blue)
 execute "hi qfLineNr" s:Fg(s:red)
 highlight! link qfSeparator Normal
