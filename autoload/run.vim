@@ -87,11 +87,13 @@ export def Run(dict: dict<any>)
         else
             if bufexists(v_bufname)
                 v_bufnr = bufnr(v_bufname)
+                setbufvar(v_bufnr, "&buftype", "nofile")
                 setbufvar(v_bufnr, "&readonly", 0)
                 setbufvar(v_bufnr, "&modified", 0)
                 setbufvar(v_bufnr, "&modifiable", 1)
             else
                 v_bufnr = bufadd(v_bufname)
+                setbufvar(v_bufnr, "&buftype", "nofile")
             endif
             execute "buffer" v_bufnr
             nnoremap <buffer> <Esc> <Cmd>bw!<CR>

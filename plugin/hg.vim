@@ -22,5 +22,5 @@ enddef
 
 command! -complete=custom,CompleteHg -nargs=+ Hg run.Run({cmd: 'hg <args>', name: "HG-OUTPUT"})
 
-nnoremap <A-v> :<C-u>Hg<Space>
+nnoremap <Leader>v :<C-u>Hg<Space>
 
