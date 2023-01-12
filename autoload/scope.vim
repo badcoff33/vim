@@ -20,7 +20,7 @@ endfunction
 " Description: A scope parser for C files.
 function! scope#ParserC() abort
   " Regular expressions to find head and bottom lines of a C function.
-  let regexpHead = '.*\(\<[0-9a-zA-Z_]\+\)\s*(.*'
+  let regexpHead = '^[a-zA-Z_].*\(\<[0-9a-zA-Z_]\+\)\s*(.*'
   let regexpTail = '^}.*$'
   " Get the line numbers, starting from current cursor line.
   " (search backward, do not move cursor, do not wrap at head of buffer)
@@ -29,7 +29,7 @@ function! scope#ParserC() abort
   " Where is the cursor?
   if lineHead > lineTail
     " Cursor is inside of function
-    let funcName = substitute(getline(lineHead), regexpHead, '\1()', '')
+    let funcName = substitute(getline(lineHead), regexpHead, '\1', '')
   else
     let funcName = ''
   endif
