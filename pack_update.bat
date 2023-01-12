@@ -6,7 +6,6 @@ import requests
 import zipfile
 
 gh_dict = {
-        "https://github.com/nvim-treesitter/nvim-treesitter/archive/refs/tags/v0.8.1.zip":  "pack/gh/start",
         "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip":               "pack/gh/start", 
         "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip":         "pack/gh/start",
         "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip":            "pack/gh/opt",

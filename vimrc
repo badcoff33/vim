@@ -288,10 +288,6 @@ augroup vimrc
     " Choose color theme dependent on term type
     autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
 
-    " Autosave
-    autocmd Textchanged * if &buftype == "" | silent update | endif
-    autocmd InsertLeave * if &buftype == "" | silent update | endif
-
     " Copy a template as local .vimrc
     autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
 
