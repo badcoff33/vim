@@ -120,9 +120,7 @@ command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wi
 " Switching modes
 inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
-inoremap <C-Space> <Esc>
-noremap! <A-Space> <Esc>:
-xnoremap <A-Space> :
+inoremap <A-Space> <Esc>
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
@@ -130,23 +128,20 @@ noremap! <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
 
-" Use the minus key for something useful
-nnoremap - :
-
 " Replace current inner word with one key press
 nnoremap <BS> ciw
-
+" Delete word before cursor
+inoremap <A-BS> <C-w>
 " Yank more consistent to D and dd commands
 nnoremap Y y$
+" Yank word under cursor
+nnoremap <C-Insert> yiw
 
 " Resizing window
 let GrowWin = { -> "3wincmd + | 5wincmd >" }
 let ShrinkWin = { -> winnr("j")==winnr() ? "5wincmd <" : "3wincmd - | 5wincmd <" }
 nnoremap <A-+> :<C-r>=GrowWin()<CR><CR>
 nnoremap <A--> :<C-r>=ShrinkWin()<CR><CR>
-
-" Yank word under cursor
-nnoremap <C-Insert> yiw
 
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
@@ -170,13 +165,10 @@ vnoremap <A-e> :move '<-2<CR>==gv=gv
 nnoremap <A-o> :bprevious<CR>
 nnoremap <A-i> :bnext<CR>
 
-nnoremap <silent> + <cmd>FF<CR>
-nnoremap <silent> - <cmd>FR<CR>
-
 " command line abbreviations
 let FilePath = { -> expand("%:h") == "" ? "" : expand("%:h") .. g:slash }
 cnoremap <expr> <A-.> (FilePath() == ".") ? "." : FilePath()
-cnoremap <expr> <A-,> $USERPROFILE .. g:slash .. 'vimfiles' .. g:slash
+cnoremap <expr> <A-,> $HOME .. g:slash .. 'vimfiles' .. g:slash
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
@@ -248,16 +240,14 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>e :edit<Space>
 nnoremap <Leader>, :edit <C-r>=$HOME .. g:slash .. 'vimfiles' .. g:slash<CR>
 nnoremap <Leader>. :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
+nnoremap <Leader>t <cmd>tab split<CR>
+nnoremap <Leader>e :edit<Space>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>t :tjump /
-nnoremap <Leader>x :Lexplore<Space>
-nnoremap <Leader><Tab> <cmd>tabnew<CR>
 
-" quickfix
+" Toggle the quickfix window
 function! s:ToggleQuickfix()
     let is_open = v:false
     windo if &buftype== "quickfix" | let is_open = v:true | endif
@@ -279,13 +269,12 @@ function! s:ToggleQuickfix()
         endif
     endif
 endfunction
-nnoremap @ <cmd>call <SID>ToggleQuickfix()<CR>
-nnoremap <Leader>g <cmd>cfirst<CR>
-nnoremap <Leader>G <cmd>clast<CR>
+nnoremap <A-Space> <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap <A-g> <cmd>clast<CR>
 
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
-nnoremap <expr> <Leader>v ':silent vimgrep /'..expand("<cword>")..'/ '..expand("%:h")..g:slash..LsFilter(&ft)
+nnoremap <expr> <Leader>g ':silent vimgrep /'..expand("<cword>")..'/ '..expand("%:h")..g:slash..LsFilter(&ft)
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
