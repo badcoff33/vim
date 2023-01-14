@@ -269,7 +269,7 @@ function! s:ToggleQuickfix()
         endif
     endif
 endfunction
-nnoremap <A-Space> <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap <A-q> <cmd>call <SID>ToggleQuickfix()<CR>
 nnoremap <A-g> <cmd>clast<CR>
 
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }

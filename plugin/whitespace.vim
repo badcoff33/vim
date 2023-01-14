@@ -4,16 +4,16 @@
 " to save startup time.
 
 " Interfaces:
-noremap <unique> <script> <Plug>WhitespaceMelt          <SID>WhitespaceMelt
+noremap <unique> <script> <Plug>WhitespaceMelt <SID>WhitespaceMelt
 
-noremap <SID>WhitespaceMelt         :call whitespace#WhitespaceMelt()<CR>
+noremap <SID>WhitespaceMelt <cmd>call whitespace#WhitespaceMelt()<CR>
 
 " Defaults: Key mappings
 if !hasmapto('<Plug>WhitespaceMelt')
-  nmap <Leader>w <Plug>WhitespaceMelt
+  nmap <A-Space> <Plug>WhitespaceMelt
 endif
 
-command -nargs=0 WhitespaceCleanup      call whitespace#WhitespaceCleanup()
+command -nargs=0 WhitespaceCleanup call whitespace#WhitespaceCleanup()
 
 augroup whitespace
   autocmd!
