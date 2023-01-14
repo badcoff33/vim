@@ -14,9 +14,7 @@ let s:black    = "#000000"
 let s:white    = "#FFFFFF"
 
 let s:blue     = "#2188FF"
-let s:blue_hl  = "#D8EFF3"
 let s:red      = "#FF2382"
-let s:red_hl   = "#F3EFD8"
 
 let s:silver9 = "#F8F5F8"
 let s:silver8 = "#E7E1E7"
@@ -86,11 +84,11 @@ execute "hi Title" s:Fg(s:black)  s:Attr("bold")
 execute "hi Todo" s:Fg(s:silver2) s:Bg(s:silver7)
 execute "hi Error" s:Fg(s:red) s:Bg("bg") s:Attr("underline")
 execute "hi Directory" s:Fg(s:silver2)
-execute "hi ErrorMsg" s:Fg(s:red) s:Bg(s:red_hl) s:Attr("NONE")
+execute "hi ErrorMsg" s:Fg(s:white) s:Bg(s:red) s:Attr("NONE")
 execute "hi WarningMsg" s:Fg(s:silver0) s:Bg(s:silver8)
-execute "hi ModeMsg" s:Fg(s:blue) s:Bg(s:blue_hl) s:Attr("NONE")
+execute "hi ModeMsg" s:Fg(s:white) s:Bg(s:blue) s:Attr("NONE")
 execute "hi Question" s:Fg(s:silver1) s:Bg("bg")
-execute "hi QuickFixLine" s:Fg(s:blue) s:Bg(s:blue_hl) s:Attr("NONE")
+execute "hi QuickFixLine" s:Fg(s:blue) s:Bg(s:silver9) s:Attr("bold")
 execute "hi qfFileName" s:Fg(s:blue)
 execute "hi qfLineNr" s:Fg(s:red)
 highlight! link qfSeparator Normal
