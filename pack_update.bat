@@ -6,11 +6,12 @@ import requests
 import zipfile
 
 gh_dict = {
-        "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip":               "pack/gh/start", 
-        "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip":         "pack/gh/start",
-        "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip":            "pack/gh/opt",
-        "https://github.com/lilydjwg/colorizer/archive/refs/heads/master.zip":              "pack/gh/opt",
-        "https://github.com/liuchengxu/vista.vim/archive/refs/heads/master.zip":            "pack/gh/opt",
+        "https://github.com/yegappan/lsp/archive/refs/heads/main.zip": "pack/gh/start",
+        "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip": "pack/gh/start", 
+        "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip": "pack/gh/start",
+        "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip": "pack/gh/opt",
+        "https://github.com/lilydjwg/colorizer/archive/refs/heads/master.zip": "pack/gh/opt",
+        "https://github.com/liuchengxu/vista.vim/archive/refs/heads/master.zip": "pack/gh/opt",
         }
 
 zip_fname = os.getenv("TEMP") + os.sep + "pack_download.zip"
