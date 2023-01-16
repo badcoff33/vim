@@ -9,14 +9,14 @@ setlocal nocindent
 nnoremap <buffer> K :help <C-r><C-w><CR>
 nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 
-set path=
+setlocal path=
 for p in split(&rtp, ",")
     execute "set path+=" .. escape(p .. g:slash, " \\") .. "**"
 endfor
 
 if empty(matchstr(expand("%:p:h"), "color"))
     " source Vim file
-    nnoremap <special> <buffer> <CR> :w<bar>source%<CR>
+    nnoremap <special> <buffer> <CR> :w<bar>messages clear<bar>source%<CR>
 else
     " source Vim color theme
     nnoremap <special> <buffer> <CR> :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
@@ -32,7 +32,7 @@ function! s:VisExecute() abort
     let save_selection = &selection
     let save_reg_x = @x
     silent normal '<V'>"xy
-    let @a = substitute(@x, '\r', '\n', 'g')
+    let @x = substitute(@x, '\r', '\n', 'g')
     @x
     let @x = save_reg_x
     let &selection = save_selection

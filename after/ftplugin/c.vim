@@ -17,9 +17,6 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> xtod #warning TODO
 endif
 
-" like :tjump
-nnoremap <buffer> <CR> g<C-]>
-
 " open tag preview
 nnoremap <buffer> K <C-w>}
 

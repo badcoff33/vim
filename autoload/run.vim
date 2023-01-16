@@ -26,11 +26,15 @@ export def CloseCb(ch: channel)
 
     if d.bufname == ""
         var save_errorformat = &errorformat
-        execute "set errorformat=" .. escape(d.regexp, ' \')
-        execute "cgetbuffer" d.bufnr
-        execute "set errorformat=" .. escape(save_errorformat, ' \')
+        try
+            execute "set errorformat=" .. escape(d.regexp, ' \')
+            execute "cgetbuffer" d.bufnr
+            execute "set errorformat=" .. escape(save_errorformat, ' \')
+        catch /.*/
+            echoerr ">>failed " &errorformat
+        endtry
         w:quickfix_title = d.cmd
-        execute "bwipe" d.bufnr
+        execute "silent bwipe" d.bufnr
     else
         setbufvar(d.bufnr, "&readonly", 1)
         setbufvar(d.bufnr, "&modified", 0)

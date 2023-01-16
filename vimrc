@@ -31,6 +31,8 @@ set showmatch matchtime=1
 set showtabline=1
 set tabstop=2
 set termguicolors
+set signcolumn=yes
+set laststatus=2
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
@@ -118,20 +120,22 @@ endif
 command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
 " Switching modes
-inoremap <Ins> <Esc>
 inoremap <k0> <Esc>
-inoremap <A-Space> <Esc>
+imap jj <Esc>
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
 noremap! <A-Right> <End>
+nnoremap <A-Left> <Home>
+nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
 
 " Replace current inner word with one key press
 nnoremap <BS> ciw
-" Delete word before cursor
-inoremap <A-BS> <C-w>
+" Alternative keys to delete words in insert mode
+inoremap <A-BS> <C-o>db
+inoremap <A-Del> <C-o>de
 " Yank more consistent to D and dd commands
 nnoremap Y y$
 " Yank word under cursor
@@ -203,9 +207,9 @@ tnoremap <S-left> <Esc><C-w>h
 tnoremap <S-right> <Esc><C-w>l
 tnoremap <S-up> <Esc><C-w>k
 tnoremap <S-down> <Esc><C-w>j
-" }}}1
+" }}}
 
-" By default, <c-l> clears and redraws the screen (like :redraw!). The
+" By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
 nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
@@ -269,8 +273,8 @@ function! s:ToggleQuickfix()
         endif
     endif
 endfunction
-nnoremap <A-Space> <cmd>call <SID>ToggleQuickfix()<CR>
-nnoremap <A-g> <cmd>clast<CR>
+nnoremap <Leader>c <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap <Leader>G <cmd>clast<CR>
 
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
@@ -299,5 +303,5 @@ syntax on
 runtime plugins.vim
 runtime local.vim
 
-" vim:nocindent:foldmethod=marker:foldenable:
+" vim:foldmethod=marker:foldenable:
 

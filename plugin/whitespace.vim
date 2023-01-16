@@ -3,17 +3,19 @@
 " Description: very basic functions called from init.vim as autoload functions
 " to save startup time.
 
-" Interfaces:
-noremap <unique> <script> <Plug>WhitespaceMelt          <SID>WhitespaceMelt
+" <Plug> Interface
+noremap <unique> <script> <Plug>WhitespaceMelt <SID>WhitespaceMelt
 
-noremap <SID>WhitespaceMelt         :call whitespace#WhitespaceMelt()<CR>
+" Translate SID to Vim command
+noremap <SID>WhitespaceMelt :call whitespace#WhitespaceMelt()<CR>
 
 " Defaults: Key mappings
 if !hasmapto('<Plug>WhitespaceMelt')
-  nmap <Leader>w <Plug>WhitespaceMelt
+  nmap <C-Space> <Plug>WhitespaceMelt
+  imap <C-Space> <Esc><C-Space>
 endif
 
-command -nargs=0 WhitespaceCleanup      call whitespace#WhitespaceCleanup()
+command -nargs=0 WhitespaceCleanup call whitespace#WhitespaceCleanup()
 
 augroup whitespace
   autocmd!

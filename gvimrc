@@ -4,8 +4,6 @@ set guicursor+=a:blinkon0
 set renderoptions=type:directx
 set mousemodel=popup
 set nomousefocus
-set signcolumn=yes
-set laststatus=2
 
 augroup gvimrc
     autocmd!
