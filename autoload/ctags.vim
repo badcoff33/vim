@@ -46,11 +46,13 @@ export def HighlightTags(what: string)
 enddef
 
 export def RunUpdate(tid: number)
-  if exists(":CtagsUpdate") == 2
     CtagsUpdate
-  endif
 enddef
 
 export def Update()
-  timer_start(1000, "ctags#RunUpdate", {'repeat': 1})
+  if exists(":CtagsUpdate") == 2
+      timer_start(1000, "ctags#RunUpdate", {'repeat': 1})
+  endif
 enddef
+
+defcompile

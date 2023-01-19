@@ -11,7 +11,7 @@ nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 
 setlocal path=
 for p in split(&rtp, ",")
-    execute "set path+=" .. escape(p .. g:slash, " \\") .. "**"
+    execute "setlocal path+=" .. escape(p .. g:slash, " \\") .. "**"
 endfor
 
 if empty(matchstr(expand("%:p:h"), "color"))

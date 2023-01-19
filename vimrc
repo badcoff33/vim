@@ -119,6 +119,13 @@ if &diff
 endif
 command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
+
+" Living with QWERTZ keyboards
+execute "set langmap+=\<Char-196>}"
+execute "set langmap+=\<Char-246>["
+execute "set langmap+=\<Char-228>]"
+execute "set langmap+=\<Char-214>{"
+
 " Switching modes
 inoremap <k0> <Esc>
 imap jj <Esc>
@@ -136,6 +143,11 @@ nnoremap <BS> ciw
 " Alternative keys to delete words in insert mode
 inoremap <A-BS> <C-o>db
 inoremap <A-Del> <C-o>de
+
+" Next/prev match,expand fold and recenter
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Yank more consistent to D and dd commands
 nnoremap Y y$
 " Yank word under cursor
@@ -161,28 +173,25 @@ tnoremap <Esc>       <C-\><C-n>
 tnoremap <LeftMouse> <C-\><C-n>
 
 " Line bubbling, key mapping leant to scrolling keys C-e C-y
-nnoremap <A-y> <cmd>move .+1<CR>==
-nnoremap <A-e> <cmd>move .-2<CR>==
-vnoremap <A-y> :move '>+1<CR>==gv=gv
+nnoremap <A-e> :move .-2<CR>==
 vnoremap <A-e> :move '<-2<CR>==gv=gv
+nnoremap <A-y> :move .+1<CR>==
+vnoremap <A-y> :move '>+1<CR>==gv=gv
 
 nnoremap <A-o> :bprevious<CR>
 nnoremap <A-i> :bnext<CR>
 
-" command line abbreviations
-let FilePath = { -> expand("%:h") == "" ? "" : expand("%:h") .. g:slash }
-cnoremap <expr> <A-.> (FilePath() == ".") ? "." : FilePath()
-cnoremap <expr> <A-,> $HOME .. g:slash .. 'vimfiles' .. g:slash
+" Command line abbreviations
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
+cabbrev <expr> home $HOME .. g:slash .. 'vimfiles' .. g:slash
+cabbrev <expr> here (FilePath() == ".") ? "." : FilePath()
 
-" Living with QWERTZ keyboards
-execute "set langmap+=\<Char-196>}"
-execute "set langmap+=\<Char-246>["
-execute "set langmap+=\<Char-228>]"
-execute "set langmap+=\<Char-214>{"
-
+let FilePath = { -> expand("%:h") == "" ? "" : expand("%:h") .. g:slash }
+cnoremap <expr> <A-.> (FilePath() == ".") ? "." : FilePath()
+cnoremap <expr> <A-,> $HOME .. g:slash .. 'vimfiles' .. g:slash
+"
 " Surfing the quickfix matches
 nnoremap <A-h> :colder<CR>
 nnoremap <A-l> :cnewer<CR>
@@ -190,11 +199,6 @@ nnoremap <A-j> <cmd>cnext<CR>
 nnoremap <A-k> <cmd>cprevious<CR>
 
 " Move between windows - This is boring {{{
-nnoremap <C-Tab> <C-w>w
-nnoremap <CS-Tab> <C-w>W
-tnoremap <C-Tab> <C-w>w
-tnoremap <CS-Tab> <C-w>W
-
 nnoremap <S-left> <C-w>h
 nnoremap <S-right> <C-w>l
 nnoremap <S-up> <C-w>k
@@ -256,14 +260,21 @@ function! s:ToggleQuickfix()
     let is_open = v:false
     windo if &buftype== "quickfix" | let is_open = v:true | endif
     if is_open == v:false
-        if winnr("$") == 1 && &columns >= 140
-            vert copen
-            wincmd =
-                wincmd H
-            wincmd l
-        else
+        let qf = getqflist()
+        let max_len = 0
+        for qfentry in qf
+            let max_len = len(qfentry["text"]) > max_len ? len(qfentry["text"]) : max_len
+        endfor
+        if max_len > (&columns / 3)
             botright copen
-        endif
+            wincmd p
+        elseif winnr("$") == 1 && &columns >= 140
+            vert copen
+            wincmd p
+            wincmd =
+                else
+            botright copen
+                endif
     else
         if (winnr("$") == 1) && (&buftype=="quickfix")
             buffer #
@@ -300,8 +311,14 @@ augroup END
 let g:term = &term
 syntax on
 
-runtime plugins.vim
-runtime local.vim
+
+" Vim9: (gvim.exe) since C-] is no longer mapped on German keyboards, use this {{{
+nmap <C-+> g<C-]>
+imap <C-+> <C-]>
+cmap <C-+> <C-]>
+imap <C-Char-252> <C-[>
+cmap <C-Char-252> <C-[>
+" }}}
 
 " vim:foldmethod=marker:foldenable:
 

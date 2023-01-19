@@ -29,10 +29,4 @@ endif
 nnoremenu 1.320 PopUp.-SEP4- <NOP>
 nnoremenu 1.321 PopUp.Set\ font  :set guifont=*<CR>
 
-" Vim9: (gvim.exe) since C-] is no longer mapped on German keyboards, use this
-nmap <C-+> g<C-]>
-imap <C-+> <C-]>
-imap <C-Char-252> <C-[>
-cmap <C-Char-252> <C-[>
-
 " vim:ft=vim

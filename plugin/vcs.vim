@@ -2,7 +2,7 @@ vim9script
 
 import autoload 'run.vim' as run
 
-def WhichVcs(): string
+def g:WhichVcs(): string
   if isdirectory(".git")
       return "git"
   elseif isdirectory(".hg")
@@ -45,9 +45,9 @@ def CompleteVcs(arg_lead: string, cmd_line: string, cur_pos: number): string
     var candidates: list<string>
     var filename: string
 
-    if WhichVcs() == "git"
+    if g:WhichVcs() == "git"
         candidates = CompleteCandidatesGit()
-    elseif WhichVcs() == "hg"
+    elseif g:WhichVcs() == "hg"
         candidates = CompleteCandidatesHg()
     else
         candidates = []
@@ -61,7 +61,7 @@ def CompleteVcs(arg_lead: string, cmd_line: string, cur_pos: number): string
     return matching_keys
 enddef
 
-command! -complete=custom,CompleteVcs -nargs=+ Vcs run.Run({cmd: g:WhichVcs() .. ' <args>', name: "HG-OUTPUT"})
+command! -complete=custom,CompleteVcs -nargs=+ Vcs run.Run({cmd: g:WhichVcs() .. ' <args>', name: "VCS-OUTPUT"})
 
 nnoremap <Leader>v :<C-u>Vcs<Space>
 

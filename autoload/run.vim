@@ -36,7 +36,6 @@ export def CloseCb(ch: channel)
         w:quickfix_title = d.cmd
         execute "silent bwipe" d.bufnr
     else
-        setbufvar(d.bufnr, "&readonly", 1)
         setbufvar(d.bufnr, "&modified", 0)
         setbufvar(d.bufnr, "&modifiable", 0)
     endif
@@ -54,11 +53,11 @@ def ConditionalWriteAll(dict: dict<any>)
     if has_key(dict, "nowrite") && (dict.nowrite == 1)
         return
     endif
-    if (&autowrite || &autowriteall)
+    if &autowrite || &autowriteall
         try
             silent wall
         catch /.*/
-            echoerr "run#run: not all modified buffers written"
+            echomsg "No autowrite. Not all modified buffers written"
         finally
         endtry
     endif
@@ -72,7 +71,7 @@ export def Run(dict: dict<any>)
 
     var job_opts = {}
 
-    if !has_key(dict, 'cmd')
+    if !has_key(dict, 'cmd') && (dict.cmd != "")
         echoerr "run.vim: key 'cmd' required"
         return
     endif
@@ -89,12 +88,13 @@ export def Run(dict: dict<any>)
     else
         if v_bufname == ""
             v_bufnr = bufadd(dict.cmd)
+            setbufvar(v_bufnr, "&buftype", "nofile")
         else
             if bufexists(v_bufname)
                 v_bufnr = bufnr(v_bufname)
                 setbufvar(v_bufnr, "&buftype", "nofile")
-                setbufvar(v_bufnr, "&readonly", 0)
                 setbufvar(v_bufnr, "&modified", 0)
+                setbufvar(v_bufnr, "&readonly", 0)
                 setbufvar(v_bufnr, "&modifiable", 1)
             else
                 v_bufnr = bufadd(v_bufname)

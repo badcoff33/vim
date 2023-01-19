@@ -14,15 +14,10 @@ vim9script
 import autoload "run.vim"
 import autoload "ctags.vim"
 
-# def CtagsHighlightingCpl(a,l,p)
-#     return filter(['both', 'functions', 'types'], 'v:val =~ a:a')
-# endfun
-
-#command! -complete=customlist,CtagsHighlightingCpl -nargs=1 CtagsHighlighting ctags.HighlightTags(<q-args>)
-command! -nargs=1 CtagsHighlighting Ctags.HighlightTags(<q-args>)
 command! -complete=file -nargs=* Ctags run.Run({cmd: 'ctags <args>', hidden: true})
 
 augroup CTAGS
   autocmd!
   autocmd BufWritePost *.c,*.h ctags.Update()
+  autocmd BufWritePost *.cpp,*.hpp ctags.Update()
 augroup END
