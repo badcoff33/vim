@@ -141,8 +141,8 @@ xnoremap <A-Right> $
 " Replace current inner word with one key press
 nnoremap <BS> ciw
 " Alternative keys to delete words in insert mode
-inoremap <A-BS> <C-o>db
-inoremap <A-Del> <C-o>de
+inoremap <C-BS> <C-o>db
+inoremap <C-Del> <C-o>de
 
 " Next/prev match,expand fold and recenter
 nnoremap n nzzzv
@@ -191,7 +191,9 @@ cabbrev <expr> here (FilePath() == ".") ? "." : FilePath()
 let FilePath = { -> expand("%:h") == "" ? "" : expand("%:h") .. g:slash }
 cnoremap <expr> <A-.> (FilePath() == ".") ? "." : FilePath()
 cnoremap <expr> <A-,> $HOME .. g:slash .. 'vimfiles' .. g:slash
-"
+cmap <C-BS> <C-w>
+cmap <C-Del> <C-Right><C-w>
+
 " Surfing the quickfix matches
 nnoremap <A-h> :colder<CR>
 nnoremap <A-l> :cnewer<CR>
@@ -252,7 +254,7 @@ nnoremap <Leader>, :edit <C-r>=$HOME .. g:slash .. 'vimfiles' .. g:slash<CR>
 nnoremap <Leader>. :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
 nnoremap <Leader>t <cmd>tab split<CR>
 nnoremap <Leader>e :edit<Space>
-nnoremap <Leader>f :find *
+nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
 
 " Toggle the quickfix window

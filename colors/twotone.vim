@@ -63,7 +63,7 @@ highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine StatusLineNC
 highlight! link TabLineFill Normal
-highlight! link TabLineSel StatusLine
+highlight! link TabLineSel PmenuSel
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
 

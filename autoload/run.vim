@@ -64,6 +64,7 @@ def ConditionalWriteAll(dict: dict<any>)
         silent wall
     catch /.*/
         echomsg "No autowrite. Not all modified buffers written"
+        ls +
     finally
     endtry
 enddef

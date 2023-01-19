@@ -10,19 +10,19 @@ vim9script
 import autoload "run.vim"
 
 def RunUpdate(tid: number)
-    CtagsUpdate
+    CtagsTriggerUpdate
 enddef
 
-def Update()
-  if exists(":CtagsUpdate") == 2
+def CtagsTriggerUpdate()
+  if exists(":CtagsTriggerUpdate") == 2
       timer_start(1000, "RunUpdate", {'repeat': 1})
   endif
 enddef
 
 augroup CTAGS
   autocmd!
-  autocmd BufWritePost *.c,*.h ctags.Update()
-  autocmd BufWritePost *.cpp,*.hpp ctags.Update()
+  autocmd BufWritePost *.c,*.h CtagsTriggerUpdate()
+  autocmd BufWritePost *.cpp,*.hpp CtagsTriggerUpdate()
 augroup END
 
 command! -complete=file -nargs=* Ctags run.Run({cmd: 'ctags <args>', hidden: true})
