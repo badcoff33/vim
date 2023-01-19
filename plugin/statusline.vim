@@ -2,24 +2,41 @@
 
 augroup statusline
   au!
-  au WinEnter * call unique#UpdateUniqueName()
+  au BufWinEnter,WinEnter * call unique#UpdateUniqueName()
 augroup END
 
-set statusline =\ %{unique#GetUniqueName()}%t
-set statusline+=\ %m%r%y%w%{GetSearchMode()}
-set statusline+=%=
-set statusline+=%{scope#GetScope()}\ %l:%c
-let &statusline = &statusline.." "
+let g:currentmode={
+       \ 'n'  : 'NORMAL',
+       \ 'v'  : 'VISUAL',
+       \ 'V'  : 'V·Line',
+       \ "\<C-V>" : 'V·Block',
+       \ 'i'  : 'INSERT',
+       \ 'R'  : 'R',
+       \ 'Rv' : 'V·Replace',
+       \ 'c'  : 'Command',
+       \}
 
-let &statusline=&statusline.." "
+function BuildStatusline()
+    let sl = ""
+    if win_getid() == g:statusline_winid
+        let sl  .= "%1*%{toupper(g:currentmode[mode()])}%* "
+    endif
+    let sl .= "%{unique#GetUniqueName()}%t"
+    let sl .= " %M%Y%w%{GetSearchMode()}"
+    let sl .= "%="
+    let sl .= "%{scope#GetScope()}\ %l:%c "
+    let g:copy = sl
+    return sl
+endfunction
+set statusline=%!BuildStatusline()
 
 function! GetSearchMode()
   if &ignorecase == 1 && &smartcase == 1
-    return '[sc]'
+    return ',sc'
   elseif &ignorecase == 0
-    return '[cs]'
+    return ',cs'
   else
-    return '[ic]'
+    return ',ic'
   endif
 endfunction
 
