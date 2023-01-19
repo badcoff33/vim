@@ -53,14 +53,12 @@ def ConditionalWriteAll(dict: dict<any>)
     if has_key(dict, "nowrite") && (dict.nowrite == 1)
         return
     endif
-    if &autowrite || &autowriteall
-        try
-            silent wall
-        catch /.*/
-            echomsg "No autowrite. Not all modified buffers written"
-        finally
-        endtry
-    endif
+    try
+        silent wall
+    catch /.*/
+        echomsg "No autowrite. Not all modified buffers written"
+    finally
+    endtry
 enddef
 
 export def Run(dict: dict<any>)

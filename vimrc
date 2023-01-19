@@ -295,24 +295,18 @@ command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
 command! -nargs=0 SC :set   ignorecase  smartcase
 
-augroup vimrc
+augroup vimrc " {{{
     autocmd!
-    " Reload changed buffers. :checktime relies on 'autoread'.
-    autocmd WinEnter * checktime
-
-    " Choose color theme dependent on term type
+    autocmd WinEnter * checktime " Reload changed buffers. :checktime relies on 'autoread'.
     autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
-
-    " Copy a template as local .vimrc
+    autocmd FocusLost * silent wall
     autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
-
-augroup END
+augroup END " }}}
 
 let g:term = &term
 syntax on
 
-
-" Vim9: (gvim.exe) since C-] is no longer mapped on German keyboards, use this {{{
+" Vim9: Workaround for gvim.exe since several keys didn't work on German keyboards {{{
 nmap <C-+> g<C-]>
 imap <C-+> <C-]>
 cmap <C-+> <C-]>
