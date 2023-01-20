@@ -100,7 +100,6 @@ export def Run(dict: dict<any>)
                 v_bufnr = bufnr(v_bufname)
                 setbufvar(v_bufnr, "&buftype", "nofile")
                 setbufvar(v_bufnr, "&modified", 0)
-                setbufvar(v_bufnr, "&readonly", 0)
                 setbufvar(v_bufnr, "&modifiable", 1)
             else
                 v_bufnr = bufadd(v_bufname)
