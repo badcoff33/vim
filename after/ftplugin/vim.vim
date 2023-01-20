@@ -23,20 +23,11 @@ else
 endif
 
 " source current visual region
-vnoremap <buffer> <CR> :<C-U>call s:VisExecute()<CR>
+vnoremap <buffer> <CR> :source<CR>
 
-iabbrev <buffer> _fun function!<CR>endfunction<Up>
-iabbrev <buffer> _aug augroup NAME<CR>au!<CR>augroup END<Up><Up><End>
-
-function! s:VisExecute() abort
-    let save_selection = &selection
-    let save_reg_x = @x
-    silent normal '<V'>"xy
-    let @x = substitute(@x, '\r', '\n', 'g')
-    @x
-    let @x = save_reg_x
-    let &selection = save_selection
-endfunction
+iabbrev <buffer> xfun function!<CR>endfunction<Up><End>
+iabbrev <buffer> xdef def<CR>enddef<Up><End>
+iabbrev <buffer> xaug augroup NAME<CR>au!<CR>augroup END<Up><Up><End>
 
 if !exists('*LogError')
     " Description: Support testing with Vim's assert functions
