@@ -5,7 +5,7 @@ set renderoptions=type:directx
 set mousemodel=popup
 set nomousefocus
 
-augroup gvimrc
+augroup GroupGvimrc
     autocmd!
     autocmd FocusLost * try | wall | catch /.*/ | endtry
 augroup END

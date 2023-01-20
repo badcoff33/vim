@@ -59,7 +59,7 @@ set sidescrolloff=3
 " window behavior
 set nosplitbelow
 set splitright
-set equalalways
+set noequalalways
 
 " folding
 set foldmethod=indent
@@ -297,7 +297,7 @@ command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
 command! -nargs=0 SC :set   ignorecase  smartcase
 
-augroup vimrc " {{{
+augroup GroupVimrc " {{{
     autocmd!
     autocmd WinEnter * checktime " Reload changed buffers. :checktime relies on 'autoread'.
     autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
@@ -310,7 +310,6 @@ syntax on
 
 " Vim9: Workaround for gvim.exe since several keys didn't work on German keyboards {{{
 nmap <C-+> g<C-]>
-imap <C-+> <C-]>
 cmap <C-+> <C-]>
 imap <C-Char-252> <C-[>
 cmap <C-Char-252> <C-[>
