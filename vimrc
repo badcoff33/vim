@@ -119,7 +119,6 @@ if &diff
 endif
 command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
-
 " Living with QWERTZ keyboards
 execute "set langmap+=\<Char-196>}"
 execute "set langmap+=\<Char-246>["
@@ -129,6 +128,7 @@ execute "set langmap+=\<Char-214>{"
 " Switching modes
 inoremap <k0> <Esc>
 imap jj <Esc>
+imap <Char-252> <Esc>
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>

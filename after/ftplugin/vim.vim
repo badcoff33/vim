@@ -23,19 +23,17 @@ else
 endif
 
 " source current visual region
-vnoremap <buffer> <CR> :<C-U>call s:VisExecute()<CR>
+vnoremap <buffer> <CR> :call VimScriptExecuteVisual()<CR>
 
 iabbrev <buffer> _fun function!<CR>endfunction<Up>
 iabbrev <buffer> _aug augroup NAME<CR>au!<CR>augroup END<Up><Up><End>
 
-function! s:VisExecute() abort
-    let save_selection = &selection
-    let save_reg_x = @x
-    silent normal '<V'>"xy
-    let @x = substitute(@x, '\r', '\n', 'g')
-    @x
-    let @x = save_reg_x
-    let &selection = save_selection
+function! VimScriptExecuteVisual() range
+    let script_lines = getline(a:firstline, a:lastline)
+    echo "Execute" len(script_lines) len(script_lines) == 1 ? "line" : "lines"
+    for script_line in script_lines
+        execute script_line
+    endfor
 endfunction
 
 if !exists('*LogError')
