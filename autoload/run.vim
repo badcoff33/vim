@@ -1,6 +1,12 @@
 vim9script
 
 g:run_dict = {}
+g:run_winid = 0
+
+augroup GroupRun
+    autocmd!
+    autocmd VimResized * if (win_id2win(g:run_winid) > 0) | call popup_setoptions(g:run_winid, g:Winopts()) | endif
+augroup END
 
 def g:Winopts(): dict<any>
     return { pos: "botright",
@@ -21,9 +27,6 @@ export def CloseCb(ch: channel)
     setwinvar(d.winid, "&wincolor", "PmenuSel")
     g:run_2_tid = timer_start(4000, (_) => {
         popup_close(d.winid)
-        augroup GroupRun
-            autocmd!
-        augroup END
     }, {repeat: 1})
 
     if d.bufname == ""
@@ -69,7 +72,8 @@ def ConditionalWriteAll(dict: dict<any>)
     endtry
 enddef
 
-export def Run(dict: dict<any>)
+export def Run(dict: dict<any>): job
+    var job: job
     var v_bufnr: number
     var v_winid: number
     var v_bufname: string
@@ -79,7 +83,7 @@ export def Run(dict: dict<any>)
 
     if !has_key(dict, 'cmd') && (dict.cmd != "")
         echoerr "run.vim: key 'cmd' required"
-        return
+        return null_job
     endif
 
     ConditionalWriteAll(dict)
@@ -90,7 +94,7 @@ export def Run(dict: dict<any>)
     if has_key(dict, "hidden") && (dict.hidden == true)
         job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
         job_opts.err_cb = function("run#HiddenErrorCb")
-        var job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
+        job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
     else
         if v_bufname == ""
             v_bufnr = bufadd(dict.cmd)
@@ -117,7 +121,7 @@ export def Run(dict: dict<any>)
         job_opts.out_io = "buffer"
         job_opts.close_cb = function("run#CloseCb")
 
-        var job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
+        job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
         var channel = split(string(job_getchannel(job)), " ")[1]
         var popup_text: string
 
@@ -127,10 +131,7 @@ export def Run(dict: dict<any>)
             popup_text = dict.cmd
         endif
         v_winid = popup_create("Run " .. popup_text, g:Winopts())
-        augroup GroupRun
-            autocmd!
-            autocmd VimResized * call popup_setoptions(v_winid, g:Winopts())
-        augroup END
+        g:run_winid = v_winid # populate var for autocmd
 
         g:run_dict[channel] = {
             winid: v_winid,
@@ -140,7 +141,9 @@ export def Run(dict: dict<any>)
             bufnr: v_bufnr
         }
     endif
+
+    return job
 enddef
 
 # Uncomment when testing
-# defcompile
+defcompile
