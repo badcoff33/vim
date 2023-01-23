@@ -256,6 +256,7 @@ nnoremap <Leader>t <cmd>tab split<CR>
 nnoremap <Leader>e :edit<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader>x <cmd>bwipe<CR>
 
 " Toggle the quickfix window
 function! s:ToggleQuickfix()
