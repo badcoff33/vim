@@ -23,18 +23,11 @@ else
 endif
 
 " source current visual region
-vnoremap <buffer> <CR> :call VimScriptExecuteVisual()<CR>
+vnoremap <buffer> <CR> :source<CR>
 
-iabbrev <buffer> _fun function!<CR>endfunction<Up>
-iabbrev <buffer> _aug augroup NAME<CR>au!<CR>augroup END<Up><Up><End>
-
-function! VimScriptExecuteVisual() range
-    let script_lines = getline(a:firstline, a:lastline)
-    echo "Execute" len(script_lines) len(script_lines) == 1 ? "line" : "lines"
-    for script_line in script_lines
-        execute script_line
-    endfor
-endfunction
+iabbrev <buffer> xfun function!<CR>endfunction<Up><End>
+iabbrev <buffer> xdef def<CR>enddef<Up><End>
+iabbrev <buffer> xaug augroup NAME<CR>au!<CR>augroup END<Up><Up><End>
 
 if !exists('*LogError')
     " Description: Support testing with Vim's assert functions
