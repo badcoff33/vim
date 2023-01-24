@@ -1,28 +1,24 @@
 vim9script
 # Vim9 plugin files
 
-augroup statusline
-  au!
-  au BufWinEnter,WinEnter * unique#UpdateUniqueName()
-augroup END
-
 g:mode_translation = {
     "n": "NORM",
     "v": "VIS",
     "V": "V·LINE",
     "\<C-V>": "V·BLOCK",
     "i": "INS",
-    "R": "R",
     "r": "PROMPT",
+    "R": "R",
     "Rv": "V·Replace",
     "c": "CMD",
     "t": "TERM"
 }
+
 def g:GetMode(): string
     var m = mode()
-        if has_key(g:mode_translation, m)
-            return g:mode_translation[m]
-        endif
+    if has_key(g:mode_translation, m)
+        return g:mode_translation[m]
+    endif
     echowin "mode unknown" .. m
     return m
 enddef
@@ -44,7 +40,7 @@ def g:BuildStatusline(): string
         sl =  "%1*%{GetMode()}%*"
     endif
 
-    sl = sl .. " %{unique#GetUniqueName()}%t"
+    sl = sl .. " %{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
     sl = sl .. " %M%Y%w%{GetSearchMode()}"
     sl = sl .. "%="
     sl = sl .. "%{scope#GetScope()}\ %l:%c "
