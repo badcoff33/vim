@@ -15,12 +15,21 @@ var ctags_job: job
 ctags_locked = false
 
 def g:CtagsTriggerUpdate()
+    var ctags_options: string
+
     if job_status(ctags_job) != "run"
         ctags_locked = false
     endif
     if exists("g:ctags_options") && (ctags_locked == false)
+        if type(g:ctags_options) == v:t_string
+            ctags_options = g:ctags_options
+        elseif type(g:ctags_options) == v:t_list
+            ctags_options = join(g:ctags_options, " ")
+        else
+            return
+        endif
         ctags_locked = true
-        ctags_job = run.Run({cmd: 'ctags ' .. g:ctags_options, hidden: true})
+        ctags_job = run.Run({cmd: 'ctags ' .. ctags_options, hidden: true})
     endif
 enddef
 
