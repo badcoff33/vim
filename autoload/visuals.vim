@@ -19,7 +19,9 @@ endfunction
 
 function! visuals#hl_word_cyclic(tid)
     let cword = expand("<cword>")
-    if matchstr(cword, "[a-zA-Z0-9_]") != ""
+    if mode() == "v"
+        match NONE
+    elseif matchstr(cword, "[a-zA-Z0-9_]") != ""
         execute "match HlWordUnderline /\\<" .. cword .. "\\>/"
     else
         match none
