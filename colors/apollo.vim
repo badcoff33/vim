@@ -21,27 +21,6 @@ let bg1      = "#132443"
 let bg2      = "#263154"
 let bg3      = "#344468"
 let bg4      = "#48506F"
-let silver1  = "#A0A0A0"
-let silver2  = "#B8B8B8"
-let silver3  = "#D0D0D0"
-let silver4  = "#E0E0E0"
-let green_bg = "#018848"
-let green1   = "#02B360"
-let green2   = "#07C168"
-let green3   = "#07E070"
-let green4   = "#07F88F"
-let blue_bg  = "#2E4388"
-let blue1    = "#3068B0"
-let blue2    = "#60A0D8"
-let blue3    = "#70B0F8"
-let red1     = "#B82042"
-let red2     = "#E84070"
-let amber    = "#D0CF20"
-
-let bg1      = "#132443"
-let bg2      = "#263154"
-let bg3      = "#344468"
-let bg4      = "#48506F"
 let silver1  = "#A0A0A8"
 let silver2  = "#B8B8BE"
 let silver3  = "#D0D0D8"
@@ -51,7 +30,7 @@ let green1   = "#02B360"
 let green2   = "#07C168"
 let green3   = "#07E070"
 let green4   = "#07F88F"
-let blue_bg  = "#2E4388"
+let blue_bg  = "#035388"
 let blue1    = "#3068B0"
 let blue2    = "#60A0D8"
 let blue3    = "#70B0F8"
@@ -85,12 +64,12 @@ execute "hi PmenuSel" Fg(white) Bg(green_bg) Attr("NONE")
 execute "hi PmenuThumb" Fg(blue2) Bg(bg4)
 execute "hi Question" Fg(green2) Bg("bg")
 execute "hi QuickFixLine"  Fg(amber) Bg("bg") Attr("bold")
-execute "hi Search" Fg(white) Bg(blue_bg) Attr("NONE")
+execute "hi Search" Fg(white) Bg(green_bg) Attr("NONE")
 execute "hi StatusLine" Fg(black) Bg(blue3) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(silver4) Bg(bg3) Attr("NONE") Cterm("NONE")
 execute "hi Terminal" Fg(green3) Bg(black)
 execute "hi Title" Fg(green3)
-execute "hi User1" Fg(blue2) Bg(black)
+execute "hi User1" Fg(white) Bg(blue_bg)
 execute "hi VertSplit" Fg(bg2) Bg(bg2) Attr("NONE")
 execute "hi Visual" Fg(white) Bg(blue_bg)
 execute "hi WarningMsg" Fg(blue1) Bg("bg")

@@ -12,11 +12,11 @@ export def GetUniqueName()
     endfor
 
     for b in buf_numbers
-         setbufvar(b, "unique_name_prefix", "")
+        setbufvar(b, "unique_name_prefix", "")
         for b_ in buf_numbers
             diff_str = FindUniqueNamePart(bufname(b), bufname(b_))
             if len(diff_str) > 0 && getbufvar(b, "unique_name_prefix") == ""
-                 setbufvar(b, "unique_name_prefix", diff_str .. ":")
+                setbufvar(b, "unique_name_prefix", diff_str .. ":")
             endif
         endfor
     endfor

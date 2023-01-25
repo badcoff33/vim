@@ -3,6 +3,7 @@
 let b:undo_ftplugin = "setlocal textwidth< shiftwidth< nocindent<"
 
 setlocal textwidth=0
+setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal nocindent
 
