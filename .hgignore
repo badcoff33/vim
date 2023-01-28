@@ -5,7 +5,6 @@
 spell
 undo
 backup
-pack
+pack/*
 doc/tags
-*swp
 local.vim 
