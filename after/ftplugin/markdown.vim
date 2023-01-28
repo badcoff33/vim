@@ -65,10 +65,10 @@ endfunction
 
 function! s:MakeHTML(...)
   if exists("b:markdown_command")
-    call run#run({
-          \ 'cmd': b:markdown_command,
-          \ 'hidden': 1,
-          \ 'nowrite': 1
+    call run#Run(#{
+          \ cmd: b:markdown_command,
+          \ hidden: v:true,
+          \ nowrite: v:true
           \ })
   endif
 endfunction

@@ -63,10 +63,10 @@ endfunction
 
 function! s:MakeHTML(...)
   if exists("b:rst_command")
-    call run#run({
-          \ 'cmd': b:rst_command,
-          \ 'hidden': 1,
-          \ 'nowrite': 1
-          \ })
+    call run#Run(#{
+          \ cmd: b:rst_command,
+          \ hidden: v:true,
+          \ nowrite: v:true
+    })
   endif
 endfunction

@@ -60,7 +60,7 @@ export def HiddenErrorCb(ch: channel,  msg: string)
 enddef
 
 def ConditionalWriteAll(dict: dict<any>)
-    if has_key(dict, "nowrite") && (dict.nowrite == 1)
+    if has_key(dict, "nowrite") && (dict.nowrite == true)
         return
     endif
     try
