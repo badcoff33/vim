@@ -302,7 +302,7 @@ augroup GroupVimrc " {{{
     autocmd!
     autocmd WinEnter * checktime " Reload changed buffers. :checktime relies on 'autoread'.
     autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
-    autocmd FocusLost * silent wall
+    autocmd FocusLost * try | silent wall | catch /.*/ | endtry
     autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
 augroup END " }}}
 
