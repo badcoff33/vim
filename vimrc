@@ -24,12 +24,12 @@ set report=0
 set ruler
 set selection=inclusive
 set selectmode=
-set shiftwidth=2
+set shiftwidth=4
 set shortmess-=S " Yes, search count please
 set shortmess-=f " long form for file info
 set showmatch matchtime=1
 set showtabline=1
-set tabstop=2
+set tabstop=4
 set termguicolors
 set signcolumn=yes
 set laststatus=2
@@ -256,7 +256,7 @@ nnoremap <Leader>t <cmd>tab split<CR>
 nnoremap <Leader>e :edit<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
-nnoremap <Leader>x <cmd>bwipe<CR>
+nnoremap <Leader>d <cmd>bdelete<CR>
 
 " Toggle the quickfix window
 function! s:ToggleQuickfix()

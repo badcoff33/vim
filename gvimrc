@@ -10,12 +10,28 @@ augroup GroupGvimrc
     autocmd FocusLost * try | wall | catch /.*/ | endtry
 augroup END
 
-let FontFamily = {-> escape(split(&gfn, ":")[0], ' ')}
-let IncFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) + 1)}
-let DecFontHeight = {-> string(str2nr(split(&gfn, ":h")[1]) - 1)}
+function GetFontInfo(...)
+    let font_dict = {}
+    let font_dict.family = escape(split(&gfn, ":")[0], ' ')
+    try
+        let font_height_str = split(&gfn, ":h")[1]
+        if a:0 == 1 && a:1 == "+"
+            let height = min([20, str2nr(font_height_str) + 1])
+        elseif a:0 == 1 && a:1 == "-"
+            let height = max([6, str2nr(font_height_str) - 1])
+        else
+            let height = str2nr(font_height_str)
+        endif
+        let font_dict.height = string(height)
+    catch /.*/
+        " height info not part of &gfn: use default
+        let font_dict.height = "11"
+    endtry
+    return font_dict
+endfunction
 
-nnoremap <expr> <C-ScrollWheelUp> "<cmd>set guifont=" .. FontFamily() .. ":h" .. IncFontHeight() .. "<CR>"
-nnoremap <expr> <C-ScrollWheelDown> "<cmd>set guifont=" .. FontFamily() .. ":h" .. DecFontHeight() .. "<CR>"
+nnoremap <expr> <C-ScrollWheelUp> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("+").height .. "<CR>"
+nnoremap <expr> <C-ScrollWheelDown> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("-").height .. "<CR>"
 
 tnoremap <LeftMouse> <C-w>N
 tmap <RightMouse> <C-w>N<RightMouse>

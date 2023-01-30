@@ -66,7 +66,7 @@ endfun
 function! scope#ParserVim() abort
   " Regular expressions to find head and bottom lines of a Vim function.
   let regexpHead = '^func.*\ \+\([A-Za-z0-9#:<>]\+\)(.*$'
-  let regexpTail = '^endf.*$'
+  let regexpTail = '^end.*$'
   " Get the line numbers, starting from current cursor line.
   " (search backward, do not move cursor, do not wrap at head of buffer)
   let  lineHead = search(regexpHead, 'bnW')
@@ -74,7 +74,7 @@ function! scope#ParserVim() abort
   " Where is the cursor?
   if lineHead > lineTail
     " Cursor is inside of function
-    let funcName = substitute(getline(lineHead), regexpHead, '\=submatch(1)', '')
+    let funcName = substitute(getline(lineHead), regexpHead, '\=submatch(2)', '')
   else
     let funcName = ''
   endif
