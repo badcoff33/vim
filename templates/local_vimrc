@@ -1,5 +1,9 @@
-" If :CtagsUpdate exists it gets executed by every write of C files
-command! -nargs=0 CtagsUpdate Ctags -R src vim
+" Options for the Ctags executable
+let g:ctags_options = [ "-R", "src", "inc" ]
+
+" for plugin/rg.vim
+let g:rg_paths = [ "src", "inc" ]
+let g:rg_excludes = [ "Build" ]
 
 " Set Ripgrep as grep with project-specific Ripgrep options 
 "set grepprg=rg\ --vimgrep\ -g\ *.[ch]\ $*\ Software
@@ -15,8 +19,6 @@ set tagcase=match
 compiler gcc
 set makeprg=make
 
-" for plugin/rg.vim
-let g:rg_paths = ["src", "inc" ]
-let g:rg_excludes = ["Build"]
-
+" Markdown, please
+autocmd BufRead *.txt setfiletype markdown
 
