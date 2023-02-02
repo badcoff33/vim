@@ -1,7 +1,7 @@
 set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
 set guioptions=!a
 set guicursor+=a:blinkon0
-set renderoptions=type:directx
+set renderoptions=type:directx encoding=utf-8
 set mousemodel=popup
 set nomousefocus
 
