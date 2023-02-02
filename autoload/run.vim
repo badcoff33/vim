@@ -41,8 +41,8 @@ export def CloseCb(ch: channel)
         w:quickfix_title = d.cmd
         execute "silent bwipe" d.bufnr
         for e in getqflist({ "nr": "$", "all": 0 }).items
-                errors += e.type == "e" ? 1 : 0
-                warnings += e.type == "w" ? 1 : 0
+            errors += e.type ==? "e" ? 1 : 0
+            warnings += e.type ==? "w" ? 1 : 0
         endfor
         popup_settext(d.winid, "Done: warnings=" .. warnings .. " errros=" .. errors)
     else
