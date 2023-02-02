@@ -24,12 +24,14 @@ export def TorchlightInCurrentBuf()
 
     for item in qf_items
         if item.bufnr == str2nr(key_b)
-            prop_add(item.lnum, 0, {
-                type: item.type ==? "e" ? "Error" : "Warning",
-                text:  " " .. item.text,
-                text_align: 'below',
-                text_padding_left: 4
-            })
+            if item.type ==? "e" || item.type ==? "w"
+                prop_add(item.lnum, 0, {
+                    type: item.type ==? "e" ? "Error" : "Warning",
+                    text:  " " .. item.text,
+                    text_align: 'below',
+                    text_padding_left: 4
+                })
+            endif
         endif
     endfor
 enddef
