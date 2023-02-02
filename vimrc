@@ -250,10 +250,9 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>, :edit <C-r>=$HOME .. g:slash .. 'vimfiles' .. g:slash<CR>
-nnoremap <Leader>. :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
+nnoremap <Leader>E :edit <C-r>=$HOME .. g:slash .. 'vimfiles' .. g:slash<CR>
+nnoremap <Leader>e :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
 nnoremap <Leader>t <cmd>tab split<CR>
-nnoremap <Leader>e :edit<Space>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>
