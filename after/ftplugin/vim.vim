@@ -26,9 +26,11 @@ endif
 " source current visual region
 vnoremap <buffer> <CR> :source<CR>
 
-iabbrev <buffer> xfun function!<CR>endfunction<Up><End>
+iabbrev <buffer> xfun function!<CR>endfunction<C-f><Up><End>
 iabbrev <buffer> xdef def<CR>enddef<Up><End>
 iabbrev <buffer> xaug augroup NAME<CR>au!<CR>augroup END<Up><Up><End>
+iabbrev <buffer> xfor for<CR>endfor<C-f><CR><Up><Up><End>
+iabbrev <buffer> xif  if<CR>endif<C-f><CR><Up><Up><End>
 
 if !exists('*LogError')
     " Description: Support testing with Vim's assert functions

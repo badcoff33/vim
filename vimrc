@@ -138,8 +138,6 @@ nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
 
-" Replace current inner word with one key press
-nnoremap <BS> ciw
 " Alternative keys to delete words in insert mode
 inoremap <C-BS> <C-o>db
 inoremap <C-Del> <C-o>de
@@ -286,7 +284,7 @@ function! s:ToggleQuickfix()
         endif
     endif
 endfunction
-nnoremap <Leader>c <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap <BS> <cmd>call <SID>ToggleQuickfix()<CR>
 nnoremap <Leader>G <cmd>clast<CR>
 
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
