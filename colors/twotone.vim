@@ -91,7 +91,7 @@ execute "hi Structure" s:Fg(s:red) s:Attr("NONE")
 execute "hi Title" s:Fg(s:black)  s:Attr("bold")
 execute "hi Todo" s:Fg(s:silver2) s:Bg(s:silver7)
 execute "hi Type" s:Fg(s:blue) s:Attr("NONE")
-execute "hi WarningMsg" s:Fg(s:silver0) s:Bg(s:silver8)
+execute "hi WarningMsg" s:Fg(s:white) s:Bg(s:blue)
 execute "hi qfFileName" s:Fg(s:blue)
 execute "hi qfLineNr" s:Fg(s:red)
 

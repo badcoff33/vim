@@ -91,6 +91,8 @@ export def Run(dict: dict<any>): job
     v_bufname = has_key(dict, "name") ? dict.name : ""
     v_regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
 
+    silent doautocmd QuickFixCmdPre make
+
     if has_key(dict, "hidden") && (dict.hidden == true)
         job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
         job_opts.err_cb = function("run#HiddenErrorCb")
