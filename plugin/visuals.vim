@@ -10,5 +10,5 @@ nnoremap <Leader>h <cmd>HlWordToggle<CR>
 augroup visuals
   au!
   autocmd WinNew,WinEnter,BufWinEnter * call visuals#blend_down()
-  autocmd TextYankPost *  call visuals#blink_on_yank_now(#{duration: 150})
+  autocmd TextYankPost *  call visuals#blink_on_yank_now(#{duration: 300})
 augroup END

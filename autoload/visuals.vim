@@ -3,7 +3,7 @@ function! visuals#hl_word_toggle()
     highlight HlWordUnderline gui=underline
     if !exists("g:hl_word_timer")
         let g:hl_word_timer = timer_start(1000, function("visuals#hl_word_cyclic"), #{repeat: -1})
-            let s:save_hlsearch = &hlsearch
+        let s:save_hlsearch = &hlsearch
         set nohlsearch
     else
         let save_winid = winnr()
