@@ -21,8 +21,9 @@ enddef
 export def CloseCb(ch: channel)
     var ch_nr = split(string(ch), " ")[1]
     var d = g:run_dict[ch_nr]
-    var errors: number
-    var warnings: number
+    var lines = 0
+    var errors = 0
+    var warnings = 0
 
     setwinvar(d.winid, "&wincolor", "PmenuSel")
     g:run_2_tid = timer_start(4000, (_) => {
@@ -41,10 +42,13 @@ export def CloseCb(ch: channel)
         w:quickfix_title = d.cmd
         execute "silent bwipe" d.bufnr
         for e in getqflist({ "nr": "$", "all": 0 }).items
+            lines = lines + 1
             errors += e.type ==? "e" ? 1 : 0
             warnings += e.type ==? "w" ? 1 : 0
         endfor
-        popup_settext(d.winid, "Done: warnings=" .. warnings .. " errros=" .. errors)
+        popup_settext(d.winid, lines .. " lines with "
+                      .. warnings .. " warnings and "
+                      .. errors .. " errors")
     else
         setbufvar(d.bufnr, "&modified", 0)
         setbufvar(d.bufnr, "&modifiable", 0)

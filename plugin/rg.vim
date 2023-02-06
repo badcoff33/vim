@@ -32,7 +32,6 @@ def g:RgExcludes(): string
     return exclude_string
 enddef
 
-
 # Using links? Ripgrep supports this by th option '--follow'
 set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m

@@ -127,7 +127,6 @@ execute "set langmap+=\<Char-214>{"
 
 " Switching modes
 inoremap <k0> <Esc>
-imap jj <Esc>
 imap <Char-252> <Esc>
 
 " Consistent cursor movement
@@ -135,12 +134,14 @@ noremap! <A-Left> <Home>
 noremap! <A-Right> <End>
 nnoremap <A-Left> <Home>
 nnoremap <A-Right> <End>
-xnoremap <A-Left> 0
-xnoremap <A-Right> $
+vnoremap <A-Left> 0
+vnoremap <A-Right> $
 
 " Alternative keys to delete words in insert mode
 inoremap <C-BS> <C-o>db
 inoremap <C-Del> <C-o>de
+cnoremap <C-BS> <C-w>
+cnoremap <C-Del> <C-Right><C-w>
 
 " Next/prev match,expand fold and recenter
 nnoremap n nzzzv

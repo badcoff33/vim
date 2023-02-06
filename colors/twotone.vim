@@ -105,9 +105,9 @@ execute "hi cParen" s:Fg(s:silver3)
 execute "hi cBlock" s:Fg(s:silver3)
 
 " filetype HTML
-execute "hi htmlH1" s:Fg(s:blue)  s:Attr("bold")
-execute "hi htmlH2" s:Fg(s:blue)  s:Attr("bold")
-execute "hi htmlH3" s:Fg(s:blue)  s:Attr("bold")
+execute "hi htmlH1" s:Fg(s:red)  s:Attr("bold")
+execute "hi htmlH2" s:Fg(s:red)  s:Attr("bold")
+execute "hi htmlH3" s:Fg(s:red)  s:Attr("bold")
 
 " markdown
 execute "hi markdownCode" s:Fg(s:silver3) s:Bg(s:silver9)
