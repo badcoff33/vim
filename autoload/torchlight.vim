@@ -33,7 +33,7 @@ export def TorchlightUpdate()
             prop_add(item.lnum, 0, {
                 bufnr: item.bufnr,
                 type: "Warning",
-                text: item.text,
+                text: "►" .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
                 text_align: 'below',
                 text_padding_left: 4
             })
@@ -44,7 +44,7 @@ export def TorchlightUpdate()
             prop_add(item.lnum, 0, {
                 bufnr: item.bufnr,
                 type: "Error",
-                text: item.text,
+                text: "►" .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
                 text_align: 'below',
                 text_padding_left: 4
             })
