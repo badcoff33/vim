@@ -34,13 +34,13 @@ let s:Cterm = {str -> empty(str) ? "":"cterm="..str}
 
 " Basics
 
-execute "hi Bold" s:Attr("bold")
+s:silver5execute "hi Bold" s:Attr("bold")
 execute "hi CursorLine" s:Bg(s:silver9) s:Cterm("NONE")
 execute "hi CursorLineNr" s:Fg(s:silver4) s:Attr("bold")
 execute "hi IncSearch" s:Fg(s:white) s:Bg(s:black) s:Attr("NONE")
 execute "hi Italic" s:Attr("italic")
 execute "hi LineNr" s:Fg(s:silver4) s:Attr("bold")
-execute "hi MatchParen" s:Fg(s:white) s:Bg(s:silver5) s:Attr("NONE")
+execute "hi MatchParen" s:Fg(s:blue) s:Bg("bg") s:Attr("underline,bold")
 execute "hi NonText" s:Fg(s:silver6) s:Bg("bg")
 execute "hi Normal" s:Fg(s:silver2) s:Bg(s:white) s:Attr("NONE")
 execute "hi Pmenu" s:Fg(s:white) s:Bg(s:silver4)
