@@ -27,7 +27,7 @@ def g:CtagsTriggerUpdate()
         return
     endif
 
-    ctags_job = run.Run({cmd: 'ctags ' .. ctags_options, hidden: false})
+    ctags_job = run.Run({cmd: 'ctags ' .. ctags_options, hidden: true})
 enddef
 
 augroup GroupeCtags
