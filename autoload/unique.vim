@@ -3,7 +3,7 @@ vim9script
 # Description: Sets a buffer local variable with unique part for buffers with
 # the same base name.
 export def GetUniqueName()
-    var buf_listed = getbufinfo({"listed": 1})
+    var buf_listed = getbufinfo({"bufloaded": 1})
     var buf_numbers = []
     var diff_str = ""
 
@@ -11,7 +11,8 @@ export def GetUniqueName()
          add(buf_numbers, e.bufnr)
     endfor
 
-    for b in buf_numbers
+    for w in range(1, winnr("$"))
+        var b = winbufnr(w)
         setbufvar(b, "unique_name_prefix", "")
         for b_ in buf_numbers
             diff_str = FindUniqueNamePart(bufname(b), bufname(b_))
@@ -21,6 +22,7 @@ export def GetUniqueName()
             endif
         endfor
     endfor
+
 enddef
 
 # Description: Find the differences in buffers path name and return the
