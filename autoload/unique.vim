@@ -15,8 +15,9 @@ export def GetUniqueName()
         setbufvar(b, "unique_name_prefix", "")
         for b_ in buf_numbers
             diff_str = FindUniqueNamePart(bufname(b), bufname(b_))
-            if len(diff_str) > 0 && getbufvar(b, "unique_name_prefix") == ""
+            if diff_str != ""
                 setbufvar(b, "unique_name_prefix", diff_str .. ":")
+                break
             endif
         endfor
     endfor
@@ -30,9 +31,7 @@ def FindUniqueNamePart(file_a: string, file_b: string): string
 
     if file_a == file_b
         return ""
-    elseif fnamemodify(file_a, ":p:t") != fnamemodify(file_b, ":p:t")
-        return ""
-    else
+    elseif fnamemodify(file_a, ":p:t") == fnamemodify(file_b, ":p:t")
         paths_a = split(substitute(fnamemodify(file_a, ":p:h"), '\', '/', 'g'), '/')
         paths_b = split(substitute(fnamemodify(file_b, ":p:h"), '\', '/', 'g'), '/')
 
@@ -46,6 +45,8 @@ def FindUniqueNamePart(file_a: string, file_b: string): string
             paths_b = paths_b[1 : ]
         endwhile
         return paths_a[0]
+    else
+        return ""
     endif
 enddef
 
