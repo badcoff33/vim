@@ -27,6 +27,7 @@ export def TorchlightUpdate()
 
     for item in qf_items
         if item.type ==? "w"
+            bufload(item.bufnr)
             if empty(prop_type_get("Warning", {bufnr: item.bufnr}))
                 prop_type_add('Warning', {bufnr: item.bufnr, highlight: 'WarningMsg'})
             endif
@@ -38,6 +39,7 @@ export def TorchlightUpdate()
                 text_padding_left: 4
             })
         elseif item.type ==? "e"
+            bufload(item.bufnr)
             if empty(prop_type_get("Error", {bufnr: item.bufnr}))
                 prop_type_add('Error', {bufnr: item.bufnr, highlight: 'ErrorMsg'})
             endif
