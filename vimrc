@@ -88,10 +88,12 @@ set magic
 set wrapscan
 
 set backup
+execute mkdir(getenv('LOCALAPPDATA') .. g:slash .. join(["vim", "backup"], g:slash) , "p")
 execute 'set backupdir=' .. getenv('LOCALAPPDATA') .. '\vim\backup'
 set wildignore+=*/backup/*
 
 set undofile
+execute mkdir(getenv('LOCALAPPDATA') .. g:slash .. join(["vim", "undo"], g:slash) , "p")
 execute 'set undodir=' .. getenv('LOCALAPPDATA') .. '\vim\undo'
 set wildignore+=*/undo/*
 
