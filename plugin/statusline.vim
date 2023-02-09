@@ -48,5 +48,4 @@ def g:BuildStatusline(): string
 enddef
 set statusline=%!BuildStatusline()
 
-
 defcompile

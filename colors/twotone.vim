@@ -40,7 +40,7 @@ execute "hi CursorLineNr" s:Fg(s:silver4) s:Attr("bold")
 execute "hi IncSearch" s:Fg(s:white) s:Bg(s:black) s:Attr("NONE")
 execute "hi Italic" s:Attr("italic")
 execute "hi LineNr" s:Fg(s:silver4) s:Attr("bold")
-execute "hi MatchParen" s:Fg(s:white) s:Bg(s:silver5) s:Attr("NONE")
+execute "hi MatchParen" s:Fg(s:blue) s:Bg("bg") s:Attr("underline,bold")
 execute "hi NonText" s:Fg(s:silver6) s:Bg("bg")
 execute "hi Normal" s:Fg(s:silver2) s:Bg(s:white) s:Attr("NONE")
 execute "hi Pmenu" s:Fg(s:white) s:Bg(s:silver4)
@@ -68,6 +68,7 @@ highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
 
 " Code
+
 execute "hi Comment" s:Fg(s:silver5) s:Attr("NONE")
 execute "hi Conditional" s:Fg(s:red)  s:Attr("bold")
 execute "hi Constant" s:Fg(s:blue)
@@ -96,26 +97,31 @@ execute "hi qfFileName" s:Fg(s:blue)
 execute "hi qfLineNr" s:Fg(s:red)
 
 " Filetype VIM
+
 execute "hi vimCommentTitle" s:Fg(s:blue)  s:Attr("bold")
 
 " Filetype C
+
 execute "hi cCppOut" s:Bg(s:silver9) s:Attr("NONE")
 execute "hi cCppOutIf2" s:Bg(s:silver9) s:Attr("NONE")
 execute "hi cParen" s:Fg(s:silver3)
 execute "hi cBlock" s:Fg(s:silver3)
 
-" filetype HTML
+" Filetype HTML
+
 execute "hi htmlH1" s:Fg(s:red)  s:Attr("bold")
 execute "hi htmlH2" s:Fg(s:red)  s:Attr("bold")
 execute "hi htmlH3" s:Fg(s:red)  s:Attr("bold")
 
-" markdown
+" Filetype Markdown
+
 execute "hi markdownCode" s:Fg(s:silver3) s:Bg(s:silver9)
 execute "hi markdownCodeBlock" s:Fg(s:silver2)
 execute "hi rstEmphasis" s:Fg(s:silver2)
 execute "hi rstStrongEmphasis" s:Fg(s:silver2)  s:Attr("bold")
 
 " Diffs
+
 execute "hi DiffChange" s:Fg(s:white) s:Bg(s:blue)
 execute "hi DiffText" s:Fg(s:white) s:Bg(s:blue)
 execute "hi DiffDelete" s:Fg(s:red) s:Bg(s:red)

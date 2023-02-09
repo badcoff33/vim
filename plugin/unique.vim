@@ -1,12 +1,9 @@
 vim9script
-# Vim plugin interface
 
 import autoload "unique.vim"
 
 augroup GroupUnique
     au!
-    au BufAdd     * unique.GetUniqueName()
-    au BufWipeout * unique.GetUniqueName()
-    au BufDelete  * unique.GetUniqueName()
+    au BufEnter     * unique.GetUniqueName()
 augroup END
 

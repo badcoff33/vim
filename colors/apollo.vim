@@ -29,8 +29,8 @@ let s:green1   = "#02A358"
 let s:green2   = "#07C168"
 let s:green3   = "#07E070"
 let s:green4   = "#07F88F"
-let s:blue_bg  = "#134580"
-let s:blue1    = "#2048B0"
+let s:blue_bg  = "#134570"
+let s:blue1    = "#3068B8"
 let s:blue2    = "#4090D8"
 let s:blue3    = "#70B0F8"
 let s:red1     = "#B82042"
@@ -63,12 +63,12 @@ execute "hi PmenuSel" Fg(s:white) Bg(s:green1) Attr("NONE")
 execute "hi PmenuThumb" Fg(s:blue2) Bg(s:bg4)
 execute "hi Question" Fg(s:green2) Bg("bg")
 execute "hi QuickFixLine" Fg(s:blue3) Bg(s:blue_bg) Attr("NONE")
-execute "hi Search" Fg(s:gold) Bg(s:blue_bg) Attr("NONE")
+execute "hi Search" Fg(s:gold) Bg(s:blue_bg) Attr("bold")
 execute "hi StatusLine" Fg(s:black) Bg(s:blue3) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(s:silver4) Bg(s:bg3) Attr("NONE") Cterm("NONE")
 execute "hi Terminal" Fg(s:green3) Bg(s:black)
 execute "hi Title" Fg(s:green3)
-execute "hi User1" Fg(s:white) Bg(s:blue_bg)
+execute "hi User1" Fg(s:blue3) Bg(s:blue_bg)
 execute "hi VertSplit" Fg(s:bg2) Bg(s:bg2) Attr("NONE")
 execute "hi Visual" Fg(s:white) Bg(s:silver1)
 execute "hi WarningMsg" Fg(s:white) Bg(s:blue1)
@@ -107,7 +107,7 @@ execute "hi Constant" Fg(s:white)
 execute "hi Number" Fg(s:white)
 execute "hi Todo" Fg(s:silver2) Bg(s:bg3)
 execute "hi Error" Fg(s:red2) Bg(s:bg3)
-execute "hi Directory" Fg(s:silver4)  Attr("underline")
+execute "hi Directory" Fg(s:blue3)  Attr("underline")
 
 " Filetype VIM
 execute "hi vimCommentTitle" Fg(s:white)  Attr("bold")

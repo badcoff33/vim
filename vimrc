@@ -265,19 +265,17 @@ function! s:ToggleQuickfix()
     if is_open == v:false
         let qf = getqflist()
         let max_len = 0
-        for qfentry in qf
-            let max_len = len(qfentry["text"]) > max_len ? len(qfentry["text"]) : max_len
+        for e in qf
+            let max_len = len(e["text"]) > max_len ? len(e["text"]) : max_len
         endfor
-        if max_len > (&columns / 3)
-            botright copen
-            wincmd p
-        elseif winnr("$") == 1 && &columns >= 140
+        if winnr("$") == 1 && &columns >= 140
             vert copen
             wincmd p
             wincmd =
-                else
-            botright copen
-                endif
+        else
+            execute "botright" "copen" min([&lines/3, max([1, len(qf)])])
+            wincmd p
+        endif
     else
         if (winnr("$") == 1) && (&buftype=="quickfix")
             buffer #

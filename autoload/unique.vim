@@ -3,7 +3,7 @@ vim9script
 # Description: Sets a buffer local variable with unique part for buffers with
 # the same base name.
 export def GetUniqueName()
-    var buf_listed = getbufinfo({"listed": 1})
+    var buf_listed = getbufinfo({"bufloaded": 1})
     var buf_numbers = []
     var diff_str = ""
 
@@ -11,15 +11,18 @@ export def GetUniqueName()
          add(buf_numbers, e.bufnr)
     endfor
 
-    for b in buf_numbers
+    for w in range(1, winnr("$"))
+        var b = winbufnr(w)
         setbufvar(b, "unique_name_prefix", "")
         for b_ in buf_numbers
             diff_str = FindUniqueNamePart(bufname(b), bufname(b_))
-            if len(diff_str) > 0 && getbufvar(b, "unique_name_prefix") == ""
+            if diff_str != ""
                 setbufvar(b, "unique_name_prefix", diff_str .. ":")
+                break
             endif
         endfor
     endfor
+
 enddef
 
 # Description: Find the differences in buffers path name and return the
@@ -30,9 +33,7 @@ def FindUniqueNamePart(file_a: string, file_b: string): string
 
     if file_a == file_b
         return ""
-    elseif fnamemodify(file_a, ":p:t") != fnamemodify(file_b, ":p:t")
-        return ""
-    else
+    elseif fnamemodify(file_a, ":p:t") == fnamemodify(file_b, ":p:t")
         paths_a = split(substitute(fnamemodify(file_a, ":p:h"), '\', '/', 'g'), '/')
         paths_b = split(substitute(fnamemodify(file_b, ":p:h"), '\', '/', 'g'), '/')
 
@@ -46,6 +47,8 @@ def FindUniqueNamePart(file_a: string, file_b: string): string
             paths_b = paths_b[1 : ]
         endwhile
         return paths_a[0]
+    else
+        return ""
     endif
 enddef
 
