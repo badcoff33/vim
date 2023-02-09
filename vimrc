@@ -133,6 +133,7 @@ execute "set langmap+=\<Char-214>{"
 " Switching modes
 inoremap <k0> <Esc>
 imap <Char-252> <Esc>
+nmap <Char-252> :
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
