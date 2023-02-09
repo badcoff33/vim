@@ -5,6 +5,9 @@
 "
 " Maintainer: Markus Prepens (markus dot prepens at gmail dot com)
 
+let g:vim_home = expand('<sfile>:p:h')
+let g:slash = exists('&shellslash') ? '\' : '/'
+
 filetype plugin on
 filetype indent on
 
@@ -228,9 +231,6 @@ inoremap <C-s>` <C-o>b`<Esc>ea`
 inoremap <C-s>) <C-o>b(<Esc>ea)
 inoremap <C-s>] <C-o>b[<Esc>ea]
 inoremap <C-s>} <C-o>b{<Esc>ea}
-
-let g:vim_home = expand('<sfile>:p:h')
-let g:slash = exists('&shellslash') ? '\' : '/'
 
 " set leader and localleader keys, that works best for me
 let mapleader = " "
