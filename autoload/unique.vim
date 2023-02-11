@@ -12,12 +12,12 @@ export def GetUniqueName()
     endfor
 
     for w in range(1, winnr("$"))
-        var b = winbufnr(w)
-        setbufvar(b, "unique_name_prefix", "")
-        for b_ in buf_numbers
-            diff_str = FindUniqueNamePart(bufname(b), bufname(b_))
+        var bufnr_ref = winbufnr(w)
+        setbufvar(bufnr_ref, "unique_name_prefix", "")
+        for bufnr_2nd in buf_numbers
+            diff_str = FindUniqueNamePart(bufname(bufnr_ref), bufname(bufnr_2nd))
             if diff_str != ""
-                setbufvar(b, "unique_name_prefix", diff_str .. ":")
+                setbufvar(bufnr_ref, "unique_name_prefix", diff_str .. ":")
                 break
             endif
         endfor
