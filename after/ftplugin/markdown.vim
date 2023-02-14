@@ -104,10 +104,10 @@ if match(&cpoptions, '>') >= 0
   finish
 endif
 
-iabbrev <buffer> _link []()<Esc>2hi
-iabbrev <buffer> _date <C-r>=strftime("%Y-%m-%d")<CR>
-iabbrev <buffer> _py   ``` python<CR><CR>```<Up>
-iabbrev <buffer> _todo - [ ]
+iabbrev <buffer> xlink [TEXT](LINK)<C-o>B<C-o>2w
+iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
+iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
+iabbrev <buffer> xtodo - [ ]
 
 function! s:ToggleTodo()
   let stop_at_line = search('^\s*$','nbW')
