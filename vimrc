@@ -237,9 +237,6 @@ inoremap <C-s>} <C-o>b{<Esc>ea}
 let mapleader = " "
 let maplocalleader = "!"
 
-" quick note taking
-nnoremap <expr> <Leader>n ":drop "..strftime("~/Documents/Notes/note-%d-%m-%y.txt".."<CR>:setfiletype markdown<CR>")
-
 " toggle options
 nnoremap <Leader>os <cmd>setlocal invspell spell?<CR>
 nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
@@ -265,10 +262,6 @@ function! s:ToggleQuickfix()
     windo if &buftype== "quickfix" | let is_open = v:true | endif
     if is_open == v:false
         let qf = getqflist()
-        let max_len = 0
-        for e in qf
-            let max_len = len(e["text"]) > max_len ? len(e["text"]) : max_len
-        endfor
         if winnr("$") == 1 && &columns >= 140
             vert copen
             wincmd p
