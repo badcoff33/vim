@@ -83,6 +83,7 @@ execute "hi Question" s:Fg(s:green) s:Bg("bg")
 execute "hi QuickFixLine"  s:Fg(s:yellow) s:Bg("bg") s:Attr("bold")
 execute "hi Search" s:Fg(s:green) s:Bg(s:green_bg) s:Attr("none")
 execute 'hi StatusLine' s:Fg(s:fg4) s:Bg(s:blue_bghl) s:Attr('NONE')
+execute 'hi User1' s:Fg(s:bg1) s:Bg(s:yellow) s:Attr('NONE')
 execute 'hi StatusLineNC' s:Fg(s:fg4) s:Bg(s:bg2) s:Attr('NONE')
 execute "hi Terminal" s:Fg(s:blue) s:Bg(s:bg2)
 execute "hi Title" s:Fg(s:bluegreen)
@@ -101,7 +102,6 @@ highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Normal
 highlight! link TabLineFill Normal
 highlight! link TabLineSel StatusLine
-highlight! link User1 StatusLine
 highlight! link User2 StatusLine
 highlight! link User3 StatusLine
 highlight! link User4 StatusLine

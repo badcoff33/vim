@@ -25,11 +25,11 @@ enddef
 
 def g:GetSearchMode(): string
   if &ignorecase == true && &smartcase == true
-    return ',sc'
+    return 'sc'
   elseif &ignorecase == false
-    return ',cs'
+    return 'cs'
   else
-    return ',ic'
+    return 'ic'
   endif
 enddef
 
@@ -41,11 +41,13 @@ def g:BuildStatusline(): string
     endif
 
     sl = sl .. " %{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
-    sl = sl .. " %M%Y%w%{GetSearchMode()}"
+    sl = sl .. " %{GetSearchMode()}%M%Y%w "
     sl = sl .. "%="
     sl = sl .. "%{scope#GetScope()}\ %l:%c "
+
     return sl
 enddef
+
 set statusline=%!BuildStatusline()
 
 defcompile

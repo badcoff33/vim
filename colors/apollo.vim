@@ -25,17 +25,17 @@ let s:silver1  = "#A0A0A8"
 let s:silver2  = "#B8B8BE"
 let s:silver3  = "#D0D0D8"
 let s:silver4  = "#E0E0E8"
+let s:green_bg = "#136035"
 let s:green1   = "#02A358"
 let s:green2   = "#07C168"
 let s:green3   = "#07E070"
-let s:green4   = "#07F88F"
 let s:blue_bg  = "#134570"
 let s:blue1    = "#3068B8"
 let s:blue2    = "#4090D8"
 let s:blue3    = "#70B0F8"
 let s:red1     = "#B82042"
 let s:red2     = "#E84070"
-let s:gold    = "#E0EF50"
+let s:sun    = "#E0EF50"
 
 let Fg = { str -> empty(str) ? "" : "guifg=" .. str }
 let Bg = { str -> empty(str) ? "" : "guibg=" .. str }
@@ -63,12 +63,13 @@ execute "hi PmenuSel" Fg(s:white) Bg(s:green1) Attr("NONE")
 execute "hi PmenuThumb" Fg(s:blue2) Bg(s:bg4)
 execute "hi Question" Fg(s:green2) Bg("bg")
 execute "hi QuickFixLine" Fg(s:blue3) Bg(s:blue_bg) Attr("NONE")
-execute "hi Search" Fg(s:gold) Bg(s:blue_bg) Attr("bold")
+execute "hi Search" Fg(s:sun) Bg(s:blue_bg) Attr("bold")
 execute "hi StatusLine" Fg(s:black) Bg(s:blue3) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(s:silver4) Bg(s:bg3) Attr("NONE") Cterm("NONE")
 execute "hi Terminal" Fg(s:green3) Bg(s:black)
 execute "hi Title" Fg(s:green3)
-execute "hi User1" Fg(s:blue3) Bg(s:blue_bg)
+execute "hi User1" Fg(s:sun) Bg(s:blue_bg)
+execute "hi User2" Fg(s:black) Bg(s:sun)
 execute "hi VertSplit" Fg(s:bg2) Bg(s:bg2) Attr("NONE")
 execute "hi Visual" Fg(s:white) Bg(s:silver1)
 execute "hi WarningMsg" Fg(s:white) Bg(s:blue1)
@@ -84,7 +85,6 @@ highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLineSel StatusLine
 highlight! link TabLine StatusLineNC
 highlight! link TabLineFill StatusLineNC
-highlight! link User2 StatusLine
 highlight! link User3 StatusLine
 highlight! link User4 StatusLine
 highlight! link WildMenu IncSearch
@@ -119,7 +119,7 @@ execute "hi cParen" Fg(s:silver3)
 execute "hi cBlock" Fg(s:silver3)
 
 " filetype HTML
-execute "hi htmlH1" Fg(s:green4)  Attr("bold")
+execute "hi htmlH1" Fg(s:green3)  Attr("bold")
 execute "hi htmlH2" Fg(s:green3)  Attr("bold")
 execute "hi htmlH3" Fg(s:green2)  Attr("bold")
 

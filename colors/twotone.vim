@@ -52,6 +52,7 @@ execute "hi StatusLineNC" s:Fg(s:silver2) s:Bg(s:silver7) s:Attr("NONE")
 execute "hi StatusLineTerm" s:Fg(s:white) s:Bg(s:black) s:Attr("bold")
 execute "hi Terminal" s:Fg(s:black) s:Bg(s:silver8)
 execute "hi User1" s:Fg(s:white) s:Bg(s:blue)
+execute "hi User2" s:Fg(s:white) s:Bg(s:red)
 execute "hi VertSplit" s:Fg(s:silver9) s:Bg(s:silver9) s:Attr("NONE")
 execute "hi Visual" s:Fg(s:white) s:Bg(s:blue)
 
