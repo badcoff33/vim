@@ -1,5 +1,4 @@
 vim9script
-# Vim9 plugin files
 
 g:mode_translation = {
     "n": "NORM",
@@ -40,7 +39,7 @@ def g:BuildStatusline(): string
         sl =  "%1*%{GetMode()}%*"
     endif
 
-    sl = sl .. "%{GetSearchMode()}%M%Y%w "
+    sl = sl .. " %{GetSearchMode()}%M%Y%w "
     if v:versionlong >= 9001307
         sl = sl .. "%="
     endif

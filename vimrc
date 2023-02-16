@@ -233,7 +233,8 @@ inoremap <C-s>) <C-o>b(<Esc>ea)
 inoremap <C-s>] <C-o>b[<Esc>ea]
 inoremap <C-s>} <C-o>b{<Esc>ea}
 
-" set leader and localleader keys, that works best for me
+" Leader key mappings {{{
+
 let mapleader = " "
 let maplocalleader = "!"
 
@@ -251,10 +252,21 @@ vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 " commands
 nnoremap <Leader>E :edit <C-r>=$HOME .. g:slash .. 'vimfiles' .. g:slash<CR>
 nnoremap <Leader>e :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
-nnoremap <Leader>t <cmd>tab split<CR>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>
+
+" Leader-t space
+nnoremap <Leader>tt <Cmd>tab split<CR>
+nnoremap <Leader>tn <Cmd>tabnew<CR>
+nnoremap <Leader>tc <Cmd>tabclose<CR>
+
+" Leader-c space
+nnoremap <Leader>c- <Cmd>colder<CR>
+nnoremap <Leader>c+ <Cmd>cnewer<CR>
+nnoremap <Leader>cn <Cmd>cnext<CR>
+nnoremap <Leader>cp <Cmd>cprevious<CR>
+nnoremap <Leader>cc <Cmd>cfirst<CR>
 
 " Toggle the quickfix window
 function! s:ToggleQuickfix()
@@ -262,14 +274,8 @@ function! s:ToggleQuickfix()
     windo if &buftype== "quickfix" | let is_open = v:true | endif
     if is_open == v:false
         let qf = getqflist()
-        if winnr("$") == 1 && &columns >= 140
-            vert copen
-            wincmd p
-            wincmd =
-        else
-            execute "botright" "copen" min([&lines/3, max([1, len(qf)])])
-            wincmd p
-        endif
+        execute "botright" "copen" min([&lines/3, max([1, len(qf)])])
+        wincmd p
     else
         if (winnr("$") == 1) && (&buftype=="quickfix")
             buffer #
@@ -285,6 +291,8 @@ nnoremap <Leader>G <cmd>clast<CR>
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
 nnoremap <expr> <Leader>g ':silent vimgrep /'..expand("<cword>")..'/ '..expand("%:h")..g:slash..LsFilter(&ft)
+
+" }}}
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
