@@ -34,9 +34,9 @@ enddef
 
 def g:RgGlobSwitch(): string
     if has("unix")
-        return " -g"
+        return " -g "
     else
-        return " --iglob"
+        return " --iglob "
     endif
 enddef
 
