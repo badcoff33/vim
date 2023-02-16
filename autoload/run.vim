@@ -58,6 +58,11 @@ export def CloseCb(ch: channel)
 enddef
 
 export def HiddenErrorCb(ch: channel,  msg: string)
+    var ch_nr = split(string(ch), " ")[1]
+    var d = g:run_dict[ch_nr]
+
+    popup_close(d.winid)
+    g:run_dict = remove(g:run_dict, ch_nr)
     echohl ErrorMsg
     echo "error reported by channel" ch_info(ch)["id"] "-->" msg
     echohl None
