@@ -58,40 +58,41 @@ let s:Attr = {str -> empty(str) ? "":"gui=" .. str}
 let s:Special = {str -> empty(str) ? "":"guisp=" .. str}
 
 " Basics
+
 execute "hi Bold" s:Fg(s:fg2)  s:Attr("bold")
+execute "hi CurSearch" s:Fg(s:green) s:Bg(s:green_bg) s:Attr("inverse")
 execute "hi Cursor" s:Fg(s:black) s:Bg(s:white)
 execute "hi CursorLine"  s:Bg(s:hl_line)
 execute "hi CursorLineNr" s:Fg(s:bluegreen) s:Bg(s:bg3) s:Attr("bold")
-execute "hi CurSearch" s:Fg(s:green) s:Bg(s:green_bg) s:Attr("inverse")
 execute "hi ErrorMsg" s:Fg(s:orange) s:Bg("bg")
 execute "hi IncSearch" s:Fg(s:green_bg) s:Bg(s:yellow) s:Attr("bold")
-execute "hi NONE" s:Fg(s:fg2)  s:Attr("NONE")
 execute "hi LineNr" s:Fg(s:lightgreen) s:Bg(s:bg2)
 execute "hi LineNrAbove" s:Fg(s:bg4) s:Bg("bg") s:Attr("bold")
 execute "hi LineNrBelow" s:Fg(s:bg4) s:Bg("bg") s:Attr("bold")
 execute "hi MatchParen" s:Fg(s:bluegreen) s:Bg("bg") s:Attr("underline")
 execute "hi ModeMsg" s:Fg(s:fg2) s:Bg("bg")
+execute "hi NONE" s:Fg(s:fg2)  s:Attr("NONE")
 execute "hi NonText" s:Fg(s:magenta) s:Bg(s:bg1)
 execute "hi Normal" s:Fg(s:fg4) s:Bg(s:bg1) s:Attr("NONE")
 execute "hi NormalFloat" s:Fg(s:yellow) s:Bg(s:green_bg) s:Attr("NONE")
 execute "hi NormalNC" s:Fg(s:fg4) s:Bg(s:bg0) s:Attr("NONE")
+execute "hi Question" s:Fg(s:green) s:Bg("bg")
+execute "hi QuickFixLine"  s:Fg(s:yellow) s:Bg("bg") s:Attr("bold")
+execute "hi Search" s:Fg(s:green) s:Bg(s:green_bg) s:Attr("none")
+execute "hi Terminal" s:Fg(s:blue) s:Bg(s:bg2)
+execute "hi Title" s:Fg(s:bluegreen)
+execute "hi VertSplit" s:Fg(s:bg3) s:Bg(s:bg3) s:Attr("NONE")
+execute "hi WarningMsg" s:Fg(s:magenta) s:Bg("bg")
+execute "hi qfFileName" s:Fg(s:blue)
+execute "hi qfSeparator" s:Fg("fg")
 execute 'hi Pmenu' s:Fg(s:white) s:Bg(s:blue_bg) s:Attr('NONE')
 execute 'hi PmenuSbar' s:Fg(s:fg3) s:Bg(s:bg3)
 execute 'hi PmenuSel' s:Fg(s:white) s:Bg(s:magenta) s:Attr('NONE')
 execute 'hi PmenuThumb' s:Fg(s:blue) s:Bg(s:bg4)
-execute "hi Question" s:Fg(s:green) s:Bg("bg")
-execute "hi QuickFixLine"  s:Fg(s:yellow) s:Bg("bg") s:Attr("bold")
-execute "hi Search" s:Fg(s:green) s:Bg(s:green_bg) s:Attr("none")
 execute 'hi StatusLine' s:Fg(s:fg4) s:Bg(s:blue_bghl) s:Attr('NONE')
-execute 'hi User1' s:Fg(s:bg1) s:Bg(s:yellow) s:Attr('NONE')
 execute 'hi StatusLineNC' s:Fg(s:fg4) s:Bg(s:bg2) s:Attr('NONE')
-execute "hi Terminal" s:Fg(s:blue) s:Bg(s:bg2)
-execute "hi Title" s:Fg(s:bluegreen)
-execute "hi VertSplit" s:Fg(s:bg1) s:Bg(s:bg1) s:Attr("NONE")
+execute 'hi User1' s:Fg(s:blue) s:Bg(s:blue_bghl) s:Attr('NONE')
 execute 'hi Visual' s:Fg(s:blue_bg) s:Bg(s:blue)
-execute "hi WarningMsg" s:Fg(s:magenta) s:Bg("bg")
-execute "hi qfFileName" s:Fg(s:blue)
-execute "hi qfSeparator" s:Fg("fg")
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn Normal
@@ -153,12 +154,7 @@ execute "hi rstEmphasis" s:Fg(s:green)
 execute "hi rstStrongEmphasis" s:Fg(s:green)  s:Attr("bold")
 
 " Diffs
-execute "hi diffAdded" s:Fg(s:green) s:Bg(s:bg3) s:Attr("bold")
-execute "hi diffChanged" s:Fg(s:white) s:Bg(s:bg4)
-execute "hi diffRemoved" s:Fg(s:red) s:Bg(s:red)
-
-" Diff Mode
 execute "hi DiffText" s:Fg(s:blue) s:Bg(s:bg4) s:Attr("bold")
-hi! link DiffAdd diffAdded
-hi! link DiffChange diffChange
-hi! link DiffDelete diffRemoved
+execute "hi DiffAdd" s:Fg(s:green) s:Bg(s:bg2) s:Attr("bold")
+execute "hi DiffChange" s:Fg(s:blue) s:Bg(s:bg2)
+execute "hi DiffDelete" s:Fg(s:red) s:Bg(s:bg2)

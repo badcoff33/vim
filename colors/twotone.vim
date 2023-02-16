@@ -125,5 +125,5 @@ execute "hi rstStrongEmphasis" s:Fg(s:silver2)  s:Attr("bold")
 
 execute "hi DiffChange" s:Fg(s:white) s:Bg(s:blue)
 execute "hi DiffText" s:Fg(s:white) s:Bg(s:blue)
-execute "hi DiffDelete" s:Fg(s:red) s:Bg(s:red)
+execute "hi DiffDelete" s:Fg(s:white) s:Bg(s:red)
 execute "hi DiffAdd" s:Fg(s:silver3) s:Bg(s:silver8)
