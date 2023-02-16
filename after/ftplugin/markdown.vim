@@ -23,59 +23,8 @@ nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 " some math calculation
 nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
 
-" Preview in HTML
-
-let b:markdown_css_file = g:vim_home .. "\\templates\\simple.css"
-if !filereadable(b:markdown_css_file)
-  let b:markdown_css_file =  ""
-else
-  let b:markdown_css_file = " --css=" .. b:markdown_css_file
-endif
-
-let b:markdown_template_file = g:vim_home .. "\\templates\\template.html"
-if !filereadable(b:markdown_template_file)
- let b:markdown_template_file = ""
-else
-  let b:markdown_template_file = " --template=" .. b:markdown_template_file
-endif
-
-let b:markdown_command = "pandoc -f gfm -t html5 --toc --toc-depth=3"
-      \ .. b:markdown_css_file
-      \ .. b:markdown_template_file
-      \ .." --metadata title=\""..expand("%:t:r").."\""
-      \ .." -o "..getenv("TEMP")..g:slash..expand("%:t")..".html"
-      \ .." "..getenv("TEMP")..g:slash.."_"..expand("%:t")
-
-command! -buffer OpenMarkdownPreview call <SID>OpenHTML()
-command! -buffer UpdateMarkdownPreview call <SID>MakeHTML()
-
-autocmd InsertLeave <buffer> call <SID>UpdateShadowFile()
-autocmd TextChanged <buffer> call <SID>UpdateShadowFile()
-autocmd InsertLeave <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
-autocmd TextChanged <buffer> call timer_start(2000, expand("<SID>").."MakeHTML")
-
-function! s:UpdateShadowFile()
-  silent exe "write!" getenv("TEMP")..g:slash.."_"..expand("%:t")
-  silent exe "bwipeout!" getenv("TEMP")..g:slash.."_"..expand("%:t")
-endfunction
-
-function! s:OpenHTML()
-    exe "terminal ++close ++hidden cmd /C start" getenv("TEMP")..g:slash..expand("%:t")..".html"
-endfunction
-
-function! s:MakeHTML(...)
-  if exists("b:markdown_command")
-    call run#Run(#{
-          \ cmd: b:markdown_command,
-          \ hidden: v:true,
-          \ nowrite: v:true
-          \ })
-  endif
-endfunction
-
 " Plugin EasyAlign tables
 if exists(":EasyAlign")
-  nnoremap <buffer> <LocalLeader><Tab> vap:EasyAlign *\|<CR>`.
   vnoremap <buffer> <Tab> :EasyAlign *\|<CR>`.
 endif
 
@@ -124,3 +73,48 @@ function! s:ToggleTodo()
   endif
 endfunction
 
+" Preview in HTML {{{
+
+let b:markdown_css_file = g:vim_home .. "\\templates\\simple.css"
+if !filereadable(b:markdown_css_file)
+  let b:markdown_css_file =  ""
+else
+  let b:markdown_css_file = " --css=" .. b:markdown_css_file
+endif
+
+let b:markdown_template_file = g:vim_home .. "\\templates\\template.html"
+if !filereadable(b:markdown_template_file)
+ let b:markdown_template_file = ""
+else
+  let b:markdown_template_file = " --template=" .. b:markdown_template_file
+endif
+
+let b:markdown_command = "pandoc -f gfm -t html5 --toc --toc-depth=3"
+      \ .. b:markdown_css_file
+      \ .. b:markdown_template_file
+      \ .." --metadata title=\""..expand("%:t:r").."\""
+      \ .." -o "..getenv("TEMP")..g:slash..expand("%:t")..".html"
+      \ .." "..getenv("TEMP")..g:slash.."_"..expand("%:t")
+
+function! s:OpenHTML()
+    exe "terminal ++close ++hidden cmd /C start" getenv("TEMP")..g:slash..expand("%:t")..".html"
+endfunction
+
+function! s:MakeHTML(...)
+    if exists("b:markdown_command")
+        silent exe "write!" getenv("TEMP")..g:slash.."_"..expand("%:t")
+        silent exe "bwipeout!" getenv("TEMP")..g:slash.."_"..expand("%:t")
+        call run#Run(#{
+                    \ cmd: b:markdown_command,
+                    \ hidden: v:true,
+                    \ nowrite: v:true
+                    \ })
+    endif
+endfunction
+
+command! -buffer MarkdownOpenPreview call <SID>OpenHTML()
+command! -buffer MarkdownUpdatePreview call <SID>MakeHTML()
+
+autocmd FocusLost <buffer> call s:MakeHTML()
+
+" }}}

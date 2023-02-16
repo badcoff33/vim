@@ -6,6 +6,7 @@ setlocal textwidth=0
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal nocindent
+setlocal foldmethod=marker
 
 nnoremap <buffer> K :help <C-r><C-w><CR>
 nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
@@ -17,7 +18,7 @@ endfor
 
 if empty(matchstr(expand("%:p:h"), "color"))
     " source Vim file
-    nnoremap <special> <buffer> <CR> :w<bar>messages clear<bar>source%<CR>
+    nnoremap <buffer> <CR> :w<CR>:messages clear<CR>:source%<CR>
 else
     " source Vim color theme
     nnoremap <special> <buffer> <CR> :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
