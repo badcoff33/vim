@@ -262,11 +262,13 @@ nnoremap <Leader>tn <Cmd>tabnew<CR>
 nnoremap <Leader>tc <Cmd>tabclose<CR>
 
 " Leader-c space
-nnoremap <Leader>c- <Cmd>colder<CR>
-nnoremap <Leader>c+ <Cmd>cnewer<CR>
+nnoremap <silent> <Leader>c- <Cmd>colder<CR>
+nnoremap <silent> <Leader>c+ <Cmd>cnewer<CR>
 nnoremap <Leader>cn <Cmd>cnext<CR>
 nnoremap <Leader>cp <Cmd>cprevious<CR>
-nnoremap <Leader>cc <Cmd>cfirst<CR>
+nnoremap <Leader>cc <Cmd>cc<CR>
+nnoremap <Leader>cf <Cmd>cfirst<CR>
+nnoremap <Leader>cl <Cmd>clast<CR>
 
 " Toggle the quickfix window
 function! s:ToggleQuickfix()

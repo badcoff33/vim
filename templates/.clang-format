@@ -1,0 +1,17 @@
+# Keep ordered!
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: false
+AlignConsecutiveMacros: true
+AlignEscapedNewlines: Left
+AllowShortBlocksOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: false
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Allman
+ColumnLimit: 0
+FixNamespaceComments: false
+IndentCaseLabels: true
+IndentWidth: 4
+NamespaceIndentation: None
+PointerAlignment: Middle
+SortIncludes: false
+UseTab: Never
