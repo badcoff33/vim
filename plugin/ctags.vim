@@ -28,6 +28,9 @@ def g:CtagsTriggerUpdate()
     endif
 
     ctags_job = run.Run({cmd: 'ctags ' .. ctags_options, hidden: true})
+    if job_status(ctags_job) != "run"
+        echoerr "check ctags options"
+    endif
 enddef
 
 augroup GroupeCtags
@@ -35,4 +38,6 @@ augroup GroupeCtags
   autocmd BufWritePost *.c,*.h call CtagsTriggerUpdate()
   autocmd BufWritePost *.cpp,*.hpp call CtagsTriggerUpdate()
 augroup END
+
+defcompile
 
