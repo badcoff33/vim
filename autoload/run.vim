@@ -23,16 +23,16 @@ def g:WinoptsDone(): dict<any>
     }
 enddef
 
-def RemoveChannelFromDict(ch: string): list<any>
+def RemoveChannelFromDict(ch: string)
     var r: list<any>
 
     for e in g:run_dict
-        if e.channel == ch
+        if e.channel != ch
            add(r, e)
         endif
     endfor
 
-    return r
+    g:run_dict = r
 enddef
 
 export def CloseCb(ch: channel)
@@ -43,6 +43,8 @@ export def CloseCb(ch: channel)
 
     for d in g:run_dict
         if d.channel == ch_nr
+
+            timer_stop(d.timer)
             g:run_2_tid = timer_start(500, (_) => {
                 popup_close(d.winid)
                 RemoveChannelFromDict(d.channel)
@@ -83,6 +85,7 @@ export def HiddenErrorCb(ch: channel,  msg: string)
     var ch_nr = split(string(ch), " ")[1]
     for d in g:run_dict
         if d.channel == ch_nr
+            timer_stop(d.timer)
             popup_close(d.winid)
             echohl ErrorMsg
             echo "error reported by channel" ch_info(ch)["id"] "-->" msg
@@ -104,6 +107,29 @@ def ConditionalWriteAll(dict: dict<any>)
         ls +
     finally
     endtry
+enddef
+
+def RunTimerCb(tid: number)
+    var max_width = 30
+    var popup_text: string
+
+    for d in g:run_dict
+        if d.timer == tid
+            if len(d.cmd) > max_width
+                popup_text = "Running " .. d.cmd[0 : max_width]
+                    .. "..."
+                    .. (localtime() - d.started)
+                    .. "sec"
+            else
+                popup_text = "Running " .. d.cmd
+                    .. " "
+                    .. (localtime() - d.started)
+                    .. "sec"
+            endif
+            popup_settext(d.winid, popup_text)
+            break
+        endif
+    endfor
 enddef
 
 export def Run(dict: dict<any>): job
@@ -167,8 +193,7 @@ export def Run(dict: dict<any>): job
         else
             popup_text = dict.cmd
         endif
-        v_winid = popup_create("Run " .. popup_text, g:Winopts())
-        g:run_winid = v_winid # populate var for autocmd
+        v_winid = popup_create("Started " .. popup_text, g:Winopts())
 
         add(g:run_dict, {
             channel: v_channel,
@@ -176,7 +201,9 @@ export def Run(dict: dict<any>): job
             cmd: dict.cmd,
             regexp: v_regexp,
             bufname: v_bufname,
-            bufnr: v_bufnr
+            bufnr: v_bufnr,
+            timer: timer_start(1000, RunTimerCb, {repeat: -1}),
+            started: localtime()
         })
     endif
 
@@ -185,7 +212,7 @@ enddef
 
 augroup GroupRun
     autocmd!
-    autocmd VimResized * call popup_setoptions(g:run_dict.winid, g:Winopts())
+    # autocmd VimResized * call popup_setoptions(g:run_dict.winid, g:Winopts())
 augroup END
 
 # Uncomment when testing
