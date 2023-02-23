@@ -125,10 +125,17 @@ endif
 command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
 " Living with QWERTZ keyboards
-execute "set langmap+=\<Char-196>}"
 execute "set langmap+=\<Char-246>["
 execute "set langmap+=\<Char-228>]"
 execute "set langmap+=\<Char-214>{"
+execute "set langmap+=\<Char-196>}"
+execute "set langmap+=\<Char-252>/"
+execute "set langmap+=\<Char-220>?"
+
+" Avoid other keyboard/terminal problems
+nnoremap <C-CR> g<C-]>
+inoremap <C-CR> <C-]>
+inoremap <C-x><C-CR> <C-x><C-]>
 
 " Switching modes
 inoremap <k0> <Esc>
@@ -186,12 +193,18 @@ vnoremap <A-y> :move '>+1<CR>==gv=gv
 nnoremap <A-o> :bprevious<CR>
 nnoremap <A-i> :bnext<CR>
 
-" Command line abbreviations
+" Abbreviations {{{
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 cabbrev <expr> home $HOME .. g:slash .. 'vimfiles' .. g:slash
 cabbrev <expr> here (FilePath() == ".") ? "." : FilePath()
+
+iabbrev () ( )<Left><Left>
+iabbrev {} { }<Left><Left>
+
+" }}}
+
 
 let FilePath = { -> expand("%:h") == "" ? "" : expand("%:h") .. g:slash }
 cnoremap <expr> <A-.> (FilePath() == ".") ? "." : FilePath()
@@ -255,6 +268,7 @@ nnoremap <Leader>e :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>
+nnoremap <Leader>. :tjump /
 
 " Leader-t space
 nnoremap <Leader>tt <Cmd>tab split<CR>
@@ -302,7 +316,8 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 
 augroup GroupVimrc " {{{
     autocmd!
-    autocmd WinEnter * checktime " Reload changed buffers. :checktime relies on 'autoread'.
+    autocmd InsertEnter * checktime
+    autocmd BufWinEnter * checktime
     autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
     autocmd FocusLost * try | silent wall | catch /.*/ | endtry
     autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
@@ -310,13 +325,6 @@ augroup END " }}}
 
 let g:term = &term
 syntax on
-
-" Vim9: Workaround for gvim.exe since several keys didn't work on German keyboards {{{
-nmap <C-+> g<C-]>
-cmap <C-+> <C-]>
-imap <C-Char-252> <C-[>
-cmap <C-Char-252> <C-[>
-" }}}
 
 " vim:foldmethod=marker:foldenable:
 

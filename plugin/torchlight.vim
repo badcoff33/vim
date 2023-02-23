@@ -1,7 +1,7 @@
 vim9script
 import autoload "torchlight.vim"
 
-augroup GroupTL
+augroup GroupTorchlight
     autocmd!
     autocmd TextChanged * torchlight.TorchlightChanged()
     autocmd QuickFixCmdPre make torchlight.TorchlightClearAll()

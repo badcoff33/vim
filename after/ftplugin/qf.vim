@@ -1,8 +1,8 @@
 " Vim ftplugin file
 
 setlocal nowrap
-setlocal nonumber 
-setlocal norelativenumber 
+setlocal nonumber
+setlocal norelativenumber
 setlocal scrolloff=0
 
 "prepare cleanup
@@ -21,4 +21,3 @@ call histdel("search", -1)
 let b:undo_ftplugin = "setlocal number< relativenumber< wrap< scrolloff<"
 
 nnoremap <buffer> <Esc> :cclose<CR>
-
