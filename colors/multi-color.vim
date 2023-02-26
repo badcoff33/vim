@@ -29,7 +29,7 @@ let Cterm = { str -> empty(str) ? "" : "cterm=" .. str }
 " Basics
 execute "hi Bold" Fg(s:gray[2])  Attr("bold")
 execute "hi Cursor" Fg(s:black) Bg(s:white)
-execute "hi CursorLine"  Bg(s:gray[0]) Cterm("NONE")
+execute "hi CursorLine"  Bg(s:gray[9]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(s:green[3]) Bg(s:gray[0]) Attr("bold")
 execute "hi ErrorMsg" Fg(s:red[3]) Bg(s:red[8])
 execute "hi IncSearch" Fg(s:black) Bg(s:green[2]) Attr("NONE") Cterm("NONE")
@@ -39,7 +39,7 @@ execute "hi LineNrAbove" Fg(s:gray[0]) Bg("bg") Attr("bold")
 execute "hi LineNrBelow" Fg(s:gray[0]) Bg("bg") Attr("bold")
 execute "hi MatchParen" Fg(s:green[3]) Bg("bg") Attr("underline")
 execute "hi ModeMsg" Fg(s:gray[2]) Bg("bg")
-execute "hi NonText" Fg(s:blue[1]) Bg(s:gray[0])
+execute "hi NonText" Fg(s:blue[1]) Bg(s:gray[9])
 execute "hi Normal" Fg(s:blue[1]) Bg(s:black) Attr("NONE")
 execute "hi Pmenu" Fg(s:purple[3]) Bg(s:purple[7]) Attr("NONE")
 execute "hi PmenuSbar" Fg(s:gray[3]) Bg(s:gray[8])
@@ -118,10 +118,10 @@ execute "hi rstEmphasis" Fg(s:green[2])
 execute "hi rstStrongEmphasis" Fg(s:green[2])  Attr("bold")
 
 " Diffs
-execute "hi DiffChange" Fg(s:white) Bg(s:gray[0])
-execute "hi DiffText" Fg(s:blue[2]) Bg(s:gray[0]) Attr("bold")
-execute "hi DiffDelete" Fg(s:red[1]) Bg(s:red[1])
-execute "hi DiffAdd" Fg(s:green[2]) Bg(s:gray[0]) Attr("bold")
+execute "hi DiffChange" Fg(s:white) Bg(s:gray[9])
+execute "hi DiffText" Fg(s:blue[2]) Bg(s:gray[9]) Attr("bold")
+execute "hi DiffDelete" Fg(s:red[1]) Bg(s:red[9])
+execute "hi DiffAdd" Fg(s:green[2]) Bg(s:gray[9]) Attr("bold")
 
 unlet Fg
 unlet Bg
