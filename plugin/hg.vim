@@ -33,7 +33,9 @@ enddef
 
 command! -complete=custom,CompleteHg -nargs=+ Hg run.Run({cmd: 'hg <args>', name: "HG-OUTPUT"})
 
-nnoremap <Leader>v :<C-u>Hg<Space>
+nnoremap <Leader>vv :<C-u>Hg<Space>
+nnoremap <Leader>vs <Cmd>Hg status<CR>
+nnoremap <Leader>vl <Cmd>Hg sl<CR>
 
 # Uncomment when testing
 defcompile

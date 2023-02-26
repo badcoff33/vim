@@ -13,6 +13,9 @@ export def TorchlightClearAll()
     endfor
 enddef
 
+# Clear properties on current line
+# This might work for you
+#       `autocmd TextChanged * torchlight.TorchlightChanged()`
 export def TorchlightChanged()
     prop_clear(line("."))
 enddef

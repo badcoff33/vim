@@ -139,8 +139,6 @@ inoremap <C-x><C-CR> <C-x><C-]>
 
 " Switching modes
 inoremap <k0> <Esc>
-imap <Char-252> <Esc>
-nmap <Char-252> :
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
@@ -205,10 +203,9 @@ iabbrev {} { }<Left><Left>
 
 " }}}
 
-
 let FilePath = { -> expand("%:h") == "" ? "" : expand("%:h") .. g:slash }
-cnoremap <expr> <A-.> (FilePath() == ".") ? "." : FilePath()
-cnoremap <expr> <A-,> $HOME .. g:slash .. 'vimfiles' .. g:slash
+cnoremap <expr> <C-r>. (FilePath() == ".") ? "." : FilePath()
+cnoremap <expr> <C-r>, $HOME .. g:slash .. 'vimfiles' .. g:slash
 cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
 
@@ -268,7 +265,6 @@ nnoremap <Leader>e :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>
-nnoremap <Leader>. :tjump /
 
 " Leader-t space
 nnoremap <Leader>tt <Cmd>tab split<CR>

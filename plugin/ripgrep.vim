@@ -44,8 +44,8 @@ set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 command! -complete=file -nargs=* RgFiles run.Run({cmd: "rg --files" .. g:RgGlobSwitch() .. join(split(<q-args>, " "), g:RgGlobSwitch() ), name: "RG-OUTPUT"})
-command! -complete=file -nargs=* Rg      run.Run({cmd: 'rg --vimgrep ' .. ' <args> ' .. join(g:rg_paths, " "), regexp: &grepformat})
-command! -complete=file -nargs=* RgNoDir run.Run({cmd: 'rg --vimgrep ' .. ' <args> ', regexp: &grepformat})
+command! -complete=file -nargs=* Rg      run.Run({cmd: 'rg --vimgrep ' .. ' <args> ' .. join(g:rg_paths, " "), regexp: &grepformat, no_popup: true})
+command! -complete=file -nargs=* RgNoDir run.Run({cmd: 'rg --vimgrep ' .. ' <args> ', regexp: &grepformat, no_popup: true})
 
 nnoremap <Leader>F :RgFiles<C-r>=g:RgExcludes()<CR><C-r>=g:RgGlobSwitch()<CR> **<Left>
 nnoremap <Leader>R :Rg <C-r>=g:RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR>

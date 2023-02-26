@@ -44,9 +44,13 @@ export def CloseCb(ch: channel)
     for d in g:run_dict
         if d.channel == ch_nr
 
-            timer_stop(d.timer)
+            if has_key(d, "timer")
+                timer_stop(d.timer)
+            endif
             g:run_2_tid = timer_start(500, (_) => {
-                popup_close(d.winid)
+                if has_key(d, "winid")
+                    popup_close(d.winid)
+                endif
                 RemoveChannelFromDict(d.channel)
             }, {repeat: 1})
 
@@ -86,7 +90,9 @@ export def HiddenErrorCb(ch: channel,  msg: string)
     for d in g:run_dict
         if d.channel == ch_nr
             timer_stop(d.timer)
-            popup_close(d.winid)
+            if has_key(d, "winid")
+                popup_close(d.winid)
+            endif
             echohl ErrorMsg
             echo "error reported by channel" ch_info(ch)["id"] "-->" msg
             echohl None
@@ -110,21 +116,23 @@ def ConditionalWriteAll(dict: dict<any>)
 enddef
 
 def RunTimerCb(tid: number)
-    var max_width = 30
+    var max_width = 20
     var popup_text: string
 
     for d in g:run_dict
-        if d.timer == tid
+        if has_key(d, "timer") && d.timer == tid
             if len(d.cmd) > max_width
-                popup_text = "Running " .. d.cmd[0 : max_width]
-                    .. "..."
+                popup_text = job_status(d.job) .. " "
                     .. (localtime() - d.started)
-                    .. "sec"
+                    .. "sec ("
+                    .. d.cmd[0 : max_width]
+                    .. "...)"
             else
-                popup_text = "Running " .. d.cmd
-                    .. " "
+                popup_text = job_status(d.job) .. " "
                     .. (localtime() - d.started)
-                    .. "sec"
+                    .. "sec ("
+                    .. d.cmd
+                    .. ")"
             endif
             popup_settext(d.winid, popup_text)
             break
@@ -133,11 +141,12 @@ def RunTimerCb(tid: number)
 enddef
 
 export def Run(dict: dict<any>): job
-    var job: job
+    var v_job: job
     var v_bufnr: number
     var v_winid: number
     var v_bufname: string
     var v_regexp: string
+    var save_winid = win_getid(winnr())
 
     var job_opts = {}
 
@@ -156,7 +165,7 @@ export def Run(dict: dict<any>): job
     if has_key(dict, "hidden") && (dict.hidden == true)
         job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
         job_opts.err_cb = function("run#HiddenErrorCb")
-        job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
+        v_job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
     else
         if v_bufname == ""
             v_bufnr = bufadd(dict.cmd)
@@ -171,7 +180,7 @@ export def Run(dict: dict<any>): job
                 v_bufnr = bufadd(v_bufname)
                 setbufvar(v_bufnr, "&buftype", "nofile")
             endif
-            execute "buffer" v_bufnr
+
             nnoremap <buffer> <Esc> <Cmd>bw!<CR>
             appendbufline(v_bufnr, "$", "-----" .. strftime("%X") .. "------" .. dict.cmd .. "-----")
             normal G
@@ -184,30 +193,52 @@ export def Run(dict: dict<any>): job
         job_opts.out_io = "buffer"
         job_opts.close_cb = function("run#CloseCb")
 
-        job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
-        var v_channel = split(string(job_getchannel(job)), " ")[1]
+        v_job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
+        var v_channel = split(string(job_getchannel(v_job)), " ")[1]
         var popup_text: string
 
-        if len(dict.cmd) > 40
-            popup_text = dict.cmd[0 : 40] .. "..."
-        else
-            popup_text = dict.cmd
-        endif
-        v_winid = popup_create("Started " .. popup_text, g:Winopts())
 
-        add(g:run_dict, {
-            channel: v_channel,
-            winid: v_winid,
-            cmd: dict.cmd,
-            regexp: v_regexp,
-            bufname: v_bufname,
-            bufnr: v_bufnr,
-            timer: timer_start(1000, RunTimerCb, {repeat: -1}),
-            started: localtime()
-        })
+        if !has_key(dict, "no_popup") || (dict.no_popup == false)
+            # split
+            # execute "buffer" v_bufnr
+            # wincmd J
+
+            if len(dict.cmd) > 40
+                popup_text = "Started (" .. dict.cmd[0 : 40] .. "...)"
+            else
+                popup_text = "Started (" .. dict.cmd .. ")"
+            endif
+            v_winid = popup_create(popup_text, g:Winopts())
+            execute "buffer" v_bufnr
+            add(g:run_dict, {
+                winid: v_winid,
+                timer: timer_start(1000, RunTimerCb, {repeat: -1}),
+                job: v_job,
+                channel: v_channel,
+                cmd: dict.cmd,
+                regexp: v_regexp,
+                bufname: v_bufname,
+                bufnr: v_bufnr,
+                started: localtime()
+            })
+        else
+            add(g:run_dict, {
+                job: v_job,
+                channel: v_channel,
+                cmd: dict.cmd,
+                regexp: v_regexp,
+                bufname: v_bufname,
+                bufnr: v_bufnr,
+                started: localtime()
+            })
+        endif
+
+
     endif
 
-    return job
+    win_gotoid(save_winid)
+
+    return v_job
 enddef
 
 augroup GroupRun

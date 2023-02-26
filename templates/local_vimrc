@@ -19,6 +19,10 @@ set tagcase=match
 compiler gcc
 set makeprg=make
 
-" Markdown, please
-autocmd BufRead *.txt setfiletype markdown
-
+augroup GroupLocal
+    au!
+    " Markdown, please
+    au BufRead *.txt setfiletype markdown
+    " Remember last state of work
+    autocmd VimLeave * mksession! .session
+augroup END
