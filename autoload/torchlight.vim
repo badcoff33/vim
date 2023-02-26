@@ -3,8 +3,6 @@ vim9script
 export def TorchlightClearAll()
     var qf_items = getqflist({ "nr": "$", "all": 0 }).items
 
-    prop_clear(1, line("$"))
-
     for item in qf_items
         if !empty(prop_type_get("Warning", {bufnr: item.bufnr}))
             prop_type_delete("Warning", {bufnr: item.bufnr})
@@ -22,8 +20,6 @@ enddef
 # Run as autocommand after entering buffer
 export def TorchlightUpdate()
     var qf_items = getqflist({ "nr": "$", "all": 0 }).items
-
-    prop_clear(1, line("$"))
 
     for item in qf_items
         if item.type ==? "w"

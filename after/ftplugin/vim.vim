@@ -16,16 +16,16 @@ for p in split(&rtp, ",")
     execute "setlocal path+=" .. escape(p .. g:slash, " \\") .. "**"
 endfor
 
+" source current visual region
+vnoremap <buffer> <CR> :source<CR>
+
 if empty(matchstr(expand("%:p:h"), "color"))
     " source Vim file
-    nnoremap <buffer> <CR> :w<CR>:messages clear<CR>:source%<CR>
+    nnoremap <special> <buffer> <CR> :w<bar>source%<CR>
 else
     " source Vim color theme
     nnoremap <special> <buffer> <CR> :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
 endif
-
-" source current visual region
-vnoremap <buffer> <CR> :source<CR>
 
 iabbrev <buffer> xfun function!<CR>endfunction<C-f><Up><End>
 iabbrev <buffer> xdef def<CR>enddef<Up><End>
