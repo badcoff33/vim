@@ -31,7 +31,9 @@ def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): string
     return matching_keys
 enddef
 
-command! -complete=custom,CompleteHg -nargs=+ Hg run.Run({cmd: 'hg <args>', name: "HG-OUTPUT"})
+command! -bar -complete=custom,CompleteHg -nargs=+ Hg terminal ++open hg <args>
+
+autocmd WinLeave *hg* if (&buftype == "terminal") | bwipeout | endif
 
 nnoremap <Leader>vv :<C-u>Hg<Space>
 nnoremap <Leader>vs <Cmd>Hg status<CR>
