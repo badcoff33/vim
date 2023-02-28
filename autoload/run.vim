@@ -142,13 +142,6 @@ enddef
 
 export def Run(dict: dict<any>): job
     var v_job: job
-    var v_bufnr: number
-    var v_winid: number
-    var v_bufname: string
-    var v_regexp: string
-    var save_winid = win_getid(winnr())
-
-    var job_opts = {}
 
     if !has_key(dict, 'cmd') && (dict.cmd != "")
         echoerr "run.vim: key 'cmd' required"
@@ -157,86 +150,100 @@ export def Run(dict: dict<any>): job
 
     ConditionalWriteAll(dict)
 
-    v_bufname = has_key(dict, "name") ? dict.name : ""
-    v_regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
-
     silent doautocmd QuickFixCmdPre make
 
     if has_key(dict, "hidden") && (dict.hidden == true)
-        job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
-        job_opts.err_cb = function("run#HiddenErrorCb")
-        v_job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
+        v_job = Run0(dict)
     else
-        if v_bufname == ""
-            v_bufnr = bufadd(dict.cmd)
-            setbufvar(v_bufnr, "&buftype", "nofile")
-        else
-            if bufexists(v_bufname)
-                v_bufnr = bufnr(v_bufname)
-                setbufvar(v_bufnr, "&buftype", "nofile")
-                setbufvar(v_bufnr, "&modified", 0)
-                setbufvar(v_bufnr, "&modifiable", 1)
-            else
-                v_bufnr = bufadd(v_bufname)
-                setbufvar(v_bufnr, "&buftype", "nofile")
-            endif
-
-            nnoremap <buffer> <Esc> <Cmd>bw!<CR>
-            appendbufline(v_bufnr, "$", "-----" .. strftime("%X") .. "------" .. dict.cmd .. "-----")
-            normal G
-        endif
-
-        job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
-        job_opts.err_buf = v_bufnr
-        job_opts.out_buf = v_bufnr
-        job_opts.err_io = "buffer"
-        job_opts.out_io = "buffer"
-        job_opts.close_cb = function("run#CloseCb")
-
-        v_job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
-        var v_channel = split(string(job_getchannel(v_job)), " ")[1]
-        var popup_text: string
-
-
-        if !has_key(dict, "no_popup") || (dict.no_popup == false)
-            # split
-            # execute "buffer" v_bufnr
-            # wincmd J
-
-            if len(dict.cmd) > 40
-                popup_text = "Started (" .. dict.cmd[0 : 40] .. "...)"
-            else
-                popup_text = "Started (" .. dict.cmd .. ")"
-            endif
-            v_winid = popup_create(popup_text, g:Winopts())
-            execute "buffer" v_bufnr
-            add(g:run_dict, {
-                winid: v_winid,
-                timer: timer_start(1000, RunTimerCb, {repeat: -1}),
-                job: v_job,
-                channel: v_channel,
-                cmd: dict.cmd,
-                regexp: v_regexp,
-                bufname: v_bufname,
-                bufnr: v_bufnr,
-                started: localtime()
-            })
-        else
-            add(g:run_dict, {
-                job: v_job,
-                channel: v_channel,
-                cmd: dict.cmd,
-                regexp: v_regexp,
-                bufname: v_bufname,
-                bufnr: v_bufnr,
-                started: localtime()
-            })
-        endif
-
-
+        v_job = Run1(dict)
     endif
 
-    win_gotoid(save_winid)
+    return v_job
+enddef
+
+
+export def Run0(dict: dict<any>): job
+    var v_job: job
+    var job_opts = {}
+
+    job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
+    job_opts.err_cb = function("run#HiddenErrorCb")
+    v_job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
+
+    return v_job
+enddef
+
+export def Run1(dict: dict<any>): job
+    var v_job: job
+    var v_bufnr: number
+    var v_winid: number
+    var v_bufname: string
+    var v_regexp: string
+    var job_opts = {}
+
+    v_bufname = has_key(dict, "name") ? dict.name : ""
+    v_regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
+
+    if v_bufname == ""
+        v_bufnr = bufadd(dict.cmd)
+        setbufvar(v_bufnr, "&buftype", "nofile")
+    else
+        if bufexists(v_bufname)
+            v_bufnr = bufnr(v_bufname)
+            setbufvar(v_bufnr, "&buftype", "nofile")
+            setbufvar(v_bufnr, "&modified", 0)
+            setbufvar(v_bufnr, "&modifiable", 1)
+        else
+            v_bufnr = bufadd(v_bufname)
+            setbufvar(v_bufnr, "&buftype", "nofile")
+        endif
+
+        nnoremap <buffer> <Esc> <Cmd>bw!<CR>
+        appendbufline(v_bufnr, "$", "-----" .. strftime("%X") .. "------" .. dict.cmd .. "-----")
+        normal G
+    endif
+
+    job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
+    job_opts.err_buf = v_bufnr
+    job_opts.out_buf = v_bufnr
+    job_opts.err_io = "buffer"
+    job_opts.out_io = "buffer"
+    job_opts.close_cb = function("run#CloseCb")
+    v_job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
+
+    var v_channel = split(string(job_getchannel(v_job)), " ")[1]
+    var popup_text: string
+
+    if has_key(dict, "no_popup") && (dict.no_popup == true)
+        add(g:run_dict, {
+            job: v_job,
+            channel: v_channel,
+            cmd: dict.cmd,
+            regexp: v_regexp,
+            bufname: v_bufname,
+            bufnr: v_bufnr,
+            started: localtime()
+        })
+    else
+        if len(dict.cmd) > 40
+            popup_text = "Started (" .. dict.cmd[0 : 40] .. "...)"
+        else
+            popup_text = "Started (" .. dict.cmd .. ")"
+        endif
+        v_winid = popup_create(popup_text, g:Winopts())
+
+        add(g:run_dict, {
+            winid: v_winid,
+            timer: timer_start(1000, RunTimerCb, {repeat: -1}),
+            job: v_job,
+            channel: v_channel,
+            cmd: dict.cmd,
+            regexp: v_regexp,
+            bufname: v_bufname,
+            bufnr: v_bufnr,
+            started: localtime()
+        })
+    endif
 
     return v_job
 enddef
