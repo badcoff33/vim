@@ -35,6 +35,41 @@ def RemoveChannelFromDict(ch: string)
     g:run_dict = r
 enddef
 
+export def CloseTermCb(ch: channel)
+    var ch_nr = split(string(ch), " ")[1]
+    var lines = 0
+    var errors = 0
+    var warnings = 0
+    g:wch = ch
+    for d in g:run_dict
+        if d.channel == ch_nr
+            var save_errorformat = &errorformat
+
+            try
+                execute "set errorformat=" .. escape(d.regexp, ' \')
+                execute "cgetbuffer" d.bufnr
+                execute "set errorformat=" .. escape(save_errorformat, ' \')
+            catch /.*/
+                echoerr ">>failed " &errorformat
+            endtry
+            w:quickfix_title = d.cmd
+            execute "silent bwipe" d.bufnr
+            for e in getqflist({ "nr": "$", "all": 0 }).items
+                lines = lines + 1
+                errors += e.type ==? "e" ? 1 : 0
+                warnings += e.type ==? "w" ? 1 : 0
+            endfor
+            popup_create("Done"
+                .. " (" .. lines
+                .. ", " .. warnings
+                .. ", " .. errors .. ") ",
+                g:WinoptsDone())
+            silent doautocmd QuickFixCmdPost make
+            break
+        endif
+    endfor
+enddef
+
 export def CloseCb(ch: channel)
     var ch_nr = split(string(ch), " ")[1]
     var lines = 0
@@ -80,7 +115,7 @@ export def CloseCb(ch: channel)
     endfor
 enddef
 
-export def HiddenErrorCb(ch: channel,  msg: string)
+export def BackgroundErrorCb(ch: channel,  msg: string)
     var ch_nr = split(string(ch), " ")[1]
     for d in g:run_dict
         if d.channel == ch_nr
@@ -147,8 +182,10 @@ export def Run(dict: dict<any>): job
 
     silent doautocmd QuickFixCmdPre make
 
-    if has_key(dict, "hidden") && (dict.hidden == true)
-        v_job = RunHidden(dict)
+    if has_key(dict, "as_term") && (dict.as_term == true)
+        RunTerm(dict)
+    elseif has_key(dict, "background") && (dict.background == true)
+        v_job = RunBackground(dict)
     else
         v_job = RunBuf(dict)
     endif
@@ -157,15 +194,41 @@ export def Run(dict: dict<any>): job
 enddef
 
 
-export def RunHidden(dict: dict<any>): job
+export def RunBackground(dict: dict<any>): job
     var v_job: job
     var job_opts = {}
 
     job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
-    job_opts.err_cb = function("run#HiddenErrorCb")
+    job_opts.err_cb = function("run#BackgroundErrorCb")
     v_job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
 
     return v_job
+enddef
+
+export def RunTerm(dict: dict<any>)
+    var v_job: job
+    var v_bufnr: number
+    var v_winid: number
+    var v_regexp: string
+    var v_channel: string
+    var job_opts = {}
+
+    v_regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
+
+    job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
+    job_opts.close_cb = function("run#CloseTermCb")
+    v_bufnr = term_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
+    v_job = term_getjob(v_bufnr)
+    v_channel = split(string(job_getchannel(v_job)), " ")[1]
+    setbufvar(v_bufnr, "&buftype", "nofile")
+
+    add(g:run_dict, {
+        cmd: dict.cmd,
+        regexp: v_regexp,
+        bufnr: v_bufnr,
+        channel: v_channel,
+        started: localtime()
+    })
 enddef
 
 export def RunBuf(dict: dict<any>): job

@@ -21,10 +21,10 @@ vnoremap <buffer> <CR> :source<CR>
 
 if empty(matchstr(expand("%:p:h"), "color"))
     " source Vim file
-    nnoremap <special> <buffer> <CR> :w<bar>source%<CR>
+    cabbrev <buffer> x write<bar>source%
 else
     " source Vim color theme
-    nnoremap <special> <buffer> <CR> :w<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
+    cabbrev <buffer> x :write<bar>colorscheme <C-r>=expand("%:t:r")<CR>
 endif
 
 iabbrev <buffer> xfun function!<CR>endfunction<C-f><Up><End>

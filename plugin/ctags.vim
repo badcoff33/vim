@@ -27,7 +27,7 @@ def g:CtagsTriggerUpdate()
         return
     endif
 
-    ctags_job = run.Run({cmd: 'ctags ' .. ctags_options, hidden: true})
+    ctags_job = run.Run({cmd: 'ctags ' .. ctags_options, background: true})
     if job_status(ctags_job) != "run"
         echoerr "check ctags options"
     endif

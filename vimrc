@@ -25,7 +25,7 @@ set novisualbell
 set nowrap
 set report=0
 set ruler
-set selection=inclusive
+set selection=exclusive
 set selectmode=
 set shiftwidth=4
 set shortmess-=S " Yes, search count please
@@ -139,6 +139,10 @@ inoremap <C-x><C-CR> <C-x><C-]>
 
 " Switching modes
 inoremap <k0> <Esc>
+
+" Add blank lines
+nnoremap <expr> <CR> &modifiable ? "o\<Esc>" : "\<CR>"
+nnoremap <S-CR> O<Esc>
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>

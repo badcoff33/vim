@@ -39,11 +39,11 @@ def g:BuildStatusline(): string
         sl =  "%1*%{GetMode()}%*"
     endif
 
-    sl = sl .. " %{GetSearchMode()}%M%Y%w "
+    sl = sl .. " %{GetSearchMode()}%Y%w "
     if v:versionlong >= 9001307
         sl = sl .. "%="
     endif
-    sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
+    sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t%m"
     sl = sl .. "%="
     sl = sl .. "%{scope#GetScope()}\ %l:%c "
 
