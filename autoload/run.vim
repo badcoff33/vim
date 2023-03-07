@@ -23,6 +23,17 @@ def g:WinoptsDone(): dict<any>
     }
 enddef
 
+def g:WinoptsError(): dict<any>
+    return { pos: "botright",
+        line: &showtabline ? 4 : 3,
+        col: &columns,
+        tabpage: -1,
+        highlight: 'ErrorMsg',
+        padding: [0, 1, 0, 1],
+        time: 3500,
+    }
+enddef
+
 def RemoveChannelFromDict(ch: string)
     var r: list<any>
 
@@ -35,37 +46,11 @@ def RemoveChannelFromDict(ch: string)
     g:run_dict = r
 enddef
 
-export def CloseTermCb(ch: channel)
+export def ErrorCb(ch: channel,  msg: string)
     var ch_nr = split(string(ch), " ")[1]
-    var lines = 0
-    var errors = 0
-    var warnings = 0
-    g:wch = ch
     for d in g:run_dict
         if d.channel == ch_nr
-            var save_errorformat = &errorformat
-
-            try
-                execute "set errorformat=" .. escape(d.regexp, ' \')
-                execute "cgetbuffer" d.bufnr
-                execute "set errorformat=" .. escape(save_errorformat, ' \')
-            catch /.*/
-                echoerr ">>failed " &errorformat
-            endtry
-            w:quickfix_title = d.cmd
-            execute "silent bwipe" d.bufnr
-            for e in getqflist({ "nr": "$", "all": 0 }).items
-                lines = lines + 1
-                errors += e.type ==? "e" ? 1 : 0
-                warnings += e.type ==? "w" ? 1 : 0
-            endfor
-            popup_create("Done"
-                .. " (" .. lines
-                .. ", " .. warnings
-                .. ", " .. errors .. ") ",
-                g:WinoptsDone())
-            silent doautocmd QuickFixCmdPost make
-            break
+            popup_create("Error:" .. msg, g:WinoptsError())
         endif
     endfor
 enddef
@@ -78,37 +63,30 @@ export def CloseCb(ch: channel)
 
     for d in g:run_dict
         if d.channel == ch_nr
-            var save_errorformat = &errorformat
-
             if has_key(d, "timer")
                 timer_stop(d.timer)
             endif
-            g:run_2_tid = timer_start(500, (_) => {
-                if has_key(d, "winid")
-                    popup_close(d.winid)
-                endif
-                RemoveChannelFromDict(d.channel)
-            }, {repeat: 1})
-
-            try
-                execute "set errorformat=" .. escape(d.regexp, ' \')
-                execute "cgetbuffer" d.bufnr
-                execute "set errorformat=" .. escape(save_errorformat, ' \')
-            catch /.*/
-                echoerr ">>failed " &errorformat
-            endtry
-            w:quickfix_title = d.cmd
-            execute "silent bwipe" d.bufnr
+            setqflist([], " ", {
+                efm: d.regexp,
+                title: d.cmd,
+                lines: getbufline(d.bufnr, 1, "$")
+            })
             for e in getqflist({ "nr": "$", "all": 0 }).items
                 lines = lines + 1
                 errors += e.type ==? "e" ? 1 : 0
                 warnings += e.type ==? "w" ? 1 : 0
             endfor
-            popup_create("Done"
-                .. " (" .. lines
-                .. ", " .. warnings
-                .. ", " .. errors .. ") ",
+            popup_create(
+                printf("DONE | %d lines | %d warnings | %d errors",
+                    lines,
+                    errors,
+                    warnings),
                 g:WinoptsDone())
+            if has_key(d, "winid")
+                popup_close(d.winid)
+            endif
+            execute "silent bwipe" d.bufnr
+            RemoveChannelFromDict(d.channel)
             silent doautocmd QuickFixCmdPost make
             break
         endif
@@ -141,31 +119,22 @@ def ConditionalWriteAll(dict: dict<any>)
     catch /.*/
         echomsg "No autowrite. Not all modified buffers written"
         ls +
-            finally
-            endtry
+    finally
+    endtry
 enddef
 
 def RunTimerCb(tid: number)
-    var max_width = 20
-    var popup_text: string
-
     for d in g:run_dict
-        if has_key(d, "timer") && d.timer == tid
-            if len(d.cmd) > max_width
-                popup_text = job_status(d.job) .. " "
-                    .. (localtime() - d.started)
-                    .. "sec ("
-                    .. d.cmd[0 : max_width]
-                    .. "...)"
-            else
-                popup_text = job_status(d.job) .. " "
-                    .. (localtime() - d.started)
-                    .. "sec ("
-                    .. d.cmd
-                    .. ")"
+        if d.winid > 0
+            popup_setoptions(d.winid, g:Winopts())
+            if has_key(d, "timer") && d.timer == tid
+                popup_settext(d.winid,
+                    printf("status %s | %d lines | %d sec",
+                        job_status(d.job),
+                        getbufinfo(d.bufnr)[0].linecount,
+                        localtime() - d.started))
+                break
             endif
-            popup_settext(d.winid, popup_text)
-            break
         endif
     endfor
 enddef
@@ -182,9 +151,7 @@ export def Run(dict: dict<any>): job
 
     silent doautocmd QuickFixCmdPre make
 
-    if has_key(dict, "as_term") && (dict.as_term == true)
-        RunTerm(dict)
-    elseif has_key(dict, "background") && (dict.background == true)
+    if has_key(dict, "background") && (dict.background == true)
         v_job = RunBackground(dict)
     else
         v_job = RunBuf(dict)
@@ -199,36 +166,11 @@ export def RunBackground(dict: dict<any>): job
     var job_opts = {}
 
     job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
+    job_opts.noblock = 1
     job_opts.err_cb = function("run#BackgroundErrorCb")
     v_job = job_start('cmd /C ' .. escape(dict.cmd, '\'), job_opts)
 
     return v_job
-enddef
-
-export def RunTerm(dict: dict<any>)
-    var v_job: job
-    var v_bufnr: number
-    var v_winid: number
-    var v_regexp: string
-    var v_channel: string
-    var job_opts = {}
-
-    v_regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
-
-    job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
-    job_opts.close_cb = function("run#CloseTermCb")
-    v_bufnr = term_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
-    v_job = term_getjob(v_bufnr)
-    v_channel = split(string(job_getchannel(v_job)), " ")[1]
-    setbufvar(v_bufnr, "&buftype", "nofile")
-
-    add(g:run_dict, {
-        cmd: dict.cmd,
-        regexp: v_regexp,
-        bufnr: v_bufnr,
-        channel: v_channel,
-        started: localtime()
-    })
 enddef
 
 export def RunBuf(dict: dict<any>): job
@@ -244,51 +186,39 @@ export def RunBuf(dict: dict<any>): job
     setbufvar(v_bufnr, "&buftype", "nofile")
 
     job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
+    job_opts.noblock = 1
     job_opts.err_buf = v_bufnr
     job_opts.out_buf = v_bufnr
     job_opts.err_io = "buffer"
     job_opts.out_io = "buffer"
     job_opts.close_cb = function("run#CloseCb")
-    v_job = job_start('cmd /C ' .. escape(dict.cmd, ''), job_opts)
+    if has_key(dict, "show_err") && dict.show_err == true
+        job_opts.err_cb = function("run#ErrorCb")
+    endif
+    v_job = job_start(escape(dict.cmd, ''), job_opts)
 
     var v_channel = split(string(job_getchannel(v_job)), " ")[1]
-    var popup_text: string
 
     if has_key(dict, "no_popup") && (dict.no_popup == true)
-        add(g:run_dict, {
-            job: v_job,
-            channel: v_channel,
-            cmd: dict.cmd,
-            regexp: v_regexp,
-            bufnr: v_bufnr,
-            started: localtime()
-        })
+        v_winid = popup_create(
+            printf("starting %s",
+                split(dict.cmd, " ")[0]),
+            g:Winopts())
     else
-        if len(dict.cmd) > 40
-            popup_text = "Started (" .. dict.cmd[0 : 40] .. "...)"
-        else
-            popup_text = "Started (" .. dict.cmd .. ")"
-        endif
-        v_winid = popup_create(popup_text, g:Winopts())
-
-        add(g:run_dict, {
-            winid: v_winid,
-            timer: timer_start(1000, RunTimerCb, {repeat: -1}),
-            job: v_job,
-            channel: v_channel,
-            cmd: dict.cmd,
-            regexp: v_regexp,
-            bufnr: v_bufnr,
-            started: localtime()
-        })
+        v_winid = 0
     endif
+    add(g:run_dict, {
+        winid: v_winid,
+        timer: timer_start(1000, RunTimerCb, {repeat: -1}),
+        job: v_job,
+        channel: v_channel,
+        cmd: dict.cmd,
+        regexp: v_regexp,
+        bufnr: v_bufnr,
+        started: localtime()
+    })
     return v_job
 enddef
 
-augroup GroupRun
-    autocmd!
-    # autocmd VimResized * call popup_setoptions(g:run_dict.winid, g:Winopts())
-augroup END
-
 # Uncomment when testing
-defcompile
+# defcompile
