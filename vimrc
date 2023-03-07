@@ -199,17 +199,20 @@ nnoremap <A-i> :bnext<CR>
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
-cabbrev <expr> home $HOME .. g:slash .. 'vimfiles' .. g:slash
-cabbrev <expr> here (FilePath() == ".") ? "." : FilePath()
 
-iabbrev () ( )<Left><Left>
-iabbrev {} { }<Left><Left>
+" Kill whitespace after abbrev expansion
+let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
+
+iabbrev () ()<Left><C-r>=Killer(getchar(0))<CR>
+iabbrev [] ()<Left><C-r>=Killer(getchar(0))<CR>
+iabbrev {} {}<Left><C-r>=Killer(getchar(0))<CR>
+iabbrev "" ""<Left><C-r>=Killer(getchar(0))<CR>
 
 " }}}
 
 let FilePath = { -> expand("%:h") == "" ? "" : expand("%:h") .. g:slash }
 cnoremap <expr> <C-r>. (FilePath() == ".") ? "." : FilePath()
-cnoremap <expr> <C-r>, $HOME .. g:slash .. 'vimfiles' .. g:slash
+cnoremap <expr> <C-r>, expand("~/vimfiles") .. g:slash
 cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
 
@@ -264,7 +267,7 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>E :edit <C-r>=$HOME .. g:slash .. 'vimfiles' .. g:slash<CR>
+nnoremap <Leader>E :edit <C-r>=expand("~/vimfiles") .. g:slash<CR>
 nnoremap <Leader>e :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
