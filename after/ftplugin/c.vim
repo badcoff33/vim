@@ -18,7 +18,7 @@ if match(&cpoptions, '>') < 0
 endif
 
 " open tag preview
-nnoremap <buffer> K <C-w>}
+nnoremap <buffer> K g<C-]>
 
 " Toggle automatic comment formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
