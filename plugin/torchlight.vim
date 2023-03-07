@@ -5,6 +5,7 @@ augroup GroupTorchlight
     autocmd!
     # autocmd TextChanged * torchlight.TorchlightChanged()
     autocmd QuickFixCmdPre make torchlight.TorchlightClearAll()
-    autocmd QuickFixCmdPost make torchlight.TorchlightUpdate()
+    autocmd WinEnter * torchlight.TorchlightUpdate()
+    autocmd BufWinEnter * torchlight.TorchlightUpdate()
 augroup END
 
