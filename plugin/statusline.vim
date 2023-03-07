@@ -18,7 +18,6 @@ def g:GetMode(): string
     if has_key(g:mode_translation, m)
         return g:mode_translation[m]
     endif
-    echowin "mode unknown" .. m
     return m
 enddef
 
@@ -36,7 +35,7 @@ def g:BuildStatusline(): string
     var sl: string
 
     if exists("g:statusline_winid") && (win_getid() == g:statusline_winid)
-        sl =  "%1*%{GetMode()}%*"
+        sl =  "%1* %{GetMode()} %*"
     endif
 
     sl = sl .. " %{GetSearchMode()}%Y%w "
