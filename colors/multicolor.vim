@@ -28,6 +28,7 @@ let Cterm = { str -> empty(str) ? "" : "cterm=" .. str }
 
 " Basics
 execute "hi Bold" Fg(s:gray[2])  Attr("bold")
+execute "hi CurSearch" Fg(s:black) Bg(s:yellow[5]) Attr("NONE")
 execute "hi Cursor" Fg(s:yellow[8]) Bg(s:blue[2])
 execute "hi CursorLine" Bg(s:gray[8]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(s:green[3]) Bg(s:gray[7]) Attr("bold")
@@ -123,7 +124,7 @@ execute "hi rstStrongEmphasis" Fg(s:green[2])  Attr("bold")
 execute "hi DiffChange" Fg(s:blue[3]) Bg(s:blue[9])
 execute "hi DiffText" Fg(s:blue[5]) Bg(s:blue[9]) Attr("bold")
 execute "hi DiffDelete" Fg(s:red[5]) Bg(s:red[9])
-execute "hi DiffAdd" Fg(s:green[5]) Bg(s:green[9]) Attr("bold")
+execute "hi DiffAdd" Fg(s:green[5]) Bg(s:green[9]) Attr("none")
 
 unlet Fg
 unlet Bg
