@@ -200,12 +200,12 @@ export def RunBuf(dict: dict<any>): job
     var v_channel = split(string(job_getchannel(v_job)), " ")[1]
 
     if has_key(dict, "no_popup") && (dict.no_popup == true)
+        v_winid = 0
+    else
         v_winid = popup_create(
             printf("starting %s",
                 split(dict.cmd, " ")[0]),
             g:Winopts())
-    else
-        v_winid = 0
     endif
     add(g:run_dict, {
         winid: v_winid,
