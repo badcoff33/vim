@@ -73,14 +73,14 @@ export def CloseCb(ch: channel)
             })
             for e in getqflist({ "nr": "$", "all": 0 }).items
                 lines = lines + 1
-                errors += e.type ==? "e" ? 1 : 0
                 warnings += e.type ==? "w" ? 1 : 0
+                errors += e.type ==? "e" ? 1 : 0
             endfor
             popup_create(
                 printf("DONE | %d lines | %d warnings | %d errors",
                     lines,
-                    errors,
-                    warnings),
+                    warnings,
+                    errors),
                 g:WinoptsDone())
             if has_key(d, "winid")
                 popup_close(d.winid)
