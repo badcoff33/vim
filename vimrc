@@ -139,6 +139,7 @@ inoremap <C-x><C-CR> <C-x><C-]>
 
 " Switching modes
 inoremap <k0> <Esc>
+inoremap <S-Space> <Esc>
 
 " Add blank lines
 nnoremap <expr> <CR> &modifiable ? "o\<Esc>" : "\<CR>"
@@ -210,9 +211,9 @@ iabbrev "" ""<Left><C-r>=Killer(getchar(0))<CR>
 
 " }}}
 
-let FilePath = { -> expand("%:h") == "" ? "" : expand("%:h") .. g:slash }
-cnoremap <expr> <C-r>. (FilePath() == ".") ? "." : FilePath()
 cnoremap <expr> <C-r>, expand("~/vimfiles") .. g:slash
+cnoremap <expr> <C-r>. ((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash
+
 cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
 
@@ -255,6 +256,10 @@ inoremap <C-s>} <C-o>b{<Esc>ea}
 let mapleader = " "
 let maplocalleader = "!"
 
+" Edit files
+nnoremap <Leader>, :edit <C-r>=expand("~/vimfiles") .. g:slash<CR>
+nnoremap <Leader>. :edit <C-r>=((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash<CR>
+
 " toggle options
 nnoremap <Leader>os <cmd>setlocal invspell spell?<CR>
 nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
@@ -267,8 +272,6 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>E :edit <C-r>=expand("~/vimfiles") .. g:slash<CR>
-nnoremap <Leader>e :edit <C-r>=(FilePath() == ".") ? "." : FilePath()<CR>
 nnoremap <Leader>f :find<Space>
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>

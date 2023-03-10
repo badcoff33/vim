@@ -17,14 +17,14 @@ for p in split(&rtp, ",")
 endfor
 
 " source current visual region
-vnoremap <buffer> <LocalLeader><LocalLeader> :source<CR>
+vnoremap <buffer> <LocalLeader><LocalLeader> :source<CR>g`>
 
-if empty(matchstr(expand("%:p:h"), "color"))
-    " source Vim file
-    nnoremap <buffer> <LocalLeader><LocalLeader> <Cmd>write<bar>source%<CR>
-else
+if matchstr(expand("%:p:h"), "color")
     " source Vim color theme
     nnoremap <buffer> <LocalLeader><LocalLeader> :write<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
+else
+    " source Vim file
+    nnoremap <buffer> <LocalLeader><LocalLeader> :write<bar>source%<CR>
 endif
 
 iabbrev <buffer> xfun function!<CR>endfunction<C-f><Up><End>
