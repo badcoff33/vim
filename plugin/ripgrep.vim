@@ -49,5 +49,5 @@ command! -complete=file -nargs=* RgNoDir run.Run({cmd: 'rg --vimgrep ' .. ' <arg
 
 nnoremap <Leader>F :RgFiles<C-r>=g:RgExcludes()<CR><C-r>=g:RgGlobSwitch()<CR> **<Left>
 nnoremap <Leader>R :Rg <C-r>=g:RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR>
-nnoremap <Leader>r :Rg <C-r>=g:RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR><CR>
+nnoremap <silent> <Leader>r :Rg <C-r>=g:RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR><CR>
 
