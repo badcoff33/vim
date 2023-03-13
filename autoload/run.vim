@@ -123,17 +123,26 @@ def ConditionalWriteAll(dict: dict<any>)
     endtry
 enddef
 
-def RunTimerCb(tid: number)
+def RunJobMonitoringCb(tid: number)
+    var job_status: string
+
     for d in g:run_dict
         if d.winid > 0
-            popup_setoptions(d.winid, g:Winopts())
-            if has_key(d, "timer") && d.timer == tid
-                popup_settext(d.winid,
-                    printf("status %s | %d lines | %d sec",
-                        job_status(d.job),
-                        getbufinfo(d.bufnr)[0].linecount,
-                        localtime() - d.started))
-                break
+            job_status = job_status(d.job)
+            if job_status == "run"
+                popup_setoptions(d.winid, g:Winopts())
+                if has_key(d, "timer") && d.timer == tid
+                    popup_settext(d.winid,
+                        printf("status %s | %d lines | %d sec",
+                            job_status,
+                            getbufinfo(d.bufnr)[0].linecount,
+                            localtime() - d.started))
+                    break
+                endif
+            else
+                popup_close(d.winid)
+                timer_stop(d.timer)
+                popup_create("Error: job failed", g:WinoptsError())
             endif
         endif
     endfor
@@ -209,7 +218,7 @@ export def RunBuf(dict: dict<any>): job
     endif
     add(g:run_dict, {
         winid: v_winid,
-        timer: timer_start(1000, RunTimerCb, {repeat: -1}),
+        timer: timer_start(1000, RunJobMonitoringCb, {repeat: -1}),
         job: v_job,
         channel: v_channel,
         cmd: dict.cmd,
