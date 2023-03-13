@@ -133,8 +133,8 @@ execute "set langmap+=\<Char-252>/"
 execute "set langmap+=\<Char-220>?"
 
 " Avoid other keyboard/terminal problems
-nnoremap <C-CR> g<C-]>
-inoremap <C-CR> <C-]>
+nnoremap <C-CR> g<C-]>zz
+inoremap <C-CR> <C-]>zz
 inoremap <C-x><C-CR> <C-x><C-]>
 
 " Switching modes

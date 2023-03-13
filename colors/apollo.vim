@@ -63,7 +63,7 @@ execute "hi PmenuSel" Fg(s:white) Bg(s:green1) Attr("NONE")
 execute "hi PmenuThumb" Fg(s:blue2) Bg(s:bg4)
 execute "hi Question" Fg(s:green2) Bg("bg")
 execute "hi QuickFixLine" Fg(s:blue3) Bg(s:blue_bg) Attr("NONE")
-execute "hi Search" Fg(s:sun) Bg(s:blue_bg) Attr("bold")
+execute "hi Search" Fg(s:silver3) Bg(s:blue_bg) Attr("underline")
 execute "hi StatusLine" Fg(s:black) Bg(s:blue3) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(s:silver4) Bg(s:bg3) Attr("NONE") Cterm("NONE")
 execute "hi Terminal" Fg(s:green3) Bg(s:black)
@@ -88,7 +88,8 @@ highlight! link TabLineFill StatusLineNC
 highlight! link User3 StatusLine
 highlight! link User4 StatusLine
 highlight! link WildMenu IncSearch
-highlight! link qfLineNr    LineNr
+highlight! link qfLineNr LineNr
+highlight! link CurSearch IncSearch
 
 " Code
 execute "hi Statement" Fg(s:blue3)
