@@ -1,37 +1,50 @@
 vim9script
 
 g:run_dict = []
+g:run_popup_line_min = 3
+g:run_popup_line_max = 10
+g:run_popup_line = g:run_popup_line_min
 
 def g:Winopts(): dict<any>
-    return { pos: "botright",
-        line: &showtabline ? 2 : 1,
+    var d = { pos: "botright",
+        line: g:run_popup_line,
         col: &columns,
         tabpage: -1,
         highlight: 'Pmenu',
         padding: [0, 1, 0, 1],
     }
+    return d
 enddef
 
 def g:WinoptsDone(): dict<any>
-    return { pos: "botright",
-        line: &showtabline ? 3 : 2,
+    var d = { pos: "botright",
+        line: g:run_popup_line,
         col: &columns,
         tabpage: -1,
         highlight: 'PmenuSel',
         padding: [0, 1, 0, 1],
         time: 3500,
     }
+    return d
 enddef
 
 def g:WinoptsError(): dict<any>
-    return { pos: "botright",
-        line: &showtabline ? 4 : 3,
+    var d = { pos: "botright",
+        line: g:run_popup_line,
         col: &columns,
         tabpage: -1,
         highlight: 'ErrorMsg',
         padding: [0, 1, 0, 1],
         time: 3500,
     }
+    return d
+enddef
+
+def SetNewPosition()
+    g:run_popup_line += 1
+    if g:run_popup_line > g:run_popup_line_max
+        g:run_popup_line = g:run_popup_line_min
+    endif
 enddef
 
 def RemoveChannelFromDict(ch: string)
@@ -50,6 +63,7 @@ export def ErrorCb(ch: channel,  msg: string)
     var ch_nr = split(string(ch), " ")[1]
     for d in g:run_dict
         if d.channel == ch_nr
+            SetNewPosition()
             popup_create("Error:" .. msg, g:WinoptsError())
         endif
     endfor
@@ -76,6 +90,7 @@ export def CloseCb(ch: channel)
                 warnings += e.type ==? "w" ? 1 : 0
                 errors += e.type ==? "e" ? 1 : 0
             endfor
+            SetNewPosition()
             popup_create(
                 printf("DONE | %d lines | %d warnings | %d errors",
                     lines,
@@ -111,7 +126,7 @@ export def BackgroundErrorCb(ch: channel,  msg: string)
 enddef
 
 def ConditionalWriteAll(dict: dict<any>)
-    if has_key(dict, "nowrite") && (dict.nowrite == true)
+    if has_key(dict, "no_write") && (dict.no_write == true)
         return
     endif
     try
@@ -133,8 +148,8 @@ def RunJobMonitoringCb(tid: number)
                 popup_setoptions(d.winid, g:Winopts())
                 if has_key(d, "timer") && d.timer == tid
                     popup_settext(d.winid,
-                        printf("status %s | %d lines | %d sec",
-                            job_status,
+                        printf("%s | %d lines | %d sec",
+                            toupper(job_status),
                             getbufinfo(d.bufnr)[0].linecount,
                             localtime() - d.started))
                     break
@@ -142,6 +157,7 @@ def RunJobMonitoringCb(tid: number)
             else
                 popup_close(d.winid)
                 timer_stop(d.timer)
+                SetNewPosition()
                 popup_create("Error: job failed", g:WinoptsError())
             endif
         endif
@@ -161,16 +177,16 @@ export def Run(dict: dict<any>): job
     silent doautocmd QuickFixCmdPre make
 
     if has_key(dict, "background") && (dict.background == true)
-        v_job = RunBackground(dict)
+        v_job = StartBackground(dict)
     else
-        v_job = RunBuf(dict)
+        v_job = StartBuffered(dict)
     endif
 
     return v_job
 enddef
 
 
-export def RunBackground(dict: dict<any>): job
+def StartBackground(dict: dict<any>): job
     var v_job: job
     var job_opts = {}
 
@@ -182,7 +198,7 @@ export def RunBackground(dict: dict<any>): job
     return v_job
 enddef
 
-export def RunBuf(dict: dict<any>): job
+def StartBuffered(dict: dict<any>): job
     var v_job: job
     var v_bufnr: number
     var v_winid: number
@@ -211,8 +227,9 @@ export def RunBuf(dict: dict<any>): job
     if has_key(dict, "no_popup") && (dict.no_popup == true)
         v_winid = 0
     else
+        SetNewPosition()
         v_winid = popup_create(
-            printf("starting %s",
+            printf("STARTING '%s'",
                 split(dict.cmd, " ")[0]),
             g:Winopts())
     endif
@@ -230,4 +247,4 @@ export def RunBuf(dict: dict<any>): job
 enddef
 
 # Uncomment when testing
-# defcompile
+defcompile
