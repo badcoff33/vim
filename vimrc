@@ -205,7 +205,7 @@ cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? '
 let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 iabbrev () ()<Left><C-r>=Killer(getchar(0))<CR>
-iabbrev [] ()<Left><C-r>=Killer(getchar(0))<CR>
+iabbrev [] []<Left><C-r>=Killer(getchar(0))<CR>
 iabbrev {} {}<Left><C-r>=Killer(getchar(0))<CR>
 iabbrev "" ""<Left><C-r>=Killer(getchar(0))<CR>
 
