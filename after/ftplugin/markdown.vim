@@ -12,7 +12,7 @@ if has("conceal")
   setlocal conceallevel=0 concealcursor=nc
 endif
 
-vnoremap <LocalLeader>x "xy:luado print("<C-r>x = "..<C-r>x)<CR>
+inoremap <C-r>= <C-r>=printf("= %f", )<left>
 
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif <CR>
