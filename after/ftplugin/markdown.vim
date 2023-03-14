@@ -12,7 +12,15 @@ if has("conceal")
   setlocal conceallevel=0 concealcursor=nc
 endif
 
-inoremap <C-r>= <C-r>=printf("= %f", )<left>
+function! s:MarkdownCalcLine()
+    let equation = substitute(matchstr(getline('.'), '^[^=]*'), '\s\+$', '', 'g')
+    let result = eval(equation)
+    let replace_line = printf("%s = %f", equation, result)
+    call setline(line("."), replace_line)
+endfunction
+command! -buffer -nargs=0 Calc call <SID>MarkdownCalcLine()
+nnoremap <buffer> <A-CR> <Cmd>Calc<CR>
+imap <buffer> <A-CR> <Esc><A-CR>
 
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif <CR>
