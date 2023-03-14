@@ -28,12 +28,12 @@ let Cterm = { str -> empty(str) ? "" : "cterm=" .. str }
 
 " Basics
 execute "hi Bold" Fg(s:gray[2])  Attr("bold")
-execute "hi CurSearch" Fg(s:black) Bg(s:yellow[5]) Attr("NONE")
+execute "hi CurSearch" Fg(s:black) Bg(s:blue[7]) Attr("NONE")
 execute "hi Cursor" Fg(s:yellow[8]) Bg(s:blue[2])
 execute "hi CursorLine" Bg(s:gray[8]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(s:green[3]) Bg(s:gray[7]) Attr("bold")
 execute "hi ErrorMsg" Fg(s:red[3]) Bg(s:red[8])
-execute "hi IncSearch" Fg(s:black) Bg(s:green[7]) Attr("NONE") Cterm("NONE")
+execute "hi IncSearch" Fg(s:black) Bg(s:blue[7]) Attr("NONE") Cterm("NONE")
 execute "hi Italic" Fg(s:gray[2])  Attr("NONE")
 execute "hi LineNr" Fg(s:blue[3]) Bg(s:gray[9]) Attr("bold")
 execute "hi LineNrAbove" Fg(s:gray[6]) Bg("bg") Attr("bold")
@@ -57,7 +57,7 @@ execute "hi User1" Fg(s:white) Bg(s:blue[4])
 execute "hi User2" Fg(s:white) Bg(s:blue[4])
 execute "hi VertSplit" Fg(s:gray[7]) Bg(s:gray[6]) Attr("NONE")
 execute "hi Visual" Fg(s:black) Bg(s:blue[8])
-execute "hi WarningMsg" Fg(s:green[3]) Bg(s:green[8])
+execute "hi WarningMsg" Fg(s:orange[3]) Bg(s:orange[8])
 execute "hi qfFileName" Fg(s:blue[4])
 execute "hi qfSeparator" Fg("fg")
 

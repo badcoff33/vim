@@ -11,16 +11,22 @@ let g:slash = exists('&shellslash') ? '\' : '/'
 filetype plugin on
 filetype indent on
 
+set autoread
+set autowrite
 set belloff=all
 set clipboard=
 set expandtab
+set hidden
 set history=200
 set keymodel=
+set laststatus=2
+set more
 set mouse=a
 set noerrorbells
-set more
 set norelativenumber numberwidth=2
 set noswapfile
+set notimeout
+set nottimeout
 set novisualbell
 set nowrap
 set report=0
@@ -32,21 +38,14 @@ set shortmess-=S " Yes, search count please
 set shortmess-=f " long form for file info
 set showmatch matchtime=1
 set showtabline=1
+set signcolumn=yes
 set tabstop=4
 set termguicolors
-set signcolumn=yes
-set laststatus=2
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
 set spelllang=en_us,de_de
 set spelloptions=camel
-
-" Read changed files automatically if they are changed in the background
-set autoread
-
-" Allow modified files to flip in background, without a write.
-set hidden
 
 " Set behavior for commands ':cc', ':cn', 'cp', etc.
 set switchbuf=useopen,uselast
@@ -68,13 +67,6 @@ set noequalalways
 set foldmethod=indent
 set foldnestmax=1
 set nofoldenable
-
-" Write all files before any ':make' command
-set autowrite
-
-" timer configuration for key sequences
-set notimeout
-set nottimeout
 
 " backspace and cursor keys wrap to previous/next line
 set backspace=indent,eol,start
@@ -132,10 +124,12 @@ execute "set langmap+=\<Char-196>}"
 execute "set langmap+=\<Char-252>/"
 execute "set langmap+=\<Char-220>?"
 
-" Avoid other keyboard/terminal problems
-nnoremap <C-CR> g<C-]>zz
-inoremap <C-CR> <C-]>zz
-inoremap <C-x><C-CR> <C-x><C-]>
+" fix broken C-[, C-] keys on Vim9
+inoremap <C-Char-252> <C-[>
+inoremap <C-+> <C-]>
+nnoremap <C-+> g<C-]>zz
+inoremap <C-+> <C-]>
+inoremap <C-x><C-+> <C-x><C-]>
 
 " Switching modes
 inoremap <k0> <Esc>
@@ -285,7 +279,7 @@ nnoremap <Leader>tc <Cmd>tabclose<CR>
 nnoremap <silent> <Leader>c- <Cmd>colder<CR>
 nnoremap <silent> <Leader>c+ <Cmd>cnewer<CR>
 nnoremap <Leader>cn <Cmd>cnext<CR>
-nnoremap <Leader>cp <Cmd>cprevious<CR>
+nnoremap <Leader>cN <Cmd>cprevious<CR>
 nnoremap <Leader>cc <Cmd>cc<CR>
 nnoremap <Leader>cf <Cmd>cfirst<CR>
 nnoremap <Leader>cl <Cmd>clast<CR>
