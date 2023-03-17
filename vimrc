@@ -14,7 +14,7 @@ filetype indent on
 set autoread
 set autowrite
 set belloff=all
-set checktime=1000
+set updatetime=1000
 set clipboard=
 set expandtab
 set hidden
