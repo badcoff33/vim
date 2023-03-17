@@ -101,7 +101,7 @@ export def CloseCb(ch: channel)
                 popup_close(d.winid)
             endif
 
-            " act like :make
+            # act like :make
             silent doautocmd QuickFixCmdPost make
 
             execute "silent bwipe" d.bufnr
@@ -178,7 +178,7 @@ export def Run(dict: dict<any>): job
 
     ConditionalWriteAll(dict)
 
-    " act like :make
+    # act like :make
     silent doautocmd QuickFixCmdPre make
 
     if has_key(dict, "background") && (dict.background == true)
@@ -198,7 +198,7 @@ def StartBackground(dict: dict<any>): job
     job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
     job_opts.noblock = 1
     job_opts.err_cb = function("run#BackgroundErrorCb")
-    v_job = job_start(dict.cmd, job_opts)
+    v_job = job_start(escape(dict.cmd, '\'), job_opts)
 
     return v_job
 enddef
@@ -238,7 +238,7 @@ def StartBuffered(dict: dict<any>): job
             g:Winopts())
     endif
 
-    run_dict_entry.job = job_start("cmd /C " .. dict.cmd, job_opts)
+    run_dict_entry.job = job_start("cmd /C " .. escape(dict.cmd, '\'), job_opts)
     run_dict_entry.channel = split(string(job_getchannel(run_dict_entry.job)), " ")[1]
 
     add(g:run_dict, run_dict_entry)
