@@ -20,7 +20,7 @@ def g:PopupTermHere()
         minwidth: &columns - 10,
         minheight: 10,
         maxheight: &lines - 10,
-        border: [0, 0, 0, 0],
+        border: [1, 1, 1, 1],
         padding: [1, 1, 1, 1],
         title: "cmd"
     }

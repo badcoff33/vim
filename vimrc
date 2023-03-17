@@ -14,6 +14,7 @@ filetype indent on
 set autoread
 set autowrite
 set belloff=all
+set checktime=1000
 set clipboard=
 set expandtab
 set hidden
@@ -44,7 +45,7 @@ set termguicolors
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
-set spelllang=en_us,de_de
+set spelllang=en_us
 set spelloptions=camel
 
 " Set behavior for commands ':cc', ':cn', 'cp', etc.
@@ -70,7 +71,7 @@ set nofoldenable
 
 " backspace and cursor keys wrap to previous/next line
 set backspace=indent,eol,start
-set whichwrap+=<,>,[,]
+"set whichwrap+=<,>,[,]
 
 " makes selecting text more consistent (at least for me)
 set virtualedit=onemore,block
@@ -133,7 +134,6 @@ inoremap <C-x><C-+> <C-x><C-]>
 
 " Switching modes
 inoremap <k0> <Esc>
-inoremap <S-Space> <Esc>
 
 " Add blank lines
 nnoremap <expr> <CR> &modifiable ? "o\<Esc>" : "\<CR>"
@@ -238,12 +238,19 @@ nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
 
 " Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
-inoremap <C-s>" <C-o>b"<Esc>ea"
-inoremap <C-s>' <C-o>b'<Esc>ea'
-inoremap <C-s>` <C-o>b`<Esc>ea`
-inoremap <C-s>) <C-o>b(<Esc>ea)
-inoremap <C-s>] <C-o>b[<Esc>ea]
-inoremap <C-s>} <C-o>b{<Esc>ea}
+inoremap <C-s>" <C-o>B"<Esc>ea"
+inoremap <C-s>' <C-o>B'<Esc>ea'
+inoremap <C-s>` <C-o>B`<Esc>ea`
+inoremap <C-s>) <C-o>B(<Esc>ea)
+inoremap <C-s>] <C-o>B[<Esc>ea]
+inoremap <C-s>} <C-o>B{<Esc>ea}
+
+" toggle options
+nnoremap +s <cmd>setlocal invspell spell? spelllang?<CR>
+nnoremap +p <cmd>setlocal invpaste paste?<CR>
+nnoremap +r <cmd>setlocal invrelativenumber<CR>
+nnoremap +w <cmd>setlocal invwrap<CR>
+nnoremap +g :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Leader key mappings {{{
 
@@ -253,13 +260,6 @@ let maplocalleader = "!"
 " Edit files
 nnoremap <Leader>, :edit <C-r>=expand("~/vimfiles") .. g:slash<CR>
 nnoremap <Leader>. :edit <C-r>=((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash<CR>
-
-" toggle options
-nnoremap <Leader>os <cmd>setlocal invspell spell?<CR>
-nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
-nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
-nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
-nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Substitute command
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>

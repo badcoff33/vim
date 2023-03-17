@@ -43,22 +43,22 @@ execute "hi ModeMsg" Fg(s:gray[2]) Bg("bg")
 execute "hi NonText" Fg(s:blue[6]) Bg(s:white)
 execute "hi Normal" Fg(s:gray[3]) Bg(s:white) Attr("NONE")
 execute "hi Pmenu" Fg(s:purple[3]) Bg(s:purple[7]) Attr("NONE")
-execute "hi PmenuSbar" Fg(s:gray[3]) Bg(s:gray[8])
+execute "hi PmenuSbar" Fg(s:gray[3]) Bg(s:purple[8])
 execute "hi PmenuSel" Fg(s:purple[8]) Bg(s:purple[4]) Attr("NONE")
-execute "hi PmenuThumb" Fg(s:blue[2]) Bg(s:gray[0])
+execute "hi PmenuThumb" Fg(s:blue[2]) Bg(s:purple[3])
 execute "hi Question" Fg(s:orange[3]) Bg(s:orange[8])
-execute "hi QuickFixLine" Fg(s:blue[3]) Bg(s:white) Attr("bold")
+execute "hi QuickFixLine" Fg(s:blue[3]) Bg("bg") Attr("bold")
 execute "hi Search" Fg(s:black) Bg(s:yellow[7]) Attr("NONE")
-execute "hi StatusLine" Fg(s:white) Bg(s:pink[2]) Attr("NONE") Cterm("NONE")
+execute "hi StatusLine" Fg(s:white) Bg(s:purple[2]) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(s:gray[2]) Bg(s:gray[6]) Attr("NONE") Cterm("NONE")
-execute "hi Terminal" Fg(s:green[0]) Bg(s:green[9])
+execute "hi Terminal" Fg(s:green[0]) Bg(s:green[8])
 execute "hi Title" Fg(s:green[3])
-execute "hi User1" Fg(s:white) Bg(s:blue[4])
+execute "hi User1" Fg(s:white) Bg(s:blue[5])
 execute "hi User2" Fg(s:white) Bg(s:blue[4])
 execute "hi VertSplit" Fg(s:gray[7]) Bg(s:gray[6]) Attr("NONE")
 execute "hi Visual" Fg(s:black) Bg(s:blue[8])
 execute "hi WarningMsg" Fg(s:orange[3]) Bg(s:orange[8])
-execute "hi qfFileName" Fg(s:blue[4])
+execute "hi qfFileName" Fg(s:blue[6])
 execute "hi qfSeparator" Fg("fg")
 
 highlight! link CursorColumn CursorLine
@@ -67,13 +67,13 @@ highlight! link Folded Normal
 highlight! link SignColumn Normal
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLineSel StatusLine
+highlight! link TabLineSel User1
 highlight! link TabLine CursorLine
 highlight! link TabLineFill Normal
 highlight! link User3 StatusLine
 highlight! link User4 StatusLine
 highlight! link WildMenu IncSearch
-highlight! link qfLineNr    LineNr
+highlight! link qfLineNr LineNr
 
 " Code
 execute "hi Character" Fg(s:purple[6]) Attr("bold")

@@ -100,9 +100,12 @@ export def CloseCb(ch: channel)
             if has_key(d, "winid")
                 popup_close(d.winid)
             endif
+
+            " act like :make
+            silent doautocmd QuickFixCmdPost make
+
             execute "silent bwipe" d.bufnr
             RemoveChannelFromDict(d.channel)
-            silent doautocmd QuickFixCmdPost make
             break
         endif
     endfor
@@ -175,6 +178,7 @@ export def Run(dict: dict<any>): job
 
     ConditionalWriteAll(dict)
 
+    " act like :make
     silent doautocmd QuickFixCmdPre make
 
     if has_key(dict, "background") && (dict.background == true)
