@@ -6,11 +6,13 @@ function! visuals#hl_word_toggle()
         let s:save_hlsearch = &hlsearch
         set nohlsearch
     else
-        let save_winid = winnr()
-        noautocmd windo match none
+        let save_winid = win_getid()
+        for w in getwininfo()
+            call clearmatches(w.winnr)
+        endfor
+        call win_gotoid(save_winid)
         call timer_stop(g:hl_word_timer)
         unlet g:hl_word_timer
-        execute save_winid "wincmd w"
         if s:save_hlsearch
             set hlsearch
         endif
@@ -20,11 +22,12 @@ endfunction
 function! visuals#hl_word_cyclic(tid)
     let cword = expand("<cword>")
     if mode() == "v"
-        match NONE
+        call clearmatches()
     elseif matchstr(cword, "[a-zA-Z0-9_]") != ""
-        execute "match HlWordUnderline /\\<" .. cword .. "\\>/"
+        call clearmatches()
+        let w:match_id = matchadd( "HlWordUnderline",  "\\<" .. cword .. "\\>")
     else
-        match none
+        call clearmatches()
     endif
 endfunction
 
