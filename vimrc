@@ -11,16 +11,23 @@ let g:slash = exists('&shellslash') ? '\' : '/'
 filetype plugin on
 filetype indent on
 
+set autoread
+set autowrite
 set belloff=all
+set updatetime=1000
 set clipboard=
 set expandtab
+set hidden
 set history=200
 set keymodel=
+set laststatus=2
+set more
 set mouse=a
 set noerrorbells
-set more
 set norelativenumber numberwidth=2
 set noswapfile
+set notimeout
+set nottimeout
 set novisualbell
 set nowrap
 set report=0
@@ -32,21 +39,14 @@ set shortmess-=S " Yes, search count please
 set shortmess-=f " long form for file info
 set showmatch matchtime=1
 set showtabline=1
+set signcolumn=yes
 set tabstop=4
 set termguicolors
-set signcolumn=yes
-set laststatus=2
 
 " limit number of suggestions of z=
 set spellsuggest=best,10
-set spelllang=en_us,de_de
+set spelllang=en_us
 set spelloptions=camel
-
-" Read changed files automatically if they are changed in the background
-set autoread
-
-" Allow modified files to flip in background, without a write.
-set hidden
 
 " Set behavior for commands ':cc', ':cn', 'cp', etc.
 set switchbuf=useopen,uselast
@@ -69,16 +69,9 @@ set foldmethod=indent
 set foldnestmax=1
 set nofoldenable
 
-" Write all files before any ':make' command
-set autowrite
-
-" timer configuration for key sequences
-set notimeout
-set nottimeout
-
 " backspace and cursor keys wrap to previous/next line
 set backspace=indent,eol,start
-set whichwrap+=<,>,[,]
+"set whichwrap+=<,>,[,]
 
 " makes selecting text more consistent (at least for me)
 set virtualedit=onemore,block
@@ -132,14 +125,15 @@ execute "set langmap+=\<Char-196>}"
 execute "set langmap+=\<Char-252>/"
 execute "set langmap+=\<Char-220>?"
 
-" Avoid other keyboard/terminal problems
-nnoremap <C-CR> g<C-]>
-inoremap <C-CR> <C-]>
-inoremap <C-x><C-CR> <C-x><C-]>
+" fix broken C-[, C-] keys on Vim9
+inoremap <C-Char-252> <C-[>
+inoremap <C-+> <C-]>
+nnoremap <C-+> g<C-]>zz
+inoremap <C-+> <C-]>
+inoremap <C-x><C-+> <C-x><C-]>
 
 " Switching modes
 inoremap <k0> <Esc>
-inoremap <S-Space> <Esc>
 
 " Add blank lines
 nnoremap <expr> <CR> &modifiable ? "o\<Esc>" : "\<CR>"
@@ -205,7 +199,7 @@ cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? '
 let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 iabbrev () ()<Left><C-r>=Killer(getchar(0))<CR>
-iabbrev [] ()<Left><C-r>=Killer(getchar(0))<CR>
+iabbrev [] []<Left><C-r>=Killer(getchar(0))<CR>
 iabbrev {} {}<Left><C-r>=Killer(getchar(0))<CR>
 iabbrev "" ""<Left><C-r>=Killer(getchar(0))<CR>
 
@@ -244,12 +238,19 @@ nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
 imap <C-l> <Esc><C-l>
 
 " Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
-inoremap <C-s>" <C-o>b"<Esc>ea"
-inoremap <C-s>' <C-o>b'<Esc>ea'
-inoremap <C-s>` <C-o>b`<Esc>ea`
-inoremap <C-s>) <C-o>b(<Esc>ea)
-inoremap <C-s>] <C-o>b[<Esc>ea]
-inoremap <C-s>} <C-o>b{<Esc>ea}
+inoremap <C-s>" <C-o>B"<Esc>ea"
+inoremap <C-s>' <C-o>B'<Esc>ea'
+inoremap <C-s>` <C-o>B`<Esc>ea`
+inoremap <C-s>) <C-o>B(<Esc>ea)
+inoremap <C-s>] <C-o>B[<Esc>ea]
+inoremap <C-s>} <C-o>B{<Esc>ea}
+
+" toggle options
+nnoremap +s <cmd>setlocal invspell spell? spelllang?<CR>
+nnoremap +p <cmd>setlocal invpaste paste?<CR>
+nnoremap +r <cmd>setlocal invrelativenumber<CR>
+nnoremap +w <cmd>setlocal invwrap<CR>
+nnoremap +g :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Leader key mappings {{{
 
@@ -259,13 +260,6 @@ let maplocalleader = "!"
 " Edit files
 nnoremap <Leader>, :edit <C-r>=expand("~/vimfiles") .. g:slash<CR>
 nnoremap <Leader>. :edit <C-r>=((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash<CR>
-
-" toggle options
-nnoremap <Leader>os <cmd>setlocal invspell spell?<CR>
-nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
-nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
-nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
-nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Substitute command
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
@@ -285,7 +279,7 @@ nnoremap <Leader>tc <Cmd>tabclose<CR>
 nnoremap <silent> <Leader>c- <Cmd>colder<CR>
 nnoremap <silent> <Leader>c+ <Cmd>cnewer<CR>
 nnoremap <Leader>cn <Cmd>cnext<CR>
-nnoremap <Leader>cp <Cmd>cprevious<CR>
+nnoremap <Leader>cN <Cmd>cprevious<CR>
 nnoremap <Leader>cc <Cmd>cc<CR>
 nnoremap <Leader>cf <Cmd>cfirst<CR>
 nnoremap <Leader>cl <Cmd>clast<CR>

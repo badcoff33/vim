@@ -25,17 +25,17 @@ let s:silver1  = "#A0A0A8"
 let s:silver2  = "#B8B8BE"
 let s:silver3  = "#D0D0D8"
 let s:silver4  = "#E0E0E8"
-let s:green_bg = "#136035"
-let s:green1   = "#02A358"
-let s:green2   = "#07C168"
-let s:green3   = "#07E070"
-let s:blue_bg  = "#134570"
+let s:green_bg = "#1D683C"
+let s:green1   = "#22A358"
+let s:green2   = "#27C168"
+let s:green3   = "#27F070"
+let s:blue_bg  = "#1B507F"
 let s:blue1    = "#3068B8"
 let s:blue2    = "#4090D8"
 let s:blue3    = "#70B0F8"
 let s:red1     = "#B82042"
 let s:red2     = "#E84070"
-let s:sun    = "#E0EF50"
+let s:sun    = "#B0BF40"
 
 let Fg = { str -> empty(str) ? "" : "guifg=" .. str }
 let Bg = { str -> empty(str) ? "" : "guibg=" .. str }
@@ -44,11 +44,11 @@ let Cterm = { str -> empty(str) ? "" : "cterm=" .. str }
 
 " Basics
 execute "hi Bold" Fg(s:silver2)  Attr("bold")
-execute "hi Cursor" Fg(s:black) Bg(s:white)
+execute "hi Cursor" Fg(s:black) Bg(s:sun)
 execute "hi CursorLine"  Bg(s:bg3) Cterm("NONE")
 execute "hi CursorLineNr" Fg(s:green3) Bg(s:bg3) Attr("bold")
 execute "hi ErrorMsg" Fg(s:white) Bg(s:red2)
-execute "hi IncSearch" Fg(s:black) Bg(s:green2) Attr("NONE") Cterm("NONE")
+execute "hi IncSearch" Fg(s:black) Bg(s:green1) Attr("NONE") Cterm("NONE")
 execute "hi Italic" Fg(s:silver2)  Attr("NONE")
 execute "hi LineNr" Fg(s:blue3) Bg(s:bg2)
 execute "hi LineNrAbove" Fg(s:bg4) Bg("bg") Attr("bold")
@@ -62,13 +62,13 @@ execute "hi PmenuSbar" Fg(s:silver3) Bg(s:bg3)
 execute "hi PmenuSel" Fg(s:white) Bg(s:green1) Attr("NONE")
 execute "hi PmenuThumb" Fg(s:blue2) Bg(s:bg4)
 execute "hi Question" Fg(s:green2) Bg("bg")
-execute "hi QuickFixLine" Fg(s:blue3) Bg(s:blue_bg) Attr("NONE")
-execute "hi Search" Fg(s:sun) Bg(s:blue_bg) Attr("bold")
-execute "hi StatusLine" Fg(s:black) Bg(s:blue3) Attr("NONE") Cterm("NONE")
+execute "hi QuickFixLine" Fg(s:blue3) Bg("bg") Attr("bold")
+execute "hi Search" Fg(s:silver4) Bg(s:bg4) Attr("NONE")
+execute "hi StatusLine" Fg(s:white) Bg(s:blue3) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(s:silver4) Bg(s:bg3) Attr("NONE") Cterm("NONE")
-execute "hi Terminal" Fg(s:green3) Bg(s:black)
+execute "hi Terminal" Fg(s:green3) Bg(s:bg1)
 execute "hi Title" Fg(s:green3)
-execute "hi User1" Fg(s:sun) Bg(s:blue_bg)
+execute "hi User1" Fg(s:sun) Bg(s:blue_bg) Attr("bold")
 execute "hi User2" Fg(s:black) Bg(s:sun)
 execute "hi VertSplit" Fg(s:bg2) Bg(s:bg2) Attr("NONE")
 execute "hi Visual" Fg(s:white) Bg(s:silver1)
@@ -78,7 +78,7 @@ execute "hi qfSeparator" Fg("fg")
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn Normal
-highlight! link Folded StatusLineNC
+highlight! link Folded Normal
 highlight! link SignColumn Normal
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
@@ -88,12 +88,13 @@ highlight! link TabLineFill StatusLineNC
 highlight! link User3 StatusLine
 highlight! link User4 StatusLine
 highlight! link WildMenu IncSearch
-highlight! link qfLineNr    LineNr
+highlight! link qfLineNr LineNr
+highlight! link CurSearch IncSearch
 
 " Code
 execute "hi Statement" Fg(s:blue3)
 execute "hi Conditional" Fg(s:blue3)  Attr("bold")
-execute "hi Type" Fg(s:blue2)  Attr("NONE")
+execute "hi Type" Fg(s:green3)  Attr("NONE")
 execute "hi Structure" Fg(s:blue2)
 execute "hi StorageClass" Fg(s:blue3)
 execute "hi PreProc" Fg(s:white)  Attr("bold")

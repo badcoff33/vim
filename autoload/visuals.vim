@@ -71,7 +71,7 @@ function! visuals#info_hl()
 endfunction
 
 function visuals#blend_down()
-    if ((&previewwindow) || (&bt=='help') || (&bt == 'quickfix'))
+    if ((&previewwindow) || (&bt=='help'))
         set wincolor=CursorLine
     else
         set wincolor=

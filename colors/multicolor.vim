@@ -53,7 +53,7 @@ execute "hi StatusLine" Fg(s:white) Bg(s:purple[2]) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(s:gray[2]) Bg(s:gray[6]) Attr("NONE") Cterm("NONE")
 execute "hi Terminal" Fg(s:gray[0]) Bg(s:gray[8])
 execute "hi Title" Fg(s:green[3])
-execute "hi User1" Fg(s:white) Bg(s:blue[4])
+execute "hi User1" Fg(s:white) Bg(s:blue[5])
 execute "hi User2" Fg(s:white) Bg(s:blue[4])
 execute "hi VertSplit" Fg(s:gray[7]) Bg(s:gray[6]) Attr("NONE")
 execute "hi Visual" Fg(s:black) Bg(s:blue[8])
@@ -67,13 +67,13 @@ highlight! link Folded Normal
 highlight! link SignColumn Normal
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLineSel StatusLine
+highlight! link TabLineSel User1
 highlight! link TabLine CursorLine
 highlight! link TabLineFill Normal
 highlight! link User3 StatusLine
 highlight! link User4 StatusLine
 highlight! link WildMenu IncSearch
-highlight! link qfLineNr    LineNr
+highlight! link qfLineNr LineNr
 
 " Code
 execute "hi Character" Fg(s:purple[6]) Attr("bold")

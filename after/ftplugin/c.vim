@@ -3,12 +3,10 @@
 " Description:   Some support functions and mappings for C code files.
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
-let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
-
 " iabbrev did not work when 'cpoptions' has '>'
 if match(&cpoptions, '>') < 0
-  iabbrev <buffer> xswi switch ()<C-f><Cr>{<CR>default:<C-f><CR>break;<CR>}<C-o>4k<End>
-  iabbrev <buffer> xcas case :<C-f><CR>break;<CR><Up><Up><End><Left>
+  iabbrev <buffer> xswi switch ()<C-f><Cr>{<CR>default:<C-f><CR>break;<CR>}<C-o>4k<End><Left>
+  iabbrev <buffer> xcas case <CR>break;<CR><Up><Up><End>
   iabbrev <buffer> xop  {<C-f><CR><CR>}<CR><Up><Up><C-f>
   iabbrev <buffer> xif  if ()<Left><C-f>
   iabbrev <buffer> xels else<C-f><CR>{<C-f><CR><CR>}<CR><Up><Up><C-f>
@@ -16,6 +14,11 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> xdef #define
   iabbrev <buffer> xtod #warning TODO
 endif
+
+
+" Open a neew line without continuation of comment
+nnoremap <buffer> <C-CR> $o<Esc>0"_D
+imap     <buffer> <C-CR> <Esc><S-CR>i
 
 " open tag preview
 nnoremap <buffer> K g<C-]>
@@ -48,9 +51,18 @@ if exists("g:c_comment_strings") | unlet g:c_comment_strings | endif
 let g:c_space_errors = 1
 let g:c_syntax_for_h = 1
 
+" How to display unprintable characters
+let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
+if g:c_show_list_chars == 0
+  setlocal nolist
+else
+  setlocal list
+endif
+
 " Customize the c indent style
 setlocal cinoptions=(0,W4,gN
 
+setlocal listchars=tab:>-,trail:.,extends:#
 setlocal textwidth=80
 setlocal expandtab
 setlocal formatoptions+=j
@@ -58,12 +70,4 @@ setlocal foldmethod=indent
 setlocal foldnestmax=2
 setlocal tabstop=4
 setlocal shiftwidth=4
-
-" How to display unprintable charcters
-if g:c_show_list_chars == 0
-  setlocal nolist
-else
-  setlocal list
-endif
-setlocal listchars=tab:>-,trail:.,extends:#
 

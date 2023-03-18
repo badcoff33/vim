@@ -54,8 +54,8 @@ function! s:MakeHTML(...)
         silent exe "bwipeout!" getenv("TEMP")..g:slash.."_"..expand("%:t")
         call run#Run(#{
                     \ cmd: b:rst_command,
-                    \ hidden: v:true,
-                    \ nowrite: v:true
+                    \ background: v:true,
+                    \ no_write: v:true
         })
     endif
 endfunction

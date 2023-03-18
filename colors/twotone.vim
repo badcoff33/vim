@@ -43,9 +43,10 @@ execute "hi LineNr" Fg(s:silver4) Attr("bold")
 execute "hi MatchParen" Fg(s:blue) Bg("bg") Attr("underline,bold")
 execute "hi NonText" Fg(s:silver6) Bg("bg")
 execute "hi Normal" Fg(s:silver2) Bg(s:white) Attr("NONE")
-execute "hi Pmenu" Fg(s:white) Bg(s:silver4)
+execute "hi Pmenu" Fg(s:white) Bg(s:silver5)
 execute "hi PmenuSel" Fg(s:white) Bg(s:blue)
 execute "hi PmenuThumb" Fg(s:silver2) Bg(s:silver7)
+execute "hi PmenuSbar" Fg(s:red) Bg(s:red)
 execute "hi CurSearch" Fg(s:black) Bg(s:silver6) Attr("NONE")
 execute "hi Search" Fg(s:black) Bg(s:silver8) Attr("NONE")
 execute "hi StatusLine" Fg(s:white) Bg(s:black) Attr("NONE")
@@ -60,7 +61,6 @@ execute "hi Visual" Fg(s:white) Bg(s:blue)
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link Folded Comment
-highlight! link PmenuSbar Pmenu
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine StatusLineNC

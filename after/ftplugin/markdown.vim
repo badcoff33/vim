@@ -12,8 +12,6 @@ if has("conceal")
   setlocal conceallevel=0 concealcursor=nc
 endif
 
-vnoremap <LocalLeader>x "xy:luado print("<C-r>x = "..<C-r>x)<CR>
-
 " Toggle automatic code formatting
 nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif <CR>
 
@@ -106,8 +104,8 @@ function! s:MakeHTML(...)
         silent exe "bwipeout!" getenv("TEMP")..g:slash.."_"..expand("%:t")
         call run#Run(#{
                     \ cmd: b:markdown_command,
-                    \ hidden: v:true,
-                    \ nowrite: v:true
+                    \ background: v:true,
+                    \ no_write: v:true
                     \ })
     endif
 endfunction
