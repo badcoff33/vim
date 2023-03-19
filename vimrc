@@ -14,7 +14,6 @@ filetype indent on
 set autoread
 set autowrite
 set belloff=all
-set updatetime=1000
 set clipboard=
 set expandtab
 set hidden
@@ -24,6 +23,7 @@ set laststatus=2
 set more
 set mouse=a
 set noerrorbells
+set nojoinspaces
 set norelativenumber numberwidth=2
 set noswapfile
 set notimeout
@@ -31,6 +31,7 @@ set nottimeout
 set novisualbell
 set nowrap
 set report=0
+set updatetime=1000
 set ruler
 set selection=exclusive
 set selectmode=
