@@ -8,14 +8,12 @@ function! visuals#hl_word_toggle()
     else
         let save_winid = win_getid()
         for w in getwininfo()
-            call clearmatches(w.winnr)
+            call clearmatches(w.winid)
         endfor
         call win_gotoid(save_winid)
         call timer_stop(g:hl_word_timer)
         unlet g:hl_word_timer
-        if s:save_hlsearch
-            set hlsearch
-        endif
+        let &hlsearch = s:save_hlsearch
     endif
 endfunction
 
