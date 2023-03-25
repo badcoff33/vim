@@ -102,7 +102,7 @@ function! s:MakeHTML(...)
     if exists("b:markdown_command")
         silent exe "write!" getenv("TEMP")..g:slash.."_"..expand("%:t")
         silent exe "bwipeout!" getenv("TEMP")..g:slash.."_"..expand("%:t")
-        call run#Run(#{
+        call run#RunStart(#{
                     \ cmd: b:markdown_command,
                     \ background: v:true,
                     \ no_write: v:true

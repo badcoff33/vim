@@ -70,6 +70,7 @@ export def ErrorCb(ch: channel,  msg: string)
 enddef
 
 export def CloseCb(ch: channel)
+    var Callback: func
     var ch_nr = split(string(ch), " ")[1]
     var lines = 0
     var errors = 0
@@ -101,14 +102,22 @@ export def CloseCb(ch: channel)
                 popup_close(d.winid)
             endif
 
-            # act like :make
-            silent doautocmd QuickFixCmdPost make
-
             execute "silent bwipe" d.bufnr
+
+            try
+                Callback = function(d.callback)
+                Callback()
+            catch /.*/
+            endtry
+
             RemoveChannelFromDict(d.channel)
             break
         endif
     endfor
+
+    # act like :make
+    silent doautocmd QuickFixCmdPost make
+
 enddef
 
 export def BackgroundErrorCb(ch: channel,  msg: string)
@@ -168,7 +177,7 @@ def RunJobMonitoringCb(tid: number)
     endfor
 enddef
 
-export def Run(dict: dict<any>): job
+export def RunStart(dict: dict<any>): job
     var v_job: job
 
     if !has_key(dict, 'cmd') && (dict.cmd != "")
@@ -212,7 +221,7 @@ def StartBuffered(dict: dict<any>): job
     run_dict_entry.bufnr = bufadd(dict.cmd)
     setbufvar(run_dict_entry.bufnr, "&buftype", "nofile")
 
-    job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
+    job_opts.cwd = get(dict, "cwd", getcwd())
     job_opts.noblock = 1
     job_opts.err_buf = run_dict_entry.bufnr
     job_opts.out_buf = run_dict_entry.bufnr
@@ -225,6 +234,7 @@ def StartBuffered(dict: dict<any>): job
 
     run_dict_entry.full_cmd = dict.cmd
     run_dict_entry.short_cmd = split(dict.cmd, " ")[0]
+    run_dict_entry.callback = get(dict, "callback", "")
     run_dict_entry.started = localtime()
     run_dict_entry.timer = timer_start(1000, RunJobMonitoringCb, {repeat: -1})
 
