@@ -197,12 +197,8 @@ cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? '
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
 " Kill whitespace after abbrev expansion
+" Example:  iabbrev () ()<Left><C-r>=Killer(getchar(0))<CR>
 let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
-
-iabbrev () ()<Left><C-r>=Killer(getchar(0))<CR>
-iabbrev [] []<Left><C-r>=Killer(getchar(0))<CR>
-iabbrev {} {}<Left><C-r>=Killer(getchar(0))<CR>
-iabbrev "" ""<Left><C-r>=Killer(getchar(0))<CR>
 
 " }}}
 
@@ -268,7 +264,7 @@ vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
 nnoremap <Leader>f :find<Space>
-nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader><Tab> :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>
 
 " Leader-t space
