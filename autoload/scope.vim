@@ -3,6 +3,32 @@
 " Description:
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
+function! g:WinoptsScope()
+    let d = #{ pos: "topright",
+                \ line: "cursor",
+                \ col: win_screenpos(win_getid())[1] + winwidth(0),
+                \ highlight: 'ErrorMsg',
+                \ padding: [0, 1, 0, 1],
+                \ time: 3500 }
+    return d
+endfunction
+
+function! ScopePopup()
+    let g:scope_previous = get(g:, "scope_previous", "")
+    let text = scope#GetScope()
+    if text != g:scope_previous && text != ""
+        echo "<" .. text .. ">"
+        call popup_create(text, g:WinoptsScope())
+    endif
+    let g:scope_previous = text
+endfunction
+
+augroup GroupScope
+    au!
+    au CursorHold *.vim call ScopePopup()
+augroup END
+
+"
 " Description: If a function 'scope#Parser'..&ft exists, call it. The returned
 " string can be used by 'statusline'. Recommended way to add new parser
 " functions is to add it in this file. Most
