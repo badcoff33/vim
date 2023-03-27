@@ -7,44 +7,37 @@ function! g:WinoptsScope()
     let d = #{ pos: "topright",
                 \ line: "cursor",
                 \ col: win_screenpos(win_getid())[1] + winwidth(0),
-                \ highlight: 'ErrorMsg',
+                \ highlight: 'Search',
                 \ padding: [0, 1, 0, 1],
-                \ time: 3500 }
+                \ time: 2000 }
     return d
 endfunction
 
-function! ScopePopup()
+function! scope#PopupScope()
     let g:scope_previous = get(g:, "scope_previous", "")
     let text = scope#GetScope()
     if text != g:scope_previous && text != ""
-        echo "<" .. text .. ">"
         call popup_create(text, g:WinoptsScope())
     endif
     let g:scope_previous = text
 endfunction
 
-augroup GroupScope
-    au!
-    au CursorHold *.vim call ScopePopup()
-augroup END
-
-"
-" Description: If a function 'scope#Parser'..&ft exists, call it. The returned
+" Description: If a function 'scope#GetScope'..&ft exists, call it. The returned
 " string can be used by 'statusline'. Recommended way to add new parser
-" functions is to add it in this file. Most
-" important is that the function ScopeParser&ft exists.
+" functions is to add it in this file. Most important is that the function
+" ScopeParser&ft exists.
 function! scope#GetScope()
-  let parser_fname = 'scope#Parser' . toupper(&ft[0]) . &ft[1:]
+  let parser_fname = 'scope#GetScope' . toupper(&ft[0]) . &ft[1:]
   try
-    let Parser = function(parser_fname)
-    return Parser()
+    let FuncRef = function(parser_fname)
+    return FuncRef()
   catch
     return ''
   endtry
 endfunction
 
 " Description: A scope parser for C files.
-function! scope#ParserC() abort
+function! scope#GetScopeC() abort
   " Regular expressions to find head and bottom lines of a C function.
   let regexpHead = '^[a-zA-Z_].*\(\<[0-9a-zA-Z_]\+\)\s*(.*'
   let regexpTail = '^}.*$'
@@ -63,7 +56,7 @@ function! scope#ParserC() abort
 endfun
 
 " Description: A simple scope parser for Python files.
-function! scope#ParserPython() abort
+function! scope#GetScopePython() abort
     let regexpHead = '^\s*\(class\|def\)\s\+\(\w\+\).*$'
     let lineHead = search(regexpHead, 'bnWe')
     if lineHead > 0
@@ -74,7 +67,7 @@ function! scope#ParserPython() abort
 endfun
 
 " Description: A simple scope parser for Markdown files.
-function! scope#ParserMarkdown() abort
+function! scope#GetScopeMarkdown() abort
   let fNum = search('^#\{1,\}', 'bcnWez')
     if fNum > 0
       let chapter_str = substitute(getline(fNum), '^\(#\{1,\}\)\s\+\(.*\)$', '\=len(submatch(1)).."|"..submatch(2)', '')
@@ -89,7 +82,7 @@ function! scope#ParserMarkdown() abort
 endfun
 
 " Description: A scope parser for Vim files.
-function! scope#ParserVim() abort
+function! scope#GetScopeVim() abort
   " Regular expressions to find head and bottom lines of a Vim function.
   let regexpHead = '^\(func\|def\|export def\).*\ \+\([A-Za-z0-9#:<>]\+\)(.*$'
   let regexpTail = '^end.*$'
