@@ -43,8 +43,8 @@ execute "hi LineNr" Fg(s:silver4) Attr("bold")
 execute "hi MatchParen" Fg(s:blue) Bg("bg") Attr("underline,bold")
 execute "hi NonText" Fg(s:silver6) Bg("bg")
 execute "hi Normal" Fg(s:silver2) Bg(s:white) Attr("NONE")
-execute "hi Pmenu" Fg(s:white) Bg(s:silver5)
-execute "hi PmenuSel" Fg(s:white) Bg(s:blue)
+execute "hi Pmenu" Fg(s:black) Bg(s:silver8)
+execute "hi PmenuSel" Fg(s:white) Bg(s:blue) Attr("bold")
 execute "hi PmenuThumb" Fg(s:silver2) Bg(s:silver7)
 execute "hi PmenuSbar" Fg(s:red) Bg(s:red)
 execute "hi CurSearch" Fg(s:black) Bg(s:silver6) Attr("NONE")
@@ -55,7 +55,7 @@ execute "hi StatusLineTerm" Fg(s:white) Bg(s:black) Attr("bold")
 execute "hi Terminal" Fg(s:black) Bg(s:silver8)
 execute "hi User1" Fg(s:white) Bg(s:blue)
 execute "hi User2" Fg(s:white) Bg(s:red)
-execute "hi VertSplit" Fg(s:silver9) Bg(s:silver9) Attr("NONE")
+execute "hi VertSplit" Fg(s:silver6) Bg("bg") Attr("NONE")
 execute "hi Visual" Fg(s:white) Bg(s:blue)
 
 highlight! link CursorColumn CursorLine
@@ -63,7 +63,7 @@ highlight! link FoldColumn LineNr
 highlight! link Folded Comment
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine StatusLineNC
+highlight! link TabLine Pmenu
 highlight! link TabLineFill Normal
 highlight! link TabLineSel PmenuSel
 highlight! link WildMenu PmenuSel
@@ -124,9 +124,9 @@ execute "hi rstStrongEmphasis" Fg(s:silver2)  Attr("bold")
 
 " Diffs
 
-execute "hi DiffChange" Fg(s:white) Bg(s:blue)
-execute "hi DiffText" Fg(s:white) Bg(s:blue)
-execute "hi DiffDelete" Fg(s:white) Bg(s:red)
+execute "hi DiffChange" Fg(s:blue) Bg(s:silver9)
+execute "hi DiffText" Fg(s:blue) Bg(s:silver8)
+execute "hi DiffDelete" Fg(s:red) Bg(s:silver8)
 execute "hi DiffAdd" Fg(s:silver3) Bg(s:silver8)
 
 unlet Fg
