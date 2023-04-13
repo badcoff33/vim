@@ -31,7 +31,7 @@ set nottimeout
 set novisualbell
 set nowrap
 set report=0
-set updatetime=1000
+set updatetime=300
 set ruler
 set selection=exclusive
 set selectmode=
@@ -136,8 +136,7 @@ inoremap <C-x><C-+> <C-x><C-]>
 inoremap <k0> <Esc>
 
 " Add blank lines
-nnoremap <expr> <CR> &modifiable ? "o\<Esc>" : "\<CR>"
-nnoremap <S-CR> O<Esc>
+nnoremap <expr> <CR> &modifiable ? "i\<CR><C-f>" : "\<CR>"
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
@@ -249,8 +248,9 @@ nnoremap +w <cmd>setlocal invwrap<CR>
 nnoremap +g :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Leader key mappings {{{
-
 let mapleader = " "
+nmap <C-Space> <Leader>
+imap <C-Space> <Esc><Leader>
 let maplocalleader = "!"
 
 " Edit files
@@ -297,7 +297,7 @@ function! s:ToggleQuickfix()
         endif
     endif
 endfunction
-nnoremap <C-Space> <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap <Leader>q <cmd>call <SID>ToggleQuickfix()<CR>
 imap <C-Space> <Esc><C-Space>
 nnoremap <Leader>G <cmd>clast<CR>
 
