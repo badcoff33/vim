@@ -11,14 +11,13 @@ enddef
 def MakeStart(cmd: string)
     torchlight.TorchlightClearAll()
     run.RunStart({
-        cmd: &makeprg .. cmd,
+        cmd: &makeprg .. " " .. cmd,
         callback: MakeCallback
     })
 enddef
 
 augroup GroupMake
     autocmd!
-    autocmd BufWinEnter * torchlight.TorchlightUpdate()
 augroup END
 
 command! -complete=file -nargs=* Make MakeStart(<q-args>)
