@@ -1,8 +1,8 @@
 vim9script
 
 g:run_dict = []
-g:run_popup_line_min = 3
-g:run_popup_line_max = 10
+g:run_popup_line_min = 2
+g:run_popup_line_max = 6
 g:run_popup_line = g:run_popup_line_min
 
 def g:Winopts(): dict<any>
@@ -116,7 +116,7 @@ export def CloseCb(ch: channel)
     endfor
 
     # act like :make
-    silent doautocmd QuickFixCmdPost make
+    # silent doautocmd QuickFixCmdPost make
 
 enddef
 
@@ -150,6 +150,18 @@ def ConditionalWriteAll(dict: dict<any>)
     endtry
 enddef
 
+var indicator = ["-", "\\", "|", "/"]
+var indicator_index = 0
+
+def GetIndicator(): string
+    if indicator_index < 3
+        indicator_index += 1
+    else
+        indicator_index = 0
+    endif
+    return indicator[indicator_index]
+enddef
+
 def RunJobMonitoringCb(tid: number)
     var job_status: string
 
@@ -160,7 +172,8 @@ def RunJobMonitoringCb(tid: number)
                 popup_setoptions(d.winid, g:Winopts())
                 if has_key(d, "timer") && d.timer == tid
                     popup_settext(d.winid,
-                        printf("%s %s | %d lines | %d sec",
+                        printf("%s %s %s | %d lines | %d sec",
+                            GetIndicator(),
                             toupper(job_status),
                             d.short_cmd,
                             getbufinfo(d.bufnr)[0].linecount,
@@ -188,7 +201,7 @@ export def RunStart(dict: dict<any>): job
     ConditionalWriteAll(dict)
 
     # act like :make
-    silent doautocmd QuickFixCmdPre make
+    # silent doautocmd QuickFixCmdPre make
 
     if has_key(dict, "background") && (dict.background == true)
         v_job = StartBackground(dict)
@@ -205,9 +218,8 @@ def StartBackground(dict: dict<any>): job
     var job_opts = {}
 
     job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
-    job_opts.noblock = 1
     job_opts.err_cb = function("run#BackgroundErrorCb")
-    v_job = job_start(escape(dict.cmd, '\'), job_opts)
+    v_job = job_start("cmd /C " .. escape(dict.cmd, '\'), job_opts)
 
     return v_job
 enddef
@@ -222,7 +234,6 @@ def StartBuffered(dict: dict<any>): job
     setbufvar(run_dict_entry.bufnr, "&buftype", "nofile")
 
     job_opts.cwd = get(dict, "cwd", getcwd())
-    job_opts.noblock = 1
     job_opts.err_buf = run_dict_entry.bufnr
     job_opts.out_buf = run_dict_entry.bufnr
     job_opts.err_io = "buffer"
@@ -236,7 +247,7 @@ def StartBuffered(dict: dict<any>): job
     run_dict_entry.short_cmd = split(dict.cmd, " ")[0]
     run_dict_entry.callback = get(dict, "callback", "")
     run_dict_entry.started = localtime()
-    run_dict_entry.timer = timer_start(1000, RunJobMonitoringCb, {repeat: -1})
+    run_dict_entry.timer = timer_start(333, RunJobMonitoringCb, {repeat: -1})
 
     if has_key(dict, "no_popup") && (dict.no_popup == true)
         run_dict_entry.winid = 0
