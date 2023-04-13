@@ -84,15 +84,14 @@ set hlsearch
 set magic
 set wrapscan
 
-set backup
-execute mkdir(getenv('LOCALAPPDATA') .. g:slash .. join(["vim", "backup"], g:slash) , "p")
-execute 'set backupdir=' .. getenv('LOCALAPPDATA') .. '\vim\backup'
-set wildignore+=*/backup/*
+set writebackup
+set nobackup
+"execute mkdir(getenv('LOCALAPPDATA') .. g:slash .. join(["vim", "backup"], g:slash) , "p")
+"execute 'set backupdir=' .. getenv('LOCALAPPDATA') .. '\vim\backup'
 
 set undofile
 execute mkdir(getenv('LOCALAPPDATA') .. g:slash .. join(["vim", "undo"], g:slash) , "p")
 execute 'set undodir=' .. getenv('LOCALAPPDATA') .. '\vim\undo'
-set wildignore+=*/undo/*
 
 " Insert mode completion
 set complete=.,w
@@ -111,7 +110,7 @@ set wildignore+=*.*~,*.o,TAGS
 set tagcase=match
 
 " Tune the diff feature for my needs.
-set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler
+set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 " When starting in 'diff' mode, go full screen.
 if &diff
     set columns=999 lines=999
@@ -263,8 +262,8 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>f :find<Space>
-nnoremap <Leader><Tab> :buffer<Space>
+nnoremap <Leader>f :find<Space>*
+nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>
 
 " Leader-t space
@@ -298,7 +297,8 @@ function! s:ToggleQuickfix()
         endif
     endif
 endfunction
-nnoremap <BS> <cmd>call <SID>ToggleQuickfix()<CR>
+nnoremap <A-Space> <cmd>call <SID>ToggleQuickfix()<CR>
+imap <A-Space> <Esc><A-Space>
 nnoremap <Leader>G <cmd>clast<CR>
 
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
@@ -316,7 +316,7 @@ augroup GroupVimrc " {{{
     autocmd InsertEnter * checktime
     autocmd BufWinEnter * checktime
     autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
-    autocmd FocusLost * try | silent wall | catch /.*/ | endtry
+    "autocmd FocusLost * try | silent wall | catch /.*/ | endtry
     autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
 augroup END " }}}
 
