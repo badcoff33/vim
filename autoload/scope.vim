@@ -3,21 +3,23 @@
 " Description:
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
-function! g:WinoptsScope()
-    let d = #{ pos: "topright",
+function! g:WinoptsScope(length)
+    let rel_col = win_screenpos(win_getid())[1]
+    let d = #{ pos: "topleft",
                 \ line: "cursor",
-                \ col: win_screenpos(win_getid())[1] + winwidth(0),
+                \ col: rel_col + winwidth(0) - min([30, a:length + 1]),
                 \ highlight: 'Search',
                 \ padding: [0, 1, 0, 1],
                 \ time: 2000 }
     return d
 endfunction
 
+let g:scope_previous = ""
+
 function! scope#PopupScope()
-    let g:scope_previous = get(g:, "scope_previous", "")
     let text = scope#GetScope()
     if text != g:scope_previous && text != ""
-        call popup_create(text, g:WinoptsScope())
+        call popup_create("<< " .. text, g:WinoptsScope(len(text) + 3))
     endif
     let g:scope_previous = text
 endfunction
