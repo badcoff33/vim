@@ -137,7 +137,7 @@ execute "hi rstStrongEmphasis" Fg(s:green2)  Attr("bold")
 " Diffs
 execute "hi DiffChange" Fg(s:white) Bg(s:bg4)
 execute "hi DiffText" Fg(s:blue2) Bg(s:bg4) Attr("bold")
-execute "hi DiffDelete" Fg(s:red1) Bg(s:red1)
+execute "hi DiffDelete" Fg(s:red1) Bg(s:bg3)
 execute "hi DiffAdd" Fg(s:green2) Bg(s:bg3) Attr("bold")
 
 unlet Fg
