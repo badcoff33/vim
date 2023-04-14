@@ -280,27 +280,6 @@ nnoremap <Leader>cc <Cmd>cc<CR>
 nnoremap <Leader>cf <Cmd>cfirst<CR>
 nnoremap <Leader>cl <Cmd>clast<CR>
 
-" Toggle the quickfix window
-function! s:ToggleQuickfix()
-    let is_open = v:false
-    windo if &buftype== "quickfix" | let is_open = v:true | endif
-    if is_open == v:false
-        let qf = getqflist()
-        execute "botright" "copen" min([&lines/3, max([1, len(qf)])])
-        wincmd p
-    else
-        if (winnr("$") == 1) && (&buftype=="quickfix")
-            buffer #
-        else
-            cclose
-            wincmd p
-        endif
-    endif
-endfunction
-nnoremap <Leader>q <cmd>call <SID>ToggleQuickfix()<CR>
-imap <C-Space> <Esc><C-Space>
-nnoremap <Leader>G <cmd>clast<CR>
-
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
 nnoremap <expr> <Leader>g ':silent vimgrep /'..expand("<cword>")..'/ '..expand("%:h")..g:slash..LsFilter(&ft)
