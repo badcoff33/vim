@@ -60,4 +60,5 @@ endfunction
 
 execute mkdir(expand("~/.notes"), "p")
 nnoremap <Leader>n <Cmd>call NotesToday()<CR>
+nnoremap <Leader>N <Cmd>e ~/.notes<CR>
 
