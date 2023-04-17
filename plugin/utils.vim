@@ -31,7 +31,7 @@ def g:PopupFiletypeHelp()
     bufload(b)
     for m in maplist()
         if m.buffer > 0
-            appendbufline(b, "$", printf("%s   -->   %s %s\n", m.lhs, m.mode, m.rhs))
+            appendbufline(b, "$", printf("%s %s\t%s\n", m.mode, m.lhs, m.rhs))
         endif
     endfor
     var rel_row = win_screenpos(win_getid())[0]
@@ -40,14 +40,18 @@ def g:PopupFiletypeHelp()
         pos: "botright",
         title: "BUFFER MAPPINGS",
         line: winheight(0) + rel_row,
-        col: winwidth(0) + rel_col,
+        col: winwidth(0) + rel_col - 1,
         highlight: 'Pmenu',
         maxwidth: 40,
         maxheight: 20,
         wrap: 0,
-        time: 5500,
-        padding: [1, 1, 1, 1],
+        moved: "any",
+        border: [1, 1, 1, 1],
+        padding: [0, 1, 0, 1],
+        drag: true,
+        close: "click"
     })
+    setbufvar(b, "&modified", false)
 enddef
 
 nnoremap <Leader>? <Cmd>call PopupFiletypeHelp()<CR>
