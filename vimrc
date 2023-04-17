@@ -134,6 +134,7 @@ inoremap <C-x><C-+> <C-x><C-]>
 
 " Switching modes
 inoremap <k0> <Esc>
+imap <C-Space> <Esc>
 
 " Add blank lines
 nnoremap <expr> <CR> &modifiable ? "i\<CR><C-f>" : "\<CR>"
@@ -249,8 +250,6 @@ nnoremap +g :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Leader key mappings {{{
 let mapleader = " "
-nmap <C-Space> <Leader>
-imap <C-Space> <Esc><Leader>
 let maplocalleader = "!"
 
 " Edit files
