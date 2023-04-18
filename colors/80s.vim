@@ -8,7 +8,7 @@ endif
 
 hi clear
 set background=dark
-let g:colors_name = "bladerunner"
+let g:colors_name = "80s"
 
 let s:black    = "#000000"
 let s:white    = "#FFFFFF"
@@ -115,10 +115,10 @@ execute "hi htmlH1" Fg(s:red)  Attr("bold")
 execute "hi htmlH2" Fg(s:red)  Attr("bold")
 execute "hi htmlH3" Fg(s:red)  Attr("bold")
 
-" Filetype Markdown
+" Some markup flavours
 
-execute "hi markdownCode" Fg(s:silver8) Bg(s:silver2)
-execute "hi markdownCodeBlock" Fg(s:blue)
+execute "hi markdownCode" Fg(s:silver6) Bg(s:silver2)
+execute "hi markdownCodeBlock" Fg(s:silver6)
 execute "hi rstEmphasis" Fg(s:blue)
 execute "hi rstStrongEmphasis" Fg(s:blue)  Attr("bold")
 
