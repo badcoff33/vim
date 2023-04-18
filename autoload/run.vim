@@ -92,12 +92,21 @@ export def CloseCb(ch: channel)
                 errors += e.type ==? "e" ? 1 : 0
             endfor
             UpdatePopupPosition()
-            popup_create(
-                printf("DONE | %d lines | %d warnings | %d errors",
-                    lines,
-                    warnings,
-                    errors),
-                g:WinoptsDone())
+            var done_str = printf("%s took %dsec | %d lines",
+                d.short_cmd,
+                localtime() - d.started,
+                lines)
+            if warnings == 1
+                done_str ..= printf(" | %d warning", warnings)
+            elseif warnings > 1
+                done_str ..= printf(" | %d warnings", warnings)
+            endif
+            if errors == 1
+                done_str ..= printf(" | %d error", errors)
+            elseif errors > 1
+                done_str ..= printf(" | %d errors", errors)
+            endif
+            popup_create(done_str, g:WinoptsDone())
             if has_key(d, "winid")
                 popup_close(d.winid)
             endif
@@ -154,9 +163,8 @@ var indicator = ["-", "\\", "|", "/"]
 var indicator_index = 0
 
 def GetIndicator(): string
-    if indicator_index < 3
-        indicator_index += 1
-    else
+    indicator_index += 1
+    if indicator_index == 4
         indicator_index = 0
     endif
     return indicator[indicator_index]
@@ -172,12 +180,12 @@ def RunJobMonitoringCb(tid: number)
                 popup_setoptions(d.winid, g:Winopts())
                 if has_key(d, "timer") && d.timer == tid
                     popup_settext(d.winid,
-                        printf("%s %s %s | %d lines | %d sec",
+                        printf("%s %s %s | %d lines",
                             GetIndicator(),
                             toupper(job_status),
                             d.short_cmd,
-                            getbufinfo(d.bufnr)[0].linecount,
-                            localtime() - d.started))
+                            getbufinfo(d.bufnr)[0].linecount
+                        ))
                     break
                 endif
             else
