@@ -8,7 +8,7 @@ function s:NotesBufferSettings()
 endfunction
 
 function! NotesToday()
-    execute "drop" strftime("~/.notes/note-%d-%m-%y.md")
+    execute "drop" strftime("~/.notes/note-%Y-%m-%d.md")
     call s:NotesBufferSettings()
     let g:notes_files = NotesUpdateBacklog(60)
     let g:notes_file_idx = 0
@@ -19,7 +19,7 @@ function! NotesUpdateBacklog(days)
     let now = localtime()
     let files = []
     for day in range(0, -a:days, -1)
-        let file_candidate = expand(strftime("~/.notes/note-%d-%m-%y.md", (now - now % one_day) + (day * one_day )))
+        let file_candidate = expand(strftime("~/.notes/note-%Y-%m-%d.md", (now - now % one_day) + (day * one_day )))
         if bufexists(file_candidate)
             call add(files, file_candidate)
         elseif filereadable(file_candidate)
