@@ -208,12 +208,18 @@ cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
 
 " Surfing the quickfix matches
-nnoremap <A-h> :colder<CR>
-nnoremap <A-l> :cnewer<CR>
-nnoremap <A-j> <cmd>cnext<CR>
-nnoremap <A-k> <cmd>cprevious<CR>
+nnoremap + <cmd>cnext<CR>
+nnoremap - <cmd>cprevious<CR>
 
 " Move between windows - This is boring {{{
+nnoremap <A-h> <C-w>h
+nnoremap <A-l> <C-w>l
+nnoremap <A-k> <C-w>k
+nnoremap <A-j> <C-w>j
+inoremap <A-h> <Esc><C-w>h
+inoremap <A-l> <Esc><C-w>l
+inoremap <A-k> <Esc><C-w>k
+inoremap <A-j> <Esc><C-w>j
 nnoremap <S-left> <C-w>h
 nnoremap <S-right> <C-w>l
 nnoremap <S-up> <C-w>k
@@ -241,16 +247,16 @@ inoremap <C-s>) <C-o>B(<Esc>ea)
 inoremap <C-s>] <C-o>B[<Esc>ea]
 inoremap <C-s>} <C-o>B{<Esc>ea}
 
-" toggle options
-nnoremap +s <cmd>setlocal invspell spell? spelllang?<CR>
-nnoremap +p <cmd>setlocal invpaste paste?<CR>
-nnoremap +r <cmd>setlocal invrelativenumber<CR>
-nnoremap +w <cmd>setlocal invwrap<CR>
-nnoremap +g :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
-
 " Leader key mappings {{{
 let mapleader = " "
 let maplocalleader = "!"
+
+" toggle options
+nnoremap <Leader>os <cmd>setlocal invspell spell? spelllang?<CR>
+nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
+nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
+nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
+nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Edit files
 nnoremap <Leader>, :edit <C-r>=expand("~/vimfiles") .. g:slash<CR>
