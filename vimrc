@@ -50,7 +50,7 @@ set spelllang=en_us
 set spelloptions=camel
 
 " Set behavior for commands ':cc', ':cn', 'cp', etc.
-set switchbuf=useopen,uselast
+set switchbuf=usetab,uselast
 
 " keep cursor line away from the upper and lower window border
 set scrolloff=2
@@ -60,10 +60,9 @@ set scrolljump=1
 set sidescroll=8
 set sidescrolloff=3
 
-" window behavior
-set nosplitbelow
+" split window behavior
+set splitbelow
 set splitright
-set noequalalways
 
 " folding
 set foldmethod=indent
@@ -137,7 +136,7 @@ inoremap <k0> <Esc>
 imap <C-Space> <Esc>
 
 " Add blank lines
-nnoremap <expr> <CR> &modifiable ? "i\<CR><C-f>" : "\<CR>"
+nnoremap <expr> <CR> &modifiable ? "i\<CR>" : "\<CR>"
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
@@ -236,7 +235,7 @@ tnoremap <S-down> <Esc><C-w>j
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
-nmap <C-l> :nohlsearch<cr>:diffupdate<cr>:redraw!<cr>
+nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR><Cmd>checktime<CR>
 imap <C-l> <Esc><C-l>
 
 " Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
@@ -297,8 +296,6 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 
 augroup GroupVimrc " {{{
     autocmd!
-    autocmd InsertEnter * checktime
-    autocmd BufWinEnter * checktime
     autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
     "autocmd FocusLost * try | silent wall | catch /.*/ | endtry
     autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
