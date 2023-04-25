@@ -35,7 +35,7 @@ function! s:MakeHTML(...)
                     \ cmd: b:rst_command,
                     \ background: v:true,
                     \ no_write: v:true
-        })
+                    \ })
     endif
 endfunction
 
