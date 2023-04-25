@@ -1,10 +1,11 @@
 
 let g:notes_files = []
+let g:notes_home = expand("~/.notes")
 
-function s:NotesBufferSettings()
+function! s:NotesBufferSettings()
     setfiletype markdown
-    nnoremap <buffer> <A-PageDown> <Cmd>call NotesBacklog(+1)<CR>
-    nnoremap <buffer> <A-PageUp>   <Cmd>call NotesBacklog(-1)<CR>
+    nnoremap <LocalLeader>f <Cmd>call NotesBacklog(+1)<CR>
+    nnoremap <LocalLeader>b <Cmd>call NotesBacklog(-1)<CR>
 endfunction
 
 function! NotesToday()
@@ -19,7 +20,7 @@ function! NotesUpdateBacklog(days)
     let now = localtime()
     let files = []
     for day in range(0, -a:days, -1)
-        let file_candidate = expand(strftime("~/.notes/note-%Y-%m-%d.md", (now - now % one_day) + (day * one_day )))
+        let file_candidate = expand(strftime(g:notes_home .. "/note-%Y-%m-%d.md", (now - now % one_day) + (day * one_day )))
         if bufexists(file_candidate)
             call add(files, file_candidate)
         elseif filereadable(file_candidate)
@@ -58,7 +59,34 @@ function! NotesBacklog(dir)
     endtry
 endfunction
 
-execute mkdir(expand("~/.notes"), "p")
-nnoremap <Leader>n <Cmd>call NotesToday()<CR>
-nnoremap <Leader>N <Cmd>e ~/.notes<CR>
+function! GetHeadlines(files)
+    let g:popup_file_list = []
+    let headlines = []
+    for f in a:files
+        for l in readfile(f, "", 10)
+            if matchstr(l, '[#A-Za-z]\+') > ""
+                call add(headlines, fnamemodify(f, ":t") .. "|" .. l)
+                call add(g:popup_file_list, f)
+                break
+            endif
+        endfor
+    endfor
+    return headlines
+endfunction
+
+function! NotesSelected(id, result)
+    execute "drop" g:popup_file_list[a:result - 1]
+endfunction
+
+function! NotesPopup()
+    let current_files = globpath(g:notes_home, "*.md", v:false, v:true)
+    let headlines = GetHeadlines(reverse(sort(current_files)))
+    call popup_menu(reverse(sort(headlines)),
+                \ #{callback: 'NotesSelected'})
+endfunction
+
+execute mkdir(g:notes_home, "p")
+nnoremap <Leader>n. <Cmd>call NotesToday()<CR>
+nnoremap <Leader>nn <Cmd>call NotesPopup()<CR>
+nnoremap <Leader>ng :vimgrep <C-r>=g:notes_home<CR>/*.md<C-b><C-Right><Space>
 
