@@ -14,21 +14,26 @@ else
   let b:markdown_template_file = " --template=" .. b:markdown_template_file
 endif
 
-let b:markdown_command = "pandoc -f gfm -t html5 --toc --toc-depth=3"
-      \ .. b:markdown_css_file
-      \ .. b:markdown_template_file
-      \ .." --metadata title=\""..expand("%:t:r").."\""
-      \ .." -o "..getenv("TEMP")..g:slash..expand("%:t")..".html"
-      \ .." "..getenv("TEMP")..g:slash.."_"..expand("%:t")
 
 function! s:OpenHTML()
-    exe "terminal ++close ++hidden cmd /C start" getenv("TEMP")..g:slash..expand("%:t")..".html"
+    exe "terminal ++close ++hidden cmd /C start" getenv("TEMP") .. g:slash .. expand("%:t") .. ".html"
+endfunction
+
+function! s:ComputeCommand(file)
+    return "pandoc -f gfm -t html5 --toc --toc-depth=3"
+                \ .. b:markdown_css_file
+                \ .. b:markdown_template_file
+                \ .. " --metadata title=\"" .. expand("%:t:r") .. "\""
+                \ .. " -o " .. getenv("TEMP") .. g:slash .. expand("%:t") .. ".html"
+                \ .. " " .. getenv("TEMP") .. g:slash.."_" .. expand("%:t")
 endfunction
 
 function! s:MakeHTML(...)
-    if exists("b:markdown_command")
-        silent exe "write!" getenv("TEMP")..g:slash.."_"..expand("%:t")
-        silent exe "bwipeout!" getenv("TEMP")..g:slash.."_"..expand("%:t")
+    if filereadable(expand("%"))
+        let b:markdown_command = s:ComputeCommand(expand("%"))
+        let b:markdown_temp_file = getenv("TEMP") .. g:slash .. "_" .. expand("%:t")
+        silent exe "write!" b:markdown_temp_file
+        silent exe "bwipeout!" b:markdown_temp_file
         call run#RunStart(#{
                     \ cmd: b:markdown_command,
                     \ background: v:true,
