@@ -8,11 +8,21 @@ setlocal formatoptions-=a
 setlocal tabstop=4
 setlocal shiftwidth=0 " carry over from 'tabstop'
 
-" Make heading underlined
-nnoremap <buffer> <LocalLeader>h1 yyppkkVr=jjVr=}
-nnoremap <buffer> <LocalLeader>h2 yyppkkVr-jjVr-}
-nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr~}
+" Make heading overlined/underlined
+" following the Sphinx recommenadation, "Section"
+" https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
+"  1   # with overline, for parts
+"  2   * with overline, for chapters
+"  3   = for sections
+"  4   - for subsections
+"  5   ^ for subsubsections
+"  6   " for paragraphs
+nnoremap <buffer> <LocalLeader>h1 yyppkkVr#jjVr#}
+nnoremap <buffer> <LocalLeader>h2 yyppkkVr*jjVr*}
+nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr=}
+nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr-}
 nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr^}
+nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr"}
 
 " Toggle between TODO and DONE
 nnoremap <buffer> <LocalLeader>x :call gtd#ToggleTodo()<CR>
