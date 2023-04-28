@@ -9,15 +9,14 @@ unpack_to_start = [
         "pack/unzipped/start/",
         "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip", 
         "https://github.com/godlygeek/tabular/archive/refs/heads/master.zip",
-        "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip",
         "https://github.com/aklt/plantuml-syntax/archive/refs/heads/master.zip"
+        "https://github.com/preservim/tagbar",
         ]
 
 unpack_to_opt = [
         "pack/unzipped/opt/",
         "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip",
         "https://github.com/lilydjwg/colorizer/archive/refs/heads/master.zip",
-        "https://github.com/liuchengxu/vista.vim/archive/refs/heads/master.zip",
         ]
 
 zip_fname = os.getenv("TEMP") + os.sep + "pack_download.zip"
