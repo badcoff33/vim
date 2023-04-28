@@ -180,10 +180,10 @@ def RunJobMonitoringCb(tid: number)
                 popup_setoptions(d.winid, g:Winopts())
                 if has_key(d, "timer") && d.timer == tid
                     popup_settext(d.winid,
-                        printf("%s %s %s | %d lines",
-                            GetIndicator(),
+                        printf("%s %s %s %d lines",
                             toupper(job_status),
                             d.short_cmd,
+                            GetIndicator(),
                             getbufinfo(d.bufnr)[0].linecount
                         ))
                     break
