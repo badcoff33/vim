@@ -136,7 +136,7 @@ inoremap <k0> <Esc>
 imap <C-Space> <Esc>
 
 " Add blank lines
-nnoremap <expr> <CR> &modifiable ? "i\<CR>" : "\<CR>"
+nnoremap <expr> <CR> &modifiable ? "A\<CR><Esc>" : "\<CR>"
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
@@ -201,7 +201,7 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 " }}}
 
 cnoremap <expr> <C-r>, expand("~/vimfiles") .. g:slash
-cnoremap <expr> <C-r>. ((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash
+cnoremap <expr> <C-r>d ((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash
 
 cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
@@ -259,13 +259,13 @@ nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Edit files
 nnoremap <Leader>, :edit <C-r>=expand("~/vimfiles") .. g:slash<CR>
-nnoremap <Leader>. :edit <C-r>=((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash<CR>
 
 " Substitute command
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
+nnoremap <Leader>e :edit <C-r>=((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash<CR>
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>
