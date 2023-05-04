@@ -4,6 +4,7 @@ g:run_dict = []
 g:run_popup_line_min = 2
 g:run_popup_line_max = 6
 g:run_popup_line = g:run_popup_line_min
+g:run_be_verbose = false
 
 def g:Winopts(): dict<any>
     var d = { pos: "botright",
@@ -206,6 +207,12 @@ export def RunStart(dict: dict<any>): job
         return null_job
     endif
 
+    if g:run_be_verbose == true
+        for k in keys(dict)
+            echo "run dict:" k "=" dict[k]
+        endfor
+    endif
+
     ConditionalWriteAll(dict)
 
     # act like :make
@@ -227,7 +234,7 @@ def StartBackground(dict: dict<any>): job
 
     job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
     job_opts.err_cb = function("run#BackgroundErrorCb")
-    v_job = job_start("cmd /C " .. escape(dict.cmd, '\'), job_opts)
+    v_job = job_start("cmd /C " .. dict.cmd, job_opts)
 
     return v_job
 enddef
@@ -267,7 +274,7 @@ def StartBuffered(dict: dict<any>): job
             g:Winopts())
     endif
 
-    run_dict_entry.job = job_start("cmd /C " .. escape(dict.cmd, '\'), job_opts)
+    run_dict_entry.job = job_start("cmd /C " .. dict.cmd, job_opts)
     run_dict_entry.channel = split(string(job_getchannel(run_dict_entry.job)), " ")[1]
 
     add(g:run_dict, run_dict_entry)
