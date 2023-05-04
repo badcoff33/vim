@@ -9,6 +9,7 @@ endif
 
 hi clear
 set background=light
+
 g:colors_name = "twotone"
 
 var black    = "#000000"
