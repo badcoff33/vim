@@ -79,37 +79,49 @@ export def CloseCb(ch: channel)
 
     for d in g:run_dict
         if d.channel == ch_nr
+
             if has_key(d, "timer")
                 timer_stop(d.timer)
             endif
-            setqflist([], " ", {
-                efm: d.regexp,
-                title: d.full_cmd,
-                lines: getbufline(d.bufnr, 1, "$")
-            })
-            for e in getqflist({ "nr": "$", "all": 0 }).items
-                lines = lines + 1
-                warnings += e.type ==? "w" ? 1 : 0
-                errors += e.type ==? "e" ? 1 : 0
-            endfor
-            UpdatePopupPosition()
-            var done_str = printf("%s took %dsec | %d lines",
-                d.short_cmd,
-                localtime() - d.started,
-                lines)
-            if warnings == 1
-                done_str ..= printf(" | %d warning", warnings)
-            elseif warnings > 1
-                done_str ..= printf(" | %d warnings", warnings)
-            endif
-            if errors == 1
-                done_str ..= printf(" | %d error", errors)
-            elseif errors > 1
-                done_str ..= printf(" | %d errors", errors)
-            endif
-            popup_create(done_str, g:WinoptsDone())
+
             if has_key(d, "winid")
                 popup_close(d.winid)
+            endif
+
+            if d.name == "quickfix"
+                setqflist([], " ", {
+                    efm: d.regexp,
+                    title: d.full_cmd,
+                    lines: getbufline(d.bufnr, 1, "$")
+                })
+                for e in getqflist({ "nr": "$", "all": 0 }).items
+                    lines = lines + 1
+                    warnings += e.type ==? "w" ? 1 : 0
+                    errors += e.type ==? "e" ? 1 : 0
+                endfor
+
+                var done_str = printf("%s took %dsec | %d lines",
+                    d.short_cmd,
+                    localtime() - d.started,
+                    lines)
+                if warnings == 1
+                    done_str ..= printf(" | %d warning", warnings)
+                elseif warnings > 1
+                    done_str ..= printf(" | %d warnings", warnings)
+                endif
+                if errors == 1
+                    done_str ..= printf(" | %d error", errors)
+                elseif errors > 1
+                    done_str ..= printf(" | %d errors", errors)
+                endif
+                UpdatePopupPosition()
+                popup_create(done_str, g:WinoptsDone())
+            else
+                var b = bufadd(d.name)
+                execute "drop" d.name
+                setline(line("$") + 1, [d.full_cmd] + getbufline(d.bufnr, 1, "$"))
+                setlocal buftype=nofile nomodified
+
             endif
 
             execute "silent bwipe" d.bufnr
@@ -156,8 +168,8 @@ def ConditionalWriteAll(dict: dict<any>)
     catch /.*/
         echomsg "No autowrite. Not all modified buffers written"
         ls +
-    finally
-    endtry
+            finally
+            endtry
 enddef
 
 var indicator = ["-", "\\", "|", "/"]
@@ -263,6 +275,7 @@ def StartBuffered(dict: dict<any>): job
     run_dict_entry.callback = get(dict, "callback", "")
     run_dict_entry.started = localtime()
     run_dict_entry.timer = timer_start(333, RunJobMonitoringCb, {repeat: -1})
+    run_dict_entry.name = get(dict, "name", "quickfix")
 
     if has_key(dict, "no_popup") && (dict.no_popup == true)
         run_dict_entry.winid = 0

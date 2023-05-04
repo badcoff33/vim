@@ -43,7 +43,7 @@ enddef
 set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
-command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files" .. g:RgGlobSwitch() .. join(split('<args>', " "), g:RgGlobSwitch() ), regexp: "%f"})
+command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files" .. g:RgGlobSwitch() .. join(split('<args>', " "), g:RgGlobSwitch() ), name: "RgFiles"})
 command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args> ' .. join(g:rg_paths, " "), regexp: &grepformat, no_popup: true})
 
 nnoremap <Leader>F :RgFiles **<Left>
