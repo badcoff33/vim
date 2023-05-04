@@ -4,6 +4,7 @@ setlocal nowrap
 setlocal nonumber
 setlocal norelativenumber
 setlocal scrolloff=0
+setlocal wincolor=CursorLine
 
 "prepare cleanup
 setlocal modifiable
@@ -21,6 +22,4 @@ call histdel("search", -1)
 let b:undo_ftplugin = "setlocal number< relativenumber< wrap< scrolloff<"
 
 nnoremap <buffer> <Esc> :cclose<CR>
-nnoremap <buffer> . <cmd>cnext<CR><C-w>p
-nnoremap <buffer> , <cmd>cprev<CR><C-w>p
-nnoremap <buffer> <CR> <CR><C-w>p
+

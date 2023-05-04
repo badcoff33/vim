@@ -68,14 +68,6 @@ function! visuals#info_hl()
     echo "background:" synIDattr(synidtrans, "bg")
 endfunction
 
-function visuals#blend_down()
-    if ((&previewwindow) || (&bt=='help'))
-        set wincolor=CursorLine
-    else
-        set wincolor=
-    endif
-endfunction
-
 function! visuals#blink_on_yank_now(dict)
     let duration = (type(a:dict) == v:t_dict) && (has_key(a:dict, "duration")) ? a:dict["duration"] : 1000
     let a = getpos("'[")

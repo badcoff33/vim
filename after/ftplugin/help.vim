@@ -3,6 +3,7 @@
 " Description: Add-on some features for Help files.
 
 setlocal nonumber norelativenumber
+setlocal wincolor=CursorLine
 
 " Jump to links with enter
 nmap <silent> <buffer> <CR> <C-]>
