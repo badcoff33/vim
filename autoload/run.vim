@@ -118,10 +118,12 @@ export def CloseCb(ch: channel)
                 popup_create(done_str, g:WinoptsDone())
             else
                 var b = bufadd(d.name)
+                lines = getbufinfo(b)[0].linecount
                 execute "drop" d.name
-                setline(line("$") + 1, [d.full_cmd] + getbufline(d.bufnr, 1, "$"))
-                setlocal buftype=nofile nomodified
-
+                setlocal noreadonly
+                setline(lines + 1, ['# ' .. d.full_cmd] + getbufline(d.bufnr, 1, "$"))
+                setlocal buftype=nofile nomodified readonly
+                setpos(".", [b, lines + 1, 0, 0])
             endif
 
             execute "silent bwipe" d.bufnr

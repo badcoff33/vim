@@ -2,11 +2,11 @@ vim9script
 # Vim plugin FIF - find in files
 # Description: Some minor extensions to run ripgrep or Windows own findstr.
 
-import autoload "run.vim"
-
 if !executable("rg")
     finish
 endif
+
+import autoload "run.vim"
 
 g:rg_glob_patterns = {
     c: '-g *.c -g *.h -g *.850 -g *.s',
@@ -43,10 +43,10 @@ enddef
 set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
-command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files" .. g:RgGlobSwitch() .. join(split('<args>', " "), g:RgGlobSwitch() ), name: "RgFiles"})
+command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files" .. g:RgGlobSwitch() .. ' <args>', name: "RgFiles"})
 command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args> ' .. join(g:rg_paths, " "), regexp: &grepformat, no_popup: true})
 
-nnoremap <Leader>F :RgFiles **<Left>
+nnoremap <Leader>F :RgFiles ** .<Left><Left><Left>
 nnoremap <Leader>R :Rg <C-r>=g:RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR>
 nnoremap <silent> <Leader>r :Rg <C-r>=g:RgExcludes()<CR> <C-r>=RgIncludes(&ft)<CR> <C-r>=RgPattern()<CR><CR>
 
