@@ -1,11 +1,11 @@
 vim9script
-# A Vim color theme
-# Intro: Apollo tries to be a less-is-more color theme. It uses less colors to
-# gain better readability and colorful clutter. But the temptation was too
-# strong: I added some blueish and greenish colors to make thins not too
-# boring. Enjoy!
-# Name: Apollo
-# Maintainer: Markus Prepens
+# Name: Apollo Maintainer: Markus Prepens
+#
+# A Vim color theme Intro: Apollo tries to be a less-is-more color theme to
+# reduce distraction by fancy colors. But the temptation was too strong:
+# Blueish and greenish colors should help to make things not too boring.
+#
+# Enjoy!
 
 if exists("syntax_on")
    syntax reset
@@ -18,12 +18,12 @@ g:colors_name = "apollo"
 
 var white = "#FFFFFF"
 var black = "#000000"
-var bg    = ["#132443", "#263154", "#344468", "#48506F"]
+var bg    = ["#133433", "#263154", "#344468", "#48506F"]
 var moon  = ["#A0A0A8", "#B8B8BE", "#D0D0D8", "#E0E0E8"]
 var green = ["#1D683C", "#22A358", "#27C168", "#27F070"]
 var blue  = ["#1B507F", "#3068B8", "#4090D8", "#70B0F8"]
 var red   = ["#B82042", "#E84070"]
-var sun   = "#B0BF40"
+var sun   = "#D0DF40"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str

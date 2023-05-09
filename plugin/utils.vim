@@ -34,6 +34,7 @@ def g:PopupFiletypeHelp()
             appendbufline(b, "$", printf("%s %s\t%s\n", m.mode, m.lhs, m.rhs))
         endif
     endfor
+    deletebufline(b, 1) # delete first line (always blank)
     var rel_row = win_screenpos(win_getid())[0]
     var rel_col = win_screenpos(win_getid())[1]
     popup_create(b, {

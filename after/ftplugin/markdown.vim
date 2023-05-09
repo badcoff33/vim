@@ -19,7 +19,7 @@ nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> e
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 
 " some math calculation
-nnoremap <buffer> g== o<C-r>="= "..luaeval(getline(line(".") - 1))<CR>
+nnoremap <buffer> g== o<C-r>="= " .. luaeval(getline(line(".") - 1))<CR>
 
 " Make heading underlined
 nnoremap <buffer> <localleader>1 yypVr=k

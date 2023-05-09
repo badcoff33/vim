@@ -3,6 +3,8 @@
 " Description:   Some support functions and mappings for C code files.
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
+let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
+
 " iabbrev did not work when 'cpoptions' has '>'
 if match(&cpoptions, '>') < 0
   iabbrev <buffer> xswi switch ()<C-f><Cr>{<CR>default:<C-f><CR>break;<CR>}<C-o>4k<End><Left>
@@ -13,15 +15,16 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> xinc #include ".h"<Left><Left><Left>
   iabbrev <buffer> xdef #define
   iabbrev <buffer> xtod #warning TODO
+  iabbrev <buffer> {} {<CR><CR>}<Up><C-f>
 endif
 
 
-" Open a neew line without continuation of comment
+" Open a new line without continuation of comment
 nnoremap <buffer> <C-CR> $o<Esc>0"_D
 imap     <buffer> <C-CR> <Esc><S-CR>i
 
 " open tag preview
-nnoremap <buffer> K g<C-]>
+nnoremap <buffer> K g<C-]>zz
 
 " Toggle automatic comment formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
