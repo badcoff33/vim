@@ -13,7 +13,7 @@ nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
 
 setlocal path=
 for p in split(&rtp, ",")
-    execute "setlocal path+=" .. escape(p .. g:slash, " \\") .. "**"
+    execute "setlocal path+=" .. escape(p .. Sep(), " \\") .. "**"
 endfor
 
 " source current visual region

@@ -6,7 +6,9 @@
 " Maintainer: Markus Prepens (markus dot prepens at gmail dot com)
 
 let g:vim_home = expand('<sfile>:p:h')
-let g:slash = exists('&shellslash') ? '\' : '/'
+
+let Sep = { -> exists('&shellslash') ? '\' : '/' }
+let AppendSep = { p -> p .. (exists('&shellslash') ? '\' : '/') }
 
 filetype plugin on
 filetype indent on
@@ -85,11 +87,11 @@ set wrapscan
 
 set writebackup
 set nobackup
-"execute mkdir(getenv('LOCALAPPDATA') .. g:slash .. join(["vim", "backup"], g:slash) , "p")
+"execute mkdir(AppendSep(getenv('LOCALAPPDATA')).. join(["vim", "backup"], Sep()) , "p")
 "execute 'set backupdir=' .. getenv('LOCALAPPDATA') .. '\vim\backup'
 
 set undofile
-execute mkdir(getenv('LOCALAPPDATA') .. g:slash .. join(["vim", "undo"], g:slash) , "p")
+execute mkdir(AppendSep(getenv('LOCALAPPDATA')) .. join(["vim", "undo"], Sep()) , "p")
 execute 'set undodir=' .. getenv('LOCALAPPDATA') .. '\vim\undo'
 
 " Insert mode completion
@@ -200,8 +202,8 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 " }}}
 
-cnoremap <expr> <C-r>, expand("~/vimfiles") .. g:slash
-cnoremap <expr> <C-r>d ((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash
+cnoremap <expr> <C-r>, AppendSep(expand("~/vimfiles"))
+cnoremap <expr> <C-r>d ((expand("%:h") == "") ? "." : AppendSep(expand("%:h") ))
 
 cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
@@ -258,14 +260,14 @@ nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
 nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Edit files
-nnoremap <Leader>, :edit <C-r>=expand("~/vimfiles") .. g:slash<CR>
+nnoremap <Leader>, :edit <C-r>=AppendSep(expand("~/vimfiles"))<CR>
 
 " Substitute command
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>e :edit <C-r>=((expand("%:h") == "") ? "." : expand("%:h") ) .. g:slash<CR>
+nnoremap <Leader>e :edit <C-r>=((expand("%:h") == "") ? "." : AppendSep(expand("%:h")))<CR>
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>
@@ -286,7 +288,7 @@ nnoremap <Leader>cl <Cmd>clast<CR>
 
 let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
-nnoremap <expr> <Leader>g ':silent vimgrep /'..expand("<cword>")..'/ '..expand("%:h")..g:slash..LsFilter(&ft)
+nnoremap <expr> <Leader>g ':silent vimgrep /' .. expand("<cword>") .. '/ ' .. AppendSep(expand("%:h")) .. LsFilter(&ft)
 
 " }}}
 
