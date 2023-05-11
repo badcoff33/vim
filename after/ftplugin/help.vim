@@ -16,6 +16,9 @@ nnoremap <silent> <buffer> <Esc> <Cmd>helpclose<CR>
 " Show value of 'option' under cursor
 nnoremap <buffer> <LocalLeader>o :set <C-r>=substitute(expand("<cword>"), "[^a-z]", "", "g")<CR>?<CR>
 
+nnoremap <buffer> <silent> o :call search("'\\w\\+'", 'W')<CR>
+nnoremap <buffer> <silent> O :call search("'\\w\\+'", 'bW')<CR>
+
 nnoremap <buffer> <silent> . :call search('\|[^\ ]\+\|', 'W')<CR>
 nnoremap <buffer> <silent> , :call search('\|[^\ ]\+\|', 'bW')<CR>
 

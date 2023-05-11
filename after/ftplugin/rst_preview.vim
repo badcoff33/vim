@@ -17,7 +17,7 @@ else
 endif
 
 function! s:OpenHTML()
-    exe "terminal ++close ++hidden cmd /C start" getenv("TEMP")..g:slash..expand("%:t")..".html"
+    exe "terminal ++close ++hidden cmd /C start" AppendSep(getenv("TEMP")) .. expand("%:t") .. ".html"
 endfunction
 
 function! s:ComputeCommand(file)
@@ -25,14 +25,14 @@ function! s:ComputeCommand(file)
                 \ .. b:rst_css_file
                 \ .. b:rst_template_file
                 \ .. " --metadata title=\"" .. expand("%:t:r") .. "\""
-                \ .. " -o " .. getenv("TEMP") .. g:slash .. expand("%:t") .. ".html"
-                \ .. " " .. getenv("TEMP") .. g:slash .. "_" .. expand("%:t")
+                \ .. " -o " .. AppendSep(getenv("TEMP")) .. expand("%:t") .. ".html"
+                \ .. " " .. AppendSep(getenv("TEMP")) .. "_" .. expand("%:t")
 endfunction
 
 function! s:MakeHTML(...)
     if filereadable(expand("%"))
         let b:rst_command = s:ComputeCommand(expand("%"))
-        let b:rst_temp_file = getenv("TEMP") .. g:slash .. "_" .. expand("%:t")
+        let b:rst_temp_file = AppendSep(getenv("TEMP")) .. "_" .. expand("%:t")
         silent exe "write!" b:rst_temp_file
         silent exe "bwipeout!" b:rst_temp_file
         call run#RunStart(#{
