@@ -21,7 +21,7 @@ let s:silver8 = "#E7E2E7"
 let s:silver7 = "#D5D1D5"
 let s:silver6 = "#BEB0BE"
 let s:silver5 = "#989098"
-let s:silver4 = "#7A707A"
+let s:silver4 = "#7A708A"
 let s:silver3 = "#5A505A"
 let s:silver2 = "#473B47"
 let s:silver1 = "#352835"
@@ -44,7 +44,7 @@ execute "hi MatchParen" Fg(s:blue) Bg("bg") Attr("underline,bold")
 execute "hi NonText" Fg(s:silver6) Bg("bg")
 execute "hi Normal" Fg(s:silver7) Bg(s:black) Attr("NONE")
 execute "hi Pmenu" Fg(s:white) Bg(s:silver3)
-execute "hi PmenuSel" Fg(s:white) Bg(s:blue) Attr("bold")
+execute "hi PmenuSel" Fg(s:white) Bg(s:blue) Attr("NONE")
 execute "hi PmenuThumb" Fg(s:silver2) Bg(s:silver7)
 execute "hi PmenuSbar" Fg(s:red) Bg(s:red)
 execute "hi CurSearch" Fg(s:black) Bg(s:silver7) Attr("NONE")
@@ -61,6 +61,7 @@ execute "hi Visual" Fg(s:white) Bg(s:blue)
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link Folded Comment
+highlight! link Ignore Comment
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Pmenu
@@ -70,9 +71,8 @@ highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
 
 " Code
-
-execute "hi Comment" Fg(s:silver4) Attr("NONE")
-execute "hi Conditional" Fg(s:red)  Attr("bold")
+execute "hi Comment" Fg(s:silver5) Attr("NONE")
+execute "hi Conditional" Fg(s:red)  Attr("NONE")
 execute "hi Constant" Fg(s:blue)
 execute "hi Directory" Fg(s:blue) Attr("underline")
 execute "hi Error" Fg(s:red) Bg("bg") Attr("underline")
@@ -87,7 +87,7 @@ execute "hi Question" Fg(s:blue) Bg("bg")
 execute "hi QuickFixLine" Fg(s:blue) Bg(s:silver2) Attr("bold")
 execute "hi Special" Fg(s:blue)
 execute "hi SpecialKey" Fg(s:blue)
-execute "hi Statement" Fg(s:red)  Attr("bold")
+execute "hi Statement" Fg(s:red)  Attr("NONE")
 execute "hi StorageClass" Fg(s:red)
 execute "hi String" Fg(s:silver7)
 execute "hi Structure" Fg(s:red) Attr("NONE")
