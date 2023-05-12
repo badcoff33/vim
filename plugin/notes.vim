@@ -2,6 +2,10 @@
 let g:notes_files = []
 let g:notes_home = expand("~/.notes")
 
+if !isdirectory(g:notes_home)
+    mkdir mkdir(g:notes_home)
+endif
+
 function! s:NotesBufferSettings()
     setfiletype markdown
     nnoremap <LocalLeader>f <Cmd>call NotesBacklog(+1)<CR>
@@ -75,7 +79,9 @@ function! GetHeadlines(files)
 endfunction
 
 function! NotesSelected(id, result)
-    execute "drop" g:popup_file_list[a:result - 1]
+    if a:result > 1
+        execute "drop" g:popup_file_list[a:result - 1]
+    endif
 endfunction
 
 function! NotesPopup()
