@@ -7,7 +7,7 @@
 
 let g:vim_home = expand('<sfile>:p:h')
 
-let Sep = { -> exists('&shellslash') ? '\' : '/' }
+let Sep = { -> exists('&shellslash') && (has("win32") || has ("win64")) ? '\' : '/' }
 let AppendSep = { p -> p .. (exists('&shellslash') ? '\' : '/') }
 
 filetype plugin on
