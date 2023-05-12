@@ -9,7 +9,7 @@ setlocal nocindent
 setlocal foldmethod=marker
 
 nnoremap <buffer> K :help <C-r><C-w><CR>
-nnoremap <buffer> <LocalLeader>o :set <C-r><C-w>?<CR>
+nnoremap <buffer> <LocalLeader>o :verbose set <C-r><C-w>?<CR>
 
 setlocal path=
 for p in split(&rtp, ",")
