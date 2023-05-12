@@ -17,22 +17,24 @@ else
 endif
 
 function! s:OpenHTML()
-    exe "terminal ++close ++hidden cmd /C start" AppendSep(getenv("TEMP")) .. expand("%:t") .. ".html"
+    exe "terminal ++close ++hidden cmd /C start" b:rst_temp_html_file
 endfunction
+
+let b:rst_temp_file = getenv("TEMP") .. expand("/") .. "_" .. expand("%:t")
+let b:rst_temp_html_file = getenv("TEMP") .. expand("/") .. expand("%:t") .. ".html"
 
 function! s:ComputeCommand(file)
     return "pandoc -f rst -t html5 --toc --toc-depth=3"
                 \ .. b:rst_css_file
                 \ .. b:rst_template_file
                 \ .. " --metadata title=\"" .. expand("%:t:r") .. "\""
-                \ .. " -o " .. AppendSep(getenv("TEMP")) .. expand("%:t") .. ".html"
-                \ .. " " .. AppendSep(getenv("TEMP")) .. "_" .. expand("%:t")
+                \ .. " -o " .. b:rst_temp_html_file
+                \ .. " " .. b:rst_temp_file
 endfunction
 
 function! s:MakeHTML(...)
     if filereadable(expand("%"))
         let b:rst_command = s:ComputeCommand(expand("%"))
-        let b:rst_temp_file = AppendSep(getenv("TEMP")) .. "_" .. expand("%:t")
         silent exe "write!" b:rst_temp_file
         silent exe "bwipeout!" b:rst_temp_file
         call run#RunStart(#{

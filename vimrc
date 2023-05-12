@@ -63,8 +63,8 @@ set sidescroll=8
 set sidescrolloff=3
 
 " split window behavior
-set splitbelow
-set splitright
+set nosplitbelow
+set nosplitright
 
 " folding
 set foldmethod=indent
@@ -85,14 +85,8 @@ set hlsearch
 set magic
 set wrapscan
 
-set writebackup
-set nobackup
-"execute mkdir(AppendSep(getenv('LOCALAPPDATA')).. join(["vim", "backup"], Sep()) , "p")
-"execute 'set backupdir=' .. getenv('LOCALAPPDATA') .. '\vim\backup'
-
 set undofile
-execute mkdir(AppendSep(getenv('LOCALAPPDATA')) .. join(["vim", "undo"], Sep()) , "p")
-execute 'set undodir=' .. getenv('LOCALAPPDATA') .. '\vim\undo'
+execute 'set undodir=' .. getenv('TEMP')
 
 " Insert mode completion
 set complete=.,w
@@ -202,8 +196,8 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 " }}}
 
-cnoremap <expr> <C-r>, AppendSep(expand("~/vimfiles"))
-cnoremap <expr> <C-r>d ((expand("%:h") == "") ? "." : AppendSep(expand("%:h") ))
+cnoremap <expr> <C-r>, expand("~/vimfiles/")
+cnoremap <expr> <C-r>d expand("%:h") .. expand("/")
 
 cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
@@ -260,14 +254,14 @@ nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
 nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Edit files
-nnoremap <Leader>, :edit <C-r>=AppendSep(expand("~/vimfiles"))<CR>
+nnoremap <Leader>, :edit <C-r>=expand("~/vimfiles/")<CR>
 
 " Substitute command
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>e :edit <C-r>=((expand("%:h") == "") ? "." : AppendSep(expand("%:h")))<CR>
+nnoremap <Leader>e :edit <C-r>=expand("%:h") .. expand("/")<CR>
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>

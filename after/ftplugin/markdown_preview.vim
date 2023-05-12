@@ -14,9 +14,11 @@ else
   let b:markdown_template_file = " --template=" .. b:markdown_template_file
 endif
 
+let b:markdown_temp_file = getenv("TEMP") .. expand("/") .. "_" .. expand("%:t")
+let b:markdown_temp_html_file = getenv("TEMP") .. expand("/") .. expand("%:t") .. ".html"
 
 function! s:OpenHTML()
-    exe "terminal ++close ++hidden cmd /C start" AppendSep(getenv("TEMP")) .. expand("%:t") .. ".html"
+    exe "terminal ++close ++hidden cmd /C start" b:markdown_temp_html_file
 endfunction
 
 function! s:ComputeCommand(file)
@@ -24,14 +26,14 @@ function! s:ComputeCommand(file)
                 \ .. b:markdown_css_file
                 \ .. b:markdown_template_file
                 \ .. " --metadata title=\"" .. expand("%:t:r") .. "\""
-                \ .. " -o " .. AppendSep(getenv("TEMP")) .. expand("%:t") .. ".html"
-                \ .. " " .. AppendSep(getenv("TEMP")) .. "_" .. expand("%:t")
+                \ .. " -o " .. b:markdown_temp_html_file
+                \ .. " " .. b:markdown_temp_file
 endfunction
 
 function! s:MakeHTML(...)
     if filereadable(expand("%"))
         let b:markdown_command = s:ComputeCommand(expand("%"))
-        let b:markdown_temp_file = AppendSep(getenv("TEMP")) .. "_" .. expand("%:t")
+        let b:markdown_temp_file = getenv("TEMP") .. expand("/") .. "_" .. expand("%:t")
         silent exe "write!" b:markdown_temp_file
         silent exe "bwipeout!" b:markdown_temp_file
         call run#RunStart(#{
