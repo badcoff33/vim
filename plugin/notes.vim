@@ -87,8 +87,10 @@ endfunction
 function! NotesPopup()
     let current_files = globpath(g:notes_home, "*.md", v:false, v:true)
     let headlines = GetHeadlines(reverse(sort(current_files)))
-    call popup_menu(reverse(sort(headlines)),
-                \ #{callback: 'NotesSelected'})
+    call popup_menu(reverse(sort(headlines)), #{
+                \ callback: 'NotesSelected',
+                \ borderchars: [' ']
+                \ })
 endfunction
 
 execute mkdir(g:notes_home, "p")
