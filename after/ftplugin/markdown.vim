@@ -3,6 +3,7 @@
 setlocal formatoptions=q
 setlocal textwidth=80
 setlocal shiftwidth=4
+setlocal noexpandtab
 setlocal autoindent
 setlocal nocindent
 setlocal foldexpr=MarkdownFold()
