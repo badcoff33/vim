@@ -3,11 +3,11 @@ vim9script
 def g:OpenTermHere()
     var save_cwd = getcwd()
 
-    execute "cd" expand("%:h")
+    execute "noautocmd cd" expand("%:h")
     terminal
     wincmd J
     startinsert
-    execute "cd" save_cwd
+    execute "noautocmd cd" save_cwd
 enddef
 
 def g:PopupTermHere()
