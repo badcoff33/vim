@@ -148,9 +148,9 @@ inoremap <C-Del> <C-o>de
 cnoremap <C-BS> <C-w>
 cnoremap <C-Del> <C-Right><C-w>
 
-" Next/prev match,expand fold and recenter
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" By every next or prev match, expand fold
+nnoremap n nzv
+nnoremap N Nzv
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
@@ -293,8 +293,9 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 augroup GroupVimrc " {{{
     autocmd!
     autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "apollo" )
-    "autocmd FocusLost * try | silent wall | catch /.*/ | endtry
+    autocmd FocusLost * try | silent wall | catch /.*/ | endtry
     autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
+    autocmd DirChanged global if filereadable(".vimrc") | call popup_create("local .vimrc", #{time: 2000, padding: [1]}) | endif
 augroup END " }}}
 
 let g:term = &term
