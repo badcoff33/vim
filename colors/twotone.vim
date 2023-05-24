@@ -55,7 +55,6 @@ execute "hi Search" Fg(black) Bg(gray[8]) Attr("NONE")
 execute "hi StatusLine" Fg(white) Bg(black) Attr("NONE")
 execute "hi StatusLineNC" Fg(gray[2]) Bg(gray[7]) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
-execute "hi Terminal" Fg(black) Bg(gray[8])
 execute "hi User1" Fg(white) Bg(blue)
 execute "hi User2" Fg(white) Bg(red)
 execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Attr("NONE")
@@ -69,6 +68,7 @@ highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Pmenu
 highlight! link TabLineFill Normal
 highlight! link TabLineSel PmenuSel
+highlight! link Terminal Normal
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
 

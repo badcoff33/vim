@@ -15,8 +15,8 @@
 set makeprg=make
 
 " multi-line
-set errorformat=%W\"%f\"\\,\ line\ %l:\ %t%*[^0-9]%n-%m,%Z%m
-set errorformat+=%E\"%f\"\\,\ line\ %l:\ %t%*[^0-9]%n-%m,%Z%m
+set errorformat=%W\"%f\"\\,\ line\ %l:\ %tarning\ #%n-%m,%Z%m
+set errorformat+=%E\"%f\"\\,\ line\ %l:\ %trror\ #%n-%m,%Z%m
 
 " single-line
 set errorformat+=\"%f\"\\,\ line\ %l:\ %m
