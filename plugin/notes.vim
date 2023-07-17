@@ -79,7 +79,7 @@ function! GetHeadlines(files)
 endfunction
 
 function! NotesSelected(id, result)
-    if a:result > 1
+    if a:result >= 1
         execute "drop" g:popup_file_list[a:result - 1]
     endif
 endfunction
