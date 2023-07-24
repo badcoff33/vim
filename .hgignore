@@ -1,3 +1,4 @@
+syntax: glob
 .netrwhist
 .netrwbook
 .session*
@@ -7,4 +8,4 @@ undo
 backup
 pack/*
 doc/tags
-local.vim 
+local.vim
