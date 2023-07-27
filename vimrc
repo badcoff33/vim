@@ -120,13 +120,6 @@ execute "set langmap+=\<Char-196>}"
 execute "set langmap+=\<Char-252>/"
 execute "set langmap+=\<Char-220>?"
 
-" fix broken C-[, C-] keys on Vim9
-inoremap <C-Char-252> <C-[>
-inoremap <C-+> <C-]>
-nnoremap <C-+> g<C-]>zz
-inoremap <C-+> <C-]>
-inoremap <C-x><C-+> <C-x><C-]>
-
 " Switching modes
 inoremap <k0> <Esc>
 imap <C-Space> <Esc>
@@ -196,7 +189,7 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 " }}}
 
-cnoremap <expr> <C-r>, expand("~/vimfiles/")
+cnoremap <expr> <C-r>v expand("~/vimfiles/")
 cnoremap <expr> <C-r>d expand("%:h") .. expand("/")
 
 cmap <C-BS> <C-w>
