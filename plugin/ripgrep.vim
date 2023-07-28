@@ -36,7 +36,7 @@ enddef
 def g:RgExcludes(): string
     var exclude_string = ""
     for e in g:rg_excludes
-        exclude_string = exclude_string .. g:RgGlobSwitchExclude() .. " " .. e .. " "
+        exclude_string = exclude_string .. g:RgGlobSwitchExclude() .. e .. " "
     endfor
     return exclude_string
 enddef
@@ -62,9 +62,9 @@ set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files" .. g:RgGlobSwitch() .. ' <args>', name: "RgFiles"})
-command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
-
 nnoremap <Leader>F :RgFiles ** .<Left><Left><Left>
+
+command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
 nnoremap <expr> <Leader>R join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), g:RgPaths()], " ")
 nmap            <Leader>r <Leader>R<CR>
 
