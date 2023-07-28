@@ -57,5 +57,6 @@ enddef
 
 nnoremap <Leader>? <Cmd>call PopupFiletypeHelp()<CR>
 nnoremap <Leader>q <cmd>call ToggleQuickfix()<CR>
+nnoremap <F1> <cmd>call ToggleQuickfix()<CR>
 
 defcompile

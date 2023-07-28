@@ -246,8 +246,6 @@ nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
 nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
 nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
-" Edit files
-nnoremap <Leader>, :edit <C-r>=expand("~/vimfiles/")<CR>
 
 " Substitute command
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
@@ -255,6 +253,7 @@ vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
 nnoremap <Leader>e :edit <C-r>=expand("%:h") .. expand("/")<CR>
+nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>

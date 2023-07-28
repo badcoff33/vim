@@ -18,7 +18,7 @@ g:colors_name = "apollo"
 
 var white = "#FFFFFF"
 var black = "#000000"
-var bg    = ["#133433", "#263154", "#344468", "#48506F"]
+var bg    = ["#132443", "#263154", "#344468", "#48506F"]
 var moon  = ["#A0A0A8", "#B8B8BE", "#D0D0D8", "#E0E0E8"]
 var green = ["#1D683C", "#22A358", "#27C168", "#27F070"]
 var blue  = ["#1B507F", "#3068B8", "#4090D8", "#70B0F8"]
@@ -56,7 +56,7 @@ execute "hi StatusLine" Fg(black) Bg(blue[3]) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(moon[3]) Bg(bg[2]) Attr("NONE") Cterm("NONE")
 execute "hi Terminal" Fg(green[3]) Bg(bg[0])
 execute "hi Title" Fg(green[3])
-execute "hi User1" Fg(sun) Bg(blue[0]) Attr("bold")
+execute "hi User1" Fg(sun) Bg(blue[0]) Attr("NONE")
 execute "hi User2" Fg(black) Bg(sun)
 execute "hi VertSplit" Fg(bg[1]) Bg(bg[1]) Attr("NONE")
 execute "hi Visual" Bg(bg[2])
