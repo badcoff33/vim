@@ -35,9 +35,9 @@ command! -bar -complete=custom,CompleteHg -nargs=+ Hg terminal ++open hg <args>
 
 autocmd WinLeave *hg* if (&buftype == "terminal") | bwipeout | endif
 
-nnoremap <Leader>vv :<C-u>Hg<Space>
-nnoremap <Leader>vs <Cmd>Hg status<CR>
-nnoremap <Leader>vl <Cmd>Hg sl<CR>
+nnoremap <Leader>Vv :<C-u>Hg<Space>
+nnoremap <Leader>Vs <Cmd>Hg status<CR>
+nnoremap <Leader>Vl <Cmd>Hg sl<CR>
 
 # Uncomment when testing
 defcompile
