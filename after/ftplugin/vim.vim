@@ -13,7 +13,7 @@ nnoremap <buffer> <LocalLeader>o :verbose set <C-r><C-w>?<CR>
 
 setlocal path=
 for p in split(&rtp, ",")
-    execute "setlocal path+=" .. escape(p .. Sep(), " \\") .. "**"
+    execute "setlocal path+=" .. escape(p .. expand("/"), " \\") .. "**"
 endfor
 
 " source current visual region
@@ -24,7 +24,7 @@ if matchstr(expand("%:p:h"), "color")
     nnoremap <buffer> <LocalLeader><LocalLeader> :write<bar>colorscheme <C-r>=expand("%:t:r")<CR><CR>
 else
     " source Vim file
-    nnoremap <buffer> <LocalLeader><LocalLeader> :write<bar>source%<CR>
+    nnoremap <buffer> <LocalLeader><LocalLeader> :write<bar>noautocmd source%<CR>
 endif
 
 iabbrev <buffer> xfun function!<CR>endfunction<C-f><Up><End>
