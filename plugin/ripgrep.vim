@@ -24,6 +24,21 @@ g:rg_glob_patterns = {
 g:RgPattern = () =>  len(expand("<cword>")) == 0 ? "STRING" : expand("<cword>")
 g:RgPaths = () => join(g:rg_paths, " ")
 
+g:rg_dict = {}
+
+def g:RgPrettyPrint()
+    for e in getqflist({ "nr": "$", "all": 0 }).items
+        var temp: list<number>
+        if has_key(g:rg_dict, e.bufnr)
+            temp = g:rg_dict[e.bufnr]
+        else
+            temp = []
+        endif
+        add(temp, e.lnum)
+        g:rg_dict[e.bufnr] = temp
+    endfor
+enddef
+
 def g:RgIncludes(): string
     var include_string: string
     if g:rg_option_all == true
@@ -63,9 +78,9 @@ def g:RgGlobSwitch(pattern: string): string
 enddef
 
 def g:RgConfig()
-    echo printf("g:rg_paths\t %s", join(g:rg_paths, ", "))
-    echo printf("g:rg_excludes\t %s", join(g:rg_excludes, ", "))
-    echo printf("g:rg_option_all\t %s", g:rg_option_all)
+    echo printf("g:rg_paths\t= %s", join(g:rg_paths, ", "))
+    echo printf("g:rg_excludes\t= %s", join(g:rg_excludes, ", "))
+    echo printf("g:rg_option_all\t= %s", g:rg_option_all)
 enddef
 
 # Using links? Ripgrep supports this by th option '--follow'
@@ -73,7 +88,7 @@ set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 command!                -nargs=0 RgConfig call g:RgConfig()
-command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files" .. g:RgGlobSwitch() .. ' <args>', name: "RgFiles"})
+command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files " .. g:RgGlobSwitch('<args>'), name: "RgFiles"})
 command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
 nnoremap <Leader>F :RgFiles ** .<Left><Left><Left>
 
