@@ -38,7 +38,7 @@ def g:BuildStatusline(): string
         sl =  "%1* %{GetMode()} %*"
     endif
 
-    sl = sl .. " %{GetSearchMode()}%Y%w "
+    sl = sl .. " %{GetSearchMode()}%Y%R "
     if v:versionlong >= 9001307
         sl = sl .. "%="
     endif
