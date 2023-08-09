@@ -3,25 +3,23 @@
 " - keep the trailing chars behind result (may be a added comment you want to keep)
 
 function! s:MarkdownCalcLine()
-    let equation_orig = substitute(matchstr(getline('.'), '^[^=]*'), '\s\+$', '', 'g')
-    let b:equation_nospc = substitute(equation_orig, '\s\+', '', 'g')
     try
         py3 import decimal
-        py3 b = vim.current.buffer
-        py3 d = decimal.Decimal(str(eval(b.vars["equation_nospc"])))
-        "                   use str() to avoid float-noise in the significant
-        py3 b.vars["result"] = d.normalize().to_eng_string()
-        let replace_line = printf("%s = %s", equation_orig, b:result)
-        call setline(line("."), replace_line)
-        unlet b:result
+        py3 eq = vim.eval("substitute(matchstr(getline('.'), '^[^=]*'), '\\s\\+$', '', 'g')")
+        py3 eq_ = vim.eval("substitute(py3eval('eq'), '\\s\\+', '', 'g')")
+        py3 d = decimal.Decimal(str(eval(eq_))) # convert to string to avoid floating point noise
+        py3 o = "{} = {}".format(eq, d.normalize().to_eng_string())
+        py3 vim.command("call setline(line('.'), py3eval('o'))")
     catch /.*/
-        echo "trouble with" b:equation_nospc
+        echo "trouble in math"
+    finally
     endtry
-    unlet b:equation_nospc
 endfunction
 
 " Buffer-local command
 command! -buffer -nargs=0 Calc call <SID>MarkdownCalcLine()
+" or
+"autocmd CursorHold <buffer> Calc
 
 " Mappings
 nnoremap <buffer> <A-CR> <Cmd>Calc<CR>
