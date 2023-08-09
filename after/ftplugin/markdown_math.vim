@@ -5,14 +5,18 @@
 function! s:MarkdownCalcLine()
     let equation_orig = substitute(matchstr(getline('.'), '^[^=]*'), '\s\+$', '', 'g')
     let b:equation_nospc = substitute(equation_orig, '\s\+', '', 'g')
-    py3 import decimal
-    py3 b = vim.current.buffer
-    py3 d = decimal.Decimal(str(eval(b.vars["equation_nospc"])))
-    "                   use str() to avoid float-noise in the significant
-    py3 b.vars["result"] = d.normalize().to_eng_string()
-    let replace_line = printf("%s = %s", equation_orig, b:result)
-    call setline(line("."), replace_line)
-    unlet b:result
+    try
+        py3 import decimal
+        py3 b = vim.current.buffer
+        py3 d = decimal.Decimal(str(eval(b.vars["equation_nospc"])))
+        "                   use str() to avoid float-noise in the significant
+        py3 b.vars["result"] = d.normalize().to_eng_string()
+        let replace_line = printf("%s = %s", equation_orig, b:result)
+        call setline(line("."), replace_line)
+        unlet b:result
+    catch /.*/
+        echo "trouble with" b:equation_nospc
+    endtry
     unlet b:equation_nospc
 endfunction
 
