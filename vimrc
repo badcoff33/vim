@@ -7,8 +7,7 @@
 
 let g:vim_home = expand('<sfile>:p:h')
 
-let Sep = { -> exists('&shellslash') && (has("win32") || has ("win64")) ? '\' : '/' }
-let AppendSep = { p -> p .. (exists('&shellslash') ? '\' : '/') }
+let AppendSep = { p -> empty(p) ? "" : p .. expand("/") }
 
 filetype plugin on
 filetype indent on
@@ -122,6 +121,7 @@ execute "set langmap+=\<Char-220>?"
 
 " Switching modes
 inoremap <k0> <Esc>
+nnoremap <C-Space> :
 imap <C-Space> <Esc>
 
 " Add blank lines
@@ -252,7 +252,7 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-nnoremap <Leader>e :edit <C-r>=expand("%:h") .. expand("/")<CR>
+nnoremap <expr> <Leader>e ":edit " .. AppendSep(expand("%:h"))
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>b :buffer<Space>

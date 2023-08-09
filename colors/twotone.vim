@@ -128,6 +128,6 @@ execute "hi rstStrongEmphasis" Fg(gray[2])  Attr("bold")
 # Diffs
 
 execute "hi DiffChange" Fg(blue) Bg(gray[9])
-execute "hi DiffText" Fg(blue) Bg(gray[9])
+execute "hi DiffText" Fg(blue) Bg(gray[8])
 execute "hi DiffDelete" Fg(red) Bg(gray[9])
 execute "hi DiffAdd" Fg(gray[3]) Bg(gray[9])

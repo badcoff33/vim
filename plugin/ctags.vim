@@ -34,9 +34,9 @@ def g:CtagsTriggerUpdate()
 enddef
 
 augroup GroupeCtags
-  autocmd!
-  autocmd BufWritePost *.c,*.h call CtagsTriggerUpdate()
-  autocmd BufWritePost *.cpp,*.hpp call CtagsTriggerUpdate()
+    autocmd!
+    autocmd BufWritePost *.c,*.h call CtagsTriggerUpdate()
+    autocmd BufWritePost *.cpp,*.hpp call CtagsTriggerUpdate()
 augroup END
 
 defcompile

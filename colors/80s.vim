@@ -55,7 +55,7 @@ execute "hi StatusLineTerm" Fg(s:white) Bg(s:red) Attr("NONE")
 execute "hi Terminal" Fg(s:blue) Bg(s:black)
 execute "hi User1" Fg(s:black) Bg(s:gray8) Attr("bold")
 execute "hi User2" Fg(s:black) Bg(s:white)
-execute "hi VertSplit" Fg(s:gray6) Bg("bg") Attr("NONE")
+execute "hi VertSplit" Fg(s:gray2) Bg(s:gray2) Attr("NONE")
 execute "hi Visual" Fg(s:white) Bg(s:blue)
 
 highlight! link CursorColumn CursorLine
