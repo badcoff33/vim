@@ -8,8 +8,8 @@ function! s:MarkdownCalcLine()
         py3 eq = vim.eval("substitute(matchstr(getline('.'), '^[^=]*'), '\\s\\+$', '', 'g')")
         py3 eq_ = vim.eval("substitute(py3eval('eq'), '\\s\\+', '', 'g')")
         py3 d = decimal.Decimal(str(eval(eq_))) # convert to string to avoid floating point noise
-        py3 o = "{} = {}".format(eq, d.normalize().to_eng_string())
-        py3 vim.command("call setline(line('.'), py3eval('o'))")
+        py3 repl = "{} = {}".format(eq, d.normalize().to_eng_string())
+        py3 vim.command('call setline(line("."), "' + repl + '")')
     catch /.*/
         echo "trouble in math"
     finally
