@@ -18,10 +18,10 @@ endfunction
 
 " Buffer-local command
 command! -buffer -nargs=0 Calc call <SID>MarkdownCalcLine()
-" or
-"autocmd CursorHold <buffer> Calc
 
 " Mappings
 nnoremap <buffer> <A-CR> <Cmd>Calc<CR>
 imap <buffer> <A-CR> <Esc><A-CR>
+" or trigger by auto command
+"autocmd CursorHold <buffer> Calc
 
