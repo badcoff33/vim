@@ -100,7 +100,7 @@ export def CloseCb(ch: channel)
                     errors += e.type ==? "e" ? 1 : 0
                 endfor
 
-                var done_str = printf("%s took %dsec | %d lines",
+                var done_str = printf("%s took %d sec | %d lines",
                     d.short_cmd,
                     localtime() - d.started,
                     lines)
