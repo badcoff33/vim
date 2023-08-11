@@ -21,7 +21,7 @@ var black = "#000000"
 var bg    = ["#132443", "#263154", "#344468", "#48506F"]
 var moon  = ["#A0A0A8", "#B8B8BE", "#D0D0D8", "#E0E0E8"]
 var green = ["#1D683C", "#22A358", "#27C168", "#27F070"]
-var blue  = ["#1B507F", "#3068B8", "#4090D8", "#70B0F8"]
+var blue  = ["#2C609F", "#3068B8", "#4090D8", "#70B0F8"]
 var red   = ["#B82042", "#E84070"]
 var sun   = "#D0DF40"
 
@@ -32,11 +32,11 @@ var Cterm = (str) => empty(str) ? "" : "cterm=" .. str
 
 # Basics
 execute "hi Bold" Fg(moon[1])  Attr("bold")
-execute "hi Cursor" Fg(black) Bg(green[3])
+execute "hi Cursor" Fg(white) Bg(blue[2])
 execute "hi CursorLine"  Bg(bg[1]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(green[3]) Bg(bg[2]) Attr("bold")
 execute "hi ErrorMsg" Fg(white) Bg(red[1])
-execute "hi IncSearch" Fg(black) Bg(green[1]) Attr("NONE") Cterm("NONE")
+execute "hi IncSearch" Fg(white) Bg(green[1]) Attr("NONE") Cterm("NONE")
 execute "hi Italic" Fg(moon[1])  Attr("NONE")
 execute "hi LineNr" Fg(blue[3]) Bg(bg[1])
 execute "hi LineNrAbove" Fg(bg[3]) Bg("bg") Attr("bold")
@@ -52,7 +52,7 @@ execute "hi PmenuThumb" Fg(blue[2]) Bg(bg[3])
 execute "hi Question" Fg(green[2]) Bg("bg")
 execute "hi QuickFixLine" Fg(blue[2]) Bg("bg") Attr("bold")
 execute "hi Search" Fg(moon[3]) Bg(bg[3]) Attr("NONE")
-execute "hi StatusLine" Fg(black) Bg(blue[3]) Attr("NONE") Cterm("NONE")
+execute "hi StatusLine" Fg(white) Bg(blue[2]) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(moon[3]) Bg(bg[2]) Attr("NONE") Cterm("NONE")
 execute "hi Terminal" Fg(green[3]) Bg(bg[0])
 execute "hi Title" Fg(green[3])
@@ -80,15 +80,15 @@ highlight! link qfLineNr LineNr
 highlight! link CurSearch IncSearch
 
 # Code
-execute "hi Statement" Fg(blue[3])
-execute "hi Conditional" Fg(blue[3])  Attr("bold")
-execute "hi Type" Fg(green[3])  Attr("NONE")
+execute "hi Statement" Fg(green[3])
+execute "hi Conditional" Fg(green[3])  Attr("bold")
+execute "hi Type" Fg(blue[3])  Attr("NONE")
 execute "hi Structure" Fg(blue[2])
 execute "hi StorageClass" Fg(blue[3])
 execute "hi PreProc" Fg(white)  Attr("bold")
-execute "hi PreCondit" Fg(blue[1])  Attr("bold")
+execute "hi PreCondit" Fg(blue[3])  Attr("bold")
 execute "hi Define" Fg(blue[2])  Attr("NONE")
-execute "hi Comment" Fg(green[3])
+execute "hi Comment" Fg(moon[1])
 execute "hi Function" Fg(blue[3]) Attr("bold")
 execute "hi Identifier" Fg(green[3])
 execute "hi Special" Fg(green[2])

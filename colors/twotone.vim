@@ -38,6 +38,7 @@ var Cterm = (str) => empty(str) ? "" : "cterm=" .. str
 # Basics
 
 execute "hi Bold" Attr("bold")
+execute "hi Cursor" Bg(blue) Cterm("NONE")
 execute "hi CursorLine" Bg(gray[9]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray[4]) Attr("bold")
 execute "hi IncSearch" Fg(white) Bg(black) Attr("NONE")
