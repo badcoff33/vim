@@ -5,13 +5,16 @@
 function! s:MarkdownCalcLine()
     try
         py3 import decimal
-        py3 eq = vim.eval("substitute(matchstr(getline('.'), '^[^=]*'), '\\s\\+$', '', 'g')")
-        py3 eq_ = vim.eval("substitute(py3eval('eq'), '\\s\\+', '', 'g')")
-        py3 d = decimal.Decimal(str(eval(eq_))) # convert to string to avoid floating point noise
-        py3 repl = "{} = {}".format(eq, d.normalize().to_eng_string())
-        py3 vim.command('call setline(line("."), "' + repl + '")')
+        py3 import re
+        py3 line = vim.current.line
+        py3 m = re.search("([^=]*)", line)
+        py3 eq = m.group(1)
+        py3 res = eval(eq.replace(" ", ""))
+        py3 dec = decimal.Decimal(res)
+        py3 str = "{}= {}".format(eq, dec.normalize().to_eng_string())
+        py3 vim.current.line = str
     catch /.*/
-        echo "trouble in math"
+        echo "trouble in math" py3eval("eq.replace(' ', '')") py3eval("decimal.Decimal(res)")
     finally
     endtry
 endfunction
