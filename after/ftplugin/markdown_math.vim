@@ -9,12 +9,12 @@ function! s:MarkdownCalcLine()
         py3 line = vim.current.line
         py3 m = re.search("([^=]*)", line)
         py3 eq = m.group(1)
-        py3 res = eval(eq.replace(" ", ""))
-        py3 dec = decimal.Decimal(res)
-        py3 str = "{}= {}".format(eq, dec.normalize().to_eng_string())
-        py3 vim.current.line = str
+        py3 r = eval(eq.replace(" ", ""))
+        py3 d = decimal.Decimal(f"{r}")
+        py3 s = "{}= {}".format(eq, d.normalize().to_eng_string())
+        py3 vim.current.line = s
     catch /.*/
-        echo "trouble in math" py3eval("eq.replace(' ', '')") py3eval("decimal.Decimal(res)")
+        echo "trouble in math" py3eval("eq.replace(' ', '')")
     finally
     endtry
 endfunction
