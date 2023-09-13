@@ -41,6 +41,7 @@ execute "hi Bold" Attr("bold")
 execute "hi Cursor" Bg(blue) Cterm("NONE")
 execute "hi CursorLine" Bg(gray[9]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray[4]) Attr("bold")
+execute "hi Folded" Fg(blue) Bg(gray[8]) Attr("NONE")
 execute "hi IncSearch" Fg(white) Bg(black) Attr("NONE")
 execute "hi Italic" Attr("italic")
 execute "hi LineNr" Fg(gray[4]) Attr("bold")
@@ -63,7 +64,6 @@ execute "hi Visual" Bg(gray[8])
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
-highlight! link Folded Comment
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Pmenu
