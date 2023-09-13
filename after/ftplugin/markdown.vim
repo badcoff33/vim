@@ -50,7 +50,7 @@ endif
 iabbrev <buffer> xlink [TEXT](LINK)<C-o>B<C-o>2w
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
 iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
-iabbrev <buffer> xtodo - [ ]
+iabbrev <buffer> xbox  - [ ]
 
 function! s:ToggleTodo()
   let stop_at_line = search('^\s*$','nbW')
