@@ -26,6 +26,21 @@ Some things never change!
 .. _reedit : https://www.reddit.com/r/vim/
 .. _thing : https://en.m.wikipedia.org/wiki/ADM-3A
 
- vim:ft=rst
+Prepare your Computer
+---------------------
+
+Python3 Libs
+''''''''''''
+
+If Vim requires a Python 3 version that isn't installed on your computer, get
+the Python 3 files (embedded release) and extract them. Add this lines in your
+startup code to tell Vim where to find the missing files, here Python V3.11.
+
+.. code-block::
+
+    set pythonthreehome=%LOCALAPPDATA%\\Programs\\Python\\Python311emb
+    set pythonthreedll=%LOCALAPPDATA%\\Programs\\Python\\Python311emb\\python311.dll
+
+
 
 
