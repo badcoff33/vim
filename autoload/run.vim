@@ -207,7 +207,9 @@ def RunJobMonitoringCb(tid: number)
                 popup_close(d.winid)
                 timer_stop(d.timer)
                 UpdatePopupPosition()
-                popup_create("Error: job failed", g:WinoptsError())
+                if job_status == "fail"
+                    popup_create("Error: job failed", g:WinoptsError())
+                endif
             endif
         endif
     endfor
