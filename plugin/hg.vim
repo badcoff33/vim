@@ -32,7 +32,11 @@ def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): string
 enddef
 
 command! -bar -complete=custom,CompleteHg -nargs=+ Hg run.RunStart({cmd: "hg <args>", name: "Hg-Output"})
-autocmd WinLeave *hg* if (&buftype == "terminal") | bwipeout | endif
+
+augroup GroupHg
+    autocmd!
+    autocmd BufWinEnter Hg-Output setf hg
+augroup END
 
 # Uncomment when testing
 defcompile
