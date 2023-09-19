@@ -120,8 +120,6 @@ execute "set langmap+=\<Char-252>/"
 execute "set langmap+=\<Char-220>?"
 
 " Switching modes
-inoremap <k0> <Esc>
-nnoremap <C-Space> :
 imap <C-Space> <Esc>
 
 " Add blank lines
@@ -147,8 +145,12 @@ nnoremap N Nzv
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
-" Yank word under cursor
-nnoremap <C-Insert> yiw
+
+" Clipboard
+vnoremap <C-CR> "+y
+map <C-CR>      "+yiw
+map <S-CR>      "+gP
+cmap <S-CR>     <C-R>+
 
 " Resizing window
 let GrowWin = { -> "3wincmd + | 5wincmd >" }
