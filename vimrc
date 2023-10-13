@@ -121,9 +121,11 @@ execute "set langmap+=\<Char-220>?"
 
 " Switching modes
 imap <C-Space> <Esc>
+nnoremap - :
+vnoremap - :
 
 " Add blank lines
-nnoremap <expr> <CR> &modifiable ? "A\<CR><Esc>" : "\<CR>"
+nnoremap <expr> <CR> &modifiable ? "A\<CR>" : "\<CR>"
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
@@ -198,8 +200,8 @@ cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
 
 " Surfing the quickfix matches
-nnoremap + <cmd>cnext<CR>
-nnoremap - <cmd>cprevious<CR>
+nnoremap <A-j> <cmd>cnext<CR>
+nnoremap <A-k> <cmd>cprevious<CR>
 
 " Move between windows - This is boring {{{
 nnoremap <A-h> <C-w>h
