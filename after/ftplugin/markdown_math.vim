@@ -23,9 +23,9 @@ endfunction
 command! -buffer -nargs=0 Calc call <SID>MarkdownCalcLine()
 
 " Mappings
-nnoremap <buffer> <LocalLeader>0 <Cmd>Calc<CR>
-nnoremap <buffer> ^0 <Cmd>Calc<CR>
-inoremap <buffer> ^0 <Cmd>Calc<CR>
+nnoremap <buffer> <LocalLeader>= <Cmd>Calc<CR>
+nnoremap <buffer> <C-CR> <Cmd>Calc<CR>
+inoremap <buffer> <C-CR> <Cmd>Calc<CR>
 
 " or trigger by auto command
 "autocmd CursorHold <buffer> Calc
