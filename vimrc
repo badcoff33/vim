@@ -256,10 +256,11 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
+set wildcharm=<Tab>
+nnoremap <Leader>b :buffer<Space><Tab>
 nnoremap <expr> <Leader>e ":edit " .. AppendSep(expand("%:h"))
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
 nnoremap <Leader>f :find<Space>*
-nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>d <cmd>bdelete<CR>
 
 " Leader-t space
