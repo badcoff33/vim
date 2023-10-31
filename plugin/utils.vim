@@ -10,9 +10,13 @@ def g:ToggleQuickfix()
         endif
     endfor
     if is_open == false
-        var qf = getqflist()
-        execute "botright" "copen" min([ &lines / 3, max([ 1, len(qf) ]) ])
-        wincmd p
+        var num_qf_lines = len(getqflist())
+        if num_qf_lines > 0
+            execute "botright" "copen" min([ &lines / 3, num_qf_lines])
+            wincmd p
+        else
+            echomsg "- Quickfix empty -"
+        endif
     else
         if (winnr("$") == 1) && (&buftype == "quickfix")
             buffer #
