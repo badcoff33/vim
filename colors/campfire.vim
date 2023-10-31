@@ -8,15 +8,16 @@ endif
 
 hi clear
 set background=dark
-let g:colors_name = "80s"
+let g:colors_name = "campfire"
 
 let s:black    = "#000000"
 let s:white    = "#FFFFFF"
 
-let s:yellow = "#FFCE40"
-let s:orange = "#E09040"
-let s:red    = "#E84040"
-let s:blue   = "#40C0FF"
+let s:yellow     = "#FFEF60"
+let s:orange     = "#FF9040"
+let s:red        = "#F86060"
+let s:blue       = "#70C0FF"
+let s:blue_light = "#C0E0EF"
 
 let s:gray9 = "#F8F8F8"
 let s:gray8 = "#E7E2E7"
@@ -51,12 +52,12 @@ execute "hi PmenuSel" Fg(s:black) Bg(s:yellow) Attr("NONE")
 execute "hi PmenuThumb" Fg(s:gray2) Bg(s:gray7)
 execute "hi PmenuSbar" Fg(s:orange) Bg(s:orange)
 execute "hi CurSearch" Fg(s:black) Bg(s:gray7) Attr("NONE")
-execute "hi Search" Fg("fg") Bg(s:gray3) Attr("NONE")
+execute "hi Search" Fg("fg") Bg(s:gray4) Attr("NONE")
 execute "hi StatusLine" Fg(s:white) Bg(s:gray4) Attr("NONE")
 execute "hi StatusLineNC" Fg(s:gray9) Bg(s:gray2) Attr("NONE")
 execute "hi StatusLineTerm" Fg(s:white) Bg(s:orange) Attr("NONE")
 execute "hi Terminal" Fg(s:yellow) Bg(s:black)
-execute "hi User1" Fg(s:black) Bg(s:gray8) Attr("bold")
+execute "hi User1" Fg(s:black) Bg(s:gray6) Attr("bold")
 execute "hi User2" Fg(s:black) Bg(s:white)
 execute "hi VertSplit" Fg(s:gray2) Bg(s:gray2) Attr("NONE")
 execute "hi Visual" Fg(s:black) Bg(s:gray5)
@@ -81,16 +82,16 @@ execute "hi Directory" Fg(s:yellow) Attr("underline")
 execute "hi Error" Fg(s:orange) Bg("bg") Attr("underline")
 execute "hi ErrorMsg" Fg(s:white) Bg(s:orange) Attr("NONE")
 execute "hi Function" Fg(s:yellow)
-execute "hi Identifier" Fg(s:orange) Attr("NONE")
+execute "hi Identifier" Fg(s:blue_light) Attr("NONE")
 execute "hi ModeMsg" Fg(s:black) Bg(s:yellow) Attr("NONE")
 execute "hi Number" Fg(s:yellow)
-execute "hi PreCondit" Fg(s:yellow)  Attr("bold")
-execute "hi PreProc" Fg(s:yellow) Attr("NONE")
+execute "hi PreCondit" Fg(s:blue)  Attr("bold")
+execute "hi PreProc" Fg(s:blue) Attr("NONE")
 execute "hi Question" Fg(s:yellow) Bg("bg")
 execute "hi QuickFixLine" Fg(s:yellow) Bg(s:gray2) Attr("bold")
 execute "hi Special" Fg(s:yellow)
-execute "hi SpecialKey" Fg(s:yellow)
-execute "hi Statement" Fg(s:orange)  Attr("NONE")
+execute "hi SpecialKey" Fg(s:gray3)
+execute "hi Statement" Fg(s:white)  Attr("NONE")
 execute "hi StorageClass" Fg(s:orange)
 execute "hi String" Fg(s:gray7)
 execute "hi Structure" Fg(s:orange) Attr("NONE")
