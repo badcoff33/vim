@@ -5,6 +5,7 @@
 spell
 undo
 backup
-pack/*
-doc/tags
+pack/zpacks
+pack/untracked
+tags
 local.vim
