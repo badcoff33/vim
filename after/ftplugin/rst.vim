@@ -8,6 +8,14 @@ setlocal formatoptions-=a
 setlocal tabstop=4
 setlocal shiftwidth=0 " carry over from 'tabstop'
 
+" More molecular undo of text
+inoremap <buffer> , ,<C-g>u
+inoremap <buffer> . .<C-g>u
+inoremap <buffer> ! !<C-g>u
+inoremap <buffer> ? ?<C-g>u
+inoremap <buffer> ; ;<C-g>u
+inoremap <buffer> : :<C-g>u
+
 " Make heading overlined/underlined
 " following the Sphinx recommenadation, "Section"
 " https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
