@@ -99,6 +99,7 @@ set wildmenu
 set wildoptions=pum,tagfile,fuzzy
 set wildmode=full:lastused
 set nowildignorecase
+set wildcharm=<Tab>
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
 set tagcase=match
@@ -121,8 +122,12 @@ execute "set langmap+=\<Char-220>?"
 
 " Switching modes
 imap <C-Space> <Esc>
+imap jj <Esc>
 nnoremap - :
 vnoremap - :
+
+" works nicely with 'wildcharm'
+cmap <C-N> <Tab>
 
 " Add blank lines
 nnoremap <expr> <CR> &modifiable ? "A\<CR>" : "\<CR>"
@@ -193,6 +198,7 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 " }}}
 
+cnoremap <expr> <C-r>~ expand("~/")
 cnoremap <expr> <C-r>v expand("~/vimfiles/")
 cnoremap <expr> <C-r>d expand("%:h") .. expand("/")
 
@@ -200,8 +206,8 @@ cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
 
 " Surfing the quickfix matches
-nnoremap <A-j> <cmd>cnext<CR>
-nnoremap <A-k> <cmd>cprevious<CR>
+nnoremap <C-.> <cmd>cnext<CR>
+nnoremap <C-,> <cmd>cprevious<CR>
 
 " Move between windows - This is boring {{{
 nnoremap <A-h> <C-w>h
@@ -256,7 +262,6 @@ nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 " commands
-set wildcharm=<Tab>
 nnoremap <Leader>b :buffer<Space><Tab>
 nnoremap <expr> <Leader>e ":edit " .. AppendSep(expand("%:h"))
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
