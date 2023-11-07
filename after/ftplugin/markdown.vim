@@ -43,14 +43,12 @@ nnoremap <buffer> <C-b> :call search('^#\{1,\}\s',"bW")<CR>
 nnoremap <buffer> <LocalLeader>d i<C-r>=strftime("%Y-%m-%d")<CR><Esc>
 
 " iabbrev did not work when 'cpoptions' has '>'
-if match(&cpoptions, '>') >= 0
-  finish
+if match(&cpoptions, '>') < 0
+  iabbrev <buffer> xlink [TEXT](LINK)<C-o>B<C-o>2w
+  iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
+  iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
+  iabbrev <buffer> xbox  - [ ]
 endif
-
-iabbrev <buffer> xlink [TEXT](LINK)<C-o>B<C-o>2w
-iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
-iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
-iabbrev <buffer> xbox  - [ ]
 
 function! s:ToggleTodo()
   let stop_at_line = search('^\s*$','nbW')
