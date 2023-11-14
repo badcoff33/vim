@@ -41,8 +41,28 @@ syn keyword asm850Reg MPAT1 MPLA2 MPUA2 MPAT2 MPLA3 MPUA3 MPAT3 MPLA4 MPUA4 MPAT
 syn keyword asm850Reg MPUA8 MPAT8 MPLA9 MPUA9 MPAT9 MPLA10 MPUA10 MPAT10 MPLA11 MPUA11 MPAT11 MPLA12 MPUA12 MPAT12 MPLA13 MPUA13 MPAT13 MPLA14
 syn keyword asm850Reg MPUA14 MPAT14 MPLA15 MPUA15 MPAT15 fpsr fpepc fpst fpcc fpcfg fpec MPM MPRC MPBRGN MPTRGN MCA MCS MCC MCR MPPRT0 MPPRT1 MPPRT2
 
-syn match asmIdentifier         "[a-z_][a-z0-9_]*"
-syn match asmLabel              "[a-z_][a-z0-9_]*:"he=e-1
+syn keyword asm850OpCode ABSF.S ADD ADDF.S ADDI ADF AND ANDI
+syn keyword asm850OpCode Bcond BINS BSH BSW
+syn keyword asm850OpCode CACHE CALLT CAXI CEILF.SL CEILF.SUL CEILF.SUW CEILF.SW CLL CLR1 CMOV CMOVF.S CMP CMPF.S CTRET CVTF.HS CVTF.LS CVTF.SH CVTF.SL CVTF.SUL CVTF.SUW CVTF.SW CVTF.ULS CVTF.UWS CVTF.WS
+syn keyword asm850OpCode DI DISPOSE DIV DIVF.S DIVH DIVHU DIVQ DIVQU DIVU
+syn keyword asm850OpCode EI EIRET FERET
+syn keyword asm850OpCode FETRAP FLOORF.SL FLOORF.SUL FLOORF.SUW FLOORF.SW FMAF.S FMSF.S FNMAF.S FNMSF.S
+syn keyword asm850OpCode HALT HSH HSW
+syn keyword asm850OpCode JARL JMP JR
+syn keyword asm850OpCode LD.B LD.BU LD.DW LD.H LD.HU LD.W LDL.W LDSR LOOP
+syn keyword asm850OpCode MAC MACU MAXF.S MINF.S MOV MOVEA MOVHI MUL MULF.S MULH MULHI MULU
+syn keyword asm850OpCode NEGF.S NOP NOT NOT1
+syn keyword asm850OpCode OR ORI POPSP
+syn keyword asm850OpCode PREF PREPARE PUSHSP RECIPF.S ,355, 356,358, 359
+syn keyword asm850OpCode RIE ROTL RSQRTF.S
+syn keyword asm850OpCode SAR SASF SATADD SATSUB SATSUBI SATSUBR SBF SCH0L SCH0R SCH1L SCH1R SET1 SETF SHL SHR SLD.B SLD.BU SLD.H SLD.HU SLD.W SNOOZE SQRTF.S SST.B SST.H SST.W ST.B ST.DW ST.H ST.W STC.W STSR SUB SUBF.S
+syn keyword asm850OpCode SUBR SWITCH SXB SXH SYNCE SYNCI SYNCM SYNCP SYSCALL
+syn keyword asm850OpCode TRAP TRFSR TRNCF.SL TRNCF.SUL TRNCF.SUW TRNCF.SW TST TST1
+syn keyword asm850OpCode XOR XORI
+syn keyword asm850OpCode ZXB ZXH
+
+syn match asm850OpCode   "JARL\d\d"
+syn match asmLabel       "[a-z_][a-z0-9_]*:"he=e-1
 
 " Various #'s as defined by GAS ref manual sec 3.6.2.1
 " Technically, the first asmDecimal def is actually octal,
@@ -154,7 +174,7 @@ hi def link asmCharacter        Character
 hi def link asmCharacterEscape  Special
 
 hi def link asm850Reg           Macro
-hi def link asmIdentifier       Identifier
+hi def link asm850OpCode        Statement
 hi def link asmType             Type
 
 let b:current_syntax = "asm"
