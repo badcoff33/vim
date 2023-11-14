@@ -21,6 +21,7 @@ set hidden
 set history=200
 set keymodel=
 set laststatus=2
+set listchars=tab:>-,trail:.,extends:#
 set more
 set mouse=a
 set noerrorbells
@@ -254,6 +255,7 @@ nnoremap <Leader>os <cmd>setlocal invspell spell? spelllang?<CR>
 nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
 nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
 nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
+nnoremap <Leader>ol <cmd>setlocal invlist<CR>
 nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 

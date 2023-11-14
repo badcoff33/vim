@@ -62,4 +62,17 @@ enddef
 nnoremap <Leader>? <Cmd>call PopupFiletypeHelp()<CR>
 nnoremap <Leader><Leader> <Cmd>call ToggleQuickfix()<CR>
 
+def BackwardSlashToForward()
+  s#\\#/#g
+  call histdel("/", -1)
+enddef
+
+def ForwardSlashToBackward()
+  s#/#\\#g
+  call histdel("/", -1)
+enddef
+
+nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
+nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
+
 defcompile

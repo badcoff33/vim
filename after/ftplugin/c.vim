@@ -3,7 +3,17 @@
 " Description:   Some support functions and mappings for C code files.
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
-let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
+let b:undo_ftplugin = "setl cinoptions< list< tw< expandtab< formatoptions< tabstop< shiftwidth< foldnestmax< foldmethod<"
+
+setlocal cinoptions=(0,W4,gN
+setlocal list
+setlocal textwidth=80
+setlocal expandtab
+setlocal formatoptions+=j
+setlocal foldmethod=indent
+setlocal foldnestmax=2
+setlocal tabstop=4
+setlocal shiftwidth=4
 
 " iabbrev did not work when 'cpoptions' has '>'
 if match(&cpoptions, '>') < 0
@@ -17,7 +27,6 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> xtod #warning TODO
   iabbrev <buffer> {} {<CR><CR>}<Up><C-f>
 endif
-
 
 " Open a new line without continuation of comment
 nnoremap <buffer> <C-CR> $o<Esc>0"_D
@@ -53,24 +62,4 @@ let g:c_no_comment_fold = 1
 if exists("g:c_comment_strings") | unlet g:c_comment_strings | endif
 let g:c_space_errors = 1
 let g:c_syntax_for_h = 1
-
-" How to display unprintable characters
-let g:c_show_list_chars = get(g:, 'c_show_list_chars', 1)
-if g:c_show_list_chars == 0
-  setlocal nolist
-else
-  setlocal list
-endif
-
-" Customize the c indent style
-setlocal cinoptions=(0,W4,gN
-
-setlocal listchars=tab:>-,trail:.,extends:#
-setlocal textwidth=80
-setlocal expandtab
-setlocal formatoptions+=j
-setlocal foldmethod=indent
-setlocal foldnestmax=2
-setlocal tabstop=4
-setlocal shiftwidth=4
 
