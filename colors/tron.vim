@@ -1,8 +1,8 @@
-" A Vim color theme
-" Intro: Great movie -- nice theme
-" Name: Tron
-" Maintainer: Markus Prepens
-"
+vim9script
+# A Vim color theme
+# Intro: Great movie -- nice theme
+# Name: Tron
+# Maintainer: Markus Prepens
 
 if exists("syntax_on")
    syntax reset
@@ -10,90 +10,91 @@ endif
 
 hi clear
 set background=dark
-let g:colors_name = "tron"
+g:colors_name = "tron"
 
-let s:white        = '#FFFFFF'
-let s:black        = '#000000'
-let s:fg0          = "#90ACBC"
-let s:fg1          = "#5A7387"
-let s:fg2          = "#AACCDD"
-let s:fg3          = "#BBF0EF"
-let s:fg4          = "#CBECFF"
-let s:bg0          = "#0A0F11"
-let s:bg1          = "#17181b"
-let s:bg2          = "#192533"
-let s:bg3          = "#1B324B"
-let s:bg4          = "#2B4255"
-let s:hl_line      = "#101A1F"
-let s:bg_hl        = "#2B4255"
-let s:vc_r         = "#B62D66"
-let s:vc_g         = "#4BB5BE"
-let s:vc_b         = "#387AAA"
-let s:key2         = "#9BBDD6"
-let s:key3         = "#AAAAAA"
-let s:accent       = "#FFFFFF"
-let s:mode_line_bg = "#2B4255"
-let s:line_num     = "#5A7387"
-" TRON palette
-let s:yellow       = "#DEB45B"
-let s:bluegreen    = "#4BB5BE"
-let s:magenta      = "#B62D66"
-let s:orange       = "#DEB45B"
-let s:red          = "#B62D66"
-let s:blue         = "#8Fd4FF"
-let s:green        = "#4BB5AE"
-let s:lightred     = "#FF7DBB"
-let s:lightblue    = "#A0DCFF"
-let s:lightgreen   = "#AAF0CF"
-let s:red_bg       = "#361016"
-let s:blue_bg      = "#040E3F"
-let s:green_bg     = "#03353E"
-let s:red_bghl     = "#462026"
-let s:blue_bghl    = "#243E4F"
-let s:green_bghl   = "#23483E"
+var white        = '#FFFFFF'
+var black        = '#000000'
+var fg0          = "#90ACBC"
+var fg1          = "#5A7387"
+var fg2          = "#AACCDD"
+var fg3          = "#BBF0EF"
+var fg4          = "#CBECFF"
+var bg0          = "#0A0F11"
+var bg1          = "#17181b"
+var bg2          = "#192533"
+var bg3          = "#1B324B"
+var bg4          = "#2B4255"
+var hl_line      = "#101A1F"
+var bg_hl        = "#2B4255"
+var vc_r         = "#B62D66"
+var vc_g         = "#4BB5BE"
+var vc_b         = "#387AAA"
+var key2         = "#9BBDD6"
+var key3         = "#AAAAAA"
+var accent       = "#FFFFFF"
+var mode_line_bg = "#2B4255"
+var line_num     = "#5A7387"
+# TRON palette
+var yellow       = "#DEB45B"
+var bluegreen    = "#4BB5BE"
+var magenta      = "#B62D66"
+var orange       = "#DEB45B"
+var red          = "#B62D66"
+var blue         = "#8Fd4FF"
+var green        = "#4BB5AE"
+var lightred     = "#FF7DBB"
+var lightblue    = "#A0DCFF"
+var lightgreen   = "#AAF0CF"
+var red_bg       = "#361016"
+var blue_bg      = "#040E3F"
+var green_bg     = "#03353E"
+var red_bghl     = "#462026"
+var blue_bghl    = "#243E4F"
+var green_bghl   = "#23483E"
 
-let s:Fg = {str -> empty(str) ? "":"guifg=" .. str}
-let s:Bg = {str -> empty(str) ? "":"guibg=" .. str}
-let s:Attr = {str -> empty(str) ? "":"gui=" .. str}
-let s:Special = {str -> empty(str) ? "":"guisp=" .. str}
+var Fg = (str) => empty(str) ? "" : "guifg=" .. str
+var Bg = (str) => empty(str) ? "" : "guibg=" .. str
+var Attr = (str) => empty(str) ? "" : "gui=" .. str
+var Cterm = (str) => empty(str) ? "" : "cterm=" .. str
+var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
-" Basics
+# Basics
 
-execute "hi Bold" s:Fg(s:fg2)  s:Attr("bold")
-execute "hi CurSearch" s:Fg(s:green) s:Bg(s:green_bg) s:Attr("inverse")
-execute "hi Cursor" s:Fg(s:black) s:Bg(s:white)
-execute "hi CursorLine"  s:Bg(s:hl_line)
-execute "hi CursorLineNr" s:Fg(s:bluegreen) s:Bg(s:bg3) s:Attr("bold")
-execute "hi ErrorMsg" s:Fg(s:orange) s:Bg("bg")
-execute "hi IncSearch" s:Fg(s:green_bg) s:Bg(s:yellow) s:Attr("bold")
-execute "hi LineNr" s:Fg(s:lightgreen) s:Bg(s:bg2)
-execute "hi LineNrAbove" s:Fg(s:bg4) s:Bg("bg") s:Attr("bold")
-execute "hi LineNrBelow" s:Fg(s:bg4) s:Bg("bg") s:Attr("bold")
-execute "hi MatchParen" s:Fg(s:bluegreen) s:Bg("bg") s:Attr("underline")
-execute "hi ModeMsg" s:Fg(s:fg2) s:Bg("bg")
-execute "hi NONE" s:Fg(s:fg2)  s:Attr("NONE")
-execute "hi NonText" s:Fg(s:magenta) s:Bg(s:bg1)
-execute "hi Normal" s:Fg(s:fg4) s:Bg(s:bg1) s:Attr("NONE")
-execute "hi NormalFloat" s:Fg(s:yellow) s:Bg(s:green_bg) s:Attr("NONE")
-execute "hi NormalNC" s:Fg(s:fg4) s:Bg(s:bg0) s:Attr("NONE")
-execute "hi Question" s:Fg(s:green) s:Bg("bg")
-execute "hi QuickFixLine"  s:Fg(s:yellow) s:Bg("bg") s:Attr("bold")
-execute "hi Search" s:Fg(s:green) s:Bg(s:green_bg) s:Attr("none")
-execute "hi Terminal" s:Fg(s:blue) s:Bg(s:bg2)
-execute "hi Title" s:Fg(s:bluegreen)
-execute "hi VertSplit" s:Fg(s:bg3) s:Bg(s:bg3) s:Attr("NONE")
-execute "hi WarningMsg" s:Fg(s:magenta) s:Bg("bg")
-execute "hi qfFileName" s:Fg(s:blue)
-execute "hi qfSeparator" s:Fg("fg")
-execute 'hi Pmenu' s:Fg(s:white) s:Bg(s:blue_bg) s:Attr('NONE')
-execute 'hi PmenuSbar' s:Fg(s:fg3) s:Bg(s:bg3)
-execute 'hi PmenuSel' s:Fg(s:white) s:Bg(s:magenta) s:Attr('NONE')
-execute 'hi PmenuThumb' s:Fg(s:blue) s:Bg(s:bg4)
-execute 'hi StatusLine' s:Fg(s:fg4) s:Bg(s:blue_bghl) s:Attr('NONE')
-execute 'hi StatusLineNC' s:Fg(s:fg4) s:Bg(s:bg2) s:Attr('NONE')
-execute 'hi User1' s:Fg(s:blue) s:Bg(s:blue_bghl) s:Attr('NONE')
-execute 'hi Visual' s:Fg(s:blue_bg) s:Bg(s:blue)
+execute "hi Bold" Fg(fg2)  Attr("bold")
+execute "hi Cursor" Fg(black) Bg(white) Attr("NONE")
+execute "hi CursorLine"  Bg(hl_line)
+execute "hi CursorLineNr" Fg(bluegreen) Bg(bg3) Attr("bold")
+execute "hi ErrorMsg" Fg(orange) Bg("bg")
+execute "hi IncSearch" Fg(blue_bg) Bg(lightblue) Attr("NONE")
+execute "hi LineNr" Fg(lightgreen) Bg(bg2)
+execute "hi LineNrAbove" Fg(bg4) Bg("bg") Attr("bold")
+execute "hi LineNrBelow" Fg(bg4) Bg("bg") Attr("bold")
+execute "hi MatchParen" Fg(bluegreen) Bg("bg") Attr("underline")
+execute "hi ModeMsg" Fg(fg2) Bg("bg")
+execute "hi NONE" Fg(fg2)  Attr("NONE")
+execute "hi NonText" Fg(magenta) Bg(bg1)
+execute "hi Normal" Fg(fg4) Bg(bg1) Attr("NONE")
+execute "hi NormalFloat" Fg(yellow) Bg(green_bg) Attr("NONE")
+execute "hi NormalNC" Fg(fg4) Bg(bg0) Attr("NONE")
+execute "hi Question" Fg(green) Bg("bg")
+execute "hi QuickFixLine"  Fg(yellow) Bg("bg") Attr("bold")
+execute "hi Search" Bg(green_bghl) Attr("NONE")
+execute "hi Terminal" Fg(blue) Bg(bg2)
+execute "hi Title" Fg(bluegreen)
+execute "hi VertSplit" Fg(bg3) Bg(bg3) Attr("NONE")
+execute "hi WarningMsg" Fg(magenta) Bg("bg")
+execute "hi qfFileName" Fg(blue)
+execute "hi qfSeparator" Fg("fg")
+execute 'hi Pmenu' Fg(yellow) Bg(blue_bghl) Attr('NONE')
+execute 'hi PmenuSbar' Fg(fg3) Bg(bg3)
+execute 'hi PmenuSel' Fg(black) Bg(yellow) Attr('NONE')
+execute 'hi PmenuThumb' Fg(blue) Bg(bg4)
+execute 'hi StatusLine' Fg(yellow) Bg(mode_line_bg) Attr('NONE')
+execute 'hi StatusLineNC' Fg(fg4) Bg(bg2) Attr('NONE')
+execute 'hi User1' Fg(black) Bg(blue) Attr('NONE')
+execute 'hi Visual' Fg(blue_bg) Bg(blue)
 
+highlight! link CurSearch IncSearch
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn Normal
 highlight! link Folded StatusLineNC
@@ -110,51 +111,51 @@ highlight! link WildMenu IncSearch
 highlight! link WinBar StatusLine
 highlight! link qfLineNr LineNr
 
-" Code
-execute "hi Statement" s:Fg(s:yellow) s:Attr("NONE")
-execute "hi Conditional" s:Fg(s:magenta)  s:Attr("bold")
-execute "hi Type" s:Fg(s:lightred)  s:Attr("NONE")
-execute "hi Structure" s:Fg(s:blue)
-execute "hi StorageClass" s:Fg(s:lightgreen)
-execute "hi PreProc" s:Fg(s:white)  s:Attr("bold")
-execute "hi PreCondit" s:Fg(s:lightgreen)  s:Attr("bold")
-execute "hi Define" s:Fg(s:blue)  s:Attr("NONE")
-execute "hi Comment" s:Fg(s:bluegreen)
-execute "hi Function" s:Fg(s:lightgreen) s:Attr("bold")
-execute "hi Identifier" s:Fg(s:fg3)
-execute "hi Special" s:Fg(s:green)
-execute "hi Constant" s:Fg(s:fg2)
-execute "hi Number" s:Fg(s:white)
-execute "hi Todo" s:Fg(s:fg2) s:Bg(s:bg3)
-execute "hi Error" s:Fg(s:red) s:Bg(s:red_bg)
-execute "hi Directory" s:Fg(s:lightgreen) s:Attr("underline") s:Special(s:lightgreen)
+# Code
+execute "hi Statement" Fg(yellow) Attr("NONE")
+execute "hi Conditional" Fg(magenta)  Attr("bold")
+execute "hi Type" Fg(lightred)  Attr("NONE")
+execute "hi Structure" Fg(blue)
+execute "hi StorageClass" Fg(lightgreen)
+execute "hi PreProc" Fg(white)  Attr("bold")
+execute "hi PreCondit" Fg(lightgreen)  Attr("bold")
+execute "hi Define" Fg(blue)  Attr("NONE")
+execute "hi Comment" Fg(bluegreen)
+execute "hi Function" Fg(lightgreen) Attr("bold")
+execute "hi Identifier" Fg(fg3)
+execute "hi Special" Fg(green)
+execute "hi Constant" Fg(fg2)
+execute "hi Number" Fg(white)
+execute "hi Todo" Fg(fg2) Bg(bg3)
+execute "hi Error" Fg(red) Bg(red_bg)
+execute "hi Directory" Fg(lightgreen) Attr("underline") Special(lightgreen)
 
-" Filetype VIM
-execute "hi vimCommentTitle" s:Fg(s:white)  s:Attr("bold")
+# Filetype VIM
+execute "hi vimCommentTitle" Fg(white)  Attr("bold")
 
-" Filetype C
-execute "hi cCppOut" s:Fg(s:fg3)
-execute "hi cCppOutIf2" s:Fg(s:fg3)
-execute "hi cParen" s:Fg(s:fg3)
-execute "hi cBlock" s:Fg(s:fg3)
+# Filetype C
+execute "hi cCppOut" Fg(fg3)
+execute "hi cCppOutIf2" Fg(fg3)
+execute "hi cParen" Fg(fg3)
+execute "hi cBlock" Fg(fg3)
 
-" filetype HTML
-execute "hi htmlH1" s:Fg(s:orange)  s:Attr("bold")
-execute "hi htmlH2" s:Fg(s:orange)  s:Attr("bold")
-execute "hi htmlH3" s:Fg(s:orange)  s:Attr("bold")
+# filetype HTML
+execute "hi htmlH1" Fg(orange)  Attr("bold")
+execute "hi htmlH2" Fg(orange)  Attr("bold")
+execute "hi htmlH3" Fg(orange)  Attr("bold")
 
-" markdown
-execute "hi markdownCode" s:Fg(s:lightgreen)
-execute "hi markdownCodeBlock" s:Fg(s:lightgreen)
-execute "hi markdownUrl" s:Fg(s:blue) s:Attr("underline") s:Special(s:blue)
-execute "hi markdownLinkText" s:Fg(s:blue)  s:Attr("none")
+# markdown
+execute "hi markdownCode" Fg(lightgreen)
+execute "hi markdownCodeBlock" Fg(lightgreen)
+execute "hi markdownUrl" Fg(blue) Attr("underline") Special(blue)
+execute "hi markdownLinkText" Fg(blue)  Attr("none")
 
-" restructured text
-execute "hi rstEmphasis" s:Fg(s:green)
-execute "hi rstStrongEmphasis" s:Fg(s:green)  s:Attr("bold")
+# restructured text
+execute "hi rstEmphasis" Fg(green)
+execute "hi rstStrongEmphasis" Fg(green)  Attr("bold")
 
-" Diffs
-execute "hi DiffText" s:Fg(s:blue) s:Bg(s:bg4) s:Attr("bold")
-execute "hi DiffAdd" s:Fg(s:green) s:Bg(s:bg2) s:Attr("bold")
-execute "hi DiffChange" s:Fg(s:blue) s:Bg(s:bg2)
-execute "hi DiffDelete" s:Fg(s:red) s:Bg(s:bg2)
+# Diffs
+execute "hi DiffText" Fg(blue) Bg(bg4) Attr("bold")
+execute "hi DiffAdd" Fg(green) Bg(bg2) Attr("bold")
+execute "hi DiffChange" Fg(blue) Bg(bg2)
+execute "hi DiffDelete" Fg(red) Bg(bg2)

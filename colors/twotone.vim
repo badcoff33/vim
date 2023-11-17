@@ -42,6 +42,7 @@ var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
 var Attr = (str) => empty(str) ? "" : "gui=" .. str
 var Cterm = (str) => empty(str) ? "" : "cterm=" .. str
+var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 
