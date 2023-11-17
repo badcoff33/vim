@@ -1,7 +1,9 @@
 vim9script
 # Vim color theme
 #
-# Description: A light one with fresh colors.
+# Description: Keep things reduced. Only two basic colors used: red and blue.
+# To make things a little bit more subtle, each base colors is present in three
+# flavors in addition to some gray-ish colors.
 
 if exists("g:syntax_on")
   syntax reset
@@ -14,8 +16,14 @@ g:colors_name = "twotone"
 
 var black    = "#000000"
 var white    = "#FFFFFF"
-var blue     = "#2188FF"
-var red      = "#FF2382"
+
+var blue_dk = "#1148AF"
+var blue    = "#2188EF"
+var blue_lt = "#E0F0F3"
+
+var red_dk  = "#AF2352"
+var red     = "#EF2372"
+var red_lt  = "#FFA8A8"
 
 var gray = [
     "#282528",
@@ -56,12 +64,12 @@ execute "hi PmenuSel" Fg(white) Bg(blue) Attr("bold")
 execute "hi PmenuThumb" Fg(gray[2]) Bg(gray[7])
 execute "hi Search" Fg(black) Bg(gray[8]) Attr("NONE")
 execute "hi StatusLine" Fg(white) Bg(black) Attr("NONE")
-execute "hi StatusLineNC" Fg(gray[2]) Bg(gray[7]) Attr("NONE")
+execute "hi StatusLineNC" Fg(gray[2]) Bg(gray[8]) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
 execute "hi User1" Fg(white) Bg(blue)
 execute "hi User2" Fg(white) Bg(red)
 execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Attr("NONE")
-execute "hi Visual" Bg(gray[8])
+execute "hi Visual" Bg(blue_lt)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
@@ -79,7 +87,7 @@ highlight! link qfSeparator Normal
 execute "hi Comment" Fg(gray[5]) Attr("NONE")
 execute "hi Conditional" Fg(red)  Attr("bold")
 execute "hi Constant" Fg(blue)
-execute "hi Directory" Fg(gray[2])
+execute "hi Directory" Fg(blue_dk)
 execute "hi Error" Fg(red) Bg("bg") Attr("underline")
 execute "hi ErrorMsg" Fg(white) Bg(red) Attr("NONE")
 execute "hi Function" Fg(blue)
@@ -94,7 +102,7 @@ execute "hi Special" Fg(blue)
 execute "hi SpecialKey" Fg(blue)
 execute "hi Statement" Fg(red)  Attr("bold")
 execute "hi StorageClass" Fg(red)
-execute "hi String" Fg(gray[5])
+execute "hi String" Fg(blue_dk)
 execute "hi Structure" Fg(red) Attr("NONE")
 execute "hi Title" Fg(black)  Attr("bold")
 execute "hi Todo" Fg(blue) Bg("bg") Attr("bold,italic")
@@ -116,13 +124,14 @@ execute "hi cBlock" Fg(gray[3])
 
 # Filetype HTML
 
-execute "hi htmlH1" Fg(red)  Attr("bold")
-execute "hi htmlH2" Fg(red)  Attr("bold")
-execute "hi htmlH3" Fg(red)  Attr("bold")
+execute "hi htmlH1" Fg(blue_dk) Attr("bold")
+execute "hi htmlH2" Fg(blue)    Attr("bold")
+execute "hi htmlH3" Fg(blue)    Attr("NONE")
 
 # Filetype Markdown
 
-execute "hi markdownCode" Fg(gray[3]) Bg(gray[9])
+# execute "hi markdownCode" Fg(gray[3]) Bg(gray[9])
+execute "hi markdownCode" Fg(blue) Attr("italic")
 execute "hi markdownCodeBlock" Fg(gray[2])
 execute "hi rstEmphasis" Fg(gray[2])
 execute "hi rstStrongEmphasis" Fg(gray[2])  Attr("bold")

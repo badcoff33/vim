@@ -4,7 +4,6 @@ setlocal nowrap
 setlocal nonumber
 setlocal norelativenumber
 setlocal scrolloff=0
-setlocal wincolor=CursorLine
 
 "prepare cleanup
 setlocal modifiable

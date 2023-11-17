@@ -207,8 +207,8 @@ cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
 
 " Surfing the quickfix matches
-nnoremap <C-.> <cmd>cnext<CR>
-nnoremap <C-,> <cmd>cprevious<CR>
+nnoremap <C-j> <cmd>cnext<CR>
+nnoremap <C-k> <cmd>cprevious<CR>
 
 " Move between windows - This is boring {{{
 nnoremap <A-h> <C-w>h
@@ -263,9 +263,8 @@ nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
-" commands
-nnoremap <Leader>b :buffer<Space><Tab>
-nnoremap <expr> <Leader>e ":edit " .. AppendSep(expand("%:h"))
+nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader>e :call g:OneLinePopup(getcwd())<CR>:edit <C-r>=AppendSep(expand("%:h"))<CR>
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>d <cmd>bdelete<CR>
@@ -304,5 +303,5 @@ augroup END " }}}
 let g:term = &term
 syntax on
 
-" vim:foldmethod=marker:foldenable:
+" vim:foldmethod=marker:nofoldenable:
 
