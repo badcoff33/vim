@@ -13,8 +13,8 @@ g:rg_paths = get(g:, "rg_paths", ["."])
 g:rg_option_all = get(g:, "rg_option_all", false)
 
 g:rg_glob_patterns = {
-    c:      ['*.c', "*.h", "*.850", "*.s"],
-    cpp:    ['*.cc', '*.hh'],
+    c:      ['*.c', '*.h', '*.850', '*.s'],
+    cpp:    ['*.c', '*.h', '*.850', '*.s', '*.cc', '*.hh'],
     vim:    ['*.vim', '*vimrc'],
     asm:    ['*.850', '*.s'],
     py:     ['*.py'],
