@@ -40,17 +40,14 @@ var bluegreen    = "#4BB5BE"
 var magenta      = "#B62D66"
 var orange       = "#DEB45B"
 var red          = "#B62D66"
-var blue         = "#8Fd4FF"
+var blue         = "#9FA4CF"
 var green        = "#4BB5AE"
 var lightred     = "#FF7DBB"
 var lightblue    = "#A0DCFF"
 var lightgreen   = "#AAF0CF"
 var red_bg       = "#361016"
-var blue_bg      = "#040E3F"
+var blue_bg      = "#1B1662"
 var green_bg     = "#03353E"
-var red_bghl     = "#462026"
-var blue_bghl    = "#243E4F"
-var green_bghl   = "#23483E"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
@@ -78,14 +75,14 @@ execute "hi NormalFloat" Fg(yellow) Bg(green_bg) Attr("NONE")
 execute "hi NormalNC" Fg(fg4) Bg(bg0) Attr("NONE")
 execute "hi Question" Fg(green) Bg("bg")
 execute "hi QuickFixLine"  Fg(yellow) Bg("bg") Attr("bold")
-execute "hi Search" Bg(green_bghl) Attr("NONE")
+execute "hi Search" Fg(lightgreen) Bg(green_bg) Attr("NONE")
 execute "hi Terminal" Fg(blue) Bg(bg2)
 execute "hi Title" Fg(bluegreen)
 execute "hi VertSplit" Fg(bg3) Bg(bg3) Attr("NONE")
 execute "hi WarningMsg" Fg(magenta) Bg("bg")
 execute "hi qfFileName" Fg(blue)
 execute "hi qfSeparator" Fg("fg")
-execute 'hi Pmenu' Fg(yellow) Bg(blue_bghl) Attr('NONE')
+execute 'hi Pmenu' Fg(yellow) Bg(blue_bg) Attr('NONE')
 execute 'hi PmenuSbar' Fg(fg3) Bg(bg3)
 execute 'hi PmenuSel' Fg(black) Bg(yellow) Attr('NONE')
 execute 'hi PmenuThumb' Fg(blue) Bg(bg4)
@@ -155,7 +152,7 @@ execute "hi rstEmphasis" Fg(green)
 execute "hi rstStrongEmphasis" Fg(green)  Attr("bold")
 
 # Diffs
-execute "hi DiffText" Fg(blue) Bg(bg4) Attr("bold")
-execute "hi DiffAdd" Fg(green) Bg(bg2) Attr("bold")
-execute "hi DiffChange" Fg(blue) Bg(bg2)
-execute "hi DiffDelete" Fg(red) Bg(bg2)
+execute "hi DiffText" Fg(lightblue) Bg(blue_bg) Attr("NONE")
+execute "hi DiffAdd" Fg(green) Bg(green_bg) Attr("NONE")
+execute "hi DiffChange" Fg(blue) Bg(blue_bg) Attr("NONE")
+execute "hi DiffDelete" Fg(red) Bg(red)
