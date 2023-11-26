@@ -15,7 +15,8 @@ unpack_tuple = (
         ( "opt",   "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip" ),
         ( "opt",   "https://github.com/lilydjwg/colorizer/archive/refs/heads/master.zip" ),
         ( "skip",  "https://github.com/godlygeek/tabular/archive/refs/heads/master.zip" ),
-        ( "opt",   "https://github.com/preservim/vim-wordy/archive/refs/heads/master.zip"))
+        ( "opt",   "https://github.com/preservim/vim-wordy/archive/refs/heads/master.zip"),
+        ( "opt",   "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip"))
 
 zip_fname = os.getenv("TEMP") + os.sep + "pack_download.zip"
 pop_back_dir = os.getcwd()
