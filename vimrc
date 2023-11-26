@@ -124,8 +124,6 @@ execute "set langmap+=\<Char-220>?"
 " Switching modes
 imap <C-Space> <Esc>
 imap jj <Esc>
-nnoremap - :
-vnoremap - :
 
 " works nicely with 'wildcharm'
 cmap <C-N> <Tab>
