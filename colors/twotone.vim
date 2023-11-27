@@ -19,23 +19,23 @@ var white    = "#FFFFFF"
 
 var blue_dk = "#1148AF"
 var blue    = "#2188EF"
-var blue_lt = "#E0F0F3"
+var blue_lt = "#A0E0F3"
 
 var red_dk  = "#AF2352"
 var red     = "#EF2372"
 var red_lt  = "#FFA8A8"
 
 var gray = [
-    "#282528",
-    "#353335",
-    "#474447",
-    "#5A585A",
-    "#7A787A",
-    "#989598",
-    "#BEB5BE",
-    "#D5D1D5",
-    "#E7E1E7",
-    "#F8F5F8",
+    "#182528",
+    "#253335",
+    "#374447",
+    "#4A585A",
+    "#6A787A",
+    "#889598",
+    "#AEB5BE",
+    "#C5D1D5",
+    "#D7E1E7",
+    "#E8F5F8",
 ]
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
@@ -64,11 +64,11 @@ execute "hi PmenuSbar" Fg(red) Bg(red)
 execute "hi PmenuSel" Fg(white) Bg(blue) Attr("bold")
 execute "hi PmenuThumb" Fg(gray[2]) Bg(gray[7])
 execute "hi Search" Fg(black) Bg(gray[8]) Attr("NONE")
-execute "hi StatusLine" Fg(white) Bg(blue_dk) Attr("NONE")
-execute "hi StatusLineNC" Fg(gray[2]) Bg(gray[9]) Attr("NONE")
+execute "hi StatusLine" Fg(white) Bg(blue) Attr("NONE")
+execute "hi StatusLineNC" Fg(gray[9]) Bg(gray[5]) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
-execute "hi User1" Fg(white) Bg(blue)
-execute "hi User2" Fg(white) Bg(red)
+execute "hi User1" Fg(white) Bg(blue_dk)
+execute "hi User2" Fg(white) Bg(red_dk)
 execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Attr("NONE")
 execute "hi Visual" Bg(blue_lt)
 
@@ -98,7 +98,7 @@ execute "hi Number" Fg(blue)
 execute "hi PreCondit" Fg(blue)  Attr("bold")
 execute "hi PreProc" Fg(blue) Attr("NONE")
 execute "hi Question" Fg(gray[1]) Bg("bg")
-execute "hi QuickFixLine" Fg(blue) Bg(gray[8]) Attr("bold")
+execute "hi QuickFixLine" Fg(blue) Bg("bg") Attr("bold")
 execute "hi Special" Fg(blue)
 execute "hi SpecialKey" Fg(blue)
 execute "hi Statement" Fg(red)  Attr("bold")
@@ -109,8 +109,8 @@ execute "hi Title" Fg(black)  Attr("bold")
 execute "hi Todo" Fg(blue) Bg("bg") Attr("bold,italic")
 execute "hi Type" Fg(blue) Attr("NONE")
 execute "hi WarningMsg" Fg(white) Bg(blue)
-execute "hi qfFileName" Fg(blue)
-execute "hi qfLineNr" Fg(red)
+execute "hi qfFileName" Fg(blue_lt)
+execute "hi qfLineNr" Fg(red_lt)
 
 # Filetype VIM
 
