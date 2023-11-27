@@ -10,9 +10,6 @@ nmap <silent> <buffer> <CR> <C-]>
 " make use of K
 nnoremap <buffer> K :help <C-r><C-w><CR>
 
-" Close help again
-nnoremap <silent> <buffer> <Esc> <Cmd>helpclose<CR>
-
 " Show value of 'option' under cursor
 nnoremap <buffer> <LocalLeader>o :verbose set <C-r>=substitute(expand("<cword>"), "[^a-z]", "", "g")<CR>?<CR>
 

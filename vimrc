@@ -100,7 +100,6 @@ set wildmenu
 set wildoptions=pum,tagfile,fuzzy
 set wildmode=full:lastused
 set nowildignorecase
-set wildcharm=<Tab>
 set wildignore+=*.*~,*.o,TAGS
 " How to handle search for tags
 set tagcase=match
@@ -125,8 +124,10 @@ execute "set langmap+=\<Char-220>?"
 imap <C-Space> <Esc>
 imap jj <Esc>
 
-" works nicely with 'wildcharm'
-cmap <C-N> <Tab>
+set wildcharm=<Tab>
+cmap <C-N> <Tab>       " works with 'wildcharm'
+
+nnoremap <Esc> <Cmd>helpclose<CR><Cmd>cclose<CR>
 
 " Add blank lines
 nnoremap <expr> <CR> &modifiable ? "A\<CR>" : "\<CR>"
@@ -209,6 +210,7 @@ nnoremap <C-j> <cmd>cnext<CR>
 nnoremap <C-k> <cmd>cprevious<CR>
 
 " Move between windows - This is boring {{{
+nnoremap + <C-w>
 nnoremap <A-h> <C-w>h
 nnoremap <A-l> <C-w>l
 nnoremap <A-k> <C-w>k

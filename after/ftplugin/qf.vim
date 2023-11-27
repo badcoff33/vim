@@ -20,5 +20,3 @@ call histdel("search", -1)
 
 let b:undo_ftplugin = "setlocal number< relativenumber< wrap< scrolloff<"
 
-nnoremap <buffer> <Esc> :cclose<CR>
-
