@@ -176,7 +176,6 @@ vnoremap < <gv
 
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc>       <C-\><C-n>
-tnoremap <LeftMouse> <C-\><C-n>
 
 " Line bubbling, key mapping leant to scrolling keys C-e C-y
 nnoremap <A-e> :move .-2<CR>==
@@ -220,6 +219,10 @@ inoremap <A-l> <Esc><C-w>l
 inoremap <A-k> <Esc><C-w>k
 inoremap <A-j> <Esc><C-w>j
 nnoremap <S-left> <C-w>h
+tnoremap <A-h> <Esc><C-w>h
+tnoremap <A-j> <Esc><C-w>l
+tnoremap <A-k> <Esc><C-w>k
+tnoremap <A-j> <Esc><C-w>j
 nnoremap <S-right> <C-w>l
 nnoremap <S-up> <C-w>k
 nnoremap <S-down> <C-w>j
