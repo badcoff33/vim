@@ -1,13 +1,21 @@
 vim9script
 
+g:one_line_popup_line = 0
+
+def g:OneLinePopupCB(timer: number, result: number)
+  g:one_line_popup_line = g:one_line_popup_line - 1
+enddef
+
 # text of type string is the thing to show in popup
 def g:OneLinePopup(text: string)
   call popup_create( text, {
     time: 2000,
+    callback: g:OneLinePopupCB,
     col: 1,
-    line: &lines - 2,
+    line: &lines - 2 - g:one_line_popup_line,
     minwidth: &columns
   })
+  g:one_line_popup_line = g:one_line_popup_line + 1
 enddef
 
 # Toggle the quickfix window
