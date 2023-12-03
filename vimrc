@@ -145,7 +145,7 @@ inoremap <C-BS> <C-o>db
 inoremap <C-Del> <C-o>de
 cnoremap <C-BS> <C-w>
 cnoremap <C-Del> <C-Right><C-w>
-cnoremap <C-CR> <C-]>
+cnoremap <C-Space> <C-]>
 
 " By every next or prev match, expand fold
 nnoremap n nzv
