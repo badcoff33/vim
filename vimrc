@@ -145,6 +145,7 @@ inoremap <C-BS> <C-o>db
 inoremap <C-Del> <C-o>de
 cnoremap <C-BS> <C-w>
 cnoremap <C-Del> <C-Right><C-w>
+cnoremap <C-CR> <C-]>
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -200,6 +201,9 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 cnoremap <expr> <C-r>~ expand("~/")
 cnoremap <expr> <C-r>v expand("~/vimfiles/")
 cnoremap <expr> <C-r>d expand("%:h") .. expand("/")
+cabbrev <expr> ~ expand("~/")
+cabbrev <expr> v expand("~/vimfiles/")
+cabbrev <expr> . expand("%:h") .. expand("/")
 
 cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
