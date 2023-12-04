@@ -113,16 +113,20 @@ endif
 command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
 " Living with QWERTZ keyboards
-execute "set langmap+=\<Char-246>["
-execute "set langmap+=\<Char-228>]"
-execute "set langmap+=\<Char-214>{"
-execute "set langmap+=\<Char-196>}"
-execute "set langmap+=\<Char-252>/"
-execute "set langmap+=\<Char-220>?"
+execute "set langmap=\<Char-246>:"
+execute "set langmap+=\<Char-228>/"
+execute "set langmap+=\<Char-196>?"
+"execute "set langmap+=\<Char-246>["
+"execute "set langmap+=\<Char-228>]"
+"execute "set langmap+=\<Char-214>{"
+"execute "set langmap+=\<Char-196>}"
+"execute "set langmap+=\<Char-252>/"
+"execute "set langmap+=\<Char-220>?"
 
 " Switching modes
 imap <C-Space> <Esc>
 imap jj <Esc>
+imap <Ins> <Esc>
 
 set wildcharm=<Tab>
 cmap <C-N> <Tab>       " works with 'wildcharm'
@@ -210,7 +214,6 @@ nnoremap <C-j> <cmd>cnext<CR>
 nnoremap <C-k> <cmd>cprevious<CR>
 
 " Move between windows - This is boring {{{
-nnoremap + <C-w>
 nnoremap <A-h> <C-w>h
 nnoremap <A-l> <C-w>l
 nnoremap <A-k> <C-w>k
@@ -219,18 +222,10 @@ inoremap <A-h> <Esc><C-w>h
 inoremap <A-l> <Esc><C-w>l
 inoremap <A-k> <Esc><C-w>k
 inoremap <A-j> <Esc><C-w>j
-nnoremap <S-left> <C-w>h
-nnoremap <S-right> <C-w>l
-nnoremap <S-up> <C-w>k
-nnoremap <S-down> <C-w>j
-inoremap <S-left> <Esc><C-w>h
-inoremap <S-right> <Esc><C-w>l
-inoremap <S-up> <Esc><C-w>k
-inoremap <S-down> <Esc><C-w>j
-tnoremap <S-left> <Esc><C-w>h
-tnoremap <S-right> <Esc><C-w>l
-tnoremap <S-up> <Esc><C-w>k
-tnoremap <S-down> <Esc><C-w>j
+tnoremap <A-h> <Esc><C-w>h
+tnoremap <A-l> <Esc><C-w>l
+tnoremap <A-k> <Esc><C-w>k
+tnoremap <A-j> <Esc><C-w>j
 " }}}
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
@@ -297,7 +292,7 @@ augroup GroupVimrc " {{{
     autocmd!
     autocmd FocusLost * try | silent wall | catch /.*/ | endtry
     autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
-    autocmd DirChanged global if filereadable(".vimrc") | call popup_create("local .vimrc", #{time: 2000, padding: [1]}) | endif
+    autocmd DirChanged global if filereadable(".vimrc") | call g:OneLinePopup("local .vimrc") | endif
 augroup END " }}}
 
 let g:term = &term
