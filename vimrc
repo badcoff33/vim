@@ -126,7 +126,6 @@ execute "set langmap+=\<Char-196>?"
 " Switching modes
 imap <C-Space> <Esc>
 imap jj <Esc>
-imap <Ins> <Esc>
 
 set wildcharm=<Tab>
 cmap <C-N> <Tab>       " works with 'wildcharm'
@@ -149,6 +148,7 @@ inoremap <C-BS> <C-o>db
 inoremap <C-Del> <C-o>de
 cnoremap <C-BS> <C-w>
 cnoremap <C-Del> <C-Right><C-w>
+cnoremap <C-Space> <C-]>
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -180,7 +180,6 @@ vnoremap < <gv
 
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc>       <C-\><C-n>
-tnoremap <LeftMouse> <C-\><C-n>
 
 " Line bubbling, key mapping leant to scrolling keys C-e C-y
 nnoremap <A-e> :move .-2<CR>==
@@ -205,6 +204,9 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 cnoremap <expr> <C-r>~ expand("~/")
 cnoremap <expr> <C-r>v expand("~/vimfiles/")
 cnoremap <expr> <C-r>d expand("%:h") .. expand("/")
+cabbrev <expr> ~ expand("~/")
+cabbrev <expr> v expand("~/vimfiles/")
+cabbrev <expr> . expand("%:h") .. expand("/")
 
 cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
