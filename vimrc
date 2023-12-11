@@ -55,7 +55,7 @@ set spelloptions=camel
 set switchbuf=usetab,uselast
 
 " keep cursor line away from the upper and lower window border
-set scrolloff=2
+set scrolloff=0
 set scrolljump=1
 
 " make vertical scrolling more smooth
@@ -112,24 +112,17 @@ if &diff
 endif
 command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
-" Living with QWERTZ keyboards
-execute "set langmap=\<Char-246>:"
-execute "set langmap+=\<Char-228>/"
-execute "set langmap+=\<Char-196>?"
-"execute "set langmap+=\<Char-246>["
-"execute "set langmap+=\<Char-228>]"
-"execute "set langmap+=\<Char-214>{"
-"execute "set langmap+=\<Char-196>}"
-"execute "set langmap+=\<Char-252>/"
-"execute "set langmap+=\<Char-220>?"
-
 " Switching modes
-imap <C-Space> <Esc>
 imap jj <Esc>
+
+" expand abbrevs
+imap <C-Space> <C-]>
+cnoremap <C-Space> <C-]>
 
 set wildcharm=<Tab>
 cmap <C-N> <Tab>       " works with 'wildcharm'
 
+" close special windows
 nnoremap <Esc> <Cmd>helpclose<CR><Cmd>cclose<CR>
 
 " Add blank lines
@@ -148,7 +141,6 @@ inoremap <C-BS> <C-o>db
 inoremap <C-Del> <C-o>de
 cnoremap <C-BS> <C-w>
 cnoremap <C-Del> <C-Right><C-w>
-cnoremap <C-Space> <C-]>
 
 " By every next or prev match, expand fold
 nnoremap n nzv
