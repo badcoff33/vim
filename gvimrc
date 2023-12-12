@@ -7,6 +7,7 @@ set nomousefocus
 
 augroup GroupGvimrc
     autocmd!
+    autocmd GuiEnter * call foreground()
     autocmd FocusLost * try | wall | catch /.*/ | endtry
 augroup END
 
