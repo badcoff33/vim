@@ -99,7 +99,7 @@ Quick access to a simple text file to capture your ideas. >
 ------------------------------------------------------------------------------
 6. Tips                                                     *mastering-vim-tips*
 
-Useful 'g' Keystrokes ~
+The maginc of 'g' ~
 Some usefule 'g' commands:
 
 'g<' command can be used to see the last page of previous command output.  Use
@@ -129,6 +129,11 @@ look which buffers will be wiped-out. Another solution might be this: >
 Use templates ~
 Want to start new files with a template. Read more here `:help template`.
 
+Insert newlines~
+When working text-centric it may ease your workflow to add this mapping. >
+
+	nnoremap <expr> <CR> &modifiable ? "A\<CR>" : "\<CR>"
+<
 Custom Command Completion ~
 Here is a Vim script to show custom completion of a new command: >
 

@@ -125,9 +125,6 @@ cmap <C-N> <Tab>       " works with 'wildcharm'
 " close special windows
 nnoremap <Esc> <Cmd>helpclose<CR><Cmd>cclose<CR>
 
-" Add blank lines
-nnoremap <expr> <CR> &modifiable ? "A\<CR>" : "\<CR>"
-
 " Consistent cursor movement
 noremap! <A-Left> <Home>
 noremap! <A-Right> <End>
