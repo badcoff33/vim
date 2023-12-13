@@ -6,7 +6,7 @@ syntax: glob
 spell
 undo
 backup
-pack/zpacks
-pack/untracked
+pack/ignore
+pack/downloads
 tags
 local.vim
