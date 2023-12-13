@@ -7,7 +7,6 @@ import zipfile
 import glob
 
 unpack_tuple = (
-        ("start", "https://github.com/axvr/org.vim/archive/refs/heads/master.zip"),
         ("start", "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip"),
         ("start", "https://github.com/Donaldttt/fuzzyy/archive/refs/heads/vim9.zip"),
         ("start", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip"),
