@@ -71,7 +71,7 @@ highlight! link Folded Normal
 highlight! link SignColumn Normal
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLineSel StatusLine
+highlight! link TabLineSel IncSearch
 highlight! link TabLine StatusLineNC
 highlight! link TabLineFill StatusLineNC
 highlight! link User3 StatusLine

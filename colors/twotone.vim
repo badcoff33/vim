@@ -20,22 +20,24 @@ var white    = "#FFFFFF"
 var blue_dk = "#1148AF"
 var blue    = "#2188EF"
 var blue_lt = "#A0E0F3"
+var blue_bg = "#E8F0F3"
 
 var red_dk  = "#AF2352"
 var red     = "#EF2372"
 var red_lt  = "#FFA8A8"
+var red_bg  = "#FFC8B8"
 
 var gray = [
-    "#182528",
-    "#253335",
-    "#374447",
-    "#4A585A",
-    "#6A787A",
-    "#889598",
-    "#AEB5BE",
-    "#C5D1D5",
-    "#D7E1E7",
-    "#E8F5F8",
+  "#182528",
+  "#253335",
+  "#374447",
+  "#4A585A",
+  "#6A787A",
+  "#889598",
+  "#AEB5BE",
+  "#C5D1D5",
+  "#D7E1E7",
+  "#E8F5F8",
 ]
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
@@ -64,11 +66,11 @@ execute "hi PmenuSbar" Fg(red) Bg(red)
 execute "hi PmenuSel" Fg(white) Bg(blue_dk)
 execute "hi PmenuThumb" Fg(gray[2]) Bg(gray[7])
 execute "hi Search" Fg(black) Bg(gray[8]) Attr("NONE")
-execute "hi StatusLine" Fg(white) Bg(blue_dk) Attr("NONE")
-execute "hi StatusLineNC" Fg(white) Bg(blue_lt) Attr("NONE")
+execute "hi StatusLine" Fg(black) Bg(blue_bg) Attr("NONE")
+execute "hi StatusLineNC" Fg(white) Bg(gray[7]) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
-execute "hi User1" Fg(white) Bg(blue)
-execute "hi User2" Fg(white) Bg(red)
+execute "hi User1" Fg(black) Bg(gray[6]) Attr("bold")
+execute "hi User2" Fg(white) Bg(gray[6]) Attr("italic")
 execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Attr("NONE")
 execute "hi Visual" Fg(blue_lt) Bg(black)
 
@@ -76,9 +78,9 @@ highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine Pmenu
+highlight! link TabLine Normal
 highlight! link TabLineFill Normal
-highlight! link TabLineSel PmenuSel
+highlight! link TabLineSel User2
 highlight! link Terminal Normal
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
@@ -99,7 +101,7 @@ execute "hi PreCondit" Fg(blue)  Attr("bold")
 execute "hi PreProc" Fg(blue) Attr("NONE")
 execute "hi Question" Fg(gray[1]) Bg("bg")
 execute "hi QuickFixLine" Fg(blue) Bg("bg") Attr("bold")
-execute "hi Special" Fg(blue)
+execute "hi Special" Fg(red_dk)
 execute "hi SpecialKey" Fg(blue)
 execute "hi Statement" Fg(red)  Attr("bold")
 execute "hi StorageClass" Fg(red)
