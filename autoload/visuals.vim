@@ -71,11 +71,16 @@ endfunction
 
 " Description: Print highlighting information at current cursor position.
 function! visuals#info_hl()
-  let synid = synID(line("."), col("."), 0)
-  let synidtrans = synIDtrans(synid)
-  echo "highlight name:" synIDattr(synidtrans, "name")
-  echo "foreground:" synIDattr(synidtrans, "fg")
-  echo "background:" synIDattr(synidtrans, "bg")
+  for syn_id in synstack(line("."), col("."))
+    let syn_id_trans = synIDtrans(syn_id)
+    let name = synIDattr(syn_id_trans, "name")
+    let fg = synIDattr(syn_id_trans, "fg")
+    let bg = synIDattr(syn_id_trans, "bg")
+    echo printf("%s%s%s",
+          \ empty(name) ? "" : "name:" .. name,
+          \ empty(fg) ? "" : " foreground:" .. fg,
+          \ empty(bg) ? "" : " background:" .. bg)
+  endfor
 endfunction
 
 function! visuals#blink_on_yank_now(dict)
