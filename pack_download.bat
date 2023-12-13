@@ -28,7 +28,7 @@ def unpack_list(list):
         if archive_desc[0] == "skip":
             print("skipping")
         else:
-            target_dir = "pack/zpacks/" + archive_desc[0]
+            target_dir = "pack/downloads/" + archive_desc[0]
             if not os.path.isdir(target_dir):
                 os.makedirs(target_dir)
             print("downloading", end = "")
