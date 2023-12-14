@@ -11,10 +11,10 @@ def g:RstMakeHTML(command: string)
   endif
 enddef
 
-command! -buffer RstOpenPreview call g:RstMakeHTML("rst2preview \"" .. expand("%") .. "\"")
-command! -buffer RstUpdatePreview call g:RstMakeHTML("rst2preview --update-only \"" .. expand("%") .. "\"")
+command! -buffer RstOpenPreview call g:RstMakeHTML("preview \"" .. expand("%") .. "\"")
+command! -buffer RstUpdatePreview call g:RstMakeHTML("preview /U \"" .. expand("%") .. "\"")
 
-autocmd FocusLost <buffer> call g:RstMakeHTML("rst2preview --update-only \"" .. expand("%") .. "\"")
+autocmd FocusLost <buffer> call g:RstMakeHTML("preview /U \"" .. expand("%") .. "\"")
 
 defcompile
 

@@ -11,10 +11,10 @@ def g:MarkdownMakeHTML(command: string)
   endif
 enddef
 
-command! -buffer MarkdownOpenPreview call g:MarkdownMakeHTML("md2preview \"" .. expand("%") .. "\"")
-command! -buffer MarkdownUpdatePreview call g:MarkdownMakeHTML("md2preview --update-only \"" .. expand("%") .. "\"")
+command! -buffer MarkdownOpenPreview call g:MarkdownMakeHTML("preview \"" .. expand("%") .. "\"")
+command! -buffer MarkdownUpdatePreview call g:MarkdownMakeHTML("preview /U \"" .. expand("%") .. "\"")
 
-autocmd FocusLost <buffer> call g:MarkdownMakeHTML("md2preview --update-only \"" .. expand("%") .. "\"")
+autocmd FocusLost <buffer> call g:MarkdownMakeHTML("preview /U \"" .. expand("%") .. "\"")
 
 defcompile
 

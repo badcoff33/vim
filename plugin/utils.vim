@@ -13,7 +13,8 @@ def g:OneLinePopup(text: string)
     callback: g:OneLinePopupCB,
     col: 1,
     line: &lines - 2 - g:one_line_popup_line,
-    minwidth: &columns
+    minwidth: &columns,
+    highlight: "User2"
   })
   g:one_line_popup_line = g:one_line_popup_line + 1
 enddef

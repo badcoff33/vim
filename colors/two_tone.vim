@@ -28,16 +28,16 @@ var red_lt  = "#FFA8A8"
 var red_bg  = "#FFC8B8"
 
 var gray = [
-  "#182528",
-  "#253335",
-  "#374447",
-  "#4A585A",
-  "#6A787A",
-  "#889598",
-  "#AEB5BE",
-  "#C5D1D5",
-  "#D7E1E7",
-  "#E8F5F8",
+  "#252528",
+  "#333335",
+  "#444447",
+  "#58585A",
+  "#78787A",
+  "#959598",
+  "#B5B5BE",
+  "#D1D1D5",
+  "#E1E1E7",
+  "#F5F5F8",
 ]
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
@@ -49,7 +49,7 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 # Basics
 
 execute "hi Bold" Attr("bold")
-execute "hi CurSearch" Fg(black) Bg(gray[6]) Attr("NONE")
+execute "hi CurSearch" Fg(black) Bg(gray[8]) Attr("bold")
 execute "hi Cursor" Bg(blue) Cterm("NONE")
 execute "hi CursorLine" Bg(gray[9]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray[4]) Attr("bold")
@@ -66,12 +66,12 @@ execute "hi PmenuSbar" Fg(red) Bg(red)
 execute "hi PmenuSel" Fg(white) Bg(blue_dk)
 execute "hi PmenuThumb" Fg(gray[2]) Bg(gray[7])
 execute "hi Search" Fg(black) Bg(gray[8]) Attr("NONE")
-execute "hi StatusLine" Fg(black) Bg(blue_bg) Attr("NONE")
-execute "hi StatusLineNC" Fg(white) Bg(gray[7]) Attr("NONE")
+execute "hi StatusLine" Fg(black) Bg(gray[8]) Attr("NONE")
+execute "hi StatusLineNC" Fg(gray[1]) Bg(gray[9]) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
 execute "hi User1" Fg(black) Bg(gray[6]) Attr("bold")
 execute "hi User2" Fg(white) Bg(gray[6]) Attr("italic")
-execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Attr("NONE")
+execute "hi VertSplit" Fg(gray[8]) Bg(gray[9]) Attr("NONE")
 execute "hi Visual" Fg(blue_lt) Bg(black)
 
 highlight! link CursorColumn CursorLine

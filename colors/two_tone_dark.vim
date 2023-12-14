@@ -32,7 +32,7 @@ var red_bg  = "#902038"
 
 var gray_dk = "#25333F"
 var gray    = "#60717F"
-var gray_lt = "#C0D5EF"
+var gray_lt = "#B8B8CC"
 
 var Fg      = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg      = (str) => empty(str) ? "" : "guibg=" .. str
@@ -43,12 +43,12 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 # Basics
 
 execute "hi Bold" Attr("bold")
-execute "hi CurSearch" Fg(blue_lt) Bg(blue_bg) Attr("NONE")
+execute "hi CurSearch" Fg(blue_lt) Bg(blue_bg) Attr("bold")
 execute "hi Cursor" Bg(blue) Cterm("NONE")
 execute "hi CursorLine" Bg(gray_dk) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray) Attr("bold")
 execute "hi Folded" Fg(blue) Bg(gray_lt) Attr("NONE")
-execute "hi IncSearch" Fg(red_lt) Bg(red_bg) Attr("NONE")
+execute "hi IncSearch" Fg(gray_lt) Bg(gray) Attr("NONE")
 execute "hi Italic" Attr("italic")
 execute "hi Label" Fg(black) Attr("bold")
 execute "hi LineNr" Fg(gray) Attr("bold")
@@ -59,7 +59,7 @@ execute "hi Pmenu" Fg(blue_lt) Bg(blue_dk)
 execute "hi PmenuSbar" Fg(red) Bg(red)
 execute "hi PmenuSel" Fg(white) Bg(blue) Attr("bold")
 execute "hi PmenuThumb" Fg(gray_dk) Bg(gray_lt)
-execute "hi Search" Fg(blue_lt) Bg(gray_dk) Attr("NONE")
+execute "hi Search" Fg(blue_lt) Bg(blue_bg) Attr("NONE")
 execute "hi StatusLine" Fg(white) Bg(blue_dk) Attr("NONE")
 execute "hi StatusLineNC" Fg(white) Bg(gray_dk) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
@@ -72,9 +72,9 @@ highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine Pmenu
+highlight! link TabLine Normal
 highlight! link TabLineFill Normal
-highlight! link TabLineSel PmenuSel
+highlight! link TabLineSel User1
 highlight! link Terminal Normal
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
@@ -134,8 +134,8 @@ execute "hi markdownCodeBlock" Fg(gray_dk)
 
 # Filetype ReStructuredText
 
-execute "hi rstEmphasis" Fg(gray_dk)
-execute "hi rstStrongEmphasis" Fg(gray_dk) Attr("bold")
+execute "hi rstEmphasis" Fg(gray_lt)
+execute "hi rstStrongEmphasis" Fg(gray_lt) Attr("bold")
 
 # Diffs
 

@@ -237,13 +237,14 @@ let mapleader = " "
 let maplocalleader = "!"
 
 " toggle options
+nnoremap <Leader>oF <cmd>set wildoptions+=fuzzy<CR>
+nnoremap <Leader>of <cmd>set wildoptions-=fuzzy<CR>
 nnoremap <Leader>os <cmd>setlocal invspell spell? spelllang?<CR>
 nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
 nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
 nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
 nnoremap <Leader>ol <cmd>setlocal invlist<CR>
 nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
-
 
 " Substitute command
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
@@ -284,7 +285,7 @@ augroup GroupVimrc " {{{
   autocmd FocusLost * try | silent wall | catch /.*/ | endtry
   autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
   autocmd DirChanged global if filereadable(".vimrc") | call g:OneLinePopup("local .vimrc") | endif
-  autocmd FileType help wincmd T
+  autocmd WinNew * if (&buftype == "help") | wincmd T | endif
 augroup END " }}}
 
 let g:term = &term

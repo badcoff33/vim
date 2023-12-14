@@ -4,7 +4,7 @@
 setlocal textwidth=78
 setlocal shiftwidth=4
 setlocal nocindent
-setlocal formatoptions-=a
+setlocal formatoptions=
 setlocal tabstop=4
 setlocal shiftwidth=0 " carry over from 'tabstop'
 
@@ -29,8 +29,8 @@ nnoremap <buffer> <LocalLeader>h1 yyppkkVr#jjVr#}
 nnoremap <buffer> <LocalLeader>h2 yyppkkVr*jjVr*}
 nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr=}
 nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr-}
-nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr^}
-nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr"}
+nnoremap <buffer> <LocalLeader>h5 0v$beyo<Esc>PVr^}
+nnoremap <buffer> <LocalLeader>h6 0v$beyo<Esc>PVr"}
 
 " Toggle between TODO and DONE
 nnoremap <buffer> <LocalLeader>x :call gtd#ToggleTodo()<CR>
