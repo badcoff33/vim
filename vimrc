@@ -97,7 +97,7 @@ set pumheight=7
 
 " Command line completion
 set wildmenu
-set wildoptions=pum,tagfile,fuzzy
+set wildoptions=pum,tagfile ",fuzzy
 set wildmode=full:lastused
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
@@ -269,8 +269,8 @@ nnoremap <Leader>cc <Cmd>cc<CR>
 nnoremap <Leader>cf <Cmd>cfirst<CR>
 nnoremap <Leader>cl <Cmd>clast<CR>
 
-let g:ft2glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
-let LsFilter = { ft -> has_key(g:ft2glob, ft) ? g:ft2glob[ft] : '*.*'}
+let g:ft_to_glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
+let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
 nnoremap <expr> <Leader>g ':silent vimgrep /' .. expand("<cword>") .. '/ ' .. AppendSep(expand("%:h")) .. LsFilter(&ft)
 
 " }}}
@@ -280,10 +280,11 @@ command! -nargs=0 CS :set noignorecase nosmartcase
 command! -nargs=0 SC :set   ignorecase  smartcase
 
 augroup GroupVimrc " {{{
-    autocmd!
-    autocmd FocusLost * try | silent wall | catch /.*/ | endtry
-    autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
-    autocmd DirChanged global if filereadable(".vimrc") | call g:OneLinePopup("local .vimrc") | endif
+  autocmd!
+  autocmd FocusLost * try | silent wall | catch /.*/ | endtry
+  autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
+  autocmd DirChanged global if filereadable(".vimrc") | call g:OneLinePopup("local .vimrc") | endif
+  autocmd FileType help wincmd T
 augroup END " }}}
 
 let g:term = &term
