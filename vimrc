@@ -237,13 +237,14 @@ let mapleader = " "
 let maplocalleader = "!"
 
 " toggle options
-nnoremap <Leader>oF <cmd>set wildoptions+=fuzzy<CR><cmd>call g:OneLinePopup("'wildoptions' = " .. &wildoptions)<CR>
-nnoremap <Leader>of <cmd>set wildoptions-=fuzzy<CR><cmd>call g:OneLinePopup("'wildoptions' = " .. &wildoptions)<CR>
-nnoremap <Leader>os <cmd>setlocal invspell spell? spelllang?<CR>
-nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
+let OptStr = { opt -> opt .. "=" .. eval("&" .. opt) .. " " }
+nnoremap <Leader>oF <cmd>set wildoptions+=fuzzy<CR><cmd>call g:OneLinePopup(OptStr("wildoptions"))<CR>
+nnoremap <Leader>of <cmd>set wildoptions-=fuzzy<CR><cmd>call g:OneLinePopup(OptStr("wildoptions"))<CR>
+nnoremap <Leader>os <cmd>setlocal invspell<CR><cmd>:call g:OneLinePopup(OptStr("spell") .. OptStr("spelllang"))<CR>
+nnoremap <Leader>op <cmd>setlocal invpaste<CR><cmd>call g:OneLinePopup(OptStr("paste"))<CR>
 nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
 nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
-nnoremap <Leader>ol <cmd>setlocal invlist<CR>
+nnoremap <Leader>ol <cmd>setlocal invlist<CR><cmd>call g:OneLinePopup(OptStr("list") .. OptStr("listchars"))<CR>
 nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 
 " Substitute command
