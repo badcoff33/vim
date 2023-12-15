@@ -12,14 +12,14 @@ endif
 hi clear
 set background=light
 
-g:colors_name = "twotone"
+g:colors_name = "two_tone"
 
 var black    = "#000000"
 var white    = "#FFFFFF"
 
 var blue_dk = "#1148AF"
 var blue    = "#2188EF"
-var blue_lt = "#A0E0F3"
+var blue_lt = "#70A0F0"
 var blue_bg = "#E8F0F3"
 
 var red_dk  = "#AF2352"
@@ -78,12 +78,16 @@ highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine Normal
-highlight! link TabLineFill Normal
-highlight! link TabLineSel User2
+highlight! link TabLine StatusLine
+highlight! link TabLineFill StatusLine
+highlight! link TabLineSel Normal
 highlight! link Terminal Normal
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
+
+# overrule liked highlightings
+
+highlight TabLineSel gui=underline
 
 # Code
 
@@ -103,7 +107,7 @@ execute "hi Question" Fg(gray[1]) Bg("bg")
 execute "hi QuickFixLine" Fg(blue) Bg("bg") Attr("bold")
 execute "hi Special" Fg(red_dk)
 execute "hi SpecialKey" Fg(blue)
-execute "hi Statement" Fg(red)  Attr("bold")
+execute "hi Statement" Fg(blue_lt)  Attr("bold")
 execute "hi StorageClass" Fg(red)
 execute "hi String" Fg(blue_dk)
 execute "hi Structure" Fg(red) Attr("NONE")

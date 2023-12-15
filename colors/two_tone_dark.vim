@@ -12,7 +12,7 @@ endif
 hi clear
 set background=dark
 
-g:colors_name = "twotone_dark"
+g:colors_name = "two_tone_dark"
 
 var black    = "#000000"
 var white    = "#FFFFFF"

@@ -13,7 +13,7 @@ set pythonthreedll=%LOCALAPPDATA%\\Programs\\Python\\Python311emb\\python311.dll
 BlinkyOn
 
 autocmd GuiEnter * set renderoptions=
-autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "twotone" : "tron" )
+autocmd VimEnter * execute "colorscheme" ( (&term == "builtin_gui") ? "two_tone" : "tron" )
 nnoremap <Leader>n <Cmd>drop $OneDriveCommercial/Dokumente/Notes/notes.markdown<CR>
 
 ###############################################################################
