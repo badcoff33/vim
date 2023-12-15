@@ -14,8 +14,11 @@ set background=light
 
 g:colors_name = "two_tone"
 
-var black    = "#000000"
-var white    = "#FFFFFF"
+var black = "#000000"
+var white = "#FFFFFF"
+
+var fg    = "#202030"
+var bg    = "#FCFCFC"
 
 var blue_dk = "#1148AF"
 var blue    = "#2188EF"
@@ -60,7 +63,7 @@ execute "hi Label" Fg(black) Attr("bold")
 execute "hi LineNr" Fg(gray[4]) Attr("bold")
 execute "hi MatchParen" Fg(blue) Bg("bg") Attr("underline,bold")
 execute "hi NonText" Fg(gray[6]) Bg("bg")
-execute "hi Normal" Fg(gray[2]) Bg(white) Attr("NONE")
+execute "hi Normal" Fg(fg) Bg(bg) Attr("NONE")
 execute "hi Pmenu" Fg(blue_lt) Bg(blue)
 execute "hi PmenuSbar" Fg(red) Bg(red)
 execute "hi PmenuSel" Fg(white) Bg(blue_dk)
