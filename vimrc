@@ -237,8 +237,8 @@ let mapleader = " "
 let maplocalleader = "!"
 
 " toggle options
-nnoremap <Leader>oF <cmd>set wildoptions+=fuzzy<CR>
-nnoremap <Leader>of <cmd>set wildoptions-=fuzzy<CR>
+nnoremap <Leader>oF <cmd>set wildoptions+=fuzzy<CR><cmd>call g:OneLinePopup("'wildoptions' = " .. &wildoptions)<CR>
+nnoremap <Leader>of <cmd>set wildoptions-=fuzzy<CR><cmd>call g:OneLinePopup("'wildoptions' = " .. &wildoptions)<CR>
 nnoremap <Leader>os <cmd>setlocal invspell spell? spelllang?<CR>
 nnoremap <Leader>op <cmd>setlocal invpaste paste?<CR>
 nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
