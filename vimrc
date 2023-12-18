@@ -116,8 +116,8 @@ command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wi
 imap jj <Esc>
 
 " expand abbrevs
-imap <C-Space> <C-]>
-cnoremap <C-Space> <C-]>
+imap <C-CR> <C-]>
+cnoremap <C-CR> <C-]>
 
 set wildcharm=<Tab>
 cmap <C-N> <Tab>       " works with 'wildcharm'
@@ -147,10 +147,11 @@ nnoremap N Nzv
 nnoremap Y y$
 
 " Clipboard
-vnoremap <C-CR> "+y
-map <C-CR>      "+yiw
-map <S-CR>      "+gP
-cmap <S-CR>     <C-R>+
+nnoremap <C-A-c> "+yiw
+vnoremap <C-A-c> "+y
+nnoremap <C-A-v> "+gP
+inoremap <C-A-v> <C-R>+
+cnoremap <C-A-v> <C-R>+
 
 " Resizing window
 let GrowWin = { -> "3wincmd + | 5wincmd >" }
@@ -190,9 +191,6 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 " }}}
 
-cnoremap <expr> <C-r>~ expand("~/")
-cnoremap <expr> <C-r>v expand("~/vimfiles/")
-cnoremap <expr> <C-r>d expand("%:h") .. expand("/")
 cabbrev <expr> ~ expand("~/")
 cabbrev <expr> v expand("~/vimfiles/")
 cabbrev <expr> . expand("%:h") .. expand("/")
