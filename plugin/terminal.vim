@@ -57,7 +57,7 @@ augroup GroupTerminal
     au TerminalOpen * nnoremap <buffer> <silent> <C-CR>      :execute b:line .. ",$ write! $TEMP/term.log"<CR><C-w>:cfile $TEMP/term.log<CR>
 augroup END
 
-nnoremap <silent> <Leader>T :call SwitchToMainTerminal()<CR>
+nnoremap <silent> <Leader>T :call g:OpenTermHere(input("command: "))<CR>
 
 command! -nargs=* OpenTermHere  g:OpenTermHere('<args>')
 command! -nargs=0 PopupTermHere  g:PopupTermHere()
