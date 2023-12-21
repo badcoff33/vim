@@ -191,7 +191,6 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 " }}}
 
-cabbrev <expr> ~ expand("~/")
 cabbrev <expr> v expand("~/vimfiles/")
 cabbrev <expr> . expand("%:h") .. expand("/")
 

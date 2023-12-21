@@ -81,16 +81,12 @@ highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine StatusLine
-highlight! link TabLineFill StatusLine
-highlight! link TabLineSel Normal
+highlight! link TabLine Normal
+highlight! link TabLineFill Normal
+highlight! link TabLineSel User1
 highlight! link Terminal Normal
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
-
-# overrule liked highlightings
-
-highlight TabLineSel gui=underline
 
 # Code
 
