@@ -27,7 +27,7 @@ var blue_bg = "#203890"
 
 var red_dk  = "#CF3362"
 var red     = "#EF4392"
-var red_lt  = "#FFA8B8"
+var red_lt  = "#FF68A8"
 var red_bg  = "#902038"
 
 var gray_dk = "#25333F"
@@ -66,7 +66,7 @@ execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
 execute "hi User1" Fg(white) Bg(blue)
 execute "hi User2" Fg(white) Bg(blue)
 execute "hi VertSplit" Fg(gray_dk) Bg(gray_dk) Attr("NONE")
-execute "hi Visual" Fg(blue_lt) Bg(blue_dk)
+execute "hi Visual" Fg(gray_lt) Bg(gray_dk)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
@@ -88,7 +88,7 @@ execute "hi Directory" Fg(blue) Attr("bold,underline")
 execute "hi Error" Fg(red) Bg("bg") Attr("underline")
 execute "hi ErrorMsg" Fg(red_lt) Bg(red_dk) Attr("NONE")
 execute "hi Function" Fg(blue)
-execute "hi Identifier" Fg(red) Attr("NONE")
+execute "hi Identifier" Fg(red_lt) Attr("NONE")
 execute "hi ModeMsg" Fg(white) Bg(blue) Attr("NONE")
 execute "hi MoreMsg" Fg(white) Bg(red_bg) Attr("NONE")
 execute "hi Number" Fg(blue)
