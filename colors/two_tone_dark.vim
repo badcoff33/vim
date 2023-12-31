@@ -27,8 +27,8 @@ var blue_bg = "#204880"
 
 var red_dk  = "#BF3352"
 var red     = "#EF4382"
-var red_lt  = "#FF6898"
-var red_bg  = "#902038"
+var red_lt  = "#FF78A8"
+var red_bg  = "#802030"
 
 var gray_dk = "#25333F"
 var gray    = "#60717F"
@@ -63,7 +63,7 @@ execute "hi Search" Fg(def_fg) Bg(def_bg) Attr("underline")
 execute "hi StatusLine" Fg(white) Bg(blue_dk) Attr("NONE")
 execute "hi StatusLineNC" Fg(white) Bg(gray_dk) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
-execute "hi User1" Fg(white) Bg(blue)
+execute "hi User1" Fg(black) Bg(blue)
 execute "hi User2" Fg(white) Bg(blue)
 execute "hi VertSplit" Fg(gray_dk) Bg(gray_dk) Attr("NONE")
 execute "hi Visual" Fg(white) Bg(gray)
@@ -86,15 +86,15 @@ execute "hi Conditional" Fg(gray_lt) Attr("bold")
 execute "hi Constant" Fg(blue)
 execute "hi Directory" Fg(blue) Attr("bold,underline")
 execute "hi Error" Fg(red) Bg("bg") Attr("underline")
-execute "hi ErrorMsg" Fg(red_lt) Attr("NONE")
+execute "hi ErrorMsg" Fg(red_lt) Bg(def_bg) Attr("bold")
 execute "hi Function" Fg(blue)
 execute "hi Identifier" Fg(red_lt) Attr("NONE")
-execute "hi ModeMsg" Fg(white) Bg(blue) Attr("NONE")
-execute "hi MoreMsg" Fg(white) Bg(red_bg) Attr("NONE")
+execute "hi ModeMsg" Fg(blue) Bg(def_bg) Attr("NONE")
+execute "hi MoreMsg" Fg(white) Bg(def_bg) Attr("NONE")
 execute "hi Number" Fg(blue)
 execute "hi PreCondit" Fg(blue) Attr("bold")
 execute "hi PreProc" Fg(blue) Attr("NONE")
-execute "hi Question" Fg(white) Bg(red_bg)
+execute "hi Question" Fg(white) Bg(def_bg)
 execute "hi QuickFixLine" Fg(blue) Bg("bg") Attr("bold")
 execute "hi Special" Fg(red_dk)
 execute "hi SpecialKey" Fg(blue) Attr("italic")
@@ -105,7 +105,7 @@ execute "hi Structure" Fg(red) Attr("NONE")
 execute "hi Title" Fg(white) Attr("bold")
 execute "hi Todo" Fg(blue) Bg("bg") Attr("bold,italic")
 execute "hi Type" Fg(blue) Attr("NONE")
-execute "hi WarningMsg" Fg(white) Bg(blue)
+execute "hi WarningMsg" Fg(blue) Bg(def_bg)
 execute "hi qfFileName" Fg(blue_lt)
 execute "hi qfLineNr" Fg(red_lt)
 
