@@ -110,7 +110,6 @@ set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 if &diff
     set columns=999 lines=999
 endif
-command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
 " Switching modes
 imap jj <Esc>
