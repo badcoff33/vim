@@ -100,7 +100,9 @@ function! visuals#blink_on_yank_now(dict)
       let sp = b[2]
     endif
     let s:save_hlsearch = &hlsearch
+    let s:save_cursorline = &cursorline
     set nohlsearch
+    setlocal nocursorline
     call prop_add_list(#{bufnr: bufnr("%"), id: 1, type: 'text_prop_yank'}, [[a[1], a[2], b[1], sp + 1]])
     call timer_start(duration, "visuals#blink_on_yank_off", {'repeat': 1})
   endif
@@ -108,6 +110,7 @@ endfunction
 
 function! visuals#blink_on_yank_off(tid)
   let &hlsearch = s:save_hlsearch
+  let &cursorline = s:save_cursorline
   call prop_clear(1, line("$"))
 endfunction
 
