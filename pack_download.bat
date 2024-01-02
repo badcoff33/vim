@@ -8,9 +8,9 @@ import glob
 
 unpack_tuple = (
         ("start", "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip"),
-        ("start", "https://github.com/Donaldttt/fuzzyy/archive/refs/heads/vim9.zip"),
         ("start", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip"),
-        ("start", "https://github.com/preservim/tagbar/archive/refs/heads/master.zip"),
+        ("opt", "https://github.com/Donaldttt/fuzzyy/archive/refs/heads/vim9.zip"),
+        ("opt", "https://github.com/preservim/tagbar/archive/refs/heads/master.zip"),
         ("opt",   "https://github.com/aklt/plantuml-syntax/archive/refs/heads/master.zip"),
         ("opt",   "https://github.com/lilydjwg/colorizer/archive/refs/heads/master.zip"),
         ("opt",   "https://github.com/preservim/vim-wordy/archive/refs/heads/master.zip"),
