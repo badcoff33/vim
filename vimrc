@@ -195,7 +195,7 @@ cnoremap <expr> <C-r>v expand("~/vimfiles/")
 cnoremap <expr> <C-r>d expand("%:h") .. expand("/")
 cabbrev <expr> ~ expand("~/")
 cabbrev <expr> v expand("~/vimfiles/")
-cabbrev <expr> . expand("%:h") .. expand("/")
+cabbrev <expr> d expand("%:h") .. expand("/")
 
 cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
@@ -203,21 +203,6 @@ cmap <C-Del> <C-Right><C-w>
 " Surfing the quickfix matches
 nnoremap <C-j> <cmd>cnext<CR>
 nnoremap <C-k> <cmd>cprevious<CR>
-
-" Move between windows - This is boring {{{
-nnoremap <A-h> <C-w>h
-nnoremap <A-l> <C-w>l
-nnoremap <A-k> <C-w>k
-nnoremap <A-j> <C-w>j
-inoremap <A-h> <Esc><C-w>h
-inoremap <A-l> <Esc><C-w>l
-inoremap <A-k> <Esc><C-w>k
-inoremap <A-j> <Esc><C-w>j
-tnoremap <A-h> <Esc><C-w>h
-tnoremap <A-l> <Esc><C-w>l
-tnoremap <A-k> <Esc><C-w>k
-tnoremap <A-j> <Esc><C-w>j
-" }}}
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
