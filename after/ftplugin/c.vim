@@ -26,6 +26,7 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> xdef #define
   iabbrev <buffer> xtod #warning TODO
   iabbrev <buffer> {} {<CR><CR>}<Up><C-f>
+  iabbrev <buffer> xdoc /**<CR>@brief<CR>@param[in]<CR>@param[out]<CR>@return<CR><BS>*/<CR><Up><Up><Up><Up><Up><End>
 endif
 
 " Open a new line without continuation of comment
