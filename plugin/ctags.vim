@@ -39,5 +39,7 @@ augroup GroupeCtags
   autocmd BufWritePost *.cpp,*.hpp call CtagsTriggerUpdate()
 augroup END
 
+command! -nargs=0 CtagsForceUpdate call CtagsTriggerUpdate()
+
 defcompile
 
