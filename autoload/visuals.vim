@@ -31,8 +31,9 @@ endfunction
 
 " Description: Make the actual window more obvious by temporary turn the
 " option 'cursorline' on.
-function! visuals#enable_blinky()
-  let g:tid_cursorline = -1
+function! visuals#enable_blinky(...)
+  let g:tid_blinky_cursorline = -1
+  let g:blinky_stick = ((a:0 == 1) && (a:1 == "stick")) ? v:true : v:false
   augroup StickyCursorline
     autocmd!
     autocmd WinLeave             * call visuals#turn_cursorline_off()
@@ -42,7 +43,6 @@ endfunction
 
 " Description: Stop function and release all resources
 function! visuals#disable_blinky()
-  let g:blinky_cursorline_on = 0
   setlocal nocursorline
   autocmd! StickyCursorline
 endfunction
@@ -53,13 +53,15 @@ function! visuals#turn_cursorline_on()
   elseif &ft == "netrw"
     return
   elseif (&buftype == "") && !empty(bufname("%"))
-    let g:tid_cursorline = timer_start(1000, function("visuals#turn_cursorline_off"))
+    if g:blinky_stick == v:false
+      let g:tid_blinky_cursorline = timer_start(1000, function("visuals#turn_cursorline_off"))
+    endif
     setlocal cursorline
   end
 endfunction
 
 function! visuals#turn_cursorline_off(...)
-  call timer_stop(g:tid_cursorline)
+  call timer_stop(g:tid_blinky_cursorline)
   if &diff
     return
   elseif &ft == "netrw"

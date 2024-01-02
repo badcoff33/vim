@@ -2,7 +2,8 @@
 
 command -nargs=0 ShowHighlighting call visuals#info_hl()
 command -nargs=0 HlWordToggle call visuals#hl_word_toggle()
-command -nargs=0 BlinkyOn :call visuals#enable_blinky()
+command -nargs=0 BlinkyOn :call visuals#enable_blinky("blink")
+command -nargs=0 BlinkyStick :call visuals#enable_blinky("stick")
 command -nargs=0 BlinkyOff :call visuals#disable_blinky()
 
 nnoremap <Leader>h <cmd>HlWordToggle<CR>
