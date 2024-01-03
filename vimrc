@@ -190,8 +190,8 @@ cmap <C-BS> <C-w>
 cmap <C-Del> <C-Right><C-w>
 
 " Surfing the quickfix matches
-nnoremap <C-j> <cmd>cnext<CR>
-nnoremap <C-k> <cmd>cprevious<CR>
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprevious<CR>
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -229,21 +229,11 @@ nnoremap <Leader>b :buffer<Space>
 nnoremap <Leader>e :call g:OneLinePopup(getcwd())<CR>:edit <C-r>=AppendSep(expand("%:h"))<CR>
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
 nnoremap <Leader>f :find<Space>*
-nnoremap <Leader>d <cmd>bdelete<CR>
 
 " Leader-t space
 nnoremap <Leader>tt <Cmd>tab split<CR>
 nnoremap <Leader>tn <Cmd>tabnew<CR>
 nnoremap <Leader>tc <Cmd>tabclose<CR>
-
-" Leader-c space
-nnoremap <silent> <Leader>c- <Cmd>colder<CR>
-nnoremap <silent> <Leader>c+ <Cmd>cnewer<CR>
-nnoremap <Leader>cn <Cmd>cnext<CR>
-nnoremap <Leader>cN <Cmd>cprevious<CR>
-nnoremap <Leader>cc <Cmd>cc<CR>
-nnoremap <Leader>cf <Cmd>cfirst<CR>
-nnoremap <Leader>cl <Cmd>clast<CR>
 
 let g:ft_to_glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
