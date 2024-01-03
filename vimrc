@@ -110,7 +110,6 @@ set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 if &diff
     set columns=999 lines=999
 endif
-command! ShowChanges vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
 " Switching modes
 imap jj <Esc>
@@ -145,12 +144,6 @@ nnoremap N Nzv
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
-
-" Clipboard
-vnoremap <C-CR> "+y
-map <C-CR>      "+yiw
-map <S-CR>      "+gP
-cmap <S-CR>     <C-R>+
 
 " Resizing window
 let GrowWin = { -> "3wincmd + | 5wincmd >" }
@@ -190,10 +183,6 @@ let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 " }}}
 
-cnoremap <expr> <C-r>~ expand("~/")
-cnoremap <expr> <C-r>v expand("~/vimfiles/")
-cnoremap <expr> <C-r>d expand("%:h") .. expand("/")
-cabbrev <expr> ~ expand("~/")
 cabbrev <expr> v expand("~/vimfiles/")
 cabbrev <expr> d expand("%:h") .. expand("/")
 

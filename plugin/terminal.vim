@@ -1,6 +1,6 @@
 vim9script
 
-def g:OpenTermHere()
+def g:NewTermHere()
     var save_cwd = getcwd()
 
     execute "noautocmd cd" expand("%:h")
@@ -29,10 +29,10 @@ def g:PopupTermHere()
     autocmd VimResized <buffer> popup_move(g:popup_terminal_winid, winopts)
 enddef
 
-def g:SwitchToMainTerminal()
+def g:OpenTermHere(opt_cmd = "")
     var term_bufnrs = term_list()
     if len(term_bufnrs) == 0
-        g:OpenTermHere()
+        g:NewTermHere()
         return
     endif
     var winnr = bufwinnr(term_bufnrs[0])
@@ -43,6 +43,7 @@ def g:SwitchToMainTerminal()
         wincmd J
         execute "buffer" term_bufnrs[0]
     endif
+    feedkeys("i" .. opt_cmd .. "\<CR>")
 enddef
 
 augroup GroupTerminal
@@ -56,9 +57,9 @@ augroup GroupTerminal
     au TerminalOpen * nnoremap <buffer> <silent> <C-CR>      :execute b:line .. ",$ write! $TEMP/term.log"<CR><C-w>:cfile $TEMP/term.log<CR>
 augroup END
 
-nnoremap <silent> <Leader>T :call SwitchToMainTerminal()<CR>
+nnoremap <silent> <Leader>T :call g:OpenTermHere(input("command: "))<CR>
 
-command! -nargs=0 OpenTermHere  g:OpenTermHere()
+command! -nargs=* OpenTermHere  g:OpenTermHere('<args>')
 command! -nargs=0 PopupTermHere  g:PopupTermHere()
 
 defcompile
