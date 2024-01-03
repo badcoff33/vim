@@ -76,7 +76,7 @@ execute "hi Search" Fg(black) Bg(gray[8]) Attr("NONE")
 execute "hi StatusLine" Fg(black) Bg(gray[8]) Attr("NONE")
 execute "hi StatusLineNC" Fg(gray[1]) Bg(gray[9]) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
-execute "hi User1" Fg(black) Bg(gray[6]) Attr("bold")
+execute "hi User1" Fg(black) Bg(gray[6]) Attr("NONE")
 execute "hi User2" Fg(white) Bg(gray[6]) Attr("italic")
 execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Attr("NONE")
 execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
@@ -85,9 +85,9 @@ highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine Normal
-highlight! link TabLineFill Normal
-highlight! link TabLineSel User1
+highlight! link TabLine User1
+highlight! link TabLineFill StatusLine
+highlight! link TabLineSel Label
 highlight! link Terminal Normal
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
@@ -99,10 +99,10 @@ execute "hi Conditional" Fg(red)  Attr("bold")
 execute "hi Constant" Fg(blue)
 execute "hi Directory" Fg(blue_dk)
 execute "hi Error" Fg(red) Bg("bg") Attr("underline")
-execute "hi ErrorMsg" Fg(white) Bg(red) Attr("NONE")
+execute "hi ErrorMsg" Fg(red) Bg(red_bg) Attr("NONE")
 execute "hi Function" Fg(blue)
 execute "hi Identifier" Fg(red) Attr("NONE")
-execute "hi ModeMsg" Fg(white) Bg(blue) Attr("NONE")
+execute "hi ModeMsg" Fg(blue) Bg("bg") Attr("NONE")
 execute "hi Number" Fg(blue)
 execute "hi PreCondit" Fg(blue)  Attr("bold")
 execute "hi PreProc" Fg(blue) Attr("NONE")
@@ -117,7 +117,7 @@ execute "hi Structure" Fg(red) Attr("NONE")
 execute "hi Title" Fg(black)  Attr("bold")
 execute "hi Todo" Fg(blue) Bg("bg") Attr("bold,italic")
 execute "hi Type" Fg(blue) Attr("NONE")
-execute "hi WarningMsg" Fg(white) Bg(blue)
+execute "hi WarningMsg" Fg(blue_dk) Bg(blue_bg)
 execute "hi qfFileName" Fg(blue_lt)
 execute "hi qfLineNr" Fg(red_lt)
 
