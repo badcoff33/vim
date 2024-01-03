@@ -17,13 +17,14 @@ g:colors_name = "two_tone"
 var black = "#000000"
 var white = "#FFFFFF"
 
-var fg    = "#202030"
-var bg    = "#FCFCFC"
+var fg        = "#202030"
+var bg        = "#FCFCFC"
+var bg_dimmed = "#F0F0F0"
 
 var blue_dk = "#1148AF"
 var blue    = "#2188EF"
 var blue_lt = "#70A0F0"
-var blue_bg = "#E8F0F3"
+var blue_bg = "#B8D0F3"
 
 var red_dk  = "#AF2352"
 var red     = "#EF2372"
@@ -51,6 +52,9 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 
+command -nargs=0 NoDimmed execute "hi Normal" Fg(fg) Bg(bg) Attr("NONE")
+command -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Attr("NONE")
+
 execute "hi Bold" Attr("bold")
 execute "hi CurSearch" Fg(black) Bg(gray[8]) Attr("bold")
 execute "hi Cursor" Bg(blue) Cterm("NONE")
@@ -74,8 +78,8 @@ execute "hi StatusLineNC" Fg(gray[1]) Bg(gray[9]) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
 execute "hi User1" Fg(black) Bg(gray[6]) Attr("bold")
 execute "hi User2" Fg(white) Bg(gray[6]) Attr("italic")
-execute "hi VertSplit" Fg(gray[8]) Bg(gray[9]) Attr("NONE")
-execute "hi Visual" Fg(blue_lt) Bg(black)
+execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Attr("NONE")
+execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr

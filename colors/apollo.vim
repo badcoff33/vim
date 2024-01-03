@@ -72,8 +72,8 @@ highlight! link SignColumn Normal
 highlight! link StatusLineTerm StatusLine
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLineSel IncSearch
-highlight! link TabLine StatusLineNC
-highlight! link TabLineFill StatusLineNC
+highlight! link TabLine Normal
+highlight! link TabLineFill Normal
 highlight! link User3 StatusLine
 highlight! link User4 StatusLine
 highlight! link WildMenu IncSearch
