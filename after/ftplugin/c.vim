@@ -34,7 +34,7 @@ nnoremap <buffer> <C-CR> $o<Esc>0"_D
 imap     <buffer> <C-CR> <Esc><S-CR>i
 
 " open tag preview
-nnoremap <buffer> K g<C-]>zz
+nnoremap <buffer> K :ptjump <C-r><C-w><CR>
 
 " Toggle automatic comment formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
