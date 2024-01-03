@@ -14,6 +14,7 @@ filetype indent on
 
 set autoread
 set autowrite
+set autowriteall
 set belloff=all
 set clipboard=
 set expandtab
@@ -169,25 +170,27 @@ vnoremap <A-e> :move '<-2<CR>==gv=gv
 nnoremap <A-y> :move .+1<CR>==
 vnoremap <A-y> :move '>+1<CR>==gv=gv
 
+" jump previous window
+nnoremap <C-Tab> <C-w>p
+
+" jumb to visited buffers
 nnoremap <A-o> :bprevious<CR>
 nnoremap <A-i> :bnext<CR>
 
 " Abbreviations {{{
-cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
-cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
-cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
 " Kill whitespace after abbrev expansion
 " Example:  iabbrev () ()<Left><C-r>=Killer(getchar(0))<CR>
 let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
-" }}}
+cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
+cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
+cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
 cabbrev <expr> v expand("~/vimfiles/")
 cabbrev <expr> d expand("%:h") .. expand("/")
 
-cmap <C-BS> <C-w>
-cmap <C-Del> <C-Right><C-w>
+" }}}
 
 " Surfing the quickfix matches
 nnoremap <C-j> :cnext<CR>
