@@ -11,6 +11,7 @@ import autoload "run.vim"
 g:rg_excludes = get(g:, "rg_excludes", [])
 g:rg_paths = get(g:, "rg_paths", ["."])
 g:rg_option_all = get(g:, "rg_option_all", false)
+g:rg_find_files_options = get(g:, "rg_find_files_options", "-u")
 
 g:rg_glob_patterns = {
     c:      ['*.c', '*.h', '*.850', '*.s'],
@@ -88,7 +89,7 @@ set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 command!                -nargs=0 RgConfig call g:RgConfig()
-command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files " .. g:RgGlobSwitch('<args>'), name: "RgFiles"})
+command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files " .. g:rg_find_files_options .. " " .. g:RgGlobSwitch('<args>'), name: "RgFiles"})
 command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
 nnoremap <Leader>F :RgFiles ** .<Left><Left><Left>
 
