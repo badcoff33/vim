@@ -11,7 +11,7 @@ import autoload "run.vim"
 
 var ctags_job: job
 
-def g:CtagsTriggerUpdate()
+def g:CtagsTriggerUpdate(verbose = false)
   var ctags_options: string
 
   if job_status(ctags_job) == "run" || !exists("g:ctags_options")
@@ -30,6 +30,8 @@ def g:CtagsTriggerUpdate()
   ctags_job = run.RunStart({cmd: 'ctags ' .. ctags_options, background: true})
   if job_status(ctags_job) != "run"
     echoerr "check ctags options"
+  elseif verbose == true
+    echomsg 'ctags' .. ctags_options
   endif
 enddef
 
@@ -39,7 +41,7 @@ augroup GroupeCtags
   autocmd BufWritePost *.cpp,*.hpp call CtagsTriggerUpdate()
 augroup END
 
-command! -nargs=0 CtagsForceUpdate call CtagsTriggerUpdate()
+command! -nargs=0 CtagsForceUpdate call CtagsTriggerUpdate(true)
 
 defcompile
 
