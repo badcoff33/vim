@@ -170,13 +170,6 @@ vnoremap <A-e> :move '<-2<CR>==gv=gv
 nnoremap <A-y> :move .+1<CR>==
 vnoremap <A-y> :move '>+1<CR>==gv=gv
 
-" jump previous window
-nnoremap <C-Tab> <C-w>p
-
-" jumb to visited buffers
-nnoremap <A-o> :bprevious<CR>
-nnoremap <A-i> :bnext<CR>
-
 " Abbreviations {{{
 
 " Kill whitespace after abbrev expansion
@@ -202,12 +195,12 @@ nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR><Cmd>checktime<
 imap <C-l> <Esc><C-l>
 
 " Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
-inoremap <C-s>" <C-o>B"<Esc>ea"
-inoremap <C-s>' <C-o>B'<Esc>ea'
-inoremap <C-s>` <C-o>B`<Esc>ea`
-inoremap <C-s>) <C-o>B(<Esc>ea)
-inoremap <C-s>] <C-o>B[<Esc>ea]
-inoremap <C-s>} <C-o>B{<Esc>ea}
+inoremap <C-s>" <C-o>b"<Esc>ea"
+inoremap <C-s>' <C-o>b'<Esc>ea'
+inoremap <C-s>` <C-o>b`<Esc>ea`
+inoremap <C-s>) <C-o>b(<Esc>ea)
+inoremap <C-s>] <C-o>b[<Esc>ea]
+inoremap <C-s>} <C-o>b{<Esc>ea}
 
 " Leader key mappings {{{
 let mapleader = " "
@@ -228,7 +221,7 @@ nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
-nnoremap <Leader>b :buffer<Space>
+nnoremap <Leader>b :buffer<Space>*
 nnoremap <Leader>e :call g:OneLinePopup(getcwd())<CR>:edit <C-r>=AppendSep(expand("%:h"))<CR>
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
 nnoremap <Leader>f :find<Space>*
@@ -254,6 +247,7 @@ augroup GroupVimrc " {{{
   autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
   autocmd DirChanged global if filereadable(".vimrc") | call g:OneLinePopup("local .vimrc") | endif
   autocmd WinNew * if (&buftype == "help") | wincmd T | endif
+  autocmd CursorHold * checktime
 augroup END " }}}
 
 let g:term = &term
