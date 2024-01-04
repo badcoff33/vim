@@ -123,7 +123,7 @@ set wildcharm=<Tab>
 cmap <C-N> <Tab>       " works with 'wildcharm'
 
 " close special windows
-nnoremap <Esc> <Cmd>helpclose<CR><Cmd>cclose<CR>
+nnoremap <Esc> <Cmd>helpclose<CR><Cmd>cclose<CR><C-w>z
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
