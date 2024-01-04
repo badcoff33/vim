@@ -7,14 +7,14 @@ def g:OneLinePopupCB(timer: number, result: number)
 enddef
 
 # text of type string is the thing to show in popup
-def g:OneLinePopup(text: string)
+def g:OneLinePopup(text: string, t = 2000, hl = 'User2')
   call popup_create( text, {
-    time: 2000,
+    time: t,
     callback: g:OneLinePopupCB,
     col: 1,
     line: &lines - 2 - g:one_line_popup_line,
     minwidth: &columns,
-    highlight: "User2"
+    highlight: hl
   })
   g:one_line_popup_line = g:one_line_popup_line + 1
 enddef

@@ -65,7 +65,7 @@ export def ErrorCb(ch: channel,  msg: string)
   for d in g:run_dict
     if d.channel == ch_nr
       UpdatePopupPosition()
-      popup_create("Error:" .. msg, g:WinoptsError())
+      g:OneLinePopup("Error:" .. msg, 4000, 'ErrorMsg')
     endif
   endfor
 enddef
@@ -118,7 +118,7 @@ export def CloseCb(ch: channel)
           done_str ..= printf(" | %d errors", errors)
         endif
         UpdatePopupPosition()
-        popup_create(done_str, g:WinoptsDone())
+        g:OneLinePopup(done_str, 4000, 'Pmenu')
       else
         var b = bufadd(d.name)
         lines = getbufinfo(b)[0].linecount
@@ -211,7 +211,7 @@ def RunJobMonitoringCb(tid: number)
         timer_stop(d.timer)
         UpdatePopupPosition()
         if job_status == "fail"
-          popup_create("Error: job failed", g:WinoptsError())
+          g:OneLinePopup("Error: job failed", 4000, 'PmenuSel')
         endif
       endif
     endif
@@ -289,8 +289,7 @@ def StartBuffered(dict: dict<any>): job
   else
     UpdatePopupPosition()
     run_dict_entry.winid = popup_create(
-      printf("STARTING %s",
-        split(dict.cmd, " ")[0]),
+      printf("STARTING %s", split(dict.cmd, " ")[0]),
       g:Winopts())
   endif
 
