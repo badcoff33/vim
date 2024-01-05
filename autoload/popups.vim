@@ -29,7 +29,7 @@ export def OneLinePopup(text: string, t = 2000, hl = 'User2')
   add(g:one_line_popup_winlist, winid)
 enddef
 
-def g:PopupFiletypeHelp()
+export def PopupFiletypeHelp()
   if bufexists("BUF-MAP")
     noautocmd bwipeout! BUF-MAP
   endif
@@ -47,7 +47,7 @@ def g:PopupFiletypeHelp()
     pos: "botright",
     title: "BUFFER MAPPINGS",
     line: winheight(0) + rel_row,
-    col: winwidth(0) + rel_col - 1,
+    col: winwidth(0) + rel_col - 2,
     highlight: 'Pmenu',
     maxwidth: 40,
     maxheight: 20,
