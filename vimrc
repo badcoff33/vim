@@ -204,7 +204,7 @@ inoremap <C-s>} <C-o>b{<Esc>ea}
 
 " Leader key mappings {{{
 let mapleader = " "
-let maplocalleader = "!"
+let maplocalleader = "s"
 
 " toggle options
 let OptStr = { opt -> opt .. "=" .. eval("&" .. opt) .. " " }

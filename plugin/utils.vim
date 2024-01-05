@@ -1,22 +1,31 @@
 vim9script
 
-g:one_line_popup_line = 0
+g:one_line_popup_winlist  = []
 
-def g:OneLinePopupCB(timer: number, result: number)
-  g:one_line_popup_line = g:one_line_popup_line - 1
+def g:OneLinePopupCB(timer: number, winid: number)
+  var i: number
+  var l: number
+  index(g:one_line_popup_winlist, winid)
+  remove(g:one_line_popup_winlist, i)
+  for w in g:one_line_popup_winlist
+    l = popup_getpos(w)['line'] + 1
+    popup_move(w, {line: l})
+  endfor
 enddef
 
 # text of type string is the thing to show in popup
 def g:OneLinePopup(text: string, t = 2000, hl = 'User2')
-  call popup_create( text, {
+  var winid: number
+  winid = popup_create(text, {
     time: t,
     callback: g:OneLinePopupCB,
     col: 1,
-    line: &lines - 2 - g:one_line_popup_line,
+    line: &lines - 2 - len(g:one_line_popup_winlist),
+    padding: [0, 1, 0, 1],
     minwidth: &columns,
     highlight: hl
   })
-  g:one_line_popup_line = g:one_line_popup_line + 1
+  add(g:one_line_popup_winlist, winid)
 enddef
 
 # Toggle the quickfix window
@@ -70,7 +79,6 @@ def g:PopupFiletypeHelp()
     maxheight: 20,
     wrap: 0,
     moved: "any",
-    border: [1, 1, 1, 1],
     padding: [0, 1, 0, 1],
     drag: true,
     close: "click"
@@ -78,20 +86,20 @@ def g:PopupFiletypeHelp()
   setbufvar(b, "&modified", false)
 enddef
 
-nnoremap <Leader>? <Cmd>call PopupFiletypeHelp()<CR>
-nnoremap <Leader><Leader> <Cmd>call ToggleQuickfix()<CR>
-
-def BackwardSlashToForward()
+def g:BackwardSlashToForward()
   s#\\#/#g
   call histdel("/", -1)
 enddef
 
-def ForwardSlashToBackward()
+def g:ForwardSlashToBackward()
   s#/#\\#g
   call histdel("/", -1)
 enddef
 
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
+nnoremap <Leader>? <Cmd>call PopupFiletypeHelp()<CR>
+nnoremap <Leader><Leader> <Cmd>call ToggleQuickfix()<CR>
+
 
 defcompile
