@@ -7,7 +7,7 @@
 
 let g:vim_home = expand('<sfile>:p:h')
 
-let AppendSep = { p -> empty(p) ? "" : p .. expand("/") }
+let AppendSep = { dir empty(dir) ? "" : dir .. expand("/") }
 
 filetype plugin on
 filetype indent on
@@ -206,23 +206,12 @@ inoremap <C-s>} <C-o>b{<Esc>ea}
 let mapleader = " "
 let maplocalleader = "s"
 
-" toggle options
-let OptStr = { opt -> opt .. "=" .. eval("&" .. opt) .. " " }
-nnoremap <Leader>oF <cmd>set wildoptions+=fuzzy<CR><cmd>call g:OneLinePopup(OptStr("wildoptions"))<CR>
-nnoremap <Leader>of <cmd>set wildoptions-=fuzzy<CR><cmd>call g:OneLinePopup(OptStr("wildoptions"))<CR>
-nnoremap <Leader>os <cmd>setlocal invspell<CR><cmd>:call g:OneLinePopup(OptStr("spell") .. OptStr("spelllang"))<CR>
-nnoremap <Leader>op <cmd>setlocal invpaste<CR><cmd>call g:OneLinePopup(OptStr("paste"))<CR>
-nnoremap <Leader>or <cmd>setlocal invrelativenumber<CR>
-nnoremap <Leader>ow <cmd>setlocal invwrap<CR>
-nnoremap <Leader>ol <cmd>setlocal invlist<CR><cmd>call g:OneLinePopup(OptStr("list") .. OptStr("listchars"))<CR>
-nnoremap <Leader>og :<C-u>set grepprg=<C-r>=escape(&grepprg, ' ')<CR>
-
 " Substitute command
 nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
 
 nnoremap <Leader>b :buffer<Space>*
-nnoremap <Leader>e :call g:OneLinePopup(getcwd())<CR>:edit <C-r>=AppendSep(expand("%:h"))<CR>
+nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
 nnoremap <Leader>f :find<Space>*
 
@@ -244,8 +233,6 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 augroup GroupVimrc " {{{
   autocmd!
   autocmd FocusLost * try | silent wall | catch /.*/ | endtry
-  autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
-  autocmd DirChanged global if filereadable(".vimrc") | call g:OneLinePopup("local .vimrc") | endif
   autocmd WinNew * if (&buftype == "help") | wincmd T | endif
   autocmd CursorHold * checktime
 augroup END " }}}
