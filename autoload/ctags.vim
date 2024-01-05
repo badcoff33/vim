@@ -1,5 +1,5 @@
 vim9script
-# File type plugin for C
+# autoload file
 #
 # Description: Some support functions and mappings for C code files.
 # Maintainer: markus prepens (markus dot prepens at gmail dot com)
