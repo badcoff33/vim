@@ -3,30 +3,43 @@ vim9script
 
 g:one_line_popup_winlist  = []
 
-def OneLinePopupCB(timer: number, winid: number)
+# export def Test_olp()
+#   OneLinePopup("1", 5000)
+#   OneLinePopup("22", 13000)
+#   OneLinePopup("333", 15000, "Search")
+#   OneLinePopup("4444", 12000)
+# enddef
+
+def OneLinePopupCB(winid: number, result: number)
   var i: number
-  var l: number
-  index(g:one_line_popup_winlist, winid)
+  var l: number # line of popup to be removed
+  var ll: number
+  l = popup_getpos(winid)["line"]
+  i = index(g:one_line_popup_winlist, winid)
   remove(g:one_line_popup_winlist, i)
   for w in g:one_line_popup_winlist
-    l = popup_getpos(w)['line'] + 1
-    popup_move(w, {line: l})
+    ll = popup_getpos(w)['line']
+    if ll < l
+      popup_move(w, {line: ll + 1})
+    endif
   endfor
 enddef
 
 # text of type string is the thing to show in popup
-export def OneLinePopup(text: string, t = 2000, hl = 'User2')
+# returns the window id of the created popup
+export def OneLinePopup(text: string, t: number = 3000, hl: string = 'User2')
   var winid: number
   winid = popup_create(text, {
     time: t,
     callback: g:OneLinePopupCB,
     col: 1,
     line: &lines - 2 - len(g:one_line_popup_winlist),
-    padding: [0, 1, 0, 1],
-    minwidth: &columns,
+    padding: [0, 2, 0, 2],
+    minwidth: len(text),
     highlight: hl
   })
   add(g:one_line_popup_winlist, winid)
+  return winid
 enddef
 
 export def PopupFiletypeHelp()
