@@ -7,7 +7,7 @@
 
 let g:vim_home = expand('<sfile>:p:h')
 
-let AppendSep = { dir empty(dir) ? "" : dir .. expand("/") }
+let AppendSep = { dir -> empty(dir) ? "" : dir .. expand("/") }
 
 filetype plugin on
 filetype indent on
