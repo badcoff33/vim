@@ -22,6 +22,6 @@ augroup END " }}}
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
 nnoremap <Leader>? <Cmd>call popups#PopupFiletypeHelp()<CR>
-nnoremap <Leader><Leader> :call quickfix#ToggleQuickfix()<CR>
+nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
 
 defcompile
