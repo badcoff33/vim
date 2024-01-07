@@ -1,52 +1,9 @@
 vim9script
 
+import autoload "popups.vim"
+
 g:run_dict = []
-g:run_popup_line_min = 2
-g:run_popup_line_max = 6
-g:run_popup_line = g:run_popup_line_min
 g:run_be_verbose = false
-
-def g:Winopts(): dict<any>
-  var d = { pos: "botright",
-    line: g:run_popup_line,
-    col: &columns,
-    tabpage: -1,
-    highlight: 'Pmenu',
-    padding: [0, 1, 0, 1],
-  }
-  return d
-enddef
-
-def g:WinoptsDone(): dict<any>
-  var d = { pos: "botright",
-    line: g:run_popup_line,
-    col: &columns,
-    tabpage: -1,
-    highlight: 'PmenuSel',
-    padding: [0, 1, 0, 1],
-    time: 3500,
-  }
-  return d
-enddef
-
-def g:WinoptsError(): dict<any>
-  var d = { pos: "botright",
-    line: g:run_popup_line,
-    col: &columns,
-    tabpage: -1,
-    highlight: 'ErrorMsg',
-    padding: [0, 1, 0, 1],
-    time: 3500,
-  }
-  return d
-enddef
-
-def UpdatePopupPosition()
-  g:run_popup_line += 1
-  if g:run_popup_line > g:run_popup_line_max
-    g:run_popup_line = g:run_popup_line_min
-  endif
-enddef
 
 def RemoveChannelFromDict(ch: string)
   var r: list<any>
@@ -64,8 +21,13 @@ export def ErrorCb(ch: channel,  msg: string)
   var ch_nr = split(string(ch), " ")[1]
   for d in g:run_dict
     if d.channel == ch_nr
-      UpdatePopupPosition()
-      g:OneLinePopup("Error:" .. msg, 4000, 'ErrorMsg')
+      if has_key(d, "winid")
+        popups.OneLinePopupClose(d.winid)
+      endif
+      if has_key(d, "timer")
+        timer_stop(d.timer)
+      endif
+      popups.OneLinePopup("Error:" .. msg, 4000, 'ErrorMsg')
     endif
   endfor
 enddef
@@ -80,15 +42,12 @@ export def CloseCb(ch: channel)
 
   for d in g:run_dict
     if d.channel == ch_nr
-
       if has_key(d, "timer")
         timer_stop(d.timer)
       endif
-
       if has_key(d, "winid")
-        popup_close(d.winid)
+        popups.OneLinePopupClose(d.winid)
       endif
-
       if d.name == "quickfix"
         buflines = getbufline(d.bufnr, 1, "$")
         if buflines != [""] # is it empty?
@@ -117,8 +76,7 @@ export def CloseCb(ch: channel)
         elseif errors > 1
           done_str ..= printf(" | %d errors", errors)
         endif
-        UpdatePopupPosition()
-        g:OneLinePopup(done_str, 4000, 'Pmenu')
+        popups.OneLinePopup(done_str, 4000, 'Pmenu')
       else
         var b = bufadd(d.name)
         lines = getbufinfo(b)[0].linecount
@@ -153,7 +111,7 @@ export def BackgroundErrorCb(ch: channel,  msg: string)
     if d.channel == ch_nr
       timer_stop(d.timer)
       if has_key(d, "winid")
-        popup_close(d.winid)
+        popups.OneLinePopupClose(d.winid)
       endif
       echohl ErrorMsg
       echo "error reported by channel" ch_info(ch)["id"] "-->" msg
@@ -195,7 +153,6 @@ def RunJobMonitoringCb(tid: number)
     if d.winid > 0
       job_status = job_status(d.job)
       if job_status == "run"
-        popup_setoptions(d.winid, g:Winopts())
         if has_key(d, "timer") && d.timer == tid
           popup_settext(d.winid,
             printf("%s %s %s %d lines",
@@ -207,11 +164,10 @@ def RunJobMonitoringCb(tid: number)
           break
         endif
       else
-        popup_close(d.winid)
+        popups.OneLinePopupClose(d.winid)
         timer_stop(d.timer)
-        UpdatePopupPosition()
         if job_status == "fail"
-          g:OneLinePopup("Error: job failed", 4000, 'PmenuSel')
+          popups.OneLinePopup("Error: job failed", 4000, 'PmenuSel')
         endif
       endif
     endif
@@ -287,10 +243,10 @@ def StartBuffered(dict: dict<any>): job
   if has_key(dict, "no_popup") && (dict.no_popup == true)
     run_dict_entry.winid = 0
   else
-    UpdatePopupPosition()
-    run_dict_entry.winid = popup_create(
+    run_dict_entry.winid = popups.OneLinePopup(
       printf("STARTING %s", split(dict.cmd, " ")[0]),
-      g:Winopts())
+      0 # permanent
+    )
   endif
 
   run_dict_entry.job = job_start("cmd /C " .. dict.cmd, job_opts)

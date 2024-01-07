@@ -10,6 +10,44 @@ g:one_line_popup_winlist  = []
 #   OneLinePopup("4444", 12000)
 # enddef
 
+# text of type string is the thing to show in popup
+# returns the window id of the created popup
+export def OneLinePopup(text: string, t: number = 3000, hl: string = 'User2'): number
+  var winid: number
+  var winopts = {
+    col: 1,
+    line: &lines - 2 - len(g:one_line_popup_winlist),
+    padding: [0, 2, 0, 2],
+    minwidth: len(text),
+    highlight: hl
+  }
+  if t > 0
+    winopts['time'] = t
+    winopts['callback'] = g:OneLinePopupCB
+  endif
+  winid = popup_create(text, winopts)
+  add(g:one_line_popup_winlist, winid)
+  return winid
+enddef
+
+export def OneLinePopupClose(winid: number)
+  var i: number
+  var l: number # line of popup to be removed
+  var ll: number
+  if index(popup_list(), winid) > -1 # does it exist?
+    l = popup_getpos(winid)["line"]
+    popup_close(winid)
+    i = index(g:one_line_popup_winlist, winid)
+    remove(g:one_line_popup_winlist, i)
+    for w in g:one_line_popup_winlist
+      ll = popup_getpos(w)['line']
+      if ll < l
+        popup_move(w, {line: ll + 1})
+      endif
+    endfor
+  endif
+enddef
+
 def OneLinePopupCB(winid: number, result: number)
   var i: number
   var l: number # line of popup to be removed
@@ -23,23 +61,6 @@ def OneLinePopupCB(winid: number, result: number)
       popup_move(w, {line: ll + 1})
     endif
   endfor
-enddef
-
-# text of type string is the thing to show in popup
-# returns the window id of the created popup
-export def OneLinePopup(text: string, t: number = 3000, hl: string = 'User2')
-  var winid: number
-  winid = popup_create(text, {
-    time: t,
-    callback: g:OneLinePopupCB,
-    col: 1,
-    line: &lines - 2 - len(g:one_line_popup_winlist),
-    padding: [0, 2, 0, 2],
-    minwidth: len(text),
-    highlight: hl
-  })
-  add(g:one_line_popup_winlist, winid)
-  return winid
 enddef
 
 export def PopupFiletypeHelp()
@@ -74,4 +95,4 @@ export def PopupFiletypeHelp()
 enddef
 
 # uncomment when debugging
-#defcompile
+defcompile
