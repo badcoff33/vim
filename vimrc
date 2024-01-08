@@ -120,7 +120,8 @@ imap <C-Space> <C-]>
 cnoremap <C-Space> <C-]>
 
 set wildcharm=<Tab>
-cmap <C-N> <Tab>       " works with 'wildcharm'
+" works with 'wildcharm'
+cmap <C-N> <Tab>
 
 " close special windows
 nnoremap <Esc> <Cmd>helpclose<CR><Cmd>cclose<CR><C-w>z
