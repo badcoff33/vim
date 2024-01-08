@@ -49,6 +49,7 @@ endfunction
 
 function! visuals#turn_cursorline_on()
   if &diff
+    setlocal nocursorline
     return
   elseif &ft == "netrw"
     return
