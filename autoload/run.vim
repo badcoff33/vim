@@ -135,15 +135,15 @@ def ConditionalWriteAll(dict: dict<any>)
       endtry
 enddef
 
-var indicator = ["-", "\\", "|", "/"]
-var indicator_index = 0
+var animations = ["-___", "_-__", "__-_", "___-", "__-_", "_-__", "-___"]
+var animation_index = 0
 
-def GetIndicator(): string
-  indicator_index += 1
-  if indicator_index == 4
-    indicator_index = 0
+def GetAnimationStr(): string
+  animation_index += 1
+  if animation_index == len(animations)
+    animation_index = 0
   endif
-  return indicator[indicator_index]
+  return animations[animation_index]
 enddef
 
 def RunJobMonitoringCb(tid: number)
@@ -155,11 +155,11 @@ def RunJobMonitoringCb(tid: number)
       if job_status == "run"
         if has_key(d, "timer") && d.timer == tid
           popup_settext(d.winid,
-            printf("%s %s %s %d lines",
+            printf("%s %s %d lines %s",
               toupper(job_status),
               d.short_cmd,
-              GetIndicator(),
-              getbufinfo(d.bufnr)[0].linecount
+              getbufinfo(d.bufnr)[0].linecount,
+              GetAnimationStr()
             ))
           break
         endif
