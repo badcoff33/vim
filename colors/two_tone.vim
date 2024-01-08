@@ -77,7 +77,7 @@ execute "hi StatusLine" Fg(black) Bg(gray[8]) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray[1]) Bg(gray[9]) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
 execute "hi User1" Fg(black) Bg(gray[6]) Gui("NONE")
-execute "hi User2" Fg(white) Bg(gray[6]) Gui("italic")
+execute "hi User2" Fg(blue_dk) Bg(gray[6]) Gui("italic")
 execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Gui("NONE")
 execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
 
