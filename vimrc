@@ -210,8 +210,8 @@ let mapleader = "s"
 let maplocalleader = "S"
 
 " Substitute command
-nnoremap <Leader>s :%s/<C-r><C-w>//gI<Left><Left><Left>
-vnoremap <Leader>s :s///gI<Left><Left><Left><Left>
+nnoremap <Leader>s :%s/\V//gI<Left><Left><Left><Left>
+vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
 
 nnoremap <Leader>b :buffer<Space>*
 nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
