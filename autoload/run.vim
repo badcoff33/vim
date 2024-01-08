@@ -22,12 +22,12 @@ export def ErrorCb(ch: channel,  msg: string)
   for d in g:run_dict
     if d.channel == ch_nr
       if has_key(d, "winid")
-        popups.OneLinePopupClose(d.winid)
+        popups.NewsClose(d.winid)
       endif
       if has_key(d, "timer")
         timer_stop(d.timer)
       endif
-      popups.OneLinePopup("Error:" .. msg, 4000, 'ErrorMsg')
+      popups.News("Error:" .. msg, 4000, 'ErrorMsg')
     endif
   endfor
 enddef
@@ -46,7 +46,7 @@ export def CloseCb(ch: channel)
         timer_stop(d.timer)
       endif
       if has_key(d, "winid")
-        popups.OneLinePopupClose(d.winid)
+        popups.NewsClose(d.winid)
       endif
       if d.name == "quickfix"
         buflines = getbufline(d.bufnr, 1, "$")
@@ -76,7 +76,7 @@ export def CloseCb(ch: channel)
         elseif errors > 1
           done_str ..= printf(" | %d errors", errors)
         endif
-        popups.OneLinePopup(done_str, 4000, 'Pmenu')
+        popups.News(done_str, 4000, 'Pmenu')
       else
         var b = bufadd(d.name)
         lines = getbufinfo(b)[0].linecount
@@ -111,7 +111,7 @@ export def BackgroundErrorCb(ch: channel,  msg: string)
     if d.channel == ch_nr
       timer_stop(d.timer)
       if has_key(d, "winid")
-        popups.OneLinePopupClose(d.winid)
+        popups.NewsClose(d.winid)
       endif
       echohl ErrorMsg
       echo "error reported by channel" ch_info(ch)["id"] "-->" msg
@@ -164,10 +164,10 @@ def RunJobMonitoringCb(tid: number)
           break
         endif
       else
-        popups.OneLinePopupClose(d.winid)
+        popups.NewsClose(d.winid)
         timer_stop(d.timer)
         if job_status == "fail"
-          popups.OneLinePopup("Error: job failed", 4000, 'PmenuSel')
+          popups.News("Error: job failed", 4000, 'PmenuSel')
         endif
       endif
     endif
@@ -243,7 +243,7 @@ def StartBuffered(dict: dict<any>): job
   if has_key(dict, "no_popup") && (dict.no_popup == true)
     run_dict_entry.winid = 0
   else
-    run_dict_entry.winid = popups.OneLinePopup(
+    run_dict_entry.winid = popups.News(
       printf("STARTING %s", split(dict.cmd, " ")[0]),
       0 # permanent
     )

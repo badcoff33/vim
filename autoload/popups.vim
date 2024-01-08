@@ -1,18 +1,18 @@
 vim9script
 # autoload file
 
-g:one_line_popup_winlist  = []
+g:news_winlist  = []
 
-export def Test_olp()
-  OneLinePopup("1", 5000)
-  OneLinePopup("22", 13000)
-  OneLinePopup("333", 15000, "Search")
-  OneLinePopup("4444", 12000)
-enddef
+# export def Test_olp()
+#   News("1", 5000)
+#   News("22", 13000)
+#   News("333", 15000, "Search")
+#   News("4444", 12000)
+# enddef
 
 # text of type string is the thing to show in popup
 # returns the window id of the created popup
-export def OneLinePopup(text: string, t: number = 3000, hl: string = 'User2'): number
+export def News(text: string, t: number = 3000, hl: string = 'User2'): number
   var ll: number
   var winid: number
   var winopts = {
@@ -24,27 +24,27 @@ export def OneLinePopup(text: string, t: number = 3000, hl: string = 'User2'): n
   }
   if t > 0
     winopts['time'] = t
-    winopts['callback'] = g:OneLinePopupCB
+    winopts['callback'] = g:NewsCB
   endif
-  for w in g:one_line_popup_winlist
+  for w in g:news_winlist
     ll = popup_getpos(w)['line']
     popup_move(w, {line: ll - 1})
   endfor
   winid = popup_create(text, winopts)
-  add(g:one_line_popup_winlist, winid)
+  add(g:news_winlist, winid)
   return winid
 enddef
 
-export def OneLinePopupClose(winid: number)
+export def NewsClose(winid: number)
   var i: number
   var l: number # line of popup to be removed
   var ll: number
   if index(popup_list(), winid) > -1 # does it exist?
     l = popup_getpos(winid)["line"]
     popup_close(winid)
-    i = index(g:one_line_popup_winlist, winid)
-    remove(g:one_line_popup_winlist, i)
-    for w in g:one_line_popup_winlist
+    i = index(g:news_winlist, winid)
+    remove(g:news_winlist, i)
+    for w in g:news_winlist
       ll = popup_getpos(w)['line']
       if ll < l
         popup_move(w, {line: ll + 1})
@@ -53,14 +53,14 @@ export def OneLinePopupClose(winid: number)
   endif
 enddef
 
-def OneLinePopupCB(winid: number, result: number)
+def NewsCB(winid: number, result: number)
   var i: number
   var l: number # line of popup to be removed
   var ll: number
   l = popup_getpos(winid)["line"]
-  i = index(g:one_line_popup_winlist, winid)
-  remove(g:one_line_popup_winlist, i)
-  for w in g:one_line_popup_winlist
+  i = index(g:news_winlist, winid)
+  remove(g:news_winlist, i)
+  for w in g:news_winlist
     ll = popup_getpos(w)['line']
     if ll < l
       popup_move(w, {line: ll + 1})
