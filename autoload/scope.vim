@@ -3,13 +3,13 @@
 " Description:
 " Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 
-function! g:WinoptsScope(length)
+function! g:WinoptsScope()
     let rel_col = win_screenpos(win_getid())[1]
     let d = #{ pos: "topleft",
                 \ line: "cursor",
-                \ col: rel_col + winwidth(0) - min([30, a:length + 1]),
-                \ highlight: 'PmenuSel',
-                \ padding: [0, 1, 0, 1],
+                \ col: rel_col + len(getline('.')) + 3,
+                \ highlight: 'Search',
+                \ padding: [0, 1, 0, 3],
                 \ time: 2000 }
     return d
 endfunction
@@ -18,11 +18,12 @@ let g:scope_prev_text = ""
 let g:scope_prev_line = 1
 
 function! scope#PopupScope()
+  let max_text_len = 20
   let text = scope#GetScope()
-  if len(text) < 15
-      let text_disp = "< " .. text[0:15]
+  if len(text) < max_text_len
+      let text_disp = "< " .. text[0:max_text_len]
   else
-      let text_disp = "< " .. text[0:15] .. "..."
+      let text_disp = "< " .. text[0:max_text_len] .. "..."
   endif
   let line_diff = abs(g:scope_prev_line - line("."))
   if empty(text)
@@ -30,11 +31,11 @@ function! scope#PopupScope()
   endif
   if g:scope_once == v:true
     if text != g:scope_prev_text
-      call popup_create(text_disp, g:WinoptsScope(len(text_disp) + 3))
+      call popup_create(text_disp, g:WinoptsScope())
     endif
   else
     if line_diff > 7
-      call popup_create(text_disp, g:WinoptsScope(len(text_disp) + 3))
+      call popup_create(text_disp, g:WinoptsScope())
       let g:scope_prev_line = line(".")
     endif
   endif
