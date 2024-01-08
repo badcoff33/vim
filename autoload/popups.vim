@@ -3,20 +3,21 @@ vim9script
 
 g:one_line_popup_winlist  = []
 
-# export def Test_olp()
-#   OneLinePopup("1", 5000)
-#   OneLinePopup("22", 13000)
-#   OneLinePopup("333", 15000, "Search")
-#   OneLinePopup("4444", 12000)
-# enddef
+export def Test_olp()
+  OneLinePopup("1", 5000)
+  OneLinePopup("22", 13000)
+  OneLinePopup("333", 15000, "Search")
+  OneLinePopup("4444", 12000)
+enddef
 
 # text of type string is the thing to show in popup
 # returns the window id of the created popup
 export def OneLinePopup(text: string, t: number = 3000, hl: string = 'User2'): number
+  var ll: number
   var winid: number
   var winopts = {
     col: 1,
-    line: &lines - 2 - len(g:one_line_popup_winlist),
+    line: &lines - 2,
     padding: [0, 2, 0, 2],
     minwidth: len(text),
     highlight: hl
@@ -25,6 +26,10 @@ export def OneLinePopup(text: string, t: number = 3000, hl: string = 'User2'): n
     winopts['time'] = t
     winopts['callback'] = g:OneLinePopupCB
   endif
+  for w in g:one_line_popup_winlist
+    ll = popup_getpos(w)['line']
+    popup_move(w, {line: ll - 1})
+  endfor
   winid = popup_create(text, winopts)
   add(g:one_line_popup_winlist, winid)
   return winid
