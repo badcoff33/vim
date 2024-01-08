@@ -46,39 +46,39 @@ var gray = [
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
-var Attr = (str) => empty(str) ? "" : "gui=" .. str
+var Gui = (str) => empty(str) ? "" : "gui=" .. str
 var Cterm = (str) => empty(str) ? "" : "cterm=" .. str
 var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 
-command -nargs=0 NoDimmed execute "hi Normal" Fg(fg) Bg(bg) Attr("NONE")
-command -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Attr("NONE")
+command -nargs=0 NoDimmed execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
+command -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
 
-execute "hi Bold" Attr("bold")
-execute "hi CurSearch" Fg(black) Bg(gray[8]) Attr("bold")
+execute "hi Bold" Gui("bold")
+execute "hi CurSearch" Fg(black) Bg(gray[8]) Gui("bold")
 execute "hi Cursor" Bg(blue) Cterm("NONE")
 execute "hi CursorLine" Bg(gray[9]) Cterm("NONE")
-execute "hi CursorLineNr" Fg(gray[4]) Attr("bold")
-execute "hi Folded" Fg(blue) Bg(gray[8]) Attr("NONE")
-execute "hi IncSearch" Fg(red_dk) Bg(red_lt) Attr("NONE")
-execute "hi Italic" Attr("italic")
-execute "hi Label" Fg(black) Attr("bold")
-execute "hi LineNr" Fg(gray[4]) Attr("bold")
-execute "hi MatchParen" Fg(blue) Bg("bg") Attr("underline,bold")
+execute "hi CursorLineNr" Fg(gray[4]) Gui("bold")
+execute "hi Folded" Fg(blue) Bg(gray[8]) Gui("NONE")
+execute "hi IncSearch" Fg(red_dk) Bg(red_lt) Gui("NONE")
+execute "hi Italic" Gui("italic")
+execute "hi Label" Fg(black) Gui("bold")
+execute "hi LineNr" Fg(gray[4]) Gui("bold")
+execute "hi MatchParen" Fg(blue) Bg("bg") Gui("underline,bold")
 execute "hi NonText" Fg(gray[6]) Bg("bg")
-execute "hi Normal" Fg(fg) Bg(bg) Attr("NONE")
+execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 execute "hi Pmenu" Fg(white) Bg(blue)
 execute "hi PmenuSbar" Fg(red) Bg(red)
-execute "hi PmenuSel" Fg(white) Bg(blue_dk) Attr("bold")
+execute "hi PmenuSel" Fg(white) Bg(blue_dk) Gui("bold")
 execute "hi PmenuThumb" Fg(gray[2]) Bg(gray[7])
-execute "hi Search" Fg(black) Bg(gray[8]) Attr("NONE")
-execute "hi StatusLine" Fg(black) Bg(gray[8]) Attr("NONE")
-execute "hi StatusLineNC" Fg(gray[1]) Bg(gray[9]) Attr("NONE")
-execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
-execute "hi User1" Fg(black) Bg(gray[6]) Attr("NONE")
-execute "hi User2" Fg(white) Bg(gray[6]) Attr("italic")
-execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Attr("NONE")
+execute "hi Search" Fg(black) Bg(gray[8]) Gui("NONE")
+execute "hi StatusLine" Fg(black) Bg(gray[8]) Gui("NONE")
+execute "hi StatusLineNC" Fg(gray[1]) Bg(gray[9]) Gui("NONE")
+execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
+execute "hi User1" Fg(black) Bg(gray[6]) Gui("NONE")
+execute "hi User2" Fg(white) Bg(gray[6]) Gui("italic")
+execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Gui("NONE")
 execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
 
 highlight! link CursorColumn CursorLine
@@ -94,61 +94,61 @@ highlight! link qfSeparator Normal
 
 # Code
 
-execute "hi Comment" Fg(gray[5]) Attr("NONE")
-execute "hi Conditional" Fg(red)  Attr("bold")
+execute "hi Comment" Fg(gray[5]) Gui("NONE")
+execute "hi Conditional" Fg(red)  Gui("bold")
 execute "hi Constant" Fg(blue)
 execute "hi Directory" Fg(blue_dk)
-execute "hi Error" Fg(red) Bg("bg") Attr("underline")
-execute "hi ErrorMsg" Fg(red) Bg(red_bg) Attr("NONE")
+execute "hi Error" Fg(red) Bg("bg") Gui("underline")
+execute "hi ErrorMsg" Fg(red) Bg(red_bg) Gui("NONE")
 execute "hi Function" Fg(blue)
-execute "hi Identifier" Fg(red) Attr("NONE")
-execute "hi ModeMsg" Fg(blue) Bg("bg") Attr("NONE")
+execute "hi Identifier" Fg(red) Gui("NONE")
+execute "hi ModeMsg" Fg(blue) Bg("bg") Gui("NONE")
 execute "hi Number" Fg(blue)
-execute "hi PreCondit" Fg(blue)  Attr("bold")
-execute "hi PreProc" Fg(blue) Attr("NONE")
+execute "hi PreCondit" Fg(blue)  Gui("bold")
+execute "hi PreProc" Fg(blue) Gui("NONE")
 execute "hi Question" Fg(gray[1]) Bg("bg")
-execute "hi QuickFixLine" Fg(blue) Bg("bg") Attr("bold")
+execute "hi QuickFixLine" Fg(blue) Bg("bg") Gui("bold")
 execute "hi Special" Fg(red_dk)
 execute "hi SpecialKey" Fg(blue)
-execute "hi Statement" Fg(blue_lt)  Attr("bold")
+execute "hi Statement" Fg(blue_lt)  Gui("bold")
 execute "hi StorageClass" Fg(red)
 execute "hi String" Fg(blue_dk)
-execute "hi Structure" Fg(red) Attr("NONE")
-execute "hi Title" Fg(black)  Attr("bold")
-execute "hi Todo" Fg(blue) Bg("bg") Attr("bold,italic")
-execute "hi Type" Fg(blue) Attr("NONE")
+execute "hi Structure" Fg(red) Gui("NONE")
+execute "hi Title" Fg(black)  Gui("bold")
+execute "hi Todo" Fg(blue) Bg("bg") Gui("bold,italic")
+execute "hi Type" Fg(blue) Gui("NONE")
 execute "hi WarningMsg" Fg(blue_dk) Bg(blue_bg)
 execute "hi qfFileName" Fg(blue_lt)
 execute "hi qfLineNr" Fg(red_lt)
 
 # Filetype VIM
 
-execute "hi vimCommentTitle" Fg(blue)  Attr("bold")
+execute "hi vimCommentTitle" Fg(blue)  Gui("bold")
 
 # Filetype C
 
-execute "hi cCppOut" Bg(gray[9]) Attr("NONE")
-execute "hi cCppOutIf2" Bg(gray[9]) Attr("NONE")
+execute "hi cCppOut" Bg(gray[9]) Gui("NONE")
+execute "hi cCppOutIf2" Bg(gray[9]) Gui("NONE")
 execute "hi cParen" Fg(gray[3])
 execute "hi cBlock" Fg(gray[3])
 
 # Filetype HTML
 
-execute "hi htmlH1" Fg(blue_dk) Attr("bold")
-execute "hi htmlH2" Fg(blue)    Attr("bold")
-execute "hi htmlH3" Fg(blue)    Attr("NONE")
+execute "hi htmlH1" Fg(blue_dk) Gui("bold")
+execute "hi htmlH2" Fg(blue)    Gui("bold")
+execute "hi htmlH3" Fg(blue)    Gui("NONE")
 
 # Filetype Markdown
 
 # execute "hi markdownCode" Fg(gray[3]) Bg(gray[9])
-execute "hi markdownCode" Fg(blue) Attr("italic")
+execute "hi markdownCode" Fg(blue) Gui("italic")
 execute "hi markdownCodeBlock" Fg(gray[2])
 execute "hi rstEmphasis" Fg(gray[2])
-execute "hi rstStrongEmphasis" Fg(gray[2])  Attr("bold")
+execute "hi rstStrongEmphasis" Fg(gray[2])  Gui("bold")
 
 # Diffs
 
-execute "hi DiffChange" Fg(blue) Bg(gray[9])
-execute "hi DiffText" Fg(blue) Bg(gray[8])
-execute "hi DiffDelete" Fg(red) Bg(gray[9])
-execute "hi DiffAdd" Fg(gray[3]) Bg(gray[9])
+execute "hi DiffChange" Fg(blue) Bg(gray[8])
+execute "hi DiffText" Fg(blue) Bg(blue_bg) Gui("bold")
+execute "hi DiffDelete" Fg(red) Bg(red_bg)
+execute "hi DiffAdd" Fg(gray[3]) Bg(gray[8]) Gui("bold")
