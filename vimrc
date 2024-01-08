@@ -33,11 +33,13 @@ set notimeout
 set nottimeout
 set novisualbell
 set nowrap
+set paste
 set report=0
 set updatetime=300
 set ruler
 set selection=exclusive
 set selectmode=
+set sessionoptions=buffers,tabpages,winsize
 set shiftwidth=4
 set shortmess-=S " Yes, search count please
 set shortmess-=f " long form for file info
@@ -192,7 +194,7 @@ nnoremap <C-k> :cprevious<CR>
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
-nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR><Cmd>checktime<CR>
+nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR><Cmd>checktime<CR>:checktime<CR>
 imap <C-l> <Esc><C-l>
 
 " Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
@@ -235,7 +237,6 @@ augroup GroupVimrc " {{{
   autocmd!
   autocmd FocusLost * try | silent wall | catch /.*/ | endtry
   autocmd WinNew * if (&buftype == "help") | wincmd T | endif
-  autocmd CursorHold * checktime
 augroup END " }}}
 
 let g:term = &term
