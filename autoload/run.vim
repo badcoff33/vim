@@ -1,6 +1,6 @@
 vim9script
 
-import autoload "popups.vim"
+import autoload "popnews.vim"
 
 g:run_dict = []
 g:run_be_verbose = false
@@ -22,12 +22,12 @@ export def ErrorCb(ch: channel,  msg: string)
   for d in g:run_dict
     if d.channel == ch_nr
       if has_key(d, "winid")
-        popups.NewsClose(d.winid)
+        popnews.Close(d.winid)
       endif
       if has_key(d, "timer")
         timer_stop(d.timer)
       endif
-      popups.News("Error:" .. msg, 4000, 'ErrorMsg')
+      popnews.Open("Error:" .. msg, 4000, 'ErrorMsg')
     endif
   endfor
 enddef
@@ -46,7 +46,7 @@ export def CloseCb(ch: channel)
         timer_stop(d.timer)
       endif
       if has_key(d, "winid")
-        popups.NewsClose(d.winid)
+        popnews.Close(d.winid)
       endif
       if d.name == "quickfix"
         buflines = getbufline(d.bufnr, 1, "$")
@@ -62,7 +62,8 @@ export def CloseCb(ch: channel)
             errors += e.type ==? "e" ? 1 : 0
           endfor
         endif
-        var done_str = printf("%s took %d sec | %d lines",
+        var done_str = printf("%s %s took %d sec | %d lines",
+          '____',
           d.short_cmd,
           localtime() - d.started,
           lines)
@@ -76,7 +77,7 @@ export def CloseCb(ch: channel)
         elseif errors > 1
           done_str ..= printf(" | %d errors", errors)
         endif
-        popups.News(done_str, 4000, 'Pmenu')
+        popnews.Open(done_str, 4000, 'Pmenu')
       else
         var b = bufadd(d.name)
         lines = getbufinfo(b)[0].linecount
@@ -111,7 +112,7 @@ export def BackgroundErrorCb(ch: channel,  msg: string)
     if d.channel == ch_nr
       timer_stop(d.timer)
       if has_key(d, "winid")
-        popups.NewsClose(d.winid)
+        popnews.Close(d.winid)
       endif
       echohl ErrorMsg
       echo "error reported by channel" ch_info(ch)["id"] "-->" msg
@@ -135,7 +136,7 @@ def ConditionalWriteAll(dict: dict<any>)
       endtry
 enddef
 
-var animations = ["-___", "_-__", "__-_", "___-", "__-_", "_-__", "-___"]
+var animations = ["-___", "_-__", "__-_", "___-", "__-_", "_-__"]
 var animation_index = 0
 
 def GetAnimationStr(): string
@@ -155,19 +156,18 @@ def RunJobMonitoringCb(tid: number)
       if job_status == "run"
         if has_key(d, "timer") && d.timer == tid
           popup_settext(d.winid,
-            printf("%s %s %d lines %s",
-              toupper(job_status),
+            printf("%s %s %d lines",
+              GetAnimationStr(),
               d.short_cmd,
-              getbufinfo(d.bufnr)[0].linecount,
-              GetAnimationStr()
+              getbufinfo(d.bufnr)[0].linecount
             ))
           break
         endif
       else
-        popups.NewsClose(d.winid)
+        popnews.Close(d.winid)
         timer_stop(d.timer)
         if job_status == "fail"
-          popups.News("Error: job failed", 4000, 'PmenuSel')
+          popnews.Open("XXXX job failed", 4000, 'PmenuSel')
         endif
       endif
     endif
@@ -243,9 +243,14 @@ def StartBuffered(dict: dict<any>): job
   if has_key(dict, "no_popup") && (dict.no_popup == true)
     run_dict_entry.winid = 0
   else
-    run_dict_entry.winid = popups.News(
-      printf("STARTING %s", split(dict.cmd, " ")[0]),
-      0 # permanent
+    popnews.Open(
+      printf("starting %s", split(dict.cmd, " ")[0]),
+      2000,
+      'Pmenu')
+    run_dict_entry.winid = popnews.Open(
+      printf("waiting"),
+      0, # permanent
+      'Pmenu'
     )
   endif
 

@@ -1,6 +1,6 @@
 vim9script
 
-import autoload "popups.vim"
+import autoload "popnews.vim"
 import autoload "quickfix.vim"
 
 def g:BackwardSlashToForward()
@@ -16,7 +16,7 @@ enddef
 augroup GroupUtils " {{{
   autocmd!
   autocmd BufNewFile .vimrc execute "0read" g:vim_home.."\\templates\\local_vimrc"
-  autocmd DirChanged global if filereadable(".vimrc") | call popups.News("local .vimrc") | endif
+  autocmd DirChanged global if filereadable(".vimrc") | call popnews.Open("local .vimrc") | endif
 augroup END " }}}
 
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
