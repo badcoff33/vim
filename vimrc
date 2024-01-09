@@ -213,6 +213,7 @@ let maplocalleader = "S"
 nnoremap <Leader>s :%s/\V//gI<Left><Left><Left><Left>
 vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
 
+nnoremap <Space> :buffer<Space>*
 nnoremap <Leader>b :buffer<Space>*
 nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
