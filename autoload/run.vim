@@ -62,8 +62,7 @@ export def CloseCb(ch: channel)
             errors += e.type ==? "e" ? 1 : 0
           endfor
         endif
-        var done_str = printf("%s %s took %d sec | %d lines",
-          '____',
+        var done_str = printf("%s took %d sec | %d lines",
           d.short_cmd,
           localtime() - d.started,
           lines)
@@ -157,8 +156,8 @@ def RunJobMonitoringCb(tid: number)
         if has_key(d, "timer") && d.timer == tid
           popup_settext(d.winid,
             printf("%s %s %d lines",
-              GetAnimationStr(),
               d.short_cmd,
+              GetAnimationStr(),
               getbufinfo(d.bufnr)[0].linecount
             ))
           break
@@ -243,12 +242,8 @@ def StartBuffered(dict: dict<any>): job
   if has_key(dict, "no_popup") && (dict.no_popup == true)
     run_dict_entry.winid = 0
   else
-    popnews.Open(
-      printf("starting %s", split(dict.cmd, " ")[0]),
-      2000,
-      'Pmenu')
     run_dict_entry.winid = popnews.Open(
-      printf("waiting"),
+      printf("%s %s %d lines", '____', run_dict_entry.short_cmd, 0),
       0, # permanent
       'Pmenu'
     )
