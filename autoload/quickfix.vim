@@ -13,7 +13,7 @@ export def ToggleQuickfix()
   if is_open == false
     var num_qf_lines = len(getqflist())
     if num_qf_lines > 0
-      execute "botright" "copen" min([ &lines / 3, num_qf_lines])
+      execute "botright" "copen" min([ &lines / 2, num_qf_lines + 1])
       wincmd p
     else
       echomsg "- Quickfix empty -"
