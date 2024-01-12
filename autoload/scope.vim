@@ -61,7 +61,7 @@ def GetScope(): string
 enddef
 
 # Description: A scope parser for C files.
-def GetScopeC(): string
+export def GetScopeC(): string
   var funcName: string = ''
   # Regular expressions to find head and bottom lines of a C function.
   var regexpHead = '^[a-zA-Z_].*\(\<[0-9a-zA-Z_]\+\)\s*(.*'
@@ -79,7 +79,7 @@ def GetScopeC(): string
 enddef
 
 # Description: A simple scope parser for Python files.
-def GetScopePython(): string
+export def GetScopePython(): string
     var regexpHead = '^\s*\(class\|def\)\s\+\(\w\+\).*$'
     var lineHead = search(regexpHead, 'bnWe')
     if lineHead > 0
@@ -90,7 +90,7 @@ def GetScopePython(): string
 enddef
 
 # Description: A simple scope parser for Markdown files.
-def GetScopeMarkdown(): string
+export def GetScopeMarkdown(): string
   var fNum = search('^#\{1,\}', 'bcnWez')
     if fNum > 0
       var chapter_str = substitute(getline(fNum),
