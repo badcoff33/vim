@@ -1,5 +1,7 @@
 vim9script
 
+import autoload "scope.vim"
+
 var do_auto_popup = true
 g:scope_once = false
 
