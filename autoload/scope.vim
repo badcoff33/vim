@@ -20,30 +20,38 @@ def DisplayScope(text: string)
   popup_create(text, options)
 enddef
 
-export def PopupScope()
+def LimitString(s: string): string
   var max_text_len: number = 30
-  var text: string = GetScope()
+  var short_form: string
+  if len(s) < max_text_len
+      short_form = s[0 : max_text_len]
+  else
+      short_form = s[0 : max_text_len] .. "..."
+  endif
+  return short_form
+enddef
+
+export def PopupScope(now = false)
+  var text: string
   var text_disp: string
-  if len(text) < max_text_len
-      text_disp = text[0 : max_text_len]
-  else
-      text_disp = text[0 : max_text_len] .. "..."
-  endif
-  var lines_moved = abs(g:scope_prev_line - line("."))
+  var lines_moved: number
+
+  text = GetScope()
+  text_disp = LimitString(text)
+  lines_moved = abs(g:scope_prev_line - line("."))
+
   if empty(text)
-      return
+    return
   endif
-  if g:scope_once == true
-    if text != g:scope_prev_text
-      call DisplayScope(text_disp)
-    endif
-  else
-    if lines_moved > 7
-      call DisplayScope(text_disp)
-      g:scope_prev_line = line(".")
-    endif
+  if now == true
+    call DisplayScope(text_disp)
+  elseif text != g:scope_prev_text
+    call DisplayScope(text_disp)
+    g:scope_prev_text = text
+  elseif lines_moved > 10
+    DisplayScope(text_disp)
+    g:scope_prev_line = line(".")
   endif
-  g:scope_prev_text = text
 enddef
 
 # Description: If a function 'scope#GetScope'..&ft exists, call it. The returned
@@ -95,11 +103,11 @@ export def GetScopeMarkdown(): string
     if fNum > 0
       var chapter_str = substitute(getline(fNum),
         '^\(#\{1,\}\)\s\+\(.*\)$',
-        '\=len(submatch(1)) .. "|" .. submatch(2)',
+        '\=len(submatch(1)) .. " | " .. submatch(2)',
         ''
       )
-      if len(chapter_str) > 30
-        return chapter_str[ : 30] .. '...'
+      if len(chapter_str) > 50
+        return chapter_str[ : 50] .. '...'
       else
         return chapter_str
       endif
