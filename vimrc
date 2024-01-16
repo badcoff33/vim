@@ -114,9 +114,6 @@ if &diff
     set columns=999 lines=999
 endif
 
-" Switching modes
-imap jj <Esc>
-
 " expand abbrevs
 imap <C-Space> <C-]>
 cnoremap <C-Space> <C-]>
@@ -176,15 +173,15 @@ vnoremap <A-y> :move '>+1<CR>==gv=gv
 " Abbreviations {{{
 
 " Kill whitespace after abbrev expansion
-" Example:  iabbrev () ()<Left><C-r>=Killer(getchar(0))<CR>
-let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
+" Example:  iabbrev () ()<Left><C-r>=AbbrevKiller(getchar(0))<CR>
+let AbbrevKiller = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
-cabbrev <expr> v expand("~/vimfiles/")
-cabbrev <expr> d expand("%:h") .. expand("/")
+cabbrev <expr> #v expand("~/vimfiles/")
+cabbrev <expr> #d expand("%:h") .. expand("/")
 
 " }}}
 
