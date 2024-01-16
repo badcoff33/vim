@@ -9,9 +9,11 @@ g:scope_prev_line = 1
 
 def DisplayScope(text: string)
   var rel_col = win_screenpos(win_getid())[1]
+  var rel_lin = win_screenpos(win_getid())[0]
   var width = win_getid()->winwidth()
+  var line: number
   var options = { pos: "topleft",
-    line: 1,
+    line: rel_lin,
     col: rel_col,
     minwidth: width,
     highlight: 'Search',
