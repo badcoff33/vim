@@ -12,7 +12,7 @@ g:news_winlist  = []
 
 # text of type string is the thing to show in popup
 # returns the window id of the created popup
-export def News(text: string, t: number = 3000, hl: string = 'User2'): number
+export def Open(text: string, t: number = 3000, hl: string = 'User2'): number
   var ll: number
   var winid: number
   var winopts = {
@@ -35,7 +35,7 @@ export def News(text: string, t: number = 3000, hl: string = 'User2'): number
   return winid
 enddef
 
-export def NewsClose(winid: number)
+export def Close(winid: number)
   var i: number
   var l: number # line of popup to be removed
   var ll: number

@@ -1,6 +1,6 @@
 vim9script
 
-import autoload "popups.vim"
+import autoload "popnews.vim"
 import autoload "quickfix.vim"
 
 def g:BackwardSlashToForward()
@@ -28,7 +28,7 @@ augroup END " }}}
 
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
-nnoremap <Leader>? <Cmd>call popups#PopupFiletypeHelp()<CR>
+nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>
 nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
 
 defcompile

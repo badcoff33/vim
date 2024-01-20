@@ -57,7 +57,7 @@ command -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
 
 execute "hi Bold" Gui("bold")
 execute "hi CurSearch" Fg(black) Bg(gray[8]) Gui("bold")
-execute "hi Cursor" Bg(blue) Cterm("NONE")
+execute "hi Cursor" Bg(black) Cterm("NONE")
 execute "hi CursorLine" Bg(gray[9]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray[4]) Gui("bold")
 execute "hi Folded" Fg(blue) Bg(gray[8]) Gui("NONE")

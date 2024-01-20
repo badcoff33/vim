@@ -173,15 +173,15 @@ vnoremap <A-y> :move '>+1<CR>==gv=gv
 " Abbreviations {{{
 
 " Kill whitespace after abbrev expansion
-" Example:  iabbrev () ()<Left><C-r>=Killer(getchar(0))<CR>
-let Killer = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
+" Example:  iabbrev () ()<Left><C-r>=AbbrevKiller(getchar(0))<CR>
+let AbbrevKiller = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
-cabbrev <expr> v expand("~/vimfiles/")
-cabbrev <expr> d expand("%:h") .. expand("/")
+cabbrev <expr> #v expand("~/vimfiles/")
+cabbrev <expr> #d expand("%:h") .. expand("/")
 
 " }}}
 
@@ -210,6 +210,7 @@ let maplocalleader = "S"
 nnoremap <Leader>s :%s/\V//gI<Left><Left><Left><Left>
 vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
 
+nnoremap <Space> :buffer<Space>*
 nnoremap <Leader>b :buffer<Space>*
 nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
