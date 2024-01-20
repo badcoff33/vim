@@ -114,9 +114,6 @@ if &diff
     set columns=999 lines=999
 endif
 
-" Switching modes
-imap jj <Esc>
-
 " expand abbrevs
 imap <C-Space> <C-]>
 cnoremap <C-Space> <C-]>
