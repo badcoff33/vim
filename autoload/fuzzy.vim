@@ -4,15 +4,6 @@ vim9script
 #   https://www.reddit.com/r/vim/comments/wjxo3k/diy_fuzzy_completion/
 #   https://github.com/habamax/.vim/blob/920e6ca906bb6f2890e6379ad794e09f0e4954d5/autoload/popup.vim
 
-def CleanCR(text: any): any
-  if type(text) == v:t_string
-    return trim(text, "\<CR>", 2)
-  elseif type(text) == v:t_list
-    return text->mapnew((_, v) => trim(v, "\<CR>", 2))
-  endif
-  return text
-enddef
-
 # Popup menu with fuzzy filtering
 # Example usage 1:
 # FilterMenu("Echo Text",
@@ -48,14 +39,32 @@ enddef
 #                 exe $":b {res.bufnr}"
 #             endif
 #         })
-export def FilterMenu(title: string, items: list<any>, Callback: func(any, string), Setup: func(number) = null_function)
+
+augroup GroupFuzzy
+  au!
+  au ColorScheme * call prop_type_delete('FilterMenuMatch')
+augroup END
+
+def CleanCR(text: any): any
+  if type(text) == v:t_string
+    return trim(text, "\<CR>", 2)
+  elseif type(text) == v:t_list
+    return text->mapnew((_, v) => trim(v, "\<CR>", 2))
+  endif
+  return text
+enddef
+
+export def FilterMenu(
+    title: string,
+    items: list<any>,
+    Callback: func(any, string))
   if empty(prop_type_get('FilterMenuMatch'))
-    hi def link FilterMenuMatch PmenuSel
+    hi def link FilterMenuMatch Normal
     prop_type_add('FilterMenuMatch', {
       highlight: "FilterMenuMatch",
       override: true,
       priority: 1000,
-      combine: true})
+      combine: false})
   endif
   var prompt = ""
   var hint = ">>> type to filter <<<"
@@ -86,6 +95,7 @@ export def FilterMenu(title: string, items: list<any>, Callback: func(any, strin
       })
     endif
   enddef
+
   var height = min([&lines - 6, items->len()])
   var pos_top = ((&lines - height) / 2) - 1
   var winid = popup_create(Printify(filtered_items, []), {
@@ -104,7 +114,7 @@ export def FilterMenu(title: string, items: list<any>, Callback: func(any, strin
     filter: (id, key) => {
       if key == "\<esc>"
         popup_close(id, -1)
-      elseif ["\<cr>", "\<C-j>", "\<C-v>", "\<C-t>"]->index(key) > -1
+      elseif ["\<cr>", "\<C-y>"]->index(key) > -1
           && filtered_items[0]->len() > 0
         popup_close(id, {idx: getcurpos(id)[1], key: key})
       elseif key == "\<tab>" || key == "\<C-j>" || key == "\<Down>"
@@ -155,8 +165,5 @@ export def FilterMenu(title: string, items: list<any>, Callback: func(any, strin
   })
 
   win_execute(winid, "setl nonu cursorline cursorlineopt=both")
-  if Setup != null_function
-    Setup(winid)
-  endif
 enddef
 
