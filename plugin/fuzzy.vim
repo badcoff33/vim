@@ -8,7 +8,11 @@ def g:FuzzyBuf()
       return {bufnr: v.bufnr, text: (v.name ?? $'[{v.bufnr}: No Name]')}
     }),
     (res, key) => {
+      if key == "\<c-t>"
+        exe $":tab sb {res.bufnr}"
+      else
         exe $":b {res.bufnr}"
+      endif
     })
 enddef
 
@@ -21,7 +25,11 @@ def g:FuzzyMRU()
         expand(v)->stridx(expand("$VIMRUNTIME")) == -1
     }),
     (res, key) => {
+      if key == "\<c-t>"
+        exe $":tab sb {res.bufnr}"
+      else
         exe $":e {res.text}"
+      endif
     })
 enddef
 

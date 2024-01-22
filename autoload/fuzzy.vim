@@ -100,7 +100,7 @@ export def FilterMenu(
   var pos_top = ((&lines - height) / 2) - 1
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
-    highlight: "Pmenu",
+    highlight: "StatusLine",
     line: pos_top,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
@@ -114,7 +114,7 @@ export def FilterMenu(
     filter: (id, key) => {
       if key == "\<esc>"
         popup_close(id, -1)
-      elseif ["\<cr>", "\<C-y>"]->index(key) > -1
+      elseif ["\<cr>", "\<C-y>", "\<C-t>"]->index(key) > -1
           && filtered_items[0]->len() > 0
         popup_close(id, {idx: getcurpos(id)[1], key: key})
       elseif key == "\<tab>" || key == "\<C-j>" || key == "\<Down>"
@@ -164,6 +164,6 @@ export def FilterMenu(
     }
   })
 
-  win_execute(winid, "setl nonu cursorline cursorlineopt=both")
+  win_execute(winid, "setl nonu cursorline cursorlineopt=line")
 enddef
 
