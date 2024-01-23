@@ -1,13 +1,9 @@
 " Vim plugin file
 
-if v:true
-  inoremap <expr> <TAB> (InsertTab() == v:true) ? "\<TAB>" : "\<C-]>"
-else
-  inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : (InsertTab() == v:true ? "\<TAB>" : "\<C-n>")
-  inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-n>"
-  inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-  cnoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-endif
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : (InsertTab() == v:true ? "\<TAB>" : "\<C-n>")
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-n>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+cnoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " Description: Returns forward and backward char at cursor position.
 " At lines end or start of line, a blank dictionary entry is returned.
