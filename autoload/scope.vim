@@ -11,14 +11,15 @@ def DisplayScope(text: string)
   var rel_col = win_screenpos(win_getid())[1]
   var rel_lin = win_screenpos(win_getid())[0]
   var width = win_getid()->winwidth()
+  var pad = (width - len(text)) / 2
   var line: number
   var options = { pos: "topleft",
     line: rel_lin,
     col: rel_col,
-    minwidth: width,
-    highlight: 'Search',
-    padding: [0, 0, 0, (width - len(text)) / 2],
-    time: 2000 }
+    minwidth: width - pad,
+    highlight: 'TabLineSel',
+    padding: [0, 0, 0, pad],
+    time: 3000 }
   popup_create(text, options)
 enddef
 
@@ -50,7 +51,7 @@ export def PopupScope(now = false)
   elseif text != g:scope_prev_text
     call DisplayScope(text_disp)
     g:scope_prev_text = text
-  elseif lines_moved > 10
+  elseif lines_moved > 70
     DisplayScope(text_disp)
     g:scope_prev_line = line(".")
   endif
