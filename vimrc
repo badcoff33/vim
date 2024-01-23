@@ -215,6 +215,7 @@ nnoremap <Leader>b :buffer<Space>*
 nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
 nnoremap <Leader>f :find<Space>*
+nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:startinsert<CR>
 
 " Leader-t space
 nnoremap <Leader>tt <Cmd>tab split<CR>
