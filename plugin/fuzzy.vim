@@ -16,7 +16,6 @@ def g:FuzzyBuf()
     })
 enddef
 
-
 # filter and open MRU (Most Recently Used) aka oldfiles
 def g:FuzzyMRU()
   fuzzy.FilterMenu("MRU",
@@ -33,7 +32,8 @@ def g:FuzzyMRU()
     })
 enddef
 
-nnoremap <Leader>b <Cmd>call FuzzyBuf()<CR>
-nnoremap <Leader>B <Cmd>call FuzzyMRU()<CR>
+nnoremap <Leader><Space> <Cmd>call FuzzyBuf()<CR>
+nnoremap <Leader><S-Space> <Cmd>call FuzzyBuf()<CR>
+
 
 defcompile
