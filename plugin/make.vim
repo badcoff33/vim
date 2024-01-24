@@ -22,6 +22,8 @@ augroup END
 
 command! -complete=file -nargs=* Make MakeStart(<q-args>)
 
-nnoremap <leader>m :<C-u>Make<Space><Up>
+if !mapcheck('<Leader>m')
+  nnoremap <leader>m :<C-u>Make<Space><Up>
+endif
 
 
