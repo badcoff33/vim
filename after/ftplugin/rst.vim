@@ -25,12 +25,12 @@ inoremap <buffer> : :<C-g>u
 "  4   - for subsections
 "  5   ^ for subsubsections
 "  6   " for paragraphs
-nnoremap <buffer> <LocalLeader>h1 yyppkkVr#jjVr#}
-nnoremap <buffer> <LocalLeader>h2 yyppkkVr*jjVr*}
-nnoremap <buffer> <LocalLeader>h3 0v$beyo<Esc>PVr=}
-nnoremap <buffer> <LocalLeader>h4 0v$beyo<Esc>PVr-}
-nnoremap <buffer> <LocalLeader>h5 0v$beyo<Esc>PVr^}
-nnoremap <buffer> <LocalLeader>h6 0v$beyo<Esc>PVr"}
+nnoremap <buffer> <LocalLeader>1 yyppkkVr#jjVr#}
+nnoremap <buffer> <LocalLeader>2 yyppkkVr*jjVr*}
+nnoremap <buffer> <LocalLeader>3 0v$beyo<Esc>PVr=}
+nnoremap <buffer> <LocalLeader>4 0v$beyo<Esc>PVr-}
+nnoremap <buffer> <LocalLeader>5 0v$beyo<Esc>PVr^}
+nnoremap <buffer> <LocalLeader>6 0v$beyo<Esc>PVr"}
 
 " Toggle between TODO and DONE
 nnoremap <buffer> <LocalLeader>x :call gtd#ToggleTodo()<CR>
