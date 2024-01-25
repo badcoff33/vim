@@ -191,7 +191,7 @@ nnoremap <C-k> :cprevious<CR>
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
-nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR><Cmd>checktime<CR>:checktime<CR>
+nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
 imap <C-l> <Esc><C-l>
 
 " Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
