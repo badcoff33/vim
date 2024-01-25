@@ -17,7 +17,7 @@ def DisplayScope(text: string)
     line: rel_lin,
     col: rel_col,
     minwidth: width - pad,
-    highlight: 'TabLineSel',
+    highlight: 'User1',
     padding: [0, 0, 0, pad],
     time: 3000 }
   popup_create(text, options)
