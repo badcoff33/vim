@@ -3,6 +3,17 @@ vim9script
 import autoload "popnews.vim"
 import autoload "quickfix.vim"
 
+g:last_search = ""
+
+def g:SaveLastSearch()
+  g:last_search = getreg('/')
+enddef
+
+def g:RestoreLastSearch()
+  histdel('searcH', -1)
+  setreg('/', g:last_search)
+enddef
+
 def g:BackwardSlashToForward()
   s#\\#/#g
   call histdel("/", -1)

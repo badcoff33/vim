@@ -29,7 +29,7 @@ nnoremap <buffer> <LocalLeader>3 0v$beyo<Esc>PVr=k
 nnoremap <buffer> <LocalLeader>4 0v$beyo<Esc>PVr-k
 nnoremap <buffer> <LocalLeader>5 0v$beyo<Esc>PVr^k
 " delete surrounding heading lines
-nnoremap <buffer> <LocalLeader>X :.-1,.+1s/^[#=\-*\^]\+$\n//<CR>k
+nnoremap <buffer> <LocalLeader>X <Cmd>call SaveLastSearch()<CR>:.-1,.+1s/^[#=\-*\^]\+$\n//<CR>k:call RestoreLastSearch()<CR>
 
 " be up to date
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
