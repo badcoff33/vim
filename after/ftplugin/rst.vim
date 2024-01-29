@@ -23,14 +23,6 @@ inoremap <buffer> : :<C-g>u
 "  3   = for sections
 "  4   - for subsections
 "  5   ^ for subsubsections
-nnoremap <buffer> <LocalLeader># <Cmd>call <SID>ExchangeRstHead('#')<CR>
-nnoremap <buffer> <LocalLeader>* <Cmd>call <SID>ExchangeRstHead('*')<CR>
-nnoremap <buffer> <LocalLeader>= <Cmd>call <SID>ExchangeRstHead('=')<CR>
-nnoremap <buffer> <LocalLeader>- <Cmd>call <SID>ExchangeRstHead('-')<CR>
-nnoremap <buffer> <LocalLeader>^ <Cmd>call <SID>ExchangeRstHead('^')<CR>
-" delete surrounding heading lines
-nnoremap <buffer> <LocalLeader>X <Cmd>call SaveLastSearch()<CR>:.-1,.+1s/^[#=\-*\^]\+$\n//<CR>k:call RestoreLastSearch()<CR>
-
 function s:ExchangeRstHead(char)
     call SaveLastSearch()
     if getline(line('.') - 1) =~ '^[#*=\-]\{1,\}$'
@@ -59,6 +51,14 @@ function s:ExchangeRstHead(char)
     endif
     call RestoreLastSearch()
 endfunction
+
+nnoremap <buffer> <LocalLeader># <Cmd>call <SID>ExchangeRstHead('#')<CR>
+nnoremap <buffer> <LocalLeader>* <Cmd>call <SID>ExchangeRstHead('*')<CR>
+nnoremap <buffer> <LocalLeader>= <Cmd>call <SID>ExchangeRstHead('=')<CR>
+nnoremap <buffer> <LocalLeader>- <Cmd>call <SID>ExchangeRstHead('-')<CR>
+nnoremap <buffer> <LocalLeader>^ <Cmd>call <SID>ExchangeRstHead('^')<CR>
+" delete surrounding heading lines
+nnoremap <buffer> <LocalLeader>X <Cmd>call SaveLastSearch()<CR>:.-1,.+1s/^[#=\-*\^]\+$\n//<CR>k:call RestoreLastSearch()<CR>
 
 " be up to date
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
