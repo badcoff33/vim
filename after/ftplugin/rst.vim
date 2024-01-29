@@ -23,13 +23,42 @@ inoremap <buffer> : :<C-g>u
 "  3   = for sections
 "  4   - for subsections
 "  5   ^ for subsubsections
-nnoremap <buffer> <LocalLeader>1 yyppkkVr#jjVr#k
-nnoremap <buffer> <LocalLeader>2 yyppkkVr*jjVr*k
-nnoremap <buffer> <LocalLeader>3 0v$beyo<Esc>PVr=k
-nnoremap <buffer> <LocalLeader>4 0v$beyo<Esc>PVr-k
-nnoremap <buffer> <LocalLeader>5 0v$beyo<Esc>PVr^k
+nnoremap <buffer> <LocalLeader># <Cmd>call <SID>ExchangeRstHead('#')<CR>
+nnoremap <buffer> <LocalLeader>* <Cmd>call <SID>ExchangeRstHead('*')<CR>
+nnoremap <buffer> <LocalLeader>= <Cmd>call <SID>ExchangeRstHead('=')<CR>
+nnoremap <buffer> <LocalLeader>- <Cmd>call <SID>ExchangeRstHead('-')<CR>
+nnoremap <buffer> <LocalLeader>^ <Cmd>call <SID>ExchangeRstHead('^')<CR>
 " delete surrounding heading lines
 nnoremap <buffer> <LocalLeader>X <Cmd>call SaveLastSearch()<CR>:.-1,.+1s/^[#=\-*\^]\+$\n//<CR>k:call RestoreLastSearch()<CR>
+
+function s:ExchangeRstHead(char)
+    call SaveLastSearch()
+    if getline(line('.') - 1) =~ '^[#*=\-]\{1,\}$'
+        normal kdd
+    endif
+    if getline(line('.') + 1) =~ '^[#*=\-]\{1,\}$'
+        normal jddk
+    endif
+    if a:char == '#'
+        normal yyPP
+        normal 0Vr#
+        normal jj0Vr#j
+    elseif a:char == '*'
+        normal yyPP
+        normal 0Vr*
+        normal jj0Vr*j
+    elseif a:char == '='
+        normal yyP
+        normal j0Vr=j
+    elseif a:char == '-'
+        normal yyP
+        normal j0Vr-j
+    elseif a:char == '^'
+        normal yyP
+        normal j0Vr^j
+    endif
+    call RestoreLastSearch()
+endfunction
 
 " be up to date
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
