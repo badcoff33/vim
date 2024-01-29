@@ -180,9 +180,6 @@ cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
-cabbrev <expr> #v expand("~/vimfiles/")
-cabbrev <expr> #d expand("%:h") .. expand("/")
-
 " }}}
 
 " Surfing the quickfix matches
@@ -211,10 +208,14 @@ nnoremap <Leader>s :%s/\V//gI<Left><Left><Left><Left>
 vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
 
 nnoremap <Leader>b :buffer<Space>*
+nnoremap <Leader>f :find<Space>*
+nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>:startinsert<CR>
+
+" Quik directory acces in command line
 nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
 nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
-nnoremap <Leader>f :find<Space>*
-nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:startinsert<CR>
+cnoremap <expr> <C-r>v expand("~/vimfiles/")
+cnoremap <expr> <C-r>. expand("%:h") .. expand("/")
 
 " Leader-t space
 nnoremap <Leader>tt <Cmd>tab split<CR>
