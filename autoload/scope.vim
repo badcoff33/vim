@@ -43,8 +43,8 @@ export def PopupScope(now = false)
   text_disp = LimitString(text)
   lines_moved = abs(g:scope_prev_line - line("."))
 
-  if empty(text)
-    return
+  if empty(text) || (line('.') == 1)
+    return # no text or a top of buffer? Do nothing
   endif
   if now == true
     call DisplayScope(text_disp)
