@@ -200,8 +200,8 @@ inoremap <C-s>] <C-o>b[<Esc>ea]
 inoremap <C-s>} <C-o>b{<Esc>ea}
 
 " Leader key mappings {{{
-let mapleader = "s"
-let maplocalleader = "S"
+let mapleader = " "
+let maplocalleader = "s"
 
 " Substitute command
 nnoremap <Leader>s :%s/\V//gI<Left><Left><Left><Left>
