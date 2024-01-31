@@ -1,5 +1,7 @@
 vim9script
 
+import autoload "utils.vim"
+
 def g:NewTermHere()
   var save_cwd = getcwd()
 
@@ -57,17 +59,8 @@ augroup GroupTerminal
   au TerminalOpen * nnoremap <buffer> <silent> <C-CR>      :execute b:line .. ",$ write! $TEMP/term.log"<CR><C-w>:cfile $TEMP/term.log<CR>
 augroup END
 
-if !mapcheck('<Leader>T')
-  nnoremap <silent> <Leader>T :PopupTermHere<CR>
-else
-  echoerr "duplicate mapping for <Leader>T"
-endif
-
-if !mapcheck('<Leader>X')
-  nnoremap <silent> <Leader>X :call g:Execute(input("command: "))<CR>
-else
-  echoerr "duplicate mapping for <Leader>X"
-endif
+utils.Map('nnoremap', '<Leader>T', ':PopupTermHere<CR>')
+utils.Map('nnoremap', '<Leader>X', ':call g:Execute(input("command: "))<CR>')
 
 command! -nargs=* Execute  g:Execute('<args>')
 command! -nargs=0 PopupTermHere  g:PopupTermHere()

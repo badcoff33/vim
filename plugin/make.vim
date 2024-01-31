@@ -2,6 +2,7 @@ vim9script
 # Vim plugin interface
 
 import autoload "run.vim"
+import autoload "utils.vim"
 import autoload "torchlight.vim"
 
 def MakeCallback()
@@ -22,10 +23,5 @@ augroup END
 
 command! -complete=file -nargs=* Make MakeStart(<q-args>)
 
-if !mapcheck('<Leader>m')
-  nnoremap <leader>m :<C-u>Make<Space><Up>
-else
-  echoerr "duplicate mapping for <Leader>m"
-endif
-
+utils.Map('nnoremap', '<Leader>m', ':<C-u>Make<Space><Up>')
 

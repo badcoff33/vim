@@ -16,4 +16,19 @@ export def TruncateList(lst: list<string>, max_len: number): list<string>
     return out
 enddef
 
+export def MapExpr(mapcmd: string,  lhs: string, rhs: string)
+  if !mapcheck(lhs)
+    execute mapcmd '<expr>' lhs rhs
+  else
+    echoerr $"duplicate mapping for {lhs}"
+  endif
+enddef
+
+export def Map(mapcmd: string,  lhs: string, rhs: string)
+  if !mapcheck(lhs)
+    execute mapcmd lhs rhs
+  else
+    echoerr $"duplicate mapping for {lhs}"
+  endif
+enddef
 

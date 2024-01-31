@@ -1,5 +1,6 @@
 vim9script
 import autoload 'fuzzy.vim'
+import autoload 'utils.vim'
 
 # filter and open buffers
 def g:FuzzyBuf()
@@ -34,8 +35,8 @@ def g:FuzzyMRU()
     })
 enddef
 
-nnoremap <Leader><Space> <Cmd>call FuzzyBuf()<CR>
-nnoremap <Leader><S-Space> <Cmd>call FuzzyBuf()<CR>
+utils.Map('nnoremap', '<Leader><Space>', '<Cmd>call FuzzyBuf()<CR>')
+utils.Map('nnoremap', '<Leader><S-Space>', '<Cmd>call FuzzyBuf()<CR>')
 
 
 defcompile
