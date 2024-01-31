@@ -20,20 +20,20 @@ def g:PopupTermHere()
     minwidth: &columns - 10,
     minheight: 10,
     maxheight: &lines - 10,
-    border: [1, 1, 1, 1],
+    border: [0, 0, 0, 0],
     padding: [1, 1, 1, 1],
+    highlight: "StatusLine",
     title: "cmd"
   }
   g:popup_terminal_winid = popup_create(buf, winopts)
-  set wincolor=Terminal
   autocmd VimResized <buffer> popup_move(g:popup_terminal_winid, winopts)
 enddef
 
-def g:OpenTermHere(opt_cmd = "")
+def g:Execute(opt_cmd = "")
   var term_bufnrs = term_list()
   if len(term_bufnrs) == 0
     g:NewTermHere()
-    return
+    term_bufnrs = term_list()
   endif
   var winnr = bufwinnr(term_bufnrs[0])
   if winnr >= 1
@@ -58,10 +58,18 @@ augroup GroupTerminal
 augroup END
 
 if !mapcheck('<Leader>T')
-  nnoremap <silent> <Leader>T :call g:OpenTermHere(input("command: "))<CR>
+  nnoremap <silent> <Leader>T :PopupTermHere<CR>
+else
+  echoerr "duplicate mapping for <Leader>T"
 endif
 
-command! -nargs=* OpenTermHere  g:OpenTermHere('<args>')
+if !mapcheck('<Leader>X')
+  nnoremap <silent> <Leader>X :call g:Execute(input("command: "))<CR>
+else
+  echoerr "duplicate mapping for <Leader>X"
+endif
+
+command! -nargs=* Execute  g:Execute('<args>')
 command! -nargs=0 PopupTermHere  g:PopupTermHere()
 
 defcompile
