@@ -24,6 +24,8 @@ command! -complete=file -nargs=* Make MakeStart(<q-args>)
 
 if !mapcheck('<Leader>m')
   nnoremap <leader>m :<C-u>Make<Space><Up>
+else
+  echoerr "duplicate mapping for <Leader>m"
 endif
 
 
