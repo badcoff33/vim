@@ -24,16 +24,16 @@ inoremap <buffer> : :<C-g>u
 "  4   - for subsections
 "  5   ^ for subsubsections
 function s:ExchangeRstHead(char)
-    call popnews#Open("  ReStructuredText Heading-1  #######  ")
-    call popnews#Open("  ReStructuredText Heading-2  *******  ")
-    call popnews#Open("  ReStructuredText Heading-3  =======  ")
-    call popnews#Open("  ReStructuredText Heading-4  -------  ")
-    call popnews#Open("  ReStructuredText Heading-5  ^^^^^^^  ")
+    call popnews#Open("ReStructuredText Heading-1  #######  ")
+    call popnews#Open("ReStructuredText Heading-2  *******  ")
+    call popnews#Open("ReStructuredText Heading-3  =======  ")
+    call popnews#Open("ReStructuredText Heading-4  -------  ")
+    call popnews#Open("ReStructuredText Heading-5  ^^^^^^^  ")
     call SaveLastSearch()
-    if getline(line('.') - 1) =~ '^[#*=\-]\{1,\}$'
+    if getline(line('.') - 1) =~ '^[#*]\{1,\}$'
         normal kdd
     endif
-    if getline(line('.') + 1) =~ '^[#*=\-]\{1,\}$'
+    if getline(line('.') + 1) =~ '^[#*=\-\^]\{1,\}$'
         normal jddk
     endif
     if a:char == '#'
