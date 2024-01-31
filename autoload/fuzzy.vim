@@ -114,7 +114,7 @@ export def FilterMenu(
     filter: (id, key) => {
       if key == "\<esc>"
         popup_close(id, -1)
-      elseif ["\<cr>", "\<C-y>", "\<C-t>"]->index(key) > -1
+      elseif ["\<cr>", "\<C-y>", "\<C-t>", "\<C-w>"]->index(key) > -1
           && filtered_items[0]->len() > 0
         popup_close(id, {idx: getcurpos(id)[1], key: key})
       elseif key == "\<tab>" || key == "\<C-j>" || key == "\<Down>"

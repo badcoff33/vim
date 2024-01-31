@@ -10,6 +10,8 @@ def g:FuzzyBuf()
     (res, key) => {
       if key == "\<c-t>"
         exe $":tab sb {res.bufnr}"
+      elseif key == "\<c-w>"
+        exe $":bwipeout {res.bufnr}"
       else
         exe $":b {res.bufnr}"
       endif
