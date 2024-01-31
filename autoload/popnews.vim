@@ -16,7 +16,7 @@ export def Open(text: string, t: number = 3000, hl: string = 'User1'): number
   var ll: number
   var winid: number
   var winopts = {
-    col: 1,
+    col: 3,
     line: &lines - 2,
     padding: [0, 2, 0, 2],
     minwidth: len(text),
