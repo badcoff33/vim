@@ -31,18 +31,10 @@ var red     = "#EF2372"
 var red_lt  = "#FFA8A8"
 var red_bg  = "#FFC8B8"
 
-var gray = [
-  "#252528",
-  "#333335",
-  "#444447",
-  "#58585A",
-  "#78787A",
-  "#959598",
-  "#B5B5BE",
-  "#D1D1D5",
-  "#E1E1E7",
-  "#F5F5F8",
-]
+var gray_dk = "#444447"
+var gray    = "#959598"
+var gray_lt = "#E1E1E5"
+var gray_bg = "#F1F1F4"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
@@ -56,29 +48,30 @@ command -nargs=0 NoDimmed execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 command -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
 
 execute "hi Bold" Gui("bold")
-execute "hi CurSearch" Fg(black) Bg(gray[8]) Gui("bold")
+execute "hi CurSearch" Fg(black) Bg(gray_lt) Gui("bold")
 execute "hi Cursor" Bg(black) Cterm("NONE")
-execute "hi CursorLine" Bg(gray[9]) Cterm("NONE")
-execute "hi CursorLineNr" Fg(gray[4]) Gui("bold")
-execute "hi Folded" Fg(blue) Bg(gray[8]) Gui("NONE")
+execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
+execute "hi CursorLineNr" Fg(gray) Gui("bold")
+execute "hi Folded" Fg(blue) Bg(gray_lt) Gui("NONE")
 execute "hi IncSearch" Fg(red_dk) Bg(red_lt) Gui("NONE")
 execute "hi Italic" Gui("italic")
 execute "hi Label" Fg(black) Gui("bold")
-execute "hi LineNr" Fg(gray[4]) Gui("bold")
+execute "hi LineNr" Fg(gray) Gui("bold")
 execute "hi MatchParen" Fg(blue) Bg("bg") Gui("underline,bold")
-execute "hi NonText" Fg(gray[6]) Bg("bg")
+execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 execute "hi Pmenu" Fg(white) Bg(blue)
 execute "hi PmenuSbar" Fg(red) Bg(red)
 execute "hi PmenuSel" Fg(white) Bg(blue_dk) Gui("bold")
-execute "hi PmenuThumb" Fg(gray[2]) Bg(gray[7])
-execute "hi Search" Fg(black) Bg(gray[8]) Gui("NONE")
-execute "hi StatusLine" Fg(black) Bg(gray[8]) Gui("NONE")
-execute "hi StatusLineNC" Fg(gray[1]) Bg(gray[9]) Gui("NONE")
+execute "hi PmenuThumb" Fg(gray_dk) Bg(gray_lt)
+execute "hi Search" Fg(black) Bg(gray_lt) Gui("NONE")
+execute "hi StatusLine" Fg(black) Bg(gray_lt) Gui("NONE")
+execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
-execute "hi User1" Fg(black) Bg(gray[6]) Gui("NONE")
-execute "hi User2" Fg(blue_dk) Bg(gray[6]) Gui("italic")
-execute "hi VertSplit" Fg(gray[8]) Bg(gray[8]) Gui("NONE")
+execute "hi Terminal" Fg(white) Bg(gray_dk)
+execute "hi User1" Fg(black) Bg(gray) Gui("NONE")
+execute "hi User2" Fg(blue_dk) Bg(gray) Gui("italic")
+execute "hi VertSplit" Fg(gray_lt) Bg(gray_lt) Gui("NONE")
 execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
 
 highlight! link CursorColumn CursorLine
@@ -88,13 +81,12 @@ highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine User1
 highlight! link TabLineFill StatusLine
 highlight! link TabLineSel Label
-highlight! link Terminal Normal
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
 
 # Code
 
-execute "hi Comment" Fg(gray[5]) Gui("NONE")
+execute "hi Comment" Fg(gray) Gui("NONE")
 execute "hi Conditional" Fg(red)  Gui("bold")
 execute "hi Constant" Fg(blue)
 execute "hi Directory" Fg(blue_dk)
@@ -106,7 +98,7 @@ execute "hi ModeMsg" Fg(blue) Bg("bg") Gui("NONE")
 execute "hi Number" Fg(blue)
 execute "hi PreCondit" Fg(blue)  Gui("bold")
 execute "hi PreProc" Fg(blue) Gui("NONE")
-execute "hi Question" Fg(gray[1]) Bg("bg")
+execute "hi Question" Fg(gray_dk) Bg("bg")
 execute "hi QuickFixLine" Fg(blue) Bg("bg") Gui("bold")
 execute "hi Special" Fg(red_dk)
 execute "hi SpecialKey" Fg(blue)
@@ -127,10 +119,10 @@ execute "hi vimCommentTitle" Fg(blue)  Gui("bold")
 
 # Filetype C
 
-execute "hi cCppOut" Bg(gray[9]) Gui("NONE")
-execute "hi cCppOutIf2" Bg(gray[9]) Gui("NONE")
-execute "hi cParen" Fg(gray[3])
-execute "hi cBlock" Fg(gray[3])
+execute "hi cCppOut" Bg(gray_lt) Gui("NONE")
+execute "hi cCppOutIf2" Bg(gray_lt) Gui("NONE")
+execute "hi cParen" Fg(gray_dk)
+execute "hi cBlock" Fg(gray_dk)
 
 # Filetype HTML
 
@@ -140,15 +132,15 @@ execute "hi htmlH3" Fg(blue)    Gui("NONE")
 
 # Filetype Markdown
 
-# execute "hi markdownCode" Fg(gray[3]) Bg(gray[9])
+execute "hi markdownCode" Fg(gray_dk) Bg(gray_lt)
 execute "hi markdownCode" Fg(blue) Gui("italic")
-execute "hi markdownCodeBlock" Fg(gray[2])
-execute "hi rstEmphasis" Fg(gray[2])
-execute "hi rstStrongEmphasis" Fg(gray[2])  Gui("bold")
+execute "hi markdownCodeBlock" Fg(gray_dk)
+execute "hi rstEmphasis" Fg(gray_dk)
+execute "hi rstStrongEmphasis" Fg(gray_dk)  Gui("bold")
 
 # Diffs
 
-execute "hi DiffChange" Fg(blue) Bg(gray[8])
+execute "hi DiffChange" Fg(blue) Bg(gray_lt)
 execute "hi DiffText" Fg(blue) Bg(blue_bg) Gui("bold")
 execute "hi DiffDelete" Fg(red) Bg(red_bg)
-execute "hi DiffAdd" Fg(gray[3]) Bg(gray[8]) Gui("bold")
+execute "hi DiffAdd" Fg(gray_dk) Bg(gray_lt) Gui("bold")

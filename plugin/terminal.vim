@@ -24,7 +24,7 @@ def g:PopupTermHere()
     maxheight: &lines - 10,
     border: [0, 0, 0, 0],
     padding: [1, 1, 1, 1],
-    highlight: "StatusLine",
+    highlight: "Terminal",
     title: "cmd"
   }
   g:popup_terminal_winid = popup_create(buf, winopts)

@@ -63,6 +63,7 @@ execute "hi Search" Fg(def_fg) Bg(def_bg) Attr("underline")
 execute "hi StatusLine" Fg(white) Bg(blue_dk) Attr("NONE")
 execute "hi StatusLineNC" Fg(white) Bg(gray_dk) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Attr("bold")
+execute "hi Terminal" Fg(gray_lt) Bg(gray_dk)
 execute "hi User1" Fg(black) Bg(blue)
 execute "hi User2" Fg(white) Bg(blue)
 execute "hi VertSplit" Fg(gray_dk) Bg(gray_dk) Attr("NONE")
@@ -75,7 +76,6 @@ highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Normal
 highlight! link TabLineFill Normal
 highlight! link TabLineSel User1
-highlight! link Terminal Normal
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
 
