@@ -16,6 +16,8 @@ command! -buffer RstUpdatePreview call g:RstMakeHTML("preview /U \"" .. expand("
 
 autocmd FocusLost <buffer> call g:RstMakeHTML("preview /U \"" .. expand("%") .. "\"")
 
+nnoremap <buffer> <LocalLeader>p <Cmd>RstOpenPreview<CR>
+
 defcompile
 
 

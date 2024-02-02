@@ -16,5 +16,7 @@ command! -buffer MarkdownUpdatePreview call g:MarkdownMakeHTML("preview /U \"" .
 
 autocmd FocusLost <buffer> call g:MarkdownMakeHTML("preview /U \"" .. expand("%") .. "\"")
 
+nnoremap <buffer> <LocalLeader>p <Cmd>MarkdownOpenPreview<CR>
+
 defcompile
 
