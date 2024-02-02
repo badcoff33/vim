@@ -19,8 +19,9 @@ nnoremap <buffer> <LocalLeader>a :if !(&fo =~# 'a') <bar> setlocal fo+=a <bar> e
 " Toggle between  `- [ ]` and `- [x]`
 nnoremap <buffer> <LocalLeader>x :call <SID>ToggleTodo()<CR>
 
-" some math calculation
-nnoremap <buffer> g== o<C-r>="= " .. luaeval(getline(line(".") - 1))<CR>
+" spell checker
+nnoremap <buffer> <LocalLeader>se :setlocal spell spellang=en<CR>
+nnoremap <buffer> <LocalLeader>sd :setlocal spell spellang=de<CR>
 
 " Make heading underlined
 nnoremap <buffer> <localleader>1 yypVr=k

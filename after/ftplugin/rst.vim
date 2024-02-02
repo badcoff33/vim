@@ -65,6 +65,10 @@ nnoremap <buffer> <LocalLeader>^ <Cmd>call <SID>ExchangeRstHead('^')<CR>
 " delete surrounding heading lines
 nnoremap <buffer> <LocalLeader><Del> <Cmd>call SaveLastSearch()<CR>:.-1,.+1s/^[#=\-*\^]\+$\n//<CR>k:call RestoreLastSearch()<CR>
 
+" spell checker
+nnoremap <buffer> <LocalLeader>se :setlocal spell spellang=en<CR>
+nnoremap <buffer> <LocalLeader>sd :setlocal spell spellang=de<CR>
+
 " be up to date
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
 iabbrev <buffer> xtodo *TODO*
