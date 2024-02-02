@@ -23,7 +23,7 @@ var bg_dimmed = "#F0F0F0"
 
 var blue_dk = "#1148AF"
 var blue    = "#2188EF"
-var blue_lt = "#70A0F0"
+var blue_lt = "#90C0FF"
 var blue_bg = "#B8D0F3"
 
 var red_dk  = "#AF2352"
@@ -69,7 +69,7 @@ execute "hi StatusLine" Fg(black) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
 execute "hi Terminal" Fg(white) Bg(gray_dk)
-execute "hi User1" Fg(black) Bg(gray) Gui("NONE")
+execute "hi User1" Fg(black) Bg(blue_lt) Gui("NONE")
 execute "hi User2" Fg(blue_dk) Bg(gray) Gui("italic")
 execute "hi VertSplit" Fg(gray_lt) Bg(gray_lt) Gui("NONE")
 execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
@@ -78,7 +78,7 @@ highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine User1
+highlight! link TabLine StatusLineNC
 highlight! link TabLineFill StatusLine
 highlight! link TabLineSel Label
 highlight! link WildMenu PmenuSel
