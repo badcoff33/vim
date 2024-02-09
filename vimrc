@@ -211,10 +211,8 @@ nnoremap <Leader>b :buffer<Space>*
 nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>:startinsert<CR>
 
-" Quik directory acces in command line
-nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
-nnoremap <Leader>v :edit <C-r>=expand("~/vimfiles/")<CR>
-cnoremap <expr> <C-r>v expand("~/vimfiles/")
+" Quick access on current buffer's directory
+nnoremap <Leader>. :edit <C-r>=AppendSep(expand("%:h"))<CR>
 cnoremap <expr> <C-r>. expand("%:h") .. expand("/")
 
 " Leader-t space

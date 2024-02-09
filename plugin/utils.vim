@@ -2,8 +2,10 @@ vim9script
 
 import autoload "popnews.vim"
 import autoload "quickfix.vim"
+import autoload "utils.vim"
 
 g:last_search = ""
+g:user_vimrc = expand(g:vim_home .. '/pack/user/start/' .. getenv('USERNAME') .. '/plugin/user.vim')
 
 def g:SaveLastSearch()
   g:last_search = getreg('/')
@@ -15,20 +17,19 @@ def g:RestoreLastSearch()
 enddef
 
 def g:BackwardSlashToForward()
-  s#\\#/#g
+  s#\\#/#ge
   call histdel("/", -1)
 enddef
 
 def g:ForwardSlashToBackward()
-  s#/#\\#g
+  s#/#\\#ge
   call histdel("/", -1)
 enddef
 
-var user_vimrc: string = expand(g:vim_home .. '/pack/user/start/' .. getenv('USERNAME') .. '/plugin/user.vim')
-if !filereadable(user_vimrc)
-  mkdir(fnamemodify(user_vimrc, ':p:h'), 'p')
+if !filereadable(g:user_vimrc)
+  mkdir(fnamemodify(g:user_vimrc, ':p:h'), 'p')
   execute "edit" expand(g:vim_home .. "/templates/user_vimrc.vim")
-  execute "write" user_vimrc
+  execute "write" g:user_vimrc
 endif
 
 augroup GroupUtils " {{{
@@ -37,9 +38,15 @@ augroup GroupUtils " {{{
   autocmd DirChanged global if filereadable(".vimrc") | call popnews.Open("local .vimrc") | endif
 augroup END " }}}
 
-nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
-nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
-nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>
-nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
+# export def Map(mapcmd: string,  lhs: string, rhs: string)
+
+utils.Map('nnoremap', '<Leader>/', ':call ForwardSlashToBackward()<CR>')
+utils.Map('nnoremap', '<Leader>\', ':call BackwardSlashToForward()<CR>')
+utils.Map('nnoremap', '<Leader>?', '<Cmd>call popnews#PopupFiletypeHelp()<CR>')
+utils.Map('nnoremap', '<Leader>q', ':call quickfix#ToggleQuickfix()<CR>')
+
+utils.Map('nnoremap', '<Leader>vv', ':edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>')
+utils.Map('nnoremap', '<Leader>vu', ':edit <C-r>=g:user_vimrc<CR><CR>')
+utils.Map('nnoremap', '<Leader>vf', ':edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>')
 
 defcompile
