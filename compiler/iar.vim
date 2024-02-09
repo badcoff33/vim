@@ -1,5 +1,5 @@
 " Vim compiler file
-" Compiler:   IAR
+" Compiler:   IAR iccrl78 via make
 " Maintainer: Markus Prepens (markus.prepens@gmail.com)
 "
 " -----------------------------------------------------------------------------------
