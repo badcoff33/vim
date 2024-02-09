@@ -27,8 +27,8 @@ var blue_lt = "#90C0FF"
 var blue_bg = "#B8D0F3"
 
 var red_dk  = "#AF2352"
-var red     = "#EF2372"
-var red_lt  = "#FFA8A8"
+var red     = "#DF3372"
+var red_lt  = "#EF486F"
 var red_bg  = "#FFC8B8"
 
 var gray_dk = "#444447"
