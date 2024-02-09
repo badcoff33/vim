@@ -29,10 +29,6 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> xdoc /**<CR>@brief<CR>@param[in]<CR>@param[out]<CR>@return<CR><BS>*/<CR><Up><Up><Up><Up><Up><End>
 endif
 
-" Open a new line without continuation of comment
-nnoremap <buffer> <C-CR> $o<Esc>0"_D
-imap     <buffer> <C-CR> <Esc><S-CR>i
-
 " open tag preview
 nnoremap <buffer> K :ptjump <C-r><C-w><CR>
 
