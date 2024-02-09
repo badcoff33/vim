@@ -50,6 +50,7 @@ set tabstop=4
 set termguicolors
 
 " limit number of suggestions of z=
+set dictionary=spell
 set spellsuggest=best,10
 set spelllang=en_us
 set spelloptions=camel
