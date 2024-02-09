@@ -20,7 +20,8 @@ export def Open(text: string, t: number = 3000, hl: string = 'User1'): number
     line: &lines - 2,
     padding: [0, 2, 0, 2],
     minwidth: len(text),
-    highlight: hl
+    highlight: hl,
+    tabpage: -1
   }
   if t > 0
     winopts['time'] = t
