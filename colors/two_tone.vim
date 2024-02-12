@@ -26,8 +26,8 @@ var blue    = "#2188EF"
 var blue_lt = "#90C0FF"
 var blue_bg = "#B8D0F3"
 
-var red_dk  = "#AF2352"
-var red     = "#DF3372"
+var red_dk  = "#8F2352"
+var red     = "#CF3372"
 var red_lt  = "#EF486F"
 var red_bg  = "#FFC8B8"
 
@@ -53,7 +53,7 @@ execute "hi Cursor" Bg(black) Cterm("NONE")
 execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray) Gui("bold")
 execute "hi Folded" Fg(blue) Bg(gray_lt) Gui("NONE")
-execute "hi IncSearch" Fg(red_dk) Bg(red_lt) Gui("NONE")
+execute "hi IncSearch" Fg(red_dk) Bg(red_bg) Gui("bold")
 execute "hi Italic" Gui("italic")
 execute "hi Label" Fg(black) Gui("bold")
 execute "hi LineNr" Fg(gray) Gui("bold")
@@ -63,7 +63,7 @@ execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 execute "hi Pmenu" Fg(white) Bg(blue)
 execute "hi PmenuSbar" Fg(red) Bg(red)
 execute "hi PmenuSel" Fg(white) Bg(blue_dk) Gui("bold")
-execute "hi PmenuThumb" Fg(gray_dk) Bg(gray_lt)
+execute "hi PmenuThumb" Fg(red_dk) Bg(gray_lt)
 execute "hi Search" Fg(black) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLine" Fg(black) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
@@ -102,7 +102,7 @@ execute "hi Question" Fg(gray_dk) Bg("bg")
 execute "hi QuickFixLine" Fg(blue) Bg("bg") Gui("bold")
 execute "hi Special" Fg(red_dk)
 execute "hi SpecialKey" Fg(blue)
-execute "hi Statement" Fg(blue_lt)  Gui("bold")
+execute "hi Statement" Fg(blue_dk)  Gui("bold")
 execute "hi StorageClass" Fg(red)
 execute "hi String" Fg(blue_dk)
 execute "hi Structure" Fg(red) Gui("NONE")
