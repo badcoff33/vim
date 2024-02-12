@@ -13,7 +13,7 @@ def g:NewTermHere()
 enddef
 
 def g:PopupTermHere()
-  var buf = term_start(['cmd'], {
+  var buf = term_start(['cmd', '/K', 'prompt $G$S'], {
     hidden: 1,
     term_finish: 'close',
     cwd: expand("%:h") == "" ? "." : expand("%:h")
@@ -50,10 +50,8 @@ enddef
 
 augroup GroupTerminal
   au!
-  au TerminalOpen * setlocal signcolumn=no
-  au TerminalOpen * setlocal nonumber
-  au TerminalOpen * setlocal norelativenumber
-  au TerminalOpen * setlocal foldcolumn=0
+  au TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
+  au TerminalOpen * setlocal nonumber norelativenumber
   au TerminalOpen * tnoremap <buffer> <silent> <CR>   <C-w>:execute "let b:line =" line("$")<CR><CR>
   au TerminalOpen * tnoremap <buffer> <silent> <C-CR> <C-w>:execute b:line .. ",$ write! $TEMP/term.log"<CR><C-w>:cfile $TEMP/term.log<CR>
   au TerminalOpen * nnoremap <buffer> <silent> <C-CR>      :execute b:line .. ",$ write! $TEMP/term.log"<CR><C-w>:cfile $TEMP/term.log<CR>
