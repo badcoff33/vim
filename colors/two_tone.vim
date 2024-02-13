@@ -17,9 +17,9 @@ g:colors_name = "two_tone"
 var black = "#000000"
 var white = "#FFFFFF"
 
-var fg        = "#202030"
-var bg        = "#FCFCFC"
-var bg_dimmed = "#F0F0F0"
+var fg        = "#162030"
+var bg        = "#FEFEFF"
+var bg_dimmed = "#ECF0F0"
 
 var blue_dk = "#1148AF"
 var blue    = "#2188EF"
@@ -29,7 +29,7 @@ var blue_bg = "#B8D0F3"
 var red_dk  = "#8F2352"
 var red     = "#CF3372"
 var red_lt  = "#EF486F"
-var red_bg  = "#FFC8B8"
+var red_bg  = "#FFB8B8"
 
 var gray_dk = "#444447"
 var gray    = "#959598"
@@ -61,9 +61,9 @@ execute "hi MatchParen" Fg(blue) Bg("bg") Gui("underline,bold")
 execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 execute "hi Pmenu" Fg(white) Bg(blue)
-execute "hi PmenuSbar" Fg(red) Bg(red)
+execute "hi PmenuSbar" Fg(red_lt) Bg(red_lt)
 execute "hi PmenuSel" Fg(white) Bg(blue_dk) Gui("bold")
-execute "hi PmenuThumb" Fg(red_dk) Bg(gray_lt)
+execute "hi PmenuThumb" Fg(red_dk) Bg(red_dk)
 execute "hi Search" Fg(black) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLine" Fg(black) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
