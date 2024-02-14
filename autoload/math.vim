@@ -11,7 +11,7 @@ export def EvalPyLine()
         execute "py3" getline('.')
         popnews.Open(getline('.'))
     catch /.*/
-        echo "trouble in line"
+        popnews.Open("no complete math on this line")
     finally
     endtry
 enddef
@@ -28,7 +28,7 @@ export def CalcPyLine()
         py3 s = "{}= {}".format(eq, d.normalize().to_eng_string())
         py3 vim.current.line = s
     catch /.*/
-        echo "trouble in math" py3eval("eq.replace(' ', '')")
+        popnews.Open("trouble in math" .. py3eval("eq.replace(' ', '')"))
     finally
     endtry
 enddef
