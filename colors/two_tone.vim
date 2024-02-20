@@ -24,12 +24,12 @@ var bg_dimmed = "#ECF0F0"
 var blue_dk = "#1148AF"
 var blue    = "#2188EF"
 var blue_lt = "#90C0FF"
-var blue_bg = "#B8D0F3"
+var blue_bg = "#CFE8F3"
 
 var red_dk  = "#8F2352"
 var red     = "#CF3372"
 var red_lt  = "#EF486F"
-var red_bg  = "#FFB8B8"
+var red_bg  = "#FFB3B8"
 
 var gray_dk = "#444447"
 var gray    = "#959598"
@@ -68,7 +68,7 @@ execute "hi Search" Fg(black) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLine" Fg(black) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
-execute "hi Terminal" Fg(white) Bg(gray_dk)
+execute "hi Terminal" Fg(black) Bg(gray_bg)
 execute "hi User1" Fg(gray_lt) Bg(gray_dk) Gui("NONE")
 execute "hi User2" Fg(blue_dk) Bg(gray) Gui("italic")
 execute "hi VertSplit" Fg(gray_lt) Bg(gray_lt) Gui("NONE")
@@ -106,7 +106,7 @@ execute "hi Statement" Fg(blue_dk)  Gui("bold")
 execute "hi StorageClass" Fg(red)
 execute "hi String" Fg(blue_dk)
 execute "hi Structure" Fg(red) Gui("NONE")
-execute "hi Title" Fg(black)  Gui("bold")
+execute "hi Title" Fg(blue_dk)  Gui("bold")
 execute "hi Todo" Fg(blue) Bg("bg") Gui("bold,italic")
 execute "hi Type" Fg(blue) Gui("NONE")
 execute "hi WarningMsg" Fg(blue_dk) Bg(blue_bg)

@@ -213,8 +213,8 @@ nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>:startinsert<CR>
 
 " Quick access on current buffer's directory
-nnoremap <Leader>. :edit <C-r>=AppendSep(expand("%:h"))<CR>
-cnoremap <expr> <C-r>. expand("%:h") .. expand("/")
+nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
+cnoremap <expr> <C-r>e expand("%:h") .. expand("/")
 
 " Leader-t space
 nnoremap <Leader>tt <Cmd>tab split<CR>

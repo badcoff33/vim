@@ -35,6 +35,7 @@ def g:FuzzyMRU()
     })
 enddef
 
+utils.Map('nnoremap', '<F2>', '<Cmd>call FuzzyBuf()<CR>')
 utils.Map('nnoremap', '<Leader><Space>', '<Cmd>call FuzzyBuf()<CR>')
 utils.Map('nnoremap', '<Leader><S-Space>', '<Cmd>call FuzzyBuf()<CR>')
 
