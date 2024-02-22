@@ -6,7 +6,7 @@
 
 setlocal textwidth=78
 setlocal expandtab tabstop=3 softtabstop=3 shiftwidth=3
-setlocal formatoptions=tcqln
+setlocal formatoptions=qln
 setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:\\&^.\\{4\\}
 setlocal comments=fb:*,fb:-,fb:+,n:> commentstring=<!--%s-->
 
