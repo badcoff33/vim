@@ -44,8 +44,8 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 
-command -nargs=0 TwoToneBright execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
-command -nargs=0 TwoToneDimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
+command -nargs=0 Bright execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
+command -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
 
 execute "hi Bold" Gui("bold")
 execute "hi CurSearch" Fg(black) Bg(gray_lt) Gui("bold")
