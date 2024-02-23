@@ -30,8 +30,8 @@ var red_lt = "#F36897"
 var red_bg = "#FF9AC0"
 
 var green_dk = "#23AF52"
-var green    = "#33DF72"
-var green_lt = "#68F397"
+var green    = "#33CF72"
+var green_lt = "#38F07F"
 var green_bg = "#9AFFC0"
 
 var yellow_dk = "#838332"
@@ -77,8 +77,8 @@ execute "hi StatusLine" Fg(blue_dk) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_bg) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
 execute "hi Terminal" Fg(black) Bg(gray_bg)
-execute "hi User1" Fg(green_lt) Bg(green_dk) Gui("NONE")
-execute "hi User2" Fg(blue_dk) Bg(gray) Gui("italic")
+execute "hi User1" Fg(green_bg) Bg(green_dk) Gui("NONE")
+execute "hi User2" Fg(blue_bg) Bg(blue_dk) Gui("italic")
 execute "hi VertSplit" Fg(gray_lt) Bg(gray_lt) Gui("NONE")
 execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
 
