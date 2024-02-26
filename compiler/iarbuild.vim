@@ -33,5 +33,6 @@ set makeprg=iarbuild
 " multiline
 set errorformat=%E%f(%l)\ :\ Error%m,%Z%m
 set errorformat+=%W%f(%l)\ :\ Warning%m,%Z%m
+set errorformat+=%W%f(%l)\ :\ Fatal\ Error%m,%Z%m
 set errorformat+=%Wielftool\ warning%m,%Z%m
 set errorformat+=%EError[.*],%Z%m
