@@ -1,16 +1,30 @@
+vim9script
 
-function! swap#OtherFileC()
-  let extension = expand("%:e")
-  let other_file = ""
-  if extension == "c"
-    let other_file = expand("%:r")..".h"
-  elseif extension == "h"
-    let other_file = expand("%:r")..".c"
-  endif
-  if filereadable(other_file)
-    execute "edit" other_file
-  else
-    echo other_file "didn't exist"
-  endif
-endfunction
 
+
+def FileOptions(parts: list<string>): list<string>
+  var file_options: list<string>
+  var sep = expand('/')
+  var file = expand("%")
+  var head = fnamemodify(file, ":h")
+  var tail_no_ext = fnamemodify(file, ":t:r")
+  var extension = fnamemodify(file, ":e") == "c" ? "h" : "c"
+  for part in parts
+    add(file_options, head .. sep .. part .. tail_no_ext .. "." .. extension)
+  endfor
+  return file_options
+enddef
+
+
+export def OtherFileC()
+  var extension = expand("%:e")
+  for f in FileOptions(['', '../src/', '../inc/', '../include/'])
+    if filereadable(f)
+      execute "edit" f
+      return
+    endif
+  endfor
+  echomsg "- not supported -"
+enddef
+
+defcompile
