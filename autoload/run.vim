@@ -54,7 +54,7 @@ export def CloseCb(ch: channel)
           setqflist([], " ", {
             efm: d.regexp,
             title: d.full_cmd,
-            lines: buflines
+            lines: filter(buflines, 'v:val !~ "^\s*$"')
           })
           for e in getqflist({ "nr": "$", "all": 0 }).items
             lines = lines + 1
@@ -236,7 +236,7 @@ def StartBuffered(dict: dict<any>): job
   run_dict_entry.short_cmd = split(dict.cmd, " ")[0]
   run_dict_entry.callback = get(dict, "callback", "")
   run_dict_entry.started = localtime()
-  run_dict_entry.timer = timer_start(333, RunJobMonitoringCb, {repeat: -1})
+  run_dict_entry.timer = timer_start(500, RunJobMonitoringCb, {repeat: -1})
   run_dict_entry.name = get(dict, "name", "quickfix")
 
   if has_key(dict, "no_popup") && (dict.no_popup == true)
