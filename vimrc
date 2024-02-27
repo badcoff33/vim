@@ -101,7 +101,7 @@ set pumheight=7
 
 " Command line completion
 set wildmenu
-set wildoptions=pum,tagfile ",fuzzy
+set wildoptions=pum,tagfile
 set wildmode=full:lastused
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS

@@ -8,14 +8,14 @@ import glob
 
 unpack_tuple = (
         ("start", "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip"),
-        ("start", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip"),
-        ("opt",   "https://github.com/Donaldttt/fuzzyy/archive/refs/heads/vim9.zip"),
-        ("opt",   "https://github.com/preservim/tagbar/archive/refs/heads/master.zip"),
-        ("opt",   "https://github.com/aklt/plantuml-syntax/archive/refs/heads/master.zip"),
-        ("opt",   "https://github.com/preservim/vim-wordy/archive/refs/heads/master.zip"),
-        ("opt",   "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip"),
-        ("opt",   "https://github.com/dhruvasagar/vim-table-mode/archive/refs/heads/master.zip"),
-        ("opt",   "https://github.com/godlygeek/tabular/archive/refs/heads/master.zip"))
+        ("opt", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip"),
+        ("start", "https://github.com/preservim/tagbar/archive/refs/heads/master.zip"),
+        ("start", "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip"),
+        ("opt", "https://github.com/dhruvasagar/vim-table-mode/archive/refs/heads/master.zip"),
+        ("start", "https://github.com/godlygeek/tabular/archive/refs/heads/master.zip"),
+        ("skip", "https://github.com/Donaldttt/fuzzyy/archive/refs/heads/vim9.zip"),
+        ("skip", "https://github.com/aklt/plantuml-syntax/archive/refs/heads/master.zip"),
+        ("skip", "https://github.com/preservim/vim-wordy/archive/refs/heads/master.zip"))
 
 zip_fname = os.getenv("TEMP") + os.sep + "pack_download.zip"
 pop_back_dir = os.getcwd()

@@ -29,8 +29,8 @@ var red    = "#DF3372"
 var red_lt = "#F36897"
 var red_bg = "#FF9AC0"
 
-var green_dk = "#20AF62"
-var green    = "#30CF82"
+var green_dk = "#209F52"
+var green    = "#30BF72"
 var green_lt = "#35F093"
 var green_bg = "#98FFD0"
 
@@ -41,8 +41,8 @@ var yellow_bg = "#F3F380"
 
 var gray_dk =  "#444447"
 var gray    =  "#959598"
-var gray_lt =  "#CBCBCF"
-var gray_bg =  "#ECECEF"
+var gray_lt =  "#CBCBCC"
+var gray_bg =  "#ECECED"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
@@ -73,11 +73,11 @@ execute "hi PmenuSbar" Fg(red_lt) Bg(red_lt)
 execute "hi PmenuSel" Fg(white) Bg(blue_dk) Gui("bold")
 execute "hi PmenuThumb" Fg(red_dk) Bg(red_dk)
 execute "hi Search" Fg(black) Bg(yellow_bg) Gui("NONE")
-execute "hi StatusLine" Fg(blue_dk) Bg(gray_lt) Gui("NONE")
+execute "hi StatusLine" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_bg) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
 execute "hi Terminal" Fg(black) Bg(gray_bg)
-execute "hi User1" Fg(green_bg) Bg(green_dk) Gui("NONE")
+execute "hi User1" Fg(white) Bg(gray_dk) Gui("NONE")
 execute "hi User2" Fg(blue_bg) Bg(blue_dk) Gui("italic")
 execute "hi VertSplit" Fg(gray_lt) Bg(gray_lt) Gui("NONE")
 execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
