@@ -144,3 +144,11 @@ execute "hi DiffChange" Fg(blue) Bg(gray_lt)
 execute "hi DiffText" Fg(blue) Bg(blue_bg) Gui("bold")
 execute "hi DiffDelete" Fg(red) Bg(red_bg)
 execute "hi DiffAdd" Fg(gray_dk) Bg(gray_lt) Gui("bold")
+
+# Signify
+
+execute "hi SignifySignAdd"             Fg(blue_dk)
+execute "hi SignifySignDelete"          Fg(red)
+execute "hi SignifySignDeleteFirstLine" Fg(red)
+execute "hi SignifySignChange"          Fg(blue_lt)
+execute "hi SignifySignChangeDelete"    Fg(blue_lt)
