@@ -23,7 +23,7 @@ def g:CtagsTriggerUpdate(verbose = false)
   elseif type(g:ctags_options) == v:t_list
     ctags_options = join(g:ctags_options, " ")
   else
-    echoerr "unknown type of g:ctags_options"
+    echoerr "unknown type of 'g:ctags_options'"
     return
   endif
 
@@ -31,7 +31,7 @@ def g:CtagsTriggerUpdate(verbose = false)
   if job_status(ctags_job) != "run"
     echoerr "check ctags options"
   elseif verbose == true
-    echomsg 'ctags' .. ctags_options
+    echomsg 'ctags ' .. ctags_options
   endif
 enddef
 
@@ -44,4 +44,3 @@ augroup END
 command! -nargs=0 CtagsForceUpdate call CtagsTriggerUpdate(true)
 
 defcompile
-
