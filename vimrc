@@ -193,13 +193,15 @@ nnoremap <C-k> :cprevious<CR>
 nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
 imap <C-l> <Esc><C-l>
 
-" Type a word, press below key sequence and "Enclose" `current` (word) {bang}!
-inoremap <C-s>" <C-o>b"<Esc>ea"
-inoremap <C-s>' <C-o>b'<Esc>ea'
-inoremap <C-s>` <C-o>b`<Esc>ea`
-inoremap <C-s>) <C-o>b(<Esc>ea)
-inoremap <C-s>] <C-o>b[<Esc>ea]
-inoremap <C-s>} <C-o>b{<Esc>ea}
+" Type a word, press below key sequence and "Enclose" `current` (word), {bang}
+" there you go!
+inoremap <C-s>" <C-o>b"<C-o>e<Right>"
+inoremap <C-s>' <C-o>b'<C-o>e<Right>'
+inoremap <C-s>` <C-o>b`<C-o>e<Right>`
+inoremap <C-s>) <C-o>b(<C-o>e<Right>)
+inoremap <C-s>] <C-o>b[<C-o>e<Right>]
+inoremap <C-s>} <C-o>b{<C-o>e<Right>}
+nmap <C-s> i<C-s>
 
 " Leader key mappings {{{
 let mapleader = " "
@@ -214,8 +216,8 @@ nnoremap <Leader>f :find<Space>*
 nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>:startinsert<CR>
 
 " Quick access on current buffer's directory
-nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
-cnoremap <expr> <C-r>e expand("%:h") .. expand("/")
+nnoremap <Leader>. :edit <C-r>=AppendSep(expand("%:h"))<CR>
+cnoremap <expr> <C-r>. expand("%:h") .. expand("/")
 
 " Leader-t space
 nnoremap <Leader>tt <Cmd>tab split<CR>
