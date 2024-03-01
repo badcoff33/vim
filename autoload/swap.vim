@@ -1,6 +1,6 @@
 vim9script
 
-
+g:swap_path_options = get(g:, "swap_path_options", ['', '../src/', '../inc/', '../include/'])
 
 def FileOptions(parts: list<string>): list<string>
   var file_options: list<string>
@@ -18,7 +18,7 @@ enddef
 
 export def OtherFileC()
   var extension = expand("%:e")
-  for f in FileOptions(['', '../src/', '../inc/', '../include/'])
+  for f in FileOptions(g:swap_path_options)
     if filereadable(f)
       execute "edit" f
       return
