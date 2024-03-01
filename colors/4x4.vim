@@ -19,25 +19,25 @@ var fg        = "#162030"
 var bg        = "#FEFEFF"
 var bg_dimmed = "#ECF0F0"
 
-var blue_dk = "#1148AF"
+var blue_dk = "#2158AF"
 var blue    = "#2160C8"
 var blue_lt = "#3F8FE8"
-var blue_bg = "#BFCEFF"
+var blue_bg = "#9FDEFF"
 
 var red_dk = "#AF2352"
 var red    = "#DF3372"
 var red_lt = "#F36897"
-var red_bg = "#FF9AC0"
+var red_bg = "#FF9FBF"
 
-var green_dk = "#209F52"
-var green    = "#30BF72"
-var green_lt = "#35F093"
-var green_bg = "#98FFD0"
+var green_dk = "#209F72"
+var green    = "#20BF82"
+var green_lt = "#20DF93"
+var green_bg = "#88FFC0"
 
-var yellow_dk = "#838332"
-var yellow    = "#A8A852"
-var yellow_lt = "#CECE57"
-var yellow_bg = "#F3F380"
+var yellow_dk = "#937002"
+var yellow    = "#C8A012"
+var yellow_lt = "#DEC027"
+var yellow_bg = "#FFF880"
 
 var gray_dk =  "#444447"
 var gray    =  "#959598"
@@ -68,10 +68,10 @@ execute "hi LineNr" Fg(gray) Gui("bold")
 execute "hi MatchParen" Fg(blue) Bg("bg") Gui("underline,bold")
 execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
-execute "hi Pmenu" Fg(white) Bg(blue)
-execute "hi PmenuSbar" Fg(red_lt) Bg(red_lt)
-execute "hi PmenuSel" Fg(white) Bg(blue_dk) Gui("bold")
-execute "hi PmenuThumb" Fg(red_dk) Bg(red_dk)
+execute "hi Pmenu" Fg(black) Bg(yellow_lt)
+execute "hi PmenuSbar" Fg(blue_bg) Bg(blue_bg)
+execute "hi PmenuSel" Fg(white) Bg(yellow_dk) Gui("bold")
+execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_dk)
 execute "hi Search" Fg(black) Bg(yellow_bg) Gui("NONE")
 execute "hi StatusLine" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_bg) Gui("NONE")
