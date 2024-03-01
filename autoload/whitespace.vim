@@ -20,7 +20,6 @@ function! s:OneBlankLine()
   endif
 endfunction
 
-
 " Description: Delete spaces at cursor positon.
 function! s:OneSpace(col)
   let Col = {-> getcurpos()[2]}
@@ -47,16 +46,24 @@ endfunction
 
 " Description: Remove trailing spaces, replace existing tabs with spaces and
 " remove trailing Ctrl-M on each line. The amount of spaces is set by
-" 'tabstop'. This is done by :retab and option 'expandtab'.
+" 'tabstop'. This is done by :retab and option 'expandtab'. Remove blank lines
+" on head or bottom of file.
 function! whitespace#WhitespaceCleanup()
   if &modifiable
-    let l:savedView = winsaveview()
+    let save_line = getpos('.')[1]
+    let save_col = getpos('.')[2]
     setlocal expandtab
     retab
     %s/\s\+$//e
     %s/\r//e
     call histdel("search", -2)
-    call winrestview(l:savedView)
   endif
+  while getline(1) =~ '^\s*$'
+    normal 1Gdd
+    if save_line > 1 | let save_line -= 1 | endif
+  endwhile
+  while getline('$') =~ '^\s*$'
+    normal Gdd
+  endwhile
+  call cursor(save_line, save_col)
 endfunction
-
