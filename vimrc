@@ -18,6 +18,7 @@ set autowriteall
 set belloff=all
 set clipboard=
 set expandtab
+set fillchars=eob:\ ,
 set hidden
 set history=200
 set keymodel=
@@ -241,4 +242,3 @@ let g:term = &term
 syntax on
 
 " vim:foldmethod=marker:nofoldenable:
-
