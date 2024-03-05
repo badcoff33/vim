@@ -35,8 +35,15 @@ endif
 augroup GroupUtils " {{{
   autocmd!
   autocmd BufNewFile .vimrc execute "0read" g:vim_home .. "\\templates\\local_vimrc.vim"
-  autocmd DirChanged global if filereadable(".vimrc") | call popnews.Open("local .vimrc") | endif
+  autocmd DirChanged global {
+    if filereadable(".vimrc")
+      call popnews.Open("local .vimrc available")
+    endif
+  }
 augroup END " }}}
+
+# when starting up, check for .vimrc
+doautocmd DirChanged global
 
 # export def Map(mapcmd: string,  lhs: string, rhs: string)
 

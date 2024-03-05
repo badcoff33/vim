@@ -4,6 +4,8 @@ import autoload "popnews.vim"
 
 g:run_dict = []
 g:run_be_verbose = false
+g:run_hl_normal = get(g:, 'run_hl_normal', 'User1')
+g:run_hl_error  = get(g:, 'run_hl_error', 'ErrorMsg')
 
 def RemoveChannelFromDict(ch: string)
   var r: list<any>
@@ -27,7 +29,7 @@ export def ErrorCb(ch: channel,  msg: string)
       if has_key(d, "timer")
         timer_stop(d.timer)
       endif
-      popnews.Open("Error:" .. msg, 4000, 'ErrorMsg')
+      popnews.Open("Error:" .. msg, 4000, g:run_hl_error)
     endif
   endfor
 enddef
@@ -76,7 +78,7 @@ export def CloseCb(ch: channel)
         elseif errors > 1
           done_str ..= printf(" | %d errors", errors)
         endif
-        popnews.Open(done_str, 4000, 'Pmenu')
+        popnews.Open(done_str, 4000, g:run_hl_normal)
       else
         var b = bufadd(d.name)
         lines = getbufinfo(b)[0].linecount
@@ -166,7 +168,7 @@ def RunJobMonitoringCb(tid: number)
         popnews.Close(d.winid)
         timer_stop(d.timer)
         if job_status == "fail"
-          popnews.Open("XXXX job failed", 4000, 'PmenuSel')
+          popnews.Open("XXXX job failed", 4000, g:run_hl_normal)
         endif
       endif
     endif
