@@ -10,7 +10,7 @@ endif
 hi clear
 set background=light
 
-g:colors_name = "4x4"
+g:colors_name = "color_box"
 
 var black = "#000000"
 var white = "#FFFFFF"
@@ -33,6 +33,11 @@ var green_dk = "#209F72"
 var green    = "#20BF82"
 var green_lt = "#20DF93"
 var green_bg = "#88FFC0"
+
+var orange_dk = "#E54312"
+var orange    = "#FC6E43"
+var orange_lt = "#FFA16B"
+var orange_bg = "#FFDF80"
 
 var yellow_dk = "#937002"
 var yellow    = "#C8A012"
@@ -72,7 +77,7 @@ execute "hi Pmenu" Fg(black) Bg(yellow_lt)
 execute "hi PmenuSbar" Fg(blue_bg) Bg(blue_bg)
 execute "hi PmenuSel" Fg(white) Bg(yellow_dk) Gui("bold")
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_dk)
-execute "hi Search" Fg(black) Bg(yellow_bg) Gui("NONE")
+execute "hi Search" Fg(black) Bg(orange_bg) Gui("NONE")
 execute "hi StatusLine" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_bg) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
