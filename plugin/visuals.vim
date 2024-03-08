@@ -10,5 +10,10 @@ nnoremap <Leader>h <cmd>HlWordToggle<CR>
 
 augroup visuals
   au!
+  autocmd WinEnter *  {
+    if &previewwindow && exist('&winfixbuf')
+      setlocal winfixbuf
+    endif
+  }
   autocmd TextYankPost *  call visuals#blink_on_yank_now(#{duration: 300})
 augroup END

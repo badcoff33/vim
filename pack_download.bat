@@ -10,11 +10,12 @@ import requests
 import zipfile
 import glob
 
+# Move all packages to 'opt' dir. Load the packages from user.vim file with ':packadd ...'
 unpack_tuple = (
-        ("start", "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip", "signify"),
+        ("opt", "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip", "signify"),
         ("opt", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip", "easy-align"),
-        ("start", "https://github.com/preservim/tagbar/archive/refs/heads/master.zip", "tagbar"),
-        ("start", "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip", "dirvish"),
+        ("opt", "https://github.com/preservim/tagbar/archive/refs/heads/master.zip", "tagbar"),
+        ("opt", "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip", "dirvish"),
         ("opt", "https://github.com/dhruvasagar/vim-table-mode/archive/refs/heads/master.zip", "table-mode"),
         ("start", "https://github.com/godlygeek/tabular/archive/refs/heads/master.zip", "tabular"),
         ("skip", "https://github.com/Donaldttt/fuzzyy/archive/refs/heads/vim9.zip", ""),

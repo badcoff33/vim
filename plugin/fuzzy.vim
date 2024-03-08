@@ -19,6 +19,20 @@ def g:FuzzyBuf()
     })
 enddef
 
+# filter and open tags of current buffer
+def g:FuzzyTags()
+  var file = '!' .. substitute(expand('%'), '[/\\]', '!', 'g')
+  var buf_tag_dict = filter(taglist('.'),  (idx, val) => match(substitute(val['filename'], '[\./\\]', '!', 'g'), file) == -1 ? false : true)
+  # var buf_tag_dict = filter(taglist('.'),  (idx, val) => (fnamemodify(val['filename'], ':p') == file))
+  g:xxx = buf_tag_dict
+  fuzzy.FilterMenu("Tags",
+    mapnew(buf_tag_dict, (key, val) => val['name']),
+    (res, key) => {
+      execute ":" .. filter(buf_tag_dict, 'v:val["name"] == "' .. res.text .. '"')[0]['cmd']
+      echo ":" .. filter(buf_tag_dict, 'v:val["name"] == "' .. res.text .. '"')[0]['cmd']
+    })
+enddef
+
 # filter and open MRU (Most Recently Used) aka oldfiles
 def g:FuzzyMRU()
   fuzzy.FilterMenu("MRU",
@@ -35,9 +49,9 @@ def g:FuzzyMRU()
     })
 enddef
 
-utils.Map('nnoremap', '<F2>', '<Cmd>call FuzzyBuf()<CR>')
-utils.Map('nnoremap', '<Leader><Space>', '<Cmd>call FuzzyBuf()<CR>')
-utils.Map('nnoremap', '<Leader><S-Space>', '<Cmd>call FuzzyBuf()<CR>')
+# utils.Map('nnoremap', '<Leader>1', '<Cmd>call FuzzyBuf()<CR>')
+# utils.Map('nnoremap', '<Leader>2', '<Cmd>call FuzzyTags()<CR>')
+# utils.Map('nnoremap', '<Leader>3', '<Cmd>call FuzzyMRU()<CR>')
 
 
 defcompile
