@@ -40,7 +40,7 @@ vim9script
 #             endif
 #         })
 
-augroup GroupFuzzy
+augroup GroupFilterMenu
   au!
   au ColorScheme * call prop_type_delete('FilterMenuMatch')
 augroup END
@@ -166,4 +166,3 @@ export def FilterMenu(
 
   win_execute(winid, "setl nonu cursorline cursorlineopt=line")
 enddef
-

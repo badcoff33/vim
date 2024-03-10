@@ -1,10 +1,10 @@
 vim9script
-import autoload 'fuzzy.vim'
+import autoload 'filter_menu.vim'
 import autoload 'utils.vim'
 
 # filter and open buffers
-def g:FuzzyBuf()
-  fuzzy.FilterMenu("Buffers",
+def g:SelectBuf()
+  filter_menu.FilterMenu("Buffers",
     getbufinfo({'buflisted': 1})->mapnew((_, v) => {
       return {bufnr: v.bufnr, text: (v.name ?? $'[{v.bufnr}: No Name]')}
     }),
@@ -19,7 +19,7 @@ def g:FuzzyBuf()
     })
 enddef
 
-def FuzzyTagsFilterFunc(tags_filename: string, file: string): bool
+def SelectTagsFilterFunc(tags_filename: string, file: string): bool
   var a = substitute(tags_filename, "[\\.\\\\/]", "", "g")
   var b = substitute(file, "[\\.\\\\/]", "", "g")
   if a == b
@@ -30,10 +30,10 @@ enddef
 
 # filter and open tags of current buffer
 # aaa/fdgfdg/ccc.x
-def g:FuzzyTags()
+def g:SelectTags()
   var current_file = expand('%')
-  var buf_tag_dict = filter(taglist('.'), (key, val) => FuzzyTagsFilterFunc(val['filename'], current_file))
-  fuzzy.FilterMenu("Tags",
+  var buf_tag_dict = filter(taglist('.'), (key, val) => SelectTagsFilterFunc(val['filename'], current_file))
+  filter_menu.FilterMenu("Tags",
     mapnew(buf_tag_dict, (key, val) => val['name']),
     (res, key) => {
       var cmd = filter(buf_tag_dict, 'v:val["name"] == "' .. res.text .. '"')[0]['cmd']
@@ -42,8 +42,8 @@ def g:FuzzyTags()
 enddef
 
 # filter and open MRU (Most Recently Used) aka oldfiles
-def g:FuzzyMRU()
-  fuzzy.FilterMenu("MRU",
+def g:SelectMRU()
+  filter_menu.FilterMenu("MRU",
     v:oldfiles->copy()->filter((_, v) => {
       return filereadable(expand(v)) &&
         expand(v)->stridx(expand("$VIMRUNTIME")) == -1
@@ -57,9 +57,9 @@ def g:FuzzyMRU()
     })
 enddef
 
-utils.Map('nnoremap', '<Leader>1', '<Cmd>call FuzzyBuf()<CR>')
-utils.Map('nnoremap', '<Leader>2', '<Cmd>call FuzzyTags()<CR>')
-utils.Map('nnoremap', '<Leader>3', '<Cmd>call FuzzyMRU()<CR>')
+utils.Map('nnoremap', '<Leader>1', '<Cmd>call SelectBuf()<CR>')
+utils.Map('nnoremap', '<Leader>2', '<Cmd>call SelectTags()<CR>')
+utils.Map('nnoremap', '<Leader>3', '<Cmd>call SelectMRU()<CR>')
 
 
 defcompile
