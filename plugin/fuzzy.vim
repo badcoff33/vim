@@ -19,17 +19,25 @@ def g:FuzzyBuf()
     })
 enddef
 
+def FuzzyTagsFilterFunc(tags_filename: string, file: string): bool
+  var a = substitute(tags_filename, "[\\.\\\\/]", "", "g")
+  var b = substitute(file, "[\\.\\\\/]", "", "g")
+  if a == b
+    return true
+  endif
+  return false
+enddef
+
 # filter and open tags of current buffer
+# aaa/fdgfdg/ccc.x
 def g:FuzzyTags()
-  var file = '!' .. substitute(expand('%'), '[/\\]', '!', 'g')
-  var buf_tag_dict = filter(taglist('.'),  (idx, val) => match(substitute(val['filename'], '[\./\\]', '!', 'g'), file) == -1 ? false : true)
-  # var buf_tag_dict = filter(taglist('.'),  (idx, val) => (fnamemodify(val['filename'], ':p') == file))
-  g:xxx = buf_tag_dict
+  var current_file = expand('%')
+  var buf_tag_dict = filter(taglist('.'), (key, val) => FuzzyTagsFilterFunc(val['filename'], current_file))
   fuzzy.FilterMenu("Tags",
     mapnew(buf_tag_dict, (key, val) => val['name']),
     (res, key) => {
-      execute ":" .. filter(buf_tag_dict, 'v:val["name"] == "' .. res.text .. '"')[0]['cmd']
-      echo ":" .. filter(buf_tag_dict, 'v:val["name"] == "' .. res.text .. '"')[0]['cmd']
+      var cmd = filter(buf_tag_dict, 'v:val["name"] == "' .. res.text .. '"')[0]['cmd']
+      execute ":" .. escape(cmd, '*')
     })
 enddef
 
@@ -49,9 +57,9 @@ def g:FuzzyMRU()
     })
 enddef
 
-# utils.Map('nnoremap', '<Leader>1', '<Cmd>call FuzzyBuf()<CR>')
-# utils.Map('nnoremap', '<Leader>2', '<Cmd>call FuzzyTags()<CR>')
-# utils.Map('nnoremap', '<Leader>3', '<Cmd>call FuzzyMRU()<CR>')
+utils.Map('nnoremap', '<Leader>1', '<Cmd>call FuzzyBuf()<CR>')
+utils.Map('nnoremap', '<Leader>2', '<Cmd>call FuzzyTags()<CR>')
+utils.Map('nnoremap', '<Leader>3', '<Cmd>call FuzzyMRU()<CR>')
 
 
 defcompile
