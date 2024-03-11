@@ -19,20 +19,13 @@ def g:SelectBuf()
     })
 enddef
 
-def SelectTagsFilterFunc(tags_filename: string, file: string): bool
-  var a = substitute(tags_filename, "[\\.\\\\/]", "", "g")
-  var b = substitute(file, "[\\.\\\\/]", "", "g")
-  if a == b
-    return true
-  endif
-  return false
-enddef
+var FileSig = (fn) => substitute(fn, "[\\\\/]", "", "g") # get rid of the slash problem
 
-# filter and open tags of current buffer
-# aaa/fdgfdg/ccc.x
+# works with tag file an relative file paths.
+# Restrictions: No etags support or with line  numbers
 def g:SelectTags()
-  var current_file = expand('%')
-  var buf_tag_dict = filter(taglist('.'), (key, val) => SelectTagsFilterFunc(val['filename'], current_file))
+  var fsig = substitute(FileSig(expand('%:p')), FileSig(getcwd()), '', '') # make file relative as ctags files names
+  var buf_tag_dict = filter(taglist('.'), (key, val) => FileSig(val['filename']) =~ fsig)
   filter_menu.FilterMenu("Tags",
     mapnew(buf_tag_dict, (key, val) => val['name']),
     (res, key) => {
