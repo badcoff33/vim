@@ -17,22 +17,23 @@ g:colors_name = "two_tone_dark"
 var black    = "#000000"
 var white    = "#FFFFFF"
 
-var def_bg   = "#102030"
+var def_bg   = "#102F40"
 var def_fg   = "#FFF2FF"
 
-var blue_dk = "#1158AF"
-var blue    = "#21A1EF"
-var blue_lt = "#28C8FF"
 var blue_bg = "#204880"
+var blue_dk = "#2158AF"
+var blue    = "#31A1EF"
+var blue_lt = "#48C8FF"
 
+var orange_bg = "#804820"
 var orange_dk = "#AF8811"
 var orange    = "#EFC121"
 var orange_lt = "#FFE828"
-var orange_bg = "#804820"
 
-var gray_dk = "#25333F"
-var gray    = "#60717F"
-var gray_lt = "#B8B8CC"
+var gray_bg = "#354363"
+var gray_dk = "#55687F"
+var gray    = "#7099AF"
+var gray_lt = "#B8BFCC"
 
 var Fg      = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg      = (str) => empty(str) ? "" : "guibg=" .. str
@@ -45,7 +46,7 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 execute "hi Bold" Attr("bold")
 execute "hi CurSearch" Fg(def_fg) Bg(def_bg) Attr("bold,underline")
 execute "hi Cursor" Bg(blue) Cterm("NONE")
-execute "hi CursorLine" Bg(gray_dk) Cterm("NONE")
+execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray) Attr("bold")
 execute "hi Folded" Fg(blue) Bg(gray_lt) Attr("NONE")
 execute "hi IncSearch" Fg(black) Bg(gray) Attr("NONE")

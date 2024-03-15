@@ -27,7 +27,7 @@ var blue_bg = "#9FDEFF"
 var cyan_dk = "#209F9F"
 var cyan    = "#30AFA2"
 var cyan_lt = "#40CFC3"
-var cyan_bg = "#A8FFF0"
+var cyan_bg = "#C8FFF0"
 
 var red_dk = "#AF2352"
 var red    = "#DF3372"
@@ -68,7 +68,7 @@ command! -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
 execute "hi Bold" Gui("bold")
 execute "hi CurSearch" Fg(black) Bg(green_bg) Gui("NONE")
 execute "hi Cursor" Bg(black) Cterm("NONE")
-execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
+execute "hi CursorLine" Bg(cyan_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray) Gui("bold")
 execute "hi Folded" Fg(blue) Bg(gray_lt) Gui("NONE")
 execute "hi IncSearch" Fg(green_bg) Bg(green_dk) Gui("NONE")
@@ -78,9 +78,9 @@ execute "hi LineNr" Fg(gray) Gui("bold")
 execute "hi MatchParen" Fg(green_dk) Bg(green_bg) Gui("bold")
 execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
-execute "hi Pmenu" Fg(black) Bg(cyan_bg)
+execute "hi Pmenu" Fg(black) Bg(blue_bg)
 execute "hi PmenuSbar" Fg(gray_bg) Bg(gray_lt)
-execute "hi PmenuSel" Fg(white) Bg(cyan_dk) Gui("bold")
+execute "hi PmenuSel" Fg(white) Bg(orange_dk) Gui("bold")
 execute "hi PmenuThumb" Fg(gray_dk) Bg(gray_dk)
 execute "hi Search" Fg(black) Bg(orange_bg) Gui("NONE")
 execute "hi StatusLine" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
@@ -89,7 +89,7 @@ execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
 execute "hi Terminal" Fg(black) Bg(gray_bg)
 execute "hi User1" Fg(white) Bg(gray_dk) Gui("NONE")
 execute "hi User2" Fg(blue_bg) Bg(blue_dk) Gui("italic")
-execute "hi VertSplit" Fg(gray_lt) Bg(gray_lt) Gui("NONE")
+execute "hi VertSplit" Fg(gray_bg) Bg(gray_bg) Gui("NONE")
 execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
 
 highlight! link CursorColumn CursorLine
