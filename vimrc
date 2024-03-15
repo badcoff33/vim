@@ -220,7 +220,7 @@ vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
 
 nnoremap <Leader>b :buffer<Space>*
 nnoremap <Leader>f :find<Space>*
-nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>:startinsert<CR>
+nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>
 
 " Quick access on current buffer's directory
 nnoremap <Leader>. :edit <C-r>=AppendSep(expand("%:h"))<CR>
