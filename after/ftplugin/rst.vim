@@ -10,6 +10,11 @@ setlocal formatoptions=qln
 setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:\\&^.\\{4\\}
 setlocal comments=fb:*,fb:-,fb:+,n:> commentstring=<!--%s-->
 
+" plugin table-mode, prepared for rst style tables
+let b:table_mode_corner = '+'
+let b:table_mode_corner_corner = '+'
+let b:table_mode_header_fillchar = '='
+
 " More molecular undo of text
 inoremap <buffer> , ,<C-g>u
 inoremap <buffer> . .<C-g>u
@@ -82,4 +87,3 @@ iabbrev <buffer> xlink `NAME <>`_<Esc>2bea
 
 " let &cpo = s:keepcpo
 " unlet s:keepcpo
-
