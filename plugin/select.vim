@@ -24,6 +24,9 @@ var FileSig = (fn) => substitute(fn, "[\\\\/]", "", "g") # get rid of the slash 
 # works with tag file an relative file paths.
 # Restrictions: No etags support or with line  numbers
 def g:SelectTags()
+  if empty(findfile('tags', expand('%:p') .. ';'))
+    return
+  endif
   var fsig = substitute(FileSig(expand('%:p')), FileSig(getcwd()), '', '') # make file relative as ctags files names
   var buf_tag_dict = filter(taglist('.'), (key, val) => FileSig(val['filename']) =~ fsig)
   filter_menu.FilterMenu("Tags",
@@ -35,24 +38,21 @@ def g:SelectTags()
 enddef
 
 # filter and open MRU (Most Recently Used) aka oldfiles
-def g:SelectMRU()
+def g:SelectFiles()
   filter_menu.FilterMenu("MRU",
-    v:oldfiles->copy()->filter((_, v) => {
-      return filereadable(expand(v)) &&
-        expand(v)->stridx(expand("$VIMRUNTIME")) == -1
-    }),
+    split(system('rg --files -g * .'), '\n'),
     (res, key) => {
-      if key == "\<c-t>"
-        exe $":tab sb {res.bufnr}"
-      else
-        exe $":e {res.text}"
-      endif
-    })
+    if key == "\<c-t>"
+      exe $":tab sb {res.bufnr}"
+    else
+      exe $":e {res.text}"
+    endif
+  })
 enddef
 
 utils.Map('nnoremap', '<Leader>1', '<Cmd>call SelectBuf()<CR>')
 utils.Map('nnoremap', '<Leader>2', '<Cmd>call SelectTags()<CR>')
-utils.Map('nnoremap', '<Leader>3', '<Cmd>call SelectMRU()<CR>')
+utils.Map('nnoremap', '<Leader>3', '<Cmd>call SelectFiles()<CR>')
 
 
 defcompile
