@@ -1,4 +1,3 @@
-
 function! visuals#hl_word_toggle()
   highlight HlWordUnderline gui=underline
   if !exists("g:hl_word_timer")
@@ -32,11 +31,10 @@ endfunction
 " Description: Make the actual window more obvious by temporary turn the
 " option 'cursorline' on.
 function! visuals#enable_blinky(...)
-  let g:tid_blinky_cursorline = -1
   let g:blinky_stick = ((a:0 == 1) && (a:1 == "stick")) ? v:true : v:false
   augroup StickyCursorline
     autocmd!
-    autocmd WinLeave             * call visuals#turn_cursorline_off()
+    " autocmd WinLeave             * call visuals#turn_cursorline_off()
     autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
   augroup END
 endfunction
@@ -44,32 +42,37 @@ endfunction
 " Description: Stop function and release all resources
 function! visuals#disable_blinky()
   setlocal nocursorline
-  autocmd! StickyCursorline
+  augroup StickyCursorline
+    au! StickyCursorline
+  augroup END
 endfunction
+
+let g:blinky_list = []
 
 function! visuals#turn_cursorline_on()
   if &diff
-    setlocal nocursorline
     return
   elseif &ft == "netrw"
     return
   elseif (&buftype == "") && !empty(bufname("%"))
     if g:blinky_stick == v:false
-      let g:tid_blinky_cursorline = timer_start(1000, function("visuals#turn_cursorline_off"))
+      if getwinvar(winnr(), '&cursorline') == v:false
+        call setwinvar(winnr(), '&cursorline', v:true)
+        let g:blinky_list = add(g:blinky_list, winnr())
+        let tid = timer_start(1000, function("visuals#turn_cursorline_off"))
+      endif
     endif
-    setlocal cursorline
   end
 endfunction
 
-function! visuals#turn_cursorline_off(...)
-  call timer_stop(g:tid_blinky_cursorline)
-  if &diff
+function! visuals#turn_cursorline_off(tid)
+  call timer_stop(a:tid)
+  if empty(g:blinky_list)
+    call assert_true(v:false, "unexpected empty list")
     return
-  elseif &ft == "netrw"
-    return
-  else
-    setlocal nocursorline
   endif
+  call setwinvar(g:blinky_list[0], '&cursorline', v:false)
+  let g:blinky_list = g:blinky_list[1:]
 endfunction
 
 " Description: Print highlighting information at current cursor position.
@@ -118,4 +121,3 @@ endfunction
 " avoid error 2nd from prop_type_add by delete it first
 call prop_type_delete('text_prop_yank')
 call prop_type_add('text_prop_yank', #{ highlight: 'Visual' })
-
