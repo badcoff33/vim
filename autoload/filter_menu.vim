@@ -40,7 +40,7 @@ vim9script
 #             endif
 #         })
 
-augroup GroupFuzzy
+augroup GroupFilterMenu
   au!
   au ColorScheme * call prop_type_delete('FilterMenuMatch')
 augroup END
@@ -59,7 +59,7 @@ export def FilterMenu(
     items: list<any>,
     Callback: func(any, string))
   if empty(prop_type_get('FilterMenuMatch'))
-    hi def link FilterMenuMatch Normal
+    hi def link FilterMenuMatch IncSearch
     prop_type_add('FilterMenuMatch', {
       highlight: "FilterMenuMatch",
       override: true,
@@ -100,7 +100,7 @@ export def FilterMenu(
   var pos_top = ((&lines - height) / 2) - 1
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
-    highlight: "StatusLine",
+    highlight: "Normal",
     line: pos_top,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
@@ -109,7 +109,10 @@ export def FilterMenu(
     drag: 0,
     wrap: 1,
     cursorline: false,
-    padding: [1, 1, 1, 1],
+    # padding: [0, 0, 0, 0],
+    border: [1, 1, 1, 1],
+    borderchars: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    borderhighlight: ['StatusLine', 'VertSplit', 'VertSplit', 'VertSplit'],
     mapping: 0,
     filter: (id, key) => {
       if key == "\<esc>"
@@ -166,4 +169,3 @@ export def FilterMenu(
 
   win_execute(winid, "setl nonu cursorline cursorlineopt=line")
 enddef
-

@@ -8,6 +8,7 @@ vim9script
 # Maintainer: markus prepens (markus dot prepens at gmail dot com)
 
 import autoload "run.vim"
+import autoload "ctags.vim"
 
 var ctags_job: job
 
@@ -41,6 +42,8 @@ augroup GroupeCtags
   autocmd BufWritePost *.cpp,*.hpp call CtagsTriggerUpdate()
 augroup END
 
+command! -nargs=0 Tnext :call ctags.TagCycle('n')
+command! -nargs=0 Tprev :call ctags.TagCycle('p')
 command! -nargs=0 CtagsForceUpdate call CtagsTriggerUpdate(true)
 
 defcompile

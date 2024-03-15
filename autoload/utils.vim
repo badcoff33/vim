@@ -20,15 +20,18 @@ export def MapExpr(mapcmd: string,  lhs: string, rhs: string)
   if !mapcheck(lhs)
     execute mapcmd '<expr>' lhs rhs
   else
-    echoerr $"duplicate mapping for {lhs}"
+    echohl WarningMsg
+    echomsg $"duplicate mapping for {lhs}"
+    echohl None
   endif
 enddef
 
 export def Map(mapcmd: string,  lhs: string, rhs: string)
-  if !mapcheck(lhs)
+  if mapcheck(lhs) == ''
     execute mapcmd lhs rhs
   else
-    echoerr $"duplicate mapping for {lhs}"
+    echohl WarningMsg
+    echomsg $"duplicate mapping for {lhs}"
+    echohl None
   endif
 enddef
-

@@ -10,6 +10,7 @@ import requests
 import zipfile
 import glob
 
+# Move all packages to 'opt' dir. Load the packages from user.vim file with ':packadd ...'
 unpack_tuple = (
         ("opt", "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip", "signify"),
         ("opt", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip", "easy-align"),

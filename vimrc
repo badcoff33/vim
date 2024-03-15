@@ -132,14 +132,20 @@ noremap! <A-Left> <Home>
 noremap! <A-Right> <End>
 nnoremap <A-Left> <Home>
 nnoremap <A-Right> <End>
-vnoremap <A-Left> 0
-vnoremap <A-Right> $
-
-" Alternative keys to delete words in insert mode
+xnoremap <A-Left> 0
+xnoremap <A-Right> $
+" Alternative keys to delete words
 inoremap <C-BS> <C-o>db
 inoremap <C-Del> <C-o>de
 cnoremap <C-BS> <C-w>
 cnoremap <C-Del> <C-Right><C-w>
+nnoremap <C-CR> "*yiw
+" b/c most laptop keyboards suck
+nnoremap <A-CR> "*yiW
+xnoremap <C-CR> "*y
+nnoremap <S-CR> "*p
+inoremap <S-CR> <C-o>"*p
+nnoremap <S-CR> "*p
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -165,6 +171,7 @@ vnoremap < <gv
 
 " To map <Esc> to exit terminal-mode: >
 tnoremap <Esc>       <C-\><C-n>
+tnoremap <LeftMouse> <C-\><C-n>
 
 " Line bubbling, key mapping leant to scrolling keys C-e C-y
 nnoremap <A-e> :move .-2<CR>==
@@ -185,8 +192,8 @@ cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? '
 " }}}
 
 " Surfing the quickfix matches
-nnoremap <C-j> :cnext<CR>
-nnoremap <C-k> :cprevious<CR>
+nnoremap <C-j> :cnext<CR><Cmd>normal zz<CR>
+nnoremap <C-k> :cprevious<CR><Cmd>normal zz<CR>
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -213,7 +220,7 @@ vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
 
 nnoremap <Leader>b :buffer<Space>*
 nnoremap <Leader>f :find<Space>*
-nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>:startinsert<CR>
+nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>
 
 " Quick access on current buffer's directory
 nnoremap <Leader>. :edit <C-r>=AppendSep(expand("%:h"))<CR>
@@ -237,7 +244,6 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 augroup GroupVimrc " {{{
   autocmd!
   autocmd FocusLost * try | silent wall | catch /.*/ | endtry
-  autocmd WinNew * if (&buftype == "help") | wincmd T | endif
 augroup END " }}}
 
 let g:term = &term
