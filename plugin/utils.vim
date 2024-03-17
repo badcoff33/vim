@@ -58,8 +58,8 @@ def g:LookupWord()
   if size > 0
     execute 'botright lopen ' .. min([size, &lines / 3])
     nnoremap <buffer> <Esc> <C-w>p<Cmd>lclose<CR>
-    nnoremap <buffer> j <Cmd>lnext<CR><C-w>p
-    nnoremap <buffer> k <Cmd>lprevious<CR><C-w>p
+    nnoremap <buffer> j <Cmd>lnext<CR>zz<C-w>p
+    nnoremap <buffer> k <Cmd>lprevious<CR>zz<C-w>p
   endif
 enddef
 
