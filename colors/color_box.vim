@@ -47,7 +47,7 @@ var orange_bg = "#FFDF80"
 var yellow_dk = "#937002"
 var yellow    = "#C8A012"
 var yellow_lt = "#DEC027"
-var yellow_bg = "#FFF880"
+var yellow_bg = "#FFF8A0"
 
 var gray_dk =  "#444447"
 var gray    =  "#959598"
@@ -66,28 +66,28 @@ command! -nargs=0 Bright execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 command! -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
 
 execute "hi Bold" Gui("bold")
-execute "hi CurSearch" Fg(black) Bg(green_bg) Gui("NONE")
+execute "hi CurSearch" Fg(black) Bg(cyan_lt) Gui("bold")
 execute "hi Cursor" Bg(black) Cterm("NONE")
-execute "hi CursorLine" Bg(cyan_bg) Cterm("NONE")
+execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray) Gui("bold")
 execute "hi Folded" Fg(blue) Bg(gray_lt) Gui("NONE")
-execute "hi IncSearch" Fg(green_bg) Bg(green_dk) Gui("NONE")
+execute "hi IncSearch" Fg(cyan_bg) Bg(cyan_dk) Gui("NONE")
 execute "hi Italic" Gui("italic")
 execute "hi Label" Fg(black) Gui("bold")
 execute "hi LineNr" Fg(gray) Gui("bold")
 execute "hi MatchParen" Fg(green_dk) Bg(green_bg) Gui("bold")
 execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
-execute "hi Pmenu" Fg(black) Bg(blue_bg)
+execute "hi Pmenu" Fg(black) Bg(green_bg)
 execute "hi PmenuSbar" Fg(gray_bg) Bg(gray_lt)
-execute "hi PmenuSel" Fg(white) Bg(orange_dk) Gui("bold")
+execute "hi PmenuSel" Fg(white) Bg(green_dk) Gui("bold")
 execute "hi PmenuThumb" Fg(gray_dk) Bg(gray_dk)
-execute "hi Search" Fg(black) Bg(orange_bg) Gui("NONE")
-execute "hi StatusLine" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
-execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_bg) Gui("NONE")
+execute "hi Search" Bg(cyan_bg) Gui("NONE")
+execute "hi StatusLine" Fg(white) Bg(blue_lt) Gui("NONE")
+execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
 execute "hi Terminal" Fg(black) Bg(gray_bg)
-execute "hi User1" Fg(white) Bg(gray_dk) Gui("NONE")
+execute "hi User1" Fg(white) Bg(blue_dk) Gui("NONE")
 execute "hi User2" Fg(blue_bg) Bg(blue_dk) Gui("italic")
 execute "hi VertSplit" Fg(gray_bg) Bg(gray_bg) Gui("NONE")
 execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
@@ -97,7 +97,7 @@ highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine StatusLineNC
-highlight! link TabLineFill StatusLine
+highlight! link TabLineFill StatusLineNC
 highlight! link TabLineSel Label
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
