@@ -96,7 +96,7 @@ execute 'set undodir=' .. getenv('TEMP')
 " Insert mode completion
 set complete=.,w
 set noshowfulltag
-set completeopt=menu
+set completeopt=menu,longest
 set pumheight=7
 
 " Command line completion
@@ -105,6 +105,8 @@ set wildoptions=pum,tagfile
 set wildmode=full:lastused
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
+set wildcharm=<Tab>
+cmap <C-n> <Tab>
 
 " How to handle search for tags
 set tagcase=match
@@ -140,6 +142,7 @@ nnoremap <C-CR> "*yiw
 vnoremap <C-CR> "*y
 nnoremap <C-CR> viw"*y
 nnoremap <A-CR> "*P
+cnoremap <A-CR> <C-r>*
 
 " By every next or prev match, expand fold
 nnoremap n nzv
