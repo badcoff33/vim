@@ -3,14 +3,14 @@ vim9script
 
 # Toggle the quickfix window
 export def ToggleQuickfix()
-  var is_open = false
+  var winid = 0
   for m in getbufinfo()
     if getbufvar(m.bufnr, "&buftype") == "quickfix" && len(m.windows) > 0
-      is_open = true
+      winid = m.windows[0]
       break
     endif
   endfor
-  if is_open == false
+  if winid == 0
     var num_qf_lines = len(getqflist())
     if num_qf_lines > 0
       execute "botright" "copen" min([ &lines / 2, num_qf_lines + 1])
@@ -19,12 +19,10 @@ export def ToggleQuickfix()
       echomsg "- Quickfix empty -"
     endif
   else
-    if (winnr("$") == 1) && (&buftype == "quickfix")
-      buffer #
-    else
-      cclose
-      wincmd p
-    endif
+    var save_winid = win_getid()
+    winid = win_gotoid(winid)
+    cclose
+    win_gotoid(save_winid)
   endif
 enddef
 
