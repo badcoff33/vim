@@ -100,7 +100,7 @@ export def FilterMenu(
   var pos_top = ((&lines - height) / 2) - 1
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
-    highlight: "Normal",
+    highlight: "StatusLineNC",
     line: pos_top,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
@@ -109,10 +109,10 @@ export def FilterMenu(
     drag: 0,
     wrap: 1,
     cursorline: false,
-    # padding: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
     border: [1, 1, 1, 1],
     borderchars: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    borderhighlight: ['StatusLine', 'VertSplit', 'VertSplit', 'VertSplit'],
+    borderhighlight: ['StatusLine', 'StatusLineNC', 'StatusLineNC', 'StatusLineNC'],
     mapping: 0,
     filter: (id, key) => {
       if key == "\<esc>"
