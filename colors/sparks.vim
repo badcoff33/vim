@@ -40,7 +40,7 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 # Basics
 
 execute "hi Bold" Attr("bold")
-execute "hi CurSearch" Fg(fg) Bg(bg) Attr("bold,underline")
+execute "hi CurSearch" Fg(yellow) Bg(bg) Attr("bold,underline")
 execute "hi Cursor" Bg(blue) Cterm("NONE")
 execute "hi CursorLine" Bg(bg_dk) Cterm("NONE")
 execute "hi CursorLineNr" Fg(blue) Attr("bold")
@@ -56,10 +56,12 @@ execute "hi Pmenu" Fg(black) Bg(green)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(yellow) Attr("bold")
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
-execute "hi Search" Fg(fg) Bg(bg) Attr("underline")
+execute "hi Search" Fg(yellow) Bg(bg) Attr("underline")
 execute "hi StatusLine" Fg(white) Bg(blue_dk) Attr("NONE")
 execute "hi StatusLineNC" Fg(white) Bg(blue_dk) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(orange) Attr("bold")
+execute "hi TabLineFill" Fg(yellow) Bg(bg_dk) Attr('NONE')
+execute "hi TabLineSel" Fg(yellow) Bg(bg) Attr('underline')
 execute "hi Terminal" Fg(blue_lt) Bg(bg_dk)
 execute "hi User1" Fg(black) Bg(blue)
 execute "hi User2" Fg(white) Bg(blue)
@@ -71,8 +73,6 @@ highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Normal
-highlight! link TabLineFill Normal
-highlight! link TabLineSel User1
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
 
@@ -86,8 +86,8 @@ execute "hi Error" Fg(orange) Bg("bg") Attr("underline")
 execute "hi ErrorMsg" Fg(orange) Bg(bg) Attr("bold")
 execute "hi Function" Fg(blue)
 execute "hi Identifier" Fg(blue_lt) Attr("NONE")
-execute "hi ModeMsg" Fg(blue) Bg(bg) Attr("NONE")
-execute "hi MoreMsg" Fg(white) Bg(bg) Attr("NONE")
+execute "hi ModeMsg" Fg(yellow) Bg(bg) Attr("NONE")
+execute "hi MoreMsg" Fg(green) Bg(bg) Attr("NONE")
 execute "hi Number" Fg(blue)
 execute "hi PreCondit" Fg(white) Attr("bold")
 execute "hi PreProc" Fg(white) Attr("NONE")
