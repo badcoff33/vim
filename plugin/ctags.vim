@@ -9,6 +9,7 @@ vim9script
 
 import autoload "run.vim"
 import autoload "ctags.vim"
+import autoload "popnews.vim"
 
 var ctags_job: job
 
@@ -24,15 +25,15 @@ def g:CtagsTriggerUpdate(verbose = false)
   elseif type(g:ctags_options) == v:t_list
     ctags_options = join(g:ctags_options, " ")
   else
-    echoerr "unknown type of 'g:ctags_options'"
+    popnews.Open("unknown type of 'g:ctags_options'", 4000, "ErrorMsg")
     return
   endif
 
   ctags_job = run.RunStart({cmd: 'ctags ' .. ctags_options, background: true})
   if job_status(ctags_job) != "run"
-    echoerr "check ctags options"
+    popnews.Open("check ctags options", 4000, "ErrorMsg")
   elseif verbose == true
-    echomsg 'ctags ' .. ctags_options
+    popnews.Open('ctags ' .. ctags_options, 3000)
   endif
 enddef
 
