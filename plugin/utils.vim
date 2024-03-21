@@ -46,14 +46,18 @@ if filereadable(".vimrc")
   call popnews.Open("local .vimrc available")
 endif
 
-# nice presentation of v:errors, filled by assert functions
+# nnice presentation of v:errors, filled by assert functions
 command! -nargs=0 AssReport for e in v:errors | echo e | endfor
 
 def g:LookupWord()
   var size: number
-  setloclist(win_getid(), [], " ", {"title": "word in " .. fnamemodify(bufname("%"), ":t")})
+  var wid = win_getid()
+  if match(&errorformat, '%f:%l:%m') < 0
+    set errorformat+=%f:%l:%m
+  endif
+  setloclist(wid, [], " ", {"title": "word in " .. fnamemodify(bufname("%"), ":t")})
   execute 'g/' .. expand("<cword>") .. '/call setloclist(win_getid(), [], "a", {"lines": [bufname("%") .. ":" .. line(".") .. ":" .. getline(".")]})'
-  size = getloclist(win_getid(), {'nr': '$', 'size': 0}).size
+  size = getloclist(wid, {'nr': '$', 'size': 0}).size
   nnoremap <buffer> <LocalLeader><Esc> <Cmd>lclose<CR>
   if size > 0
     execute 'botright lopen ' .. min([size, &lines / 3])
