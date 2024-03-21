@@ -75,9 +75,9 @@ utils.Map('nnoremap', '<Leader>\', ':call BackwardSlashToForward()<CR>')
 utils.Map('nnoremap', '<Leader>?', '<Cmd>call popnews#PopupFiletypeHelp()<CR>')
 utils.Map('nnoremap', '<Leader>q', ':call quickfix#ToggleQuickfix()<CR>')
 
-utils.Map('nnoremap', '<Leader>vv', ':tabedit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>')
-utils.Map('nnoremap', '<Leader>vu', ':tabedit <C-r>=g:user_vimrc<CR><CR>')
-utils.Map('nnoremap', '<Leader>vf', ':tabedit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>')
-utils.Map('nnoremap', '<Leader>vc', ':tabedit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>')
+utils.Map('nnoremap', '<Leader>vv', ':edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>')
+utils.Map('nnoremap', '<Leader>vu', ':edit <C-r>=g:user_vimrc<CR><CR>')
+utils.Map('nnoremap', '<Leader>vf', ':edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>')
+utils.Map('nnoremap', '<Leader>vc', ':edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>')
 
 defcompile
