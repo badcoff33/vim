@@ -46,7 +46,7 @@ if filereadable(".vimrc")
   call popnews.Open("local .vimrc available")
 endif
 
-# nnice presentation of v:errors, filled by assert functions
+# nice presentation of v:errors, filled by assert functions
 command! -nargs=0 AssReport for e in v:errors | echo e | endfor
 
 def g:LookupWord()
