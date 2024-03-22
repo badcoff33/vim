@@ -4,10 +4,10 @@ vim9script
 # Description:
 # Maintainer:    markus prepens (markus dot prepens at gmail dot com)
 #
-# Add function scope#GetScope() to the 'statusline' option for a less
-# obstrusive way to indicate current scope. Add something like this in your
-# vimrc to indicaet the scope with a popup at the top of current window.
-# 
+# Add something like this in your vimrc to indicate the scope with a popup
+# banner in current window. Add function scope#GetScope() to the 'statusline'
+# option for a less obstrusive way to indicate current scope.
+#
 # augroup GroupScope
 #   au!
 #   # add supported filetypes
