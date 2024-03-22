@@ -19,17 +19,19 @@ var white    = "#FFFFFF"
 
 var fg       = "#D0D0F0"
 var bg       = "#1A253F"
-var bg_dk    = "#0C0F2E"
+
+var gui_bg   = "#002010"
+var gui_fg   = "#BBDDFF"
+var cl_bg    = "#000000"
 
 var blue_lt  = "#91AAD3"
 var blue     = "#819FC3"
 var blue_dk  = "#6380B0"
-var blue_bg  = "#25384F"
 
 var yellow  = "#F8E840"
 var orange  = "#E17C36"
 var red     = "#EF3005"
-var green   = "#10CC51"
+var green   = "#10DD50"
 
 var Fg      = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg      = (str) => empty(str) ? "" : "guibg=" .. str
@@ -42,31 +44,31 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 execute "hi Bold" Attr("bold")
 execute "hi CurSearch" Fg(yellow) Bg(bg) Attr("bold,underline")
 execute "hi Cursor" Bg(blue) Cterm("NONE")
-execute "hi CursorLine" Bg(bg_dk) Cterm("NONE")
-execute "hi CursorLineNr" Fg(blue) Attr("bold")
+execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
+execute "hi CursorLineNr" Fg(white) Bg(red) Attr("bold")
 execute "hi Folded" Fg(blue) Bg(blue_lt) Attr("NONE")
 execute "hi IncSearch" Fg(black) Bg(yellow) Attr("NONE")
 execute "hi Italic" Attr("italic")
 execute "hi Label" Fg(black) Attr("bold")
-execute "hi LineNr" Fg(blue) Attr("bold")
+execute "hi LineNr" Fg(blue) Attr("NONE")
 execute "hi MatchParen" Fg(green) Bg("bg") Attr("bold")
 execute "hi NonText" Fg(blue) Bg("bg") Attr("NONE")
 execute "hi Normal" Fg(fg) Bg(bg) Attr("NONE")
-execute "hi Pmenu" Fg(black) Bg(green)
+execute "hi Pmenu" Fg(gui_fg) Bg(gui_bg)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
-execute "hi PmenuSel" Fg(black) Bg(yellow) Attr("bold")
+execute "hi PmenuSel" Fg(gui_fg) Bg(gui_bg) Attr('inverse')
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
 execute "hi Search" Fg(yellow) Bg(bg) Attr("underline")
-execute "hi StatusLine" Fg(white) Bg(blue_dk) Attr("NONE")
-execute "hi StatusLineNC" Fg(white) Bg(blue_dk) Attr("NONE")
+execute "hi StatusLine" Fg(gui_fg) Bg(gui_bg) Attr("NONE")
+execute "hi StatusLineNC" Fg(blue_dk) Bg(black) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(orange) Attr("bold")
-execute "hi TabLineFill" Fg(yellow) Bg(bg_dk) Attr('NONE')
+execute "hi TabLineFill" Fg(yellow) Bg(black) Attr('NONE')
 execute "hi TabLineSel" Fg(yellow) Bg(bg) Attr('underline')
-execute "hi Terminal" Fg(blue_lt) Bg(bg_dk)
-execute "hi User1" Fg(black) Bg(blue)
+execute "hi Terminal" Fg(blue_lt) Bg(gui_bg)
+execute "hi User1" Fg(white) Bg(green)
 execute "hi User2" Fg(white) Bg(blue)
-execute "hi VertSplit" Fg(blue_dk) Bg(blue_dk) Attr("NONE")
-execute "hi Visual" Fg(white) Bg(blue)
+execute "hi VertSplit" Fg(gui_bg) Bg(gui_bg) Attr("NONE")
+execute "hi Visual" Fg(white) Bg(green)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
@@ -104,7 +106,7 @@ execute "hi Todo" Fg(blue) Bg("bg") Attr("bold,italic")
 execute "hi Type" Fg(white) Attr("NONE")
 execute "hi WarningMsg" Fg(blue) Bg(bg)
 execute "hi qfFileName" Fg(blue_lt)
-execute "hi qfLineNr" Fg(orange)
+execute "hi qfLineNr" Fg(blue)
 
 # Filetype VIM
 
