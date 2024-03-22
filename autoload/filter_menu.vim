@@ -54,18 +54,36 @@ def CleanCR(text: any): any
   return text
 enddef
 
-export def FilterMenu(
-    title: string,
-    items: list<any>,
-    Callback: func(any, string))
+def Printify(itemsAny: list<any>, props: list<any>): list<any>
   if empty(prop_type_get('FilterMenuMatch'))
     hi def link FilterMenuMatch IncSearch
     prop_type_add('FilterMenuMatch', {
       highlight: "FilterMenuMatch",
       override: true,
       priority: 1000,
-      combine: false})
+      combine: true
+    })
   endif
+  if itemsAny[0]->len() == 0 | return [] | endif
+  if itemsAny->len() > 1
+    return itemsAny[0]->mapnew((idx, v) => {
+      return {
+        text: v.text,
+        props: itemsAny[1][idx]->mapnew((_, c) => {
+          return {col: v.text->byteidx(c) + 1, length: 1, type: 'FilterMenuMatch'}
+        })}
+    })
+  else
+    return itemsAny[0]->mapnew((_, v) => {
+      return {text: v.text}
+    })
+  endif
+enddef
+
+export def FilterMenu(
+    title: string,
+    items: list<any>,
+    Callback: func(any, string))
   var prompt = ""
   var hint = ">>> type to filter <<<"
   var items_dict: list<dict<any>>
@@ -80,27 +98,11 @@ export def FilterMenu(
   endif
 
   var filtered_items: list<any> = [items_dict]
-
-  def Printify(itemsAny: list<any>, props: list<any>): list<any>
-    if itemsAny[0]->len() == 0 | return [] | endif
-    if itemsAny->len() > 1
-      return itemsAny[0]->mapnew((idx, v) => {
-        return {text: v.text, props: itemsAny[1][idx]->mapnew((_, c) => {
-          return {col: v.text->byteidx(c) + 1, length: 1, type: 'FilterMenuMatch'}
-        })}
-      })
-    else
-      return itemsAny[0]->mapnew((_, v) => {
-        return {text: v.text}
-      })
-    endif
-  enddef
-
   var height = min([&lines - 6, items->len()])
   var pos_top = ((&lines - height) / 2) - 1
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
-    highlight: "StatusLineNC",
+    highlight: "StatusLine",
     line: pos_top,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
@@ -167,5 +169,5 @@ export def FilterMenu(
     }
   })
 
-  win_execute(winid, "setl nonu cursorline cursorlineopt=line")
+  win_execute(winid, "setl number cursorline cursorlineopt=number")
 enddef
