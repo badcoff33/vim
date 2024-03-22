@@ -23,7 +23,7 @@ g:rg_glob_patterns = {
     cmake:  ['*.cmake', 'CmakeLists.txt']
 }
 
-g:RgPattern = () =>  len(expand("<cword>")) == 0 ? "STRING" : expand("<cword>")
+g:RgPattern = () =>  len(expand("<cword>")) == 0 ? "STRING" : '\b' .. expand("<cword>") .. '\b'
 g:RgPaths = () => join(g:rg_paths, " ")
 
 g:rg_dict = {}
