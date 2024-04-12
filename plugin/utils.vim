@@ -63,6 +63,29 @@ def g:LookupWord()
   endif
 enddef
 
+if prop_type_get('text_prop_postit') == {}
+  hi PostIt guifg=black guibg=yellow
+  prop_type_add('text_prop_postit', {
+    highlight: 'PostIt'
+  })
+endif
+
+def PostIt(text: string)
+  prop_add(line('.'), 0, {
+    bufnr: bufnr('%'),
+    type: "text_prop_postit",
+    text: 'note: ' .. text,
+    text_align: 'below',
+    text_padding_left: col('.')
+  })
+enddef
+
+export def PostItClear()
+    prop_clear(line("."))
+enddef
+command! -nargs=* PostItAdd :call PostIt('<args>')
+command! -nargs=0 PostItClear :call PostItClear()
+
 # export def Map(mapcmd: string,  lhs: string, rhs: string)
 
 utils.Map('nnoremap', '<Leader>l', ':call g:LookupWord()<CR>')
