@@ -63,8 +63,8 @@ def g:LookupWord()
   endif
 enddef
 
+hi PostIt guifg=black guibg=yellow
 if prop_type_get('text_prop_postit') == {}
-  hi PostIt guifg=black guibg=yellow
   prop_type_add('text_prop_postit', {
     highlight: 'PostIt'
   })
@@ -80,11 +80,14 @@ def PostIt(text: string)
   })
 enddef
 
-export def PostItClear()
+export def PostItRemove()
     prop_clear(line("."))
 enddef
+
 command! -nargs=* PostItAdd :call PostIt('<args>')
-command! -nargs=0 PostItClear :call PostItClear()
+command! -nargs=0 PostItRemove :call PostItRemove()
+utils.Map('nnoremap', '<Leader>p', ':PostItAdd ')
+utils.Map('nnoremap', '<Leader>P', ':PostItRemove<CR>')
 
 # export def Map(mapcmd: string,  lhs: string, rhs: string)
 
