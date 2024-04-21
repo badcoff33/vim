@@ -102,7 +102,7 @@ export def FilterMenu(
   var pos_top = ((&lines - height) / 2) - 1
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
-    highlight: "StatusLine",
+    highlight: "Normal",
     line: pos_top,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
@@ -111,10 +111,10 @@ export def FilterMenu(
     drag: 0,
     wrap: 1,
     cursorline: false,
-    padding: [0, 0, 0, 0],
+    padding: [1, 1, 1, 1],
     border: [1, 1, 1, 1],
-    borderchars: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    borderhighlight: ['StatusLine', 'StatusLineNC', 'StatusLineNC', 'StatusLineNC'],
+    borderchars: ['-', '|', '-', '|', '┌', '┐', '┘', '└'],
+    borderhighlight: ['Normal', 'Normal', 'Normal', 'Normal'],
     mapping: 0,
     filter: (id, key) => {
       if key == "\<esc>"
@@ -169,5 +169,5 @@ export def FilterMenu(
     }
   })
 
-  win_execute(winid, "setl number cursorline cursorlineopt=number")
+  win_execute(winid, "setl nonumber cursorline cursorlineopt=line")
 enddef
