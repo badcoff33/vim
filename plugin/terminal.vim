@@ -1,7 +1,5 @@
 vim9script
 
-import autoload "utils.vim"
-
 def g:NewTermHere()
   var save_cwd = getcwd()
 
@@ -57,8 +55,8 @@ augroup GroupTerminal
   au TerminalOpen * nnoremap <buffer> <silent> <C-CR>      :execute b:line .. ",$ write! $TEMP/term.log"<CR><C-w>:cfile $TEMP/term.log<CR>
 augroup END
 
-utils.Map('nnoremap', '<Leader>T', ':PopupTermHere<CR>')
-utils.Map('nnoremap', '<Leader>X', ':call g:Execute(input("command: "))<CR>')
+nnoremap <Leader>T :PopupTermHere<CR>
+nnoremap <Leader>X :call g:Execute(input("command: "))<CR>
 
 command! -nargs=* Execute  g:Execute('<args>')
 command! -nargs=0 PopupTermHere  g:PopupTermHere()

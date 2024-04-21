@@ -1,6 +1,5 @@
 vim9script
 import autoload 'filter_menu.vim'
-import autoload 'utils.vim'
 
 # filter and open buffers
 def g:SelectBuf()
@@ -50,9 +49,9 @@ def g:SelectFiles()
   })
 enddef
 
-utils.Map('nnoremap', '<Leader>1', '<Cmd>call SelectBuf()<CR>')
-utils.Map('nnoremap', '<Leader>2', '<Cmd>call SelectTags()<CR>')
-utils.Map('nnoremap', '<Leader>3', '<Cmd>call SelectFiles()<CR>')
+nnoremap <Leader>1 <Cmd>call SelectBuf()<CR>
+nnoremap <Leader>2 <Cmd>call SelectTags()<CR>
+nnoremap <Leader>3 <Cmd>call SelectFiles()<CR>
 
 
 defcompile

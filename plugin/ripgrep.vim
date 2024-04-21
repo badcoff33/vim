@@ -7,7 +7,6 @@ if !executable("rg")
 endif
 
 import autoload "run.vim"
-import autoload "utils.vim"
 
 g:rg_excludes = get(g:, "rg_excludes", [])
 g:rg_paths = get(g:, "rg_paths", ["."])
@@ -93,20 +92,6 @@ command!                -nargs=0 RgConfig call g:RgConfig()
 command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files " .. g:rg_find_files_options .. " " .. g:RgGlobSwitch('<args>'), name: "RgFiles"})
 command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
 
-utils.Map(
-  'nnoremap',
-  '<Leader>F',
-  ':RgFiles ** .<Left><Left><Left>'
-)
-
-utils.MapExpr(
-  'nnoremap',
-  '<Leader>R',
-  'join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), g:RgPaths()], " ")'
-)
-
-utils.Map(
-  'nmap',
-  '<Leader>r',
-  '<Leader>R<CR>'
-)
+nnoremap <Leader>F :RgFiles ** .<Left><Left><Left>
+nnoremap <expr> <Leader>R join([":Rg" g:RgExcludes() g:RgIncludes() g:RgPattern() g:RgPaths()] " ")
+nmap <Leader>r <Leader>R<CR>
