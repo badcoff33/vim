@@ -38,6 +38,20 @@ export def Open(text: string, t: number = 3000, hl: string = 'User1'): number
   return winid
 enddef
 
+export def Resize()
+  if !exists('g:news_winlist')
+    return
+  endif
+  for w in g:news_winlist
+    echo "1"
+    popup_move(w, {
+      pos: g:popnews_bottom_left ? "botleft" : "botright",
+      col: g:popnews_bottom_left ? 2 : &columns,
+      line: &lines - 2,
+    })
+  endfor
+enddef
+
 export def Close(winid: number)
   var i: number
   var l: number # line of popup to be removed
@@ -66,7 +80,11 @@ def NewsCB(winid: number, result: number)
   for w in g:news_winlist
     ll = popup_getpos(w)['line']
     if ll < l
-      popup_move(w, {line: ll + 1})
+      popup_move(w, {
+        line: ll + 1,
+        pos: g:popnews_bottom_left ? "botleft" : "botright",
+        col: g:popnews_bottom_left ? 2 : &columns
+      })
     endif
   endfor
 enddef
