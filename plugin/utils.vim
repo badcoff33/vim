@@ -46,7 +46,7 @@ if filereadable(".vimrc")
 endif
 
 # nice presentation of v:errors, filled by assert functions
-command! -nargs=0 AssReport for e in v:errors | echo e | endfor
+command! -nargs=0 PrintVimErrors for e in v:errors | echo e | endfor
 
 def g:LookupWord()
   var size: number
