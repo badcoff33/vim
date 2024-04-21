@@ -23,5 +23,4 @@ augroup END
 
 command! -complete=file -nargs=* Make MakeStart(<q-args>)
 
-utils.Map('nnoremap', '<Leader>m', ':<C-u>Make<Space><Up>')
-
+utils.Map('nnoremap', '<Leader>m', ':<C-u>Make<Up>')
