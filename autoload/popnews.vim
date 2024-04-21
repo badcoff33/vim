@@ -2,13 +2,14 @@ vim9script
 # autoload file
 
 g:news_winlist  = []
+g:popnews_bottom_left = false
 
-# export def Test_olp()
-#   News("1", 5000)
-#   News("22", 13000)
-#   News("333", 15000, "Search")
-#   News("4444", 12000)
-# enddef
+export def Test_olp()
+  Open("1", 5000)
+  Open("22", 13000)
+  Open("333", 15000, "Search")
+  Open("4444", 12000)
+enddef
 
 # text of type string is the thing to show in popup
 # returns the window id of the created popup
@@ -16,7 +17,8 @@ export def Open(text: string, t: number = 3000, hl: string = 'User1'): number
   var ll: number
   var winid: number
   var winopts = {
-    col: 2,
+    pos: g:popnews_bottom_left ? "botleft" : "botright",
+    col: g:popnews_bottom_left ? 2 : &columns,
     line: &lines - 2,
     padding: [0, 2, 0, 2],
     minwidth: len(text),
@@ -34,6 +36,20 @@ export def Open(text: string, t: number = 3000, hl: string = 'User1'): number
   winid = popup_create(text, winopts)
   add(g:news_winlist, winid)
   return winid
+enddef
+
+export def Resize()
+  if !exists('g:news_winlist')
+    return
+  endif
+  for w in g:news_winlist
+    echo "1"
+    popup_move(w, {
+      pos: g:popnews_bottom_left ? "botleft" : "botright",
+      col: g:popnews_bottom_left ? 2 : &columns,
+      line: &lines - 2,
+    })
+  endfor
 enddef
 
 export def Close(winid: number)
@@ -64,7 +80,11 @@ def NewsCB(winid: number, result: number)
   for w in g:news_winlist
     ll = popup_getpos(w)['line']
     if ll < l
-      popup_move(w, {line: ll + 1})
+      popup_move(w, {
+        line: ll + 1,
+        pos: g:popnews_bottom_left ? "botleft" : "botright",
+        col: g:popnews_bottom_left ? 2 : &columns
+      })
     endif
   endfor
 enddef

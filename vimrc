@@ -96,8 +96,7 @@ execute 'set undodir=' .. getenv('TEMP')
 " Insert mode completion
 set complete=.,w
 set noshowfulltag
-set completeopt=menu
-
+set completeopt=menu,longest
 set pumheight=7
 
 " Command line completion
@@ -106,6 +105,9 @@ set wildoptions=pum,tagfile
 set wildmode=full:lastused
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
+set wildcharm=<Tab>
+cmap <C-n> <Tab>
+
 " How to handle search for tags
 set tagcase=match
 
@@ -119,10 +121,6 @@ endif
 " expand abbrevs
 imap <C-Space> <C-]>
 cnoremap <C-Space> <C-]>
-
-set wildcharm=<Tab>
-" works with 'wildcharm'
-cmap <C-N> <Tab>
 
 " close special windows
 nnoremap <Esc> <Cmd>helpclose<CR><Cmd>cclose<CR><C-w>z
@@ -140,12 +138,11 @@ inoremap <C-Del> <C-o>de
 cnoremap <C-BS> <C-w>
 cnoremap <C-Del> <C-Right><C-w>
 nnoremap <C-CR> "*yiw
-" b/c most laptop keyboards suck
-nnoremap <A-CR> "*yiW
-xnoremap <C-CR> "*y
-nnoremap <S-CR> "*p
-inoremap <S-CR> <C-o>"*p
-nnoremap <S-CR> "*p
+" yank/paste clipoard: b/c most laptop keyboards suck
+vnoremap <C-CR> "*y
+nnoremap <C-CR> viw"*y
+nnoremap <A-CR> "*P
+cnoremap <A-CR> <C-r>*
 
 " By every next or prev match, expand fold
 nnoremap n nzv

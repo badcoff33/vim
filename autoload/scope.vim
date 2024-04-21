@@ -3,6 +3,26 @@ vim9script
 #
 # Description:
 # Maintainer:    markus prepens (markus dot prepens at gmail dot com)
+#
+# Add something like this in your vimrc to indicate the scope with a popup
+# banner in current window. Add function scope#GetScope() to the 'statusline'
+# option for a less obstrusive way to indicate current scope.
+#
+# augroup GroupScope
+#   au!
+#   # add supported filetypes
+#   au CursorHold *.vim call scope#PopupScope()
+#   au CursorHold *.c,*.h call scope#PopupScope()
+#   au CursorHold *.py call scope#PopupScope()
+#   au CursorHold *.markdown,*.md,*.txt call scope#PopupScope()
+#   # add supported filetypes
+#   au BufEnter *.vim nnoremap <buffer> <LocalLeader>? <Cmd>call scope#PopupScope(v:true)<CR>
+#   au BufEnter *.c,*.h nnoremap <buffer> <LocalLeader>? <Cmd>call scope#PopupScope(v:true)<CR>
+#   au BufEnter *.py nnoremap <buffer> <LocalLeader>? <Cmd>call scope#PopupScope(v:true)<CR>
+#   au BufEnter *.bat,*.cmd nnoremap <buffer> <LocalLeader>? <Cmd>call scope#PopupScope(v:true)<CR>
+#   au BufEnter *.markdown nnoremap <buffer> <LocalLeader>? <Cmd>call scope#PopupScope(v:true)<CR>
+#   au BufEnter *.md,*.txt nnoremap <buffer> <LocalLeader>? <Cmd>call scope#PopupScope(v:true)<CR>
+# augroup END
 
 g:scope_prev_text = ""
 g:scope_prev_line = 1
@@ -17,7 +37,7 @@ def DisplayScope(text: string)
     line: rel_lin,
     col: rel_col,
     minwidth: width - pad,
-    highlight: 'User1',
+    highlight: 'CursorLine',
     padding: [0, 0, 0, pad],
     time: 3000 }
   popup_create(text, options)
@@ -61,7 +81,7 @@ enddef
 # string can be used by 'statusline'. Recommended way to add new parser
 # functions is to add it in this file. Most important is that the function
 # ScopeParser&ft exists.
-def GetScope(): string
+export def GetScope(): string
   var parser_fname = 'scope#GetScope' .. toupper(&ft[0]) .. &ft[1 : ]
   try
     var FuncRef = function(parser_fname)

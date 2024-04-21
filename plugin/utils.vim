@@ -2,7 +2,6 @@ vim9script
 
 import autoload "popnews.vim"
 import autoload "quickfix.vim"
-import autoload "utils.vim"
 
 g:last_search = ""
 g:user_vimrc = expand(g:vim_home .. '/pack/user/start/' .. getenv('USERNAME') .. '/plugin/user.vim')
@@ -58,6 +57,7 @@ def g:LookupWord()
   if size > 0
     execute 'botright lopen ' .. min([size, &lines / 3])
     nnoremap <buffer> <Esc> <C-w>p<Cmd>lclose<CR>
+    nnoremap <buffer> q <C-w>p<Cmd>lclose<CR>
     nnoremap <buffer> j <Cmd>lnext<CR>zz<C-w>p
     nnoremap <buffer> k <Cmd>lprevious<CR>zz<C-w>p
   endif
@@ -70,36 +70,47 @@ if prop_type_get('text_prop_postit') == {}
   })
 endif
 
-def PostIt(text: string)
-  prop_add(line('.'), 0, {
-    bufnr: bufnr('%'),
-    type: "text_prop_postit",
-    text: 'note: ' .. text,
-    text_align: 'below',
-    text_padding_left: col('.')
-  })
+def PostIt()
+  var text: string
+  var prompt: string
+  prompt = "POSTIT "
+  while true
+    text = input("Post it (press <CR> only to leave): ")
+    if text == ""
+      break
+    endif
+    prop_add(line('.'), 0, {
+      bufnr: bufnr('%'),
+      type: "text_prop_postit",
+      text: prompt .. text,
+      text_align: 'below',
+      text_padding_left: col('.')
+    })
+    prompt = substitute(prompt, ".", " ", "g")
+  endwhile
 enddef
 
 export def PostItRemove()
     prop_clear(line("."))
 enddef
 
-command! -nargs=* PostItAdd :call PostIt('<args>')
+command! -nargs=0 PostItAdd :call PostIt()
 command! -nargs=0 PostItRemove :call PostItRemove()
-utils.Map('nnoremap', '<Leader>p', ':PostItAdd ')
-utils.Map('nnoremap', '<Leader>P', ':PostItRemove<CR>')
 
-# export def Map(mapcmd: string,  lhs: string, rhs: string)
-
-utils.Map('nnoremap', '<Leader>l', ':call g:LookupWord()<CR>')
-utils.Map('nnoremap', '<Leader>/', ':call ForwardSlashToBackward()<CR>')
-utils.Map('nnoremap', '<Leader>\', ':call BackwardSlashToForward()<CR>')
-utils.Map('nnoremap', '<Leader>?', '<Cmd>call popnews#PopupFiletypeHelp()<CR>')
-utils.Map('nnoremap', '<Leader>q', ':call quickfix#ToggleQuickfix()<CR>')
-
-utils.Map('nnoremap', '<Leader>vv', ':tabedit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>')
-utils.Map('nnoremap', '<Leader>vu', ':tabedit <C-r>=g:user_vimrc<CR><CR>')
-utils.Map('nnoremap', '<Leader>vf', ':tabedit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>')
-utils.Map('nnoremap', '<Leader>vc', ':tabedit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>')
+if !mapcheck("<Leader>p")
+  nnoremap <Leader>vv :tabedit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
+  nnoremap <Leader>vu :tabedit <C-r>=g:user_vimrc<CR><CR>
+  nnoremap <Leader>vf :tabedit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
+  nnoremap <Leader>vc :tabedit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
+endif
+if !mapcheck("<Leader>p")
+  nnoremap <Leader>p :PostItAdd<CR>
+  nnoremap <Leader>P :PostItRemove<CR>
+endif
+nnoremap <Leader>l :call g:LookupWord()<CR>
+nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
+nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
+nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>
+nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
 
 defcompile

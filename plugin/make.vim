@@ -2,7 +2,6 @@ vim9script
 # Vim plugin interface
 
 import autoload "run.vim"
-import autoload "utils.vim"
 import autoload "torchlight.vim"
 
 def MakeCallback()
@@ -23,5 +22,4 @@ augroup END
 
 command! -complete=file -nargs=* Make MakeStart(<q-args>)
 
-utils.Map('nnoremap', '<Leader>m', ':<C-u>Make<Space><Up>')
-
+nnoremap <Leader>m :<C-u>Make<Up>
