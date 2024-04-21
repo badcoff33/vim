@@ -30,9 +30,8 @@ endfunction
 
 " Description: Make the actual window more obvious by temporary turn the
 " option 'cursorline' on.
-function! visuals#enable_blinky(...)
-  let g:blinky_stick = ((a:0 == 1) && (a:1 == "stick")) ? v:true : v:false
-  augroup StickyCursorline
+function! visuals#enable_blinky()
+  augroup BlinkyGroup
     autocmd!
     " autocmd WinLeave             * call visuals#turn_cursorline_off()
     autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
@@ -42,8 +41,8 @@ endfunction
 " Description: Stop function and release all resources
 function! visuals#disable_blinky()
   setlocal nocursorline
-  augroup StickyCursorline
-    au! StickyCursorline
+  augroup BlinkyGroup
+    au! BlinkyGroup
   augroup END
 endfunction
 
@@ -55,12 +54,11 @@ function! visuals#turn_cursorline_on()
   elseif &ft == "netrw"
     return
   elseif (&buftype == "") && !empty(bufname("%"))
-    if g:blinky_stick == v:false
-      if getwinvar(winnr(), '&cursorline') == v:false
-        call setwinvar(winnr(), '&cursorline', v:true)
-        let g:blinky_list = add(g:blinky_list, winnr())
-        let tid = timer_start(1000, function("visuals#turn_cursorline_off"))
-      endif
+    if getwinvar(winnr(), '&cursorline') == v:false
+      call setwinvar(winnr(), '&cursorline', v:true)
+      let g:blinky_list = add(g:blinky_list, winnr())
+      let tid = timer_start(1000, function("visuals#turn_cursorline_off"))
+      echo g:blinky_list
     endif
   end
 endfunction
@@ -82,10 +80,10 @@ function! visuals#info_hl()
     let name = synIDattr(syn_id_trans, "name")
     let fg = synIDattr(syn_id_trans, "fg")
     let bg = synIDattr(syn_id_trans, "bg")
-    echo printf("%s%s%s",
-          \ empty(name) ? "" : "name:" .. name,
-          \ empty(fg) ? "" : " foreground:" .. fg,
-          \ empty(bg) ? "" : " background:" .. bg)
+    echo printf("name: %s\nforeground: %s\nbackground: %s",
+          \ empty(name) ? "NONE" : name,
+          \ empty(fg) ? "NONE" : fg,
+          \ empty(bg) ? "NONE" : bg)
   endfor
 endfunction
 
