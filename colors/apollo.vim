@@ -20,7 +20,7 @@ var white = "#FFFFFF"
 var black = "#000000"
 var bg    = ["#132443", "#263154", "#344468", "#48506F"]
 var moon  = ["#505868", "#9098A8", "#C0CBE8", "#E0E8FE"]
-var green = ["#1D683C", "#22A358", "#27C168", "#27F070"]
+var green = ["#1D983C", "#22C358", "#27D168", "#27F070"]
 var blue  = ["#2C609F", "#3068B8", "#4090D8", "#70B0F8"]
 var red   = ["#B82042", "#E84070"]
 var sun   = "#D0DF40"
@@ -55,7 +55,7 @@ execute "hi QuickFixLine" Fg(blue[2]) Bg("bg") Attr("bold")
 execute "hi Search" Fg(moon[3]) Bg(bg[3]) Attr("NONE")
 execute "hi StatusLine" Fg(white) Bg(blue[2]) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(moon[3]) Bg(bg[2]) Attr("NONE") Cterm("NONE")
-execute "hi Terminal" Fg(green[3]) Bg(green[0])
+execute "hi Terminal" Fg(green[3]) Bg(bg[2])
 execute "hi Title" Fg(green[3])
 execute "hi User1" Fg(white) Bg(blue[1]) Attr("NONE")
 execute "hi User2" Fg(black) Bg(sun)
