@@ -93,5 +93,5 @@ command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files " .. g:r
 command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
 
 nnoremap <Leader>F :RgFiles ** .<Left><Left><Left>
-nnoremap <expr> <Leader>R join([":Rg" g:RgExcludes() g:RgIncludes() g:RgPattern() g:RgPaths()] " ")
-nmap <Leader>r <Leader>R<CR>
+nnoremap <expr> <Leader>R join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), g:RgPaths()], " ")
+nmap <silent> <Leader>r <Leader>R<CR>
