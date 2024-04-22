@@ -58,7 +58,6 @@ function! visuals#turn_cursorline_on()
       call setwinvar(winnr(), '&cursorline', v:true)
       let g:blinky_list = add(g:blinky_list, winnr())
       let tid = timer_start(1000, function("visuals#turn_cursorline_off"))
-      echo g:blinky_list
     endif
   end
 endfunction
