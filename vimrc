@@ -34,7 +34,7 @@ set notimeout
 set nottimeout
 set novisualbell
 set nowrap
-set paste
+set nopaste
 set report=0
 set updatetime=300
 set ruler
@@ -132,15 +132,15 @@ nnoremap <A-Left> <Home>
 nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
-" Alternative keys to delete words
+" Alternative keys to Delete words
 inoremap <C-BS> <C-o>db
 inoremap <C-Del> <C-o>de
 cnoremap <C-BS> <C-w>
 cnoremap <C-Del> <C-Right><C-w>
-nnoremap <C-CR> "*yiw
+nnoremap <C-CR> "*yiw 
 " yank/paste clipoard: b/c most laptop keyboards suck
 vnoremap <C-CR> "*y
-nnoremap <C-CR> viw"*y
+nnoremap <C-CR> "*yiw
 nnoremap <A-CR> "*P
 cnoremap <A-CR> <C-r>*
 
@@ -176,29 +176,25 @@ vnoremap <A-e> :move '<-2<CR>==gv=gv
 nnoremap <A-y> :move .+1<CR>==
 vnoremap <A-y> :move '>+1<CR>==gv=gv
 
-" Abbreviations
-
-" Kill whitespace after abbrev expansion
-" Example:  iabbrev () ()<Left><C-r>=AbbrevKiller(getchar(0))<CR>
-let AbbrevKiller = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
-
-cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep')  ? 'silent vimgrep'  : 'vimgrep'
-cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
-cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
-
-" Expand C-w by some tab page commands
-nnoremap <C-w>tn <Cmd>tabnew<CR>
-nnoremap <C-w>tc <Cmd>tabclose<CR>
-nnoremap <C-w>to <Cmd>tabonly<CR>
-
 " Surfing the quickfix matches
 nnoremap <C-j> :cnext<CR><Cmd>normal zz<CR>
 nnoremap <C-k> :cprevious<CR><Cmd>normal zz<CR>
+" Surfing the tag stack
+nnoremap <A-k> :tj <C-r><C-w><CR>zz
+nnoremap <A-j> <C-t>zz
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
 nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
 imap <C-l> <Esc><C-l>
+
+" Kill whitespace after abbrev expansion
+" Example:  iabbrev () ()<Left><C-r>=AbbrevKiller(getchar(0))<CR>
+let AbbrevKiller = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
+
+cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep') ? 'silent vimgrep ' .. expand('<cword>') .. ' **' : 'vimgrep'
+cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
+cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!
