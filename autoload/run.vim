@@ -9,13 +9,11 @@ g:run_hl_error  = get(g:, 'run_hl_error', 'ErrorMsg')
 
 def RemoveChannelFromDict(ch: string)
   var r: list<any>
-
   for e in g:run_dict
     if e.channel != ch
       add(r, e)
     endif
   endfor
-
   g:run_dict = r
 enddef
 
@@ -41,7 +39,6 @@ export def CloseCb(ch: channel)
   var errors = 0
   var warnings = 0
   var buflines: list<string>
-
   for d in g:run_dict
     if d.channel == ch_nr
       if has_key(d, "timer")
@@ -88,23 +85,18 @@ export def CloseCb(ch: channel)
         setlocal buftype=nofile nomodified readonly
         setpos(".", [b, lines + 1, 0, 0])
       endif
-
       execute "silent bwipe" d.bufnr
-
       try
         Callback = function(d.callback)
         Callback()
       catch /.*/
       endtry
-
       RemoveChannelFromDict(d.channel)
       break
     endif
   endfor
-
   # act like :make
   # silent doautocmd QuickFixCmdPost make
-
 enddef
 
 export def BackgroundErrorCb(ch: channel,  msg: string)
