@@ -14,11 +14,12 @@
 "             #error directive:
 "   Fatal error detected, aborting.
 
-set makeprg=ninja
+"set makeprg=ninja
 
 " multi-line
-set errorformat=%W\"%f\"\\,%l\ \ %tarning\ #%n-%m,%Z%m
-set errorformat+=%E\"%f\"\\,%l\ \ %trror\ #%n-%m,%Z%m
+set errorformat=%W\"%f\"%\\,%l\ \ Warning%m,%C\ %m,%-Z%m
+set errorformat+=%E\"%f\"%\\,%l\ \ Error%m,%C\ %m,%-Z%m
+set errorformat+=%E\"%f\"%\\,%l\ \ Fatal\ error%m,%C\ %m,%-Z%m
 
 " single-line
-set errorformat+=\"%f\"\\,%l\ \ %m
+"set errorformat+=\"%f\"\\,%l\ \ %m
