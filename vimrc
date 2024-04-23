@@ -176,7 +176,7 @@ vnoremap <A-e> :move '<-2<CR>==gv=gv
 nnoremap <A-y> :move .+1<CR>==
 vnoremap <A-y> :move '>+1<CR>==gv=gv
 
-" Abbreviations {{{
+" Abbreviations
 
 " Kill whitespace after abbrev expansion
 " Example:  iabbrev () ()<Left><C-r>=AbbrevKiller(getchar(0))<CR>
@@ -186,7 +186,10 @@ cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 
-" }}}
+" Expand C-w by some tab page commands
+nnoremap <C-w>tn <Cmd>tabnew<CR>
+nnoremap <C-w>tc <Cmd>tabclose<CR>
+nnoremap <C-w>to <Cmd>tabonly<CR>
 
 " Surfing the quickfix matches
 nnoremap <C-j> :cnext<CR><Cmd>normal zz<CR>
@@ -207,7 +210,7 @@ inoremap <C-s>] <C-o>b[<C-o>e<Right>]
 inoremap <C-s>} <C-o>b{<C-o>e<Right>}
 nmap <C-s> i<C-s>
 
-" Leader key mappings {{{
+" Leader key mappings
 let mapleader = " "
 let maplocalleader = "s"
 
@@ -217,31 +220,25 @@ vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
 
 nnoremap <Leader>b :buffer<Space>*
 nnoremap <Leader>f :find<Space>*
+nnoremap <Leader>t :tjump<Space>/
 nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>
 
 " Quick access on current buffer's directory
-nnoremap <Leader>. :edit <C-r>=AppendSep(expand("%:h"))<CR>
+nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
 cnoremap <expr> <C-r>. expand("%:h") .. expand("/")
-
-" Leader-t space
-nnoremap <Leader>tt <Cmd>tab split<CR>
-nnoremap <Leader>tn <Cmd>tabnew<CR>
-nnoremap <Leader>tc <Cmd>tabclose<CR>
 
 let g:ft_to_glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
 nnoremap <expr> <Leader>g ':silent vimgrep /' .. expand("<cword>") .. '/ ' .. AppendSep(expand("%:h")) .. LsFilter(&ft)
 
-" }}}
-
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
 command! -nargs=0 SC :set   ignorecase  smartcase
 
-augroup GroupVimrc " {{{
+augroup GroupVimrc
   autocmd!
   autocmd FocusLost * try | silent wall | catch /.*/ | endtry
-augroup END " }}}
+augroup END
 
 let g:term = &term
 syntax on
