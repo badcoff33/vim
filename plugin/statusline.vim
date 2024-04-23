@@ -33,19 +33,16 @@ enddef
 
 def g:BuildStatusline(): string
     var sl: string
-
     if exists("g:statusline_winid") && (win_getid() == g:statusline_winid)
         sl =  "%1* %{GetMode()} %*"
     endif
-
     sl = sl .. " %{GetSearchMode()}%Y%R "
     if v:versionlong >= 9001307
         sl = sl .. "%="
     endif
     sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t%m"
-    sl = sl .. "%= %1* %l:%c "
-    sl = sl .. "%{scope#GetScope()}%*"
-
+    sl = sl .. "%= %l:%c "
+    sl = sl .. "%1*%{scope#GetScope()}%*"
     return sl
 enddef
 

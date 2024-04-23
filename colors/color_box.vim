@@ -66,7 +66,7 @@ command! -nargs=0 Bright execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 command! -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
 
 execute "hi Bold" Gui("bold")
-execute "hi CurSearch" Fg(black) Bg(cyan_lt) Gui("bold")
+execute "hi CurSearch" Fg(black) Bg(orange_bg) Gui("NONE")
 execute "hi Cursor" Bg(black) Cterm("NONE")
 execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray_dk) Bg(gray_bg) Gui("bold")
