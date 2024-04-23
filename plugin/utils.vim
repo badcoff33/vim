@@ -98,10 +98,10 @@ command! -nargs=0 PostItAdd :call PostIt()
 command! -nargs=0 PostItRemove :call PostItRemove()
 
 if !mapcheck("<Leader>p")
-  nnoremap <Leader>vv :tabedit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
-  nnoremap <Leader>vu :tabedit <C-r>=g:user_vimrc<CR><CR>
-  nnoremap <Leader>vf :tabedit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
-  nnoremap <Leader>vc :tabedit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
+  nnoremap <Leader>vv :edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
+  nnoremap <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
+  nnoremap <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
+  nnoremap <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
 endif
 if !mapcheck("<Leader>p")
   nnoremap <Leader>p :PostItAdd<CR>
