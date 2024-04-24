@@ -4,7 +4,7 @@ import autoload "popnews.vim"
 
 g:run_dict = []
 g:run_be_verbose = false
-g:run_hl_normal = get(g:, 'run_hl_normal', 'User1')
+g:run_hl_normal = get(g:, 'run_hl_normal', 'PmenuSel')
 g:run_hl_error  = get(g:, 'run_hl_error', 'ErrorMsg')
 
 def RemoveChannelFromDict(ch: string)
@@ -81,9 +81,10 @@ export def CloseCb(ch: channel)
         lines = getbufinfo(b)[0].linecount
         execute "drop" d.name
         setlocal noreadonly
-        setline(lines + 1, ['# ' .. d.full_cmd] + getbufline(d.bufnr, 1, "$"))
+        setline(lines + 1, ['(' .. strftime("%T") .. ') ' .. d.full_cmd] + getbufline(d.bufnr, 1, "$"))
         setlocal buftype=nofile nomodified readonly
         setpos(".", [b, lines + 1, 0, 0])
+        normal zt
       endif
       execute "silent bwipe" d.bufnr
       try
@@ -169,29 +170,23 @@ enddef
 
 export def RunStart(dict: dict<any>): job
   var v_job: job
-
   if !has_key(dict, 'cmd') && (dict.cmd != "")
     echoerr "run.vim: key 'cmd' required"
     return null_job
   endif
-
   if g:run_be_verbose == true
     for k in keys(dict)
       echo "run dict:" k "=" dict[k]
     endfor
   endif
-
   ConditionalWriteAll(dict)
-
   # act like :make
   # silent doautocmd QuickFixCmdPre make
-
   if has_key(dict, "background") && (dict.background == true)
     v_job = StartBackground(dict)
   else
     v_job = StartBuffered(dict)
   endif
-
   return v_job
 enddef
 
@@ -199,23 +194,18 @@ enddef
 def StartBackground(dict: dict<any>): job
   var v_job: job
   var job_opts = {}
-
   job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
   job_opts.err_cb = function("run#BackgroundErrorCb")
   v_job = job_start("cmd /C " .. dict.cmd, job_opts)
-
   return v_job
 enddef
 
 def StartBuffered(dict: dict<any>): job
   var job_opts = {}
   var run_dict_entry = {}
-
   run_dict_entry.regexp = has_key(dict, "regexp") ? dict.regexp : &errorformat
-
   run_dict_entry.bufnr = bufadd(dict.cmd)
   setbufvar(run_dict_entry.bufnr, "&buftype", "nofile")
-
   job_opts.cwd = get(dict, "cwd", getcwd())
   job_opts.err_buf = run_dict_entry.bufnr
   job_opts.out_buf = run_dict_entry.bufnr
@@ -225,31 +215,55 @@ def StartBuffered(dict: dict<any>): job
   if has_key(dict, "show_err") && dict.show_err == true
     job_opts.err_cb = function("run#ErrorCb")
   endif
-
   run_dict_entry.full_cmd = dict.cmd
   run_dict_entry.short_cmd = split(dict.cmd, " ")[0]
   run_dict_entry.callback = get(dict, "callback", "")
   run_dict_entry.started = localtime()
   run_dict_entry.timer = timer_start(500, RunJobMonitoringCb, {repeat: -1})
   run_dict_entry.name = get(dict, "name", "quickfix")
-
   if has_key(dict, "no_popup") && (dict.no_popup == true)
     run_dict_entry.winid = 0
   else
     run_dict_entry.winid = popnews.Open(
       printf("%s %s %d lines", '____', run_dict_entry.short_cmd, 0),
       0, # permanent
-      'Pmenu'
+      g:run_hl_normal
     )
   endif
-
   run_dict_entry.job = job_start("cmd /C " .. dict.cmd, job_opts)
   run_dict_entry.channel = split(string(job_getchannel(run_dict_entry.job)), " ")[1]
-
   add(g:run_dict, run_dict_entry)
-
   return run_dict_entry.job
 enddef
+
+var complete_candidates = [
+  "term",   # terminate process forcedly (default)
+  "hup",    # CTRL_BREAK
+  "quit",   # CTRL_BREAK
+  "int",    # CTRL_C
+  "kill",   # terminate process forcedly
+  "Others", # CTRL_BREAK
+]
+
+def CompleteKillAll(arg_lead: string, cmd_line: string, cur_pos: number): string
+    var matching_keys: string
+    var candidates: list<string>
+    var filename: string
+    for k in sort(complete_candidates)
+        if match(k, arg_lead) >= 0
+            matching_keys = matching_keys .. k .. "\n"
+        endif
+    endfor
+    return matching_keys
+enddef
+
+export def KillAll(signal: string)
+  for j in job_info()
+    job_stop(j, signal)
+  endfor
+enddef
+
+command! -bar -complete=custom,CompleteKillAll -nargs=1 KillAll call KillAll("<args>")
 
 # Uncomment when testing
 defcompile
