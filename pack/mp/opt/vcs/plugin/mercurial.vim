@@ -18,7 +18,7 @@ def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): string
     var candidates: list<string>
     var filename: string
     candidates = GetCompleteCandidates()
-    for k in sort(candidates)
+    for k in candidates
         if match(k, arg_lead) >= 0
             matching_keys = matching_keys .. k .. "\n"
         endif
