@@ -132,12 +132,6 @@ nnoremap <A-Left> <Home>
 nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
-" Alternative keys to Delete words
-inoremap <C-BS> <C-o>db
-inoremap <C-Del> <C-o>de
-cnoremap <C-BS> <C-w>
-cnoremap <C-Del> <C-Right><C-w>
-nnoremap <C-CR> "*yiw 
 " yank/paste clipoard: b/c most laptop keyboards suck
 vnoremap <C-CR> "*y
 nnoremap <C-CR> "*yiw
@@ -180,7 +174,7 @@ vnoremap <A-y> :move '>+1<CR>==gv=gv
 nnoremap <C-j> :cnext<CR><Cmd>normal zz<CR>
 nnoremap <C-k> :cprevious<CR><Cmd>normal zz<CR>
 " Surfing the tag stack
-nnoremap <A-k> :tj <C-r><C-w><CR>zz
+nnoremap <A-k> g<C-]>zz
 nnoremap <A-j> <C-t>zz
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
@@ -195,6 +189,8 @@ let AbbrevKiller = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep') ? 'silent vimgrep ' .. expand('<cword>') .. ' **' : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
+cnoreabbrev <expr> T  (getcmdtype() ==# ':' && getcmdline() =~# '^T')  ? 'tjump'  : 'T'
+cnoreabbrev <expr> F  (getcmdtype() ==# ':' && getcmdline() =~# '^F')  ? 'find'  : 'F'
 
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!
@@ -215,8 +211,6 @@ nnoremap <Leader>s :%s/\V//gI<Left><Left><Left><Left>
 vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
 
 nnoremap <Leader>b :buffer<Space>*
-nnoremap <Leader>f :find<Space>*
-nnoremap <Leader>t :tjump<Space>/
 nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>
 
 " Quick access on current buffer's directory

@@ -17,9 +17,12 @@
 "set makeprg=ninja
 
 " multi-line
-set errorformat=%W\"%f\"%\\,%l\ \ Warning%m,%C\ %m,%-Z%m
-set errorformat+=%E\"%f\"%\\,%l\ \ Error%m,%C\ %m,%-Z%m
-set errorformat+=%E\"%f\"%\\,%l\ \ Fatal\ error%m,%C\ %m,%-Z%m
+" set errorformat=%W\"%f\"%\\,%l\ \ Warning%m,%C\ %m,%-Z%m
+" set errorformat+=%E\"%f\"%\\,%l\ \ Error%m,%C\ %m,%-Z%m
+" set errorformat+=%E\"%f\"%\\,%l\ \ Fatal\ error%m,%C\ %m,%-Z%m
 
+set errorformat=%W\"%f\"%\\,%l\ \ Warning%m,%-Z%m
+set errorformat+=%E\"%f\"%\\,%l\ \ Error%m,%-Z%m
+set errorformat+=%E\"%f\"%\\,%l\ \ Fatal\ error%m,%-Z%m
 " single-line
 "set errorformat+=\"%f\"\\,%l\ \ %m
