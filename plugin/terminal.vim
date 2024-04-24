@@ -20,7 +20,8 @@ def g:Execute(command = "")
     else
       execute ":" .. string(twinnr) .. "wincmd w"
     endif
-    term_sendkeys(tbufnr, ((mode() == "n") ? "i" : "") .. command .. "\<CR>" )
+    feedkeys(((mode() == "n") ? "i" : "") .. command .. "\<CR>" )
+    term_sendkeys(tbufnr, command .. "\<CR>")
   else
     news.Open('No terminal running -- Open terminal with command :terminal')
   endif
