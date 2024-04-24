@@ -27,6 +27,11 @@ g:RgPaths = () => join(g:rg_paths, " ")
 
 g:rg_dict = {}
 
+def g:RgPatternInput()
+  var pattern = len(expand("<cword>")) == 0 ? "STRING" : expand("<cword>")
+  execute join([":Rg", g:RgExcludes(), g:RgIncludes(), input("Pattern: ", pattern, "tag"), g:RgPaths()], " ")
+enddef
+
 def g:RgPrettyPrint()
     for e in getqflist({ "nr": "$", "all": 0 }).items
         var temp: list<number>
@@ -93,5 +98,5 @@ command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files " .. g:r
 command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
 
 nnoremap <Leader>F :RgFiles ** .<Left><Left><Left>
+nnoremap <Leader>r :call g:RgPatternInput()<CR>
 nnoremap <expr> <Leader>R join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), g:RgPaths()], " ")
-nmap <silent> <Leader>r <Leader>R<CR>
