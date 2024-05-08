@@ -15,8 +15,8 @@ g:colors_name = "color_box"
 var black     = "#000000"
 var white     = "#FFFFFF"
 
-var fg        = "#404040"
-var bg        = "#F8F8F8"
+var fg = "#404040"
+var bg = "#ECECEC"
 
 var blue_dk = "#2168AF"
 var blue    = "#4188C8"
@@ -49,14 +49,14 @@ var violet_lt = "#B880D7"
 var violet_bg = "#E0D0FF"
 
 var yellow_dk = "#938002"
-var yellow    = "#E8E038"
-var yellow_lt = "#F0F047"
+var yellow    = "#EFEC58"
+var yellow_lt = "#FFFF67"
 var yellow_bg = "#FFF890"
 
 var gray_dk = "#444447"
 var gray    = "#959598"
 var gray_lt = "#CBCBCF"
-var gray_bg = "#ECECEF"
+var gray_bg = "#E0E0E0"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
@@ -66,16 +66,13 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 
-command! -nargs=0 Bright execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
-command! -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
-
 execute "hi Bold" Gui("bold")
-execute "hi CurSearch" Fg(black) Bg(orange_bg) Gui("NONE")
+execute "hi CurSearch" Bg(white) Gui("underline")
 execute "hi Cursor" Bg(black) Cterm("NONE")
 execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray_dk) Bg(gray_bg) Gui("bold")
 execute "hi Folded" Fg(blue) Bg(gray_lt) Gui("NONE")
-execute "hi IncSearch" Fg(cyan_bg) Bg(cyan_dk) Gui("NONE")
+execute "hi IncSearch" Fg(white) Bg(cyan) Gui("NONE")
 execute "hi Italic" Gui("italic")
 execute "hi Label" Fg(black) Gui("bold")
 execute "hi LineNr" Fg(gray) Gui("bold")
@@ -86,10 +83,10 @@ execute "hi Pmenu" Fg(white) Bg(blue)
 execute "hi PmenuSbar" Fg(gray_bg) Bg(gray_lt)
 execute "hi PmenuSel" Fg(white) Bg(orange) Gui("NONE")
 execute "hi PmenuThumb" Fg(gray_dk) Bg(gray_dk)
-execute "hi Search" Bg(cyan_bg) Gui("NONE")
+execute "hi Search" Bg(white) Gui("NONE")
 execute "hi StatusLine" Fg(cyan_bg) Bg(gray_dk) Gui("NONE")
-execute "hi StatusLineNC" Fg(gray) Bg(gray_bg) Gui("NONE")
-execute "hi StatusLineTerm" Fg(white) Bg(red) Gui("bold")
+execute "hi StatusLineNC" Fg(black) Bg(gray_bg) Gui("NONE")
+execute "hi StatusLineTerm" Fg(white) Bg(blue) Gui("bold")
 execute "hi Terminal" Fg(fg) Bg(bg)
 execute "hi User1" Fg(white) Bg(gray_lt) Gui("NONE")
 execute "hi User2" Fg(blue_bg) Bg(blue_dk) Gui("italic")
@@ -155,8 +152,8 @@ execute "hi htmlH3" Fg(blue)    Gui("NONE")
 # Filetype Markdown
 
 execute "hi markdownCode" Fg(gray_dk) Bg(gray_lt)
-execute "hi markdownCode" Fg(blue) Gui("italic")
-execute "hi markdownCodeBlock" Fg(gray_dk)
+execute "hi markdownCode" Fg(green_dk) Gui("italic")
+execute "hi markdownCodeBlock" Fg(green_dk) Gui("italic")
 execute "hi rstEmphasis" Fg(gray_dk)
 execute "hi rstStrongEmphasis" Fg(gray_dk)  Gui("bold")
 

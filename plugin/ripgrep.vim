@@ -27,7 +27,7 @@ g:RgPattern = () =>  len(expand("<cword>")) == 0 ? "STRING" : '\b' .. expand("<c
 g:RgPaths = () => join(g:rg_paths, " ")
 
 def g:RgPatternInput()
-  var pattern = len(expand("<cword>")) == 0 ? "STRING" : expand("<cword>")
+  var pattern = len(expand("<cword>")) == 0 ? "STRING" : '<b' .. expand("<cword>") .. '\b'
   execute join( [":Rg", g:RgExcludes(), g:RgIncludes(), input("Pattern: ", pattern, "tag"), g:RgPaths() ], " ")
 enddef
 

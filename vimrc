@@ -88,7 +88,7 @@ set ignorecase smartcase
 set incsearch
 set hlsearch
 set magic
-set wrapscan
+set nowrapscan
 
 set undofile
 execute 'set undodir=' .. getenv('TEMP')
@@ -107,7 +107,8 @@ set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " Mapping for text/abbrev completions
 set wildcharm=<C-n>
-cnoremap <Tab> <C-]>
+cmap <Tab> <C-n>
+cmap <S-Space> <C-]>
 
 " How to handle search for tags
 set tagcase=match

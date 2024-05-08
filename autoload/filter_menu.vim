@@ -10,16 +10,7 @@ vim9script
 #            ["He was aware there were numerous wonders of this world including the",
 #             "unexplained creations of humankind that showed the wonder of our",
 #             "ingenuity. There are huge heads on Easter Island. There are the",
-#             "Egyptian pyramids. There's Stonehenge. But he now stood in front of a",
-#             "newly discovered monument that simply didn't make any sense and he",
-#             "wondered how he was ever going to be able to explain it.",
-#             "The wave crashed and hit the sandcastle head-on. The sandcastle began",
-#             "to melt under the waves force and as the wave receded, half the",
-#             "sandcastle was gone. The next wave hit, not quite as strong, but still",
-#             "managed to cover the remains of the sandcastle and take more of it",
-#             "away. The third wave, a big one, crashed over the sandcastle completely",
-#             "covering and engulfing it. When it receded, there was no trace the",
-#             "sandcastle ever existed and hours of hard work disappeared forever." ],
+#             "Egyptian pyramids. There's Stonehenge."]
 #            (res, key) => {
 #               echo res
 #            })
@@ -85,7 +76,7 @@ export def FilterMenu(
     items: list<any>,
     Callback: func(any, string))
   var prompt = ""
-  var hint = ">>> type to filter <<<"
+  var hint = "type to filter  "
   var items_dict: list<dict<any>>
   if len(items) < 1
     items_dict = [{text: ""}]
@@ -102,7 +93,7 @@ export def FilterMenu(
   var pos_top = ((&lines - height) / 2) - 1
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
-    highlight: "Normal",
+    highlight: "Search",
     line: pos_top,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
@@ -112,9 +103,6 @@ export def FilterMenu(
     wrap: 1,
     cursorline: false,
     padding: [1, 1, 1, 1],
-    border: [1, 1, 1, 1],
-    borderchars: ['-', '|', '-', '|', '┌', '┐', '┘', '└'],
-    borderhighlight: ['Normal', 'Normal', 'Normal', 'Normal'],
     mapping: 0,
     filter: (id, key) => {
       if key == "\<esc>"
@@ -122,13 +110,13 @@ export def FilterMenu(
       elseif ["\<cr>", "\<C-y>", "\<C-t>", "\<C-w>"]->index(key) > -1
           && filtered_items[0]->len() > 0
         popup_close(id, {idx: getcurpos(id)[1], key: key})
-      elseif key == "\<tab>" || key == "\<C-j>" || key == "\<Down>"
+      elseif key == "\<tab>" || key == "\<C-j>" || key == "\<Down>" || key == "\<C-n>"
         var ln = getcurpos(id)[1]
         win_execute(id, "normal! j")
         if ln == getcurpos(id)[1]
           win_execute(id, "normal! gg")
         endif
-      elseif key == "\<S-tab>" || key == "\<C-k>" || key == "\<Up>"
+      elseif key == "\<S-tab>" || key == "\<C-k>" || key == "\<Up>" || key == "\<C-p>"
         var ln = getcurpos(id)[1]
         win_execute(id, "normal! k")
         if ln == getcurpos(id)[1]
