@@ -13,7 +13,7 @@ enddef
 
 # text of type string is the thing to show in popup
 # returns the window id of the created popup
-export def Open(text: string, t: number = 3000, hl: string = 'User1'): number
+export def Open(text: string, t: number = 3000, hl: string = 'PmenuSel'): number
   var ll: number
   var winid: number
   var winopts = {

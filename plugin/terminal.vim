@@ -2,7 +2,7 @@ vim9script
 
 import autoload 'popnews.vim' as news
 
-def g:Execute(command = "")
+def g:RunTerminal()
   var term_tbufnrs = term_list()
   var tbufnr = 0
   for b in term_list()
@@ -20,8 +20,7 @@ def g:Execute(command = "")
     else
       execute ":" .. string(twinnr) .. "wincmd w"
     endif
-    feedkeys(((mode() == "n") ? "i" : "") .. command .. "\<CR>" )
-    term_sendkeys(tbufnr, command .. "\<CR>")
+    feedkeys((mode() == "n") ? "i" : "")
   else
     news.Open('No terminal running -- Open terminal with command :terminal')
   endif
@@ -33,6 +32,6 @@ augroup GroupTerminal
   au TerminalOpen * setlocal nonumber norelativenumber
 augroup END
 
-nnoremap <Leader>X :call g:Execute(input("command: "))<CR>
+nnoremap <Leader>x :call g:RunTerminal()<CR>
 
 defcompile

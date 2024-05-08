@@ -9,8 +9,11 @@ augroup END
 
 def g:CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): string
   var matching_keys: string
-  var candidates = [ "status", "commit", "diff", "branch" ]
+  var candidates = [ "status", "commit", "diff", "branch", "remote" ]
   var filename: string
+  for f in systemlist("git ls-files")
+    candidates = add(candidates, f)
+  endfor
   for f in systemlist("git ls-files")
     candidates = add(candidates, f)
   endfor
@@ -22,9 +25,14 @@ def g:CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): string
   return matching_keys
 enddef
 
-# Use single-quotes (') instead of double-quotes ("). They are treated as comments in Vim's command line.
-# Most common use case is the 'git commit -m ...' command
-command! -bar -complete=custom,g:CompleteGit -nargs=* Git run.RunStart({cmd: escape("git <args>", '\'), name: "GIT-Output"})
+def g:VcsGitExecute(git_command: string)
+  run.RunStart({
+    cmd: 'git ' .. git_command,
+    name: "GIT-Output"
+  })
+enddef
+
+command! -nargs=* -complete=custom,g:CompleteGit Git g:VcsGitExecute(<q-args>)
 
 cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  : 'G'
 

@@ -13,6 +13,7 @@ g:rg_paths = get(g:, "rg_paths", ["."])
 g:rg_option_all = get(g:, "rg_option_all", false)
 g:rg_find_files_options = get(g:, "rg_find_files_options", "-u")
 
+g:rg_dict = {}
 g:rg_glob_patterns = {
     c:      ['*.c', '*.h', '*.850', '*.s'],
     cpp:    ['*.c', '*.h', '*.850', '*.s', '*.cc', '*.hh'],
@@ -25,11 +26,9 @@ g:rg_glob_patterns = {
 g:RgPattern = () =>  len(expand("<cword>")) == 0 ? "STRING" : '\b' .. expand("<cword>") .. '\b'
 g:RgPaths = () => join(g:rg_paths, " ")
 
-g:rg_dict = {}
-
 def g:RgPatternInput()
   var pattern = len(expand("<cword>")) == 0 ? "STRING" : expand("<cword>")
-  execute join([":Rg", g:RgExcludes(), g:RgIncludes(), input("Pattern: ", pattern, "tag"), g:RgPaths()], " ")
+  execute join( [":Rg", g:RgExcludes(), g:RgIncludes(), input("Pattern: ", pattern, "tag"), g:RgPaths() ], " ")
 enddef
 
 def g:RgPrettyPrint()
@@ -94,9 +93,8 @@ set grepprg=rg\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 command!                -nargs=0 RgConfig call g:RgConfig()
-command! -complete=file -nargs=* RgFiles run.RunStart({cmd: "rg --files " .. g:rg_find_files_options .. " " .. g:RgGlobSwitch('<args>'), name: "RgFiles"})
-command! -complete=file -nargs=* Rg      run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
+command! -complete=file -nargs=* RgFindFiles run.RunStart({cmd: "rg --files " .. g:rg_find_files_options .. " " .. g:RgGlobSwitch('<args>'), name: "RgFiles"})
+command! -complete=file -nargs=* Rg run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
 
-nnoremap <Leader>F :RgFiles ** .<Left><Left><Left>
-nnoremap <Leader>r :call g:RgPatternInput()<CR>
-nnoremap <expr> <Leader>R join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), g:RgPaths()], " ")
+nnoremap <Leader><CR> :call g:RgPatternInput()<CR>
+nnoremap <expr> <Leader><Leader><CR> join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), g:RgPaths()], " ")

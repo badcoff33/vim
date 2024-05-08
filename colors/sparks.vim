@@ -17,14 +17,14 @@ g:colors_name = "sparks"
 var black    = "#000000"
 var white    = "#FFFFFF"
 
-var fg       = "#D0D0F0"
+var fg       = "#D8D8F0"
 var bg       = "#1A253F"
 
 var gui_bg   = "#002010"
 var gui_fg   = "#BBDDFF"
-var cl_bg    = "#000000"
+var cl_bg    = "#101D33"
 
-var blue_lt  = "#91AAD3"
+var blue_lt  = "#91CAEF"
 var blue     = "#819FC3"
 var blue_dk  = "#6380B0"
 
@@ -42,24 +42,24 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 # Basics
 
 execute "hi Bold" Attr("bold")
-execute "hi CurSearch" Fg(yellow) Bg(bg) Attr("bold,underline")
+execute "hi CurSearch" Fg(yellow) Bg(black) Attr("bold,underline")
 execute "hi Cursor" Bg(blue) Cterm("NONE")
 execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(white) Bg(red) Attr("bold")
 execute "hi Folded" Fg(blue) Bg(blue_lt) Attr("NONE")
 execute "hi IncSearch" Fg(black) Bg(yellow) Attr("NONE")
 execute "hi Italic" Attr("italic")
-execute "hi Label" Fg(black) Attr("bold")
+execute "hi Label" Fg(orange) Attr("bold")
 execute "hi LineNr" Fg(blue) Attr("NONE")
 execute "hi MatchParen" Fg(green) Bg("bg") Attr("bold")
-execute "hi NonText" Fg(blue) Bg("bg") Attr("NONE")
+execute "hi NonText" Fg(blue) Bg(cl_bg) Attr("NONE")
 execute "hi Normal" Fg(fg) Bg(bg) Attr("NONE")
 execute "hi Pmenu" Fg(gui_fg) Bg(gui_bg)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(gui_fg) Bg(gui_bg) Attr('inverse')
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
-execute "hi Search" Fg(yellow) Bg(bg) Attr("underline")
-execute "hi StatusLine" Fg(gui_fg) Bg(gui_bg) Attr("NONE")
+execute "hi Search" Fg(yellow) Bg(black) Attr("NONE")
+execute "hi StatusLine" Fg(yellow) Bg(gui_bg) Attr("NONE")
 execute "hi StatusLineNC" Fg(blue_dk) Bg(black) Attr("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(orange) Attr("bold")
 execute "hi TabLineFill" Fg(yellow) Bg(black) Attr('NONE')
@@ -68,7 +68,7 @@ execute "hi Terminal" Fg(blue_lt) Bg(gui_bg)
 execute "hi User1" Fg(black) Bg(green)
 execute "hi User2" Fg(black) Bg(blue)
 execute "hi VertSplit" Fg(gui_bg) Bg(gui_bg) Attr("NONE")
-execute "hi Visual" Fg(white) Bg(green)
+execute "hi Visual" Fg(black) Bg(green)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
@@ -86,7 +86,7 @@ execute "hi Constant" Fg(blue)
 execute "hi Directory" Fg(blue) Attr("bold,underline")
 execute "hi Error" Fg(orange) Bg("bg") Attr("underline")
 execute "hi ErrorMsg" Fg(orange) Bg(bg) Attr("bold")
-execute "hi Function" Fg(blue)
+execute "hi Function" Fg(blue_lt)
 execute "hi Identifier" Fg(blue_lt) Attr("NONE")
 execute "hi ModeMsg" Fg(yellow) Bg(bg) Attr("NONE")
 execute "hi MoreMsg" Fg(green) Bg(bg) Attr("NONE")
@@ -110,7 +110,7 @@ execute "hi qfLineNr" Fg(blue)
 
 # Filetype VIM
 
-execute "hi vimCommentTitle" Fg(blue) Attr("bold")
+execute "hi vimCommentTitle" Fg(yellow) Attr("bold")
 
 # Filetype C
 
@@ -127,9 +127,8 @@ execute "hi htmlH3" Fg(blue) Attr("NONE")
 
 # Filetype Markdown
 
-execute "hi markdownCode" Fg(blue) Bg(blue_lt)
-execute "hi markdownCode" Fg(blue) Attr("italic")
-execute "hi markdownCodeBlock" Fg(blue_dk)
+execute "hi markdownCode" Fg(green) Bg(cl_bg)
+execute "hi markdownCodeBlock" Fg(green) Bg(cl_bg)
 
 # Filetype ReStructuorangeText
 
@@ -138,7 +137,15 @@ execute "hi rstStrongEmphasis" Fg(blue_lt) Attr("bold")
 
 # Diffs
 
-execute "hi DiffChange" Fg(blue_lt) Bg(blue_dk)
-execute "hi DiffText" Fg(blue) Bg(blue_dk)
-execute "hi DiffDelete" Fg(orange) Bg(orange)
-execute "hi DiffAdd" Fg(blue_lt) Bg(blue_dk)
+execute "hi DiffChange" Fg(orange) Bg(black)
+execute "hi DiffText" Fg(blue) Bg(black)
+execute "hi DiffDelete" Fg(black) Bg(red)
+execute "hi DiffAdd" Fg(blue_lt) Bg(black)
+
+# Signify
+
+highlight! link SignifySignAdd DiffAdd
+highlight! link SignifySignDelete DiffDelete
+highlight! link SignifySignDeleteFirstLine DiffDelete
+highlight! link SignifySignChange DiffChange
+highlight! link SignifySignChangeDelete DiffChange

@@ -1,27 +1,25 @@
 " Vim plugin file
 
-inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : (InsertTab() == v:true ? "\<TAB>" : "\<C-n>")
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : (CompleteAllowed() ? "\<C-n>" : "\<TAB>" )
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-n>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 cnoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
-" Description: Returns forward and backward char at cursor position.
+" Description: Returns forward and backward chars at cursor position.
 " At lines end or start of line, a blank dictionary entry is returned.
-function! NeighborChars()
+function! s:NeighborChars()
   let col = col('.') - 1
   let line = getline('.')
   let length = len(line)
-  let d= {}
-  let d[0] = (col == 0) ? '' : line[col - 1]
-  let d[1]  = (col == length) ? '' : line[col]
+  let d = {}
+  let d['rearview'] = (col == 0) ? '' : line[col - 1]
+  let d['frontview']  = (col == length) ? '' : line[col]
   return d
 endfunction
 
-function! InsertTab()
-  let n = NeighborChars()
-  if n[0] == ''
-    return v:true
-  elseif n[0] =~? '\s'
+function! CompleteAllowed()
+  let chars = s:NeighborChars()
+  if (chars.rearview =~ '\w') && ((chars.frontview =~ '\s') || (chars.frontview =~ ''))
     return v:true
   else
     return v:false

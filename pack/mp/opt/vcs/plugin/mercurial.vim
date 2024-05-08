@@ -31,7 +31,14 @@ augroup GroupHg
     autocmd BufWinEnter Hg-Output setf hg
 augroup END
 
-command! -bar -complete=custom,CompleteHg -nargs=+ Hg run.RunStart({cmd: "hg <args>", name: "Hg-Output"})
+def g:VcsHgExecute(hg_command: string)
+  run.RunStart({
+    cmd: 'hg ' .. hg_command,
+    name: "HG-Output"
+  })
+enddef
+
+command! -nargs=* -complete=custom,g:CompleteHg Hg g:VcsHgExecute(<q-args>)
 
 # Uncomment when testing
 defcompile

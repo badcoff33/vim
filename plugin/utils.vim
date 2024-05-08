@@ -39,6 +39,7 @@ augroup GroupUtils " {{{
       call popnews.Open("local .vimrc available")
     endif
   }
+  autocmd SourcePost .vimrc popnews.Open('sourced ' .. expand('<afile>:t'))
 augroup END " }}}
 
 if filereadable(".vimrc")

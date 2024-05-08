@@ -33,9 +33,8 @@ endfunction
 
 nnoremap <expr> <C-ScrollWheelUp> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("+").height .. "<CR>"
 nnoremap <expr> <C-ScrollWheelDown> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("-").height .. "<CR>"
-
 tnoremap <LeftMouse> <C-w>N
-tmap <RightMouse> <C-w>N<RightMouse>
+tnoremap <RightMouse> <C-w>N
 
 nnoremenu 1.300 PopUp.-SEP3- <NOP>
 if has('win32') || has('win64')

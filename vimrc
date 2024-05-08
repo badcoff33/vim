@@ -105,8 +105,9 @@ set wildoptions=pum,tagfile
 set wildmode=full:lastused
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
-set wildcharm=<Tab>
-cmap <C-n> <Tab>
+" Mapping for text/abbrev completions
+set wildcharm=<C-n>
+cnoremap <Tab> <C-]>
 
 " How to handle search for tags
 set tagcase=match
@@ -117,10 +118,6 @@ set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 if &diff
     set columns=999 lines=999
 endif
-
-" expand abbrevs
-imap <C-Space> <C-]>
-cnoremap <C-Space> <C-]>
 
 " close special windows
 nnoremap <Esc> <Cmd>helpclose<CR><Cmd>cclose<CR><C-w>z
@@ -160,10 +157,6 @@ vnoremap <C-a> <C-a>gv
 vnoremap > >gv
 vnoremap < <gv
 
-" To map <Esc> to exit terminal-mode: >
-tnoremap <Esc>       <C-\><C-n>
-tnoremap <LeftMouse> <C-\><C-n>
-
 " Line bubbling, key mapping leant to scrolling keys C-e C-y
 nnoremap <A-e> :move .-2<CR>==
 vnoremap <A-e> :move '<-2<CR>==gv=gv
@@ -171,8 +164,10 @@ nnoremap <A-y> :move .+1<CR>==
 vnoremap <A-y> :move '>+1<CR>==gv=gv
 
 " Surfing the quickfix matches
-nnoremap <C-j> :cnext<CR><Cmd>normal zz<CR>
-nnoremap <C-k> :cprevious<CR><Cmd>normal zz<CR>
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprevious<CR>
+nnoremap + :cnext<CR>
+nnoremap - :cprevious<CR>
 " Surfing the tag stack
 nnoremap <A-k> g<C-]>zz
 nnoremap <A-j> <C-t>zz
@@ -191,6 +186,8 @@ cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? '
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 cnoreabbrev <expr> T  (getcmdtype() ==# ':' && getcmdline() =~# '^T')  ? 'tjump'  : 'T'
 cnoreabbrev <expr> F  (getcmdtype() ==# ':' && getcmdline() =~# '^F')  ? 'find'  : 'F'
+cnoreabbrev <expr> E  (getcmdtype() ==# ':' && getcmdline() =~# '^E')  ? ('edit ' .. expand("%:h") .. expand("/"))  : 'E'
+cnoreabbrev <expr> B  (getcmdtype() ==# ':' && getcmdline() =~# '^B')  ? 'buffer'  : 'B'
 
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!
@@ -210,16 +207,16 @@ let maplocalleader = "s"
 nnoremap <Leader>s :%s/\V//gI<Left><Left><Left><Left>
 vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
 
-nnoremap <Leader>b :buffer<Space>*
-nnoremap <Leader>x :tabnew<CR>:setlocal buftype=nofile spell<CR>:setf rst<CR>
+" Check indents
+nnoremap <Leader>. <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
 nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
 cnoremap <expr> <C-r>. expand("%:h") .. expand("/")
 
-let g:ft_to_glob = { 'c':'*.[ch]$', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
+let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
-nnoremap <expr> <Leader>g ':silent vimgrep /' .. expand("<cword>") .. '/ ' .. AppendSep(expand("%:h")) .. LsFilter(&ft)
+nnoremap <expr> <Leader>g ':vimgrep /' .. expand("<cword>") .. '/ ' .. AppendSep(expand("%:h")) .. LsFilter(&ft)
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase

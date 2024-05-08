@@ -41,7 +41,7 @@ def g:BuildStatusline(): string
         sl = sl .. "%="
     endif
     sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t%m"
-    sl = sl .. "%= %l:%c "
+    sl = sl .. "%= %l(%L):%c "
     sl = sl .. "%{scope#GetScope()}"
     return sl
 enddef

@@ -10,7 +10,7 @@ nnoremap <Leader>h <cmd>HlWordToggle<CR>
 augroup visuals
   au!
   autocmd WinEnter *  {
-    if &previewwindow && exist('&winfixbuf')
+    if &previewwindow && exists('&winfixbuf')
       setlocal winfixbuf
     endif
   }
