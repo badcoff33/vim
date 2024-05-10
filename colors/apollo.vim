@@ -21,7 +21,8 @@ var black    = "#000000"
 var bg       = ["#132443", "#263154", "#344468", "#48506F"]
 var fg       = ["#405868", "#8098A8", "#B0CBE8", "#D0E8FE"]
 var red      = "#F84070"
-var amber    = "#D0DF40"
+var amber    = "#C8BF40"
+var green_dk = "#27C148"
 var green    = "#27E158"
 var green_br = "#27FF60"
 var blue_dk  = "#3068B8"
@@ -40,7 +41,7 @@ execute "hi Cursor" Fg(black) Bg(amber)
 execute "hi CursorLine"  Bg(bg[1]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(green_br) Bg(bg[2]) Attr("bold")
 execute "hi ErrorMsg" Fg(white) Bg(red)
-execute "hi IncSearch" Fg(amber) Bg(bg[3]) Attr("underline") Cterm("NONE")
+execute "hi IncSearch" Fg(black) Bg(amber) Attr("underline") Cterm("NONE")
 execute "hi Italic" Fg(fg[1])  Attr("NONE")
 execute "hi LineNr" Fg(blue_br) Bg(bg[1])
 execute "hi LineNrAbove" Fg(bg[3]) Bg("bg") Attr("bold")
@@ -51,7 +52,7 @@ execute "hi NonText" Fg(blue_dk) Bg(bg[0])
 execute "hi Normal" Fg(fg[3]) Bg(bg[0]) Attr("NONE")
 execute "hi Pmenu" Fg(white) Bg(black) Attr("NONE")
 execute "hi PmenuSbar" Bg(bg[2])
-execute "hi PmenuSel" Fg(black) Bg(amber) Attr("NONE")
+execute "hi PmenuSel" Fg(black) Bg(green_dk) Attr("NONE")
 execute "hi PmenuThumb" Bg(green)
 execute "hi Question" Fg(green) Bg("bg")
 execute "hi QuickFixLine" Fg(blue) Bg("bg") Attr("bold")
@@ -66,7 +67,7 @@ execute "hi Title" Fg(green_br)
 execute "hi User1" Fg(white) Bg(blue) Attr("NONE")
 execute "hi User2" Fg(black) Bg(amber)
 execute "hi VertSplit" Fg(bg[1]) Bg(bg[1]) Attr("NONE")
-execute "hi Visual" Fg(black) Bg(green)
+execute "hi Visual" Fg(black) Bg(green_dk)
 execute "hi WarningMsg" Fg(white) Bg(blue_dk)
 execute "hi qfFileName" Fg(blue)
 execute "hi qfSeparator" Fg("fg")
@@ -84,15 +85,15 @@ highlight! link qfLineNr LineNr
 highlight! link CurSearch IncSearch
 
 # Code
-execute "hi Statement" Fg(green_br) Attr("NONE")
-execute "hi Conditional" Fg(green_br)  Attr("bold")
+execute "hi Statement" Fg(white) Attr("bold")
+execute "hi Conditional" Fg(white)  Attr("italic")
 execute "hi Type" Fg(blue_br)  Attr("NONE")
 execute "hi Structure" Fg(blue)
 execute "hi StorageClass" Fg(blue_br)
 execute "hi PreProc" Fg(white)  Attr("bold")
 execute "hi PreCondit" Fg(blue_br)  Attr("bold")
 execute "hi Define" Fg(blue)  Attr("NONE")
-execute "hi Comment" Fg(green)
+execute "hi Comment" Fg(green_dk)
 execute "hi Function" Fg(blue_br) Attr("bold")
 execute "hi Identifier" Fg(green_br)
 execute "hi Special" Fg(green)

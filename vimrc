@@ -88,7 +88,7 @@ set ignorecase smartcase
 set incsearch
 set hlsearch
 set magic
-set nowrapscan
+set wrapscan
 
 set undofile
 execute 'set undodir=' .. getenv('TEMP')
@@ -131,10 +131,11 @@ nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
 " yank/paste clipoard: b/c most laptop keyboards suck
-vnoremap <C-CR> "*y
-nnoremap <C-CR> "*yiw
-nnoremap <A-CR> "*P
-cnoremap <A-CR> <C-r>*
+vnoremap <Leader>y "*y
+nnoremap <Leader>y "*yiw
+nnoremap <Leader>y "*yiw
+nnoremap <Leader>Y "*yy
+nnoremap <Leader>p "*P
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -185,10 +186,7 @@ let AbbrevKiller = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep') ? 'silent vimgrep ' .. expand('<cword>') .. ' **' : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
-cnoreabbrev <expr> T  (getcmdtype() ==# ':' && getcmdline() =~# '^T')  ? 'tjump'  : 'T'
-cnoreabbrev <expr> F  (getcmdtype() ==# ':' && getcmdline() =~# '^F')  ? 'find'  : 'F'
 cnoreabbrev <expr> E  (getcmdtype() ==# ':' && getcmdline() =~# '^E')  ? ('edit ' .. expand("%:h") .. expand("/"))  : 'E'
-cnoreabbrev <expr> B  (getcmdtype() ==# ':' && getcmdline() =~# '^B')  ? 'buffer'  : 'B'
 
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!

@@ -41,5 +41,3 @@ if !exists('*LogError')
         endif
     endfunction
 endif
-
-
