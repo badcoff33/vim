@@ -12,10 +12,12 @@ def g:SelectBuf()
         exe $":tab sb {res.bufnr}"
       elseif key == "\<c-w>"
         exe $":bwipeout {res.bufnr}"
+        g:SelectBuf()
       else
         exe $":b {res.bufnr}"
       endif
     })
+  echo "EE"
 enddef
 
 var FileSig = (fn) => substitute(fn, "[\\\\/]", "", "g") # get rid of the slash problem

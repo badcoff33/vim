@@ -93,7 +93,7 @@ export def FilterMenu(
   var pos_top = ((&lines - height) / 2) - 1
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
-    highlight: "Search",
+    highlight: "Pmenu",
     line: pos_top,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
@@ -129,7 +129,6 @@ export def FilterMenu(
         elseif (key == "\<C-h>" || key == "\<bs>")
           if empty(prompt)
             popup_close(id, {idx: getcurpos(id)[1], key: key})
-            return true
           endif
           prompt = prompt->strcharpart(0, prompt->strchars() - 1)
           if empty(prompt)
@@ -142,7 +141,7 @@ export def FilterMenu(
           filtered_items = items_dict->matchfuzzypos(prompt, {key: "text"})
         endif
         popup_settext(id, Printify(filtered_items, []))
-        popup_setoptions(id, {title: $" {title}: {prompt ?? hint} "})
+        popup_setoptions(id, { title: $" {title}: {prompt ?? hint} ", minheight: len(filtered_items[0]), maxheight: len(filtered_items[0]), })
       endif
       return true
     },
