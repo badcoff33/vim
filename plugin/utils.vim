@@ -64,14 +64,27 @@ def g:LookupWord()
   endif
 enddef
 
-hi PostIt guifg=black guibg=yellow
+hi PostIt guifg=black guibg=yellow gui=italic
 if prop_type_get('text_prop_postit') == {}
   prop_type_add('text_prop_postit', {
     highlight: 'PostIt'
   })
 endif
 
-def PostIt()
+def PostIt(arg_text: string = "")
+  def PinText(t: string)
+    prop_add(line('.'), 0, {
+      bufnr: bufnr('%'),
+      type: "text_prop_postit",
+      text: t,
+      text_align: 'below',
+      text_padding_left: col('.')
+    })
+  enddef
+  if len(arg_text) > 0
+    PinText(arg_text)
+    return
+  endif
   var text: string
   var prompt: string
   prompt = "POSTIT "
@@ -80,13 +93,7 @@ def PostIt()
     if text == ""
       break
     endif
-    prop_add(line('.'), 0, {
-      bufnr: bufnr('%'),
-      type: "text_prop_postit",
-      text: prompt .. text,
-      text_align: 'below',
-      text_padding_left: col('.')
-    })
+    PinText(prompt .. text)
     prompt = substitute(prompt, ".", " ", "g")
   endwhile
 enddef
@@ -95,7 +102,7 @@ export def PostItRemove()
     prop_clear(line("."))
 enddef
 
-command! -nargs=0 PostItAdd :call PostIt()
+command! -nargs=* PostIt :call PostIt(<q-args>)
 command! -nargs=0 PostItRemove :call PostItRemove()
 
 if !mapcheck("<Leader>p")
