@@ -27,8 +27,8 @@ g:RgPattern = () =>  len(expand("<cword>")) == 0 ? "STRING" : '\b' .. expand("<c
 g:RgPaths = () => join(g:rg_paths, " ")
 
 def g:RgPatternInput()
-  var pattern = len(expand("<cword>")) == 0 ? "STRING" : '<b' .. expand("<cword>") .. '\b'
-  execute join( [":Rg", g:RgExcludes(), g:RgIncludes(), input("Pattern: ", pattern, "tag"), g:RgPaths() ], " ")
+  var pattern = len(expand("<cword>")) == 0 ? "STRING" : expand("<cword>")
+  execute join( [":Rg", g:RgExcludes(), g:RgIncludes(), input("Pattern (use '\\bPATTERN\\b' for exact matches'): ", pattern, "tag"), g:RgPaths() ], " ")
 enddef
 
 def g:RgPrettyPrint()
@@ -97,4 +97,4 @@ command! -complete=file -nargs=* RgFindFiles run.RunStart({cmd: "rg --files " ..
 command! -complete=file -nargs=* Rg run.RunStart({cmd: 'rg --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
 
 nnoremap <Leader><CR> :call g:RgPatternInput()<CR>
-nnoremap <expr> <Leader><Leader><CR> join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), g:RgPaths()], " ")
+nnoremap <silent> <Leader><Leader> :<C-r>=join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), g:RgPaths()], " ")<CR><CR>
