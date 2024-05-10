@@ -20,7 +20,7 @@ export def Open(text: string, t: number = 3000, hl: string = 'PmenuSel'): number
     pos: g:popnews_bottom_left ? "botleft" : "botright",
     col: g:popnews_bottom_left ? 2 : &columns,
     line: &lines - 2,
-    padding: [0, 2, 0, 2],
+    padding: [0, 2, 0, 8],
     minwidth: len(text),
     highlight: hl,
     tabpage: -1
