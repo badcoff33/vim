@@ -32,7 +32,7 @@ set norelativenumber numberwidth=2
 set noswapfile
 set notimeout
 set nottimeout
-set novisualbell
+set visualbell
 set nowrap
 set nopaste
 set report=0
