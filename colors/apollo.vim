@@ -37,7 +37,7 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 execute "hi Bold" Fg(fg[1])  Attr("bold")
-execute "hi Cursor" Fg(black) Bg(amber)
+execute "hi Cursor" Fg(black) Bg(white)
 execute "hi CursorLine"  Bg(bg[1]) Cterm("NONE")
 execute "hi CursorLineNr" Fg(green_br) Bg(bg[2]) Attr("bold")
 execute "hi ErrorMsg" Fg(white) Bg(red)
@@ -85,7 +85,7 @@ highlight! link qfLineNr LineNr
 highlight! link CurSearch IncSearch
 
 # Code
-execute "hi Statement" Fg(white) Attr("bold")
+execute "hi Statement" Fg(green_br) Attr("NONE")
 execute "hi Conditional" Fg(white)  Attr("italic")
 execute "hi Type" Fg(blue_br)  Attr("NONE")
 execute "hi Structure" Fg(blue)
