@@ -46,8 +46,17 @@ if filereadable(".vimrc")
   call popnews.Open("local .vimrc available")
 endif
 
-# nice presentation of v:errors, filled by assert functions
-command! -nargs=0 PrintVimErrors for e in v:errors | echo e | endfor
+# Description: Run a diff of current buffer content and file content.
+# Taken from Vims help file diff.txt:
+def g:ShowUnsavedChanges()
+  vert new
+  set bt=nofile
+  execute "read ++edit" bufname('#')
+  normal "0d_"
+  diffthis
+  wincmd p
+  diffthis
+enddef
 
 def g:LookupWord()
   var size: number
@@ -102,9 +111,6 @@ export def PostItRemove()
     prop_clear(line("."))
 enddef
 
-command! -nargs=* PostIt :call PostIt(<q-args>)
-command! -nargs=0 PostItRemove :call PostItRemove()
-
 if !mapcheck("<Leader>p")
   nnoremap <Leader>vv :edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
   nnoremap <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
@@ -120,5 +126,11 @@ nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
 nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>
 nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
+
+# nice presentation of v:errors, filled by assert functions
+command! -nargs=0 PrintVimErrors for e in v:errors | echo e | endfor
+command! -nargs=* PostIt g:PostIt(<q-args>)
+command! -nargs=0 PostItRemove g:PostItRemove()
+command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 
 defcompile
