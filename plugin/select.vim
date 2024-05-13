@@ -51,9 +51,8 @@ def g:SelectFiles()
   })
 enddef
 
-nnoremap <Leader>1 <Cmd>call SelectBuf()<CR>
-nnoremap <Leader>2 <Cmd>call SelectTags()<CR>
-nnoremap <Leader>3 <Cmd>call SelectFiles()<CR>
-
+nnoremap <Leader>b <Cmd>call SelectBuf()<CR>
+nnoremap <Leader>t <Cmd>call SelectTags()<CR>
+nnoremap <Leader>f <Cmd>call SelectFiles()<CR>
 
 defcompile
