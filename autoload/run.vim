@@ -36,8 +36,8 @@ export def CloseCb(ch: channel)
   var Callback: func
   var ch_nr = split(string(ch), " ")[1]
   var lines = 0
-  var errors = 0
-  var warnings = 0
+  var num_errors = 0
+  var num_warnings = 0
   var buflines: list<string>
   for d in g:run_dict
     if d.channel == ch_nr
@@ -57,23 +57,26 @@ export def CloseCb(ch: channel)
           })
           for e in getqflist({ "nr": "$", "all": 0 }).items
             lines = lines + 1
-            warnings += e.type ==? "w" ? 1 : 0
-            errors += e.type ==? "e" ? 1 : 0
+            num_warnings += e.type ==? "w" ? 1 : 0
+            num_errors += e.type ==? "e" ? 1 : 0
           endfor
         endif
         var done_str = printf("%s took %d sec | %d lines",
           d.short_cmd,
           localtime() - d.started,
           lines)
-        if warnings == 1
-          done_str ..= printf(" | %d warning", warnings)
-        elseif warnings > 1
-          done_str ..= printf(" | %d warnings", warnings)
-        endif
-        if errors == 1
-          done_str ..= printf(" | %d error", errors)
-        elseif errors > 1
-          done_str ..= printf(" | %d errors", errors)
+        if (num_warnings + num_errors) > 0
+          cfirst
+          if num_warnings == 1
+            done_str ..= printf(" | %d warning", num_warnings)
+          elseif num_warnings > 1
+            done_str ..= printf(" | %d num_warnings", num_warnings)
+          endif
+          if num_errors == 1
+            done_str ..= printf(" | %d error", num_errors)
+          elseif num_errors > 1
+            done_str ..= printf(" | %d num_errors", num_errors)
+          endif
         endif
         popnews.Open(done_str, 4000, g:run_hl_normal)
       else
@@ -132,7 +135,9 @@ def ConditionalWriteAll(dict: dict<any>)
       endtry
 enddef
 
-var animations = ["-___", "_-__", "__-_", "___-", "__-_", "_-__"]
+# var animations = ["-___", "_-__", "__-_", "___-", "__-_", "_-__"]
+# var animations = [ "|*   |", "| *  |", "|  * |", "|   *|", "|  * |", "| *  |" ]
+var animations = [ ">  >  >  ",  " >  >  > ",  "  >  >  >",  " >  >  > " ]
 var animation_index = 0
 
 def GetAnimationStr(): string
@@ -227,7 +232,11 @@ def StartBuffered(dict: dict<any>): job
     run_dict_entry.winid = 0
   else
     run_dict_entry.winid = popnews.Open(
-      printf("%s %s %d lines", '____', run_dict_entry.short_cmd, 0),
+      printf(
+        "%s %s %d lines",
+        run_dict_entry.short_cmd,
+        animations[0],
+        0),
       0, # permanent
       g:run_hl_normal
     )
