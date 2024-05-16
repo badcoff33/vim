@@ -39,7 +39,7 @@ export def TorchlightUpdate()
                 type: "text_prop_warning",
                 text: " " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
                 text_align: 'below',
-                text_padding_left: 4
+                text_padding_left: 0
             })
         elseif item.type ==? "e"
             bufload(item.bufnr)
