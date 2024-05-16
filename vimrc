@@ -187,6 +187,7 @@ cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
 cnoreabbrev <expr> E  (getcmdtype() ==# ':' && getcmdline() =~# '^E')  ? ('edit ' .. expand("%:h") .. expand("/"))  : 'E'
+cnoreabbrev <expr> F  (getcmdtype() ==# ':' && getcmdline() =~# '^F')  ? 'find *'  : 'F'
 
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!

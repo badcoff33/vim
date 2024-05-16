@@ -38,12 +38,21 @@ augroup GroupUtils " {{{
     if filereadable(".vimrc")
       call popnews.Open("local .vimrc available")
     endif
+    if filereadable(".session")
+      call popnews.Open("local .session available")
+    endif
   }
   autocmd SourcePost .vimrc popnews.Open('sourced ' .. expand('<afile>:t'))
+  autocmd SourcePost .session popnews.Open('sourced ' .. expand('<afile>:t'))
+  au TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
+  au TerminalOpen * setlocal nonumber norelativenumber
 augroup END " }}}
 
 if filereadable(".vimrc")
   call popnews.Open("local .vimrc available")
+endif
+if filereadable(".session")
+  call popnews.Open("local .session available")
 endif
 
 # Description: Run a diff of current buffer content and file content.
@@ -111,7 +120,34 @@ export def PostItRemove()
     prop_clear(line("."))
 enddef
 
-if !mapcheck("<Leader>p")
+def g:RunTerminal()
+  var term_tbufnrs = term_list()
+  var tbufnr = 0
+  for b in term_list()
+    if term_getstatus(b) =~ '.*running.*'
+      tbufnr = b
+      break
+    endif
+  endfor
+  if tbufnr != 0
+    var twinnr = bufwinnr(tbufnr)
+    if twinnr == -1
+      wincmd s
+      wincmd J
+      execute "buffer" tbufnr
+    else
+      execute ":" .. string(twinnr) .. "wincmd w"
+    endif
+    feedkeys((mode() == "n") ? "i" : "")
+  else
+    popnews.Open('No terminal running -- Open terminal with command :terminal')
+  endif
+enddef
+
+if !mapcheck("<Leader>x")
+nnoremap <Leader>x :call g:RunTerminal()<CR>
+endif
+if !mapcheck("<Leader>v")
   nnoremap <Leader>vv :edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
   nnoremap <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
   nnoremap <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
