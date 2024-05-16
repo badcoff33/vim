@@ -1,6 +1,6 @@
 " Vim plugin file
 
-inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : (CompleteAllowed() ? "\<C-n>" : "\<TAB>" )
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : (CompleteAllowed() == v:true ? "\<C-n>" : "\<TAB>" )
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-n>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 cnoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
@@ -16,10 +16,11 @@ function! s:NeighborChars()
   let d['frontview']  = (col == length) ? '' : line[col]
   return d
 endfunction
+let g:a=[0,0,0]
 
 function! CompleteAllowed()
   let chars = s:NeighborChars()
-  if (chars.rearview =~ '\w') && ((chars.frontview =~ '\s') || (chars.frontview =~ ''))
+  if (chars.rearview !~ "[ \t]") && ((chars.frontview =~ '\([^a-zA-Z0-9_]\)') || (chars.frontview == ''))
     return v:true
   else
     return v:false
