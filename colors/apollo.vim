@@ -62,7 +62,7 @@ execute "hi StatusLineNC" Fg(green_br) Bg(black) Attr("NONE") Cterm("NONE")
 execute "hi TabLine" Fg(fg[1]) Bg(black) Attr('NONE')
 execute "hi TabLineFill" Fg(fg[2]) Bg(black) Attr('NONE')
 execute "hi TabLineSel" Fg(green) Bg("bg") Attr('NONE')
-execute "hi Terminal" Fg(green_br) Bg(bg[2])
+execute "hi Terminal" Fg(fg[3]) Bg(bg[0])
 execute "hi Title" Fg(green_br)
 execute "hi User1" Fg(white) Bg(blue) Attr("NONE")
 execute "hi User2" Fg(black) Bg(amber)
@@ -87,7 +87,7 @@ highlight! link CurSearch IncSearch
 # Code
 execute "hi Statement" Fg(green_br) Attr("NONE")
 execute "hi Conditional" Fg(white)  Attr("italic")
-execute "hi Type" Fg(blue_br)  Attr("NONE")
+execute "hi Type" Fg(green)  Attr("NONE")
 execute "hi Structure" Fg(blue)
 execute "hi StorageClass" Fg(blue_br)
 execute "hi PreProc" Fg(white)  Attr("bold")
@@ -95,7 +95,7 @@ execute "hi PreCondit" Fg(blue_br)  Attr("bold")
 execute "hi Define" Fg(blue)  Attr("NONE")
 execute "hi Comment" Fg(green_dk)
 execute "hi Function" Fg(blue_br) Attr("bold")
-execute "hi Identifier" Fg(green_br)
+execute "hi Identifier" Fg(green_dk)
 execute "hi Special" Fg(green)
 execute "hi Constant" Fg(white)
 execute "hi Number" Fg(white)
@@ -132,3 +132,10 @@ execute "hi DiffChange" Fg(amber) Bg(bg[3])
 execute "hi DiffText" Fg(blue) Bg(bg[3]) Attr("bold")
 execute "hi DiffDelete" Fg(red) Bg(bg[2])
 execute "hi DiffAdd" Fg(green) Bg(bg[2]) Attr("bold")
+
+# Plugin: Signify
+highlight! link SignifySignAdd DiffAdd
+highlight! link SignifySignDelete DiffDelete
+highlight! link SignifySignDeleteFirstLine DiffDelete
+highlight! link SignifySignChange DiffChange
+highlight! link SignifySignChangeDelete DiffChange

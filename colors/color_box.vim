@@ -16,7 +16,7 @@ var black     = "#000000"
 var white     = "#FFFFFF"
 
 var fg = "#404040"
-var bg = "#ECECEC"
+var bg = "#F3F3F3"
 
 var blue_dk = "#2168AF"
 var blue    = "#4188C8"
@@ -56,7 +56,7 @@ var yellow_bg = "#FFF890"
 var gray_dk = "#444447"
 var gray    = "#959598"
 var gray_lt = "#CBCBCF"
-var gray_bg = "#E0E0E0"
+var gray_bg = "#ECECEC"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
@@ -79,12 +79,12 @@ execute "hi LineNr" Fg(gray) Gui("bold")
 execute "hi MatchParen" Fg(green_dk) Bg(green_bg) Gui("bold")
 execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
-execute "hi Pmenu" Fg(white) Bg(blue)
+execute "hi Pmenu" Fg(black) Bg(yellow_bg)
 execute "hi PmenuSbar" Fg(gray_bg) Bg(gray_lt)
-execute "hi PmenuSel" Fg(white) Bg(orange) Gui("NONE")
+execute "hi PmenuSel" Fg(black) Bg(yellow_lt) Gui("NONE")
 execute "hi PmenuThumb" Fg(gray_dk) Bg(gray_dk)
 execute "hi Search" Bg(white) Gui("NONE")
-execute "hi StatusLine" Fg(cyan_bg) Bg(gray_dk) Gui("NONE")
+execute "hi StatusLine" Fg(white) Bg(blue) Gui("NONE")
 execute "hi StatusLineNC" Fg(black) Bg(gray_bg) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(blue) Gui("bold")
 execute "hi Terminal" Fg(fg) Bg(bg)
