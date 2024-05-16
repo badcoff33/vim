@@ -33,8 +33,8 @@ endfunction
 function! visuals#enable_blinky()
   augroup BlinkyGroup
     autocmd!
-    " autocmd WinLeave             * call visuals#turn_cursorline_off()
     autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
+    autocmd FocusGained * call visuals#turn_cursorline_on()
   augroup END
 endfunction
 
