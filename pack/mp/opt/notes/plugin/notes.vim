@@ -1,4 +1,3 @@
-
 let g:notes_files = []
 let g:notes_home = expand("~/.notes")
 
@@ -93,8 +92,17 @@ function! NotesPopup()
                 \ })
 endfunction
 
-execute mkdir(g:notes_home, "p")
-nnoremap <Leader>n. <Cmd>call NotesToday()<CR>
-nnoremap <Leader>nn <Cmd>call NotesPopup()<CR>
-nnoremap <Leader>ng :vimgrep <C-r>=g:notes_home<CR>/*.md<C-b><C-Right><Space>
+function! NotesFind()
+  execute 'vimgrep' input('find in notes: ') g:notes_home .. '/*.md'
+endfunction
 
+let g:notes_cmd_to_func = #{
+      \ list: funcref('NotesPopup'),
+      \ today: funcref('NotesToday'),
+      \ find: funcref('NotesFind')
+      \ }
+
+command! -complete=customlist,CustomCompleteNotes -nargs=1 Notes call g:notes_cmd_to_func['<args>']()
+function! CustomCompleteNotes(ArgLead, CmdLine, CursorPos)
+  return ['today', 'list', 'find']
+endfunction
