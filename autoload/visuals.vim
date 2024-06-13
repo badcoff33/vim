@@ -30,12 +30,24 @@ endfunction
 
 " Description: Make the actual window more obvious by temporary turn the
 " option 'cursorline' on.
-function! visuals#enable_blinky()
+function! visuals#enable_blinky_flash()
   augroup BlinkyGroup
     autocmd!
     autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
     autocmd FocusGained * call visuals#turn_cursorline_on()
   augroup END
+endfunction
+
+" Description: Make the actual window more obvious by temporary turn the
+" option 'cursorline' on.
+function! visuals#enable_blinky_stay()
+  augroup BlinkyGroup
+    autocmd!
+    autocmd BufWinEnter,WinEnter * setlocal cursorline
+    autocmd FocusGained * setlocal cursorline
+    autocmd BufWinLeave,WinLeave * setlocal nocursorline
+  augroup END
+  setlocal cursorline
 endfunction
 
 " Description: Stop function and release all resources

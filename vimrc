@@ -18,7 +18,7 @@ set autowriteall
 set belloff=all
 set clipboard=
 set expandtab
-set fillchars=eob:\ ,
+set fillchars=eob:\ ,vert:'
 set hidden
 set history=200
 set keymodel=
@@ -96,7 +96,7 @@ execute 'set undodir=' .. getenv('TEMP')
 " Insert mode completion
 set complete=.,w
 set noshowfulltag
-set completeopt=menu,longest
+set completeopt=menu
 set pumheight=7
 
 " Command line completion
@@ -107,8 +107,6 @@ set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
 " Mapping for text/abbrev completions
 set wildcharm=<C-n>
-cmap <Tab> <C-n>
-cmap <S-Space> <C-]>
 
 " How to handle search for tags
 set tagcase=match
@@ -130,12 +128,15 @@ nnoremap <A-Left> <Home>
 nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
-" yank/paste clipoard: b/c most laptop keyboards suck
-vnoremap <Leader>y "*y
-nnoremap <Leader>y "*yiw
-nnoremap <Leader>y "*yiw
-nnoremap <Leader>Y "*yy
-nnoremap <Leader>p "*P
+" Window movement
+nnoremap <A-h> <C-w>h
+nnoremap <A-l> <C-w>l
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+tnoremap <A-h> <C-w>h
+tnoremap <A-l> <C-w>l
+tnoremap <A-j> <C-w>j
+tnoremap <A-k> <C-w>k
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -168,8 +169,8 @@ vnoremap <A-y> :move '>+1<CR>==gv=gv
 " Surfing the quickfix matches
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
-nnoremap + :cnext<CR>
-nnoremap - :cprevious<CR>
+nnoremap <Leader><C-j> :cfirst<CR>
+nnoremap <Leader><C-k> :clast<CR>
 " Surfing the tag stack
 nnoremap <A-k> g<C-]>zz
 nnoremap <A-j> <C-t>zz
@@ -186,8 +187,10 @@ let AbbrevKiller = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep') ? 'silent vimgrep ' .. expand('<cword>') .. ' **' : 'vimgrep'
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
 cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
-cnoreabbrev <expr> E  (getcmdtype() ==# ':' && getcmdline() =~# '^E')  ? ('edit ' .. expand("%:h") .. expand("/"))  : 'E'
-cnoreabbrev <expr> F  (getcmdtype() ==# ':' && getcmdline() =~# '^F')  ? 'find *'  : 'F'
+cnoreabbrev <expr> e  (getcmdtype() ==# ':' && getcmdline() =~# '^e')  ? ('edit ' .. expand("%:h") .. expand("/"))  : 'e'
+cnoreabbrev <expr> f  (getcmdtype() ==# ':' && getcmdline() =~# '^f')  ? 'find *'  : 'f'
+cnoreabbrev <expr> t  (getcmdtype() ==# ':' && getcmdline() =~# '^t')  ? 'tjump /'  : 't'
+cnoremap <Tab> <C-]>
 
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!
@@ -204,19 +207,36 @@ let mapleader = " "
 let maplocalleader = "s"
 
 " Substitute command
-nnoremap <Leader>s :%s/\V//gI<Left><Left><Left><Left>
-vnoremap <Leader>s :s/\V//gI<Left><Left><Left><Left>
+nnoremap <Leader>s :%s/\C//cgI<Left><Left><Left><Left><Left>
+vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left>
 
 " Check indents
 nnoremap <Leader>. <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
 nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
-cnoremap <expr> <C-r>. expand("%:h") .. expand("/")
+cnoremap <expr> <A-.> expand("%:h") .. expand("/")
+" and basic stuff
+nnoremap <Leader>b :<C-u>buffer<Space>
+nnoremap <Leader>t :<C-u>tjump /
+nnoremap <Leader>f :<C-u>find *
+nnoremap + :<C-u>tnext<CR>
+nnoremap - :<C-u>tprevious<CR>
+
+" More tab pages, please
+nnoremap <C-w>t :<C-u>tabedit<CR>
+cnoremap <C-t> tabnew<CR>:
 
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
 nnoremap <expr> <Leader>g ':vimgrep /' .. expand("<cword>") .. '/ ' .. AppendSep(expand("%:h")) .. LsFilter(&ft)
+
+" yank/paste clipoard: b/c most laptop keyboards suck
+vnoremap <Leader>y "*y
+nnoremap <Leader>y "*yiw
+nnoremap <Leader>y "*yiw
+nnoremap <Leader>Y "*yy
+nnoremap <Leader>p "*P
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase

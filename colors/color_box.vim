@@ -17,21 +17,17 @@ var white     = "#FFFFFF"
 
 var fg = "#404040"
 var bg = "#F3F3F3"
+var bg_cl = "#FFFFFF"
 
 var blue_dk = "#2168AF"
 var blue    = "#4188C8"
 var blue_lt = "#5FAFF3"
-var blue_bg = "#CFF0FF"
+var blue_bg = "#D8F0F0"
 
 var red_dk = "#AF2352"
 var red    = "#DF3372"
 var red_lt = "#F36897"
 var red_bg = "#FFCFDF"
-
-var orange_dk = "#A54322"
-var orange    = "#DC5E43"
-var orange_lt = "#EF915B"
-var orange_bg = "#FFBF60"
 
 var cyan_dk  = "#208888"
 var cyan     = "#30AFA2"
@@ -43,20 +39,15 @@ var green    = "#20BF72"
 var green_lt = "#20DF83"
 var green_bg = "#B8FFE0"
 
-var violet_dk = "#9030B8"
-var violet    = "#A755D5"
-var violet_lt = "#B880D7"
-var violet_bg = "#E0D0FF"
-
 var yellow_dk = "#938002"
-var yellow    = "#EFEC58"
+var yellow    = "#DFDC58"
 var yellow_lt = "#FFFF67"
 var yellow_bg = "#FFF890"
 
 var gray_dk = "#444447"
 var gray    = "#959598"
 var gray_lt = "#CBCBCF"
-var gray_bg = "#ECECEC"
+var gray_bg = "#DCDCDC"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
@@ -67,11 +58,11 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 # Basics
 
 execute "hi Bold" Gui("bold")
-execute "hi CurSearch" Bg(white) Gui("underline")
+execute "hi CurSearch" Bg(gray_bg) Gui("underline")
 execute "hi Cursor" Bg(black) Cterm("NONE")
-execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
+execute "hi CursorLine" Bg(bg_cl) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray_dk) Bg(gray_bg) Gui("bold")
-execute "hi Folded" Fg(blue) Bg(gray_lt) Gui("NONE")
+execute "hi Folded" Fg(blue) Bg(blue_bg) Gui("NONE")
 execute "hi IncSearch" Fg(white) Bg(cyan) Gui("NONE")
 execute "hi Italic" Gui("italic")
 execute "hi Label" Fg(black) Gui("bold")
@@ -81,25 +72,25 @@ execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 execute "hi Pmenu" Fg(black) Bg(yellow_bg)
 execute "hi PmenuSbar" Fg(gray_bg) Bg(gray_lt)
-execute "hi PmenuSel" Fg(black) Bg(yellow_lt) Gui("NONE")
+execute "hi PmenuSel" Fg(black) Bg(yellow) Gui("NONE")
 execute "hi PmenuThumb" Fg(gray_dk) Bg(gray_dk)
-execute "hi Search" Bg(white) Gui("NONE")
+execute "hi Search" Bg(gray_bg) Gui("NONE")
 execute "hi StatusLine" Fg(white) Bg(blue) Gui("NONE")
-execute "hi StatusLineNC" Fg(black) Bg(gray_bg) Gui("NONE")
+execute "hi StatusLineNC" Fg(black) Bg(blue_bg) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(blue) Gui("bold")
+execute "hi TabLine" Fg(gray) Bg(white) Gui("NONE")
+execute "hi TabLineFill" Fg(black) Bg(white) Gui("NONE")
+execute "hi TabLineSel" Fg(black) Bg(bg) Gui("bold")
 execute "hi Terminal" Fg(fg) Bg(bg)
 execute "hi User1" Fg(white) Bg(gray_lt) Gui("NONE")
 execute "hi User2" Fg(blue_bg) Bg(blue_dk) Gui("italic")
 execute "hi VertSplit" Fg(gray_bg) Bg(gray_bg) Gui("NONE")
-execute "hi Visual" Fg(blue_dk) Bg(blue_bg)
+execute "hi Visual" Fg(white) Bg(gray)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine StatusLineNC
-highlight! link TabLineFill StatusLineNC
-highlight! link TabLineSel Label
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
 
@@ -127,7 +118,7 @@ execute "hi String" Fg(blue_dk)
 execute "hi Structure" Fg(red) Gui("NONE")
 execute "hi Title" Fg(blue_dk)  Gui("bold")
 execute "hi Todo" Fg(blue) Bg("bg") Gui("bold,italic")
-execute "hi Type" Fg(violet) Gui("NONE")
+execute "hi Type" Fg(red_dk) Gui("NONE")
 execute "hi WarningMsg" Fg(blue_dk) Bg(blue_bg)
 execute "hi qfFileName" Fg(blue_lt)
 execute "hi qfLineNr" Fg(red_lt)
@@ -139,7 +130,8 @@ execute "hi vimCommentTitle" Fg(blue)  Gui("bold")
 # Filetype C
 
 execute "hi cCppOut" Bg(gray_lt) Gui("NONE")
-execute "hi cCppOutIf2" Bg(gray_lt) Gui("NONE")
+execute "hi cCppOutIf" Gui("italic")
+execute "hi cCppOutIf2" Bg(gray_lt) Gui("italic")
 execute "hi cParen" Fg(gray_dk)
 execute "hi cBlock" Fg(gray_dk)
 

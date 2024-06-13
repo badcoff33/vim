@@ -90,18 +90,17 @@ export def FilterMenu(
 
   var filtered_items: list<any> = [items_dict]
   var height = min([&lines - 6, items->len()])
-  var pos_top = ((&lines - height) / 2) - 1
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
     highlight: "StatusLineNC",
-    line: pos_top,
+    line: 2,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
     minheight: height,
-    maxheight: height,
+    maxheight: (&lines - 10),
     drag: 0,
     wrap: 1,
-    cursorline: false,
+    cursorline: 1,
     padding: [1, 1, 1, 1],
     mapping: 0,
     filter: (id, key) => {
@@ -110,13 +109,13 @@ export def FilterMenu(
       elseif ["\<cr>", "\<C-y>", "\<C-t>", "\<C-w>"]->index(key) > -1
           && filtered_items[0]->len() > 0
         popup_close(id, {idx: getcurpos(id)[1], key: key})
-      elseif key == "\<tab>" || key == "\<C-j>" || key == "\<Down>" || key == "\<C-n>"
+      elseif key == "\<ScrollWheelDown>" || key == "\<tab>" || key == "\<C-j>" || key == "\<Down>" || key == "\<C-n>"
         var ln = getcurpos(id)[1]
         win_execute(id, "normal! j")
         if ln == getcurpos(id)[1]
           win_execute(id, "normal! gg")
         endif
-      elseif key == "\<S-tab>" || key == "\<C-k>" || key == "\<Up>" || key == "\<C-p>"
+      elseif key == "\<ScrollWheelUp>" || key == "\<S-tab>" || key == "\<C-k>" || key == "\<Up>" || key == "\<C-p>"
         var ln = getcurpos(id)[1]
         win_execute(id, "normal! k")
         if ln == getcurpos(id)[1]
@@ -141,7 +140,7 @@ export def FilterMenu(
           filtered_items = items_dict->matchfuzzypos(prompt, {key: "text"})
         endif
         popup_settext(id, Printify(filtered_items, []))
-        popup_setoptions(id, { title: $" {title}: {prompt ?? hint} ", minheight: len(filtered_items[0]), maxheight: len(filtered_items[0]), })
+        popup_setoptions(id, { title: $" {title}: {prompt ?? hint} ", minheight: len(filtered_items[0]), maxheight: (&lines - 10) })
       endif
       return true
     },
@@ -158,3 +157,5 @@ export def FilterMenu(
 
   win_execute(winid, "setl nonumber cursorline cursorlineopt=line")
 enddef
+
+defcompile

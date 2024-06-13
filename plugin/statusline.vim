@@ -31,18 +31,33 @@ def g:GetSearchMode(): string
   endif
 enddef
 
+def g:GetScopeforSL(): string
+  var scope: string
+  if exists('b:scope_in_statusline') && b:scope_in_statusline
+    scope = scope#GetScope()
+    if len(scope) == 0
+      return ''
+    else
+      return ',' .. scope
+    endif
+  else
+    return ''
+  endif
+enddef
+
 def g:BuildStatusline(): string
     var sl: string
     if exists("g:statusline_winid") && (win_getid() == g:statusline_winid)
-        sl =  " %{GetMode()} "
+        sl =  " %{GetSearchMode()}" .. " %{GetMode()} "
     endif
-    sl = sl .. " %{GetSearchMode()}%Y%R "
+    sl = sl .. " %Y%R%M"
+    sl = sl .. (len(v:errors) > 0 ? ",!" : "")
+    sl = sl .. "%{g:GetScopeforSL()}"
     if v:versionlong >= 9001307
         sl = sl .. "%="
     endif
-    sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t%m"
+    sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t%w"
     sl = sl .. "%= %l(%L):%c "
-    sl = sl .. "%{scope#GetScope()}"
     return sl
 enddef
 

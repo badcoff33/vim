@@ -17,7 +17,6 @@ def g:SelectBuf()
         exe $":b {res.bufnr}"
       endif
     })
-  echo "EE"
 enddef
 
 var FileSig = (fn) => substitute(fn, "[\\\\/]", "", "g") # get rid of the slash problem

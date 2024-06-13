@@ -26,7 +26,10 @@ nnoremap <buffer> <LocalLeader>sd :setlocal spell spellang=de<CR>
 " Make heading underlined
 nnoremap <buffer> <localleader>1 yypVr=k
 nnoremap <buffer> <localleader>2 yypVr-k
-nnoremap <buffer> <localleader>2 yypVr~k
+nnoremap <buffer> <localleader>3 yypVr~k
+
+" if 'foldenable' is set, toggle folds
+nnoremap <buffer> <CR> za
 
 " More molecular undo of text
 inoremap <buffer> , ,<C-g>u

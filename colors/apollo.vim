@@ -67,7 +67,7 @@ execute "hi Title" Fg(green_br)
 execute "hi User1" Fg(white) Bg(blue) Attr("NONE")
 execute "hi User2" Fg(black) Bg(amber)
 execute "hi VertSplit" Fg(bg[1]) Bg(bg[1]) Attr("NONE")
-execute "hi Visual" Fg(black) Bg(green_dk)
+execute "hi Visual" Fg(white) Bg(green_dk)
 execute "hi WarningMsg" Fg(white) Bg(blue_dk)
 execute "hi qfFileName" Fg(blue)
 execute "hi qfSeparator" Fg("fg")
@@ -129,9 +129,9 @@ execute "hi rstStrongEmphasis" Fg(green)  Attr("bold")
 
 # Diffs
 execute "hi DiffChange" Fg(amber) Bg(bg[3])
-execute "hi DiffText" Fg(blue) Bg(bg[3]) Attr("bold")
+execute "hi DiffText" Fg(blue) Bg(bg[3])
 execute "hi DiffDelete" Fg(red) Bg(bg[2])
-execute "hi DiffAdd" Fg(green) Bg(bg[2]) Attr("bold")
+execute "hi DiffAdd" Fg(green) Bg(bg[2])
 
 # Plugin: Signify
 highlight! link SignifySignAdd DiffAdd

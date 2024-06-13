@@ -10,6 +10,7 @@ vim9script
 # Maintainer: markus prepens (markus dot prepens at gmail dot com)
 
 import autoload "run.vim"
+import autoload "utils.vim"
 import autoload "ctags.vim"
 import autoload "popnews.vim"
 import autoload "torchlight.vim"
@@ -35,18 +36,6 @@ var rg_glob_patterns = {
   cmake:  ['*.cmake', 'CmakeLists.txt']
 }
 
-def ToString(obj: any): string
-  var toStr: string
-  if type(obj) == v:t_string
-    return obj
-  elseif type(obj) == v:t_list
-    return join(obj, " ")
-  else
-    popnews.Open("unknown type of 'g:ctags_options'", 4000, "ErrorMsg")
-    return ""
-  endif
-enddef
-
 def MakeCallback()
   torchlight.TorchlightUpdate()
 enddef
@@ -66,7 +55,7 @@ def g:CtagsTriggerUpdate(verbose = false)
     return
   endif
 
-    ctags_options = ToString(g:ctags_options)
+    ctags_options = utils.ToString(g:ctags_options)
 
   ctags_job = run.RunStart({cmd: 'ctags ' .. ctags_options, background: true})
   if job_status(ctags_job) != "run"
@@ -78,7 +67,7 @@ enddef
 
 def g:RgPatternInput()
   var pattern = len(expand("<cword>")) == 0 ? "STRING" : expand("<cword>")
-  execute join( [":Rg", g:RgExcludes(), g:RgIncludes(), input("Pattern (use '\\bPATTERN\\b' for exact matches'): ", pattern, "tag"), ToString(g:rg_paths) ], " ")
+  execute join( [":Rg", g:RgExcludes(), g:RgIncludes(), input("Pattern (use '\\bPATTERN\\b' for exact matches'): ", pattern, "tag"), utils.ToString(g:rg_paths) ], " ")
 enddef
 
 def g:RgPattern(): string
@@ -138,7 +127,7 @@ enddef
 
 def g:WbConfig()
   echo printf("g:ctags_command\t= %s", g:ctags_command)
-  echo printf("g:ctags_options\t= %s", ToString(g:ctags_options))
+  echo printf("g:ctags_options\t= %s", utils.ToString(g:ctags_options))
   echo printf("g:rg_command\t= %s", g:rg_command)
   echo printf("g:rg_paths\t= %s", join(g:rg_paths, ", "))
   echo printf("g:rg_excludes\t= %s", join(g:rg_excludes, ", "))
@@ -161,7 +150,6 @@ def g:SelectBuf()
         exe $":b {res.bufnr}"
       endif
     })
-  echo "EE"
 enddef
 
 var FileSig = (fn) => substitute(fn, "[\\\\/]", "", "g") # get rid of the slash problem
@@ -182,10 +170,11 @@ def g:SelectTags()
     })
 enddef
 
-# filter and open MRU (Most Recently Used) aka oldfiles
+# filter all files from current dir
 def g:SelectFiles()
-  filter_menu.FilterMenu("MRU",
-    split(system('rg --files -g * .'), '\n'),
+  var dir_depth = 5
+  filter_menu.FilterMenu($"Files, {dir_depth} dirs deep",
+    split(system($'rg --files --max-depth {dir_depth} g * .'), '\n'),
     (res, key) => {
     if key == "\<c-t>"
       exe $":tab sb {res.bufnr}"
@@ -206,19 +195,19 @@ if executable("rg")
   set grepprg=rg\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
   command!                -nargs=0 WbConfig g:WbConfig()
-  command! -complete=file -nargs=* RgFindFiles run.RunStart({cmd: g:rg_command .. " --files " .. g:rg_find_files_options .. " " .. g:RgGlobSwitch('<args>'), name: "RgFiles"})
+  command! -complete=file -nargs=* RgFindFiles run.RunStart({cmd: g:rg_command .. " --files " .. g:rg_find_files_options .. " " .. g:RgGlobSwitch('<args>'), name: "RG-FILES"})
   command! -complete=file -nargs=* Rg run.RunStart({cmd: g:rg_command .. ' --vimgrep ' .. ' <args>', regexp: &grepformat, no_popup: true})
 endif
-command! -nargs=0                CtagsForceUpdate g:CtagsTriggerUpdate(true)
-command! -nargs=* -complete=file                  Make MakeStart(<q-args>)
+command! -nargs=0 CtagsForceUpdate g:CtagsTriggerUpdate(true)
+command! -nargs=* -complete=file Make MakeStart(<q-args>)
 
-nnoremap <Leader>m :<C-u>Make<Up>
-nnoremap <Leader>b <Cmd>call SelectBuf()<CR>
-nnoremap <Leader>t <Cmd>call SelectTags()<CR>
-nnoremap <Leader>f <Cmd>call SelectFiles()<CR>
+nnoremap <Leader>m :<C-u>Make <Up>
+nnoremap <f1> <Cmd>call SelectBuf()<CR>
+nnoremap <f2> <Cmd>call SelectFiles()<CR>
+nnoremap <f3> <Cmd>call SelectTags()<CR>
 if executable("rg")
   nnoremap <Leader><CR> :call g:RgPatternInput()<CR>
-  nnoremap <silent> <Leader><Leader> :<C-r>=join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), ToString(g:rg_paths), " ")<CR><CR>
+  nnoremap <silent> <Leader><Leader> :<C-r>=join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), utils#ToString(g:rg_paths), " "])<CR><CR>
 endif
 
 defcompile

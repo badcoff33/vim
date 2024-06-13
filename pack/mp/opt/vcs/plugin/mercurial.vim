@@ -2,6 +2,12 @@ vim9script
 
 import autoload 'run.vim' as run
 
+augroup GroupHg
+    autocmd!
+    autocmd BufWinEnter HG-Output setf hg
+    autocmd BufWinEnter HG-Output nnoremap <buffer> <CR> :Hg<Space>
+augroup END
+
 def GetCompleteCandidates(): list<string>
     var options: list<string>
     var filename: string
@@ -13,17 +19,12 @@ def GetCompleteCandidates(): list<string>
     return options
 enddef
 
-def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): string
+def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): list<string>
     var matching_keys: string
     var candidates: list<string>
     var filename: string
     candidates = GetCompleteCandidates()
-    for k in candidates
-        if match(k, arg_lead) >= 0
-            matching_keys = matching_keys .. k .. "\n"
-        endif
-    endfor
-    return matching_keys
+    return filter(candidates, (idx, val) => val =~? arg_lead)
 enddef
 
 augroup GroupHg
@@ -38,7 +39,7 @@ def g:VcsHgExecute(hg_command: string)
   })
 enddef
 
-command! -nargs=* -complete=custom,g:CompleteHg Hg g:VcsHgExecute(<q-args>)
+command! -nargs=* -complete=customlist,CompleteHg Hg g:VcsHgExecute(<q-args>)
 
 # Uncomment when testing
 defcompile

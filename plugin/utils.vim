@@ -144,19 +144,15 @@ def g:RunTerminal()
   endif
 enddef
 
-if !mapcheck("<Leader>x")
+assert_true(mapcheck("<Leader>x"), "mapping overwritten")
 nnoremap <Leader>x :call g:RunTerminal()<CR>
-endif
-if !mapcheck("<Leader>v")
-  nnoremap <Leader>vv :edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
-  nnoremap <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
-  nnoremap <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
-  nnoremap <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
-endif
-if !mapcheck("<Leader>p")
-  nnoremap <Leader>p :PostItAdd<CR>
-  nnoremap <Leader>P :PostItRemove<CR>
-endif
+
+assert_true(mapcheck("<Leader>v"), "mapping overwritten")
+nnoremap <Leader>vv :edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
+nnoremap <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
+nnoremap <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
+nnoremap <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
+
 nnoremap <Leader>l :call g:LookupWord()<CR>
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
@@ -164,9 +160,11 @@ nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>
 nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
 
 # nice presentation of v:errors, filled by assert functions
-command! -nargs=0 PrintVimErrors for e in v:errors | echo e | endfor
-command! -nargs=* PostIt g:PostIt(<q-args>)
-command! -nargs=0 PostItRemove g:PostItRemove()
+command! -nargs=0 PrintErrors for e in v:errors | echo e | endfor
+command! -nargs=0 ClearErrors v:errors = []
+
+command! -nargs=* PostIt PostIt(<q-args>)
+command! -nargs=0 PostItRemove PostItRemove()
 command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 
 defcompile

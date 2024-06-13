@@ -1,9 +1,5 @@
 let g:notes_files = []
-let g:notes_home = expand("~/.notes")
-
-if !isdirectory(g:notes_home)
-  mkdir mkdir(g:notes_home)
-endif
+let g:notes_home = get(g:, 'notes_home', expand("~/.notes"))
 
 function! s:NotesBufferSettings()
   setfiletype markdown
@@ -11,8 +7,8 @@ function! s:NotesBufferSettings()
   nnoremap <LocalLeader>b <Cmd>call NotesBacklog(-1)<CR>
 endfunction
 
-function! NotesToday()
-  execute "drop" strftime("~/.notes/note-%Y-%m-%d.md")
+function! NotesToday(...)
+  execute "drop" strftime(g:notes_home .. "/note-%Y-%m-%d.md")
   call s:NotesBufferSettings()
   let g:notes_files = NotesUpdateBacklog(60)
   let g:notes_file_idx = 0
@@ -51,15 +47,12 @@ function! NotesBacklog(dir)
     echohl None
     let g:notes_file_idx = last_idx
   endif
-  try
     if bufexists(g:notes_files[g:notes_file_idx])
       execute "buffer" g:notes_files[g:notes_file_idx]
     else
       execute "drop" g:notes_files[g:notes_file_idx]
     endif
     call s:NotesBufferSettings()
-  catch /.*/
-  endtry
 endfunction
 
 function! GetHeadlines(files)
@@ -79,11 +72,11 @@ endfunction
 
 function! NotesSelected(id, result)
   if a:result >= 1
-    execute "drop" g:popup_file_list[a:result - 1]
+    execute "drop" fnameescape(g:popup_file_list[a:result - 1])
   endif
 endfunction
 
-function! NotesPopup()
+function! NotesList(...)
   let current_files = globpath(g:notes_home, "*.md", v:false, v:true)
   let headlines = GetHeadlines(reverse(sort(current_files)))
   call popup_menu(reverse(sort(headlines)), #{
@@ -100,10 +93,11 @@ function! NotesCmdDispatch(params)
   let cmd = split(a:params, ' ')[0]
   let rest = join(split(a:params, ' ')[1:], ' ')
   let g:notes_cmd_to_func = #{
-        \ list: funcref('NotesPopup'),
+        \ list: funcref('NotesList'),
         \ today: funcref('NotesToday'),
         \ find: funcref('NotesFind')
         \ }
+  echo '#'..rest..'#'
   call g:notes_cmd_to_func[cmd](rest)
 endfunction
 

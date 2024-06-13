@@ -70,12 +70,12 @@ export def CloseCb(ch: channel)
           if num_warnings == 1
             done_str ..= printf(" | %d warning", num_warnings)
           elseif num_warnings > 1
-            done_str ..= printf(" | %d num_warnings", num_warnings)
+            done_str ..= printf(" | %d warnings", num_warnings)
           endif
           if num_errors == 1
             done_str ..= printf(" | %d error", num_errors)
           elseif num_errors > 1
-            done_str ..= printf(" | %d num_errors", num_errors)
+            done_str ..= printf(" | %d errors", num_errors)
           endif
         endif
         popnews.Open(done_str, 4000, g:run_hl_normal)
@@ -84,12 +84,12 @@ export def CloseCb(ch: channel)
         var b = bufadd(d.name)
         lines = getbufinfo(b)[0].linecount
         execute "drop" d.name
-        setlocal noreadonly
+        setlocal noreadonly modifiable
         setline(lines + 1, cut_here + ['(' .. strftime("%T") .. ') ' .. d.full_cmd] + getbufline(d.bufnr, 1, "$"))
         # setline(lines + 1, ['(' .. strftime("%T") .. ') ' .. d.full_cmd] + getbufline(d.bufnr, 1, "$"))
-        setlocal buftype=nofile nomodified readonly
+        setlocal buftype=nofile nomodified readonly nomodifiable
         setpos(".", [b, lines + 1, 0, 0])
-        normal zt
+        normal Gzb
       endif
       execute "silent bwipe" d.bufnr
       try
@@ -137,7 +137,7 @@ enddef
 
 # var animations = ["-___", "_-__", "__-_", "___-", "__-_", "_-__"]
 # var animations = [ "|*   |", "| *  |", "|  * |", "|   *|", "|  * |", "| *  |" ]
-var animations = [ ">  >  >  ",  " >  >  > ",  "  >  >  >",  " >  >  > " ]
+var animations = [ '*', '-' ]
 var animation_index = 0
 
 def GetAnimationStr(): string

@@ -15,3 +15,19 @@ export def TruncateList(lst: list<string>, max_len: number): list<string>
     endfor
     return out
 enddef
+
+export def ToString(obj: any): string
+  var toStr: string
+  if type(obj) == v:t_string
+    return obj
+  elseif type(obj) == v:t_number
+    return string(obj)
+  elseif type(obj) == v:t_list
+    return join(obj, " ")
+  else
+    assert_report("unknown type for ToString()")
+    return ""
+  endif
+enddef
+
+defcompile

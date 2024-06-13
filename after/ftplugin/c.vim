@@ -15,6 +15,12 @@ setlocal foldnestmax=2
 setlocal tabstop=4
 setlocal shiftwidth=4
 
+let b:load_doxygen_syntax = 1
+let g:c_no_comment_fold = 1
+if exists("g:c_comment_strings") | unlet g:c_comment_strings | endif
+let g:c_space_errors = 1
+let g:c_syntax_for_h = 1
+
 " iabbrev did not work when 'cpoptions' has '>'
 if match(&cpoptions, '>') < 0
   iabbrev <buffer> xswi switch ()<C-f><Cr>{<CR>default:<C-f><CR>break;<CR>}<C-o>4k<End><Left>
@@ -31,6 +37,9 @@ endif
 
 " open tag preview
 nnoremap <buffer> K :ptjump <C-r><C-w><CR>
+nnoremap <buffer> <A-+> :tnext<CR>
+nnoremap <buffer> <A--> :tprev<CR>
+nnoremap <buffer> <LocalLeader>S <Cmd>call scope#PopupScope()<CR>
 
 " Toggle automatic comment formatting
 nnoremap <buffer> <LocalLeader>a :if match(&fo, 'a') < 0 <bar> setlocal fo+=a <bar> else <bar> setlocal fo-=a <bar> endif<CR>
@@ -43,20 +52,13 @@ vnoremap <buffer> <LocalLeader>f :silent call <SID>FormatC()<cr>
 nnoremap <buffer> <LocalLeader><Tab> :call swap#OtherFileC()<CR>
 
 function! s:FormatC() range
-    let save_cursor = getcurpos()
-    noautocmd execute "cd" expand("%:p:h")
-    if a:firstline == a:lastline
-        1,$!clang-format -style=file
-    else
-        execute a:firstline.."."..a:lastline.."!clang-format -style=file"
-    endif
-    noautocmd execute "cd -"
-    call setpos('.', save_cursor)
+  let save_cursor = getcurpos()
+  noautocmd execute "cd" expand("%:p:h")
+  if a:firstline == a:lastline
+    1,$!clang-format -style=file
+  else
+    execute a:firstline.."."..a:lastline.."!clang-format -style=file"
+  endif
+  noautocmd execute "cd -"
+  call setpos('.', save_cursor)
 endfunction
-
-let b:load_doxygen_syntax = 0
-let g:c_no_comment_fold = 1
-if exists("g:c_comment_strings") | unlet g:c_comment_strings | endif
-let g:c_space_errors = 1
-let g:c_syntax_for_h = 1
-
