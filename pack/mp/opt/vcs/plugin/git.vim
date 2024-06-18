@@ -6,7 +6,7 @@ augroup GroupGit
     autocmd!
     autocmd BufWinEnter GIT-Output setf git
     autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> d :Git diff <C-r><C-a><CR>
+    autocmd BufWinEnter GIT-Output nnoremap <buffer> d :Git diff<Space>
     autocmd BufWinEnter GIT-Output nnoremap <buffer> a :Git add <C-r><C-a>
     autocmd BufWinEnter GIT-Output nnoremap <buffer> s :Git status<CR>
     autocmd BufWinEnter GIT-Output nnoremap <buffer> b :Git branch<CR>

@@ -66,7 +66,7 @@ def g:CtagsTriggerUpdate(verbose = false)
 enddef
 
 def g:RgPatternInput()
-  var pattern = len(expand("<cword>")) == 0 ? "STRING" : expand("<cword>")
+  var pattern = len(expand("<cword>")) == 0 ? "" : expand("<cword>")
   execute join( [":Rg", g:RgExcludes(), g:RgIncludes(), input("Pattern (use '\\bPATTERN\\b' for exact matches'): ", pattern, "tag"), utils.ToString(g:rg_paths) ], " ")
 enddef
 
@@ -170,11 +170,13 @@ def g:SelectTags()
     })
 enddef
 
-# filter all files from current dir
+# Description: filter all files from current dir
+# Rg does ignore files, when '.ignore' or '.gitignore' files exists is cureent
+# directory. To ignore both ignore definition files, put '!*' in the '.ignore' file.
 def g:SelectFiles()
   var dir_depth = 5
   filter_menu.FilterMenu($"Files, {dir_depth} dirs deep",
-    split(system($'rg --files --max-depth {dir_depth} g * .'), '\n'),
+    split(system($'rg --files --max-depth {dir_depth} -g * .'), '\n'),
     (res, key) => {
     if key == "\<c-t>"
       exe $":tab sb {res.bufnr}"
@@ -202,9 +204,9 @@ command! -nargs=0 CtagsForceUpdate g:CtagsTriggerUpdate(true)
 command! -nargs=* -complete=file Make MakeStart(<q-args>)
 
 nnoremap <Leader>m :<C-u>Make <Up>
-nnoremap <f1> <Cmd>call SelectBuf()<CR>
-nnoremap <f2> <Cmd>call SelectFiles()<CR>
-nnoremap <f3> <Cmd>call SelectTags()<CR>
+nnoremap <Leader>1 <Cmd>call SelectBuf()<CR>
+nnoremap <Leader>2 <Cmd>call SelectFiles()<CR>
+nnoremap <Leader>3 <Cmd>call SelectTags()<CR>
 if executable("rg")
   nnoremap <Leader><CR> :call g:RgPatternInput()<CR>
   nnoremap <silent> <Leader><Leader> :<C-r>=join([":Rg", g:RgExcludes(), g:RgIncludes(), g:RgPattern(), utils#ToString(g:rg_paths), " "])<CR><CR>

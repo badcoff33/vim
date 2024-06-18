@@ -155,7 +155,7 @@ export def FilterMenu(
     }
   })
 
-  win_execute(winid, "setl nonumber cursorline cursorlineopt=line")
+  win_execute(winid, "setl nonumber")
 enddef
 
 defcompile

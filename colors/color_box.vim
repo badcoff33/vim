@@ -16,8 +16,8 @@ var black     = "#000000"
 var white     = "#FFFFFF"
 
 var fg = "#404040"
-var bg = "#F3F3F3"
-var bg_cl = "#FFFFFF"
+var bg = "#FFFFFF"
+var bg_cl = "#F0F0F0"
 
 var blue_dk = "#2168AF"
 var blue    = "#4188C8"

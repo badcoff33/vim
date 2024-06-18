@@ -23,11 +23,11 @@ enddef
 
 def g:GetSearchMode(): string
   if &ignorecase == true && &smartcase == true
-    return 'sc'
+    return 'S'
   elseif &ignorecase == false
-    return 'cs'
+    return 'A'
   else
-    return 'ic'
+    return 'a'
   endif
 enddef
 
@@ -50,13 +50,13 @@ def g:BuildStatusline(): string
     if exists("g:statusline_winid") && (win_getid() == g:statusline_winid)
         sl =  " %{GetSearchMode()}" .. " %{GetMode()} "
     endif
-    sl = sl .. " %Y%R%M"
     sl = sl .. (len(v:errors) > 0 ? ",!" : "")
     sl = sl .. "%{g:GetScopeforSL()}"
     if v:versionlong >= 9001307
         sl = sl .. "%="
     endif
-    sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t%w"
+    sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
+    sl = sl .. " [%Y%R%W%M]"
     sl = sl .. "%= %l(%L):%c "
     return sl
 enddef

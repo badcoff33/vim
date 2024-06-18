@@ -38,12 +38,12 @@ augroup GroupUtils " {{{
     if filereadable(".vimrc")
       call popnews.Open("local .vimrc available")
     endif
-    if filereadable(".session")
-      call popnews.Open("local .session available")
+    if filereadable(".session.vim")
+      call popnews.Open("local .session.vim available")
     endif
   }
   autocmd SourcePost .vimrc popnews.Open('sourced ' .. expand('<afile>:t'))
-  autocmd SourcePost .session popnews.Open('sourced ' .. expand('<afile>:t'))
+  autocmd SourcePost .session.vim popnews.Open('sourced ' .. expand('<afile>:t'))
   au TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
   au TerminalOpen * setlocal nonumber norelativenumber
 augroup END " }}}
@@ -65,21 +65,6 @@ def g:ShowUnsavedChanges()
   diffthis
   wincmd p
   diffthis
-enddef
-
-def g:LookupWord()
-  var size: number
-  setloclist(win_getid(), [], " ", {"title": "word in " .. fnamemodify(bufname("%"), ":t")})
-  execute 'g/' .. expand("<cword>") .. '/call setloclist(win_getid(), [], "a", {"lines": [bufname("%") .. ":" .. line(".") .. ":" .. getline(".")]})'
-  size = getloclist(win_getid(), {'nr': '$', 'size': 0}).size
-  nnoremap <buffer> <LocalLeader><Esc> <Cmd>lclose<CR>
-  if size > 0
-    execute 'botright lopen ' .. min([size, &lines / 3])
-    nnoremap <buffer> <Esc> <C-w>p<Cmd>lclose<CR>
-    nnoremap <buffer> q <C-w>p<Cmd>lclose<CR>
-    nnoremap <buffer> j <Cmd>lnext<CR>zz<C-w>p
-    nnoremap <buffer> k <Cmd>lprevious<CR>zz<C-w>p
-  endif
 enddef
 
 hi PostIt guifg=black guibg=yellow gui=italic
@@ -153,7 +138,6 @@ nnoremap <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
 nnoremap <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
 nnoremap <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
 
-nnoremap <Leader>l :call g:LookupWord()<CR>
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
 nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>

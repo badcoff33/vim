@@ -24,9 +24,9 @@ var gui_bghl = "#5060A0"
 var gui_fg   = "#BBDDFF"
 var cl_bg    = "#101D33"
 
-var blue_lt  = "#91CAFF"
-var blue     = "#718FE8"
-var blue_dk  = "#6380B0"
+var blue_lt  = "#91AAFF"
+var blue     = "#718FE3"
+var blue_dk  = "#6380C0"
 
 var yellow  = "#F8E840"
 var purple  = "#C175F1"
@@ -60,8 +60,8 @@ execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(purple)
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
 execute "hi Search" Fg(orange) Bg(black) Attr("underline")
-execute "hi StatusLine" Fg(yellow) Bg(gui_bghl) Attr("NONE")
-execute "hi StatusLineNC" Fg(blue) Bg(gui_bg) Attr("NONE")
+execute "hi StatusLine" Fg(white) Bg(gui_bghl) Attr("NONE")
+execute "hi StatusLineNC" Fg(blue_lt) Bg(gui_bg) Attr("NONE")
 execute "hi StatusLineTerm" Fg(black) Bg(orange) Attr("NONE")
 execute "hi TabLineFill" Fg(yellow) Bg(black) Attr('NONE')
 execute "hi TabLineSel" Fg(yellow) Bg(bg) Attr('underline')
@@ -81,14 +81,14 @@ highlight! link qfSeparator Normal
 
 # Code
 
-execute "hi Comment" Fg(fg_dk) Attr("NONE")
-execute "hi Conditional" Fg(blue_lt) Attr("bold")
+execute "hi Comment" Fg(green) Attr("NONE")
+execute "hi Conditional" Fg(blue_lt) Attr("NONE")
 execute "hi Constant" Fg(green)
 execute "hi Directory" Fg(blue) Attr("bold,underline")
 execute "hi Error" Fg(orange) Bg("bg") Attr("underline")
-execute "hi ErrorMsg" Fg(orange) Bg(bg) Attr("bold")
-execute "hi Function" Fg(blue_lt)
-execute "hi Identifier" Fg(blue_lt) Attr("NONE")
+execute "hi ErrorMsg" Fg(red) Bg(cl_bg) Attr("bold")
+execute "hi Function" Fg(white)
+execute "hi Identifier" Fg(fg_dk) Attr("NONE")
 execute "hi ModeMsg" Fg(yellow) Bg(bg) Attr("NONE")
 execute "hi MoreMsg" Fg(green) Bg(bg) Attr("NONE")
 execute "hi Number" Fg(green)
@@ -104,8 +104,8 @@ execute "hi String" Fg(yellow)
 execute "hi Structure" Fg(blue_dk) Attr("NONE")
 execute "hi Title" Fg(white) Attr("bold")
 execute "hi Todo" Fg(blue) Bg("bg") Attr("bold,italic")
-execute "hi Type" Fg(purple) Attr("NONE")
-execute "hi WarningMsg" Fg(blue) Bg(bg)
+execute "hi Type" Fg(blue) Attr("italic")
+execute "hi WarningMsg" Fg(blue) Bg(cl_bg)
 execute "hi qfFileName" Fg(blue_lt)
 execute "hi qfLineNr" Fg(blue)
 

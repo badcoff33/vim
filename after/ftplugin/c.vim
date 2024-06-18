@@ -15,7 +15,7 @@ setlocal foldnestmax=2
 setlocal tabstop=4
 setlocal shiftwidth=4
 
-let b:load_doxygen_syntax = 1
+let b:load_doxygen_syntax = 0
 let g:c_no_comment_fold = 1
 if exists("g:c_comment_strings") | unlet g:c_comment_strings | endif
 let g:c_space_errors = 1

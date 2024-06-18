@@ -3,8 +3,8 @@ let g:notes_home = get(g:, 'notes_home', expand("~/.notes"))
 
 function! s:NotesBufferSettings()
   setfiletype markdown
-  nnoremap <LocalLeader>f <Cmd>call NotesBacklog(+1)<CR>
-  nnoremap <LocalLeader>b <Cmd>call NotesBacklog(-1)<CR>
+  nnoremap <buffer> <LocalLeader>+ <Cmd>call NotesBacklog(+1)<CR>
+  nnoremap <buffer> <LocalLeader>- <Cmd>call NotesBacklog(-1)<CR>
 endfunction
 
 function! NotesToday(...)

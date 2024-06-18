@@ -34,7 +34,10 @@ let g:a=[0,0,0]
 
 function! CompleteAllowed()
   let chars = s:NeighborChars()
-  if (chars.rearview !~ "[ \t]") && ((chars.frontview =~ '\([^a-zA-Z0-9_]\)') || (chars.frontview == ''))
+  let g:what = chars
+  if (chars.rearview == '')
+    return v:false
+  elseif (chars.rearview !~ '[ \t]') && ((chars.frontview =~ '\([^a-zA-Z0-9_]\)') || (chars.frontview == ''))
     return v:true
   else
     return v:false

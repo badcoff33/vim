@@ -115,7 +115,7 @@ set tagcase=match
 set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 " When starting in 'diff' mode, go full screen.
 if &diff
-    set columns=999 lines=999
+  set columns=999 lines=999
 endif
 
 " close special windows
@@ -128,15 +128,6 @@ nnoremap <A-Left> <Home>
 nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
-" Window movement
-nnoremap <A-h> <C-w>h
-nnoremap <A-l> <C-w>l
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-tnoremap <A-h> <C-w>h
-tnoremap <A-l> <C-w>l
-tnoremap <A-j> <C-w>j
-tnoremap <A-k> <C-w>k
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -144,12 +135,6 @@ nnoremap N Nzv
 
 " Yank more consistent to D and dd commands
 nnoremap Y y$
-
-" Resizing window
-let GrowWin = { -> "3wincmd + | 5wincmd >" }
-let ShrinkWin = { -> winnr("j")==winnr() ? "5wincmd <" : "3wincmd - | 5wincmd <" }
-nnoremap <A-+> :<C-r>=GrowWin()<CR><CR>
-nnoremap <A--> :<C-r>=ShrinkWin()<CR><CR>
 
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
@@ -180,17 +165,9 @@ nnoremap <A-j> <C-t>zz
 nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
 imap <C-l> <Esc><C-l>
 
-" Kill whitespace after abbrev expansion
-" Example:  iabbrev () ()<Left><C-r>=AbbrevKiller(getchar(0))<CR>
-let AbbrevKiller = { c ->  nr2char(c) =~ '\s' ? '' : nr2char(c) }
-
 cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep') ? 'silent vimgrep ' .. expand('<cword>') .. ' **' : 'vimgrep'
-cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() =~# '^grep')  ? 'silent grep'  : 'grep'
-cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() =~# '^make')  ? 'silent make'  : 'make'
-cnoreabbrev <expr> e  (getcmdtype() ==# ':' && getcmdline() =~# '^e')  ? ('edit ' .. expand("%:h") .. expand("/"))  : 'e'
-cnoreabbrev <expr> f  (getcmdtype() ==# ':' && getcmdline() =~# '^f')  ? 'find *'  : 'f'
-cnoreabbrev <expr> t  (getcmdtype() ==# ':' && getcmdline() =~# '^t')  ? 'tjump /'  : 't'
-cnoremap <Tab> <C-]>
+cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() !~# '^grep')  ? 'grep' : 'silent grep'
+cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() !~# '^make')  ? 'make' : 'silent make'
 
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!
