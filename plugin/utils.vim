@@ -33,6 +33,8 @@ endif
 
 augroup GroupUtils " {{{
   autocmd!
+  autocmd CmdlineEnter / GetSearchMode()
+  autocmd CmdlineEnter ? GetSearchMode()
   autocmd BufNewFile .vimrc execute "0read" g:vim_home .. "\\templates\\local_vimrc.vim"
   autocmd DirChanged global {
     if filereadable(".vimrc")
@@ -126,6 +128,16 @@ def g:RunTerminal()
     feedkeys((mode() == "n") ? "i" : "")
   else
     popnews.Open('No terminal running -- Open terminal with command :terminal')
+  endif
+enddef
+
+def GetSearchMode()
+  if &ignorecase == true && &smartcase == true
+    popnews.Open('smartcase')
+  elseif &ignorecase == false
+    popnews.Open('case sensetive')
+  else
+    popnews.Open('ignore case')
   endif
 enddef
 

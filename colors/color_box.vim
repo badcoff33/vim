@@ -17,7 +17,8 @@ var white     = "#FFFFFF"
 
 var fg = "#404040"
 var bg = "#FFFFFF"
-var bg_cl = "#F0F0F0"
+var shadow_bg = "#F0F0F0"
+var shadow_fg = "#E0E0E0"
 
 var blue_dk = "#2168AF"
 var blue    = "#4188C8"
@@ -58,15 +59,15 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 # Basics
 
 execute "hi Bold" Gui("bold")
-execute "hi CurSearch" Bg(gray_bg) Gui("underline")
+execute "hi CurSearch" Bg(gray_bg) Gui("BOLD")
 execute "hi Cursor" Bg(black) Cterm("NONE")
-execute "hi CursorLine" Bg(bg_cl) Cterm("NONE")
+execute "hi CursorLine" Bg(shadow_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(gray_dk) Bg(gray_bg) Gui("bold")
 execute "hi Folded" Fg(blue) Bg(blue_bg) Gui("NONE")
 execute "hi IncSearch" Fg(white) Bg(cyan) Gui("NONE")
 execute "hi Italic" Gui("italic")
 execute "hi Label" Fg(black) Gui("bold")
-execute "hi LineNr" Fg(gray) Gui("bold")
+execute "hi LineNr" Fg(gray_bg) Gui("bold")
 execute "hi MatchParen" Fg(green_dk) Bg(green_bg) Gui("bold")
 execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
@@ -78,8 +79,8 @@ execute "hi Search" Bg(gray_bg) Gui("NONE")
 execute "hi StatusLine" Fg(white) Bg(blue) Gui("NONE")
 execute "hi StatusLineNC" Fg(black) Bg(blue_bg) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(blue) Gui("bold")
-execute "hi TabLine" Fg(gray) Bg(white) Gui("NONE")
-execute "hi TabLineFill" Fg(black) Bg(white) Gui("NONE")
+execute "hi TabLine" Fg(gray) Bg(shadow_bg) Gui("NONE")
+execute "hi TabLineFill" Fg(black) Bg(shadow_bg) Gui("NONE")
 execute "hi TabLineSel" Fg(black) Bg(bg) Gui("bold")
 execute "hi Terminal" Fg(fg) Bg(bg)
 execute "hi User1" Fg(white) Bg(gray_lt) Gui("NONE")

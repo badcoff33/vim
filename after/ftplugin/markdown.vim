@@ -10,7 +10,7 @@ setlocal foldexpr=MarkdownFold()
 setlocal foldmethod=expr
 
 if has("conceal")
-  set conceallevel=3 concealcursor=nc
+  set conceallevel=0 concealcursor=nc
 endif
 
 " Toggle automatic code formatting

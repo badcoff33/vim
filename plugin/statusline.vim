@@ -21,16 +21,6 @@ def g:GetMode(): string
     return m
 enddef
 
-def g:GetSearchMode(): string
-  if &ignorecase == true && &smartcase == true
-    return 'S'
-  elseif &ignorecase == false
-    return 'A'
-  else
-    return 'a'
-  endif
-enddef
-
 def g:GetScopeforSL(): string
   var scope: string
   if exists('b:scope_in_statusline') && b:scope_in_statusline
@@ -48,7 +38,7 @@ enddef
 def g:BuildStatusline(): string
     var sl: string
     if exists("g:statusline_winid") && (win_getid() == g:statusline_winid)
-        sl =  " %{GetSearchMode()}" .. " %{GetMode()} "
+        sl =  " %{GetMode()} "
     endif
     sl = sl .. (len(v:errors) > 0 ? ",!" : "")
     sl = sl .. "%{g:GetScopeforSL()}"

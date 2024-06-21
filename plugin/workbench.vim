@@ -26,6 +26,50 @@ g:rg_option_all         = get(g:, "rg_option_all", false)
 g:rg_find_files_options = get(g:, "rg_find_files_options", "-u")
 g:rg_dict               = {}
 
+def ColorSelected(id: any, result: any)
+  echo id result
+  if result == 1
+    g:ctags_command = input("Edit 'g:ctags_command': ", utils.ToString(g:ctags_command))
+  elseif result == 2
+    g:ctags_options = input("Edit 'g:ctags_options': ", utils.ToString(g:ctags_options))
+  elseif result == 3
+    g:rg_command = input("Edit 'g:rg_command': ", utils.ToString(g:rg_command))
+  elseif result == 4
+    g:rg_excludes = input("Edit 'g:rg_excludes': ", utils.ToString(g:rg_excludes))
+  elseif result == 5
+    g:rg_paths = input("Edit 'g:rg_paths': ", utils.ToString(g:rg_paths))
+  elseif result == 6
+    g:rg_option_all = input("Edit 'g:rg_option_all': ", utils.ToString(g:rg_option_all))
+  elseif result == 7
+    g:rg_find_files_options = input("Edit 'g:rg_find_files_options': ", utils.ToString(g:rg_find_files_options))
+  endif
+enddef
+
+def EditWorkbenchVariable()
+  var items_ordered = [
+    "g:ctags_command",
+    "g:ctags_options",
+    "g:rg_command",
+    "g:rg_excludes",
+    "g:rg_paths",
+    "g:rg_option_all",
+    "g:rg_find_files_options",
+  ]
+  popup_create(items_ordered, {
+    title: 'Select variable:',
+    pos: 'center',
+    zindex: 200,
+    drag: 1,
+    wrap: 0,
+    border: [0, 0, 0, 0],
+    cursorline: 1,
+    padding: [1, 2, 1, 2],
+    filter: 'popup_filter_menu',
+    mapping: 0,
+    callback: 'ColorSelected',
+  })
+enddef
+
 var ctags_job: job
 var rg_glob_patterns = {
   c:      ['*.c', '*.h', '*.850', '*.s'],
@@ -129,8 +173,8 @@ def g:WbConfig()
   echo printf("g:ctags_command\t= %s", g:ctags_command)
   echo printf("g:ctags_options\t= %s", utils.ToString(g:ctags_options))
   echo printf("g:rg_command\t= %s", g:rg_command)
-  echo printf("g:rg_paths\t= %s", join(g:rg_paths, ", "))
-  echo printf("g:rg_excludes\t= %s", join(g:rg_excludes, ", "))
+  echo printf("g:rg_paths\t= %s", utils.ToString(g:rg_paths))
+  echo printf("g:rg_excludes\t= %s", utils.ToString(g:rg_excludes))
   echo printf("g:rg_option_all\t= %s", g:rg_option_all)
 enddef
 
@@ -202,6 +246,7 @@ if executable("rg")
 endif
 command! -nargs=0 CtagsForceUpdate g:CtagsTriggerUpdate(true)
 command! -nargs=* -complete=file Make MakeStart(<q-args>)
+command! -nargs=0 EditWorkbenchVariable EditWorkbenchVariable()
 
 nnoremap <Leader>m :<C-u>Make <Up>
 nnoremap <Leader>1 <Cmd>call SelectBuf()<CR>

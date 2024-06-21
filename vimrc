@@ -7,7 +7,7 @@
 
 let g:vim_home = expand('<sfile>:p:h')
 
-let AppendSep = { dir -> empty(dir) ? "" : dir .. expand("/") }
+let DirName = { dir -> empty(expand(dir)) ? "" : expand(dir) .. expand("/") }
 
 filetype plugin on
 filetype indent on
@@ -72,6 +72,7 @@ set nosplitbelow
 set nosplitright
 
 " folding
+set foldcolumn=2
 set foldmethod=indent
 set foldnestmax=1
 set nofoldenable
@@ -154,8 +155,6 @@ vnoremap <A-y> :move '>+1<CR>==gv=gv
 " Surfing the quickfix matches
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
-nnoremap <Leader><C-j> :cfirst<CR>
-nnoremap <Leader><C-k> :clast<CR>
 " Surfing the tag stack
 nnoremap <A-k> g<C-]>zz
 nnoremap <A-j> <C-t>zz
@@ -191,8 +190,8 @@ vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left>
 nnoremap <Leader>. <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
-nnoremap <Leader>e :edit <C-r>=AppendSep(expand("%:h"))<CR>
-cnoremap <expr> <A-.> expand("%:h") .. expand("/")
+nnoremap <Leader>e :edit <C-r>=DirName("%:h")<CR>
+cnoremap <expr> <A-.> DirName("%:h")
 " and basic stuff
 nnoremap <Leader>b :<C-u>buffer<Space>
 nnoremap <Leader>t :<C-u>tjump /
@@ -201,12 +200,12 @@ nnoremap + :<C-u>tnext<CR>
 nnoremap - :<C-u>tprevious<CR>
 
 " More tab pages, please
-nnoremap <C-w>t :<C-u>tabedit<CR>
+nnoremap <C-w>t :<C-u>tab split<CR>
 cnoremap <C-t> tabnew<CR>:
 
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
-nnoremap <expr> <Leader>g ':vimgrep /' .. expand("<cword>") .. '/ ' .. AppendSep(expand("%:h")) .. LsFilter(&ft)
+nnoremap <expr> <Leader>g ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
 
 " yank/paste clipoard: b/c most laptop keyboards suck
 vnoremap <Leader>y "*y
@@ -222,6 +221,9 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 augroup GroupVimrc
   autocmd!
   autocmd FocusLost * try | silent wall | catch /.*/ | endtry
+  autocmd CmdlineEnter : set cmdheight=2
+  autocmd CmdlineEnter / set cmdheight=1
+  autocmd CmdlineLeave : set cmdheight=1
 augroup END
 
 let g:term = &term
