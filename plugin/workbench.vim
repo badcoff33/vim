@@ -80,9 +80,11 @@ set grepprg=grep\ $*
 set grepformat=%f:%l:%m
 
 command! -complete=file -nargs=* FindFiles run.RunStart({cmd: 'dir /S/B <args>', name: "RG-FILES"})
-command! -complete=file -nargs=* Grep      run.RunStart({cmd: grep.GrepCommand() .. ' <args>', regexp: &grepformat, no_popup: true})
+command! -complete=file -nargs=* Grep run.RunStart({cmd: grep.GrepCommand() .. ' <args>', regexp: &grepformat, no_popup: true })
+command! -complete=file -nargs=* GrepC run.RunStart({cmd: join([grep#GrepCommand(), grep#GrepExcludes(), grep#GrepIncludes(), grep#GrepPattern(), utils#ToString(g:grep_paths), " "]) .. ' <args>', regexp: &grepformat, no_popup: true })
 nnoremap <Leader><CR> :call grep#GrepPatternInput()<CR>
-nnoremap <silent> <Leader><Leader> :<C-r>=join([":Grep", grep#GrepExcludes(), grep#GrepIncludes(), grep#GrepPattern(), utils#ToString(g:grep_paths), " "])<CR><CR>
+nnoremap <silent> <Leader><Leader> :GrepC <C-r><C-w><CR>
+# nnoremap <silent> <Leader><Leader> :<C-r>=join([":Grep", grep#GrepExcludes(), grep#GrepIncludes(), grep#GrepPattern(), utils#ToString(g:grep_paths), " "])<CR><CR>
 
 command! -nargs=0 WbConfig g:WbConfig()
 command! -nargs=0 CtagsForceUpdate g:CtagsTriggerUpdate(true)
