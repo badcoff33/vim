@@ -81,7 +81,7 @@ highlight! link qfSeparator Normal
 
 # Code
 
-execute "hi Comment" Fg(green) Attr("NONE")
+execute "hi Comment" Fg(fg_dk) Attr("NONE")
 execute "hi Conditional" Fg(blue_lt) Attr("NONE")
 execute "hi Constant" Fg(green)
 execute "hi Directory" Fg(blue) Attr("bold,underline")

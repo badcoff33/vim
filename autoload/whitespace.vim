@@ -49,6 +49,8 @@ endfunction
 " 'tabstop'. This is done by :retab and option 'expandtab'. Remove blank lines
 " on head or bottom of file.
 function! whitespace#WhitespaceCleanup()
+  let save_formatoptions = &formatoptions
+  setlocal formatoptions=
   if &modifiable
     let save_line = getpos('.')[1]
     let save_col = getpos('.')[2]
@@ -65,5 +67,9 @@ function! whitespace#WhitespaceCleanup()
   while getline('$') =~ '^\s*$'
     normal Gdd
   endwhile
+  " keep one line at EOF
+  normal Go
+  let &formatoptions=save_formatoptions
   call cursor(save_line, save_col)
 endfunction
+

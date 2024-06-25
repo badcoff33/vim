@@ -3,6 +3,12 @@ vim9script
 #
 # Maintainer: markus prepens (markus dot prepens at gmail dot com)
 
+import autoload "run.vim"
+import autoload "utils.vim"
+import autoload "popnews.vim"
+
+var ctags_job: job
+
 export def TagCycle(direction: string)
   var tl = taglist('.')
   if !exists('b:tag_number')
@@ -36,5 +42,24 @@ export def TagCycle(direction: string)
   legacy execute 'tag ' .. b:tag_name
 enddef
 
+export def CtagsTriggerUpdate(verbose = false)
+  var ctags_options: string
+
+  if job_status(ctags_job) == "run"
+    return
+  endif
+
+    ctags_options = utils.ToString(g:ctags_options)
+
+  ctags_job = run.RunStart({cmd: 'ctags ' .. ctags_options, background: true})
+  if job_status(ctags_job) != "run"
+    popnews.Open("check ctags options", 4000, "ErrorMsg")
+  elseif verbose == true
+    popnews.Open('ctags ' .. ctags_options, 3000)
+  endif
+enddef
+
+
 # re-compile when debugging
 defcompile
+

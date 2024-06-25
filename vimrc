@@ -34,7 +34,6 @@ set notimeout
 set nottimeout
 set visualbell
 set nowrap
-set nopaste
 set report=0
 set updatetime=300
 set ruler
@@ -164,10 +163,6 @@ nnoremap <A-j> <C-t>zz
 nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
 imap <C-l> <Esc><C-l>
 
-cnoreabbrev <expr> vimgrep  (getcmdtype() ==# ':' && getcmdline() =~# '^vimgrep') ? 'silent vimgrep ' .. expand('<cword>') .. ' **' : 'vimgrep'
-cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() !~# '^grep')  ? 'grep' : 'silent grep'
-cnoreabbrev <expr> make  (getcmdtype() ==# ':' && getcmdline() !~# '^make')  ? 'make' : 'silent make'
-
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!
 inoremap <C-s>" <C-o>b"<C-o>e<Right>"
@@ -212,7 +207,7 @@ vnoremap <Leader>y "*y
 nnoremap <Leader>y "*yiw
 nnoremap <Leader>y "*yiw
 nnoremap <Leader>Y "*yy
-nnoremap <Leader>p "*P
+nnoremap <Leader>p <Cmd>set paste<CR>"*P<Cmd>set nopaste<CR>
 
 command! -nargs=0 IC :set   ignorecase nosmartcase
 command! -nargs=0 CS :set noignorecase nosmartcase
@@ -221,12 +216,11 @@ command! -nargs=0 SC :set   ignorecase  smartcase
 augroup GroupVimrc
   autocmd!
   autocmd FocusLost * try | silent wall | catch /.*/ | endtry
-  autocmd CmdlineEnter : set cmdheight=2
-  autocmd CmdlineEnter / set cmdheight=1
-  autocmd CmdlineLeave : set cmdheight=1
 augroup END
 
 let g:term = &term
 syntax on
 
 " vim:foldmethod=marker:nofoldenable:
+"
+
