@@ -195,12 +195,13 @@ export def SelectTags()
 enddef
 
 # Description: filter all files from current dir
-# Rg does ignore files, when '.ignore' or '.gitignore' files exists is cureent
-# directory. To ignore both ignore definition files, put '!*' in the '.ignore' file.
+# In case of Ripgrep: Rg does ignore files, when '.ignore' or '.gitignore'
+# files exists is current directory. To ignore both ignore definition files,
+# put '!*' in the '.ignore' file.
 export def SelectFiles()
   var dir_depth = 5
   FilterMenu($"Files, {dir_depth} dirs deep",
-    split(system($'dir /S/B *'), '\n'),
+    split(system($'fd --exclude "*.git" -g *'), '\n'),
     (res, key) => {
     if key == "\<c-t>"
       exe $":tab sb {res.bufnr}"

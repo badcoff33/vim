@@ -23,7 +23,7 @@ var shadow_fg = "#E0E0E0"
 var blue_dk = "#2168AF"
 var blue    = "#4188C8"
 var blue_lt = "#5FAFF3"
-var blue_bg = "#D8F0F0"
+var blue_bg = "#DEDEF0"
 
 var red_dk = "#AF2352"
 var red    = "#DF3372"
@@ -76,9 +76,9 @@ execute "hi PmenuSbar" Fg(gray_bg) Bg(gray_lt)
 execute "hi PmenuSel" Fg(black) Bg(yellow) Gui("NONE")
 execute "hi PmenuThumb" Fg(gray_dk) Bg(gray_dk)
 execute "hi Search" Bg(gray_bg) Gui("NONE")
-execute "hi StatusLine" Fg(white) Bg(blue) Gui("NONE")
+execute "hi StatusLine" Fg(white) Bg(black) Gui("NONE")
 execute "hi StatusLineNC" Fg(black) Bg(blue_bg) Gui("NONE")
-execute "hi StatusLineTerm" Fg(white) Bg(blue) Gui("bold")
+execute "hi StatusLineTerm" Fg(white) Bg(blue) Gui("NONE")
 execute "hi TabLine" Fg(gray) Bg(shadow_bg) Gui("NONE")
 execute "hi TabLineFill" Fg(black) Bg(shadow_bg) Gui("NONE")
 execute "hi TabLineSel" Fg(black) Bg(bg) Gui("bold")
@@ -86,7 +86,7 @@ execute "hi Terminal" Fg(fg) Bg(bg)
 execute "hi User1" Fg(white) Bg(gray_lt) Gui("NONE")
 execute "hi User2" Fg(blue_bg) Bg(blue_dk) Gui("italic")
 execute "hi VertSplit" Fg(gray_bg) Bg(gray_bg) Gui("NONE")
-execute "hi Visual" Fg(white) Bg(gray)
+execute "hi Visual" Fg(black) Bg(cyan_bg)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr

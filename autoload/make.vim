@@ -1,5 +1,6 @@
 vim9script
 
+import autoload "run.vim"
 import autoload "torchlight.vim"
 
 def MakeCallback()
@@ -13,4 +14,3 @@ export def MakeStart(cmd: string)
     callback: MakeCallback
   })
 enddef
-

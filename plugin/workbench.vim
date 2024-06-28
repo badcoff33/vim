@@ -17,8 +17,13 @@ import autoload "grep.vim"
 import autoload "popnews.vim"
 import autoload "filter_menu.vim"
 
-g:ctags_command         = "ctags -R ."
-g:ctags_options         = ""
+g:ctags_command = get(g:, "ctags_command", "ctags")
+g:ctags_options = get(g:, "ctags_options", [ "-R", "." ])
+g:grep_cmd = get(g:, "grep_cmd", "grep")
+g:grep_cmd_options = get(g:, "grep_cmd_options", "-Hnr")
+g:grep_excludes = get(g:, "grep_excludes", [])
+g:grep_paths = get(g:, "grep_paths", ".")
+g:grep_option_all = get(g:, "grep_option_all", false)
 
 def ColorSelected(id: any, result: any)
   echo id result
@@ -27,9 +32,9 @@ def ColorSelected(id: any, result: any)
   elseif result == 2
     g:ctags_options = input("Edit 'g:ctags_options': ", utils.ToString(g:ctags_options))
   elseif result == 3
-    g:grep_command = input("Edit 'g:grep_command': ", utils.ToString(g:grep_command))
+    g:grep_cmd = input("Edit 'g:grep_cmd': ", utils.ToString(g:grep_cmd))
   elseif result == 4
-    g:grep_options = input("Edit 'g:grep_options': ", utils.ToString(g:grep_options))
+    g:grep_cmd_options = input("Edit 'g:grep_cmd_options': ", utils.ToString(g:grep_cmd_options))
   elseif result == 5
     g:grep_excludes = input("Edit 'g:grep_excludes': ", utils.ToString(g:grep_excludes))
   elseif result == 6
@@ -41,8 +46,8 @@ def EditWorkbenchVariable()
   var items_ordered = [
     "g:ctags_command",
     "g:ctags_options",
-    "g:grep_command",
-    "g:grep_options",
+    "g:grep_cmd",
+    "g:grep_cmd_options",
     "g:grep_excludes",
     "g:grep_paths",
   ]
@@ -62,12 +67,12 @@ def EditWorkbenchVariable()
 enddef
 
 def g:WbConfig()
-  echo printf("g:ctags_command\t= %s", g:ctags_command)
-  echo printf("g:ctags_options\t= %s", utils.ToString(g:ctags_options))
-  echo printf("g:grep_command\t= %s", g:grep_command)
-  echo printf("g:grep_options\t= %s", g:grep_options)
-  echo printf("g:grep_paths\t= %s", utils.ToString(g:grep_paths))
-  echo printf("g:grep_excludes\t= %s", utils.ToString(g:grep_excludes))
+  echo printf("g:ctags_command     = %s", g:ctags_command)
+  echo printf("g:ctags_options     = %s", utils.ToString(g:ctags_options))
+  echo printf("g:grep_cmd          = %s", g:grep_cmd)
+  echo printf("g:grep_cmd_options  = %s", g:grep_cmd_options)
+  echo printf("g:grep_paths        = %s", utils.ToString(g:grep_paths))
+  echo printf("g:grep_excludes     = %s", utils.ToString(g:grep_excludes))
 enddef
 
 augroup GroupeWorkbench
@@ -81,10 +86,8 @@ set grepformat=%f:%l:%m
 
 command! -complete=file -nargs=* FindFiles run.RunStart({cmd: 'dir /S/B <args>', name: "RG-FILES"})
 command! -complete=file -nargs=* Grep run.RunStart({cmd: grep.GrepCommand() .. ' <args>', regexp: &grepformat, no_popup: true })
-command! -complete=file -nargs=* GrepC run.RunStart({cmd: join([grep#GrepCommand(), grep#GrepExcludes(), grep#GrepIncludes(), grep#GrepPattern(), utils#ToString(g:grep_paths), " "]) .. ' <args>', regexp: &grepformat, no_popup: true })
-nnoremap <Leader><CR> :call grep#GrepPatternInput()<CR>
-nnoremap <silent> <Leader><Leader> :GrepC <C-r><C-w><CR>
-# nnoremap <silent> <Leader><Leader> :<C-r>=join([":Grep", grep#GrepExcludes(), grep#GrepIncludes(), grep#GrepPattern(), utils#ToString(g:grep_paths), " "])<CR><CR>
+nnoremap <Leader><S-Space> :call grep#GrepPatternInput()<CR>
+nnoremap <silent> <Leader><Leader> :call grep#RunCompiledCmdLine("<C-r><C-w>")<CR>
 
 command! -nargs=0 WbConfig g:WbConfig()
 command! -nargs=0 CtagsForceUpdate g:CtagsTriggerUpdate(true)
@@ -97,4 +100,3 @@ nnoremap <Leader>2 :call filter_menu#SelectFiles()<CR>
 nnoremap <Leader>3 :call filter_menu#SelectTags()<CR>
 
 defcompile
-

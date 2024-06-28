@@ -32,7 +32,7 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> xdef #define
   iabbrev <buffer> xtod #warning TODO
   iabbrev <buffer> {} {<CR><CR>}<Up><C-f>
-  iabbrev <buffer> xdoc /**<CR>@brief<CR>@param[in]<CR>@param[out]<CR>@return<CR><BS>*/<CR><Up><Up><Up><Up><Up><End>
+  iabbrev <buffer> xdoc /**<CR>\brief<CR>\param[in]<CR>\param[out]<CR>\return<CR><BS>*/<CR><Up><Up><Up><Up><Up><End>
 endif
 
 " open tag preview

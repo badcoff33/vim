@@ -1,5 +1,7 @@
 " Vim autoload file
 
+let g:whitespace_last_line_blank = get(g:, 'whitespace_last_line_blank', v:false)
+
 let s:LookCursor = {col -> getline(".")[col - 1]}
 let s:LookForward = {col -> getline(".")[col]}
 let s:LookBackward = {col -> (col == 1) ? "" : getline(".")[col - 2]}
@@ -67,9 +69,10 @@ function! whitespace#WhitespaceCleanup()
   while getline('$') =~ '^\s*$'
     normal Gdd
   endwhile
-  " keep one line at EOF
-  normal Go
+  if g:whitespace_last_line_blank == v:true
+    " keep one line at EOF
+    normal Go
+  endif
   let &formatoptions=save_formatoptions
   call cursor(save_line, save_col)
 endfunction
-

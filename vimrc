@@ -119,7 +119,7 @@ if &diff
 endif
 
 " close special windows
-nnoremap <Esc> <Cmd>helpclose<CR><Cmd>cclose<CR><C-w>z
+nnoremap <Esc> <Cmd>helpclose<CR><C-w>z
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>

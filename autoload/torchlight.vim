@@ -48,7 +48,7 @@ export def TorchlightUpdate()
                 type: "text_prop_error",
                 text: " " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
                 text_align: 'below',
-                text_padding_left: 4
+                text_padding_left: 0
             })
         elseif item.valid == 1
             bufload(item.bufnr)
@@ -57,7 +57,7 @@ export def TorchlightUpdate()
                 type: "text_prop_warning",
                 text: " " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
                 text_align: 'below',
-                text_padding_left: 4
+                text_padding_left: 0
             })
         endif
     endfor

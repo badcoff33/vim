@@ -65,7 +65,7 @@ execute "hi StatusLineNC" Fg(blue_lt) Bg(gui_bg) Attr("NONE")
 execute "hi StatusLineTerm" Fg(black) Bg(orange) Attr("NONE")
 execute "hi TabLineFill" Fg(yellow) Bg(black) Attr('NONE')
 execute "hi TabLineSel" Fg(yellow) Bg(bg) Attr('underline')
-execute "hi Terminal" Fg(blue_lt) Bg(black)
+execute "hi Terminal" Fg(blue_lt) Bg(bg)
 execute "hi User1" Fg(black) Bg(green)
 execute "hi User2" Fg(black) Bg(blue)
 execute "hi VertSplit" Fg(gui_bg) Bg(gui_bg) Attr("NONE")
@@ -150,3 +150,4 @@ highlight! link SignifySignDelete DiffDelete
 highlight! link SignifySignDeleteFirstLine DiffDelete
 highlight! link SignifySignChange DiffChange
 highlight! link SignifySignChangeDelete DiffChange
+
