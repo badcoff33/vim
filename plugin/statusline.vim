@@ -54,3 +54,4 @@ enddef
 set statusline=%!BuildStatusline()
 
 defcompile
+

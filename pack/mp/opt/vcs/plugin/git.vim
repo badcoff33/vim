@@ -1,6 +1,7 @@
 vim9script
 
 import autoload 'run.vim' as run
+import autoload 'popnews.vim' as pop
 
 augroup GroupGit
     autocmd!
@@ -8,11 +9,36 @@ augroup GroupGit
     autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
     autocmd BufWinEnter GIT-Output nnoremap <buffer> d :Git diff<Space>
     autocmd BufWinEnter GIT-Output nnoremap <buffer> a :Git add <C-r><C-a>
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> s :Git status<CR>
+    autocmd BufWinEnter GIT-Output nnoremap <buffer> s :Git status -s -b<CR>
     autocmd BufWinEnter GIT-Output nnoremap <buffer> b :Git branch<CR>
     autocmd BufWinEnter GIT-Output nnoremap <buffer> L :Git log -n 4 --pretty=short<CR>
     autocmd BufWinEnter GIT-Output nnoremap <buffer> l :Git log -n 9 --pretty=oneline<CR>
+    autocmd DirChanged  *          pop.Open(GetBranchText())
 augroup END
+
+# Get the bare-bones Git branch name.
+# Returns Empty string when information is not available.
+def GetCurrentGitBranch(): string
+  var branch_name = ''
+  var sub: string
+  var first_line = systemlist("git status -b ")[0]
+  if first_line =~? 'On branch '
+    branch_name = substitute(first_line, 'On branch ', '', '')
+  endif
+  return branch_name
+enddef
+
+def GetBranchText(): string
+  var branch_name: string
+  if exists('*GetCurrentGitBranch')
+    if GetCurrentGitBranch() != ''
+    branch_name = "On branch " .. GetCurrentGitBranch()
+    else
+      branch_name = 'No branch'
+    endif
+  endif
+  return branch_name
+enddef
 
 def GetCompleteCandidates(): list<string>
   var candidates = [ "status", "commit", "diff", "branch", "remote" ]
@@ -34,6 +60,16 @@ def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): list<strin
   return filter(candidates, (idx, val) => val =~? arg_lead)
 enddef
 
+def g:VcsGitDirStatus(directory: string)
+  if isdirectory(directory)
+    run.RunStart({
+      cmd: 'git status -s -b',
+      cwd: directory,
+      name: "GIT-Output"
+    })
+  endif
+enddef
+
 def g:VcsGitExecute(git_command: string)
   run.RunStart({
     cmd: 'git ' .. git_command,
@@ -47,3 +83,4 @@ cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  
 
 # Uncomment when testing
 defcompile
+

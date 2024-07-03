@@ -4,7 +4,7 @@ vim9script
 # Description: Workbench contain things to ease working in projects. is a project
 #
 # - Automaticalls update Ctags files after a buffer write.
-# - Run Ripgrep
+# - Run Grep/Ripgrep
 # - Run Make
 #
 # Maintainer: markus prepens (markus dot prepens at gmail dot com)
@@ -19,14 +19,21 @@ import autoload "filter_menu.vim"
 
 g:ctags_command = get(g:, "ctags_command", "ctags")
 g:ctags_options = get(g:, "ctags_options", [ "-R", "." ])
+if 0
 g:grep_cmd = get(g:, "grep_cmd", "grep")
 g:grep_cmd_options = get(g:, "grep_cmd_options", "-Hnr")
 g:grep_excludes = get(g:, "grep_excludes", [])
 g:grep_paths = get(g:, "grep_paths", ".")
-g:grep_option_all = get(g:, "grep_option_all", false)
+g:grep_for_all = get(g:, "grep_for_all", false)
+else
+g:grep_cmd = get(g:, "grep_cmd", "rg")
+g:grep_cmd_options = get(g:, "grep_cmd_options", "--vimgrep")
+g:grep_excludes = get(g:, "grep_excludes", [])
+g:grep_paths = get(g:, "grep_paths", ".")
+g:grep_for_all = get(g:, "grep_for_all", true)
+endif
 
-def ColorSelected(id: any, result: any)
-  echo id result
+def WbMenuSelect(id: any, result: any)
   if result == 1
     g:ctags_command = input("Edit 'g:ctags_command': ", utils.ToString(g:ctags_command))
   elseif result == 2
@@ -39,6 +46,8 @@ def ColorSelected(id: any, result: any)
     g:grep_excludes = input("Edit 'g:grep_excludes': ", utils.ToString(g:grep_excludes))
   elseif result == 6
     g:grep_paths = input("Edit 'g:grep_paths': ", utils.ToString(g:grep_paths))
+  elseif result == 7
+    g:grep_for_all = g:grep_for_all == true ? false : true
   endif
 enddef
 
@@ -50,6 +59,7 @@ def EditWorkbenchVariable()
     "g:grep_cmd_options",
     "g:grep_excludes",
     "g:grep_paths",
+    "g:grep_for_all",
   ]
   popup_create(items_ordered, {
     title: 'Select variable:',
@@ -62,7 +72,7 @@ def EditWorkbenchVariable()
     padding: [1, 2, 1, 2],
     filter: 'popup_filter_menu',
     mapping: 0,
-    callback: 'ColorSelected',
+    callback: 'WbMenuSelect',
   })
 enddef
 
@@ -73,6 +83,7 @@ def g:WbConfig()
   echo printf("g:grep_cmd_options  = %s", g:grep_cmd_options)
   echo printf("g:grep_paths        = %s", utils.ToString(g:grep_paths))
   echo printf("g:grep_excludes     = %s", utils.ToString(g:grep_excludes))
+  echo printf("g:grep_for_all      = %s", g:grep_for_all)
 enddef
 
 augroup GroupeWorkbench
@@ -90,7 +101,7 @@ nnoremap <Leader><S-Space> :call grep#GrepPatternInput()<CR>
 nnoremap <silent> <Leader><Leader> :call grep#RunCompiledCmdLine("<C-r><C-w>")<CR>
 
 command! -nargs=0 WbConfig g:WbConfig()
-command! -nargs=0 CtagsForceUpdate g:CtagsTriggerUpdate(true)
+command! -nargs=0 CtagsForceUpdate ctags.CtagsTriggerUpdate(true)
 command! -nargs=* -complete=file Make make.MakeStart(<q-args>)
 command! -nargs=0 WbEditConfig EditWorkbenchVariable()
 

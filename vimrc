@@ -146,17 +146,17 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Line bubbling, key mapping leant to scrolling keys C-e C-y
-nnoremap <A-e> :move .-2<CR>==
-vnoremap <A-e> :move '<-2<CR>==gv=gv
-nnoremap <A-y> :move .+1<CR>==
-vnoremap <A-y> :move '>+1<CR>==gv=gv
+nnoremap <A-j> :move .+1<CR>==
+vnoremap <A-j> :move '>+1<CR>==gv=gv
+vnoremap <A-k> :move '<-2<CR>==gv=gv
+nnoremap <A-k> :move .-2<CR>==
 
 " Surfing the quickfix matches
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 " Surfing the tag stack
-nnoremap <A-k> g<C-]>zz
-nnoremap <A-j> <C-t>zz
+nnoremap <A-.> g<C-]>zz
+nnoremap <A-.> <C-t>zz
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.

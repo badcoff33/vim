@@ -13,14 +13,20 @@ nnoremap <buffer> K :help <C-r><C-w><CR>
 nnoremap <buffer> <LocalLeader>f :call FormatLua()<CR>
 vnoremap <buffer> <LocalLeader>f :call FormatLua()<CR>
 
-let g:lua_format_options = "--no-use-tab --indent-width=2 --tab-width=2"
+if !executable("stylua")
+  finish
+endif
+
+" This Vim code requires option '-' to use stdin
+let g:stylua_options = "--search-parent-directories -"
 
 function! FormatLua() range
     let save_cursor = getcurpos()
     if a:firstline == a:lastline
-        execute "1,$!lua-format" g:lua_format_options
+        execute "1,$!stylua" g:stylua_options
     else
-        execute a:firstline..","..a:lastline.."!lua-format" g:lua_format_options
+        execute a:firstline..","..a:lastline.."!stylua" g:stylua_options
     endif
     call setpos('.', save_cursor)
 endfunction
+

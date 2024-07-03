@@ -50,7 +50,7 @@ enddef
 
 export def GrepIncludes(): string
   var include_string: string
-  if g:grep_option_all == true
+  if g:grep_for_all == true
     include_string = GrepGlobSwitch("*")
   else
     if has_key(grep_glob_patterns, &ft)
@@ -97,3 +97,4 @@ def GrepGlobSwitch(pattern: string): string
 enddef
 
 defcompile
+

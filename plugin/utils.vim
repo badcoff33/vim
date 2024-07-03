@@ -31,18 +31,23 @@ if !filereadable(g:user_vimrc)
   execute "write" g:user_vimrc
 endif
 
+var cwd_stored: string
+
 augroup GroupUtils " {{{
   autocmd!
   autocmd CmdlineEnter / GetSearchMode()
   autocmd CmdlineEnter ? GetSearchMode()
   autocmd BufNewFile .vimrc execute "0read" g:vim_home .. "\\templates\\local_vimrc.vim"
   autocmd DirChanged global {
-    if filereadable(".vimrc")
-      call popnews.Open("local .vimrc available")
+    if getcwd() != cwd_stored
+      if filereadable(".vimrc")
+        call popnews.Open("local .vimrc available")
+      endif
+      if filereadable(".session.vim")
+        call popnews.Open("local .session.vim available")
+      endif
     endif
-    if filereadable(".session.vim")
-      call popnews.Open("local .session.vim available")
-    endif
+    cwd_stored = getcwd()
   }
   autocmd SourcePost .vimrc popnews.Open('sourced ' .. expand('<afile>:t'))
   autocmd SourcePost .session.vim popnews.Open('sourced ' .. expand('<afile>:t'))

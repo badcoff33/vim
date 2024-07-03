@@ -2,7 +2,7 @@ vim9script
 # autoload file
 
 g:news_winlist  = []
-g:popnews_bottom_left = false
+g:popnews_bottom_left = true
 
 export def Test_olp()
   Open("1", 5000)
@@ -18,9 +18,9 @@ export def Open(text: string, t: number = 3000, hl: string = 'PmenuSel'): number
   var winid: number
   var winopts = {
     pos: g:popnews_bottom_left ? "botleft" : "botright",
-    col: g:popnews_bottom_left ? 2 : &columns,
+    col: g:popnews_bottom_left ? 1 : &columns,
     line: &lines - 2,
-    padding: [0, 2, 0, 8],
+    padding: [0, 2, 0, 2],
     minwidth: len(text),
     highlight: hl,
     tabpage: -1

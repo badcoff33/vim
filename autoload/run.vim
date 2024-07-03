@@ -105,23 +105,6 @@ export def CloseCb(ch: channel)
   # silent doautocmd QuickFixCmdPost make
 enddef
 
-export def BackgroundErrorCb(ch: channel,  msg: string)
-  var ch_nr = split(string(ch), " ")[1]
-  for d in g:run_dict
-    if d.channel == ch_nr
-      timer_stop(d.timer)
-      if has_key(d, "winid")
-        popnews.Close(d.winid)
-      endif
-      echohl ErrorMsg
-      echo "error reported by channel" ch_info(ch)["id"] "-->" msg
-      echohl None
-      RemoveChannelFromDict(ch_nr)
-      break
-    endif
-  endfor
-enddef
-
 def ConditionalWriteAll(dict: dict<any>)
   if has_key(dict, "no_write") && (dict.no_write == true)
     return
@@ -201,9 +184,14 @@ enddef
 def StartBackground(dict: dict<any>): job
   var v_job: job
   var job_opts = {}
-  job_opts.cwd = has_key(dict, "cwd") ? dict.cwd : getcwd()
-  job_opts.err_cb = function("run#BackgroundErrorCb")
-  v_job = job_start("cmd /C " .. dict.cmd, job_opts)
+  var out_buffer_nr = bufadd('RUN-LOG')
+  v_job = job_start("cmd /C " .. dict.cmd, {
+      cwd: has_key(dict, "cwd") ? dict.cwd : getcwd(),
+      out_io: 'buffer',
+      out_buf: out_buffer_nr,
+      err_io: 'buffer',
+      err_buf: out_buffer_nr,
+  })
   return v_job
 enddef
 
