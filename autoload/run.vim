@@ -19,13 +19,13 @@ enddef
 
 export def ErrorCb(ch: channel,  msg: string)
   var ch_nr = split(string(ch), " ")[1]
-  for d in g:run_dict
-    if d.channel == ch_nr
-      if has_key(d, "winid")
-        popnews.Close(d.winid)
+  for dict_entry in g:run_dict
+    if dict_entry.channel == ch_nr
+      if has_key(dict_entry, "winid")
+        popnews.Close(dict_entry.winid)
       endif
-      if has_key(d, "timer")
-        timer_stop(d.timer)
+      if has_key(dict_entry, "timer")
+        timer_stop(dict_entry.timer)
       endif
       popnews.Open("Error:" .. msg, 4000, g:run_hl_error)
     endif
@@ -39,20 +39,20 @@ export def CloseCb(ch: channel)
   var num_errors = 0
   var num_warnings = 0
   var buflines: list<string>
-  for d in g:run_dict
-    if d.channel == ch_nr
-      if has_key(d, "timer")
-        timer_stop(d.timer)
+  for dict_entry in g:run_dict
+    if dict_entry.channel == ch_nr
+      if has_key(dict_entry, "timer")
+        timer_stop(dict_entry.timer)
       endif
-      if has_key(d, "winid")
-        popnews.Close(d.winid)
+      if has_key(dict_entry, "winid")
+        popnews.Close(dict_entry.winid)
       endif
-      if d.name == "quickfix"
-        buflines = getbufline(d.bufnr, 1, "$")
+      if dict_entry.name == "quickfix"
+        buflines = getbufline(dict_entry.bufnr, 1, "$")
         if buflines != [""] # is it empty?
           setqflist([], " ", {
-            efm: d.regexp,
-            title: d.full_cmd,
+            efm: dict_entry.regexp,
+            title: dict_entry.full_cmd,
             lines: filter(buflines, 'v:val !~ "^\s*$"')
           })
           for e in getqflist({ "nr": "$", "all": 0 }).items
@@ -62,8 +62,8 @@ export def CloseCb(ch: channel)
           endfor
         endif
         var done_str = printf("%s took %d sec | %d lines",
-          d.short_cmd,
-          localtime() - d.started,
+          dict_entry.short_cmd,
+          localtime() - dict_entry.started,
           lines)
         if (num_warnings + num_errors) > 0
           cfirst
@@ -81,23 +81,27 @@ export def CloseCb(ch: channel)
         popnews.Open(done_str, 4000, g:run_hl_normal)
       else
         var cut_here = ['--------------------------------------------------------------------------------']
-        var b = bufadd(d.name)
+        var b = bufadd(dict_entry.name)
         lines = getbufinfo(b)[0].linecount
-        execute "drop" d.name
+        execute "drop" dict_entry.name
         setlocal noreadonly modifiable
-        setline(lines + 1, cut_here + ['(' .. strftime("%T") .. ') ' .. d.full_cmd] + getbufline(d.bufnr, 1, "$"))
-        # setline(lines + 1, ['(' .. strftime("%T") .. ') ' .. d.full_cmd] + getbufline(d.bufnr, 1, "$"))
+        setline(lines + 1,
+          cut_here
+          + ['(' .. strftime("%T") .. ') ' .. dict_entry.full_cmd .. ' in "' .. dict_entry.cwd .. '"']
+          + getbufline(dict_entry.bufnr, 1, "$")
+        )
         setlocal buftype=nofile nomodified readonly nomodifiable
         setpos(".", [b, lines + 1, 0, 0])
         normal Gzb
+        wincmd p
       endif
-      execute "silent bwipe" d.bufnr
+      execute "silent bwipe" dict_entry.bufnr
       try
-        Callback = function(d.callback)
+        Callback = function(dict_entry.callback)
         Callback()
       catch /.*/
       endtry
-      RemoveChannelFromDict(d.channel)
+      RemoveChannelFromDict(dict_entry.channel)
       break
     endif
   endfor
@@ -134,22 +138,22 @@ enddef
 def RunJobMonitoringCb(tid: number)
   var job_status: string
 
-  for d in g:run_dict
-    if d.winid > 0
-      job_status = job_status(d.job)
+  for dict_entry in g:run_dict
+    if dict_entry.winid > 0
+      job_status = job_status(dict_entry.job)
       if job_status == "run"
-        if has_key(d, "timer") && d.timer == tid
-          popup_settext(d.winid,
+        if has_key(dict_entry, "timer") && dict_entry.timer == tid
+          popup_settext(dict_entry.winid,
             printf("%s %s %d lines",
-              d.short_cmd,
+              dict_entry.short_cmd,
               GetAnimationStr(),
-              getbufinfo(d.bufnr)[0].linecount
+              getbufinfo(dict_entry.bufnr)[0].linecount
             ))
           break
         endif
       else
-        popnews.Close(d.winid)
-        timer_stop(d.timer)
+        popnews.Close(dict_entry.winid)
+        timer_stop(dict_entry.timer)
         if job_status == "fail"
           popnews.Open("XXXX job failed", 4000, g:run_hl_normal)
         endif
@@ -216,6 +220,7 @@ def StartBuffered(dict: dict<any>): job
   run_dict_entry.started = localtime()
   run_dict_entry.timer = timer_start(500, RunJobMonitoringCb, {repeat: -1})
   run_dict_entry.name = get(dict, "name", "quickfix")
+  run_dict_entry.cwd = job_opts.cwd
   if has_key(dict, "no_popup") && (dict.no_popup == true)
     run_dict_entry.winid = 0
   else

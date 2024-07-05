@@ -70,17 +70,25 @@ def g:VcsGitDirStatus(directory: string)
   endif
 enddef
 
-def g:VcsGitExecute(git_command: string)
+def g:VcsGitRun(git_command: string)
   run.RunStart({
     cmd: 'git ' .. git_command,
     name: "GIT-Output"
   })
 enddef
 
-command! -nargs=* -complete=customlist,CompleteGit Git g:VcsGitExecute(<q-args>)
+def g:VcsGitRunLocal(git_command: string)
+  run.RunStart({
+    cmd: 'git ' .. git_command,
+    cwd: expand('%:h'),
+    name: "GIT-Output"
+  })
+enddef
+
+command! -nargs=* -complete=customlist,CompleteGit Git g:VcsGitRun(<q-args>)
+command! -nargs=* -complete=customlist,CompleteGit GitLocal g:VcsGitRunLocal(<q-args>)
 
 cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  : 'G'
 
 # Uncomment when testing
 defcompile
-
