@@ -40,24 +40,34 @@ def GetBranchText(): string
   return branch_name
 enddef
 
-def GetCompleteCandidates(): list<string>
-  var candidates = [ "status", "commit", "diff", "branch", "remote" ]
-  var sub: string
-  for f in systemlist("git branch")
-    sub = substitute(f, '[ \*]\+\(\w\+\)', '\1', '')
-    candidates = add(candidates, sub)
-  endfor
-  for f in systemlist("git ls-files --modified")
-    candidates = add(candidates, f)
-  endfor
+def GetCompleteCandidates(kind: string): list<string>
+  var candidates: list<string>
+  if kind == 'base'
+    candidates = [ "status", "commit", "diff", "branch", "remote" ]
+  elseif kind == 'branch'
+    var sub: string
+    for f in systemlist("git branch")
+      sub = substitute(f, '[ \*]\+\(\w\+\)', '\1', '')
+      candidates = add(candidates, sub)
+    endfor
+  elseif (kind == 'commit') || (kind == 'diff')
+    for f in systemlist("git ls-files --modified")
+      candidates = add(candidates, f)
+    endfor
+  endif
   return candidates
 enddef
 
 def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): list<string>
-  var matching_keys: string
   var candidates: list<string>
-  candidates = GetCompleteCandidates()
-  return filter(candidates, (idx, val) => val =~? arg_lead)
+  var words = split(cmd_line, ' ')
+  var num = len(words)
+  if num == 1 || len(arg_lead) > 0
+    candidates = filter(GetCompleteCandidates('base'), (idx, val) => val =~ arg_lead)
+  else
+    candidates = filter(GetCompleteCandidates(words[1]), (idx, val) => val =~ arg_lead)
+  endif
+  return candidates
 enddef
 
 def g:VcsGitDirStatus(directory: string)
