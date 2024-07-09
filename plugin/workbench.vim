@@ -33,19 +33,26 @@ g:grep_paths = get(g:, "grep_paths", ".")
 g:grep_for_all = get(g:, "grep_for_all", true)
 endif
 
+
+
 def WbMenuSelect(id: any, result: any)
+  var input_string: string
   if result == 1
     g:ctags_command = input("Edit 'g:ctags_command': ", utils.ToString(g:ctags_command))
   elseif result == 2
-    g:ctags_options = input("Edit 'g:ctags_options': ", utils.ToString(g:ctags_options))
+    input_string = input("Edit 'g:ctags_options': ", utils.ToString(g:ctags_options))
+    g:ctags_options = utils.ToList(input_string)
   elseif result == 3
     g:grep_cmd = input("Edit 'g:grep_cmd': ", utils.ToString(g:grep_cmd))
   elseif result == 4
-    g:grep_cmd_options = input("Edit 'g:grep_cmd_options': ", utils.ToString(g:grep_cmd_options))
+    input_string = input("Edit 'g:grep_cmd_options': ", utils.ToString(g:grep_cmd_options))
+    g:grep_cmd_options = utils.ToList(input_string)
   elseif result == 5
-    g:grep_excludes = input("Edit 'g:grep_excludes': ", utils.ToString(g:grep_excludes))
+    input_string = input("Edit 'g:grep_excludes': ", utils.ToString(g:grep_excludes))
+    g:grep_excludes = utils.ToList(input_string)
   elseif result == 6
-    g:grep_paths = input("Edit 'g:grep_paths': ", utils.ToString(g:grep_paths))
+    input_string = input("Edit 'g:grep_paths': ", utils.ToString(g:grep_paths))
+    g:grep_paths = utils.ToList(input_string)
   elseif result == 7
     g:grep_for_all = g:grep_for_all == true ? false : true
   endif
