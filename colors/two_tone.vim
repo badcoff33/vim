@@ -19,11 +19,10 @@ var white = "#FFFFFF"
 
 var fg        = "#162030"
 var bg        = "#FEFEFF"
-var bg_dimmed = "#ECF0F0"
 
-var blue_dk = "#1148AF"
-var blue    = "#2188EF"
-var blue_lt = "#90C0FF"
+var blue_dk = "#11489F"
+var blue    = "#2183DF"
+var blue_lt = "#80B0EF"
 var blue_bg = "#CFE8F3"
 
 var red_dk  = "#8F2352"
@@ -33,7 +32,7 @@ var red_bg  = "#FFB3B8"
 
 var gray_dk = "#444447"
 var gray    = "#959598"
-var gray_lt = "#E1E1E5"
+var gray_lt = "#D1D1D5"
 var gray_bg = "#F1F1F4"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
@@ -44,19 +43,16 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 
-command -nargs=0 Bright execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
-command -nargs=0 Dimmed execute "hi Normal" Fg(fg) Bg(bg_dimmed) Gui("NONE")
-
 execute "hi Bold" Gui("bold")
 execute "hi CurSearch" Fg(black) Bg(gray_lt) Gui("bold")
 execute "hi Cursor" Bg(red) Cterm("NONE")
 execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
-execute "hi CursorLineNr" Fg(gray) Gui("bold")
+execute "hi CursorLineNr" Fg(blue) Bg(blue_bg) Gui("bold")
 execute "hi Folded" Fg(blue) Bg(gray_lt) Gui("NONE")
 execute "hi IncSearch" Fg(red_dk) Bg(red_bg) Gui("bold")
 execute "hi Italic" Gui("italic")
 execute "hi Label" Fg(black) Gui("bold")
-execute "hi LineNr" Fg(gray) Gui("bold")
+execute "hi LineNr" Fg(gray_lt) Bg(white) Gui("italic")
 execute "hi MatchParen" Fg(blue) Bg("bg") Gui("underline,bold")
 execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
@@ -68,6 +64,9 @@ execute "hi Search" Fg(black) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLine" Fg(white) Bg(blue) Gui("NONE")
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_lt) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(blue_dk) Gui("bold")
+execute "hi TabLine" Fg("fg") Bg(gray_bg) Gui("none")
+execute "hi TabLineFill" Fg("fg") Bg(gray_bg) Gui("none")
+execute "hi TabLineSel" Fg(black) Bg("bg") Gui("bold")
 execute "hi Terminal" Fg(black) Bg("bg")
 execute "hi User1" Fg(gray_lt) Bg(gray_dk) Gui("NONE")
 execute "hi User2" Fg(blue_dk) Bg(gray) Gui("italic")
@@ -78,9 +77,6 @@ highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
-highlight! link TabLine StatusLineNC
-highlight! link TabLineFill StatusLine
-highlight! link TabLineSel Label
 highlight! link WildMenu PmenuSel
 highlight! link qfSeparator Normal
 
@@ -93,7 +89,7 @@ execute "hi Directory" Fg(blue_dk)
 execute "hi Error" Fg(red) Bg("bg") Gui("underline")
 execute "hi ErrorMsg" Fg(red) Bg(red_bg) Gui("NONE")
 execute "hi Function" Fg(blue)
-execute "hi Identifier" Fg(red) Gui("NONE")
+execute "hi Identifier" Fg(black) Gui("NONE")
 execute "hi ModeMsg" Fg(blue) Bg("bg") Gui("NONE")
 execute "hi Number" Fg(blue)
 execute "hi PreCondit" Fg(blue)  Gui("bold")

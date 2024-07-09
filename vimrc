@@ -105,7 +105,6 @@ set wildoptions=pum,tagfile
 set wildmode=full:lastused
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
-" Mapping for text/abbrev completions
 set wildcharm=<C-n>
 
 " How to handle search for tags
