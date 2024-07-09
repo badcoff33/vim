@@ -261,13 +261,18 @@ def CompleteKillAll(arg_lead: string, cmd_line: string, cur_pos: number): string
     return matching_keys
 enddef
 
-export def KillAll(signal: string)
+export def ListJobs()
+  echo job_info()
+enddef
+
+export def KillJobs(signal: string)
   for j in job_info()
     job_stop(j, signal)
   endfor
 enddef
 
-command! -bar -complete=custom,CompleteKillAll -nargs=1 KillAll call KillAll("<args>")
+command! -bar -complete=custom,CompleteKillAll -nargs=1 KillJobs KillJobs("<args>")
+command! -bar -nargs=0 ListJobs ListJobs()
 
 # Uncomment when testing
 defcompile
