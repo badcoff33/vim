@@ -7,12 +7,6 @@ augroup GroupGit
     autocmd!
     autocmd BufWinEnter GIT-Output setf git
     autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> d :Git diff<Space>
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> a :Git add <C-r><C-a>
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> s :Git status -s -b<CR>
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> b :Git branch<CR>
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> L :Git log -n 4 --pretty=short<CR>
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> l :Git log -n 9 --pretty=oneline<CR>
     autocmd DirChanged  *          pop.Open(GetBranchText())
 augroup END
 
@@ -43,14 +37,17 @@ enddef
 def GetCompleteCandidates(kind: string): list<string>
   var candidates: list<string>
   if kind == 'base'
-    candidates = [ "status", "commit", "diff", "branch", "remote" ]
+    candidates = [ "restore", "status", "add", "commit", "diff", "branch", "remote" ]
   elseif kind == 'branch'
     var sub: string
     for f in systemlist("git branch")
       sub = substitute(f, '[ \*]\+\(\w\+\)', '\1', '')
       candidates = add(candidates, sub)
     endfor
-  elseif (kind == 'commit') || (kind == 'diff')
+  elseif kind == 'commit'
+      || kind == 'diff'
+      || kind == 'add'
+      || kind == 'restore'
     for f in systemlist("git ls-files --modified")
       candidates = add(candidates, f)
     endfor
@@ -83,20 +80,12 @@ enddef
 def g:VcsGitRun(git_command: string)
   run.RunStart({
     cmd: 'git ' .. git_command,
-    name: "GIT-Output"
-  })
-enddef
-
-def g:VcsGitRunLocal(git_command: string)
-  run.RunStart({
-    cmd: 'git ' .. git_command,
-    cwd: expand('%:h'),
+    cwd: getcwd(),
     name: "GIT-Output"
   })
 enddef
 
 command! -nargs=* -complete=customlist,CompleteGit Git g:VcsGitRun(<q-args>)
-command! -nargs=* -complete=customlist,CompleteGit GitLocal g:VcsGitRunLocal(<q-args>)
 
 cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  : 'G'
 
