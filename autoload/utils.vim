@@ -30,4 +30,11 @@ export def ToString(obj: any): string
   endif
 enddef
 
+export def ToList(fromString: string): list<string>
+  var toList: list<string>
+  for p in split(fromString, ' ')
+    add(toList, p)
+  endfor
+  return toList
+enddef
 defcompile
