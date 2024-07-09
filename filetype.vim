@@ -7,16 +7,28 @@ endif
 " of ':setfiletype ' to overrule previous detected filetypes. Read this ':h
 " ftdetect' for more details
 function! s:WhoAreYouTxt()
+  let cnt_cmake = 0
+  let cnt_markdown = 0
+  let cnt_rst = 0
   for linenr in range(1,5)
+    if getline(linenr) =~? '.*\(set(\|if(\|CMAKE\).*'
+      let cnt_cmake += 1
+    endif
     if getline(linenr) =~ '^#\+\ \w\+'
-      setfiletype markdown
-      return
+      let cnt_markdown += 1
     endif
     if getline(linenr) =~ '^[#*=]\{3,\}$'
-      setfiletype rst
-      return
+      let cnt_rst += 1
     endif
   endfor
+  " Let's play Roulette
+  if cnt_cmake > 0  " CMake has highest prio with unique pattern
+    setf cmake
+  elseif cnt_rst > 0 " Markdownseldom uses multiple seperators in a row
+    setf rst
+  else
+    setf markdown " Take the rest
+  endif
 endfunction
 
 
