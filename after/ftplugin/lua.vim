@@ -4,11 +4,6 @@ let b:undo_ftplugin = "setlocal smartindent< tabstop< shiftwidth<"
 
 setlocal smartindent tabstop=2 shiftwidth=2
 
-nnoremap <special> <buffer> <CR> :w<bar>luafile %<CR>
-vnoremap <buffer> <CR> y:lua <C-r>"<CR>
-
-nnoremap <buffer> K :help <C-r><C-w><CR>
-
 " run LLVM's clang-format -- https://clang.llvm.org/docs/ClangFormat.html
 nnoremap <buffer> <LocalLeader>f :call FormatLua()<CR>
 vnoremap <buffer> <LocalLeader>f :call FormatLua()<CR>
@@ -29,4 +24,3 @@ function! FormatLua() range
     endif
     call setpos('.', save_cursor)
 endfunction
-
