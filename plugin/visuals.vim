@@ -14,8 +14,10 @@ function Blinky(option)
 endfunction
 
 function CompleteBlinky(arg_lead, cmd_line, cur_pos)
-  return ['stay', 'flash', 'off']
+  let candidates = filter(['stay', 'flash', 'off'], {idx, val -> val =~ a:arg_lead})
+  return candidates
 endfunction
+
 command! -nargs=* -complete=customlist,CompleteBlinky Blinky call Blinky(<q-args>)
 
 nnoremap <Leader>h <cmd>HlWordToggle<CR>
@@ -24,3 +26,4 @@ augroup visuals
   au!
   autocmd TextYankPost *  call visuals#blink_on_yank_now(#{duration: 300})
 augroup END
+

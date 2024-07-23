@@ -31,11 +31,13 @@ endfunction
 " Description: Make the actual window more obvious by temporary turn the
 " option 'cursorline' on.
 function! visuals#enable_blinky_flash()
+  doautocmd BufWinLeave *
   augroup BlinkyGroup
     autocmd!
     autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
     autocmd FocusGained * call visuals#turn_cursorline_on()
   augroup END
+  call visuals#turn_cursorline_on()
 endfunction
 
 " Description: Make the actual window more obvious by temporary turn the
@@ -130,3 +132,4 @@ endfunction
 " avoid error 2nd from prop_type_add by delete it first
 call prop_type_delete('text_prop_yank')
 call prop_type_add('text_prop_yank', #{ highlight: 'Visual' })
+
