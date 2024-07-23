@@ -16,13 +16,35 @@ def g:RestoreLastSearch()
 enddef
 
 def g:BackwardSlashToForward()
+  var save_modifiable: bool
+  var save_readonly: bool
+  save_modifiable = &modifiable
+  save_readonly = &readonly
+  setlocal modifiable noreadonly
   s#\\#/#ge
   call histdel("/", -1)
+  if save_modifiable == false
+    setlocal nomodifiable
+  endif
+  if save_readonly == true
+    setlocal readonly nomodified
+  endif
 enddef
 
 def g:ForwardSlashToBackward()
+  var save_modifiable: bool
+  var save_readonly: bool
+  save_modifiable = &modifiable
+  save_readonly = &readonly
+  setlocal modifiable noreadonly
   s#/#\\#ge
   call histdel("/", -1)
+  if save_modifiable == false
+    setlocal nomodifiable
+  endif
+  if save_readonly == true
+    setlocal readonly nomodified
+  endif
 enddef
 
 if !filereadable(g:user_vimrc)
@@ -33,10 +55,10 @@ endif
 
 var cwd_stored: string
 
-augroup GroupUtils " {{{
+augroup GroupUtils
   autocmd!
-  autocmd CmdlineEnter / GetSearchMode()
-  autocmd CmdlineEnter ? GetSearchMode()
+  # autocmd CmdlineEnter / GetSearchMode()
+  # autocmd CmdlineEnter ? GetSearchMode()
   autocmd BufNewFile .vimrc execute "0read" g:vim_home .. "\\templates\\local_vimrc.vim"
   autocmd DirChanged global {
     if getcwd() != cwd_stored

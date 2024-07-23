@@ -15,10 +15,12 @@ g:colors_name = "sparks"
 var black    = "#000000"
 var white    = "#FFFFFF"
 
-var fg       = "#D8D8F0"
-var fg_dk    = "#B3B3D0"
-var bg       = "#1A253F"
+var fg        = "#D8D8F0"
+var fg_dk     = "#B3B3D0"
+var fg_moredk = "#63739F"
+var bg        = "#1A253F"
 
+var gui_bgdk = "#203050"
 var gui_bg   = "#204060"
 var gui_bghl = "#5060A0"
 var gui_fg   = "#BBDDFF"
@@ -46,12 +48,12 @@ execute "hi Bold" Attr("bold")
 execute "hi CurSearch" Fg(black) Bg(orange) Attr("NONE")
 execute "hi Cursor" Bg(yellow) Cterm("NONE")
 execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
-execute "hi CursorLineNr" Fg(white) Bg(red) Attr("bold")
+execute "hi CursorLineNr" Fg(purple) Bg(cl_bg) Attr("NONE")
 execute "hi Folded" Fg(fg_dk) Bg(black) Attr("NONE")
 execute "hi IncSearch" Fg(black) Bg(yellow) Attr("NONE")
 execute "hi Italic" Attr("italic")
 execute "hi Label" Fg(orange) Attr("bold")
-execute "hi LineNr" Fg(blue) Attr("NONE")
+execute "hi LineNr" Fg(fg_moredk) Attr("NONE")
 execute "hi MatchParen" Fg(green) Bg("bg") Attr("bold")
 execute "hi NonText" Fg(blue) Bg(cl_bg) Attr("NONE")
 execute "hi Normal" Fg(fg) Bg(bg) Attr("NONE")
@@ -60,8 +62,8 @@ execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(purple)
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
 execute "hi Search" Fg(orange) Bg(black) Attr("underline")
-execute "hi StatusLine" Fg(white) Bg(gui_bghl) Attr("NONE")
-execute "hi StatusLineNC" Fg(blue_lt) Bg(gui_bg) Attr("NONE")
+execute "hi StatusLine" Fg(gui_fg) Bg(gui_bg) Attr("BOLD")
+execute "hi StatusLineNC" Fg(gui_fg) Bg(gui_bgdk) Attr("NONE")
 execute "hi StatusLineTerm" Fg(black) Bg(orange) Attr("NONE")
 execute "hi TabLineFill" Fg(yellow) Bg(black) Attr('NONE')
 execute "hi TabLineSel" Fg(yellow) Bg(bg) Attr('underline')
@@ -129,7 +131,7 @@ execute "hi htmlH3" Fg(blue) Attr("NONE")
 # Filetype Markdown
 
 execute "hi markdownCode" Fg(green) Bg(cl_bg)
-execute "hi markdownCodeBlock" Fg(green) Bg(cl_bg)
+execute "hi markdownCodeBlock" Fg(green) Bg(bg)
 
 # Filetype ReStructuorangeText
 
@@ -150,4 +152,3 @@ highlight! link SignifySignDelete DiffDelete
 highlight! link SignifySignDeleteFirstLine DiffDelete
 highlight! link SignifySignChange DiffChange
 highlight! link SignifySignChangeDelete DiffChange
-

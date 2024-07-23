@@ -3,41 +3,34 @@ vim9script
 import autoload 'run.vim' as run
 import autoload 'popnews.vim' as pop
 
-augroup GroupGit
-    autocmd!
-    autocmd BufWinEnter GIT-Output setf git
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
-    autocmd DirChanged  *          pop.Open(GetBranchText())
-augroup END
+var popup_duration = 5000
+var popup_hl = 'PopupNotification'
 
-# Get the bare-bones Git branch name.
-# Returns Empty string when information is not available.
-def GetCurrentGitBranch(): string
-  var branch_name = ''
-  var sub: string
-  var first_line = systemlist("git status -b ")[0]
-  if first_line =~? 'On branch '
-    branch_name = substitute(first_line, 'On branch ', '', '')
+def CbPopupBranchInfo(raw_list: list<string>)
+  var branch_name: string
+  if raw_list[0] =~? 'On branch '
+    branch_name = "On branch " .. substitute(raw_list[0], 'On branch ', '', '')
+  else
+    branch_name = 'No Git branch'
   endif
-  return branch_name
+  pop.Open(branch_name, {t: popup_duration, hl: popup_hl})
 enddef
 
-def GetBranchText(): string
-  var branch_name: string
-  if exists('*GetCurrentGitBranch')
-    if GetCurrentGitBranch() != ''
-    branch_name = "On branch " .. GetCurrentGitBranch()
-    else
-      branch_name = 'No branch'
-    endif
+def g:VcsGitBranchInfo(directory: string)
+  var output: list<string>
+  if isdirectory(directory)
+  pop.Open('In ' .. getcwd(), {t: popup_duration, hl: popup_hl})
+  job_start('git status -b', {
+      callback: (_, data) => add(output, data),
+      exit_cb: (_, data) => CbPopupBranchInfo(output),
+    })
   endif
-  return branch_name
 enddef
 
 def GetCompleteCandidates(kind: string): list<string>
   var candidates: list<string>
   if kind == 'base'
-    candidates = [ "restore", "status", "add", "commit", "diff", "branch", "remote" ]
+    candidates = [ "restore", "status", "add", "commit", "diff --no-color", "branch", "remote" ]
   elseif kind == 'branch'
     var sub: string
     for f in systemlist("git branch")
@@ -67,12 +60,18 @@ def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): list<strin
   return candidates
 enddef
 
+def CbPopList(out_list: list<string>)
+  for e in out_list
+    pop.Open(e, popup_duration, popup_hl)
+  endfor
+enddef
+
 def g:VcsGitDirStatus(directory: string)
+  var output: list<string>
   if isdirectory(directory)
-    run.RunStart({
-      cmd: 'git status -s -b',
-      cwd: directory,
-      name: "GIT-Output"
+    job_start('git status -s -b', {
+      callback: (_, data) => add(output, data),
+      exit_cb: (_, data) => CbPopList(output),
     })
   endif
 enddef
@@ -85,9 +84,25 @@ def g:VcsGitRun(git_command: string)
   })
 enddef
 
+augroup GroupGit
+    autocmd!
+    autocmd BufWinEnter GIT-Output setf git
+    autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
+    autocmd BufWinEnter GIT-Output nnoremap <buffer> - <Cmd>call search('modified:', 'bWz')<CR>W
+    autocmd BufWinEnter GIT-Output nnoremap <buffer> + <Cmd>call search('modified:', 'Wz')<CR>W
+    autocmd BufWinEnter GIT-Output nnoremap <buffer> A h"gyE
+    autocmd BufWinEnter GIT-Output nnoremap <buffer> a h"GyE
+    autocmd BufWinEnter GIT-Output nnoremap <buffer> s <Cmd>call VcsGitDirStatus('.')<CR>
+    autocmd DirChanged  *          call VcsGitBranchInfo('.')
+augroup END
+
 command! -nargs=* -complete=customlist,CompleteGit Git g:VcsGitRun(<q-args>)
+command! -nargs=0 ShowGitBranch pop.Open(GetBranchText())
 
 cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  : 'G'
+nnoremap <A-g>s <Cmd>call VcsGitDirStatus('.')<CR>
+nnoremap <A-g>b <Cmd>call VcsGitBranchInfo('.')<CR>
 
 # Uncomment when testing
 defcompile
+

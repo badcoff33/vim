@@ -1,48 +1,59 @@
 vim9script
 # autoload file
 
-g:news_winlist  = []
+g:popnews_winlist  = []
 g:popnews_bottom_left = true
 
 export def Test_olp()
-  Open("1", 5000)
-  Open("22", 13000)
-  Open("333", 15000, "Search")
-  Open("4444", 12000)
+  Open("1", {t: 5000})
+  Open("22", {t: 13000})
+  Open("333", {t: 15000, hl: "Search"})
+  Open("4444", {t: 12000})
 enddef
 
 # text of type string is the thing to show in popup
 # returns the window id of the created popup
-export def Open(text: string, t: number = 3000, hl: string = 'PmenuSel'): number
+export def Open(text: string, opts_in: dict<any> = {t: 3000, hl: 'PopupNotification'}): number
+  # t: number = 3000, hl: string = 'PopupNotification'): number
   var ll: number
   var winid: number
-  var winopts = {
+  var opts_merged: dict<any>
+  # use something like this echo map(a, 'has_key(b, v:key) ? b[v:key] : a[v:key]')
+  var opts_def = {
+    t: 3000,
+    hl: 'PopupNotification',
+  }
+  for [key, value] in items(opts_def)
+    opts_merged[key] = value
+  endfor
+  var win_opts = {
     pos: g:popnews_bottom_left ? "botleft" : "botright",
     col: g:popnews_bottom_left ? 1 : &columns,
     line: &lines - 2,
     padding: [0, 2, 0, 2],
     minwidth: len(text),
-    highlight: hl,
+    highlight: opts_merged.hl,
     tabpage: -1
   }
-  if t > 0
-    winopts['time'] = t
-    winopts['callback'] = g:NewsCB
+
+  if opts_merged.t > 0
+    win_opts['time'] = opts_merged.t
+    win_opts['callback'] = g:NewsCB
   endif
-  for w in g:news_winlist
+  for w in g:popnews_winlist
     ll = popup_getpos(w)['line']
     popup_move(w, {line: ll - 1})
   endfor
-  winid = popup_create(text, winopts)
-  add(g:news_winlist, winid)
+  winid = popup_create(text, win_opts)
+  add(g:popnews_winlist, winid)
   return winid
 enddef
 
 export def Resize()
-  if !exists('g:news_winlist')
+  if !exists('g:popnews_winlist')
     return
   endif
-  for w in g:news_winlist
+  for w in g:popnews_winlist
     echo "1"
     popup_move(w, {
       pos: g:popnews_bottom_left ? "botleft" : "botright",
@@ -59,9 +70,9 @@ export def Close(winid: number)
   if index(popup_list(), winid) > -1 # does it exist?
     l = popup_getpos(winid)["line"]
     popup_close(winid)
-    i = index(g:news_winlist, winid)
-    remove(g:news_winlist, i)
-    for w in g:news_winlist
+    i = index(g:popnews_winlist, winid)
+    remove(g:popnews_winlist, i)
+    for w in g:popnews_winlist
       ll = popup_getpos(w)['line']
       if ll < l
         popup_move(w, {line: ll + 1})
@@ -75,9 +86,9 @@ def NewsCB(winid: number, result: number)
   var l: number # line of popup to be removed
   var ll: number
   l = popup_getpos(winid)["line"]
-  i = index(g:news_winlist, winid)
-  remove(g:news_winlist, i)
-  for w in g:news_winlist
+  i = index(g:popnews_winlist, winid)
+  remove(g:popnews_winlist, i)
+  for w in g:popnews_winlist
     ll = popup_getpos(w)['line']
     if ll < l
       popup_move(w, {
@@ -122,3 +133,4 @@ enddef
 
 # uncomment when debugging
 defcompile
+

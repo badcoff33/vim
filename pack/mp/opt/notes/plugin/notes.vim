@@ -1,5 +1,5 @@
 let g:notes_files = []
-let g:notes_home = get(g:, 'notes_home', expand("~/.notes"))
+let g:notes_home = get(g:, 'notes_home', expand("~/.text"))
 
 function! s:NotesBufferSettings()
   setfiletype markdown
@@ -105,3 +105,4 @@ command! -complete=customlist,CustomCompleteNotes -nargs=1 Notes call NotesCmdDi
 function! CustomCompleteNotes(ArgLead, CmdLine, CursorPos)
   return filter(['today', 'list', 'find'], {idx, val -> val =~? a:ArgLead})
 endfunction
+

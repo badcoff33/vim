@@ -4,8 +4,8 @@ import autoload "popnews.vim"
 
 g:run_dict = []
 g:run_be_verbose = false
-g:run_hl_normal = get(g:, 'run_hl_normal', 'PmenuSel')
-g:run_hl_error  = get(g:, 'run_hl_error', 'ErrorMsg')
+var run_hl_normal = 'PopupNotification'
+var run_hl_error  = 'ErrorMsg'
 
 def RemoveChannelFromDict(ch: string)
   var r: list<any>
@@ -27,7 +27,7 @@ export def ErrorCb(ch: channel,  msg: string)
       if has_key(dict_entry, "timer")
         timer_stop(dict_entry.timer)
       endif
-      popnews.Open("Error:" .. msg, 4000, g:run_hl_error)
+      popnews.Open("Error:" .. msg, {t: 4000, hl: run_hl_error})
     endif
   endfor
 enddef
@@ -78,7 +78,7 @@ export def CloseCb(ch: channel)
             done_str ..= printf(" | %d errors", num_errors)
           endif
         endif
-        popnews.Open(done_str, 4000, g:run_hl_normal)
+        popnews.Open(done_str, [t: 4000, hl: run_hl_normal})
       else
         var cut_here = ['--------------------------------------------------------------------------------']
         var b = bufadd(dict_entry.name)
@@ -93,7 +93,6 @@ export def CloseCb(ch: channel)
         setlocal buftype=nofile nomodified readonly nomodifiable
         setpos(".", [b, lines + 1, 0, 0])
         normal Gzb
-        wincmd p
       endif
       execute "silent bwipe" dict_entry.bufnr
       try
@@ -155,7 +154,7 @@ def RunJobMonitoringCb(tid: number)
         popnews.Close(dict_entry.winid)
         timer_stop(dict_entry.timer)
         if job_status == "fail"
-          popnews.Open("XXXX job failed", 4000, g:run_hl_normal)
+          popnews.Open("XXXX job failed", {t: 4000, hl: run_hl_normal})
         endif
       endif
     endif
@@ -229,9 +228,10 @@ def StartBuffered(dict: dict<any>): job
         "%s %s %d lines",
         run_dict_entry.short_cmd,
         animations[0],
-        0),
-      0, # permanent
-      g:run_hl_normal
+        0), {
+          t: 0, # permanent
+          hl: run_hl_normal
+        }
     )
   endif
   run_dict_entry.job = job_start("cmd /C " .. dict.cmd, job_opts)
@@ -276,3 +276,4 @@ command! -bar -nargs=0 ListJobs ListJobs()
 
 # Uncomment when testing
 defcompile
+
