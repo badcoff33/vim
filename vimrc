@@ -99,13 +99,16 @@ set noshowfulltag
 set completeopt=menu
 set pumheight=7
 
-" Command line completion
-set wildmenu
-set wildoptions=pum,tagfile
-set wildmode=full:lastused
+if v:true
+    " Command line completion with popup menu
+    set wildmenu wildmode=full:lastused wildoptions=pum,tagfile
+else
+    " Command line completion the old fashion way
+    set nowildmenu wildmode=longest:list,full wildoptions=tagfile
+endif
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
-set wildcharm=<C-n>
+set wildcharm=<Tab>
 
 " How to handle search for tags
 set tagcase=match
@@ -208,9 +211,9 @@ nnoremap <Leader>y "*yiw
 nnoremap <Leader>Y "*yy
 nnoremap <Leader>p <Cmd>set paste<CR>"*P<Cmd>set nopaste<CR>
 
-command! -nargs=0 IC :set   ignorecase nosmartcase
-command! -nargs=0 CS :set noignorecase nosmartcase
-command! -nargs=0 SC :set   ignorecase  smartcase
+command! -nargs=0 IgnoreCase    :set   ignorecase nosmartcase
+command! -nargs=0 CaseSensetive :set noignorecase nosmartcase
+command! -nargs=0 SmartCase     :set   ignorecase   smartcase
 
 augroup GroupVimrc
   autocmd!
