@@ -78,7 +78,7 @@ export def CloseCb(ch: channel)
             done_str ..= printf(" | %d errors", num_errors)
           endif
         endif
-        popnews.Open(done_str, [t: 4000, hl: run_hl_normal})
+        popnews.Open(done_str, {t: 4000, hl: run_hl_normal})
       else
         var cut_here = ['--------------------------------------------------------------------------------']
         var b = bufadd(dict_entry.name)
@@ -276,4 +276,3 @@ command! -bar -nargs=0 ListJobs ListJobs()
 
 # Uncomment when testing
 defcompile
-
