@@ -31,7 +31,9 @@ endfunction
 " Description: Make the actual window more obvious by temporary turn the
 " option 'cursorline' on.
 function! visuals#enable_blinky_flash()
-  doautocmd BufWinLeave *
+  if exists("#BufWinLeave")
+    doautocmd BufWinLeave *
+  endif
   augroup BlinkyGroup
     autocmd!
     autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
