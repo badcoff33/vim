@@ -18,7 +18,7 @@ set autowriteall
 set belloff=all
 set clipboard=
 set expandtab
-set fillchars=eob:\ ,vert:'
+set fillchars=eob:\ ,vert::
 set hidden
 set history=200
 set keymodel=
@@ -197,7 +197,6 @@ nnoremap + :<C-u>tnext<CR>
 nnoremap - :<C-u>tprevious<CR>
 
 " More tab pages, please
-nnoremap <C-w>t :<C-u>tab split<CR>
 cnoremap <C-t> tabnew<CR>:
 
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
@@ -210,6 +209,21 @@ nnoremap <Leader>y "*yiw
 nnoremap <Leader>y "*yiw
 nnoremap <Leader>Y "*yy
 nnoremap <Leader>p <Cmd>set paste<CR>"*P<Cmd>set nopaste<CR>
+
+" Move it!
+inoremap <S-Up>    <Esc><C-w><Up>
+inoremap <S-Down>  <Esc><C-w><Down>
+inoremap <S-Left>  <Esc><C-w><Left>
+inoremap <S-Right> <Esc><C-w><Right>
+nnoremap <S-Up>    <C-w><Up>
+nnoremap <S-Down>  <C-w><Down>
+nnoremap <S-Left>  <C-w><Left>
+nnoremap <S-Right> <C-w><Right>
+tnoremap <S-Up>    <C-w><Up>
+tnoremap <S-Down>  <C-w><Down>
+tnoremap <S-Left>  <C-w><Left>
+tnoremap <S-Right> <C-w><Right>
+tnoremap <Esc>     <C-W>N
 
 command! -nargs=0 IgnoreCase    :set   ignorecase nosmartcase
 command! -nargs=0 CaseSensetive :set noignorecase nosmartcase
