@@ -62,7 +62,7 @@ enddef
 
 def CbPopList(out_list: list<string>)
   for e in out_list
-    pop.Open(e, popup_duration, popup_hl)
+    pop.Open(e, {t: popup_duration, hl: popup_hl})
   endfor
 enddef
 
@@ -105,4 +105,3 @@ nnoremap <A-g>b <Cmd>call VcsGitBranchInfo('.')<CR>
 
 # Uncomment when testing
 defcompile
-
