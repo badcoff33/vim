@@ -11,6 +11,14 @@ export def Test_olp()
   Open("4444", {t: 12000})
 enddef
 
+def RemoveFromWinlist(winid: number)
+  var i: number
+    i = index(g:popnews_winlist, winid)
+    if i >= 0
+      remove(g:popnews_winlist, i)
+    endif
+enddef
+
 # text of type string is the thing to show in popup
 # returns the window id of the created popup
 export def Open(text: string, opts_in: dict<any> = {t: 3000, hl: 'PopupNotification'}): number
@@ -64,14 +72,12 @@ export def Resize()
 enddef
 
 export def Close(winid: number)
-  var i: number
   var l: number # line of popup to be removed
   var ll: number
   if index(popup_list(), winid) > -1 # does it exist?
+    RemoveFromWinlist(winid)
     l = popup_getpos(winid)["line"]
     popup_close(winid)
-    i = index(g:popnews_winlist, winid)
-    remove(g:popnews_winlist, i)
     for w in g:popnews_winlist
       ll = popup_getpos(w)['line']
       if ll < l
@@ -86,8 +92,7 @@ def NewsCB(winid: number, result: number)
   var l: number # line of popup to be removed
   var ll: number
   l = popup_getpos(winid)["line"]
-  i = index(g:popnews_winlist, winid)
-  remove(g:popnews_winlist, i)
+  RemoveFromWinlist(winid)
   for w in g:popnews_winlist
     ll = popup_getpos(w)['line']
     if ll < l
@@ -133,4 +138,3 @@ enddef
 
 # uncomment when debugging
 defcompile
-
