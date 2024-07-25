@@ -11,98 +11,82 @@ export def Test_olp()
   Open("4444", {t: 12000})
 enddef
 
-def RemoveFromWinlist(winid: number)
+def CleanupWinlist(winid: number)
   var i: number
-    i = index(g:popnews_winlist, winid)
-    if i >= 0
-      remove(g:popnews_winlist, i)
-    endif
-enddef
-
-# text of type string is the thing to show in popup
-# returns the window id of the created popup
-export def Open(text: string, opts_in: dict<any> = {t: 3000, hl: 'PopupNotification'}): number
-  # t: number = 3000, hl: string = 'PopupNotification'): number
-  var ll: number
-  var winid: number
-  var opts_merged: dict<any>
-  # use something like this echo map(a, 'has_key(b, v:key) ? b[v:key] : a[v:key]')
-  var opts_def = {
-    t: 3000,
-    hl: 'PopupNotification',
-  }
-  for [key, value] in items(opts_def)
-    opts_merged[key] = value
-  endfor
-  var win_opts = {
-    pos: g:popnews_bottom_left ? "botleft" : "botright",
-    col: g:popnews_bottom_left ? 1 : &columns,
-    line: &lines - 2,
-    padding: [0, 2, 0, 2],
-    minwidth: len(text),
-    highlight: opts_merged.hl,
-    tabpage: -1
-  }
-
-  if opts_merged.t > 0
-    win_opts['time'] = opts_merged.t
-    win_opts['callback'] = g:NewsCB
+  var popup_del_line: number # line of popup to be removed
+  var popup_this_line: number
+  i = index(g:popnews_winlist, winid)
+  if i >= 0
+    remove(g:popnews_winlist, i)
   endif
+  popup_del_line = popup_getpos(winid)["line"]
   for w in g:popnews_winlist
-    ll = popup_getpos(w)['line']
-    popup_move(w, {line: ll - 1})
-  endfor
-  winid = popup_create(text, win_opts)
-  add(g:popnews_winlist, winid)
-  return winid
-enddef
-
-export def Resize()
-  if !exists('g:popnews_winlist')
-    return
-  endif
-  for w in g:popnews_winlist
-    echo "1"
-    popup_move(w, {
-      pos: g:popnews_bottom_left ? "botleft" : "botright",
-      col: g:popnews_bottom_left ? 2 : &columns,
-      line: &lines - 2,
-    })
-  endfor
-enddef
-
-export def Close(winid: number)
-  var l: number # line of popup to be removed
-  var ll: number
-  if index(popup_list(), winid) > -1 # does it exist?
-    RemoveFromWinlist(winid)
-    l = popup_getpos(winid)["line"]
-    popup_close(winid)
-    for w in g:popnews_winlist
-      ll = popup_getpos(w)['line']
-      if ll < l
-        popup_move(w, {line: ll + 1})
-      endif
-    endfor
-  endif
-enddef
-
-def NewsCB(winid: number, result: number)
-  var i: number
-  var l: number # line of popup to be removed
-  var ll: number
-  l = popup_getpos(winid)["line"]
-  RemoveFromWinlist(winid)
-  for w in g:popnews_winlist
-    ll = popup_getpos(w)['line']
-    if ll < l
+    popup_this_line = popup_getpos(w)['line']
+    if popup_this_line < popup_del_line
       popup_move(w, {
-        line: ll + 1,
+        line: popup_this_line + 1,
         pos: g:popnews_bottom_left ? "botleft" : "botright",
         col: g:popnews_bottom_left ? 2 : &columns
       })
     endif
   endfor
+enddef
+
+# text of type string is the thing to show in popup
+# returns the window id of the created popup
+export def Open(text: string, param_in: dict<any> = {t: 3000, hl: 'PopupNotification'}): number
+  var IsPermanent = (): bool =>  (has_key(param_in, 'permanent') && param_in.permanent) ? true : false
+  var popup_line: number
+  var winid: number
+  var param_merged: dict<any>
+  for [key, value] in items({
+      permanent: false,
+      t: 3000,
+      hl: 'PopupNotification'
+      })
+    if has_key(param_in, key)
+      param_merged[key] = param_in[key]
+    else
+      param_merged[key] = value
+    endif
+  endfor
+
+  var popup_opts = {
+    pos: g:popnews_bottom_left ? "botleft" : "botright",
+    col: g:popnews_bottom_left ? 1 : &columns,
+    line: &lines - 2,
+    padding: [0, 2, 0, 2],
+    minwidth: len(text),
+    highlight: param_merged.hl,
+    tabpage: -1
+  }
+
+  if IsPermanent()
+  else
+    popup_opts['time'] = param_merged.t
+    popup_opts['callback'] = g:NewsCB
+  endif
+
+  for w in g:popnews_winlist
+    popup_line = popup_getpos(w)['line']
+    popup_move(w, {line: popup_line - 1})
+  endfor
+
+  winid = popup_create(text, popup_opts)
+  add(g:popnews_winlist, winid)
+
+  return winid
+enddef
+
+export def Close(winid: number)
+  if index(popup_list(), winid) > -1 # does it exist?
+    CleanupWinlist(winid)
+    popup_close(winid)
+  endif
+enddef
+
+def NewsCB(winid: number, result: number)
+  CleanupWinlist(winid)
 enddef
 
 export def PopupFiletypeHelp()

@@ -154,7 +154,7 @@ def RunJobMonitoringCb(tid: number)
         popnews.Close(dict_entry.winid)
         timer_stop(dict_entry.timer)
         if job_status == "fail"
-          popnews.Open("XXXX job failed", {t: 4000, hl: run_hl_normal})
+          popnews.Open("job failed", {t: 4000, hl: run_hl_normal})
         endif
       endif
     endif
@@ -229,7 +229,7 @@ def StartBuffered(dict: dict<any>): job
         run_dict_entry.short_cmd,
         animations[0],
         0), {
-          t: 0, # permanent
+          permanent: true,
           hl: run_hl_normal
         }
     )
