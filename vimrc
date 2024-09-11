@@ -160,6 +160,10 @@ nnoremap <C-k> :cprevious<CR>
 nnoremap <A-.> g<C-]>zz
 nnoremap <A-.> <C-t>zz
 
+" Resize window
+nnoremap <A-+> 5<C-w>+
+nnoremap <A--> 5<C-w>-
+
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
 nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
@@ -239,4 +243,3 @@ syntax on
 
 " vim:foldmethod=marker:nofoldenable:
 "
-
