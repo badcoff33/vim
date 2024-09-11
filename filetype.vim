@@ -11,7 +11,7 @@ function! s:WhoAreYouTxt()
   let cnt_markdown = 0
   let cnt_rst = 0
   for linenr in range(1,5)
-    if getline(linenr) =~? '.*\(set(\|if(\|CMAKE\).*'
+    if getline(linenr) =~? '.*\(set(\|if(\|CMAKE\|include_\|add_\).*'
       let cnt_cmake += 1
     endif
     if getline(linenr) =~ '^#\+\ \w\+'
@@ -21,8 +21,8 @@ function! s:WhoAreYouTxt()
       let cnt_rst += 1
     endif
   endfor
-  " Let's play Roulette
-  if cnt_cmake > 0  " CMake has highest prio with unique pattern
+  " Three counters. Who wins?
+  if cnt_cmake > 0  " CMake has highest prio with unique patterns
     setf cmake
   elseif cnt_rst > 0 " Markdownseldom uses multiple seperators in a row
     setf rst
@@ -37,3 +37,4 @@ augroup filetypedetect
   autocmd BufEnter *.850 :setfiletype asm850
   autocmd BufEnter *.800 :setfiletype asm850
 augroup END
+
