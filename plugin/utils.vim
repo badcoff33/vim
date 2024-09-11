@@ -59,7 +59,7 @@ augroup GroupUtils
   autocmd!
   # autocmd CmdlineEnter / GetSearchMode()
   # autocmd CmdlineEnter ? GetSearchMode()
-  autocmd BufNewFile .vimrc execute "0read" g:vim_home .. "\\templates\\local_vimrc.vim"
+  autocmd BufNewFile .vimrc execute ":0read " expand(g:vim_home .. "/templates/local_vimrc.vim")
   autocmd DirChanged global {
     if getcwd() != cwd_stored
       if filereadable(".vimrc")
@@ -73,8 +73,8 @@ augroup GroupUtils
   }
   autocmd SourcePost .vimrc popnews.Open('sourced ' .. expand('<afile>:t'))
   autocmd SourcePost .session.vim popnews.Open('sourced ' .. expand('<afile>:t'))
-  au TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
-  au TerminalOpen * setlocal nonumber norelativenumber
+  autocmd TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
+  autocmd TerminalOpen * setlocal nonumber norelativenumber
 augroup END " }}}
 
 if filereadable(".vimrc")
@@ -191,3 +191,4 @@ command! -nargs=0 PostItRemove PostItRemove()
 command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 
 defcompile
+
