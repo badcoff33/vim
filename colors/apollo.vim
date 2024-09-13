@@ -76,7 +76,7 @@ execute "hi Title" Fg(green_br)
 execute "hi User1" Fg(white) Bg(blue) Attr("NONE")
 execute "hi User2" Fg(black) Bg(amber)
 execute "hi VertSplit" Fg(bg1) Bg(bg1) Attr("NONE")
-execute "hi Visual" Fg(black) Bg(green_dk)
+execute "hi Visual" Fg(fg2) Bg(bg3)
 execute "hi WarningMsg" Fg(white) Bg(blue_dk)
 execute "hi qfFileName" Fg(blue)
 execute "hi qfSeparator" Fg("fg")
@@ -127,10 +127,10 @@ execute "hi htmlH2" Fg(green_br)  Attr("bold")
 execute "hi htmlH3" Fg(green)  Attr("bold")
 
 # markdown
-execute "hi markdownCode" Fg(fg2) Bg(bg2)
-execute "hi markdownCodeBlock" Fg(fg1)
-execute "hi markdownUrl" Fg(fg1) Bg(bg2) Attr("underline")
-execute "hi markdownLinkText" Fg(blue)  Attr("NONE")
+execute "hi markdownCode" Fg(green)
+execute "hi markdownCodeBlock" Fg(green)
+execute "hi markdownUrl" Fg(blue_dk) Attr("underline")
+execute "hi markdownLinkText" Fg(blue_br)  Attr("NONE")
 
 # restructured text
 execute "hi rstEmphasis" Fg(green)
@@ -148,3 +148,4 @@ highlight! link SignifySignDelete DiffDelete
 highlight! link SignifySignDeleteFirstLine DiffDelete
 highlight! link SignifySignChange DiffChange
 highlight! link SignifySignChangeDelete DiffChange
+
