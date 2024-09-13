@@ -55,6 +55,7 @@ def WbMenuSelect(id: any, result: any)
     g:grep_paths = utils.ToList(input_string)
   elseif result == 7
     g:grep_for_all = g:grep_for_all == true ? false : true
+    echo "g:grep_for_all = " .. g:grep_for_all
   endif
 enddef
 
@@ -118,3 +119,4 @@ nnoremap <Leader>2 :call filter_menu#SelectFiles()<CR>
 nnoremap <Leader>3 :call filter_menu#SelectTags()<CR>
 
 defcompile
+

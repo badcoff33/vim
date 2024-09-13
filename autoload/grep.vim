@@ -63,10 +63,14 @@ export def GrepIncludes(): string
 enddef
 
 export def GrepExcludes(): string
-  var exclude_string = ""
-  for e in g:grep_excludes
-    exclude_string = exclude_string .. GrepGlobSwitchExclude(e) .. " "
-  endfor
+  var exclude_string: string
+  if g:grep_for_all == true
+    return ""
+  else
+    for e in g:grep_excludes
+      exclude_string = exclude_string .. GrepGlobSwitchExclude(e) .. " "
+    endfor
+  endif
   return exclude_string
 enddef
 
