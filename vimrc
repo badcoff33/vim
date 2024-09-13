@@ -78,7 +78,8 @@ set nofoldenable
 
 " backspace and cursor keys wrap to previous/next line
 set backspace=indent,eol,start
-"set whichwrap+=<,>,[,]
+" specify keys that move to next/previous line
+set whichwrap+=<,>,[,]
 
 " makes selecting text more consistent (at least for me)
 set virtualedit=onemore,block
@@ -243,3 +244,4 @@ syntax on
 
 " vim:foldmethod=marker:nofoldenable:
 "
+
