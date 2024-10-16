@@ -3,7 +3,7 @@ set guioptions=!a
 set guicursor+=n:blinkon0
 set guicursor+=i:ver10-Cursor
 set guicursor+=ve:ver10-Cursor
-set renderoptions=type:directx encoding=utf-8
+" set renderoptions=type:directx encoding=utf-8
 set mousemodel=popup
 set nomousefocus
 
@@ -48,3 +48,4 @@ nnoremenu 1.320 PopUp.-SEP4- <NOP>
 nnoremenu 1.321 PopUp.Set\ font  :set guifont=*<CR>
 
 " vim:ft=vim
+

@@ -29,7 +29,7 @@ var fg1       = "#8098A8"
 var fg2       = "#B0CBE8"
 var fg3       = "#D0E8FE"
 
-var red      = "#F84070"
+var red      = "#F84050"
 var amber    = "#C8BF40"
 var green_dk = "#27C148"
 var green    = "#27E158"
@@ -46,11 +46,11 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 execute "hi Bold" Fg(fg1)  Attr("bold")
-execute "hi Cursor" Fg(black) Bg(green_dk)
+execute "hi Cursor" Fg(white) Bg(red)
 execute "hi CursorLine"  Bg(bg1) Cterm("NONE")
 execute "hi CursorLineNr" Fg(green_br) Bg(bg2) Attr("bold")
 execute "hi ErrorMsg" Fg(red) Bg("bg")
-execute "hi IncSearch" Fg(black) Bg(amber) Attr("underline") Cterm("NONE")
+execute "hi IncSearch" Fg(black) Bg(green_dk) Attr("underline") Cterm("NONE")
 execute "hi Italic" Fg(fg1)  Attr("NONE")
 execute "hi LineNr" Fg(blue_br) Bg(bg1)
 execute "hi LineNrAbove" Fg(bg3) Bg("bg") Attr("bold")
@@ -59,13 +59,13 @@ execute "hi MatchParen" Fg(green_br) Bg("bg") Attr("underline")
 execute "hi ModeMsg" Fg(fg1) Bg("bg")
 execute "hi NonText" Fg(blue_dk) Bg(bg0)
 execute "hi Normal" Fg(fg3) Bg(bg0) Attr("NONE")
-execute "hi Pmenu" Fg(white) Bg(bg1) Attr("NONE")
-execute "hi PmenuSbar" Bg(bg2)
+execute "hi Pmenu" Fg(white) Bg(blue) Attr("NONE")
+execute "hi PmenuSbar" Bg(white)
 execute "hi PmenuSel" Fg(white) Bg(blue_dk) Attr("NONE")
-execute "hi PmenuThumb" Bg(blue_br)
+execute "hi PmenuThumb" Bg(black)
 execute "hi Question" Fg(green) Bg("bg")
 execute "hi QuickFixLine" Fg(green) Bg(bg2) Attr("NONE")
-execute "hi Search" Fg(amber) Bg("bg") Attr("underline")
+execute "hi Search" Fg(green_br) Bg("bg") Attr("underline")
 execute "hi StatusLine" Fg(white) Bg(bg2) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(white) Bg(black) Attr("NONE") Cterm("NONE")
 execute "hi TabLine" Fg(fg1) Bg(black) Attr('NONE')

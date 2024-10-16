@@ -4,7 +4,7 @@ import autoload "popnews.vim"
 
 g:run_dict = []
 g:run_be_verbose = false
-var run_hl_normal = 'PopupNotification'
+var run_hl_normal = 'ModeMsg'
 var run_hl_error  = 'ErrorMsg'
 
 def RemoveChannelFromDict(ch: string)
@@ -276,3 +276,4 @@ command! -bar -nargs=0 ListJobs ListJobs()
 
 # Uncomment when testing
 defcompile
+

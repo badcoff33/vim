@@ -31,7 +31,7 @@ export def GrepCommand(): string
     set grepformat=%f:%l:%m
     set grepprg=grep
   endif
-  return g:grep_cmd .. ' ' .. g:grep_cmd_options
+  return g:grep_cmd .. ' ' .. utils.ToString(g:grep_options)
 enddef
 
 export def RunCompiledCmdLine(pattern: string)

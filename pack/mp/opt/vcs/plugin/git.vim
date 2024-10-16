@@ -4,15 +4,6 @@ import autoload 'run.vim' as run
 import autoload 'popnews.vim' as pop
 
 var popup_duration = 6000
-var popup_hl = 'GitPopup'
-
-def g:VcsAdjustColors()
-  if &background == 'dark'
-    highlight GitPopup guibg=White guifg=Black
-  else
-    highlight GitPopup guibg=Black guifg=White
-  endif
-enddef
 
 def CbPopupBranchInfo(raw_list: list<string>)
   var branch_name: string
@@ -21,13 +12,13 @@ def CbPopupBranchInfo(raw_list: list<string>)
   else
     branch_name = '--> No Git branch'
   endif
-  pop.Open(branch_name, {t: popup_duration, hl: popup_hl})
+  pop.Open(branch_name, {t: popup_duration, hl: 'PopupNotification'})
 enddef
 
 def g:VcsGitBranchInfo(directory: string)
   var output: list<string>
   if isdirectory(directory)
-  pop.Open('In ' .. getcwd(), {t: popup_duration, hl: popup_hl})
+  pop.Open('In ' .. getcwd(), {t: popup_duration, hl: 'PopupNotification'})
   job_start('git status -b', {
       callback: (_, data) => add(output, data),
       exit_cb: (_, data) => CbPopupBranchInfo(output),
@@ -70,7 +61,7 @@ enddef
 
 def CbPopList(out_list: list<string>)
   for e in out_list
-    pop.Open('--> ' .. e, {t: popup_duration, hl: popup_hl})
+    pop.Open('--> ' .. e, {t: popup_duration, hl: 'PopupNotification'})
   endfor
 enddef
 
@@ -102,7 +93,6 @@ augroup GroupGit
     autocmd BufWinEnter GIT-Output nnoremap <buffer> a h"GyE
     autocmd BufWinEnter GIT-Output nnoremap <buffer> s <Cmd>call VcsGitDirStatus('.')<CR>
     autocmd DirChanged  *          call VcsGitBranchInfo('.')
-    autocmd ColorScheme *          call VcsAdjustColors()
 augroup END
 
 command! -nargs=* -complete=customlist,CompleteGit Git g:VcsGitRun(<q-args>)
@@ -112,8 +102,6 @@ cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  
 nnoremap <A-g>s <Cmd>call VcsGitDirStatus('.')<CR>
 nnoremap <A-g>b <Cmd>call VcsGitBranchInfo('.')<CR>
 
-# Use matching colors
-g:VcsAdjustColors()
-
 # Uncomment when testing
 defcompile
+

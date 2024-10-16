@@ -75,6 +75,11 @@ augroup GroupUtils
   autocmd SourcePost .session.vim popnews.Open('sourced ' .. expand('<afile>:t'))
   autocmd TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
   autocmd TerminalOpen * setlocal nonumber norelativenumber
+  autocmd WinEnter     * {
+    if &buftype == 'terminal'
+      normal i
+    endif
+  }
 augroup END " }}}
 
 if filereadable(".vimrc")
@@ -180,7 +185,7 @@ nnoremap <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. 
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
 nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>
-nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
+nnoremap <C-Tab> :call quickfix#ToggleQuickfix()<CR>
 
 # nice presentation of v:errors, filled by assert functions
 command! -nargs=0 PrintErrors for e in v:errors | echo e | endfor

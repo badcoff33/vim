@@ -11,6 +11,12 @@ export def Test_olp()
   Open("4444", {t: 12000})
 enddef
 
+def g:PopnewsAdjustColors()
+  if !hlexists("PopupNotification")
+    highlight! link PopupNotification Pmenu
+  endif
+enddef
+
 def CleanupWinlist(winid: number)
   var i: number
   var popup_del_line: number # line of popup to be removed
@@ -39,6 +45,7 @@ export def Open(text: string, param_in: dict<any> = {t: 3000, hl: 'PopupNotifica
   var popup_line: number
   var winid: number
   var param_merged: dict<any>
+  doautocmd ColorScheme *
   for [key, value] in items({
       permanent: false,
       t: 3000,
@@ -120,5 +127,11 @@ export def PopupFiletypeHelp()
   setbufvar(b, "&modified", false)
 enddef
 
+augroup GroupNews
+    autocmd!
+    autocmd ColorScheme * call PopnewsAdjustColors()
+augroup END
+
 # uncomment when debugging
 defcompile
+

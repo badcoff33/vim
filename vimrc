@@ -201,9 +201,6 @@ nnoremap <Leader>f :<C-u>find *
 nnoremap + :<C-u>tnext<CR>
 nnoremap - :<C-u>tprevious<CR>
 
-" More tab pages, please
-cnoremap <C-t> tabnew<CR>:
-
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
 nnoremap <expr> <Leader>g ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
