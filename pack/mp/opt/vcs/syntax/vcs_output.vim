@@ -23,6 +23,14 @@ syn match VcsGitOutputBranch "^On branch \w\+"
 syn match VcsGitOutputString "'.*\'"
 syn match VcsGitOutputInfo "(.*)"
 
+syn match VcsHggLogAttrib "^\(changeset\|user\|date\|summary\):"
+syn match VcsHgReference "\d\+:\w\+"
+syn match VcsHgTime      "\d\d:\d\d:\d\d"
+
+hi def link VcsHgLogAttrib Keyword
+hi def link VcsHgReference Type
+hi def link VcsHgTime Comment
+
 hi def link VcsGitOutputStage Keyword
 hi def link VcsGitOutputTime Comment
 hi def link VcsGitOutputInfo Comment
