@@ -12,6 +12,10 @@ set background=light
 
 g:colors_name = "blaubeere"
 
+var fg          = "#404040"
+var bg          = "#FFFFFF"
+var shadow_bg   = "#F0F0F0"
+var shadow_fg   = "#E0E0E0"
 var black       = "#000000"
 var white       = "#FFFFFF"
 var blue_dk     = "#4841AF"
@@ -22,7 +26,7 @@ var yellow_dk   = "#9D8E77"
 var red         = "#FB8A9C"
 var red_dk      = "#BC6D76"
 var green       = "#7FCA7C"
-var green_dk    = "#4FA04C"
+var green_dk    = "#65A06F"
 var aluminium_0 = "#2e3436"
 var aluminium_1 = "#555753"
 var aluminium_2 = "#888a85"
@@ -30,26 +34,21 @@ var aluminium_3 = "#babdb6"
 var aluminium_4 = "#d3d7cf"
 var aluminium_5 = "#eeeeec"
 
-var fg = "#404040"
-var bg = "#FFFFFF"
-var shadow_bg = "#F0F0F0"
-var shadow_fg = "#E0E0E0"
-
-var Fg = (str) => empty(str) ? "" : "guifg=" .. str
-var Bg = (str) => empty(str) ? "" : "guibg=" .. str
-var Gui = (str) => empty(str) ? "" : "gui=" .. str
-var Cterm = (str) => empty(str) ? "" : "cterm=" .. str
+var Fg      = (str) => empty(str) ? "" : "guifg=" .. str
+var Bg      = (str) => empty(str) ? "" : "guibg=" .. str
+var Gui     = (str) => empty(str) ? "" : "gui=" .. str
+var Cterm   = (str) => empty(str) ? "" : "cterm=" .. str
 var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 
 execute "hi Bold" Gui("bold")
-execute "hi CurSearch" Bg(aluminium_5) Gui("BOLD")
+execute "hi CurSearch" Fg(green_dk) Bg(aluminium_5) Gui("BOLD")
 execute "hi Cursor" Bg(black) Cterm("NONE")
 execute "hi CursorLine" Bg(shadow_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(aluminium_2) Bg(aluminium_5) Gui("bold")
 execute "hi Folded" Fg(blue) Bg(blue_lt) Gui("NONE")
-execute "hi IncSearch" Fg(white) Bg(blue) Gui("NONE")
+execute "hi IncSearch" Fg(white) Bg(aluminium_0) Gui("NONE")
 execute "hi Italic" Gui("italic")
 execute "hi Label" Fg(black) Gui("bold")
 execute "hi LineNr" Fg(aluminium_5) Gui("bold")
@@ -57,14 +56,14 @@ execute "hi MatchParen" Fg(green_dk) Bg(green) Gui("bold")
 execute "hi NonText" Fg(aluminium_3) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 execute "hi Operator" Fg(green) Gui("NONE")
-execute "hi Pmenu" Fg(black) Bg(yellow)
-execute "hi PmenuSbar" Fg(aluminium_5) Bg(aluminium_4)
-execute "hi PmenuSel" Fg(black) Bg(yellow_dk) Gui("NONE")
-execute "hi PmenuThumb" Fg(aluminium_2) Bg(aluminium_3)
+execute "hi Pmenu" Fg(white) Bg(green)
+execute "hi PmenuSbar" Fg(blue) Bg(blue)
+execute "hi PmenuSel" Fg(white) Bg(green_dk) Gui("NONE")
+execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_dk)
 execute "hi Search" Bg(aluminium_5) Gui("NONE")
-execute "hi StatusLine" Fg(white) Bg(aluminium_2) Gui("NONE")
+execute "hi StatusLine" Fg(white) Bg(aluminium_1) Gui("NONE")
 execute "hi StatusLineNC" Fg(black) Bg(aluminium_3) Gui("NONE")
-execute "hi StatusLineTerm" Fg(white) Bg(blue) Gui("NONE")
+execute "hi StatusLineTerm" Fg(white) Bg(aluminium_1) Gui("NONE")
 execute "hi TabLine" Fg(aluminium_3) Bg(shadow_bg) Gui("NONE")
 execute "hi TabLineFill" Fg(black) Bg(shadow_bg) Gui("NONE")
 execute "hi TabLineSel" Fg(black) Bg(bg) Gui("bold")
@@ -72,10 +71,11 @@ execute "hi Terminal" Fg(fg) Bg(bg)
 execute "hi User1" Fg(white) Bg(aluminium_4) Gui("NONE")
 execute "hi User2" Fg(blue_lt) Bg(blue_dk) Gui("italic")
 execute "hi VertSplit" Fg(aluminium_5) Bg(aluminium_3) Gui("NONE")
-execute "hi Visual" Fg(black) Bg(blue_lt)
+execute "hi Visual" Fg(black) Bg(aluminium_4)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
+highlight! link PopupNotification StatusLineNC
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link WildMenu PmenuSel
@@ -88,7 +88,7 @@ execute "hi Conditional" Fg(red)  Gui("NONE")
 execute "hi Constant" Fg(blue)
 execute "hi Directory" Fg(blue_dk)
 execute "hi Error" Fg(red) Bg("bg") Gui("underline")
-execute "hi ErrorMsg" Fg(red_dk) Bg(red) Gui("NONE")
+execute "hi ErrorMsg" Fg(white) Bg(red_dk) Gui("NONE")
 execute "hi Function" Fg(blue)
 execute "hi Identifier" Fg(red) Gui("NONE")
 execute "hi ModeMsg" Fg(black) Bg(yellow) Gui("NONE")
@@ -106,7 +106,7 @@ execute "hi Structure" Fg(red) Gui("NONE")
 execute "hi Title" Fg(blue_dk)  Gui("bold")
 execute "hi Todo" Fg(blue) Bg("bg") Gui("bold,italic")
 execute "hi Type" Fg(red_dk) Gui("NONE")
-execute "hi WarningMsg" Fg(blue_dk) Bg(blue_lt)
+execute "hi WarningMsg" Fg(white) Bg(green_dk)
 execute "hi qfFileName" Fg(blue_lt)
 execute "hi qfLineNr" Fg(red)
 
