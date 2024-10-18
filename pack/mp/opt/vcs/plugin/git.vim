@@ -85,7 +85,7 @@ enddef
 
 augroup GroupGit
     autocmd!
-    autocmd BufWinEnter GIT-Output setf git_output
+    autocmd BufWinEnter GIT-Output setf vcs_output
     autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
     autocmd BufWinEnter GIT-Output nnoremap <buffer> - <Cmd>call search('modified:', 'bWz')<CR>W
     autocmd BufWinEnter GIT-Output nnoremap <buffer> + <Cmd>call search('modified:', 'Wz')<CR>W
