@@ -155,6 +155,7 @@ vnoremap <A-k> :move '<-2<CR>==gv=gv
 nnoremap <A-k> :move .-2<CR>==
 
 " Surfing the quickfix matches
+nnoremap <Leader>G :cfirst<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 " Surfing the tag stack
