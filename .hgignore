@@ -1,0 +1,12 @@
+syntax:glob
+.netrwhist
+.netrwbook
+.session*
+.vimrc
+spell
+undo
+backup
+pack/user
+pack/downloads
+tags
+local.vim
