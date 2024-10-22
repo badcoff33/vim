@@ -18,7 +18,7 @@ set autowriteall
 set belloff=all
 set clipboard=
 set expandtab
-set fillchars=eob:\ ,vert:'
+set fillchars=eob:\ ,vert::
 set hidden
 set history=200
 set keymodel=
@@ -78,7 +78,8 @@ set nofoldenable
 
 " backspace and cursor keys wrap to previous/next line
 set backspace=indent,eol,start
-"set whichwrap+=<,>,[,]
+" specify keys that move to next/previous line
+set whichwrap+=<,>,[,]
 
 " makes selecting text more consistent (at least for me)
 set virtualedit=onemore,block
@@ -99,14 +100,16 @@ set noshowfulltag
 set completeopt=menu
 set pumheight=7
 
-" Command line completion
-set wildmenu
-set wildoptions=pum,tagfile
-set wildmode=full:lastused
+if v:true
+    " Command line completion with popup menu
+    set wildmenu wildmode=full:lastused wildoptions=pum,tagfile
+else
+    " Command line completion the old fashion way
+    set nowildmenu wildmode=longest:list,full wildoptions=tagfile
+endif
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
-" Mapping for text/abbrev completions
-set wildcharm=<C-n>
+set wildcharm=<Tab>
 
 " How to handle search for tags
 set tagcase=match
@@ -158,6 +161,10 @@ nnoremap <C-k> :cprevious<CR>
 nnoremap <A-.> g<C-]>zz
 nnoremap <A-.> <C-t>zz
 
+" Resize window
+nnoremap <A-+> 5<C-w>+
+nnoremap <A--> 5<C-w>-
+
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
 nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
@@ -194,10 +201,6 @@ nnoremap <Leader>f :<C-u>find *
 nnoremap + :<C-u>tnext<CR>
 nnoremap - :<C-u>tprevious<CR>
 
-" More tab pages, please
-nnoremap <C-w>t :<C-u>tab split<CR>
-cnoremap <C-t> tabnew<CR>:
-
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
 nnoremap <expr> <Leader>g ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
@@ -209,9 +212,24 @@ nnoremap <Leader>y "*yiw
 nnoremap <Leader>Y "*yy
 nnoremap <Leader>p <Cmd>set paste<CR>"*P<Cmd>set nopaste<CR>
 
-command! -nargs=0 IC :set   ignorecase nosmartcase
-command! -nargs=0 CS :set noignorecase nosmartcase
-command! -nargs=0 SC :set   ignorecase  smartcase
+" Move it!
+inoremap <S-Up>    <Esc><C-w><Up>
+inoremap <S-Down>  <Esc><C-w><Down>
+inoremap <S-Left>  <Esc><C-w><Left>
+inoremap <S-Right> <Esc><C-w><Right>
+nnoremap <S-Up>    <C-w><Up>
+nnoremap <S-Down>  <C-w><Down>
+nnoremap <S-Left>  <C-w><Left>
+nnoremap <S-Right> <C-w><Right>
+tnoremap <S-Up>    <C-w><Up>
+tnoremap <S-Down>  <C-w><Down>
+tnoremap <S-Left>  <C-w><Left>
+tnoremap <S-Right> <C-w><Right>
+tnoremap <Esc>     <C-W>N
+
+command! -nargs=0 IgnoreCase    :set   ignorecase nosmartcase
+command! -nargs=0 CaseSensetive :set noignorecase nosmartcase
+command! -nargs=0 SmartCase     :set   ignorecase   smartcase
 
 augroup GroupVimrc
   autocmd!

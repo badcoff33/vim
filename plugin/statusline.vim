@@ -47,11 +47,10 @@ def g:BuildStatusline(): string
     endif
     sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
     sl = sl .. " [%Y%R%W%M]"
-    sl = sl .. "%= %l(%L):%c "
+    sl = sl .. "%= %l:%c "
     return sl
 enddef
 
 set statusline=%!BuildStatusline()
 
 defcompile
-

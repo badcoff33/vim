@@ -25,15 +25,15 @@ def g:CtagsTriggerUpdate(verbose = false)
   elseif type(g:ctags_options) == v:t_list
     ctags_options = join(g:ctags_options, " ")
   else
-    popnews.Open("unknown type of 'g:ctags_options'", 4000, "ErrorMsg")
+    popnews.Open("unknown type of 'g:ctags_options'", [t: 4000, hl: "ErrorMsg"})
     return
   endif
 
   ctags_job = run.RunStart({cmd: 'ctags ' .. ctags_options, background: true})
   if job_status(ctags_job) != "run"
-    popnews.Open("check ctags options", 4000, "ErrorMsg")
+    popnews.Open("check ctags options", {t: 4000, hl: "ErrorMsg"})
   elseif verbose == true
-    popnews.Open('ctags ' .. ctags_options, 3000)
+    popnews.Open('ctags ' .. ctags_options, {t: 3000})
   endif
 enddef
 
@@ -48,3 +48,4 @@ command! -nargs=0 Tprev :call ctags.TagCycle('p')
 command! -nargs=0 CtagsForceUpdate call CtagsTriggerUpdate(true)
 
 defcompile
+

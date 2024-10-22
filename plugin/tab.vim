@@ -43,3 +43,4 @@ function! CompleteAllowed()
     return v:false
   endif
 endfunction
+

@@ -48,14 +48,14 @@ export def CtagsTriggerUpdate(verbose = false)
     return
   endif
   ctags_options = utils.ToString(g:ctags_options)
-  ctags_job = run.RunStart({cmd: 'ctags ' .. ctags_options, background: true})
+  ctags_job = run.RunStart({cmd: g:ctags_cmd .. ' ' .. ctags_options, background: true})
   if job_status(ctags_job) != "run"
-    popnews.Open("check ctags options", 4000, "ErrorMsg")
+    popnews.Open("check ctags options", {t: 4000, hl: "ErrorMsg"})
   elseif verbose == true
-    popnews.Open('ctags ' .. ctags_options, 3000)
+    popnews.Open(g:ctags_cmd .. ' ' .. ctags_options, {t: 3000})
   endif
 enddef
 
-
 # re-compile when debugging
 defcompile
+

@@ -16,13 +16,35 @@ def g:RestoreLastSearch()
 enddef
 
 def g:BackwardSlashToForward()
+  var save_modifiable: bool
+  var save_readonly: bool
+  save_modifiable = &modifiable
+  save_readonly = &readonly
+  setlocal modifiable noreadonly
   s#\\#/#ge
   call histdel("/", -1)
+  if save_modifiable == false
+    setlocal nomodifiable
+  endif
+  if save_readonly == true
+    setlocal readonly nomodified
+  endif
 enddef
 
 def g:ForwardSlashToBackward()
+  var save_modifiable: bool
+  var save_readonly: bool
+  save_modifiable = &modifiable
+  save_readonly = &readonly
+  setlocal modifiable noreadonly
   s#/#\\#ge
   call histdel("/", -1)
+  if save_modifiable == false
+    setlocal nomodifiable
+  endif
+  if save_readonly == true
+    setlocal readonly nomodified
+  endif
 enddef
 
 if !filereadable(g:user_vimrc)
@@ -33,11 +55,11 @@ endif
 
 var cwd_stored: string
 
-augroup GroupUtils " {{{
+augroup GroupUtils
   autocmd!
-  autocmd CmdlineEnter / GetSearchMode()
-  autocmd CmdlineEnter ? GetSearchMode()
-  autocmd BufNewFile .vimrc execute "0read" g:vim_home .. "\\templates\\local_vimrc.vim"
+  # autocmd CmdlineEnter / GetSearchMode()
+  # autocmd CmdlineEnter ? GetSearchMode()
+  autocmd BufNewFile .vimrc execute ":0read " expand(g:vim_home .. "/templates/local_vimrc.vim")
   autocmd DirChanged global {
     if getcwd() != cwd_stored
       if filereadable(".vimrc")
@@ -51,8 +73,13 @@ augroup GroupUtils " {{{
   }
   autocmd SourcePost .vimrc popnews.Open('sourced ' .. expand('<afile>:t'))
   autocmd SourcePost .session.vim popnews.Open('sourced ' .. expand('<afile>:t'))
-  au TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
-  au TerminalOpen * setlocal nonumber norelativenumber
+  autocmd TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
+  autocmd TerminalOpen * setlocal nonumber norelativenumber
+  autocmd WinEnter     * {
+    if &buftype == 'terminal'
+      normal i
+    endif
+  }
 augroup END " }}}
 
 if filereadable(".vimrc")
@@ -158,7 +185,7 @@ nnoremap <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. 
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
 nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>
-nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
+nnoremap <C-Tab> :call quickfix#ToggleQuickfix()<CR>
 
 # nice presentation of v:errors, filled by assert functions
 command! -nargs=0 PrintErrors for e in v:errors | echo e | endfor
@@ -169,3 +196,4 @@ command! -nargs=0 PostItRemove PostItRemove()
 command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 
 defcompile
+
