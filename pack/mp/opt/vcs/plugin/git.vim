@@ -68,7 +68,7 @@ enddef
 def g:VcsGitDirStatus(directory: string)
   var output: list<string>
   if isdirectory(directory)
-    job_start('git status -s', {
+    job_start('git status -s -b', {
       callback: (_, data) => add(output, data),
       exit_cb: (_, data) => CbPopList(output),
     })
@@ -96,7 +96,7 @@ augroup GroupGit
 augroup END
 
 command! -nargs=* -complete=customlist,CompleteGit Git g:VcsGitRun(<q-args>)
-command! -nargs=0 ShowGitBranch pop.Open(GetBranchText())
+command! -nargs=0 ShowGitBranch call g:VcsGitBranchInfo(".")
 
 cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  : 'G'
 nnoremap <A-g>s <Cmd>call VcsGitDirStatus('.')<CR>

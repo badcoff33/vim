@@ -95,7 +95,7 @@ set grepformat=%f:%l:%m
 
 command! -complete=file -nargs=* FindFiles run.RunStart({cmd: 'dir /S/B <args>', name: "RG-FILES"})
 command! -complete=file -nargs=* Grep run.RunStart({cmd: grep.GrepCommand() .. ' <args>', regexp: &grepformat, no_popup: true })
-nnoremap <Leader><S-Space> :call grep#GrepPatternInput()<CR>
+nnoremap <Leader><CR> :call grep#GrepPatternInput()<CR>
 nnoremap <silent> <Leader><Leader> :call grep#RunCompiledCmdLine("<C-r><C-w>")<CR>
 
 command! -nargs=0 CtagsForceUpdate ctags.CtagsTriggerUpdate(true)

@@ -92,7 +92,7 @@ def FilterMenu(
   var height = min([&lines - 6, items->len()])
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
-    highlight: "StatusLineNC",
+    highlight: "Pmenu",
     line: 2,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),

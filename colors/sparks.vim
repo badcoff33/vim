@@ -75,6 +75,7 @@ execute "hi Visual" Fg(white) Bg(blue_dk)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
+highlight! link PopupNotification StatusLineNC
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Normal
