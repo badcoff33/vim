@@ -61,7 +61,7 @@ def Printify(itemsAny: list<any>, props: list<any>): list<any>
       return {
         text: v.text,
         props: itemsAny[1][idx]->mapnew((_, c) => {
-          return {col: v.text->byteidx(c) + 1, length: 1, type: 'FilterMenuMatch'}
+          return {col: 2, length: 1, type: 'FilterMenuMatch'}
         })}
     })
   else
@@ -94,6 +94,7 @@ def FilterMenu(
     title: $" {title}: {hint} ",
     highlight: "Pmenu",
     line: 2,
+    col: 2,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
     minheight: height,
