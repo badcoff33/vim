@@ -15,7 +15,7 @@ import autoload "ctags.vim"
 import autoload "make.vim"
 import autoload "grep.vim"
 import autoload "popnews.vim"
-import autoload "filter_menu.vim"
+import autoload "selector/use.vim"
 
 g:ctags_cmd = get(g:, "ctags_cmd", "ctags")
 g:ctags_options = get(g:, "ctags_options", [ "-R", "." ])
@@ -103,9 +103,9 @@ command! -nargs=* -complete=file Make make.MakeStart(<q-args>)
 command! -nargs=0 WbConfig EditWorkbenchVariable()
 
 nnoremap <Leader>m :<C-u>Make <Up>
-nnoremap <Leader>1 :call filter_menu#SelectBuf()<CR>
-nnoremap <Leader>2 :call filter_menu#SelectFiles()<CR>
-nnoremap <Leader>3 :call filter_menu#SelectTags()<CR>
+nnoremap <Leader>1 <Cmd>call selector#use#Buffers()<CR>
+nnoremap <Leader>2 <Cmd>call selector#use#Files()<CR>
+nnoremap <Leader>3 <Cmd>call selector#use#Tags()<CR>
 
 defcompile
 
