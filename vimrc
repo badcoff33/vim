@@ -59,7 +59,7 @@ set spelloptions=camel
 set switchbuf=usetab,uselast
 
 " keep cursor line away from the upper and lower window border
-set scrolloff=0
+set scrolloff=12
 set scrolljump=1
 
 " make vertical scrolling more smooth
@@ -100,12 +100,12 @@ set noshowfulltag
 set completeopt=menu
 set pumheight=7
 
-if v:true
+if v:false
     " Command line completion with popup menu
-    set wildmenu wildmode=full:lastused wildoptions=pum,tagfile
+    set wildmenu wildmode=full:lastused wildoptions=pum,tagfile,fuzzy
 else
     " Command line completion the old fashion way
-    set nowildmenu wildmode=longest:list,full wildoptions=tagfile
+    set nowildmenu wildmode=longest:list,full wildoptions=tagfile,fuzzy
 endif
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
@@ -149,15 +149,15 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Line bubbling, key mapping leant to scrolling keys C-e C-y
-nnoremap <A-j> :move .+1<CR>==
-vnoremap <A-j> :move '>+1<CR>==gv=gv
-vnoremap <A-k> :move '<-2<CR>==gv=gv
-nnoremap <A-k> :move .-2<CR>==
+nnoremap <C-j> :move .+1<CR>==
+vnoremap <C-j> :move '>+1<CR>==gv=gv
+vnoremap <C-k> :move '<-2<CR>==gv=gv
+nnoremap <C-k> :move .-2<CR>==
 
 " Surfing the quickfix matches
 nnoremap <Leader>G :cfirst<CR>
-nnoremap <C-j> :cnext<CR>
-nnoremap <C-k> :cprevious<CR>
+nnoremap + :cnext<CR>
+nnoremap - :cprevious<CR>
 " Surfing the tag stack
 nnoremap <A-.> g<C-]>zz
 nnoremap <A-.> <C-t>zz
@@ -188,6 +188,8 @@ let maplocalleader = "s"
 " Substitute command
 nnoremap <Leader>s :%s/\C//cgI<Left><Left><Left><Left><Left>
 vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left>
+
+nnoremap <Leader><Tab> :tabnew<CR>
 
 " Check indents
 nnoremap <Leader>. <Cmd>set invcursorcolumn<CR>
