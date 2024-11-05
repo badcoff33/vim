@@ -188,7 +188,7 @@ nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>
 nnoremap <C-Tab> :call quickfix#ToggleQuickfix()<CR>
 
 # nice presentation of v:errors, filled by assert functions
-command! -nargs=0 PrintErrors for e in v:errors | echo e | endfor
+command! -nargs=0 ShowVimErrors for e in v:errors | echo e | endfor
 command! -nargs=0 ClearErrors v:errors = []
 
 command! -nargs=* PostIt PostIt(<q-args>)
