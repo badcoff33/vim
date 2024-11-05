@@ -92,7 +92,7 @@ augroup GroupGit
     autocmd BufWinEnter GIT-Output nnoremap <buffer> A h"gyE
     autocmd BufWinEnter GIT-Output nnoremap <buffer> a h"GyE
     autocmd BufWinEnter GIT-Output nnoremap <buffer> s <Cmd>call VcsGitDirStatus('.')<CR>
-    autocmd DirChanged  *          call VcsGitBranchInfo('.')
+    # autocmd DirChanged  *          call VcsGitBranchInfo('.')
 augroup END
 
 command! -nargs=* -complete=customlist,CompleteGit Git g:VcsGitRun(<q-args>)
@@ -101,6 +101,7 @@ command! -nargs=0 ShowGitBranch call g:VcsGitBranchInfo(".")
 cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  : 'G'
 nnoremap <A-g>s <Cmd>call VcsGitDirStatus('.')<CR>
 nnoremap <A-g>b <Cmd>call VcsGitBranchInfo('.')<CR>
+nnoremap <A-g>g <Cmd>buffer GIT-Output<CR>
 
 # Uncomment when testing
 defcompile
