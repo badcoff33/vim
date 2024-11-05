@@ -13,8 +13,8 @@ import autoload "run.vim"
 import autoload "utils.vim"
 
 var grep_glob_patterns = {
-  c:      ['*.c', '*.h', '*.850', '*.s'],
-  cpp:    ['*.c', '*.h', '*.850', '*.s', '*.cc', '*.hh'],
+  c:      ['*.c', '*.h', '*.h.in', '*.850', '*.s'],
+  cpp:    ['*.c', '*.h', '*.h.in', '*.850', '*.s', '*.cc', '*.hh'],
   vim:    ['*.vim', '*vimrc'],
   asm:    ['*.850', '*.s'],
   py:     ['*.py'],
@@ -45,7 +45,16 @@ enddef
 
 export def GrepPatternInput()
   var pattern = input("Pattern (use '\\bPATTERN\\b' for exact matches'): ", "", "tag")
-  RunCompiledCmdLine(pattern)
+  if pattern->len() > 0
+    var edited_options = input("Grep options: ", grep#GrepExcludes() .. " " .. grep#GrepIncludes())
+    var edited_paths = input("Grep path: ", utils#ToString(g:grep_paths), "dir")
+    var cmd_line = join([grep#GrepCommand(), edited_options, pattern, edited_paths], " ")
+    run.RunStart({
+      cmd: cmd_line,
+      regexp: &grepformat,
+      no_popup: true
+    })
+  endif
 enddef
 
 export def GrepIncludes(): string
