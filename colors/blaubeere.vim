@@ -130,9 +130,8 @@ execute "hi htmlH3" Fg(blue)    Gui("NONE")
 
 # Filetype Markdown
 
-execute "hi markdownCode" Fg(aluminium_2) Bg(aluminium_4)
-execute "hi markdownCode" Fg(green_dk) Gui("italic")
-execute "hi markdownCodeBlock" Fg(green_dk) Gui("italic")
+execute "hi markdownCode" Fg(aluminium_2) Bg(aluminium_5)
+execute "hi markdownCodeBlock" Fg(aluminium_2) Gui("italic")
 execute "hi rstEmphasis" Fg(aluminium_2)
 execute "hi rstStrongEmphasis" Fg(aluminium_2)  Gui("bold")
 
