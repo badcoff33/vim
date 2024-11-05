@@ -59,14 +59,12 @@ enddef
 
 export def GrepIncludes(): string
   var include_string: string
-  if g:grep_for_all == true
+  if g:grep_for_all == true || !has_key(grep_glob_patterns, &ft)
     include_string = GrepGlobSwitch("*")
   else
-    if has_key(grep_glob_patterns, &ft)
-      for e in grep_glob_patterns[&ft]
-        include_string = include_string .. GrepGlobSwitch(e) .. " "
-      endfor
-    endif
+    for e in grep_glob_patterns[&ft]
+      include_string = include_string .. GrepGlobSwitch(e) .. " "
+    endfor
   endif
   return include_string
 enddef
