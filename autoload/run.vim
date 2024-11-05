@@ -49,7 +49,7 @@ export def CloseCb(ch: channel)
       endif
       if dict_entry.name == "quickfix"
         buflines = getbufline(dict_entry.bufnr, 1, "$")
-        if buflines != [""] # is it empty?
+        if buflines != [""]
           setqflist([], " ", {
             efm: dict_entry.regexp,
             title: dict_entry.full_cmd,
@@ -60,6 +60,12 @@ export def CloseCb(ch: channel)
             num_warnings += e.type ==? "w" ? 1 : 0
             num_errors += e.type ==? "e" ? 1 : 0
           endfor
+        else
+          setqflist([], " ", {
+            efm: dict_entry.regexp,
+            title: dict_entry.full_cmd,
+            lines: []
+          })
         endif
         var done_str = printf("%s took %d sec | %d lines",
           dict_entry.short_cmd,
