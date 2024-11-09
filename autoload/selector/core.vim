@@ -118,8 +118,9 @@ export def OpenMenu( title: string, items: list<any>, Callback: func(any, string
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
     highlight: "Pmenu",
-    line: 2,
-    col: 2,
+    pos: "botleft",
+    line: &lines - 2,
+    col: 0,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
     minheight: height,

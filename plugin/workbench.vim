@@ -102,10 +102,11 @@ command! -nargs=0 CtagsForceUpdate ctags.CtagsTriggerUpdate(true)
 command! -nargs=* -complete=file Make make.MakeStart(<q-args>)
 command! -nargs=0 WbConfig EditWorkbenchVariable()
 
-nnoremap <Leader>m :<C-u>Make <Up>
-nnoremap <Leader>1 <Cmd>call selector#use#Buffers()<CR>
-nnoremap <Leader>2 <Cmd>call selector#use#Files()<CR>
-nnoremap <Leader>3 <Cmd>call selector#use#Tags()<CR>
+nnoremap <Leader>M :<C-u>Make <Up>
+nnoremap <Leader>m :<C-u>Make <Up><CR>
+nnoremap <Leader>b <Cmd>call selector#use#Buffers()<CR>
+nnoremap <Leader>f <Cmd>call selector#use#Files()<CR>
+nnoremap <Leader>t <Cmd>call selector#use#Tags()<CR>
 
 defcompile
 

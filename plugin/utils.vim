@@ -75,11 +75,12 @@ augroup GroupUtils
   autocmd SourcePost .session.vim popnews.Open('sourced ' .. expand('<afile>:t'))
   autocmd TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
   autocmd TerminalOpen * setlocal nonumber norelativenumber
-  autocmd WinEnter     * {
-    if &buftype == 'terminal'
-      normal i
-    endif
-  }
+  # Collidse with visuals
+  # autocmd WinEnter     * {
+  #   if &buftype == 'terminal'
+  #     normal i
+  #   endif
+  # }
 augroup END " }}}
 
 if filereadable(".vimrc")

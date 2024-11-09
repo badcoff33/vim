@@ -29,14 +29,14 @@ var fg1       = "#8098A8"
 var fg2       = "#B0CBE8"
 var fg3       = "#D0E8FE"
 
-var red      = "#F84050"
-var amber    = "#C8BF40"
-var green_dk = "#27C148"
-var green    = "#27E158"
-var green_br = "#27FF60"
-var blue_dk  = "#3068B8"
-var blue     = "#509CD8"
-var blue_br  = "#70B0F8"
+var red       = "#F84050"
+var amber     = "#C8BF40"
+var green_dk  = "#27C148"
+var green     = "#27E158"
+var green_br  = "#27FF60"
+var blue_dk   = "#3068B8"
+var blue      = "#509CD8"
+var blue_br   = "#70B0F8"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
@@ -46,11 +46,12 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
 # Basics
 execute "hi Bold" Fg(fg1)  Attr("bold")
+execute "hi CurSearch" Fg(amber) Bg(bg2) Attr("underline")
 execute "hi Cursor" Fg(white) Bg(red)
 execute "hi CursorLine"  Bg(bg1) Cterm("NONE")
 execute "hi CursorLineNr" Fg(green_br) Bg(bg2) Attr("bold")
 execute "hi ErrorMsg" Fg(red) Bg("bg")
-execute "hi IncSearch" Fg(black) Bg(green_dk) Attr("underline") Cterm("NONE")
+execute "hi IncSearch" Fg(black) Bg(white) Attr("NONE") Cterm("NONE")
 execute "hi Italic" Fg(fg1)  Attr("NONE")
 execute "hi LineNr" Fg(blue_br) Bg(bg1)
 execute "hi LineNrAbove" Fg(bg3) Bg("bg") Attr("bold")
@@ -65,9 +66,9 @@ execute "hi PmenuSel" Fg(white) Bg(blue_dk) Attr("NONE")
 execute "hi PmenuThumb" Bg(black)
 execute "hi Question" Fg(green) Bg("bg")
 execute "hi QuickFixLine" Fg(green) Bg(bg2) Attr("NONE")
-execute "hi Search" Fg(green_br) Bg("bg") Attr("underline")
+execute "hi Search" Fg(amber) Bg(bg2) Attr("NONE")
 execute "hi StatusLine" Fg(white) Bg(bg2) Attr("NONE") Cterm("NONE")
-execute "hi StatusLineNC" Fg(white) Bg(black) Attr("NONE") Cterm("NONE")
+execute "hi StatusLineNC" Fg(white) Bg(bg1) Attr("NONE") Cterm("NONE")
 execute "hi TabLine" Fg(fg1) Bg(black) Attr('NONE')
 execute "hi TabLineFill" Fg(fg2) Bg(black) Attr('NONE')
 execute "hi TabLineSel" Fg(green) Bg("bg") Attr('NONE')
@@ -91,7 +92,6 @@ highlight! link User3 StatusLine
 highlight! link User4 StatusLine
 highlight! link WildMenu IncSearch
 highlight! link qfLineNr LineNr
-highlight! link CurSearch IncSearch
 
 # Code
 execute "hi Statement" Fg(green_br) Attr("NONE")
@@ -105,7 +105,7 @@ execute "hi Define" Fg(blue)  Attr("NONE")
 execute "hi Comment" Fg(fg1)
 execute "hi Function" Fg(blue_br) Attr("bold")
 execute "hi Identifier" Fg(blue_br)
-execute "hi Special" Fg(green)
+execute "hi Special" Fg(green_dk)
 execute "hi Constant" Fg(white)
 execute "hi Number" Fg(white)
 execute "hi Todo" Fg(fg1) Bg(bg2)

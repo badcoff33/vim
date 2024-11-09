@@ -15,12 +15,12 @@ enddef
 def CreateProps()
     if prop_type_get('text_prop_warning') == {}
         prop_type_add('text_prop_warning', {
-            highlight: 'WarningMsg'
+            highlight: 'CursorLine'
         })
     endif
     if prop_type_get('text_prop_error') == {}
         prop_type_add('text_prop_error', {
-            highlight: 'ErrorMsg'
+            highlight: 'Error'
         })
     endif
 enddef
@@ -37,7 +37,7 @@ export def TorchlightUpdate()
             prop_add(item.lnum, 0, {
                 bufnr: item.bufnr,
                 type: "text_prop_warning",
-                text: " " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
+                text: "> " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
                 text_align: 'below',
                 text_padding_left: 0
             })
@@ -46,7 +46,7 @@ export def TorchlightUpdate()
             prop_add(item.lnum, 0, {
                 bufnr: item.bufnr,
                 type: "text_prop_error",
-                text: " " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
+                text: "> " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
                 text_align: 'below',
                 text_padding_left: 0
             })
@@ -65,3 +65,4 @@ enddef
 
 # uncomment during dev
 defcompile
+

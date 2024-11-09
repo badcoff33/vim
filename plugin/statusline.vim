@@ -1,29 +1,45 @@
 vim9script
 
+g:scope_in_statusline = false
+g:statusline_search_mode = ""
+
 g:mode_translation = {
-    "n": "NORM",
-    "v": "VIS",
-    "V": "V·LINE",
-    "\<C-V>": "V·BLOCK",
-    "i": "INS",
-    "r": "PROMPT",
-    "R": "R",
-    "Rv": "V·Replace",
-    "c": "CMD",
-    "t": "TERM"
+  "n": "NORM",
+  "v": "VIS",
+  "V": "V·LINE",
+  "\<C-V>": "V·BLOCK",
+  "i": "INS",
+  "r": "PROMPT",
+  "R": "R",
+  "Rv": "V·Replace",
+  "c": "CMD",
+  "t": "TERM"
 }
+def GetSearchMode(): string
+  if &ignorecase && !&smartcase
+    return "/IC"
+  elseif !&ignorecase && !&smartcase
+    return "/CS"
+  elseif &ignorecase && &smartcase
+    return "/SC"
+  endif
+  return ""
+enddef
 
 def g:GetMode(): string
-    var m = mode()
-    if has_key(g:mode_translation, m)
-        return g:mode_translation[m]
+  var m = mode()
+  if has_key(g:mode_translation, m)
+    m = g:mode_translation[m]
+    if m == "CMD"
+      m ..= g:statusline_search_mode
     endif
-    return m
+  endif
+  return m
 enddef
 
 def g:GetScopeforSL(): string
   var scope: string
-  if exists('b:scope_in_statusline') && b:scope_in_statusline
+  if exists('g:scope_in_statusline') && (g:scope_in_statusline == true)
     scope = scope#GetScope()
     if len(scope) == 0
       return ''
@@ -53,4 +69,12 @@ enddef
 
 set statusline=%!BuildStatusline()
 
+augroup GroupStatusline
+  au!
+  au CmdlineEnter / g:statusline_search_mode = GetSearchMode()
+  au CmdlineEnter : g:statusline_search_mode = ""
+  au BufEnter * nnoremap <buffer> <LocalLeader>? <Cmd>let g:scope_in_statusline = g:scope_in_statusline ? v:false : v:true<CR>
+augroup END
+
 defcompile
+

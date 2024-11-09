@@ -36,7 +36,7 @@ function! visuals#enable_blinky_flash()
   endif
   augroup BlinkyGroup
     autocmd!
-    autocmd BufWinEnter,WinEnter * call visuals#turn_cursorline_on()
+    autocmd WinEnter * call visuals#turn_cursorline_on()
     autocmd FocusGained * call visuals#turn_cursorline_on()
   augroup END
   call visuals#turn_cursorline_on()
@@ -47,11 +47,11 @@ endfunction
 function! visuals#enable_blinky_stay()
   augroup BlinkyGroup
     autocmd!
-    autocmd BufWinEnter,WinEnter * setlocal cursorline
-    autocmd FocusGained * setlocal cursorline
-    autocmd BufWinLeave,WinLeave * setlocal nocursorline
+    autocmd WinEnter * call setwinvar(winnr(), '&cursorline', v:true)
+    autocmd WinLeave * call setwinvar(winnr(), '&cursorline', v:false)
+    autocmd FocusGained * call setwinvar(winnr(), '&cursorline', v:true)
   augroup END
-  setlocal cursorline
+  call setwinvar(winnr(), '&cursorline', v:true)
 endfunction
 
 " Description: Stop function and release all resources

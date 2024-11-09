@@ -62,3 +62,4 @@ function! s:FormatC() range
   noautocmd execute "cd -"
   call setpos('.', save_cursor)
 endfunction
+

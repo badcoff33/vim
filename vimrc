@@ -18,7 +18,7 @@ set autowriteall
 set belloff=all
 set clipboard=
 set expandtab
-set fillchars=eob:\ ,vert::
+set fillchars=eob:\ ,vert:\|
 set hidden
 set history=200
 set keymodel=
@@ -45,7 +45,7 @@ set shortmess-=S " Yes, search count please
 set shortmess-=f " long form for file info
 set showmatch matchtime=1
 set showtabline=1
-set signcolumn=yes
+set signcolumn=no
 set tabstop=4
 set termguicolors
 
@@ -71,7 +71,7 @@ set nosplitbelow
 set nosplitright
 
 " folding
-set foldcolumn=2
+set foldcolumn=0
 set foldmethod=indent
 set foldnestmax=1
 set nofoldenable
@@ -100,7 +100,7 @@ set noshowfulltag
 set completeopt=menu
 set pumheight=7
 
-if v:false
+if v:true
     " Command line completion with popup menu
     set wildmenu wildmode=full:lastused wildoptions=pum,tagfile,fuzzy
 else
@@ -155,12 +155,9 @@ vnoremap <C-k> :move '<-2<CR>==gv=gv
 nnoremap <C-k> :move .-2<CR>==
 
 " Surfing the quickfix matches
-nnoremap <Leader>G :cfirst<CR>
+nnoremap <Leader>+ :cfirst<CR>
 nnoremap + :cnext<CR>
 nnoremap - :cprevious<CR>
-" Surfing the tag stack
-nnoremap <A-.> g<C-]>zz
-nnoremap <A-.> <C-t>zz
 
 " Resize window
 nnoremap <A-+> 5<C-w>+
@@ -186,8 +183,8 @@ let mapleader = " "
 let maplocalleader = "s"
 
 " Substitute command
-nnoremap <Leader>s :%s/\C//cgI<Left><Left><Left><Left><Left>
-vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left>
+nnoremap <Leader>s :%s/\C//cgI<C-b><Right><Right><Right>
+vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left><Left><Left>
 
 nnoremap <Leader><Tab> :tabnew<CR>
 
@@ -196,15 +193,12 @@ nnoremap <Leader>. <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
 nnoremap <Leader>e :edit <C-r>=DirName("%:h")<CR>
-cnoremap <expr> <A-.> DirName("%:h")
-" and basic stuff
-nnoremap <Leader>b :<C-u>buffer<Space>
-nnoremap <Leader>t :<C-u>tjump /
-nnoremap <Leader>f :<C-u>find *
+cnoremap <expr> <C-CR> DirName("%:h")
 
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
-nnoremap <expr> <Leader>g ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
+nnoremap <expr> <Leader>V ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
+nnoremap <Leader>v :vimgrep /<C-R><C-w>/ %
 
 " yank/paste clipoard: b/c most laptop keyboards suck
 vnoremap <Leader>y "*y

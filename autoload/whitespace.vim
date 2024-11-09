@@ -62,11 +62,11 @@ function! whitespace#WhitespaceCleanup()
     %s/\r//e
     call histdel("search", -2)
   endif
-  while getline(1) =~ '^\s*$'
+  while getline(1) =~ '^\s*$' && line('$') > 1
     normal 1Gdd
     if save_line > 1 | let save_line -= 1 | endif
   endwhile
-  while getline('$') =~ '^\s*$'
+  while getline('$') =~ '^\s*$' && line('$') > 1
     normal Gdd
   endwhile
   if g:whitespace_trailing_line_blank == v:true
