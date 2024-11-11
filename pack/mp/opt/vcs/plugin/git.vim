@@ -28,7 +28,7 @@ enddef
 
 def GetCompleteCandidates(kind: string): list<string>
   var candidates: list<string>
-  if kind == 'base'
+  if kind == 'start'
     candidates = [ "restore", "status", "add", "commit", "diff --no-color", "branch", "remote" ]
   elseif kind == 'branch'
     var sub: string
@@ -52,7 +52,7 @@ def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): list<strin
   var words = split(cmd_line, ' ')
   var num = len(words)
   if num == 1 || len(arg_lead) > 0
-    candidates = filter(GetCompleteCandidates('base'), (idx, val) => val =~ arg_lead)
+    candidates = filter(GetCompleteCandidates('start'), (idx, val) => val =~ arg_lead)
   else
     candidates = filter(GetCompleteCandidates(words[1]), (idx, val) => val =~ arg_lead)
   endif
@@ -83,7 +83,7 @@ def g:VcsGitRun(git_command: string)
   })
 enddef
 
-augroup GroupGit
+augroup GroupVcsGit
     autocmd!
     autocmd BufWinEnter GIT-Output setf vcs_output
     autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>

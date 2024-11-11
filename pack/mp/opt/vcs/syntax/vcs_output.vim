@@ -26,10 +26,11 @@ syn match VcsGitOutputInfo "(.*)"
 syn match VcsHggLogAttrib "^\(changeset\|user\|date\|summary\):"
 syn match VcsHgReference "\d\+:\w\+"
 syn match VcsHgTime      "\d\d:\d\d:\d\d"
-
+syn match VcsHgFileState "^\(R\|M\|A\)\s"
 hi def link VcsHgLogAttrib Keyword
 hi def link VcsHgReference Type
 hi def link VcsHgTime Comment
+hi def link VcsHgFileState Title
 
 hi def link VcsGitOutputStage Keyword
 hi def link VcsGitOutputTime Comment
