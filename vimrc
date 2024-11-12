@@ -169,6 +169,12 @@ nnoremap <A--> 5<C-w>-
 nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
 imap <C-l> <Esc><C-l>
 
+" Survival mappings
+inoremap <C-BS> <C-w>
+inoremap <C-Del> <C-o>dw
+cnoremap <C-BS> <C-w>
+cnoremap <C-Del> <C-Right><C-w>
+
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!
 inoremap <C-s>" <C-o>b"<C-o>e<Right>"
