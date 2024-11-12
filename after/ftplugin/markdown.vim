@@ -10,7 +10,7 @@ setlocal foldexpr=MarkdownFold()
 setlocal foldmethod=expr
 
 if has("conceal")
-  set conceallevel=0 concealcursor=nc
+  setlocal conceallevel=2 concealcursor=nc
 endif
 
 " Toggle automatic code formatting
@@ -68,3 +68,4 @@ function! s:ToggleTodo()
     normal `'
   endif
 endfunction
+
