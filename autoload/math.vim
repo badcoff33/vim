@@ -9,7 +9,7 @@ export def EvalPyLine()
     try
         py3 import decimal
         execute "py3" getline('.')
-        popnews.Open(getline('.'))
+        popnews.Open(getline('.') .. " stored" )
     catch /.*/
         popnews.Open("no complete math on this line")
     finally
