@@ -21,6 +21,7 @@ set expandtab
 set fillchars=eob:\ ,vert:\|
 set hidden
 set history=200
+set jumpoptions=stack
 set keymodel=
 set laststatus=2
 set listchars=tab:>-,trail:.,extends:#
