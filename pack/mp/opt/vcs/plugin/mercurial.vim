@@ -18,7 +18,7 @@ def GetChangedFiles(): list<string>
 enddef
 
 def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): list<string>
-  var candidates = [ "revert", "status", "commit", "diff", "tag", "branch" ]
+  var candidates = [ "revert", "status", "commit", "diff", "tag", "branch", "push", "pull", "incoming", "outgoing" ]
   var hg_sub_cmd = matchstr(substitute(cmd_line, 'Hg\s\+', '', ''), '\w\+')
   if index(candidates, hg_sub_cmd) == -1
     filter(candidates, (idx, val) => val =~ hg_sub_cmd)

@@ -36,7 +36,7 @@ def GetChangedFiles(): list<string>
 enddef
 
 def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): list<string>
-  var candidates = [ "restore", "status", "add", "commit", "diff --no-color", "branch", "remote" ]
+  var candidates = [ "restore", "status", "add", "commit", "diff --no-color", "branch", "remote", "push", "pull", "fetch" ]
   var git_sub_cmd = matchstr(substitute(cmd_line, 'Git\s\+', '', ''), '\w\+')
   if index(candidates, git_sub_cmd) == -1
     filter(candidates, (idx, val) => val =~ git_sub_cmd)
