@@ -86,14 +86,13 @@ export def CloseCb(ch: channel)
         endif
         popnews.Open(done_str, {t: 4000, hl: run_hl_normal})
       else
-        var cut_here = ['--------------------------------------------------------------------------------']
         var b = bufadd(dict_entry.name)
         lines = getbufinfo(b)[0].linecount
         execute "drop" dict_entry.name
         setlocal noreadonly modifiable
         setline(lines + 1,
-          cut_here
-          + ['(' .. strftime("%T") .. ') ' .. dict_entry.full_cmd .. ' in "' .. dict_entry.cwd .. '"']
+          ['--------------------------------------------------------------------------------']
+          + ['-- ' .. strftime("%T") .. ' / ' .. dict_entry.full_cmd .. ' / "' .. dict_entry.cwd .. '"']
           + getbufline(dict_entry.bufnr, 1, "$")
         )
         setlocal buftype=nofile nomodified readonly nomodifiable
