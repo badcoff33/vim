@@ -5,6 +5,8 @@ import autoload 'popnews.vim' as pop
 
 var popup_duration = 6000
 
+g:vcs_git_changed_files = []
+
 def CbPopupBranchInfo(raw_list: list<string>)
   var branch_name: string
   if raw_list[0] =~? 'On branch '
@@ -26,35 +28,21 @@ def g:VcsGitBranchInfo(directory: string)
   endif
 enddef
 
-def GetCompleteCandidates(kind: string): list<string>
-  var candidates: list<string>
-  if kind == 'start'
-    candidates = [ "restore", "status", "add", "commit", "diff --no-color", "branch", "remote" ]
-  elseif kind == 'branch'
-    var sub: string
-    for f in systemlist("git branch")
-      sub = substitute(f, '[ \*]\+\(\w\+\)', '\1', '')
-      candidates = add(candidates, sub)
-    endfor
-  elseif kind == 'commit'
-      || kind == 'diff'
-      || kind == 'add'
-      || kind == 'restore'
-    for f in systemlist("git ls-files --modified")
-      candidates = add(candidates, f)
-    endfor
+def GetChangedFiles(): list<string>
+  if g:vcs_git_changed_files == []
+      g:vcs_git_changed_files = systemlist("git ls-files --modified")
   endif
-  return candidates
+  return g:vcs_git_changed_files
 enddef
 
 def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): list<string>
-  var candidates: list<string>
-  var words = split(cmd_line, ' ')
-  var num = len(words)
-  if num == 1 || len(arg_lead) > 0
-    candidates = filter(GetCompleteCandidates('start'), (idx, val) => val =~ arg_lead)
+  var candidates = [ "restore", "status", "add", "commit", "diff --no-color", "branch", "remote" ]
+  var git_sub_cmd = matchstr(substitute(cmd_line, 'Git\s\+', '', ''), '\w\+')
+  if index(candidates, git_sub_cmd) == -1
+    filter(candidates, (idx, val) => val =~ git_sub_cmd)
   else
-    candidates = filter(GetCompleteCandidates(words[1]), (idx, val) => val =~ arg_lead)
+    candidates = GetChangedFiles()
+    filter(candidates, (idx, val) => val =~ arg_lead)
   endif
   return candidates
 enddef
@@ -84,24 +72,18 @@ def g:VcsGitRun(git_command: string)
 enddef
 
 augroup GroupVcsGit
-    autocmd!
-    autocmd BufWinEnter GIT-Output setf vcs_output
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> - <Cmd>call search('modified:', 'bWz')<CR>W
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> + <Cmd>call search('modified:', 'Wz')<CR>W
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> A h"gyE
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> a h"GyE
-    autocmd BufWinEnter GIT-Output nnoremap <buffer> s <Cmd>call VcsGitDirStatus('.')<CR>
-    # autocmd DirChanged  *          call VcsGitBranchInfo('.')
+  autocmd!
+  autocmd BufWinEnter GIT-Output setf vcs_output
+  autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
+  autocmd BufWinEnter GIT-Output nnoremap <buffer> s <Cmd>call VcsGitDirStatus('.')<CR>
+  autocmd CmdlineEnter : g:vcs_git_changed_files = []
+  # autocmd DirChanged * call VcsGitBranchInfo('.')
 augroup END
 
 command! -nargs=* -complete=customlist,CompleteGit Git g:VcsGitRun(<q-args>)
 command! -nargs=0 ShowGitBranch call g:VcsGitBranchInfo(".")
 
 cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  : 'G'
-nnoremap <A-g>s <Cmd>call VcsGitDirStatus('.')<CR>
-nnoremap <A-g>b <Cmd>call VcsGitBranchInfo('.')<CR>
-nnoremap <A-g>g <Cmd>buffer GIT-Output<CR>
 
 # Uncomment when testing
 defcompile

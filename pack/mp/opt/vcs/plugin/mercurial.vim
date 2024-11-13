@@ -2,24 +2,23 @@ vim9script
 
 import autoload 'run.vim' as run
 
-augroup GroupVcsHg
-  autocmd!
-  autocmd BufWinEnter HG-Output setf vcs_output
-  autocmd BufWinEnter HG-Output nnoremap <buffer> <CR> :Hg<Space>
-augroup END
+g:vcs_hg_changed_files = []
 
 def GetChangedFiles(): list<string>
-  var filename: string
+  var files: string
   var candidates: list<string>
-  for e in systemlist("hg status") # returns list in format "[M|R|A] <FILENAME>"
-    filename = substitute(e, '\(M\|R\|A\)\s\(.*\)', '\2', '')
-    candidates = add(candidates, filename)
+  if g:vcs_hg_changed_files == []
+      g:vcs_hg_changed_files = systemlist("hg status")
+  endif
+  for e in g:vcs_hg_changed_files
+    files = substitute(e, '\(M\|R\|A\)\s\(.*\)', '\2', '')
+    add(candidates, files)
   endfor
   return candidates
 enddef
 
 def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): list<string>
-  var candidates = [ "revert", "status", "commit", "diff", "tag" ]
+  var candidates = [ "revert", "status", "commit", "diff", "tag", "branch" ]
   var hg_sub_cmd = matchstr(substitute(cmd_line, 'Hg\s\+', '', ''), '\w\+')
   if index(candidates, hg_sub_cmd) == -1
     filter(candidates, (idx, val) => val =~ hg_sub_cmd)
@@ -43,6 +42,13 @@ def g:VcsHgExecute(hg_command: string)
 enddef
 
 command! -nargs=* -complete=customlist,CompleteHg Hg g:VcsHgExecute(<q-args>)
+
+augroup GroupVcsHg
+  autocmd!
+  autocmd BufWinEnter HG-Output setf vcs_output
+  autocmd BufWinEnter HG-Output nnoremap <buffer> <CR> :Hg<Space>
+    autocmd CmdlineEnter : g:vcs_hg_changed_files = []
+augroup END
 
 # Uncomment when testing
 defcompile
