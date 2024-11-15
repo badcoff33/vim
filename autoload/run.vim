@@ -67,22 +67,12 @@ export def CloseCb(ch: channel)
             lines: []
           })
         endif
-        var done_str = printf("%s took %d sec | %d lines",
-          dict_entry.short_cmd,
-          localtime() - dict_entry.started,
-          lines)
+        var tim = localtime() - dict_entry.started
+        var done_str = $"{dict_entry.short_cmd} took {tim} sec | {lines} lines"
         if (num_warnings + num_errors) > 0
           cfirst
-          if num_warnings == 1
-            done_str ..= printf(" | %d warning", num_warnings)
-          elseif num_warnings > 1
-            done_str ..= printf(" | %d warnings", num_warnings)
-          endif
-          if num_errors == 1
-            done_str ..= printf(" | %d error", num_errors)
-          elseif num_errors > 1
-            done_str ..= printf(" | %d errors", num_errors)
-          endif
+          done_str ..= $" | {num_warnings} warning" .. (num_warnings > 1) ? "s" : ""
+          done_str ..= $" | {num_errors} error" .. (num_errors > 1) ? "s" : ""
         endif
         popnews.Open(done_str, {t: 4000, hl: run_hl_normal})
       else
