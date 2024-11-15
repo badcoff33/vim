@@ -102,44 +102,6 @@ def g:ShowUnsavedChanges()
   diffthis
 enddef
 
-hi PostIt guifg=black guibg=yellow gui=italic
-if prop_type_get('text_prop_postit') == {}
-  prop_type_add('text_prop_postit', {
-    highlight: 'PostIt'
-  })
-endif
-
-def PostIt(arg_text: string = "")
-  def PinText(t: string)
-    prop_add(line('.'), 0, {
-      bufnr: bufnr('%'),
-      type: "text_prop_postit",
-      text: t,
-      text_align: 'below',
-      text_padding_left: col('.')
-    })
-  enddef
-  if len(arg_text) > 0
-    PinText(arg_text)
-    return
-  endif
-  var text: string
-  var prompt: string
-  prompt = "POSTIT "
-  while true
-    text = input("Post it (press <CR> only to leave): ")
-    if text == ""
-      break
-    endif
-    PinText(prompt .. text)
-    prompt = substitute(prompt, ".", " ", "g")
-  endwhile
-enddef
-
-export def PostItRemove()
-    prop_clear(line("."))
-enddef
-
 def g:RunTerminal()
   var term_tbufnrs = term_list()
   var tbufnr = 0
@@ -178,22 +140,19 @@ assert_true(mapcheck("<Leader>x"), "mapping overwritten")
 nnoremap <Leader>x :call g:RunTerminal()<CR>
 
 assert_true(mapcheck("<Leader>v"), "mapping overwritten")
-nnoremap <Leader>vv :edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
-nnoremap <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
-nnoremap <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
-nnoremap <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
+nnoremap <silent> <Leader>vv :edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
+nnoremap <silent> <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
+nnoremap <silent> <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
+nnoremap <silent> <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
 
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
-nnoremap <Leader>? <Cmd>call popnews#PopupFiletypeHelp()<CR>
 nnoremap <C-Tab> :call quickfix#ToggleQuickfix()<CR>
 
 # nice presentation of v:errors, filled by assert functions
 command! -nargs=0 ShowVimErrors for e in v:errors | echo e | endfor
 command! -nargs=0 ClearErrors v:errors = []
 
-command! -nargs=* PostIt PostIt(<q-args>)
-command! -nargs=0 PostItRemove PostItRemove()
 command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 
 defcompile
