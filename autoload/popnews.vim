@@ -96,37 +96,6 @@ def NewsCB(winid: number, result: number)
   CleanupWinlist(winid)
 enddef
 
-export def PopupFiletypeHelp()
-  if bufexists("BUF-MAP")
-    noautocmd bwipeout! BUF-MAP
-  endif
-  var b = bufadd("BUF-MAP")
-  bufload(b)
-  for m in maplist()
-    if m.buffer > 0
-      appendbufline(b, "$", printf("%s %s\t%s\n", m.mode, m.lhs, m.rhs))
-    endif
-  endfor
-  deletebufline(b, 1) # delete first line (always blank)
-  var rel_row = win_screenpos(win_getid())[0]
-  var rel_col = win_screenpos(win_getid())[1]
-  popup_create(b, {
-    pos: "botright",
-    title: "BUFFER MAPPINGS",
-    line: winheight(0) + rel_row,
-    col: winwidth(0) + rel_col - 2,
-    highlight: 'Pmenu',
-    maxwidth: 40,
-    maxheight: 20,
-    wrap: 0,
-    moved: "any",
-    padding: [0, 1, 0, 1],
-    drag: true,
-    close: "click"
-  })
-  setbufvar(b, "&modified", false)
-enddef
-
 augroup GroupNews
     autocmd!
     autocmd ColorScheme * call PopnewsAdjustColors()
