@@ -15,12 +15,12 @@ g:colors_name = "blaubeere"
 var fg          = "#404040"
 var bg          = "#FFFFFF"
 var shadow_bg   = "#F0F0F0"
-var shadow_fg   = "#E0E0E0"
+var shadow_fg   = "#C0C0C0"
 var black       = "#000000"
 var white       = "#FFFFFF"
 var blue_dk     = "#4841AF"
 var blue        = "#8A81CF"
-var blue_lt     = "#CFC8F3"
+var blue_lt     = "#ACC6EB"
 var yellow      = "#FFE895"
 var yellow_dk   = "#9D8E77"
 var red         = "#FB8A9C"
@@ -56,10 +56,10 @@ execute "hi MatchParen" Fg(green_dk) Bg(green) Gui("bold")
 execute "hi NonText" Fg(aluminium_3) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
 execute "hi Operator" Fg(green) Gui("NONE")
-execute "hi Pmenu" Fg(white) Bg(green)
-execute "hi PmenuSbar" Fg(blue) Bg(blue)
+execute "hi Pmenu" Fg(aluminium_1) Bg(aluminium_5)
+execute "hi PmenuSbar" Fg(aluminium_4) Bg(aluminium_4)
 execute "hi PmenuSel" Fg(white) Bg(green_dk) Gui("NONE")
-execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_dk)
+execute "hi PmenuThumb" Fg(green) Bg(green)
 execute "hi Search" Bg(aluminium_5) Gui("NONE")
 execute "hi StatusLine" Fg(black) Bg(aluminium_4) Gui("NONE")
 execute "hi StatusLineNC" Fg(aluminium_2) Bg(aluminium_5) Gui("NONE")
@@ -88,7 +88,7 @@ execute "hi Conditional" Fg(red)  Gui("NONE")
 execute "hi Constant" Fg(blue)
 execute "hi Directory" Fg(blue_dk)
 execute "hi Error" Fg(red) Bg("bg") Gui("underline")
-execute "hi ErrorMsg" Fg(white) Bg(red_dk) Gui("NONE")
+execute "hi ErrorMsg" Fg(red_dk) Bg("bg") Gui("NONE")
 execute "hi Function" Fg(blue)
 execute "hi Identifier" Fg(red) Gui("NONE")
 execute "hi ModeMsg" Fg(black) Bg(yellow) Gui("NONE")
@@ -127,6 +127,7 @@ execute "hi cBlock" Fg(aluminium_2)
 execute "hi htmlH1" Fg(blue_dk) Gui("bold")
 execute "hi htmlH2" Fg(blue)    Gui("bold")
 execute "hi htmlH3" Fg(blue)    Gui("NONE")
+execute "hi htmlItalic" Fg(shadow_fg) Gui("italic")
 
 # Filetype Markdown
 
