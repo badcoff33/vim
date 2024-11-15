@@ -11,8 +11,8 @@ noremap <SID>WhitespaceMelt :call whitespace#WhitespaceMelt()<CR>
 
 " Defaults: Key mappings
 if !hasmapto('<Plug>WhitespaceMelt')
-  nmap <A-Space> <Plug>WhitespaceMelt
-  imap <A-Space> <Esc><A-Space>i
+  nmap <C-A-BS> <Plug>WhitespaceMelt
+  imap <C-A-BS> <Esc><C-A-BS>i
 endif
 
 command -nargs=0 WhitespaceCleanup call whitespace#WhitespaceCleanup()
