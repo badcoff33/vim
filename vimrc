@@ -110,7 +110,7 @@ else
 endif
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
-set wildcharm=<Tab>
+set wildcharm=<C-n>
 
 " How to handle search for tags
 set tagcase=match
@@ -160,10 +160,6 @@ nnoremap <Leader>+ :cfirst<CR>
 nnoremap + :cnext<CR>
 nnoremap - :cprevious<CR>
 
-" Resize window
-nnoremap <A-+> 5<C-w>+
-nnoremap <A--> 5<C-w>-
-
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
 nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
@@ -188,6 +184,10 @@ nmap <C-s> i<C-s>
 " Leader key mappings
 let mapleader = " "
 let maplocalleader = "s"
+
+" Make leader accessible in insert and normal mode
+imap <C-z> <Esc><Leader>
+nmap <C-z> <Leader>
 
 " Substitute command
 nnoremap <Leader>s :%s/\C//cgI<C-b><Right><Right><Right>
@@ -227,7 +227,6 @@ tnoremap <S-Up>    <C-w><Up>
 tnoremap <S-Down>  <C-w><Down>
 tnoremap <S-Left>  <C-w><Left>
 tnoremap <S-Right> <C-w><Right>
-tnoremap <Esc>     <C-W>N
 
 command! -nargs=0 IgnoreCase    :set   ignorecase nosmartcase
 command! -nargs=0 CaseSensetive :set noignorecase nosmartcase

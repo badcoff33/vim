@@ -33,8 +33,14 @@ function GetFontInfo(...)
     return font_dict
 endfunction
 
-nnoremap <expr> <C-ScrollWheelUp> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("+").height .. "<CR>"
-nnoremap <expr> <C-ScrollWheelDown> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("-").height .. "<CR>"
+" Resize window
+nnoremap <C-ScrollWheelUp> 3<C-w>>
+nnoremap <C-ScrollWheelDown> 3<C-w><
+nnoremap <C-A-ScrollWheelUp> 3<C-w>+
+nnoremap <C-A-ScrollWheelDown> 3<C-w>-
+
+nnoremap <expr> <C-S-ScrollWheelUp> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("+").height .. "<CR>"
+nnoremap <expr> <C-S-ScrollWheelDown> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("-").height .. "<CR>"
 tnoremap <LeftMouse> <C-w>N
 tnoremap <RightMouse> <C-w>N
 
