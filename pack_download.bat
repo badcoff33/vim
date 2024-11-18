@@ -12,13 +12,12 @@ import glob
 
 # Move all packages to 'opt' dir. Load the packages from user.vim file with ':packadd ...'
 unpack_tuple = (
+        ("start", "https://github.com/godlygeek/tabular/archive/refs/heads/master.zip", "tabular"),
         ("opt", "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip", "signify"),
-        ("opt", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip", "easy-align"),
         ("opt", "https://github.com/preservim/tagbar/archive/refs/heads/master.zip", "tagbar"),
-        ("opt", "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip", "dirvish"),
-        ("opt", "https://github.com/dhruvasagar/vim-table-mode/archive/refs/heads/master.zip", "table-mode"),
-        ("opt", "https://github.com/godlygeek/tabular/archive/refs/heads/master.zip", "tabular"),
-        ("opt", "https://github.com/jceb/vim-orgmode/archive/refs/heads/master.zip", "orgmode"),
+        ("skip", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip", "easy-align"),
+        ("skip", "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip", "dirvish"),
+        ("skip", "https://github.com/jceb/vim-orgmode/archive/refs/heads/master.zip", "orgmode"),
         ("skip", "https://github.com/Donaldttt/fuzzyy/archive/refs/heads/vim9.zip", ""),
         ("skip", "https://github.com/aklt/plantuml-syntax/archive/refs/heads/master.zip", ""),
         ("skip", "https://github.com/preservim/vim-wordy/archive/refs/heads/master.zip", ""))
