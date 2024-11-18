@@ -18,6 +18,7 @@ unpack_tuple = (
         ("opt", "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip", "dirvish"),
         ("opt", "https://github.com/dhruvasagar/vim-table-mode/archive/refs/heads/master.zip", "table-mode"),
         ("opt", "https://github.com/godlygeek/tabular/archive/refs/heads/master.zip", "tabular"),
+        ("opt", "https://github.com/jceb/vim-orgmode/archive/refs/heads/master.zip", "orgmode"),
         ("skip", "https://github.com/Donaldttt/fuzzyy/archive/refs/heads/vim9.zip", ""),
         ("skip", "https://github.com/aklt/plantuml-syntax/archive/refs/heads/master.zip", ""),
         ("skip", "https://github.com/preservim/vim-wordy/archive/refs/heads/master.zip", ""))
