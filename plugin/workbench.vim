@@ -17,15 +17,17 @@ import autoload "grep.vim"
 import autoload "popnews.vim"
 import autoload "selector/use.vim"
 
-g:ctags_cmd = get(g:, "ctags_cmd", "ctags")
-g:ctags_options = get(g:, "ctags_options", [ "-R", "." ])
-if 0
+g:grep_backend = "rg"
+
+if g:grep_backend == "rg"
 g:grep_cmd = get(g:, "grep_cmd", "grep")
 g:grep_options = get(g:, "grep_options", ["-Hnr"])
 g:grep_excludes = get(g:, "grep_excludes", [])
 g:grep_paths = get(g:, "grep_paths", ["."])
 g:grep_for_all = get(g:, "grep_for_all", false)
-else
+endif
+
+if g:grep_backend == "grep"
 g:grep_cmd = get(g:, "grep_cmd", "rg")
 g:grep_options = get(g:, "grep_options", ["--vimgrep"])
 g:grep_excludes = get(g:, "grep_excludes", [])
@@ -33,7 +35,8 @@ g:grep_paths = get(g:, "grep_paths", ["."])
 g:grep_for_all = get(g:, "grep_for_all", true)
 endif
 
-
+g:ctags_cmd = get(g:, "ctags_cmd", "ctags")
+g:ctags_options = get(g:, "ctags_options", [ "-R", "." ])
 
 def WbMenuSelect(id: any, result: any)
   var input_string: string
