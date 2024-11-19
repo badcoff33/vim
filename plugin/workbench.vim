@@ -98,8 +98,8 @@ set grepformat=%f:%l:%m
 
 command! -complete=file -nargs=* FindFiles run.RunStart({cmd: 'dir /S/B <args>', name: "RG-FILES"})
 command! -complete=file -nargs=* Grep run.RunStart({cmd: grep.GrepCommand() .. ' <args>', regexp: &grepformat, no_popup: true })
-nnoremap <Leader><CR> :call grep#GrepPatternInput()<CR>
-nnoremap <silent> <Leader><Leader> :call grep#RunCompiledCmdLine("<C-r><C-w>")<CR>
+nnoremap <Leader>G :call grep#GrepPatternInput()<CR>
+nnoremap <silent> <Leader>g :call grep#RunCompiledCmdLine("<C-r><C-w>")<CR>
 
 command! -nargs=0 CtagsForceUpdate ctags.CtagsTriggerUpdate(true)
 command! -nargs=* -complete=file Make make.MakeStart(<q-args>)
