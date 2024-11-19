@@ -8,5 +8,6 @@ undo
 backup
 pack/user
 pack/downloads
+after/user.vim
 tags
 local.vim

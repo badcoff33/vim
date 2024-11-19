@@ -4,7 +4,7 @@ import autoload "popnews.vim"
 import autoload "quickfix.vim"
 
 g:last_search = ""
-g:user_vimrc = expand(g:vim_home .. '/pack/user/start/' .. getenv('USERNAME') .. '/plugin/user.vim')
+g:user_vimrc = expand(g:vim_home .. '/after/user.vim')
 
 def g:SaveLastSearch()
   g:last_search = getreg('/')
@@ -57,8 +57,7 @@ var cwd_stored: string
 
 augroup GroupUtils
   autocmd!
-  # autocmd CmdlineEnter / GetSearchMode()
-  # autocmd CmdlineEnter ? GetSearchMode()
+  autocmd VimEnter * runtime user.vim
   autocmd BufNewFile .vimrc execute ":0read " expand(g:vim_home .. "/templates/local_vimrc.vim")
   autocmd DirChanged global {
     if getcwd() != cwd_stored
@@ -123,16 +122,6 @@ def g:RunTerminal()
     feedkeys((mode() == "n") ? "i" : "")
   else
     popnews.Open('No terminal running -- Open terminal with command :terminal')
-  endif
-enddef
-
-def GetSearchMode()
-  if &ignorecase == true && &smartcase == true
-    popnews.Open('smartcase')
-  elseif &ignorecase == false
-    popnews.Open('case sensetive')
-  else
-    popnews.Open('ignore case')
   endif
 enddef
 

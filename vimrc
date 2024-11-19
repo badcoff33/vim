@@ -182,8 +182,8 @@ inoremap <C-s>} <C-o>b{<C-o>e<Right>}
 nmap <C-s> i<C-s>
 
 " Leader key mappings
-let mapleader = " "
-let maplocalleader = "s"
+let mapleader = "s"
+let maplocalleader = "S"
 
 " Make leader accessible in insert and normal mode
 imap <C-z> <Esc><Leader>
@@ -200,7 +200,7 @@ nnoremap <Leader>. <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
 nnoremap <Leader>e :edit <C-r>=DirName("%:h")<CR>
-cnoremap <expr> <C-CR> DirName("%:h")
+cnoremap <expr> <C-r>. DirName("%:h")
 
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
