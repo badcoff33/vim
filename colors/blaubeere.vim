@@ -18,7 +18,7 @@ var shadow_bg   = "#F0F0F0"
 var shadow_fg   = "#C0C0C0"
 var black       = "#000000"
 var white       = "#FFFFFF"
-var blue_dk     = "#4841AF"
+var blue_dk     = "#48418F"
 var blue        = "#8A81CF"
 var blue_lt     = "#ACC6EB"
 var yellow      = "#FFE895"
@@ -61,7 +61,7 @@ execute "hi PmenuSbar" Fg(aluminium_4) Bg(aluminium_4)
 execute "hi PmenuSel" Fg(white) Bg(green_dk) Gui("NONE")
 execute "hi PmenuThumb" Fg(green) Bg(green)
 execute "hi Search" Bg(aluminium_5) Gui("NONE")
-execute "hi StatusLine" Fg(black) Bg(aluminium_4) Gui("NONE")
+execute "hi StatusLine" Fg(white) Bg(blue_dk) Gui("NONE")
 execute "hi StatusLineNC" Fg(aluminium_2) Bg(aluminium_5) Gui("NONE")
 execute "hi StatusLineTerm" Fg(white) Bg(blue) Gui("NONE")
 execute "hi TabLine" Fg(aluminium_3) Bg(shadow_bg) Gui("NONE")
@@ -91,6 +91,7 @@ execute "hi Error" Fg(red) Bg("bg") Gui("underline")
 execute "hi ErrorMsg" Fg(red_dk) Bg("bg") Gui("NONE")
 execute "hi Function" Fg(blue)
 execute "hi Identifier" Fg(red) Gui("NONE")
+execute "hi Ignore" Fg(aluminium_3) Gui("italic")
 execute "hi ModeMsg" Fg(black) Bg(yellow) Gui("NONE")
 execute "hi Number" Fg(blue)
 execute "hi PreCondit" Fg(blue)  Gui("bold")
