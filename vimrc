@@ -133,6 +133,9 @@ nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
 
+" fast forward: it takes two
+nnoremap <expr> <Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
+
 " By every next or prev match, expand fold
 nnoremap n nzv
 nnoremap N Nzv
@@ -149,11 +152,11 @@ vnoremap <C-a> <C-a>gv
 vnoremap > >gv
 vnoremap < <gv
 
-" Line bubbling, key mapping leant to scrolling keys C-e C-y
-nnoremap <C-j> :move .+1<CR>==
-vnoremap <C-j> :move '>+1<CR>==gv=gv
-vnoremap <C-k> :move '<-2<CR>==gv=gv
-nnoremap <C-k> :move .-2<CR>==
+" Line bubbling, key mapping leant to scroll keys C-e C-y
+nnoremap <A-e> :move .+1<CR>==
+vnoremap <A-e> :move '>+1<CR>==gv=gv
+nnoremap <A-y> :move .-2<CR>==
+vnoremap <A-y> :move '<-2<CR>==gv=gv
 
 " Surfing the quickfix matches
 nnoremap <Leader>+ :cfirst<CR>
@@ -199,6 +202,7 @@ nnoremap <Leader><Tab> :tabnew<CR>
 nnoremap <Leader>. <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
+cnoreabbrev <expr> E (getcmdtype() ==# ':' && getcmdline() =~# '^E') ? 'edit ' .. expand('%:h') : 'E'
 nnoremap <Leader>e :edit <C-r>=DirName("%:h")<CR>
 cnoremap <expr> <C-r>. DirName("%:h")
 
@@ -241,5 +245,4 @@ let g:term = &term
 syntax on
 
 " vim:foldmethod=marker:nofoldenable:
-"
 
