@@ -14,7 +14,7 @@ g:colors_name = "blaubeere"
 
 var fg          = "#404040"
 var bg          = "#FFFFFF"
-var shadow_bg   = "#F0F0F0"
+var shadow_bg   = "#F6F6F6"
 var shadow_fg   = "#C0C0C0"
 var black       = "#000000"
 var white       = "#FFFFFF"
