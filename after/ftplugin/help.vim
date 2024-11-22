@@ -17,5 +17,6 @@ nnoremap <buffer> <silent> o :call search("'\\w\\+'", 'W')<CR>
 nnoremap <buffer> <silent> O :call search("'\\w\\+'", 'bW')<CR>
 
 " navigate to |topic|
-nnoremap <buffer> <silent> t :call search('\|[^\ ]\+\|', 'W')<CR>
-nnoremap <buffer> <silent> T :call search('\|[^\ ]\+\|', 'bW')<CR>
+nnoremap <buffer> <silent> t :call search('[\*\|][a-zA-Z-_:]\+[\*\|]', 'W')<CR>
+nnoremap <buffer> <silent> T :call search('[\*\|][a-zA-Z-_:]\+[\*\|]', 'bW')<CR>
+
