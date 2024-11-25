@@ -82,7 +82,7 @@ enddef
 export def Files()
   var dir_depth = 5
   if len(selector_list_of_files) == 0
-    UpdateFiles()
+    selector_list_of_files = split(system($'fd --exclude "*.git" -g *'), '\n')
   endif
   core.OpenMenu($"Files, {dir_depth} dirs deep",
     selector_list_of_files,
@@ -95,11 +95,20 @@ export def Files()
   })
 enddef
 
-def UpdateFiles()
-  selector_list_of_files = split(system($'fd --exclude "*.git" -g *'), '\n')
+# filter and open buffers
+export def RecentBuffers()
+  core.OpenMenu("Most recent buffers",
+    v:oldfiles,
+    (res, key) => {
+      if key == "\<c-t>"
+        exe $":tab sb {res.bufnr}"
+      elseif key == "\<c-w>"
+        exe $":bwipeout {res.bufnr}"
+        g:Buffer()
+      else
+        exe $":b {res.bufnr}"
+      endif
+    })
 enddef
 
-command -nargs=0 SelectorUpdateFiles call UpdateFiles()
-
 defcompile
-

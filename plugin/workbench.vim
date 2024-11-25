@@ -15,7 +15,7 @@ import autoload "ctags.vim"
 import autoload "make.vim"
 import autoload "grep.vim"
 import autoload "popnews.vim"
-import autoload "selector/use.vim"
+import autoload "selector/function.vim"
 
 g:grep_backend = "rg"
 
@@ -107,9 +107,9 @@ command! -nargs=0 WbConfig EditWorkbenchVariable()
 
 nnoremap <Leader>M :<C-u>Make <Up>
 nnoremap <Leader>m :<C-u>Make <Up><CR>
-nnoremap <Leader>b <Cmd>call selector#use#Buffers()<CR>
-nnoremap <Leader>f <Cmd>call selector#use#Files()<CR>
-nnoremap <Leader>t <Cmd>call selector#use#Tags()<CR>
+nnoremap <Leader>r <Cmd>call selector#function#RecentBuffers()<CR>
+nnoremap <Leader>b <Cmd>call selector#function#Buffers()<CR>
+nnoremap <Leader>f <Cmd>call selector#function#Files()<CR>
+nnoremap <Leader>t <Cmd>call selector#function#Tags()<CR>
 
 defcompile
-
