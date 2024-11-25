@@ -100,14 +100,7 @@ export def RecentBuffers()
   core.OpenMenu("Most recent buffers",
     v:oldfiles,
     (res, key) => {
-      if key == "\<c-t>"
-        exe $":tab sb {res.bufnr}"
-      elseif key == "\<c-w>"
-        exe $":bwipeout {res.bufnr}"
-        g:Buffer()
-      else
-        exe $":b {res.bufnr}"
-      endif
+        exe $":edit {res.text}"
     })
 enddef
 
