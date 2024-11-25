@@ -4,7 +4,6 @@ import autoload "popnews.vim"
 import autoload "quickfix.vim"
 
 g:last_search = ""
-g:user_vimrc = expand(g:vim_home .. '/after/user.vim')
 
 def g:SaveLastSearch()
   g:last_search = getreg('/')
@@ -47,18 +46,10 @@ def g:ForwardSlashToBackward()
   endif
 enddef
 
-if !filereadable(g:user_vimrc)
-  mkdir(fnamemodify(g:user_vimrc, ':p:h'), 'p')
-  execute "edit" expand(g:vim_home .. "/templates/user_vimrc.vim")
-  execute "write" g:user_vimrc
-endif
-
 var cwd_stored: string
 
 augroup GroupUtils
   autocmd!
-  autocmd VimEnter * runtime user.vim
-  autocmd BufNewFile .vimrc execute ":0read " expand(g:vim_home .. "/templates/local_vimrc.vim")
   autocmd DirChanged global {
     if getcwd() != cwd_stored
       if filereadable(".vimrc")
@@ -128,19 +119,9 @@ enddef
 assert_true(mapcheck("<Leader>x"), "mapping overwritten")
 nnoremap <Leader>x :call g:RunTerminal()<CR>
 
-assert_true(mapcheck("<Leader>v"), "mapping overwritten")
-nnoremap <silent> <Leader>vv :edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
-nnoremap <silent> <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
-nnoremap <silent> <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
-nnoremap <silent> <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
-
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
 nnoremap <C-Tab> :call quickfix#ToggleQuickfix()<CR>
-
-# nice presentation of v:errors, filled by assert functions
-command! -nargs=0 ShowVimErrors for e in v:errors | echo e | endfor
-command! -nargs=0 ClearErrors v:errors = []
 
 command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 

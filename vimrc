@@ -202,7 +202,7 @@ nnoremap <Leader><Tab> :tabnew<CR>
 nnoremap <Leader>. <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
-cnoreabbrev <expr> E (getcmdtype() ==# ':' && getcmdline() =~# '^E') ? 'edit ' .. expand('%:h') : 'E'
+cnoreabbrev <expr> E (getcmdtype() ==# ':' && getcmdline() =~# '^E') ? 'edit ' .. DirName("%:h") : 'E'
 nnoremap <Leader>e :edit <C-r>=DirName("%:h")<CR>
 cnoremap <expr> <C-r>. DirName("%:h")
 
@@ -239,10 +239,15 @@ command! -nargs=0 SmartCase     :set   ignorecase   smartcase
 augroup GroupVimrc
   autocmd!
   autocmd FocusLost * try | silent wall | catch /.*/ | endtry
+  autocmd BufNewFile .vimrc execute ":0read " expand(g:vim_home .. "/templates/local_vimrc.vim")
 augroup END
 
 let g:term = &term
 syntax on
+
+" nice presentation of v:errors, filled by assert_* functions
+command! -nargs=0 ShowLoggedAsserts for e in v:errors | echo e | endfor
+command! -nargs=0 ClearLoggedAsserts v:errors = []
 
 " vim:foldmethod=marker:nofoldenable:
 
