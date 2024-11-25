@@ -27,17 +27,11 @@ Blinky stay
 #Blinky flash
 #Blinky off
 
-augroup GroupUser
-  autocmd!
-  autocmd GuiEnter * set renderoptions=
-  autocmd VimEnter * {
-    if &term == "builtin_gui"
-      colorscheme apollo
-    else
-      colorscheme two_tone_dark
-    endif
-  }
-augroup END
+if &term == "builtin_gui"
+  colorscheme blaubeere
+else
+  colorscheme apollo
+endif
 
 g:netrw_use_errorwindow = 0
 g:netrw_wiw = 1
@@ -46,4 +40,3 @@ g:netrw_browse_split = 0
 g:netrw_altv = 1
 g:netrw_cursor = 3
 g:netrw_list_hide = '.*\.swp$'
-
