@@ -52,6 +52,8 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
   iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
   iabbrev <buffer> xbox  - [ ]
+  iabbrev <buffer> xsub  <sub><C-o>mc</sub><Esc>`ci
+  iabbrev <buffer> xsup  <sup><C-o>mc</sup><Esc>`ci
 endif
 
 function! s:ToggleTodo()
@@ -68,4 +70,3 @@ function! s:ToggleTodo()
     normal `'
   endif
 endfunction
-
