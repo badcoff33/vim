@@ -9,6 +9,9 @@ nmap <silent> <buffer> <CR> <C-]>
 " make use of K
 nnoremap <buffer> K :help <C-r><C-w><CR>
 
+packadd helptoc
+nnoremap <buffer> gO :HelpToc<CR>
+
 " Show value of 'option' under cursor
 nnoremap <buffer> <LocalLeader>o :ShowVimOption<CR>
 
