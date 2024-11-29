@@ -33,11 +33,10 @@ endfunction
 " Resize window
 nnoremap <C-ScrollWheelUp> 3<C-w>>
 nnoremap <C-ScrollWheelDown> 3<C-w><
-nnoremap <C-A-ScrollWheelUp> 3<C-w>+
-nnoremap <C-A-ScrollWheelDown> 3<C-w>-
-
-nnoremap <expr> <C-S-ScrollWheelUp> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("+").height .. "<CR>"
-nnoremap <expr> <C-S-ScrollWheelDown> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("-").height .. "<CR>"
+nnoremap <C-S-ScrollWheelUp> 3<C-w>+
+nnoremap <C-S-ScrollWheelDown> 3<C-w>-
+nnoremap <expr> <C-A-ScrollWheelUp> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("+").height .. "<CR>"
+nnoremap <expr> <C-A-ScrollWheelDown> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("-").height .. "<CR>"
 tnoremap <LeftMouse> <C-w>N
 tnoremap <RightMouse> <C-w>N
 
@@ -51,4 +50,3 @@ nnoremenu 1.320 PopUp.-SEP4- <NOP>
 nnoremenu 1.321 PopUp.Set\ font  :set guifont=*<CR>
 
 " vim:ft=vim
-
