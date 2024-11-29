@@ -50,11 +50,11 @@ set signcolumn=no
 set tabstop=4
 set termguicolors
 
-" limit number of suggestions of z=
 set dictionary=spell
 set spellsuggest=best,10
 set spelllang=en_us
 set spelloptions=camel
+execute 'set thesaurus=' .. g:vim_home .. '/thesaurus/english.txt'
 
 " Set behavior for commands ':cc', ':cn', 'cp', etc.
 set switchbuf=usetab,uselast
@@ -98,7 +98,7 @@ execute 'set undodir=' .. getenv('TEMP')
 " Insert mode completion
 set complete=.,w
 set noshowfulltag
-set completeopt=menu
+set completeopt=menuone,noinsert,noselect
 set pumheight=7
 
 if v:true
@@ -250,4 +250,3 @@ command! -nargs=0 ShowLoggedAsserts for e in v:errors | echo e | endfor
 command! -nargs=0 ClearLoggedAsserts v:errors = []
 
 " vim:foldmethod=marker:nofoldenable:
-
