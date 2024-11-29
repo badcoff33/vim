@@ -67,7 +67,7 @@ execute "hi PmenuThumb" Bg(black)
 execute "hi Question" Fg(green) Bg("bg")
 execute "hi QuickFixLine" Fg(green) Bg(bg2) Attr("NONE")
 execute "hi Search" Fg(amber) Bg(bg2) Attr("NONE")
-execute "hi StatusLine" Fg(white) Bg(bg2) Attr("NONE") Cterm("NONE")
+execute "hi StatusLine" Fg(white) Bg(bg3) Attr("NONE") Cterm("NONE")
 execute "hi StatusLineNC" Fg(white) Bg(bg1) Attr("NONE") Cterm("NONE")
 execute "hi TabLine" Fg(fg1) Bg(black) Attr('NONE')
 execute "hi TabLineFill" Fg(fg2) Bg(black) Attr('NONE')
@@ -148,4 +148,3 @@ highlight! link SignifySignDelete DiffDelete
 highlight! link SignifySignDeleteFirstLine DiffDelete
 highlight! link SignifySignChange DiffChange
 highlight! link SignifySignChangeDelete DiffChange
-
