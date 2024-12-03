@@ -76,5 +76,13 @@ augroup GroupStatusline
   au BufEnter * nnoremap <buffer> <LocalLeader>? <Cmd>let g:scope_in_statusline = g:scope_in_statusline ? v:false : v:true<CR>
 augroup END
 
-defcompile
+command -nargs=0 ShowScopeToggle {
+  if exists('g:scope_in_statusline') && (g:scope_in_statusline == true)
+    g:scope_in_statusline = false
+  else
+    g:scope_in_statusline = true
+  endif
+}
 
+
+defcompile
