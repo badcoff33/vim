@@ -41,6 +41,14 @@ startup code to tell Vim where to find the missing files, here Python V3.11.
     set pythonthreehome=%LOCALAPPDATA%\\Programs\\Python\\Python311emb
     set pythonthreedll=%LOCALAPPDATA%\\Programs\\Python\\Python311emb\\python311.dll
 
+Vim Script Snippets
+-------------------
 
+Get longest string in list
+''''''''''''''''''''''''''
+
+.. code-block::
+
+   vim9 echo ["dasdsadsa", "eee"]->copy()->map((_, line: string) => line->strcharlen())->max()
 
 
