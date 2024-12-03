@@ -134,7 +134,7 @@ xnoremap <A-Left> 0
 xnoremap <A-Right> $
 
 " fast forward: it takes two
-nnoremap <expr> <Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
+nnoremap <expr> <Leader><Leader> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -185,8 +185,8 @@ inoremap <C-s>} <C-o>b{<C-o>e<Right>}
 nmap <C-s> i<C-s>
 
 " Leader key mappings
-let mapleader = "s"
-let maplocalleader = "S"
+let mapleader = " "
+let maplocalleader = "\<char-246>"
 
 " Make leader accessible in insert and normal mode
 imap <C-z> <Esc><Leader>
@@ -196,10 +196,8 @@ nmap <C-z> <Leader>
 nnoremap <Leader>s :%s/\C//cgI<C-b><Right><Right><Right>
 vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left><Left><Left>
 
-nnoremap <Leader><Tab> :tabnew<CR>
-
 " Check indents
-nnoremap <Leader>. <Cmd>set invcursorcolumn<CR>
+nnoremap <Leader><bar> <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
 cnoreabbrev <expr> E (getcmdtype() ==# ':' && getcmdline() =~# '^E') ? 'edit ' .. DirName("%:h") : 'E'
@@ -208,8 +206,8 @@ cnoremap <expr> <C-r>. DirName("%:h")
 
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
-nnoremap <expr> <Leader>V ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
-nnoremap <Leader>v :vimgrep /<C-R><C-w>/ %
+nnoremap <expr> <Leader>V<CR> ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
+nnoremap <Leader>VV :vimgrep /<C-R><C-w>/ %
 
 " yank/paste clipoard: b/c most laptop keyboards suck
 vnoremap <Leader>y "*y

@@ -31,10 +31,11 @@ var fg3       = "#D0E8FE"
 
 var red       = "#F84050"
 var amber     = "#C8BF40"
+var green_bg  = "#274843"
 var green_dk  = "#27C148"
 var green     = "#27E158"
 var green_br  = "#27FF60"
-var blue_dk   = "#3068B8"
+var blue_dk   = "#1058B8"
 var blue      = "#509CD8"
 var blue_br   = "#70B0F8"
 
@@ -60,10 +61,10 @@ execute "hi MatchParen" Fg(green_br) Bg("bg") Attr("underline")
 execute "hi ModeMsg" Fg(fg1) Bg("bg")
 execute "hi NonText" Fg(blue_dk) Bg(bg0)
 execute "hi Normal" Fg(fg3) Bg(bg0) Attr("NONE")
-execute "hi Pmenu" Fg(white) Bg(bg2) Attr("NONE")
-execute "hi PmenuSbar" Bg(white)
-execute "hi PmenuSel" Fg(white) Bg(blue_dk) Attr("NONE")
-execute "hi PmenuThumb" Bg(black)
+execute "hi Pmenu" Fg(fg2) Bg(bg2) Attr("NONE")
+execute "hi PmenuSbar" Bg(green_dk)
+execute "hi PmenuSel" Fg(fg3) Bg(blue) Attr("NONE")
+execute "hi PmenuThumb" Bg(green_br)
 execute "hi Question" Fg(green) Bg("bg")
 execute "hi QuickFixLine" Fg(green) Bg(bg2) Attr("NONE")
 execute "hi Search" Fg(amber) Bg(bg2) Attr("NONE")
@@ -77,8 +78,9 @@ execute "hi Title" Fg(green_br)
 execute "hi User1" Fg(white) Bg(blue) Attr("NONE")
 execute "hi User2" Fg(black) Bg(amber)
 execute "hi VertSplit" Fg(bg1) Bg(bg1) Attr("NONE")
-execute "hi Visual" Fg(fg2) Bg(bg3)
-execute "hi WarningMsg" Fg(white) Bg(blue_dk)
+# execute "hi Visual" Fg(fg2) Bg(bg3)
+execute "hi Visual" Fg(green) Bg(green_bg)
+execute "hi WarningMsg" Fg(black) Bg(amber)
 execute "hi qfFileName" Fg(blue)
 execute "hi qfSeparator" Fg("fg")
 
@@ -128,7 +130,7 @@ execute "hi htmlH3" Fg(green)  Attr("bold")
 
 # markdown
 execute "hi markdownCode" Fg(green)
-execute "hi markdownCodeBlock" Fg(green)
+execute "hi markdownCodeBlock" Fg(white)
 execute "hi markdownUrl" Fg(blue_dk) Attr("underline")
 execute "hi markdownLinkText" Fg(blue_br)  Attr("NONE")
 
