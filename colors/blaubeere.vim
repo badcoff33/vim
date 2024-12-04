@@ -14,6 +14,7 @@ g:colors_name = "blaubeere"
 
 var fg          = "#404040"
 var bg          = "#FFFFFF"
+var cl_bg       = "#E5FCEF"
 var shadow_bg   = "#F6F6F6"
 var shadow_fg   = "#C0C0C0"
 var black       = "#000000"
@@ -45,13 +46,15 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 execute "hi Bold" Gui("bold")
 execute "hi CurSearch" Fg(green_dk) Bg(aluminium_5) Gui("BOLD")
 execute "hi Cursor" Bg(black) Cterm("NONE")
-execute "hi CursorLine" Bg(shadow_bg) Cterm("NONE")
+execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(aluminium_2) Bg(aluminium_5) Gui("bold")
 execute "hi Folded" Fg(blue) Bg(blue_lt) Gui("NONE")
 execute "hi IncSearch" Fg(white) Bg(aluminium_0) Gui("NONE")
 execute "hi Italic" Gui("italic")
 execute "hi Label" Fg(black) Gui("bold")
-execute "hi LineNr" Fg(aluminium_3) Gui("bold")
+execute "hi LineNrAbove" Fg(aluminium_3) Gui("bold")
+execute "hi LineNr" Fg(aluminium_2) Gui("bold")
+execute "hi LineNrBelow" Fg(aluminium_2) Gui("bold")
 execute "hi MatchParen" Fg(green_dk) Bg(green) Gui("bold")
 execute "hi NonText" Fg(aluminium_3) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Gui("NONE")
@@ -151,4 +154,3 @@ execute "hi SignifySignDelete"          Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
 execute "hi SignifySignChange"          Fg(blue)
 execute "hi SignifySignChangeDelete"    Fg(blue)
-

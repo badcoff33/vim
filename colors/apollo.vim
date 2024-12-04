@@ -30,14 +30,14 @@ var fg2       = "#B0CBE8"
 var fg3       = "#D0E8FE"
 
 var red       = "#F84050"
-var amber     = "#C8BF40"
-var green_bg  = "#274843"
-var green_dk  = "#27C148"
+var amber     = "#B8CF40"
+var green_bg  = "#1F4843"
+var green_dk  = "#20B144"
 var green     = "#27E158"
 var green_br  = "#27FF60"
 var blue_dk   = "#1058B8"
 var blue      = "#509CD8"
-var blue_br   = "#70B0F8"
+var blue_br   = "#70C0F8"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
@@ -50,21 +50,21 @@ execute "hi Bold" Fg(fg1)  Attr("bold")
 execute "hi CurSearch" Fg(amber) Bg(bg2) Attr("underline")
 execute "hi Cursor" Fg(white) Bg(red)
 execute "hi CursorLine"  Bg(bg1) Cterm("NONE")
-execute "hi CursorLineNr" Fg(green_br) Bg(bg2) Attr("bold")
+execute "hi CursorLineNr" Fg(green) Bg(bg2) Attr("bold") Cterm("None")
 execute "hi ErrorMsg" Fg(red) Bg("bg")
 execute "hi IncSearch" Fg(black) Bg(white) Attr("NONE") Cterm("NONE")
 execute "hi Italic" Fg(fg1)  Attr("NONE")
-execute "hi LineNr" Fg(blue_br) Bg(bg1)
-execute "hi LineNrAbove" Fg(bg3) Bg("bg") Attr("bold")
-execute "hi LineNrBelow" Fg(bg3) Bg("bg") Attr("bold")
+execute "hi LineNr" Fg(blue_br) Bg(bg1) Cterm("NONE")
+execute "hi LineNrAbove" Fg(fg0) Bg("bg") Attr("bold")
+execute "hi LineNrBelow" Fg(fg1) Bg("bg") Attr("bold")
 execute "hi MatchParen" Fg(green_br) Bg("bg") Attr("underline")
 execute "hi ModeMsg" Fg(fg1) Bg("bg")
 execute "hi NonText" Fg(blue_dk) Bg(bg0)
 execute "hi Normal" Fg(fg3) Bg(bg0) Attr("NONE")
 execute "hi Pmenu" Fg(fg2) Bg(bg2) Attr("NONE")
-execute "hi PmenuSbar" Bg(green_dk)
-execute "hi PmenuSel" Fg(fg3) Bg(blue) Attr("NONE")
-execute "hi PmenuThumb" Bg(green_br)
+execute "hi PmenuSbar" Bg(bg3)
+execute "hi PmenuSel" Fg(green_br) Bg(green_dk) Attr("NONE")
+execute "hi PmenuThumb" Bg(blue_br)
 execute "hi Question" Fg(green) Bg("bg")
 execute "hi QuickFixLine" Fg(green) Bg(bg2) Attr("NONE")
 execute "hi Search" Fg(amber) Bg(bg2) Attr("NONE")
@@ -139,10 +139,10 @@ execute "hi rstEmphasis" Fg(green)
 execute "hi rstStrongEmphasis" Fg(green)  Attr("bold")
 
 # Diffs
-execute "hi DiffChange" Fg(amber) Bg(bg3)
-execute "hi DiffText" Fg(blue) Bg(bg3)
-execute "hi DiffDelete" Fg(red) Bg(bg2)
-execute "hi DiffAdd" Fg(green) Bg(bg2)
+execute "hi DiffChange" Fg(white)  Bg(bg0)
+execute "hi DiffText"   Fg(blue_br) Bg(bg3)
+execute "hi DiffDelete" Fg(red)   Bg(red)
+execute "hi DiffAdd"    Fg(green_br) Bg(bg3)
 
 # Plugin: Signify
 highlight! link SignifySignAdd DiffAdd
