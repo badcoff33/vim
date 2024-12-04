@@ -1,3 +1,6 @@
+" Blinky operation mode =0: off, =1: stay, =2: flash
+let s:blinky_mode = 0
+
 function! visuals#hl_word_toggle()
   highlight HlWordUnderline gui=underline
   if !exists("g:hl_word_timer")
@@ -36,9 +39,10 @@ function! visuals#enable_blinky_flash()
   endif
   augroup BlinkyGroup
     autocmd!
-    autocmd WinEnter * call visuals#turn_cursorline_on()
+    autocmd WinEnter    * call visuals#turn_cursorline_on()
     autocmd FocusGained * call visuals#turn_cursorline_on()
   augroup END
+  let s:blinky_mode = 2
   call visuals#turn_cursorline_on()
 endfunction
 
@@ -47,10 +51,11 @@ endfunction
 function! visuals#enable_blinky_stay()
   augroup BlinkyGroup
     autocmd!
-    autocmd WinEnter * call setwinvar(winnr(), '&cursorline', v:true)
-    autocmd WinLeave * call setwinvar(winnr(), '&cursorline', v:false)
-    autocmd FocusGained * call setwinvar(winnr(), '&cursorline', v:true)
+    autocmd WinEnter *    call visuals#turn_cursorline_on()
+    autocmd WinLeave *    call visuals#turn_cursorline_off(0)
+    autocmd FocusGained * call visuals#turn_cursorline_on()
   augroup END
+  let s:blinky_mode = 1
   call setwinvar(winnr(), '&cursorline', v:true)
 endfunction
 
@@ -60,6 +65,7 @@ function! visuals#disable_blinky()
   augroup BlinkyGroup
     au! BlinkyGroup
   augroup END
+  let s:blinky_mode = 0
 endfunction
 
 let g:blinky_list = []
@@ -69,23 +75,31 @@ function! visuals#turn_cursorline_on()
     return
   elseif &ft == "netrw"
     return
-  elseif (&buftype == "") && !empty(bufname("%"))
-    if getwinvar(winnr(), '&cursorline') == v:false
-      call setwinvar(winnr(), '&cursorline', v:true)
-      let g:blinky_list = add(g:blinky_list, winnr())
-      let tid = timer_start(1000, function("visuals#turn_cursorline_off"))
+  elseif s:blinky_mode == 1
+    call setwinvar(winnr(), '&cursorline', v:true)
+  elseif s:blinky_mode == 2
+    if (&buftype == "") && !empty(bufname("%"))
+      if getwinvar(winnr(), '&cursorline') == v:false
+        call setwinvar(winnr(), '&cursorline', v:true)
+        let g:blinky_list = add(g:blinky_list, winnr())
+        let tid = timer_start(1000, function("visuals#turn_cursorline_off"))
+      endif
     endif
-  end
+  endif
 endfunction
 
 function! visuals#turn_cursorline_off(tid)
-  call timer_stop(a:tid)
-  if empty(g:blinky_list)
-    call assert_true(v:false, "unexpected empty list")
-    return
+  if s:blinky_mode == 1
+    call setwinvar(winnr(), '&cursorline', v:false)
+  elseif s:blinky_mode == 2
+    call timer_stop(a:tid)
+    if empty(g:blinky_list)
+      call assert_true(v:false, "unexpected empty list")
+      return
+    endif
+    call setwinvar(g:blinky_list[0], '&cursorline', v:false)
+    let g:blinky_list = g:blinky_list[1:]
   endif
-  call setwinvar(g:blinky_list[0], '&cursorline', v:false)
-  let g:blinky_list = g:blinky_list[1:]
 endfunction
 
 " Description: Print highlighting information at current cursor position.
@@ -134,4 +148,3 @@ endfunction
 " avoid error 2nd from prop_type_add by delete it first
 call prop_type_delete('text_prop_yank')
 call prop_type_add('text_prop_yank', #{ highlight: 'Visual' })
-
