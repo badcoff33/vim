@@ -1,3 +1,5 @@
+let g:blinky_winnr_list = []
+
 " Blinky operation mode =0: off, =1: stay, =2: flash
 let s:blinky_mode = 0
 
@@ -37,8 +39,6 @@ function! blinky#disable_blinky()
   let s:blinky_mode = 0
 endfunction
 
-let g:blinky_list = []
-
 function! s:turn_cursorline_on()
   if &diff
     return
@@ -50,7 +50,7 @@ function! s:turn_cursorline_on()
     if (&buftype == "") && !empty(bufname("%"))
       if getwinvar(winnr(), '&cursorline') == v:false
         call setwinvar(winnr(), '&cursorline', v:true)
-        let g:blinky_list = add(g:blinky_list, winnr())
+        call add(g:blinky_winnr_list, winnr())
         let tid = timer_start(1000, function("s:turn_cursorline_off"))
       endif
     endif
@@ -63,11 +63,11 @@ function! s:turn_cursorline_off(...)
     call setwinvar(winnr(), '&cursorline', v:false)
   elseif s:blinky_mode == 2
     call timer_stop(timer_id)
-    if empty(g:blinky_list)
+    if empty(g:blinky_winnr_list)
       call assert_true(v:false, "unexpected empty list")
       return
     endif
-    call setwinvar(g:blinky_list[0], '&cursorline', v:false)
-    let g:blinky_list = g:blinky_list[1:]
+    call setwinvar(g:blinky_winnr_list[0], '&cursorline', v:false)
+    let g:blinky_winnr_list = g:blinky_winnr_list[1:]
   endif
 endfunction
