@@ -5,11 +5,11 @@ command -nargs=0 HlWordToggle call visuals#hl_word_toggle()
 
 function Blinky(option)
   if a:option == 'off'
-    call visuals#disable_blinky()
+    call blinky#disable_blinky()
   elseif a:option == 'flash'
-    call visuals#enable_blinky_flash()
+    call blinky#enable_blinky_flash()
   elseif a:option == 'stay'
-    call visuals#enable_blinky_stay()
+    call blinky#enable_blinky_stay()
   endif
 endfunction
 
@@ -26,4 +26,3 @@ augroup visuals
   au!
   autocmd TextYankPost *  call visuals#blink_on_yank_now(#{duration: 300})
 augroup END
-

@@ -1,6 +1,3 @@
-" Blinky operation mode =0: off, =1: stay, =2: flash
-let s:blinky_mode = 0
-
 function! visuals#hl_word_toggle()
   highlight HlWordUnderline gui=underline
   if !exists("g:hl_word_timer")
@@ -28,77 +25,6 @@ function! visuals#hl_word_cyclic(tid)
     let w:match_id = matchadd( "HlWordUnderline",  "\\<" .. cword .. "\\>")
   else
     call clearmatches()
-  endif
-endfunction
-
-" Description: Make the actual window more obvious by temporary turn the
-" option 'cursorline' on.
-function! visuals#enable_blinky_flash()
-  if exists("#BufWinLeave")
-    doautocmd BufWinLeave *
-  endif
-  augroup BlinkyGroup
-    autocmd!
-    autocmd WinEnter    * call visuals#turn_cursorline_on()
-    autocmd FocusGained * call visuals#turn_cursorline_on()
-  augroup END
-  let s:blinky_mode = 2
-  call visuals#turn_cursorline_on()
-endfunction
-
-" Description: Make the actual window more obvious by temporary turn the
-" option 'cursorline' on.
-function! visuals#enable_blinky_stay()
-  augroup BlinkyGroup
-    autocmd!
-    autocmd WinEnter *    call visuals#turn_cursorline_on()
-    autocmd WinLeave *    call visuals#turn_cursorline_off(0)
-    autocmd FocusGained * call visuals#turn_cursorline_on()
-  augroup END
-  let s:blinky_mode = 1
-  call setwinvar(winnr(), '&cursorline', v:true)
-endfunction
-
-" Description: Stop function and release all resources
-function! visuals#disable_blinky()
-  setlocal nocursorline
-  augroup BlinkyGroup
-    au! BlinkyGroup
-  augroup END
-  let s:blinky_mode = 0
-endfunction
-
-let g:blinky_list = []
-
-function! visuals#turn_cursorline_on()
-  if &diff
-    return
-  elseif &ft == "netrw"
-    return
-  elseif s:blinky_mode == 1
-    call setwinvar(winnr(), '&cursorline', v:true)
-  elseif s:blinky_mode == 2
-    if (&buftype == "") && !empty(bufname("%"))
-      if getwinvar(winnr(), '&cursorline') == v:false
-        call setwinvar(winnr(), '&cursorline', v:true)
-        let g:blinky_list = add(g:blinky_list, winnr())
-        let tid = timer_start(1000, function("visuals#turn_cursorline_off"))
-      endif
-    endif
-  endif
-endfunction
-
-function! visuals#turn_cursorline_off(tid)
-  if s:blinky_mode == 1
-    call setwinvar(winnr(), '&cursorline', v:false)
-  elseif s:blinky_mode == 2
-    call timer_stop(a:tid)
-    if empty(g:blinky_list)
-      call assert_true(v:false, "unexpected empty list")
-      return
-    endif
-    call setwinvar(g:blinky_list[0], '&cursorline', v:false)
-    let g:blinky_list = g:blinky_list[1:]
   endif
 endfunction
 
