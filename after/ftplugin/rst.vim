@@ -10,11 +10,6 @@ setlocal formatoptions=qln
 setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:\\&^.\\{4\\}
 setlocal comments=fb:*,fb:-,fb:+,n:> commentstring=<!--%s-->
 
-" plugin table-mode, prepared for rst style tables
-let b:table_mode_corner = '+'
-let b:table_mode_corner_corner = '+'
-let b:table_mode_header_fillchar = '='
-
 " More molecular undo of text
 inoremap <buffer> , ,<C-g>u
 inoremap <buffer> . .<C-g>u
@@ -30,55 +25,39 @@ inoremap <buffer> : :<C-g>u
 "  3   = for sections
 "  4   - for subsections
 "  5   ^ for subsubsections
-function s:ExchangeRstHead(char)
-  if a:char == 'h'
-    call popnews#Open("ReStructuredText Heading-1  #######  ")
-    call popnews#Open("ReStructuredText Heading-2  *******  ")
-    call popnews#Open("ReStructuredText Heading-3  =======  ")
-    call popnews#Open("ReStructuredText Heading-4  -------  ")
-    call popnews#Open("ReStructuredText Heading-5  ^^^^^^^  ")
-    return
-  endif
-  call SaveLastSearch()
-  if getline(line('.') - 1) =~ '^[#*]\{1,\}$'
-    normal kdd
-  endif
-  if getline(line('.') + 1) =~ '^[#*=\-\^]\{1,\}$'
-    normal jddk
-  endif
-  if a:char == '#'
+function s:InsertRstHead()
+  let header_deco = ['#', '*' , '=', '-' ,'^']
+  let chars = join(map(copy(header_deco), '"chapter-" .. v:key .. ": `" .. v:val .. "`"'), ', ')
+  echo $"RST header {chars}"
+  let char = nr2char(getchar())
+  let deco_index = index(header_deco, char)
+  if deco_index >= 0
+    call SaveLastSearch()
+    if getline(line('.') - 1) =~ '^[#*]\{1,\}$'
+      normal kdd
+    endif
+    if getline(line('.') + 1) =~ '^[#*=\-\^]\{1,\}$'
+      normal jddk
+    endif
     normal yyPP
-    normal 0Vr#
-    normal jj0Vr#k
-  elseif a:char == '*'
-    normal yyPP
-    normal 0Vr*
-    normal jj0Vr*k
-  elseif a:char == '='
-    normal yyP
-    normal j0Vr=k
-  elseif a:char == '-'
-    normal yyP
-    normal j0Vr-k
-  elseif a:char == '^'
-    normal yyP
-    normal j0Vr^k
+    execute "normal 0Vr" .. header_deco[deco_index]
+    execute "normal jj0Vr" .. header_deco[deco_index] .."k"
+    call RestoreLastSearch()
   endif
-  call RestoreLastSearch()
 endfunction
 
-nnoremap <buffer> <LocalLeader>h <Cmd>call <SID>ExchangeRstHead('h')<CR>
-nnoremap <buffer> <LocalLeader># <Cmd>call <SID>ExchangeRstHead('#')<CR>
-nnoremap <buffer> <LocalLeader>* <Cmd>call <SID>ExchangeRstHead('*')<CR>
-nnoremap <buffer> <LocalLeader>= <Cmd>call <SID>ExchangeRstHead('=')<CR>
-nnoremap <buffer> <LocalLeader>- <Cmd>call <SID>ExchangeRstHead('-')<CR>
-nnoremap <buffer> <LocalLeader>^ <Cmd>call <SID>ExchangeRstHead('^')<CR>
+nnoremap <buffer> <LocalLeader>h <Cmd>call <SID>InsertRstHead()<CR>
+
 " delete surrounding heading lines
 nnoremap <buffer> <LocalLeader><Del> <Cmd>call SaveLastSearch()<CR>:.-1,.+1s/^[#=\-*\^]\+$\n//<CR>k:call RestoreLastSearch()<CR>
 
 " spell checker
 nnoremap <buffer> <LocalLeader>se :setlocal spell spellang=en<CR>
 nnoremap <buffer> <LocalLeader>sd :setlocal spell spellang=de<CR>
+
+" auto format paragraph
+nnoremap <buffer> <LocalLeader>fA :setlocal formatoptions+=a
+nnoremap <buffer> <LocalLeader>fa :setlocal formatoptions-=a
 
 " be up to date
 iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
