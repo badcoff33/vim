@@ -143,6 +143,9 @@ nnoremap N Nzv
 " Yank more consistent to D and dd commands
 nnoremap Y y$
 
+" More exact and easy to reach
+nmap ' `
+
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
 vnoremap <C-a> <C-a>gv
@@ -152,16 +155,14 @@ vnoremap <C-a> <C-a>gv
 vnoremap > >gv
 vnoremap < <gv
 
-" Line bubbling, key mapping leant to scroll keys C-e C-y
-nnoremap <A-e> :move .+1<CR>==
-vnoremap <A-e> :move '>+1<CR>==gv=gv
-nnoremap <A-y> :move .-2<CR>==
-vnoremap <A-y> :move '<-2<CR>==gv=gv
+" Move visual line up or down in buffer
+vnoremap <C-j> :move '>+1<CR>==gv=gv
+vnoremap <C-k> :move '<-2<CR>==gv=gv
 
 " Surfing the quickfix matches
-nnoremap <Leader>+ :cfirst<CR>
-nnoremap + :cnext<CR>
-nnoremap - :cprevious<CR>
+nnoremap <Leader><C-k> :cfirst<CR>
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprevious<CR>
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -188,9 +189,9 @@ nmap <C-s> i<C-s>
 let mapleader = " "
 let maplocalleader = "\<char-246>"
 
-" Make leader accessible in insert and normal mode
-imap <C-z> <Esc><Leader>
-nmap <C-z> <Leader>
+" Avoid other keyboard/terminal problems
+nnoremap <Leader>. g<C-]>
+nnoremap <Leader>, <C-t>
 
 " Substitute command
 nnoremap <Leader>s :%s/\C//cgI<C-b><Right><Right><Right>
@@ -245,6 +246,6 @@ syntax on
 
 " nice presentation of v:errors, filled by assert_* functions
 command! -nargs=0 ShowLoggedAsserts for e in v:errors | echo e | endfor
-command! -nargs=0 ClearLoggedAsserts v:errors = []
+command! -nargs=0 ClearLoggedAsserts let v:errors = []
 
 " vim:foldmethod=marker:nofoldenable:
