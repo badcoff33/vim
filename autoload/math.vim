@@ -14,12 +14,13 @@ import autoload 'popnews.vim'
 # Second, try to run a calculation
 export def EvalPyLine()
   try
+    py3 import decimal
+    py3 import math
+    py3 import re
     execute "py3" getline('.')
   catch /.*/
   endtry
   try
-    py3 import decimal
-    py3 import re
     py3 line = vim.current.line
     py3 m = re.search("([^=]*)", line)
     py3 eq = m.group(1)
