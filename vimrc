@@ -134,7 +134,7 @@ xnoremap <A-Left> 0
 xnoremap <A-Right> $
 
 " fast forward: it takes two
-nnoremap <expr> <Leader><Leader> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
+nnoremap <expr> <Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -186,8 +186,8 @@ inoremap <C-s>} <C-o>b{<C-o>e<Right>}
 nmap <C-s> i<C-s>
 
 " Leader key mappings
-let mapleader = " "
-let maplocalleader = "\<char-246>"
+let mapleader = "s"
+let maplocalleader = "S"
 
 " Avoid other keyboard/terminal problems
 nnoremap <Leader>. g<C-]>
