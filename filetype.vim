@@ -34,8 +34,8 @@ endfunction
 
 augroup filetypedetect
   autocmd BufNewFile,BufRead *.txt :call <SID>WhoAreYouTxt()
-  autocmd BufEnter *.850 :setfiletype asm850
-  autocmd BufEnter *.800 :setfiletype asm850
+  autocmd BufEnter *.850 :setfiletype asm_rh850
+  autocmd BufEnter *.800 :setfiletype asm_rh850
   autocmd BufNewFile,BufRead *.org setfiletype org
 augroup END
 
