@@ -39,6 +39,7 @@ var Normal = "gui=NONE"
 var Bold = "gui=bold"
 var Italic = "gui=italic"
 var Underline = "gui=underline"
+var BoldUnderline = "gui=bold,underline"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str
@@ -49,7 +50,7 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 # Basics
 
 execute "hi Bold" Bold
-execute "hi CurSearch" Fg(black) Bg(gray_lt) Bold
+execute "hi CurSearch" Fg(black) Bg(gray_lt) BoldUnderline
 execute "hi Cursor" Bg(red) Cterm("NONE")
 execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(blue) Bg(blue_bg) Bold
@@ -68,7 +69,7 @@ execute "hi PmenuSbar" Fg(red_lt) Bg(red_lt)
 execute "hi PmenuSel" Fg(white) Bg(red) Normal
 execute "hi PmenuThumb" Fg(red_dk) Bg(red_dk)
 execute "hi Search" Fg(black) Bg(gray_lt) Normal
-execute "hi StatusLine" Fg(white) Bg(blue) Bold
+execute "hi StatusLine" Fg(white) Bg(black) Bold
 execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_lt) Normal
 execute "hi StatusLineTerm" Fg(white) Bg(blue_dk) Bold
 execute "hi TabLine" Fg("fg") Bg(gray_bg) Gui("none")
@@ -77,9 +78,8 @@ execute "hi TabLineSel" Fg(black) Bg("bg") Bold
 execute "hi Terminal" Fg(black) Bg("bg")
 execute "hi User1" Fg(gray_lt) Bg(gray_dk) Normal
 execute "hi User2" Fg(blue_dk) Bg(gray) Italic
-execute "hi VertSplit" Fg(blue_bg) Bg(blue_bg) Normal
-# execute "hi VertSplit" Fg(gray) Bg('bg') Normal
-execute "hi Visual" Fg(white) Bg(black)
+execute "hi VertSplit" Fg(gray) Bg('bg') Normal
+execute "hi Visual" Fg(white) Bg(blue)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
@@ -107,7 +107,7 @@ execute "hi Question" Fg(gray_dk) Bg("bg")
 execute "hi QuickFixLine" Fg(blue) Bg("bg") Bold
 execute "hi Special" Fg(red_dk)
 execute "hi SpecialKey" Fg(blue)
-execute "hi Statement" Fg(blue_dk) Bold
+execute "hi Statement" Fg(blue_dk) Normal
 execute "hi StorageClass" Fg(red)
 execute "hi String" Fg(blue_dk)
 execute "hi Structure" Fg(red) Normal
@@ -156,4 +156,3 @@ execute "hi SignifySignDelete" Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
 execute "hi SignifySignChange" Fg(blue_lt)
 execute "hi SignifySignChangeDelete" Fg(red_lt)
-

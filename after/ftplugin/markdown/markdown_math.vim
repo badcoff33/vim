@@ -1,6 +1,10 @@
 vim9script
-import autoload "math.vim"
 
-# Mappings
-nnoremap <buffer> <C-CR> <Cmd>call math#EvalPyLine()<CR>
-inoremap <buffer> <C-CR> <Cmd>call math#EvalPyLine()<CR>
+import "math.vim"
+
+# Local command to have an abstraction of imported function
+command! -buffer -nargs=0 CalcLine math.EvalPyLine()
+
+# Local mappings
+nnoremap <buffer> <C-CR> <Cmd>CalcLine<CR>
+inoremap <buffer> <C-CR> <Cmd>CalcLine<CR>

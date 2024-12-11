@@ -1,7 +1,7 @@
 vim9script
 
-import autoload "run.vim"
-import autoload "torchlight.vim"
+import "run.vim"
+import "torchlight.vim"
 
 def MakeCallback()
   torchlight.TorchlightUpdate()

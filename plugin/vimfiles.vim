@@ -6,7 +6,7 @@ if !has('win32') && !has('win64')
   finish
 endif
 
-g:user_vimrc = expand(getenv('LOCALAPPDATA') .. '/user-startup.vim')
+g:user_vimrc = expand(getenv('LOCALAPPDATA') .. '/vim/user.vim')
 
 def CreateNewUserFile()
   execute ":0read " expand(g:vim_home .. "/templates/user_vimrc.vim")

@@ -1,6 +1,5 @@
 vim9script
 
-import autoload "popnews.vim"
 import autoload "quickfix.vim"
 
 g:last_search = ""
@@ -53,16 +52,11 @@ augroup GroupUtils
   autocmd DirChanged global {
     if getcwd() != cwd_stored
       if filereadable(".vimrc")
-        call popnews.Open("local .vimrc available")
-      endif
-      if filereadable(".session.vim")
-        call popnews.Open("local .session.vim available")
+        echomsg "local .vimrc available"
       endif
     endif
     cwd_stored = getcwd()
   }
-  autocmd SourcePost .vimrc popnews.Open('sourced ' .. expand('<afile>:t'))
-  autocmd SourcePost .session.vim popnews.Open('sourced ' .. expand('<afile>:t'))
   autocmd TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
   autocmd TerminalOpen * setlocal nonumber norelativenumber
   # Collidse with visuals
@@ -74,10 +68,7 @@ augroup GroupUtils
 augroup END " }}}
 
 if filereadable(".vimrc")
-  call popnews.Open("local .vimrc available")
-endif
-if filereadable(".session")
-  call popnews.Open("local .session available")
+  echomsg "local .vimrc available"
 endif
 
 # Description: Run a diff of current buffer content and file content.
@@ -112,7 +103,7 @@ def g:RunTerminal()
     endif
     feedkeys((mode() == "n") ? "i" : "")
   else
-    popnews.Open('No terminal running -- Open terminal with command :terminal')
+    echomsg 'No terminal running -- Open terminal with command :terminal'
   endif
 enddef
 
@@ -126,4 +117,3 @@ nnoremap <C-Tab> :call quickfix#ToggleQuickfix()<CR>
 command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 
 defcompile
-

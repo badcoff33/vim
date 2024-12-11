@@ -1,6 +1,6 @@
 vim9script
 
-import autoload "popnews.vim"
+import "popnews.vim"
 
 g:run_dict = []
 g:run_be_verbose = false
@@ -271,4 +271,3 @@ command! -bar -nargs=0 ShowJobs ShowJobs()
 
 # Uncomment when testing
 defcompile
-

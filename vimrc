@@ -101,13 +101,11 @@ set noshowfulltag
 set completeopt=menuone,noinsert,noselect
 set pumheight=7
 
-if v:true
-    " Command line completion with popup menu
-    set wildmenu wildmode=full:lastused wildoptions=pum,tagfile,fuzzy
-else
-    " Command line completion the old fashion way
-    set nowildmenu wildmode=longest:list,full wildoptions=tagfile,fuzzy
-endif
+" Command line completion with popup menu
+" set wildmenu wildmode=full:lastused wildoptions=pum,tagfile,fuzzy
+" Command line completion the old fashion way
+set nowildmenu wildmode=longest:list,full wildoptions=tagfile,fuzzy
+
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
 set wildcharm=<C-n>
@@ -133,9 +131,6 @@ nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
 
-" fast forward: it takes two
-nnoremap <expr> <Leader><Leader> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
-
 " By every next or prev match, expand fold
 nnoremap n nzv
 nnoremap N Nzv
@@ -145,6 +140,10 @@ nnoremap Y y$
 
 " More exact and easy to reach
 nmap ' `
+
+" Find and find-until
+nnoremap <Space> ;
+nnoremap <S-Space> ,
 
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
@@ -186,8 +185,11 @@ inoremap <C-s>} <C-o>b{<C-o>e<Right>}
 nmap <C-s> i<C-s>
 
 " Leader key mappings
-let mapleader = " "
-let maplocalleader = "\<char-246>"
+let mapleader = "s"
+let maplocalleader = "S"
+
+" fast forward: it takes two
+nnoremap <expr> <A-Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
 
 " Avoid other keyboard/terminal problems
 nnoremap <Leader>. g<C-]>
@@ -230,6 +232,10 @@ tnoremap <S-Up>    <C-w><Up>
 tnoremap <S-Down>  <C-w><Down>
 tnoremap <S-Left>  <C-w><Left>
 tnoremap <S-Right> <C-w><Right>
+
+nnoremap <S-CR> :
+inoremap <S-CR> <Esc>:
+tnoremap <S-CR> <C-W>:
 
 command! -nargs=0 IgnoreCase    :set   ignorecase nosmartcase
 command! -nargs=0 CaseSensetive :set noignorecase nosmartcase

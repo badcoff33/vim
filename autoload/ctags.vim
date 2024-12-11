@@ -3,9 +3,9 @@ vim9script
 #
 # Maintainer: markus prepens (markus dot prepens at gmail dot com)
 
-import autoload "run.vim"
-import autoload "utils.vim"
-import autoload "popnews.vim"
+import "run.vim"
+import "utils.vim"
+import "popnews.vim"
 
 var ctags_job: job
 
@@ -58,4 +58,3 @@ enddef
 
 # re-compile when debugging
 defcompile
-

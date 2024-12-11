@@ -1,5 +1,6 @@
 vim9script
-import autoload 'popnews.vim'
+
+import 'popnews.vim'
 
 # TODO
 # - cope with engineering units m,k,u,n
@@ -31,3 +32,26 @@ export def EvalPyLine()
     popnews.Open("trouble in math " .. py3eval("eq.replace(' ', '')"))
   endtry
 enddef
+
+#  python3 << END_OF_PY
+#
+#  def DoCalc():
+#    import math
+#    import decimal
+#    import re
+#    try:
+#      vim.command(" ".join(["python3 ", vim.current.line]))
+#    finally:
+#      print()
+#    try:
+#      line = vim.current.line
+#      m = re.search("([^=]*)", line)
+#      eq = m.group(1)
+#      r = eval(eq.replace(" ", ""))
+#      d = decimal.Decimal(f"{r}")
+#      s = "{}= {}".format(eq, d.normalize().to_eng_string())
+#      vim.current.line = s
+#    finally:
+#      print("done")
+#
+#  END_OF_PY

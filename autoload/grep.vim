@@ -9,8 +9,8 @@ vim9script
 #
 # Maintainer: markus prepens (markus dot prepens at gmail dot com)
 
-import autoload "run.vim"
-import autoload "utils.vim"
+import "run.vim"
+import "utils.vim"
 
 var grep_glob_patterns = {
   c:      ['*.c', '*.h', '*.h.in', '*.850', '*.s'],
@@ -59,7 +59,7 @@ enddef
 
 export def GrepIncludes(): string
   var include_string: string
-  if g:grep_for_all == true || !has_key(grep_glob_patterns, &ft)
+  if g:grep_for_all[0] == 'true' || !has_key(grep_glob_patterns, &ft)
     include_string = GrepGlobSwitch("*")
   else
     for e in grep_glob_patterns[&ft]
@@ -71,7 +71,7 @@ enddef
 
 export def GrepExcludes(): string
   var exclude_string: string
-  if g:grep_for_all == true
+  if g:grep_for_all[0] == 'true'
     return ""
   else
     for e in g:grep_excludes
@@ -108,4 +108,3 @@ def GrepGlobSwitch(pattern: string): string
 enddef
 
 defcompile
-

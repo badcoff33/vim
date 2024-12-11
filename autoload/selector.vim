@@ -1,6 +1,6 @@
 vim9script
 
-import autoload "selector/core.vim" as core
+import "selector_core.vim" as core
 
 # Source:
 #   https://www.reddit.com/r/vim/comments/wjxo3k/diy_fuzzy_completion/
