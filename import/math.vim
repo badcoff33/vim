@@ -34,25 +34,34 @@ export def EvalPyLine()
   endtry
 enddef
 
-#  python3 << END_OF_PY
-#
-#  def DoCalc():
-#    import math
-#    import decimal
-#    import re
-#    try:
-#      vim.command(" ".join(["python3 ", vim.current.line]))
-#    finally:
-#      print()
-#    try:
-#      line = vim.current.line
-#      m = re.search("([^=]*)", line)
-#      eq = m.group(1)
-#      r = eval(eq.replace(" ", ""))
-#      d = decimal.Decimal(f"{r}")
-#      s = "{}= {}".format(eq, d.normalize().to_eng_string())
-#      vim.current.line = s
-#    finally:
-#      print("done")
-#
-#  END_OF_PY
+python3 << END_OF_PY
+
+# global space for variables
+gg = {}
+
+def DoCalcCurrLine():
+  import math
+  import decimal
+  import re
+  line_ = vim.current.line
+  line = line_.replace(" ", "")
+  m = re.search("([a-z]+)(.*)=(.+)", line)
+  if (m != None) and (len(m.groups()) == 3):
+    lhs = m.group(1)
+    lhs_rest = m.group(2)
+    rhs = m.group(3)
+    if m.group(2) == "":
+      gg[lhs] = eval(rhs)
+      return
+    else:
+      equotation = lhs + lhs_rest
+      # print("guessing formula with ",lhs + lhs_rest)
+      try:
+        r = eval(equotation, gg)
+        d = decimal.Decimal(f"{r}")
+        s = "{}={}".format(equotation, d.normalize().to_eng_string())
+        vim.current.line = re.sub(r"([=\+\-\*/])", r" \1 ", s)
+      finally:
+        return
+
+END_OF_PY
