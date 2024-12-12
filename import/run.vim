@@ -57,8 +57,8 @@ export def CloseCb(ch: channel)
           })
           for e in getqflist({ "nr": "$", "all": 0 }).items
             lines = lines + 1
-            num_warnings += e.type ==? "w" ? 1 : 0
-            num_errors += e.type ==? "e" ? 1 : 0
+            num_warnings += (e.type ==? "w") ? 1 : 0
+            num_errors += (e.type ==? "e") ? 1 : 0
           endfor
         else
           setqflist([], " ", {
@@ -71,8 +71,8 @@ export def CloseCb(ch: channel)
         var done_str = $"{dict_entry.short_cmd} took {tim} sec | {lines} lines"
         if (num_warnings + num_errors) > 0
           cfirst
-          done_str ..= $" | {num_warnings} warning" .. (num_warnings > 1) ? "s" : ""
-          done_str ..= $" | {num_errors} error" .. (num_errors > 1) ? "s" : ""
+          done_str ..= $" | {num_warnings} warning{(num_warnings > 1) ? 's' : ''}"
+          done_str ..= $" | {num_errors} error{(num_errors > 1) ? 's' : ''}"
         endif
         popnews.Open(done_str, {t: 4000, hl: run_hl_normal})
       else
@@ -159,7 +159,7 @@ enddef
 export def RunStart(dict: dict<any>): job
   var v_job: job
   if !has_key(dict, 'cmd') && (dict.cmd != "")
-    echoerr "run.vim: key 'cmd' required"
+    echoerr expand("<sfile>") .. ": key 'cmd' required"
     return null_job
   endif
   if g:run_be_verbose == true
@@ -204,9 +204,9 @@ def StartBuffered(dict: dict<any>): job
   job_opts.out_buf = run_dict_entry.bufnr
   job_opts.err_io = "buffer"
   job_opts.out_io = "buffer"
-  job_opts.close_cb = function("run#CloseCb")
+  job_opts.close_cb = function("CloseCb")
   if has_key(dict, "show_err") && dict.show_err == true
-    job_opts.err_cb = function("run#ErrorCb")
+    job_opts.err_cb = function("ErrorCb")
   endif
   run_dict_entry.full_cmd = dict.cmd
   run_dict_entry.short_cmd = split(dict.cmd, " ")[0]

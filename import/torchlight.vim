@@ -63,6 +63,7 @@ export def TorchlightUpdate()
     endfor
 enddef
 
+command! -nargs=0 TorchlightClear torchlight.TorchlightClearAll()
+
 # uncomment during dev
 defcompile
-

@@ -35,7 +35,13 @@ export def GrepCommand(): string
 enddef
 
 export def RunCompiledCmdLine(pattern: string)
-  var cmd_line = join([grep#GrepCommand(), grep#GrepExcludes(), grep#GrepIncludes(), pattern, utils#ToString(g:grep_paths)], " ")
+  var cmd_line = join([
+    GrepCommand(),
+    GrepExcludes(),
+    GrepIncludes(),
+    pattern,
+    utils.ToString(g:grep_paths)],
+    " ")
   run.RunStart({
     cmd: cmd_line,
     regexp: &grepformat,
@@ -46,9 +52,9 @@ enddef
 export def GrepPatternInput()
   var pattern = input("Pattern (use '\\bPATTERN\\b' for exact matches'): ", "", "tag")
   if pattern->len() > 0
-    var edited_options = input("Grep options: ", grep#GrepExcludes() .. " " .. grep#GrepIncludes())
-    var edited_paths = input("Grep path: ", utils#ToString(g:grep_paths), "dir")
-    var cmd_line = join([grep#GrepCommand(), edited_options, pattern, edited_paths], " ")
+    var edited_options = input("Grep options: ", GrepExcludes() .. " " .. GrepIncludes())
+    var edited_paths = input("Grep path: ", utils.ToString(g:grep_paths), "dir")
+    var cmd_line = join([GrepCommand(), edited_options, pattern, edited_paths], " ")
     run.RunStart({
       cmd: cmd_line,
       regexp: &grepformat,
