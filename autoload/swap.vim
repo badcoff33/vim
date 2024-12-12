@@ -17,8 +17,11 @@ enddef
 
 
 export def OtherFileC()
-  var extension = expand("%:e")
-  for f in FileOptions(g:swap_path_options)
+  var file = expand("%")
+  var tail_no_ext = fnamemodify(file, ":t:r")
+  var extension = fnamemodify(file, ":e") == "c" ? "h" : "c"
+  var found_files = findfile(tail_no_ext .. '.' .. extension, '**', -1)
+  for f in found_files
     if filereadable(f)
       execute "edit" f
       return
