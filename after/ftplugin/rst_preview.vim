@@ -1,6 +1,8 @@
 vim9script
 # Preview ReStructuredText as HTML
 
+import "run.vim"
+
 def g:RstMakeHTML(command: string)
   if filereadable(expand("%"))
     call run#RunStart({
@@ -19,5 +21,3 @@ autocmd FocusLost <buffer> call g:RstMakeHTML("preview /U \"" .. expand("%") .. 
 nnoremap <buffer> <LocalLeader>p <Cmd>RstOpenPreview<CR>
 
 defcompile
-
-
