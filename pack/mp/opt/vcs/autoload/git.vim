@@ -28,6 +28,15 @@ export def BranchInfo(directory: string)
   endif
 enddef
 
+def GetBranches(): list<string>
+  var names: list<string>
+  var branches = systemlist("git branch")
+  for e in branches
+    add(names, substitute(e, "[* ] ", "", ""))
+  endfor
+  return names
+enddef
+
 def GetChangedFiles(): list<string>
   if g:vcs_git_changed_files == []
       g:vcs_git_changed_files = systemlist("git ls-files --modified")
@@ -36,10 +45,13 @@ def GetChangedFiles(): list<string>
 enddef
 
 export def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): list<string>
-  var candidates = [ "restore", "status", "add", "commit", "diff --no-color", "branch", "remote", "push", "pull", "fetch" ]
+  var candidates = [ "restore", "switch", "status", "add", "commit", "diff --no-color", "branch", "remote", "push", "pull", "fetch" ]
   var git_sub_cmd = matchstr(substitute(cmd_line, 'Git\s\+', '', ''), '\w\+')
   if index(candidates, git_sub_cmd) == -1
     filter(candidates, (idx, val) => val =~ git_sub_cmd)
+  elseif git_sub_cmd == "switch" || git_sub_cmd == "branch"
+    candidates  = GetBranches()
+    filter(candidates, (idx, val) => val =~ arg_lead)
   else
     candidates = GetChangedFiles()
     filter(candidates, (idx, val) => val =~ arg_lead)
