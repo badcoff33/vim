@@ -57,12 +57,12 @@ augroup GroupUtils
     endif
     cwd_stored = getcwd()
   }
-  autocmd TerminalOpen * setlocal signcolumn=no nocursorline foldcolumn=0
+  autocmd TerminalOpen * setlocal scrolloff=0 signcolumn=no nocursorline foldcolumn=0
   autocmd TerminalOpen * setlocal nonumber norelativenumber
-  # Collidse with visuals
-  # autocmd WinEnter     * {
+  autocmd WinLeave     cmd.exe* wincmd c
+  # autocmd WinLeave     * {
   #   if &buftype == 'terminal'
-  #     normal i
+  #     wincmd c
   #   endif
   # }
 augroup END " }}}

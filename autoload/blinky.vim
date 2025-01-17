@@ -42,7 +42,7 @@ endfunction
 function! s:turn_cursorline_on()
   if &diff
     return
-  elseif &ft == "netrw"
+  elseif (&ft == "netrw") || (&bt == "terminal")
     return
   elseif s:blinky_mode == 1
     call setwinvar(winnr(), '&cursorline', v:true)

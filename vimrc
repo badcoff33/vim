@@ -18,7 +18,7 @@ set autowriteall
 set belloff=all
 set clipboard=
 set expandtab
-set fillchars=eob:\ ,vert:\|
+set fillchars=vert:\|
 set hidden
 set history=200
 set jumpoptions=stack
