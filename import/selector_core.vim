@@ -8,7 +8,7 @@ var filtered_items: list<any>
 
 augroup GroupSelectorCore
   au!
-  au ColorScheme * call prop_type_delete('PropSelectorNatch')
+  au ColorScheme * call prop_type_delete('PropSelectorMatch')
 augroup END
 
 def CleanCR(text: any): any
@@ -21,10 +21,9 @@ def CleanCR(text: any): any
 enddef
 
 def Printify(itemsAny: list<any>, props: list<any>): list<any>
-  if empty(prop_type_get('PropSelectorNatch'))
-    hi def link SelectorNatch IncSearch
-    prop_type_add('PropSelectorNatch', {
-      highlight: "SelectorNatch",
+  if prop_type_get('PropSelectorMatch') == {}
+    prop_type_add('PropSelectorMatch', {
+      highlight: "PmenuMatchSel",
       override: true,
       priority: 1000,
       combine: true
@@ -36,7 +35,7 @@ def Printify(itemsAny: list<any>, props: list<any>): list<any>
       return {
         text: v.text,
         props: itemsAny[1][idx]->mapnew((_, c) => {
-          return {col: c + 1, length: 1, type: 'PropSelectorNatch'}
+          return {col: c + 1, length: 1, type: 'PropSelectorMatch'}
         })}
     })
   else
@@ -145,4 +144,3 @@ export def OpenMenu( title: string, items: list<any>, Callback: func(any, string
 enddef
 
 defcompile
-
