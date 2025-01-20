@@ -5,7 +5,7 @@ import "run.vim"
 
 def g:RstMakeHTML(command: string)
   if filereadable(expand("%"))
-    call run#RunStart({
+    call run.RunStart({
       cmd: command,
       background: true,
       no_write: true
