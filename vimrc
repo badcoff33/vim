@@ -18,7 +18,7 @@ set autowriteall
 set belloff=all
 set clipboard=
 set expandtab
-set fillchars=vert:\|
+set fillchars=vert:\|,stl:\ ,
 set hidden
 set history=200
 set jumpoptions=stack
@@ -46,7 +46,6 @@ set shortmess-=S " Yes, search count please
 set shortmess-=f " long form for file info
 set showmatch matchtime=1
 set showtabline=1
-set signcolumn=no
 set tabstop=4
 set termguicolors
 
@@ -102,9 +101,9 @@ set completeopt=menuone,noinsert,noselect
 set pumheight=7
 
 " Command line completion with popup menu
-" set wildmenu wildmode=full:lastused wildoptions=pum,tagfile,fuzzy
+"set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy
 " Command line completion the old fashion way
-set nowildmenu wildmode=longest:list,full wildoptions=tagfile,fuzzy
+set nowildmenu wildmode=longest:list,full wildoptions=fuzzy
 
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
@@ -141,10 +140,6 @@ nnoremap Y y$
 " More exact and easy to reach
 nmap ' `
 
-" Find and find-until
-nnoremap <Space> ;
-nnoremap <S-Space> ,
-
 " increment/decrement numbers blockwise
 vnoremap <C-x> <C-x>gv
 vnoremap <C-a> <C-a>gv
@@ -159,7 +154,7 @@ vnoremap <C-j> :move '>+1<CR>==gv=gv
 vnoremap <C-k> :move '<-2<CR>==gv=gv
 
 " Surfing the quickfix matches
-nnoremap <Leader><C-k> :cfirst<CR>
+nnoremap <Leader><C-j> :cfirst<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 
@@ -185,8 +180,8 @@ inoremap <C-s>} <C-o>b{<C-o>e<Right>}
 nmap <C-s> i<C-s>
 
 " Leader key mappings
-let mapleader = "s"
-let maplocalleader = "S"
+let mapleader = " "
+let maplocalleader = "-"
 
 " fast forward: it takes two
 nnoremap <expr> <A-Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
@@ -209,7 +204,7 @@ cnoremap <expr> <C-r>. DirName("%:h")
 
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
-nnoremap <expr> <Leader>V<CR> ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
+nnoremap <expr> <Leader>VD ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
 nnoremap <Leader>VV :vimgrep /<C-R><C-w>/ %
 
 " yank/paste clipoard: b/c most laptop keyboards suck
