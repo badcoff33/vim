@@ -181,8 +181,19 @@ enddef
 
 def StartBackground(dict: dict<any>): job
   var v_job: job
-  var job_opts = {}
-  var out_buffer_nr = bufadd('RUN-LOG')
+  var short_cmd: string
+  var buffer_name: string
+  var out_buffer_nr: number
+  var log_cmd: list<string>
+
+  short_cmd = split(dict.cmd, " ")[0]
+  buffer_name = 'RUN-LOG-' .. toupper(short_cmd)
+  out_buffer_nr = bufadd(buffer_name)
+  log_cmd = [
+    "[" .. strftime("%T") .. "]" .. dict.cmd,
+    ""
+  ]
+  setbufline(out_buffer_nr, "$", log_cmd)
   v_job = job_start("cmd /C " .. dict.cmd, {
       cwd: has_key(dict, "cwd") ? dict.cwd : getcwd(),
       out_io: 'buffer',
