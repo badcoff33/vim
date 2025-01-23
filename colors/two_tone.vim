@@ -55,7 +55,7 @@ execute "hi Cursor" Bg(red) Cterm("NONE")
 execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(blue) Bg(blue_bg) Bold
 execute "hi Folded" Fg(blue) Bg(gray_lt) Normal
-execute "hi IncSearch" Fg(red_dk) Bg(red_bg) Bold
+execute "hi IncSearch" Fg(white) Bg(black) Bold
 execute "hi Italic" Italic
 execute "hi Label" Fg(black) Bold
 execute "hi LineNr" Fg(gray_lt) Bg(white) Italic
@@ -64,13 +64,13 @@ execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Normal
 execute "hi Pmenu" Fg(black) Bg(red_bg)
 execute "hi PmenuMatch" Fg(black) Bg(red_bg) Underline
-execute "hi PmenuMatchSel" Fg(white) Bg(red) Underline
+execute "hi PmenuMatchSel" Fg(white) Bg(red_dk) Underline
 execute "hi PmenuSbar" Fg(red_lt) Bg(red_lt)
 execute "hi PmenuSel" Fg(white) Bg(red) Normal
 execute "hi PmenuThumb" Fg(red_dk) Bg(red_dk)
 execute "hi Search" Fg(black) Bg(gray_lt) Normal
-execute "hi StatusLine" Fg(white) Bg(black) Bold
-execute "hi StatusLineNC" Fg(gray_dk) Bg(gray_lt) Normal
+execute "hi StatusLine" Fg(black) Bg(gray_lt) Normal
+execute "hi StatusLineNC" Fg(black) Bg(gray_bg) Normal
 execute "hi StatusLineTerm" Fg(white) Bg(blue_dk) Bold
 execute "hi TabLine" Fg("fg") Bg(gray_bg) Gui("none")
 execute "hi TabLineFill" Fg("fg") Bg(gray_bg) Gui("none")
@@ -145,9 +145,9 @@ execute "hi rstStrongEmphasis" Fg(gray_dk) Bold
 # Diffs
 
 execute "hi DiffChange" Fg(blue) Bg(gray_lt)
-execute "hi DiffText" Fg(blue) Bg(blue_bg) Bold
-execute "hi DiffDelete" Fg(red) Bg(red_bg)
-execute "hi DiffAdd" Fg(gray_dk) Bg(gray_lt) Bold
+execute "hi DiffText" Fg(white) Bg(blue) Normal
+execute "hi DiffDelete" Fg(red_lt) Bg(red_lt)
+execute "hi DiffAdd" Fg(white) Bg(gray_dk) Normal
 
 # Signify
 

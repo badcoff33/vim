@@ -31,10 +31,10 @@ var fg3       = "#D0E8FE"
 
 var red       = "#F84050"
 var amber     = "#B8CF40"
-var green_bg  = "#1F4843"
-var green_dk  = "#20B144"
-var green     = "#27E158"
-var green_br  = "#27FF60"
+var green_bg  = "#1F4838"
+var green_dk  = "#20A154"
+var green     = "#27E168"
+var green_br  = "#27FF70"
 var blue_dk   = "#1058B8"
 var blue      = "#509CD8"
 var blue_br   = "#70C0F8"
@@ -60,10 +60,11 @@ execute "hi LineNrBelow" Fg(fg1) Bg("bg") Attr("bold")
 execute "hi MatchParen" Fg(green_br) Bg("bg") Attr("underline")
 execute "hi ModeMsg" Fg(fg1) Bg("bg")
 execute "hi NonText" Fg(blue_dk) Bg(bg0)
-execute "hi Normal" Fg(fg3) Bg(bg0) Attr("NONE")
+execute "hi Normal" Fg(white) Bg(bg0) Attr("NONE")
 execute "hi Pmenu" Fg(green) Bg(bg1) Attr("NONE")
 execute "hi PmenuSbar" Bg(bg3)
 execute "hi PmenuSel" Fg(white) Bg(green_dk) Attr("NONE")
+execute "hi PmenuMatchSel" Fg(green) Bg(green_bg) Attr("bold,underline")
 execute "hi PmenuThumb" Bg(blue_br)
 execute "hi Question" Fg(green) Bg("bg")
 execute "hi QuickFixLine" Fg(green) Bg(bg2) Attr("NONE")
@@ -108,7 +109,7 @@ execute "hi Comment" Fg(fg1)
 execute "hi Function" Fg(blue_br) Attr("bold")
 execute "hi Identifier" Fg(blue_br)
 execute "hi Special" Fg(green_dk)
-execute "hi Constant" Fg(white)
+execute "hi Constant" Fg(fg3)
 execute "hi Number" Fg(white)
 execute "hi Todo" Fg(fg1) Bg(bg2)
 execute "hi Error" Fg(red) Bg(bg2)
