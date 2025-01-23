@@ -44,7 +44,7 @@ augroup END
 export def Buffers()
   core.OpenMenu("Buffers",
     getbufinfo({'buflisted': 1})->mapnew((_, v) => {
-      return {bufnr: v.bufnr, text: (v.name ?? $'[{v.bufnr}: No Name]')}
+      return {bufnr: v.bufnr, text: v.name ?? $'[{v.bufnr}: No Name]'}
     }),
     (res, key) => {
       if key == "\<c-t>"
@@ -58,12 +58,16 @@ export def Buffers()
     })
 enddef
 
-# works with tag file an relative file paths.
-# Restrictions: No etags support or with line  numbers
+# Description:  Works with tag file, found in current buffers directory and upwards
+# Restrictions: No etags support or tag file with line numbers
 export def Tags()
   var FileSig = (fn) => substitute(fn, "[\\\\/]", "", "g") # get rid of the slash problem
-  if empty(findfile('tags', expand('%:p') .. ';'))
+  var tag_file = findfile('tags', expand('%:h') .. ';')
+  if empty(tag_file)
+    echomsg "No tag file in " .. expand('%:h') .. " and upwards"
     return
+  else
+    echomsg "TAG file " .. tag_file
   endif
   var fsig = substitute(FileSig(expand('%:p')), FileSig(getcwd()), '', '') # make file relative as ctags files names
   var buf_tag_dict = filter(taglist('.'), (key, val) => FileSig(val['filename']) =~ fsig)
@@ -100,7 +104,7 @@ export def RecentBuffers()
   core.OpenMenu("Most recent buffers",
     v:oldfiles,
     (res, key) => {
-        exe $":edit {res.text}"
+      exe $":edit {res.text}"
     })
 enddef
 
