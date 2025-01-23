@@ -6,7 +6,5 @@ import "math.vim"
 command! -buffer -nargs=0 CalcLine math.EvalPyLine()
 
 # Local mappings
-nnoremap <buffer> <C-CR> <Cmd>py3 DoCalcCurrLine()<CR>
-inoremap <buffer> <C-CR> <Cmd>py3 DoCalcCurrLine()<CR>
-## nnoremap <buffer> <C-CR> <Cmd>CalcLine<CR>
-## inoremap <buffer> <C-CR> <Cmd>CalcLine<CR>
+nnoremap <buffer> <C-CR> <Cmd>CalcLine<CR>
+inoremap <buffer> <C-CR> <Cmd>CalcLine<CR>
