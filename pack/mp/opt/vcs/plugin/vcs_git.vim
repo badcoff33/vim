@@ -1,6 +1,6 @@
 vim9script
 
-import autoload 'git.vim' as git
+import autoload 'vcs_git.vim' as git
 
 command! -nargs=* -complete=customlist,git.CompleteGit Git git.Execute(<q-args>)
 command! -nargs=0 ShowGitBranch call git.BranchInfo(".")
