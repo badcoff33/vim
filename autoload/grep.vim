@@ -21,7 +21,57 @@ var grep_glob_patterns = {
   cmake:  ['*.cmake', 'CmakeLists.txt']
 }
 
-export def GrepCommand(): string
+def GrepIncludes(): string
+  var include_string: string
+  if g:grep_for_all[0] == 'true' || !has_key(grep_glob_patterns, &ft)
+    include_string = GrepGlobSwitch("*")
+  else
+    for e in grep_glob_patterns[&ft]
+      include_string = include_string .. GrepGlobSwitch(e) .. " "
+    endfor
+  endif
+  return include_string
+enddef
+
+def GrepExcludes(): string
+  var exclude_string: string
+  if g:grep_for_all[0] == 'true'
+    return ""
+  else
+    for e in g:grep_excludes
+      exclude_string = exclude_string .. GrepGlobSwitchExclude(e) .. " "
+    endfor
+  endif
+  return exclude_string
+enddef
+
+def GrepGlobSwitchExclude(anti_pattern: string): string
+  if g:grep_cmd == 'grep'
+    return "--exclude-dir=" .. anti_pattern
+  elseif g:grep_cmd == 'rg'
+    if has("unix")
+      return "--glob !" .. anti_pattern
+    else
+      return "--iglob !" .. anti_pattern
+    endif
+  endif
+  return ""
+enddef
+
+def GrepGlobSwitch(pattern: string): string
+  if g:grep_cmd == 'grep'
+    return "--include=" .. pattern
+  elseif g:grep_cmd == 'rg'
+    if has("unix")
+      return "-g " .. pattern
+    else
+      return "--iglob " .. pattern
+    endif
+  endif
+  return ""
+enddef
+
+def GrepCommand(): string
   assert_true(g:grep_cmd == 'rg' || g:grep_cmd == 'grep', "set g:grep_cmd to 'rg' or 'grep' only")
   if g:grep_cmd == 'rg'
     set grepformat=%f:%l:%c:%m
@@ -61,56 +111,6 @@ export def GrepPatternInput()
       no_popup: true
     })
   endif
-enddef
-
-export def GrepIncludes(): string
-  var include_string: string
-  if g:grep_for_all[0] == 'true' || !has_key(grep_glob_patterns, &ft)
-    include_string = GrepGlobSwitch("*")
-  else
-    for e in grep_glob_patterns[&ft]
-      include_string = include_string .. GrepGlobSwitch(e) .. " "
-    endfor
-  endif
-  return include_string
-enddef
-
-export def GrepExcludes(): string
-  var exclude_string: string
-  if g:grep_for_all[0] == 'true'
-    return ""
-  else
-    for e in g:grep_excludes
-      exclude_string = exclude_string .. GrepGlobSwitchExclude(e) .. " "
-    endfor
-  endif
-  return exclude_string
-enddef
-
-def GrepGlobSwitchExclude(anti_pattern: string): string
-  if g:grep_cmd == 'grep'
-    return "--exclude-dir=" .. anti_pattern
-  elseif g:grep_cmd == 'rg'
-    if has("unix")
-      return "--glob !" .. anti_pattern
-    else
-      return "--iglob !" .. anti_pattern
-    endif
-  endif
-  return ""
-enddef
-
-def GrepGlobSwitch(pattern: string): string
-  if g:grep_cmd == 'grep'
-    return "--include=" .. pattern
-  elseif g:grep_cmd == 'rg'
-    if has("unix")
-      return "-g " .. pattern
-    else
-      return "--iglob " .. pattern
-    endif
-  endif
-  return ""
 enddef
 
 defcompile
