@@ -6,14 +6,14 @@
 let b:undo_ftplugin = "setl cinoptions< list< tw< expandtab< formatoptions< tabstop< shiftwidth< foldnestmax< foldmethod<"
 
 setlocal cinoptions=(0,W4,gN
-setlocal list
-setlocal textwidth=80
 setlocal expandtab
-setlocal formatoptions+=j
 setlocal foldmethod=indent
 setlocal foldnestmax=2
-setlocal tabstop=4
+setlocal formatoptions+=j
+setlocal list
 setlocal shiftwidth=4
+setlocal tabstop=4
+setlocal textwidth=80
 
 let b:load_doxygen_syntax = 0
 let g:c_no_comment_fold = 1
@@ -62,4 +62,3 @@ function! s:FormatC() range
   noautocmd execute "cd -"
   call setpos('.', save_cursor)
 endfunction
-
