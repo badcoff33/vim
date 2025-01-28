@@ -41,21 +41,3 @@ if !exists('*LogError')
         endif
     endfunction
 endif
-
-function! Colorize()
-  let rgb_code = expand('<cword>')
-  if hlexists('DisplayColor')
-    let prop = hlget('DisplayColor')[0]
-    if prop.cleard == v:true
-      execute 'syn match DisplayColor "' .. rgb_code ..'"'
-      execute 'hi DisplayColor guifg=' .. rgb_code
-      echo "on"
-    else
-      hi clear DisplayColor
-      echo "off"
-    endif
-  endif
-endfunction
-
-nnoremap <buffer> <LocalLeader>c <Cmd>call Colorize()<CR>
-

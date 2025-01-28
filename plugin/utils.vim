@@ -107,8 +107,17 @@ def g:RunTerminal()
   endif
 enddef
 
+# Description: Change background of 24bit hex-coded color under cursor,
+def g:ColorizeCodeAtCursor()
+  var rgb_24bit = expand('<cword>')
+  execute $"highlight Color24 guifg=black guibg={rgb_24bit}"
+  execute $"match Color24 /{rgb_24bit}/"
+enddef
+
+nnoremap <Leader>uc <Cmd>call g:ColorizeCodeAtCursor()<CR>
+
 assert_true(mapcheck("<Leader>x"), "mapping overwritten")
-nnoremap <Leader>x :call g:RunTerminal()<CR>
+nnoremap <Leader>ux :call g:RunTerminal()<CR>
 
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
