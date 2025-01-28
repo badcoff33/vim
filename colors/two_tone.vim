@@ -40,6 +40,7 @@ var Bold = "gui=bold"
 var Italic = "gui=italic"
 var Underline = "gui=underline"
 var BoldUnderline = "gui=bold,underline"
+var BoldItalic = "gui=bold,italic"
 
 var Fg = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg = (str) => empty(str) ? "" : "guibg=" .. str

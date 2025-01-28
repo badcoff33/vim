@@ -42,35 +42,42 @@ var Attr    = (str) => empty(str) ? "" : "gui="   .. str
 var Cterm   = (str) => empty(str) ? "" : "cterm=" .. str
 var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
+var Normal = "gui=NONE"
+var Bold = "gui=bold"
+var Italic = "gui=italic"
+var Underline = "gui=underline"
+var BoldUnderline = "gui=bold,underline"
+var BoldItalic = "gui=bold,italic"
+
 # Basics
 
-execute "hi Bold" Attr("bold")
-execute "hi CurSearch" Fg(black) Bg(orange) Attr("NONE")
+execute "hi Bold" Bold
+execute "hi CurSearch" Fg(black) Bg(orange) Normal
 execute "hi Cursor" Bg(yellow) Cterm("NONE")
 execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
-execute "hi CursorLineNr" Fg(purple) Bg(cl_bg) Attr("NONE")
-execute "hi Folded" Fg(fg_dk) Bg(black) Attr("NONE")
-execute "hi IncSearch" Fg(black) Bg(yellow) Attr("NONE")  Cterm("NONE")
-execute "hi Italic" Attr("italic")
-execute "hi Label" Fg(orange) Attr("bold")
-execute "hi LineNr" Fg(fg_moredk) Attr("NONE")
-execute "hi MatchParen" Fg(green) Bg("bg") Attr("bold")
-execute "hi NonText" Fg(blue) Bg(cl_bg) Attr("NONE")
-execute "hi Normal" Fg(fg) Bg(bg) Attr("NONE")
+execute "hi CursorLineNr" Fg(purple) Bg(cl_bg) Normal
+execute "hi Folded" Fg(fg_dk) Bg(black) Normal
+execute "hi IncSearch" Fg(black) Bg(yellow) Normal  Cterm("NONE")
+execute "hi Italic" Italic
+execute "hi Label" Fg(orange) Bold
+execute "hi LineNr" Fg(fg_moredk) Normal
+execute "hi MatchParen" Fg(green) Bg("bg") Bold
+execute "hi NonText" Fg(blue) Bg(cl_bg) Normal
+execute "hi Normal" Fg(fg) Bg(bg) Normal
 execute "hi Pmenu" Fg(black) Bg(orange)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(yellow)
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
-execute "hi Search" Fg(green) Bg(black) Attr("underline")
-execute "hi StatusLine" Fg(gui_fg) Bg(gui_bg) Attr("NONE")
-execute "hi StatusLineNC" Fg(gui_fg) Bg(gui_bgdk) Attr("NONE")
-execute "hi StatusLineTerm" Fg(black) Bg(orange) Attr("NONE")
-execute "hi TabLineFill" Fg(yellow) Bg(black) Attr('NONE')
-execute "hi TabLineSel" Fg(yellow) Bg(bg) Attr('underline')
+execute "hi Search" Fg(green) Bg(black) Underline
+execute "hi StatusLine" Fg(gui_fg) Bg(gui_bg) Normal
+execute "hi StatusLineNC" Fg(gui_fg) Bg(gui_bgdk) Normal
+execute "hi StatusLineTerm" Fg(black) Bg(orange) Normal
+execute "hi TabLineFill" Fg(yellow) Bg(black) Normal
+execute "hi TabLineSel" Fg(yellow) Bg(bg) Underline
 execute "hi Terminal" Fg(blue_lt) Bg(bg)
 execute "hi User1" Fg(black) Bg(green)
 execute "hi User2" Fg(black) Bg(blue)
-execute "hi VertSplit" Fg(gui_bg) Bg(gui_bg) Attr("NONE")
+execute "hi VertSplit" Fg(gui_bg) Bg(gui_bg) Normal
 execute "hi Visual" Fg(white) Bg(blue_dk)
 
 highlight! link CursorColumn CursorLine
@@ -84,50 +91,50 @@ highlight! link qfSeparator Normal
 
 # Code
 
-execute "hi Comment" Fg(fg_dk) Attr("NONE")
-execute "hi Conditional" Fg(blue_lt) Attr("NONE")
+execute "hi Comment" Fg(fg_dk) Normal
+execute "hi Conditional" Fg(blue_lt) Normal
 execute "hi Constant" Fg(green)
-execute "hi Directory" Fg(blue) Attr("bold,underline")
-execute "hi Error" Fg(orange) Bg(cl_bg) Attr("underline")
-execute "hi ErrorMsg" Fg(black) Bg(red) Attr("NONE")
+execute "hi Directory" Fg(blue) BoldUnderline
+execute "hi Error" Fg(orange) Bg(cl_bg) Underline
+execute "hi ErrorMsg" Fg(black) Bg(red) Normal
 execute "hi Function" Fg(white)
-execute "hi Identifier" Fg(fg_dk) Attr("NONE")
-execute "hi ModeMsg" Fg(black) Bg(green) Attr("NONE")
-execute "hi MoreMsg" Fg(green) Bg(bg) Attr("NONE")
+execute "hi Identifier" Fg(fg_dk) Normal
+execute "hi ModeMsg" Fg(black) Bg(green) Normal
+execute "hi MoreMsg" Fg(green) Bg(bg) Normal
 execute "hi Number" Fg(green)
-execute "hi PreCondit" Fg(white) Attr("bold")
-execute "hi PreProc" Fg(white) Attr("NONE")
+execute "hi PreCondit" Fg(white) Bold
+execute "hi PreProc" Fg(white) Normal
 execute "hi Question" Fg(white) Bg(bg)
-execute "hi QuickFixLine" Fg(blue) Bg("bg") Attr("bold")
+execute "hi QuickFixLine" Fg(blue) Bg("bg") Bold
 execute "hi Special" Fg(blue_dk)
-execute "hi SpecialKey" Fg(blue) Attr("NONE")
-execute "hi Statement" Fg(white) Attr("NONE")
+execute "hi SpecialKey" Fg(blue) Normal
+execute "hi Statement" Fg(white) Normal
 execute "hi StorageClass" Fg(white)
 execute "hi String" Fg(yellow)
-execute "hi Structure" Fg(blue_dk) Attr("NONE")
-execute "hi Title" Fg(white) Attr("bold")
-execute "hi Todo" Fg(blue) Bg("bg") Attr("bold,NONE")
-execute "hi Type" Fg(blue) Attr("NONE")
-execute "hi WarningMsg" Fg(black) Bg(blue) Attr("NONE")
+execute "hi Structure" Fg(blue_dk) Normal
+execute "hi Title" Fg(white) Bold
+execute "hi Todo" Fg(blue) Bg("bg") Bold
+execute "hi Type" Fg(blue) Normal
+execute "hi WarningMsg" Fg(black) Bg(blue) Normal
 execute "hi qfFileName" Fg(blue_lt)
 execute "hi qfLineNr" Fg(blue)
 
 # Filetype VIM
 
-execute "hi vimCommentTitle" Fg(yellow) Attr("bold")
+execute "hi vimCommentTitle" Fg(yellow) Bold
 
 # Filetype C
 
-execute "hi cCppOut" Bg(blue_lt) Attr("NONE")
-execute "hi cCppOutIf2" Bg(blue_lt) Attr("NONE")
+execute "hi cCppOut" Bg(blue_lt) Normal
+execute "hi cCppOutIf2" Bg(blue_lt) Normal
 execute "hi cParen" Fg(blue)
 execute "hi cBlock" Fg(blue)
 
 # Filetype HTML
 
-execute "hi htmlH1" Fg(blue_lt) Attr("bold")
-execute "hi htmlH2" Fg(blue) Attr("bold")
-execute "hi htmlH3" Fg(blue) Attr("NONE")
+execute "hi htmlH1" Fg(blue_lt) Bold
+execute "hi htmlH2" Fg(blue) Bold
+execute "hi htmlH3" Fg(blue) Normal
 
 # Filetype Markdown
 
@@ -137,7 +144,7 @@ execute "hi markdownCodeBlock" Fg(green) Bg(bg)
 # Filetype ReStructuorangeText
 
 execute "hi rstEmphasis" Fg(blue_lt)
-execute "hi rstStrongEmphasis" Fg(blue_lt) Attr("bold")
+execute "hi rstStrongEmphasis" Fg(blue_lt) Bold
 
 # Diffs
 
@@ -153,4 +160,3 @@ highlight! link SignifySignDelete DiffDelete
 highlight! link SignifySignDeleteFirstLine DiffDelete
 highlight! link SignifySignChange DiffChange
 highlight! link SignifySignChangeDelete DiffChange
-

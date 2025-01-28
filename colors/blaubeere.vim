@@ -19,15 +19,15 @@ var shadow_bg   = "#F6F6F6"
 var shadow_fg   = "#C0C0C0"
 var black       = "#000000"
 var white       = "#FFFFFF"
-var blue_dk     = "#48416F"
-var blue        = "#8A81BF"
-var blue_lt     = "#ACC6DB"
+var blue_dk     = "#43416F"
+var blue        = "#8581BF"
+var blue_lt     = "#ACA6FB"
 var yellow      = "#FFE895"
-var yellow_dk   = "#9D8E77"
+var yellow_dk   = "#AD8E37"
 var red         = "#FB8A9C"
 var red_dk      = "#BC6D76"
 var green       = "#7FCA7C"
-var green_dk    = "#65A06F"
+var green_dk    = "#55A85F"
 var aluminium_0 = "#2e3436"
 var aluminium_1 = "#555753"
 var aluminium_2 = "#888a85"
@@ -46,6 +46,7 @@ var Bold = "gui=bold"
 var Italic = "gui=italic"
 var Underline = "gui=underline"
 var BoldUnderline = "gui=bold,underline"
+var BoldItalic = "gui=bold,italic"
 
 # Basics
 
@@ -68,10 +69,10 @@ execute "hi Operator" Fg(green) Normal
 execute "hi Pmenu" Fg(aluminium_1) Bg(aluminium_5)
 execute "hi PmenuSbar" Fg(aluminium_4) Bg(aluminium_4)
 execute "hi PmenuSel" Fg(white) Bg(green_dk) Normal
-execute "hi PmenuMatchSel" Fg(white) Bg(black) Normal
+execute "hi PmenuMatchSel" Fg(white) Bg(green_dk) Bold
 execute "hi PmenuThumb" Fg(green) Bg(green)
 execute "hi Search" Bg(aluminium_5) Normal
-execute "hi StatusLine" Fg(blue_lt) Bg(blue_dk) Normal
+execute "hi StatusLine" Fg(white) Bg(blue_dk) Normal
 execute "hi StatusLineNC" Fg(aluminium_2) Bg(aluminium_5) Normal
 execute "hi StatusLineTerm" Fg(white) Bg(blue) Normal
 execute "hi TabLine" Fg(aluminium_2) Bg(shadow_bg) Normal
@@ -80,7 +81,7 @@ execute "hi TabLineSel" Fg(blue_lt) Bg(blue_dk) Bold
 execute "hi Terminal" Fg(fg) Bg(bg)
 execute "hi User1" Fg(white) Bg(aluminium_4) Normal
 execute "hi User2" Fg(blue_lt) Bg(blue_dk) Italic
-execute "hi VertSplit" Fg(aluminium_4) Bg("bg") Normal
+execute "hi VertSplit" Fg(aluminium_4) Bg(aluminium_5) Normal
 execute "hi Visual" Fg(black) Bg(aluminium_4)
 
 highlight! link CursorColumn CursorLine
@@ -114,8 +115,8 @@ execute "hi Statement" Fg(blue_dk)  Normal
 execute "hi StorageClass" Fg(red)
 execute "hi String" Fg(yellow_dk)
 execute "hi Structure" Fg(red) Normal
-execute "hi Title" Fg(yellow_dk)  Bold
-execute "hi Todo" Fg(blue) Bg("bg") Gui("bold,italic")
+execute "hi Title" Fg(blue_dk)  Bold
+execute "hi Todo" Fg(red) Bg("bg") BoldItalic
 execute "hi Type" Fg(red_dk) Normal
 execute "hi WarningMsg" Fg(white) Bg(green_dk)
 execute "hi qfFileName" Fg(blue_lt)
@@ -144,6 +145,9 @@ execute "hi htmlItalic" Fg(shadow_fg) Italic
 
 execute "hi markdownCode" Fg(aluminium_2) Bg(aluminium_5)
 execute "hi markdownCodeBlock" Fg(aluminium_2) Italic
+
+# Filetype ReStructuredTExt
+
 execute "hi rstEmphasis" Fg(aluminium_2)
 execute "hi rstStrongEmphasis" Fg(aluminium_2)  Bold
 
