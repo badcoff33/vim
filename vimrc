@@ -18,7 +18,7 @@ set autowriteall
 set belloff=all
 set clipboard=
 set expandtab
-set fillchars=vert:\|,stl:\ ,
+set fillchars=diff:\ ,stl:\ ,
 set hidden
 set history=200
 set jumpoptions=stack
@@ -97,13 +97,13 @@ execute 'set undodir=' .. getenv('TEMP')
 " Insert mode completion
 set complete=.,w
 set noshowfulltag
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noinsert
 set pumheight=7
 
 " Command line completion with popup menu
 "set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy
 " Command line completion the old fashion way
-set nowildmenu wildmode=longest:list,full wildoptions=fuzzy
+set nowildmenu wildmode=list:lastused,full wildoptions=fuzzy
 
 set nowildignorecase
 set wildignore+=*.*~,*.o,TAGS
@@ -187,8 +187,8 @@ let maplocalleader = "-"
 nnoremap <expr> <A-Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
 
 " Avoid other keyboard/terminal problems
-nnoremap <Leader>. g<C-]>
-nnoremap <Leader>, <C-t>
+nnoremap + g<C-]>
+nnoremap <Leader>+ <C-t>
 
 " Substitute command
 nnoremap <Leader>s :%s/\C//cgI<C-b><Right><Right><Right>
@@ -216,11 +216,11 @@ nnoremap <Leader>p <Cmd>set paste<CR>"*P<Cmd>set nopaste<CR>
 
 " Move it!
 inoremap <S-Up>    <Esc><C-w><Up>
-inoremap <S-Down>  <Esc><C-w><Down>
+inoremap <expr> <S-Down>  (winnr() == winnr('j')) ? "<Esc>:" : "<Esc><C-w><Down>"
 inoremap <S-Left>  <Esc><C-w><Left>
 inoremap <S-Right> <Esc><C-w><Right>
 nnoremap <S-Up>    <C-w><Up>
-nnoremap <S-Down>  <C-w><Down>
+nnoremap <expr> <S-Down>  (winnr() == winnr('j')) ? ":" : "<C-w><Down>"
 nnoremap <S-Left>  <C-w><Left>
 nnoremap <S-Right> <C-w><Right>
 tnoremap <S-Up>    <C-w><Up>
