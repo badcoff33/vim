@@ -154,7 +154,6 @@ vnoremap <C-j> :move '>+1<CR>==gv=gv
 vnoremap <C-k> :move '<-2<CR>==gv=gv
 
 " Surfing the quickfix matches
-nnoremap <Leader><C-j> :cfirst<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 
@@ -224,7 +223,7 @@ nnoremap <expr> <S-Down>  (winnr() == winnr('j')) ? ":" : "<C-w><Down>"
 nnoremap <S-Left>  <C-w><Left>
 nnoremap <S-Right> <C-w><Right>
 tnoremap <S-Up>    <C-w><Up>
-tnoremap <S-Down>  <C-w><Down>
+tnoremap <expr> <S-Down>  (winnr() == winnr('j')) ? "<C-w>N:" : "<C-w>N<C-w><Down>"
 tnoremap <S-Left>  <C-w><Left>
 tnoremap <S-Right> <C-w><Right>
 
