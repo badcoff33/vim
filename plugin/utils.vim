@@ -49,14 +49,6 @@ var cwd_stored: string
 
 augroup GroupUtils
   autocmd!
-  autocmd DirChanged global {
-    if getcwd() != cwd_stored
-      if filereadable(".vimrc")
-        echomsg "local .vimrc available"
-      endif
-    endif
-    cwd_stored = getcwd()
-  }
   autocmd TerminalOpen * setlocal scrolloff=0 signcolumn=no nocursorline foldcolumn=0
   autocmd TerminalOpen * setlocal nonumber norelativenumber
   autocmd WinLeave     cmd.exe* wincmd c
@@ -66,10 +58,6 @@ augroup GroupUtils
   #   endif
   # }
 augroup END " }}}
-
-if filereadable(".vimrc")
-  echomsg "local .vimrc available"
-endif
 
 # Description: Run a diff of current buffer content and file content.
 # Taken from Vims help file diff.txt:
