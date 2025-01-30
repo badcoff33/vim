@@ -21,30 +21,6 @@ var grep_glob_patterns = {
   cmake:  ['*.cmake', 'CmakeLists.txt']
 }
 
-def GrepIncludes(): string
-  var include_string: string
-  if g:grep_for_all[0] == 'true' || !has_key(grep_glob_patterns, &ft)
-    include_string = GrepGlobSwitch("*")
-  else
-    for e in grep_glob_patterns[&ft]
-      include_string = include_string .. GrepGlobSwitch(e) .. " "
-    endfor
-  endif
-  return include_string
-enddef
-
-def GrepExcludes(): string
-  var exclude_string: string
-  if g:grep_for_all[0] == 'true'
-    return ""
-  else
-    for e in g:grep_excludes
-      exclude_string = exclude_string .. GrepGlobSwitchExclude(e) .. " "
-    endfor
-  endif
-  return exclude_string
-enddef
-
 def GrepGlobSwitchExclude(anti_pattern: string): string
   if g:grep_cmd == 'grep'
     return "--exclude-dir=" .. anti_pattern
@@ -69,6 +45,30 @@ def GrepGlobSwitch(pattern: string): string
     endif
   endif
   return ""
+enddef
+
+def GrepIncludes(): string
+  var include_string: string
+  if g:grep_for_all[0] == true || !has_key(grep_glob_patterns, &ft)
+    include_string = GrepGlobSwitch("*")
+  else
+    for e in grep_glob_patterns[&ft]
+      include_string = include_string .. GrepGlobSwitch(e) .. " "
+    endfor
+  endif
+  return include_string
+enddef
+
+def GrepExcludes(): string
+  var exclude_string: string
+  if g:grep_for_all[0] == true
+    return ""
+  else
+    for e in g:grep_excludes
+      exclude_string = exclude_string .. GrepGlobSwitchExclude(e) .. " "
+    endfor
+  endif
+  return exclude_string
 enddef
 
 def GrepCommand(): string
