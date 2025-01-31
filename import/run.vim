@@ -4,7 +4,7 @@ import "popnews.vim"
 
 g:run_dict = []
 g:run_be_verbose = false
-var run_hl_normal = 'ModeMsg'
+var run_hl_normal = 'PopupNotification'
 var run_hl_error  = 'ErrorMsg'
 
 def RemoveChannelFromDict(ch: string)
@@ -275,6 +275,7 @@ export def KillJobs(signal: string)
   for j in job_info()
     job_stop(j, signal)
   endfor
+  popup_clear()
 enddef
 
 command! -bar -complete=custom,CompleteKillAll -nargs=1 KillJobs KillJobs("<args>")
