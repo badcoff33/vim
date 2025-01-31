@@ -43,12 +43,12 @@ var Attr    = (str) => empty(str) ? "" : "gui="   .. str
 var Cterm   = (str) => empty(str) ? "" : "cterm=" .. str
 var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
-var Normal = "gui=NONE"
-var Bold = "gui=bold"
-var Italic = "gui=italic"
-var Underline = "gui=underline"
+var Normal        = "gui=NONE"
+var Bold          = "gui=bold"
+var Italic        = "gui=italic"
+var Underline     = "gui=underline"
 var BoldUnderline = "gui=bold,underline"
-var BoldItalic = "gui=bold,italic"
+var BoldItalic    = "gui=bold,italic"
 
 # Basics
 
@@ -160,9 +160,8 @@ execute "hi DiffDelete" Fg(black) Bg(red)
 execute "hi DiffAdd" Fg(blue_lt) Bg(black)
 
 # Signify
-
-highlight! link SignifySignAdd DiffAdd
-highlight! link SignifySignDelete DiffDelete
-highlight! link SignifySignDeleteFirstLine DiffDelete
-highlight! link SignifySignChange DiffChange
-highlight! link SignifySignChangeDelete DiffChange
+execute "hi SignifySignAdd"             Fg(green)
+execute "hi SignifySignDelete"          Fg(red)
+execute "hi SignifySignDeleteFirstLine" Fg(red)
+execute "hi SignifySignChange"          Fg(blue)
+execute "hi SignifySignChangeDelete"    Fg(blue)

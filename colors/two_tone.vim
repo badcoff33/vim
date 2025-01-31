@@ -152,8 +152,8 @@ execute "hi DiffAdd" Fg(white) Bg(gray_dk) Normal
 
 # Signify
 
-execute "hi SignifySignAdd" Fg(blue_dk)
-execute "hi SignifySignDelete" Fg(red)
+execute "hi SignifySignAdd"             Fg(blue_dk)
+execute "hi SignifySignDelete"          Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
-execute "hi SignifySignChange" Fg(blue_lt)
-execute "hi SignifySignChangeDelete" Fg(red_lt)
+execute "hi SignifySignChange"          Fg(blue_lt)
+execute "hi SignifySignChangeDelete"    Fg(red_lt)
