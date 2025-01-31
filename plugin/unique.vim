@@ -2,8 +2,7 @@ vim9script
 
 import autoload "unique.vim"
 
-augroup GroupUnique
+augroup GroupUniqueP
     au!
     au BufEnter     * unique.GetUniqueName()
 augroup END
-
