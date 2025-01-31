@@ -2,7 +2,7 @@ vim9script
 
 var g_title: string
 var prompt = ""
-var hint = "type to filter  "
+var hint = " "
 var items_dict: list<dict<any>>
 var filtered_items: list<any>
 
@@ -91,8 +91,9 @@ def FilterKey(id: number, key: string): bool
     popup_settext(id, Printify(filtered_items, []))
     popup_setoptions(id, {
       title: $" {g_title}: {prompt ?? hint} ",
+      line: &lines / 2,
       minheight: len(filtered_items[0]),
-      maxheight: (&lines - 10)
+      maxheight: (&lines / 2 - 4)
     })
   endif
   return true
@@ -117,13 +118,13 @@ export def OpenMenu( title: string, items: list<any>, Callback: func(any, string
   var winid = popup_create(Printify(filtered_items, []), {
     title: $" {title}: {hint} ",
     highlight: "Pmenu",
-    pos: "botleft",
-    line: &lines - 2,
+    pos: "topleft",
+    line: &lines / 2,
     col: 0,
     minwidth: (&columns * 0.6)->float2nr(),
     maxwidth: (&columns - 5),
     minheight: height,
-    maxheight: (&lines - 10),
+    maxheight: (&lines / 2 - 4),
     drag: 0,
     wrap: 1,
     cursorline: 1,
