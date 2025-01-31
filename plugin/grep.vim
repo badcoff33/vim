@@ -10,7 +10,7 @@ if g:grep_backend == "grep"
   g:grep_options = get(g:, "grep_options", ["-Hnr"])
   g:grep_excludes = get(g:, "grep_excludes", [])
   g:grep_paths = get(g:, "grep_paths", ["."])
-  g:grep_for_all = get(g:, "grep_for_all", ['false'])
+  g:grep_for_all = get(g:, "grep_for_all", [v:false])
 endif
 
 if g:grep_backend == "ripgrep"
@@ -18,7 +18,7 @@ if g:grep_backend == "ripgrep"
   g:grep_options = get(g:, "grep_options", ["--vimgrep"])
   g:grep_excludes = get(g:, "grep_excludes", [])
   g:grep_paths = get(g:, "grep_paths", ["."])
-  g:grep_for_all = get(g:, "grep_for_all", ['false'])
+  g:grep_for_all = get(g:, "grep_for_all", [v:false])
 endif
 
 cfg.RegisterVariable("g:grep_cmd")
