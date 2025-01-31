@@ -7,7 +7,7 @@ let s:blinky_mode = 0
 " option 'cursorline' on.
 function! blinky#enable_blinky_flash()
   call s:turn_cursorline_off()
-  augroup BlinkyGroup
+  augroup GroupBlinky
   autocmd!
   autocmd WinEnter    * call s:turn_cursorline_on()
   autocmd FocusGained * call s:turn_cursorline_on()
@@ -16,11 +16,17 @@ function! blinky#enable_blinky_flash()
   call s:turn_cursorline_on()
 endfunction
 
+augroup GroupBlinkyBg
+  au!
+  autocmd WinEnter *  if hlexists("NormalWinHl") | setlocal wincolor=NormalWinHl | endif
+  autocmd WinLeave *  setlocal wincolor=
+augroup END
+
 " Description: Make the actual window more obvious by temporary turn the
 " option 'cursorline' on.
 function! blinky#enable_blinky_stay()
   call s:turn_cursorline_off()
-  augroup BlinkyGroup
+  augroup GroupBlinky
     autocmd!
     autocmd WinEnter *    call s:turn_cursorline_on()
     autocmd WinLeave *    call s:turn_cursorline_off()
@@ -33,8 +39,8 @@ endfunction
 " Description: Stop function and release all resources
 function! blinky#disable_blinky()
   setlocal nocursorline
-  augroup BlinkyGroup
-    au! BlinkyGroup
+  augroup GroupBlinky
+    au! GroupBlinky
   augroup END
   let s:blinky_mode = 0
 endfunction
