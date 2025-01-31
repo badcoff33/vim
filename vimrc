@@ -33,10 +33,9 @@ set norelativenumber numberwidth=2
 set noswapfile
 set notimeout
 set nottimeout
-set visualbell
 set nowrap
+set previewpopup=height:10,width:60,highlight:PopupNotification
 set report=0
-set updatetime=300
 set ruler
 set selection=exclusive
 set selectmode=
@@ -48,6 +47,8 @@ set showmatch matchtime=1
 set showtabline=1
 set tabstop=4
 set termguicolors
+set updatetime=300
+set visualbell
 
 set dictionary=spell
 set spellsuggest=best,10
@@ -97,7 +98,7 @@ execute 'set undodir=' .. getenv('TEMP')
 " Insert mode completion
 set complete=.,w
 set noshowfulltag
-set completeopt=menuone,noinsert
+set completeopt=menu
 set pumheight=7
 
 " Command line completion with popup menu
