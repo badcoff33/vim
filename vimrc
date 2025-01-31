@@ -15,110 +15,80 @@ filetype indent on
 set autoread
 set autowrite
 set autowriteall
+set backspace=indent,eol,start  " backspace and cursor keys wrap to previous/next line
 set belloff=all
 set clipboard=
+set complete=.,w
+set dictionary=spell
+set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 set expandtab
 set fillchars=diff:\ ,stl:\ ,
+set foldcolumn=0
+set foldmethod=indent
+set foldnestmax=1
 set hidden
 set history=200
+set hlsearch
+set ignorecase smartcase
+set incsearch
 set jumpoptions=stack
 set keymodel=
 set laststatus=2
 set listchars=tab:>-,trail:.,extends:#
+set magic
 set more
 set mouse=a
 set noerrorbells
+set nofoldenable
 set nojoinspaces
 set norelativenumber numberwidth=2
+set noshowfulltag
+set nosplitbelow
+set nosplitright
 set noswapfile
 set notimeout
 set nottimeout
+set nowildignorecase
 set nowrap
 set previewpopup=height:10,width:60,highlight:PopupNotification
+set pumheight=7
 set report=0
 set ruler
+set scrolljump=1
+set scrolloff=12
 set selection=exclusive
 set selectmode=
 set sessionoptions=buffers,tabpages,winsize
 set shiftwidth=4
-set shortmess-=S " Yes, search count please
-set shortmess-=f " long form for file info
+set shortmess-=S                " show match-count
+set shortmess-=f                " long form for file info
 set showmatch matchtime=1
 set showtabline=1
-set tabstop=4
-set termguicolors
-set updatetime=300
-set visualbell
-
-set dictionary=spell
-set spellsuggest=best,10
-set spelllang=en_us
-set spelloptions=camel
-execute 'set thesaurus=' .. g:vim_home .. '/thesaurus/english.txt'
-
-" Set behavior for commands ':cc', ':cn', 'cp', etc.
-set switchbuf=usetab,uselast
-
-" keep cursor line away from the upper and lower window border
-set scrolloff=12
-set scrolljump=1
-
-" make vertical scrolling more smooth
 set sidescroll=8
 set sidescrolloff=3
-
-" split window behavior
-set nosplitbelow
-set nosplitright
-
-" folding
-set foldcolumn=0
-set foldmethod=indent
-set foldnestmax=1
-set nofoldenable
-
-" backspace and cursor keys wrap to previous/next line
-set backspace=indent,eol,start
-" specify keys that move to next/previous line
-set whichwrap+=<,>,[,]
-
-" makes selecting text more consistent (at least for me)
-set virtualedit=onemore,block
-
-" Search: Some configuration for the search behavior.
-set ignorecase smartcase
-set incsearch
-set hlsearch
-set magic
-set wrapscan
-
+set spelllang=en_us
+set spelloptions=camel
+set spellsuggest=best,10
+set switchbuf=usetab,uselast    " Set behavior for commands ':cc', ':cn', 'cp', etc.
+set tabstop=4
+set tagcase=match
+set termguicolors
+set undodir=$TEMP
 set undofile
-execute 'set undodir=' .. getenv('TEMP')
-
-" Insert mode completion
-set complete=.,w
-set noshowfulltag
-set completeopt=menu
-set pumheight=7
+set updatetime=300
+set virtualedit=onemore,block   " makes selecting text more consistent
+set visualbell
+set whichwrap+=<,>,[,]          " specify keys that move to next/previous line
+set wildcharm=<C-n>
+set wildignore+=*.*~,*.o,TAGS
+set wrapscan                    " wrap search at EOB or BOB
 
 " Command line completion with popup menu
-"set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy
+set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy completeopt=menuone,noselect
 " Command line completion the old fashion way
-set nowildmenu wildmode=list:lastused,full wildoptions=fuzzy
+"set nowildmenu wildmode=list:lastused,full wildoptions=fuzzy  completeopt=menu
 
-set nowildignorecase
-set wildignore+=*.*~,*.o,TAGS
-set wildcharm=<C-n>
-
-" How to handle search for tags
-set tagcase=match
-
-" Tune the diff feature for my needs.
-set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
-" When starting in 'diff' mode, go full screen.
-if &diff
-  set columns=999 lines=999
-endif
+execute 'set thesaurus=' .. g:vim_home .. '/thesaurus/english.txt'
 
 " close special windows
 nnoremap <Esc> <Cmd>helpclose<CR><C-w>z
