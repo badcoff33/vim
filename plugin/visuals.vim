@@ -22,7 +22,7 @@ command! -nargs=* -complete=customlist,CompleteBlinky Blinky call Blinky(<q-args
 
 nnoremap <Leader>h <cmd>HlWordToggle<CR>
 
-augroup GroupVisualsPl
+augroup GroupVisualsP
   au!
   autocmd TextYankPost *  call visuals#blink_on_yank_now(#{duration: 300})
 augroup END
