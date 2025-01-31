@@ -18,8 +18,8 @@ endfunction
 
 augroup GroupBlinkyBg
   au!
-  autocmd WinEnter *  if hlexists("NormalWinHl") | setlocal wincolor=NormalWinHl | endif
-  autocmd WinLeave *  setlocal wincolor=
+  autocmd BufWinEnter,WinEnter *  if hlexists("NormalWinHl") | setlocal wincolor=NormalWinHl | endif
+  autocmd BufWinLeave,WinLeave *  setlocal wincolor=
 augroup END
 
 " Description: Make the actual window more obvious by temporary turn the
