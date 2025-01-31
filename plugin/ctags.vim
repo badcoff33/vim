@@ -15,6 +15,8 @@ augroup GroupeCtags
   autocmd BufWritePost *.cpp,*.hpp ctags.CtagsTriggerUpdate()
 augroup END
 
-command! -nargs=0 CtagsForceUpdate ctags.CtagsTriggerUpdate(true)
+command! -nargs=0 CtagsForceUpdate ctags.CtagsForceUpdate(true)
+nnoremap <Leader>T <Cmd>call ctags#Tags()<CR>
+nnoremap <Leader>t <Cmd>call ctags#Tags("local")<CR>
 
 defcompile

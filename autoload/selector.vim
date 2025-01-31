@@ -58,38 +58,6 @@ export def Buffers()
     })
 enddef
 
-# Description:  Works with tag file, found in current buffers directory and upwards
-# Restrictions: No etags support or tag file with line numbers
-export def Tags()
-
-  var tag_file: string
-  var tags_list: list<dict<any>>
-  var buf_tags_list: list<dict<any>>
-  var fsig: string
-
-  def FileSignature(fn: string): string
-    # get rid of the slashes problem
-    return substitute(fn, "[\\\\/]", "", "g")
-  enddef
-
-  tag_file = findfile('tags', expand('%:h') .. ';,.;')
-  if empty(tag_file)
-    echomsg "No tag file in " .. expand('%:h') .. " and upwards"
-    return
-  endif
-
-  tags_list = taglist('.', tag_file)
-  fsig = substitute(FileSignature(expand('%:p')), FileSignature(getcwd()), '', '') # make file relative as ctags files names
-  buf_tags_list = filter(tags_list, (key, val) => FileSignature(val['filename']) =~ fsig)
-  core.OpenMenu(
-    "Tags",
-    mapnew(buf_tags_list, (key, val) => val['name']),
-    (res, key) => {
-      var cmd = filter(buf_tags_list, 'v:val["name"] == "' .. res.text .. '"')[0]['cmd']
-      execute ":" .. escape(cmd, '*')
-    })
-enddef
-
 # Description: filter all files from current dir
 # In case of Ripgrep: Rg does ignore files, when '.ignore' or '.gitignore'
 # files exists is current directory. To ignore both ignore definition files,
