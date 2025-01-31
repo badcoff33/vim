@@ -18,7 +18,8 @@ var white    = "#FFFFFF"
 var fg        = "#D8D8F0"
 var fg_dk     = "#B3B3D0"
 var fg_moredk = "#63739F"
-var bg        = "#1A253F"
+var bg        = "#18233D"
+var bg_hl     = "#1F2845"
 
 var gui_bgdk = "#203050"
 var gui_bg   = "#204060"
@@ -33,7 +34,7 @@ var blue_dk  = "#6380C0"
 var yellow  = "#F8E840"
 var purple  = "#C175F1"
 var orange  = "#E1BC16"
-var red     = "#EF3005"
+var red     = "#EF4025"
 var green   = "#10DD50"
 
 var Fg      = (str) => empty(str) ? "" : "guifg=" .. str
@@ -53,7 +54,7 @@ var BoldItalic = "gui=bold,italic"
 
 execute "hi Bold" Bold
 execute "hi CurSearch" Fg(black) Bg(orange) Normal
-execute "hi Cursor" Bg(yellow) Cterm("NONE")
+execute "hi Cursor" Fg(black) Bg(white) Cterm("NONE")
 execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(purple) Bg(cl_bg) Normal
 execute "hi Folded" Fg(fg_dk) Bg(black) Normal
@@ -64,6 +65,7 @@ execute "hi LineNr" Fg(fg_moredk) Normal
 execute "hi MatchParen" Fg(green) Bg("bg") Bold
 execute "hi NonText" Fg(blue) Bg(cl_bg) Normal
 execute "hi Normal" Fg(fg) Bg(bg) Normal
+execute "hi NormalWinHl" Fg(fg) Bg(bg_hl) Normal
 execute "hi Pmenu" Fg(black) Bg(orange)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(yellow)
@@ -105,11 +107,11 @@ execute "hi Number" Fg(green)
 execute "hi PreCondit" Fg(white) Bold
 execute "hi PreProc" Fg(white) Normal
 execute "hi Question" Fg(white) Bg(bg)
-execute "hi QuickFixLine" Fg(blue) Bg("bg") Bold
+execute "hi QuickFixLine" Fg(blue) Bg("black") Bold
 execute "hi Special" Fg(blue_dk)
 execute "hi SpecialKey" Fg(blue) Normal
 execute "hi Statement" Fg(white) Normal
-execute "hi StorageClass" Fg(white)
+execute "hi StorageClass" Fg(purple)
 execute "hi String" Fg(yellow)
 execute "hi Structure" Fg(blue_dk) Normal
 execute "hi Title" Fg(white) Bold
@@ -145,6 +147,10 @@ execute "hi markdownCodeBlock" Fg(green) Bg(bg)
 
 execute "hi rstEmphasis" Fg(blue_lt)
 execute "hi rstStrongEmphasis" Fg(blue_lt) Bold
+
+# Filetype Cmake
+
+execute "hi cmakeArguments" Fg(green) Bg("Bg") Normal
 
 # Diffs
 
