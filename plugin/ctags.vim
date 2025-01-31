@@ -11,11 +11,11 @@ cfg.RegisterVariable("g:ctags_options")
 
 augroup GroupeCtags
   autocmd!
-  autocmd BufWritePost *.c,*.h ctags.CtagsTriggerUpdate()
-  autocmd BufWritePost *.cpp,*.hpp ctags.CtagsTriggerUpdate()
+  autocmd BufWritePost *.c,*.h     ctags.CtagsUpdate()
+  autocmd BufWritePost *.cpp,*.hpp ctags.CtagsUpdate()
 augroup END
 
-command! -nargs=0 CtagsForceUpdate ctags.CtagsForceUpdate(true)
+command! -nargs=0 CtagsForceUpdate ctags.CtagsUpdate({verbose: true, rebuild_sel_list: true})
 nnoremap <Leader>T <Cmd>call ctags#Tags()<CR>
 nnoremap <Leader>t <Cmd>call ctags#Tags("local")<CR>
 

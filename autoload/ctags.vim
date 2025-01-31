@@ -45,25 +45,33 @@ export def TagCycle(direction: string)
   b:tag_name = tl[n]['name']
   var name = b:tag_name
   echo ':tag ' .. b:tag_name
-  legacy execute 'tag ' .. b:tag_name
+  execute 'tag ' .. b:tag_name
 enddef
 
-export def CtagsForceUpdate(verbose = false)
-  var ctags_options: string
+export def CtagsUpdate(opt = {verbose: false, rebuild_sel_list: false})
 
-  ctags_rebuild_sel_list = true
+  if !has_key(opt, "verbose")
+    opt.verbose = false
+  endif
+  if !has_key(opt, "rebuild_sel_list")
+    opt.rebuild_sel_list = false
+  endif
+
+  ctags_rebuild_sel_list = opt.rebuild_sel_list
+
   if job_status(ctags_job) == "run"
     return
   endif
-  ctags_options = utils.ToString(g:ctags_options)
+
   ctags_job = run.RunStart({
-    cmd: g:ctags_cmd .. ' ' .. ctags_options,
+    cmd: g:ctags_cmd .. ' ' .. utils.ToString(g:ctags_options),
     background: true
   })
+
   if job_status(ctags_job) != "run"
     popnews.Open("check ctags options", {t: 4000, hl: "ErrorMsg"})
-  elseif verbose == true
-    popnews.Open(g:ctags_cmd .. ' ' .. ctags_options, {t: 3000})
+  elseif opt.verbose == true
+    popnews.Open(g:ctags_cmd .. ' ' .. utils.ToString(g:ctags_options), {t: 3000})
   endif
 enddef
 
