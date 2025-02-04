@@ -98,15 +98,14 @@ export def Tags(scope = "global")
   var first_entry: dict<any>
 
   def FilterBufPath(l: list<dict<any>>): list<dict<any>>
-    var path_signature: string
+    var path_relative: string
 
-    def FileSignature(fn: string): string
-      # get rid of the 'slash problem'
-      return substitute(fn, "[\\\\/]", "", "g")
+    def UnixSep(fn: string): string
+      return substitute(fn, "[\\/]", "/", "g") # get rid of the 'slash problem'
     enddef
 
-    path_signature = substitute(FileSignature(expand('%:p')), FileSignature(getcwd()), '', '')
-    return filter(copy(l), (key, val) => FileSignature(val['filename']) =~ path_signature)
+    path_relative = substitute(UnixSep(expand('%:p')), UnixSep(getcwd()), '', '')[1 : ]
+    return filter(copy(l), (key, val) => val['filename'] =~ path_relative)
   enddef
 
   TagsUpdateList()
