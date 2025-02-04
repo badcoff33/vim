@@ -19,7 +19,7 @@ g:colors_name = "apollo"
 var white    = "#FFFFFF"
 var black    = "#000000"
 
-var bg_winhl  = "#10131C"
+var bg_winhl  = "#101F2F"
 var bg0       = "#101A24"
 var bg1       = "#263140"
 var bg2       = "#344458"

@@ -13,7 +13,8 @@ set background=light
 g:colors_name = "blaubeere"
 
 var fg          = "#404040"
-var bg          = "#FFFFFF"
+var bg          = "#FAFAFA"
+var bg_winhl    = "#FFFFFF"
 var cl_bg       = "#E5FCEF"
 var shadow_bg   = "#F6F6F6"
 var shadow_fg   = "#C0C0C0"
@@ -51,7 +52,7 @@ var BoldItalic = "gui=bold,italic"
 # Basics
 
 execute "hi Bold" Bold
-execute "hi CurSearch" Fg(green_dk) Bg(aluminium_5) Bold
+execute "hi CurSearch" Fg(white) Bg(aluminium_2) Bold
 execute "hi Cursor" Bg(black) Cterm("NONE")
 execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(aluminium_2) Bg(aluminium_5) Bold
@@ -65,13 +66,14 @@ execute "hi LineNrBelow" Fg(blue) Bold
 execute "hi MatchParen" Fg(green_dk) Bg(bg) Underline
 execute "hi NonText" Fg(aluminium_3) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Normal
+execute "hi NormalWinHl" Fg(fg) Bg(bg_winhl) Normal
 execute "hi Operator" Fg(green) Normal
 execute "hi Pmenu" Fg(aluminium_1) Bg(aluminium_5)
 execute "hi PmenuSbar" Fg(aluminium_4) Bg(aluminium_4)
 execute "hi PmenuSel" Fg(white) Bg(green_dk) Normal
 execute "hi PmenuMatchSel" Fg(white) Bg(green_dk) Bold
 execute "hi PmenuThumb" Fg(green) Bg(green)
-execute "hi Search" Bg(aluminium_5) Normal
+execute "hi Search" Fg(white) Bg(aluminium_3) Normal
 execute "hi StatusLine" Fg(white) Bg(blue_dk) Normal
 execute "hi StatusLineNC" Fg(aluminium_2) Bg(aluminium_5) Normal
 execute "hi StatusLineTerm" Fg(white) Bg(blue) Normal
@@ -86,7 +88,7 @@ execute "hi Visual" Fg(black) Bg(aluminium_4)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
-highlight! link PopupNotification StatusLineNC
+highlight! link PopupNotification StatusLine
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link WildMenu PmenuSel
@@ -98,7 +100,7 @@ execute "hi Comment" Fg(green_dk) Normal
 execute "hi Conditional" Fg(red)  Normal
 execute "hi Constant" Fg(blue)
 execute "hi Directory" Fg(blue_dk) Underline
-execute "hi Error" Fg(red) Bg("bg") Gui("underline")
+execute "hi Error" Fg(black) Bg(red) Normal
 execute "hi ErrorMsg" Fg(red_dk) Bg("bg") Normal
 execute "hi Function" Fg(blue)
 execute "hi Identifier" Fg(green_dk) Normal
@@ -109,7 +111,7 @@ execute "hi PreCondit" Fg(blue)  Bold
 execute "hi PreProc" Fg(blue) Normal
 execute "hi Question" Fg(aluminium_2) Bg("bg")
 execute "hi QuickFixLine" Fg(blue) Bg("bg") Bold
-execute "hi Special" Fg(red_dk)
+execute "hi Special" Fg(blue_lt)
 execute "hi SpecialKey" Fg(blue)
 execute "hi Statement" Fg(blue_dk)  Normal
 execute "hi StorageClass" Fg(red)
@@ -129,8 +131,8 @@ execute "hi vimCommentTitle" Fg(blue)  Bold
 # Filetype C
 
 execute "hi cCppOut" Bg(aluminium_4) Normal
-execute "hi cCppOutIf" Italic
-execute "hi cCppOutIf2" Bg(aluminium_4) Italic
+execute "hi cCppOutIf" Fg(aluminium_3) Italic
+execute "hi cCppOutIf2" Fg(aluminium_4) Italic
 execute "hi cParen" Fg(aluminium_2)
 execute "hi cBlock" Fg(aluminium_2)
 
