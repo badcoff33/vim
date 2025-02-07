@@ -4,28 +4,59 @@ import 'run.vim' as run
 import 'popnews.vim' as pop
 
 var popup_duration = 6000
+var working_dir = ""
 
 g:vcs_git_changed_files = []
+
+def PresetWorkingDir()
+  if working_dir == ""
+    working_dir = getcwd()
+  endif
+enddef
 
 def CbPopupBranchInfo(raw_list: list<string>)
   var branch_name: string
   if raw_list[0] =~? 'On branch '
     branch_name = "--> On branch " .. substitute(raw_list[0], 'On branch ', '', '')
+  elseif raw_list[0] =~? 'HEAD detached'
+    branch_name = raw_list[0]
   else
     branch_name = '--> No Git branch'
   endif
   pop.Open(branch_name, {t: popup_duration, hl: 'PopupNotification'})
 enddef
 
-export def BranchInfo(directory: string)
-  var output: list<string>
-  if isdirectory(directory)
-  pop.Open('In ' .. getcwd(), {t: popup_duration, hl: 'PopupNotification'})
-  job_start('git status -b', {
-      callback: (_, data) => add(output, data),
-      exit_cb: (_, data) => CbPopupBranchInfo(output),
-    })
+export def ChangeDir(new_working_dir = "")
+  var entered_working_dir: string
+
+  if isdirectory(new_working_dir)
+    working_dir = fnamemodify(new_working_dir, ":p")
+  else
+    PresetWorkingDir()
+    entered_working_dir = input(
+      "Git working directory: ",
+      fnamemodify(working_dir, ":p"),
+      "dir")
+    entered_working_dir = fnamemodify(entered_working_dir, ":p")
+    if isdirectory(entered_working_dir)
+      working_dir = entered_working_dir
+    endif
   endif
+  BranchInfo()
+enddef
+
+export def BranchInfo()
+  var output: list<string>
+  PresetWorkingDir()
+  pop.Open('In ' .. working_dir, {
+    t: popup_duration,
+    hl: 'PopupNotification'
+  })
+  job_start('git status -b', {
+    cwd: working_dir,
+    callback: (_, data) => add(output, data),
+    exit_cb: (_, data) => CbPopupBranchInfo(output),
+  })
 enddef
 
 def GetBranches(): list<string>
@@ -39,7 +70,7 @@ enddef
 
 def GetChangedFiles(): list<string>
   if g:vcs_git_changed_files == []
-      g:vcs_git_changed_files = systemlist("git ls-files --modified")
+    g:vcs_git_changed_files = systemlist("git ls-files --modified")
   endif
   return g:vcs_git_changed_files
 enddef
@@ -47,6 +78,7 @@ enddef
 export def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): list<string>
   var candidates = [ "restore", "switch", "status", "add", "commit", "diff", "branch", "remote", "push", "pull", "fetch" ]
   var git_sub_cmd = matchstr(substitute(cmd_line, 'Git\s\+', '', ''), '\w\+')
+
   if index(candidates, git_sub_cmd) == -1
     filter(candidates, (idx, val) => val =~ git_sub_cmd)
   elseif git_sub_cmd == "switch" || git_sub_cmd == "branch"
@@ -65,31 +97,40 @@ def CbPopList(out_list: list<string>)
   endfor
 enddef
 
-export def DirStatus(directory: string)
+export def DirInfo()
   var output: list<string>
-  if isdirectory(directory)
-    job_start('git status -s -b', {
-      callback: (_, data) => add(output, data),
-      exit_cb: (_, data) => CbPopList(output),
-    })
-  endif
+
+  PresetWorkingDir()
+  job_start('git status -s -b', {
+    cwd: working_dir,
+    callback: (_, data) => add(output, data),
+    exit_cb: (_, data) => CbPopList(output),
+  })
 enddef
 
 export def Execute(git_command: string)
+  PresetWorkingDir()
   run.RunStart({
     cmd: 'git ' .. git_command,
-    cwd: getcwd(),
+    cwd: working_dir,
     name: "GIT-Output"
   })
+enddef
+
+export def RunGui()
+  PresetWorkingDir()
+  job_start(
+    'git-gui',
+    {cwd: working_dir}
+  )
 enddef
 
 augroup GroupVcsGit
   autocmd!
   autocmd BufWinEnter GIT-Output setf vcs_output
   autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
-  autocmd BufWinEnter GIT-Output nnoremap <buffer> s <Cmd>call git.DirStatus('.')<CR>
   autocmd CmdlineEnter : g:vcs_git_changed_files = []
-  # autocmd DirChanged * call VcsGitBranchInfo('.')
+  autocmd DirChanged global call ChangeDir(".")
 augroup END
 
 # Uncomment when testing
