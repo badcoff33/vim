@@ -66,11 +66,11 @@ execute "hi MatchParen" Fg(green) Bg("bg") Bold
 execute "hi NonText" Fg(blue) Bg(cl_bg) Normal
 execute "hi Normal" Fg(fg) Bg(bg) Normal
 execute "hi NormalWinHl" Fg(fg) Bg(bg_hl) Normal
-execute "hi Pmenu" Fg(black) Bg(orange)
+execute "hi Pmenu" Fg(green) Bg(gui_bg)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(yellow)
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
-execute "hi Search" Fg(green) Bg(black) Underline
+execute "hi Search" Fg(green) Bg(gui_bg) Normal
 execute "hi StatusLine" Fg(gui_fg) Bg(gui_bg) Normal
 execute "hi StatusLineNC" Fg(gui_fg) Bg(gui_bgdk) Normal
 execute "hi StatusLineTerm" Fg(black) Bg(orange) Normal

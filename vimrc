@@ -151,7 +151,7 @@ nmap <C-s> i<C-s>
 
 " Leader key mappings
 let mapleader = " "
-let maplocalleader = "-"
+let maplocalleader = "\\"
 
 " fast forward: it takes two
 nnoremap <expr> <A-Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
