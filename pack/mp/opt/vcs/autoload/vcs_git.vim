@@ -3,6 +3,7 @@ vim9script
 import 'run.vim' as run
 import 'popnews.vim' as pop
 
+var local_branch_name: dict<dict<any>>
 var popup_duration = 6000
 var working_dir = ""
 
@@ -14,16 +15,19 @@ def PresetWorkingDir()
   endif
 enddef
 
-def CbPopupBranchInfo(raw_list: list<string>)
+def CbBranchInfo(raw_list: list<string>)
   var branch_name: string
   if raw_list[0] =~? 'On branch '
-    branch_name = "--> On branch " .. substitute(raw_list[0], 'On branch ', '', '')
+    branch_name = substitute(raw_list[0], 'On branch ', '', '')
   elseif raw_list[0] =~? 'HEAD detached'
     branch_name = raw_list[0]
   else
-    branch_name = '--> No Git branch'
+    branch_name = 'NO BRANCH'
   endif
-  pop.Open(branch_name, {t: popup_duration, hl: 'PopupNotification'})
+  pop.Open($"In {working_dir} on {branch_name}", {
+    t: popup_duration,
+    hl: 'PopupNotification'
+  })
 enddef
 
 export def ChangeDir(new_working_dir = "")
@@ -48,15 +52,45 @@ enddef
 export def BranchInfo()
   var output: list<string>
   PresetWorkingDir()
-  pop.Open('In ' .. working_dir, {
-    t: popup_duration,
-    hl: 'PopupNotification'
-  })
   job_start('git status -b', {
     cwd: working_dir,
     callback: (_, data) => add(output, data),
-    exit_cb: (_, data) => CbPopupBranchInfo(output),
+    exit_cb: (_, data) => CbBranchInfo(output),
   })
+enddef
+
+
+export def SetLocalBranchVar()
+  var key: string
+  var j_new: job
+
+  def CbCapture(c: channel, d: string)
+    var k = split(string(c), " ")[1]
+    local_branch_name[k].text = (typename(d) == "string") ? d : ""
+  enddef
+
+  def CbExit(j: job, s: number)
+    var k = split(string(job_info(j).channel), " ")[1]
+    if s == 0
+      setbufvar(local_branch_name[k].buf, "vcs_branch_name", "Git:" .. local_branch_name[k].text)
+    else
+      setbufvar(local_branch_name[k].buf, "vcs_branch_name", "")
+    endif
+    remove(local_branch_name, k)
+  enddef
+
+  j_new = job_start('git branch --show-current', {
+    cwd: expand("%:p:h"),
+    callback: CbCapture,
+    exit_cb: CbExit
+  })
+
+  key = split(string(job_info(j_new).channel), " ")[1]
+  local_branch_name[key] = {
+    buf: bufnr('%'),
+    text: ""
+  }
+
 enddef
 
 def GetBranches(): list<string>
@@ -76,7 +110,10 @@ def GetChangedFiles(): list<string>
 enddef
 
 export def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): list<string>
-  var candidates = [ "restore", "switch", "status", "add", "commit", "diff", "branch", "remote", "push", "pull", "fetch" ]
+  var candidates = [
+    "restore", "switch", "status", "add", "commit", "diff",
+    "branch", "remote", "push", "pull", "fetch"
+  ]
   var git_sub_cmd = matchstr(substitute(cmd_line, 'Git\s\+', '', ''), '\w\+')
 
   if index(candidates, git_sub_cmd) == -1
@@ -91,20 +128,25 @@ export def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): lis
   return candidates
 enddef
 
-def CbPopList(out_list: list<string>)
-  for e in out_list
-    pop.Open('--> ' .. e, {t: popup_duration, hl: 'PopupNotification'})
-  endfor
+def CbDirInfo(out_list: list<string>)
+    pop.Open(out_list, {
+      close_on_key: true,
+      hl: 'PopupNotification'})
+  # for e in out_list
+  #   pop.Open('Git: ' .. e, {
+  #     close_on_key: true,
+  #     hl: 'PopupNotification'})
+  # endfor
 enddef
 
 export def DirInfo()
   var output: list<string>
 
   PresetWorkingDir()
-  job_start('git status -s -b', {
+  job_start('git status -s', {
     cwd: working_dir,
     callback: (_, data) => add(output, data),
-    exit_cb: (_, data) => CbPopList(output),
+    exit_cb: (_, data) => CbDirInfo(output),
   })
 enddef
 
@@ -135,3 +177,4 @@ augroup END
 
 # Uncomment when testing
 defcompile
+

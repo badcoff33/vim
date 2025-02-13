@@ -57,10 +57,11 @@ def g:BuildStatusline(): string
         sl =  " %{GetMode()} "
     endif
     sl = sl .. (len(v:errors) > 0 ? ",!" : "")
+    sl = sl .. " %{get(b:\, \"vcs_branch_name\"\, \"\")}"
     if v:versionlong >= 9001307
         sl = sl .. "%="
     endif
-    sl = sl .. "%{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
+    sl = sl .. " %{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
     sl = sl .. " %{g:GetScopeforSL()}"
     sl = sl .. " [%Y%R%W%M]"
     sl = sl .. "%= %l:%c "

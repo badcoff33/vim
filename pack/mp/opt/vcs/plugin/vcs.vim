@@ -13,5 +13,11 @@ command! -nargs=0 GitGui git.RunGui()
 
 cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  : 'G'
 
+augroup GroupVcsGitP
+  autocmd!
+  autocmd BufEnter,BufWinEnter *.c,*.h,CMakeLists.txt,*.cmake git.SetLocalBranchVar()
+augroup END
+
 # Uncomment when testing
 defcompile
+
