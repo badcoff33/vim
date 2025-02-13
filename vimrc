@@ -5,7 +5,7 @@
 "
 " Maintainer: Markus Prepens (markus dot prepens at gmail dot com)
 
-let g:vim_home = expand('<sfile>:p:h')
+let $VIMHOME = substitute(expand('<sfile>:p:h'), '\', '/', 'g')
 
 let DirName = { dir -> empty(expand(dir)) ? "" : expand(dir) .. expand("/") }
 
@@ -22,7 +22,6 @@ set complete=.,w
 set dictionary=spell
 set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 set expandtab
-set fillchars=diff:\ ,stl:\ ,
 set foldcolumn=0
 set foldmethod=indent
 set foldnestmax=1
@@ -36,6 +35,7 @@ set keymodel=
 set laststatus=2
 set listchars=tab:>-,trail:.,extends:#
 set magic
+set messagesopt=hit-enter,history:100
 set more
 set mouse=a
 set noerrorbells
@@ -75,7 +75,7 @@ set tagcase=match
 set termguicolors
 set undodir=$TEMP
 set undofile
-set updatetime=300
+set updatetime=500
 set virtualedit=onemore,block   " makes selecting text more consistent
 set visualbell
 set whichwrap+=<,>,[,]          " specify keys that move to next/previous line
@@ -84,11 +84,11 @@ set wildignore+=*.*~,*.o,TAGS
 set wrapscan                    " wrap search at EOB or BOB
 
 " Command line completion with popup menu
-set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy completeopt=menuone,noselect
+set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy completeopt=menu
 " Command line completion the old fashion way
 "set nowildmenu wildmode=list:lastused,full wildoptions=fuzzy  completeopt=menu
 
-execute 'set thesaurus=' .. g:vim_home .. '/thesaurus/english.txt'
+execute 'set thesaurus=' .. $VIMHOME .. '/thesaurus/english.txt'
 
 " close special windows
 nnoremap <Esc> <Cmd>helpclose<CR><C-w>z
@@ -151,10 +151,10 @@ nmap <C-s> i<C-s>
 
 " Leader key mappings
 let mapleader = " "
-let maplocalleader = "\\"
+let maplocalleader = "S"
 
 " fast forward: it takes two
-nnoremap <expr> <A-Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
+nnoremap <expr> <Leader><Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
 
 " Avoid other keyboard/terminal problems
 nnoremap + g<C-]>
@@ -168,7 +168,6 @@ vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left><Left><Left>
 nnoremap <Leader><bar> <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
-cnoreabbrev <expr> E (getcmdtype() ==# ':' && getcmdline() =~# '^E') ? 'edit ' .. DirName("%:h") : 'E'
 nnoremap <Leader>e :edit <C-r>=DirName("%:h")<CR>
 cnoremap <expr> <C-r>. DirName("%:h")
 
@@ -209,7 +208,7 @@ command! -nargs=0 SmartCase     :set   ignorecase   smartcase
 augroup GroupVimrc
   autocmd!
   autocmd FocusLost * try | silent wall | catch /.*/ | endtry
-  autocmd BufNewFile .vimrc execute ":0read " expand(g:vim_home .. "/templates/local_vimrc.vim")
+  autocmd BufNewFile .vimrc execute ":0read " expand($VIMHOME .. "/templates/local_vimrc.vim")
 augroup END
 
 let g:term = &term
