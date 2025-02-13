@@ -81,8 +81,8 @@ export def CloseCb(ch: channel)
         execute "drop" dict_entry.name
         setlocal noreadonly modifiable
         setline(lines + 1,
-          ['--------------------------------------------------------------------------------']
-          + ['-- ' .. strftime("%T") .. ' / ' .. dict_entry.full_cmd .. ' / "' .. dict_entry.cwd .. '"']
+          ['']
+          + ['^^^^^^ ' .. strftime("%T") .. ' / ' .. dict_entry.full_cmd .. ' / "' .. dict_entry.cwd .. '"']
           + getbufline(dict_entry.bufnr, 1, "$")
         )
         setlocal buftype=nofile nomodified readonly nomodifiable
@@ -116,9 +116,9 @@ def ConditionalWriteAll(dict: dict<any>)
       endtry
 enddef
 
-# var animations = ["-___", "_-__", "__-_", "___-", "__-_", "_-__"]
-# var animations = [ "|*   |", "| *  |", "|  * |", "|   *|", "|  * |", "| *  |" ]
-var animations = [ '*', '-' ]
+var animations = ["----", "BUSY"]
+#var animations = ["B___", "_U__", "__S_", "___Y", "BUSY", "____"]
+#var animations = [ '*', '-' ]
 var animation_index = 0
 
 def GetAnimationStr(): string
@@ -235,7 +235,7 @@ def StartBuffered(dict: dict<any>): job
         run_dict_entry.short_cmd,
         animations[0],
         0), {
-          permanent: true,
+          no_timeout: true,
           hl: run_hl_normal
         }
     )
@@ -283,3 +283,4 @@ command! -bar -nargs=0 ShowJobs ShowJobs()
 
 # Uncomment when testing
 defcompile
+

@@ -8,9 +8,10 @@ def MakeCallback()
 enddef
 
 export def MakeStart(cmd: string)
-  torchlight.TorchlightClearAll()
+  torchlight.ClearAll()
   run.RunStart({
     cmd: &makeprg .. " " .. cmd,
     callback: MakeCallback
   })
 enddef
+

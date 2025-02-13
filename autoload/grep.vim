@@ -49,7 +49,7 @@ enddef
 
 def GrepIncludes(): string
   var include_string: string
-  if g:grep_for_all[0] == true || !has_key(grep_glob_patterns, &ft)
+  if g:grep_for_all[0] ==? "true" || !has_key(grep_glob_patterns, &ft)
     include_string = GrepGlobSwitch("*")
   else
     for e in grep_glob_patterns[&ft]
@@ -61,7 +61,7 @@ enddef
 
 def GrepExcludes(): string
   var exclude_string: string
-  if g:grep_for_all[0] == true
+  if g:grep_for_all[0] ==? "true"
     return ""
   else
     for e in g:grep_excludes
@@ -114,3 +114,4 @@ export def GrepPatternInput()
 enddef
 
 defcompile
+

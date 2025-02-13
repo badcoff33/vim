@@ -9,12 +9,7 @@ export def Test_olp()
   Open("22", {t: 13000})
   Open("333", {t: 15000, hl: "Search"})
   Open("4444", {t: 12000})
-enddef
-
-def g:PopnewsAdjustColors()
-  if !hlexists("PopupNotification")
-    highlight! link PopupNotification Pmenu
-  endif
+  Open("key?", {close_on_key: true})
 enddef
 
 def CleanupWinlist(winid: number)
@@ -38,48 +33,77 @@ def CleanupWinlist(winid: number)
   endfor
 enddef
 
+var opt_default = {
+  hl: 'PopupNotification',
+  no_timeout: false,
+  close_on_key: false,
+  t: 3000
+}
+
 # text of type string is the thing to show in popup
 # returns the window id of the created popup
-export def Open(text: string, param_in: dict<any> = {t: 3000, hl: 'PopupNotification'}): number
-  var IsPermanent = (): bool =>  (has_key(param_in, 'permanent') && param_in.permanent) ? true : false
+export def Open(text: any, opt: dict<any> = opt_default): number
+  var IsCloseOnTime = (): bool =>  (has_key(opt, 'no_timeout') && opt.no_timeout) ? false : true
+  var IsCloseOnKey = (): bool =>  (has_key(opt, 'close_on_key') && opt.close_on_key) ? true : false
   var popup_line: number
+  var popup_width: number
+  var text_lines: number
   var winid: number
-  var param_merged: dict<any>
-  doautocmd ColorScheme *
+  var opt_m: dict<any>
+
+  if !hlexists("PopupNotification")
+    highlight! link PopupNotification Pmenu
+  endif
+
+  def FilterClose(w: number, key: string): number
+    Close(w)
+    return 1
+  enddef
+
+  if typename(text) == "string"
+    popup_width = len(text)
+    text_lines = 1
+  else
+    popup_width = &columns - 4
+    text_lines = len(text)
+  endif
+
   for [key, value] in items({
-      permanent: false,
+      hl: 'PopupNotification',
+      no_timeout: false,
+      close_on_key: false,
       t: 3000,
-      hl: 'PopupNotification'
       })
-    if has_key(param_in, key)
-      param_merged[key] = param_in[key]
+    if has_key(opt, key)
+      opt_m[key] = opt[key]
     else
-      param_merged[key] = value
+      opt_m[key] = value
     endif
   endfor
 
-  var popup_opts = {
+  var popup_opt = {
     pos: g:popnews_bottom_left ? "botleft" : "botright",
     col: g:popnews_bottom_left ? 1 : &columns,
     line: &lines - 2,
     padding: [0, 2, 0, 2],
-    minwidth: len(text),
-    highlight: param_merged.hl,
+    minwidth: popup_width,
+    highlight: opt_m.hl,
     tabpage: -1
   }
 
-  if IsPermanent()
-  else
-    popup_opts['time'] = param_merged.t
-    popup_opts['callback'] = g:NewsCB
+  if IsCloseOnKey()
+    popup_opt['filter'] = FilterClose
+  elseif IsCloseOnTime()
+    popup_opt['time'] = opt_m.t
+    popup_opt['callback'] = g:NewsCB
   endif
 
   for w in g:popnews_winlist
     popup_line = popup_getpos(w)['line']
-    popup_move(w, {line: popup_line - 1})
+    popup_move(w, {line: popup_line - text_lines})
   endfor
 
-  winid = popup_create(text, popup_opts)
+  winid = popup_create(text, popup_opt)
   add(g:popnews_winlist, winid)
 
   return winid
@@ -96,11 +120,7 @@ def NewsCB(winid: number, result: number)
   CleanupWinlist(winid)
 enddef
 
-augroup GroupNews
-    autocmd!
-    autocmd ColorScheme * call PopnewsAdjustColors()
-augroup END
-
+#Test_olp()
 # uncomment when debugging
 defcompile
 

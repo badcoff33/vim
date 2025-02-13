@@ -4,7 +4,7 @@ import "utils.vim"
 
 g:config_vars = []
 
-def Select(id: any, result: any)
+def CbSelect(id: any, result: any)
   var input_string: string
   var gvar_name = g:config_vars[result - 1]
   var gvar_val = get(g:, gvar_name[2 : ], [])
@@ -32,7 +32,7 @@ export def Edit()
     padding: [1, 2, 1, 2],
     filter: 'popup_filter_menu',
     mapping: 0,
-    callback: 'Select',
+    callback: 'CbSelect',
   })
 enddef
 
@@ -46,3 +46,4 @@ export def RegisterVariable(new: string)
 enddef
 
 defcompile
+

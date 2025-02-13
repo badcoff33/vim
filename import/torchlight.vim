@@ -1,6 +1,6 @@
 vim9script
 
-export def TorchlightClearAll()
+export def ClearAll()
     prop_type_delete("text_prop_warning")
     prop_type_delete("text_prop_error")
 enddef
@@ -63,7 +63,7 @@ export def TorchlightUpdate()
     endfor
 enddef
 
-command! -nargs=0 TorchlightClear torchlight.TorchlightClearAll()
+command! -nargs=0 TorchlightClear Torchlight.ClearAll()
 
 # uncomment during dev
 defcompile

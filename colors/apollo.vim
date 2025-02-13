@@ -114,7 +114,7 @@ execute "hi PreProc" Fg(white)  Bold
 execute "hi PreCondit" Fg(blue_br)  Bold
 execute "hi Define" Fg(blue)  Normal
 execute "hi Comment" Fg(fg1)
-execute "hi Function" Fg(blue_br) Bold
+execute "hi Function" Fg(green_br) Normal
 execute "hi Identifier" Fg(blue_br)
 execute "hi Special" Fg(green_dk)
 execute "hi Constant" Fg(fg3)
@@ -159,3 +159,4 @@ execute "hi SignifySignDelete"          Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
 execute "hi SignifySignChange"          Fg(blue)
 execute "hi SignifySignChangeDelete"    Fg(blue)
+

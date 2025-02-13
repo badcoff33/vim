@@ -74,7 +74,7 @@ execute "hi PmenuSel" Fg(white) Bg(green_dk) Normal
 execute "hi PmenuMatchSel" Fg(white) Bg(green_dk) Bold
 execute "hi PmenuThumb" Fg(green) Bg(green)
 execute "hi Search" Fg(white) Bg(aluminium_3) Normal
-execute "hi StatusLine" Fg(white) Bg(blue_dk) Normal
+execute "hi StatusLine" Fg(blue_lt) Bg(blue_dk) Normal
 execute "hi StatusLineNC" Fg(aluminium_2) Bg(aluminium_5) Normal
 execute "hi StatusLineTerm" Fg(white) Bg(blue) Normal
 execute "hi TabLine" Fg(aluminium_2) Bg(shadow_bg) Normal
@@ -167,3 +167,4 @@ execute "hi SignifySignDelete"          Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
 execute "hi SignifySignChange"          Fg(blue)
 execute "hi SignifySignChangeDelete"    Fg(blue)
+

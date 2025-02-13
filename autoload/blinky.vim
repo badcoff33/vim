@@ -9,8 +9,9 @@ function! blinky#enable_blinky_flash()
   call s:turn_cursorline_off()
   augroup GroupBlinky
   autocmd!
-  autocmd WinEnter    * call s:turn_cursorline_on()
-  autocmd FocusGained * call s:turn_cursorline_on()
+  autocmd TabLeave,TabClosed * call s:turn_cursorline_off()
+  autocmd WinEnter           * call s:turn_cursorline_on()
+  autocmd FocusGained        * call s:turn_cursorline_on()
   augroup END
   let s:blinky_mode = 2
   call s:turn_cursorline_on()
@@ -28,6 +29,7 @@ function! blinky#enable_blinky_stay()
   call s:turn_cursorline_off()
   augroup GroupBlinky
     autocmd!
+    autocmd TabLeave,TabClosed * call s:turn_cursorline_off()
     autocmd WinEnter *    call s:turn_cursorline_on()
     autocmd WinLeave *    call s:turn_cursorline_off()
     autocmd FocusGained * call s:turn_cursorline_on()
@@ -70,7 +72,6 @@ function! s:turn_cursorline_off(...)
   elseif s:blinky_mode == 2
     call timer_stop(timer_id)
     if empty(g:blinky_winnr_list)
-      call assert_true(v:false, "unexpected empty list")
       return
     endif
     call setwinvar(g:blinky_winnr_list[0], '&cursorline', v:false)

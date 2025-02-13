@@ -33,7 +33,7 @@ var red_bg = "#FFB3B8"
 var gray_dk = "#444447"
 var gray = "#959598"
 var gray_lt = "#D1D1D5"
-var gray_bg = "#F1F1F4"
+var gray_bg = "#EAEAF0"
 
 var Normal = "gui=NONE"
 var Bold = "gui=bold"
@@ -51,8 +51,8 @@ var Special = (str) => empty(str) ? "" : "guisp=" .. str
 # Basics
 
 execute "hi Bold" Bold
-execute "hi CurSearch" Fg(black) Bg(gray_lt) BoldUnderline
-execute "hi Cursor" Bg(red) Cterm("NONE")
+execute "hi CurSearch" Fg(blue_dk) Bg(blue_bg) Bold
+execute "hi Cursor" Bg(black) Cterm("NONE")
 execute "hi CursorLine" Bg(gray_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(blue) Bg(blue_bg) Bold
 execute "hi Folded" Fg(blue) Bg(gray_lt) Normal
@@ -65,21 +65,21 @@ execute "hi NonText" Fg(gray) Bg("bg")
 execute "hi Normal" Fg(fg) Bg(bg) Normal
 execute "hi Pmenu" Fg(black) Bg(red_bg)
 execute "hi PmenuMatch" Fg(black) Bg(red_bg) Underline
-execute "hi PmenuMatchSel" Fg(white) Bg(red_dk) Underline
+execute "hi PmenuMatchSel" Fg(black) Bg(blue_lt) BoldUnderline
 execute "hi PmenuSbar" Fg(red_lt) Bg(red_lt)
-execute "hi PmenuSel" Fg(white) Bg(red) Normal
+execute "hi PmenuSel" Fg(black) Bg(blue_lt) Normal
 execute "hi PmenuThumb" Fg(red_dk) Bg(red_dk)
-execute "hi Search" Fg(black) Bg(gray_lt) Normal
-execute "hi StatusLine" Fg(black) Bg(gray_lt) Normal
-execute "hi StatusLineNC" Fg(black) Bg(gray_bg) Normal
+execute "hi Search" Fg(black) Bg(gray_bg) Normal
+execute "hi StatusLine" Fg(white) Bg(blue) Normal
+execute "hi StatusLineNC" Fg(black) Bg(blue_bg) Normal
 execute "hi StatusLineTerm" Fg(white) Bg(blue_dk) Bold
 execute "hi TabLine" Fg("fg") Bg(gray_bg) Gui("none")
 execute "hi TabLineFill" Fg("fg") Bg(gray_bg) Gui("none")
-execute "hi TabLineSel" Fg(black) Bg("bg") Bold
+execute "hi TabLineSel" Fg(white) Bg(blue) Bold
 execute "hi Terminal" Fg(gray_lt) Bg(black)
 execute "hi User1" Fg(gray_lt) Bg(gray_dk) Normal
 execute "hi User2" Fg(blue_dk) Bg(gray) Italic
-execute "hi VertSplit" Fg(gray) Bg('bg') Normal
+execute "hi VertSplit" Fg(gray_bg) Bg(gray_bg) Normal
 execute "hi Visual" Fg(white) Bg(blue)
 
 highlight! link CursorColumn CursorLine
@@ -96,10 +96,10 @@ execute "hi Comment" Fg(gray) Normal
 execute "hi Conditional" Fg(red) Bold
 execute "hi Constant" Fg(blue)
 execute "hi Directory" Fg(blue_dk)
-execute "hi Error" Fg(red) Bg("bg") Underline
+execute "hi Error" Fg(red_bg) Bg(red_dk)
 execute "hi ErrorMsg" Fg(red) Bg(red_bg) Normal
 execute "hi Function" Fg(blue)
-execute "hi Identifier" Fg(black) Normal
+execute "hi Identifier" Fg(red) Normal
 execute "hi ModeMsg" Fg(blue) Bg("bg") Normal
 execute "hi Number" Fg(blue)
 execute "hi PreCondit" Fg(blue) Bold
@@ -109,8 +109,8 @@ execute "hi QuickFixLine" Fg(blue) Bg("bg") Bold
 execute "hi Special" Fg(red_dk)
 execute "hi SpecialKey" Fg(blue)
 execute "hi Statement" Fg(blue_dk) Normal
-execute "hi StorageClass" Fg(red)
-execute "hi String" Fg(blue_dk)
+execute "hi StorageClass" Fg(red_dk)
+execute "hi String" Fg(blue)
 execute "hi Structure" Fg(red) Normal
 execute "hi Title" Fg(blue_dk) Bold
 execute "hi Todo" Fg(blue) Bg("bg") Gui("bold,italic")
@@ -157,3 +157,4 @@ execute "hi SignifySignDelete"          Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
 execute "hi SignifySignChange"          Fg(blue_lt)
 execute "hi SignifySignChangeDelete"    Fg(red_lt)
+
