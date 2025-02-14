@@ -1,6 +1,7 @@
 vim9script
 
 import autoload 'vcs_git.vim' as git
+import autoload 'vcs_hg.vim' as hg
 
 g:git_working_dir = get(g:, "git_working_dir", ".")
 
@@ -20,4 +21,3 @@ augroup END
 
 # Uncomment when testing
 defcompile
-
