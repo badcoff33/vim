@@ -70,6 +70,7 @@ execute "hi Pmenu" Fg(green) Bg(gui_bg)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(yellow)
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
+execute "hi PopupNotification" Fg(white) Bg(blue)
 execute "hi Search" Fg(green) Bg(gui_bg) Normal
 execute "hi StatusLine" Fg(gui_fg) Bg(gui_bg) Normal
 execute "hi StatusLineNC" Fg(gui_fg) Bg(gui_bgdk) Normal
@@ -84,7 +85,6 @@ execute "hi Visual" Fg(white) Bg(blue_dk)
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
-highlight! link PopupNotification StatusLineNC
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link TabLine Normal
@@ -165,3 +165,4 @@ execute "hi SignifySignDelete"          Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
 execute "hi SignifySignChange"          Fg(blue)
 execute "hi SignifySignChangeDelete"    Fg(blue)
+

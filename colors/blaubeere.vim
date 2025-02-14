@@ -56,7 +56,7 @@ execute "hi CurSearch" Fg(white) Bg(aluminium_2) Bold
 execute "hi Cursor" Bg(black) Cterm("NONE")
 execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(aluminium_2) Bg(aluminium_5) Bold
-execute "hi Folded" Fg(blue) Bg(blue_lt) Normal
+execute "hi Folded" Fg(blue) Bg("bg") Normal
 execute "hi IncSearch" Fg(white) Bg(aluminium_0) Normal
 execute "hi Italic" Italic
 execute "hi Label" Fg(black) Bold
@@ -73,7 +73,7 @@ execute "hi PmenuSbar" Fg(aluminium_4) Bg(aluminium_4)
 execute "hi PmenuSel" Fg(white) Bg(green_dk) Normal
 execute "hi PmenuMatchSel" Fg(white) Bg(green_dk) Bold
 execute "hi PmenuThumb" Fg(green) Bg(green)
-execute "hi Search" Fg(white) Bg(aluminium_3) Normal
+execute "hi Search" Fg(black) Bg(aluminium_3) Normal
 execute "hi StatusLine" Fg(blue_lt) Bg(blue_dk) Normal
 execute "hi StatusLineNC" Fg(aluminium_2) Bg(aluminium_5) Normal
 execute "hi StatusLineTerm" Fg(white) Bg(blue) Normal
@@ -155,10 +155,10 @@ execute "hi rstStrongEmphasis" Fg(aluminium_2)  Bold
 
 # Diffs
 
-execute "hi DiffChange" Fg(blue) Bg(aluminium_4)
-execute "hi DiffText" Fg(blue) Bg(blue_lt) Bold
-execute "hi DiffDelete" Fg(red) Bg(red)
-execute "hi DiffAdd" Fg(aluminium_2) Bg(aluminium_4) Bold
+execute "hi DiffChange" Fg(black) Bg(aluminium_5)
+execute "hi DiffText" Fg(white) Bg(black) Bold
+execute "hi DiffDelete" Fg(red_dk) Bg(red)
+execute "hi DiffAdd" Fg(black) Bg(aluminium_5) Bold
 
 # Signify
 
