@@ -17,12 +17,6 @@ function! blinky#enable_blinky_flash()
   call s:turn_cursorline_on()
 endfunction
 
-augroup GroupBlinkyBg
-  au!
-  autocmd BufWinEnter,WinEnter *  if hlexists("NormalWinHl") | setlocal wincolor=NormalWinHl | endif
-  autocmd BufWinLeave,WinLeave *  setlocal wincolor=
-augroup END
-
 " Description: Make the actual window more obvious by temporary turn the
 " option 'cursorline' on.
 function! blinky#enable_blinky_stay()
@@ -78,3 +72,4 @@ function! s:turn_cursorline_off(...)
     let g:blinky_winnr_list = g:blinky_winnr_list[1:]
   endif
 endfunction
+
