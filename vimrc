@@ -55,7 +55,7 @@ set pumheight=7
 set report=0
 set ruler
 set scrolljump=1
-set scrolloff=12
+set scrolloff=4
 set selection=exclusive
 set selectmode=
 set sessionoptions=buffers,tabpages,winsize
@@ -100,6 +100,10 @@ nnoremap <A-Left> <Home>
 nnoremap <A-Right> <End>
 xnoremap <A-Left> 0
 xnoremap <A-Right> $
+
+" Context aware movement
+nnoremap <expr> <A-Down> (&diff) ? "]czt" : (&ft == "help") ? ":call search('[\\*}\|][a-zA-Z-_:]\\+[\\*\\|]', 'W')<CR>" :  ":call feedkeys(']]')<CR>"
+nnoremap <expr> <A-Up>   (&diff) ? "[czt" : (&ft == "help") ? ":call search('[\\*}\|][a-zA-Z-_:]\\+[\\*\\|]', 'bW')<CR>" : ":call feedkeys('[[')<CR>"
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -151,7 +155,7 @@ nmap <C-s> i<C-s>
 
 " Leader key mappings
 let mapleader = " "
-let maplocalleader = "S"
+let maplocalleader = "-"
 
 " fast forward: it takes two
 nnoremap <expr> <Leader><Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
@@ -166,7 +170,6 @@ vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left><Left><Left>
 
 " Check indents
 nnoremap <Leader><bar> <Cmd>set invcursorcolumn<CR>
-
 " Quick access on current buffer's directory
 nnoremap <Leader>e :edit <C-r>=DirName("%:h")<CR>
 cnoremap <expr> <C-r>. DirName("%:h")

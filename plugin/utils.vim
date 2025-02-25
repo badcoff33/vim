@@ -96,20 +96,20 @@ def g:RunTerminal()
 enddef
 
 # Description: Change background of 24bit hex-coded color under cursor,
-def g:ColorizeCodeAtCursor()
+def ColorizeCodeUnderCursor()
   var rgb_24bit = expand('<cword>')
   execute $"highlight Color24 guifg=black guibg={rgb_24bit}"
   execute $"match Color24 /{rgb_24bit}/"
 enddef
 
-nnoremap <Leader>uc <Cmd>call g:ColorizeCodeAtCursor()<CR>
+command -nargs=0 ShowColorUnderCursor call ColorizeCodeUnderCursor()
 
-assert_true(mapcheck("<Leader>x"), "mapping overwritten")
+assert_true(mapcheck("<Leader>ux") == "", "mapping overwritten")
 nnoremap <Leader>ux :call g:RunTerminal()<CR>
 
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
-nnoremap <C-Tab> :call quickfix#ToggleQuickfix()<CR>
+nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
 
 command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 

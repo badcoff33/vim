@@ -15,11 +15,10 @@ g:colors_name = "sparks"
 var black    = "#000000"
 var white    = "#FFFFFF"
 
-var fg        = "#D8D8F0"
-var fg_dk     = "#B3B3D0"
-var fg_moredk = "#63739F"
-var bg        = "#18233D"
-var bg_hl     = "#1F2845"
+var fg         = "#D8D8F0"
+var fg_dk      = "#B3B3D0"
+var fg_moredk  = "#63739F"
+var bg         = "#15203A"
 
 var gui_bgdk = "#203050"
 var gui_bg   = "#204060"
@@ -65,7 +64,6 @@ execute "hi LineNr" Fg(fg_moredk) Normal
 execute "hi MatchParen" Fg(green) Bg("bg") Bold
 execute "hi NonText" Fg(blue) Bg(cl_bg) Normal
 execute "hi Normal" Fg(fg) Bg(bg) Normal
-execute "hi NormalWinHl" Fg(fg) Bg(bg_hl) Normal
 execute "hi Pmenu" Fg(green) Bg(gui_bg)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(yellow)

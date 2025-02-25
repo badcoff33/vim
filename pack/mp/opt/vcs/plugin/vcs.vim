@@ -16,8 +16,10 @@ cnoreabbrev <expr> G  (getcmdtype() ==# ':' && getcmdline() =~# '^G')  ? 'Git'  
 
 augroup GroupVcsGitP
   autocmd!
-  autocmd BufEnter,BufWinEnter *.c,*.h,CMakeLists.txt,*.cmake git.SetLocalBranchVar()
+  autocmd BufEnter,BufWinEnter *.asm,*.bat,*.c,*.h,CMakeLists.txt,*.cmake git.SetLocalBranchVar()
+  autocmd FocusGained * git.SetLocalBranchVar()
 augroup END
 
 # Uncomment when testing
 defcompile
+

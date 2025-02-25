@@ -17,7 +17,7 @@ endif
 
 command -nargs=0 WhitespaceCleanup call whitespace#WhitespaceCleanup()
 
-augroup whitespace
+augroup GroupWhitespaceP
   autocmd!
   autocmd BufWritePre *.cc,*.hh :WhitespaceCleanup
   autocmd BufWritePre *.c,*.h   :WhitespaceCleanup
@@ -25,5 +25,6 @@ augroup whitespace
   autocmd BufWritePre *.vim     :WhitespaceCleanup
   autocmd BufWritePre vimrc     :WhitespaceCleanup
   autocmd BufWritePre gvimrc    :WhitespaceCleanup
+  autocmd BufWritePre CMakeLists.txt,*.cmake :WhitespaceCleanup
 augroup END
 

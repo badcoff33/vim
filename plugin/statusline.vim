@@ -63,8 +63,8 @@ def g:BuildStatusline(): string
     endif
     sl = sl .. " %{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
     sl = sl .. " %{g:GetScopeforSL()}"
-    sl = sl .. " [%Y%R%W%M]"
-    sl = sl .. "%= %l:%c "
+    sl = sl .. " %=[%Y%R%W%M]"
+    sl = sl .. " %l:%c "
     return sl
 enddef
 
@@ -87,3 +87,4 @@ command -nargs=0 ShowScopeToggle {
 
 
 defcompile
+

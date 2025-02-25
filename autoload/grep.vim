@@ -13,12 +13,12 @@ import "run.vim"
 import "utils.vim"
 
 var grep_glob_patterns = {
-  c:      ['*.c', '*.h', '*.h.in', '*.850', '*.s'],
-  cpp:    ['*.c', '*.h', '*.h.in', '*.850', '*.s', '*.cc', '*.hh'],
+  c:      ['*.c', '*.h', '*.h.in', '*.850', '*.s', '*.asm'],
+  cpp:    ['*.c', '*.h', '*.h.in', '*.cc', '*.hh'],
   vim:    ['*.vim', '*vimrc'],
   asm:    ['*.850', '*.s'],
   py:     ['*.py'],
-  cmake:  ['*.cmake', 'CmakeLists.txt']
+  cmake:  ['*.cmake', 'CMakeLists.txt']
 }
 
 def GrepGlobSwitchExclude(anti_pattern: string): string

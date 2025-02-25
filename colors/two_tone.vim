@@ -79,7 +79,7 @@ execute "hi TabLineSel" Fg(white) Bg(blue) Bold
 execute "hi Terminal" Fg(gray_lt) Bg(black)
 execute "hi User1" Fg(gray_lt) Bg(gray_dk) Normal
 execute "hi User2" Fg(blue_dk) Bg(gray) Italic
-execute "hi VertSplit" Fg(gray_bg) Bg(gray_bg) Normal
+execute "hi VertSplit" Fg(gray_lt) Bg(gray_bg) Normal
 execute "hi Visual" Fg(white) Bg(blue)
 
 highlight! link CursorColumn CursorLine
@@ -106,7 +106,7 @@ execute "hi PreCondit" Fg(blue) Bold
 execute "hi PreProc" Fg(blue) Normal
 execute "hi Question" Fg(gray_dk) Bg("bg")
 execute "hi QuickFixLine" Fg(blue) Bg("bg") Bold
-execute "hi Special" Fg(red_dk)
+execute "hi Special" Fg(red)
 execute "hi SpecialKey" Fg(blue)
 execute "hi Statement" Fg(blue_dk) Normal
 execute "hi StorageClass" Fg(red_dk)
@@ -157,4 +157,3 @@ execute "hi SignifySignDelete"          Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
 execute "hi SignifySignChange"          Fg(blue_lt)
 execute "hi SignifySignChangeDelete"    Fg(red_lt)
-
