@@ -74,6 +74,8 @@ function! whitespace#WhitespaceCleanup()
     normal Go
   endif
   let &formatoptions=save_formatoptions
-  call cursor(save_line, save_col)
+  if exists("save_line") && exists(save_col)
+    call cursor(save_line, save_col)
+  endif
 endfunction
 
