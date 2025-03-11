@@ -59,8 +59,9 @@ export def BranchInfo()
   })
 enddef
 
-
 export def SetLocalBranchVar()
+  # called by auto-command
+
   var key: string
   var j_new: job
 
@@ -78,6 +79,10 @@ export def SetLocalBranchVar()
     endif
     remove(local_branch_name, k)
   enddef
+
+  if &buftype != ""
+    return # when nofile, quickfix, help, terminal, ...
+  endif
 
   j_new = job_start('git branch --show-current', {
     cwd: expand("%:p:h"),
@@ -117,7 +122,7 @@ export def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): lis
   var git_sub_cmd = matchstr(substitute(cmd_line, 'Git\s\+', '', ''), '\w\+')
 
   if index(candidates, git_sub_cmd) == -1
-    filter(candidates, (idx, val) => val =~ git_sub_cmd)
+    filter(candidates, (idx, val) => val =~ '^' .. git_sub_cmd)
   elseif git_sub_cmd == "switch" || git_sub_cmd == "branch"
     candidates  = GetBranches()
     filter(candidates, (idx, val) => val =~ arg_lead)
@@ -177,4 +182,3 @@ augroup END
 
 # Uncomment when testing
 defcompile
-
