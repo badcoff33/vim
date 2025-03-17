@@ -1,8 +1,5 @@
 " Vim plugin file
 
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-cnoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-
 inoremap <expr> <TAB> InsertTabOrComplete()
 inoremap <expr> <S-TAB> "\<C-p>"
 
@@ -43,4 +40,3 @@ function! CompleteAllowed()
     return v:false
   endif
 endfunction
-

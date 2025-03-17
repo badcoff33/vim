@@ -12,72 +12,74 @@ set background=light
 g:colors_name = "blaubeere"
 
 extend(v:colornames, {
-    fg:        "#404040",
-    bg:        "#FAFAFA",
-    cl_bg:     "#E5FCEF",
-    shadow_bg: "#F6F6F6",
-    shadow_fg: "#C0C0C0",
-    black:     "#000000",
-    white:     "#FFFFFF",
-    blue_dk:   "#4341AF",
-    blue:      "#6581BF",
-    blue_lt:   "#C4CFFB",
-    blue_bg:   "#D8EFFF",
-    red_bg:    "#FBE9EB",
-    red_lt:    "#FFCACC",
-    red:       "#FB8A9C",
-    red_dk:    "#BC6D76",
-    green_bg:  "#DCFDE0",
-    green_lt:  "#C3EBCE",
-    green:     "#7FCA7C",
-    green_dk:  "#55A85F",
-    gray_0:    "#2e3436",
-    gray_1:    "#555753",
-    gray_2:    "#888a85",
-    gray_3:    "#babdb6",
-    gray_4:    "#d3d7cf",
-    gray_5:    "#eeeeec"
+    cFg:        "#787072",
+    cBg:        "#FFFFFF",
+    cShadowBg:  "#F6F6F6",
+    cShadowFg:  "#C0C0C0",
+    cHighlight: "#FFE070",
+    cBlueDk:    "#4341AF",
+    cBlue:      "#6581BF",
+    cBlueLt:    "#C4CFFB",
+    cBlueBg:    "#D8EFFF",
+    cRedBg:     "#FBE9EB",
+    cRedLt:     "#FFCACC",
+    cRed:       "#FB8A9C",
+    cRedDk:     "#BC6D76",
+    cGreenBg:   "#DCFDE0",
+    cGreenLt:   "#C3EBCE",
+    cGreen:     "#7FCA7C",
+    cGreenDk:   "#45984F",
+    cBrownBg:   "#E7E0CF",
+    cBrownLt:   "#B36E5C",
+    cBrown:     "#A37E4C",
+    cBrownDk:   "#7E7668",
+    cGray_0:    "#2e3436",
+    cGray_1:    "#555753",
+    cGray_2:    "#888a85",
+    cGray_3:    "#babdb6",
+    cGray_4:    "#d3d7cf",
+    cGray_5:    "#eeeeec"
 })
 
 # Basics
 
-hi Bold           gui=bold
-hi CurSearch      guifg=blue_dk  guibg=blue_bg   gui=NONE
-hi Cursor         guibg=black    cterm=NONE
-hi CursorLine     guibg=green_bg cterm=NONE
-hi CursorLineNr   guifg=gray_2   guibg=gray_5    gui=bold
-hi Folded         guifg=blue     guibg=bg        gui=NONE
-hi IncSearch      guifg=white    guibg=gray_0    gui=NONE
-hi Italic         gui=italic
-hi Label          guifg=black    gui=bold
-hi LineNrAbove    guifg=red      gui=bold
-hi LineNr         guifg=gray_2   gui=bold
-hi LineNrBelow    guifg=blue     gui=bold
-hi MatchParen     guifg=green_dk guibg=bg        gui=underline
-hi NonText        guifg=gray_3   guibg=bg
-hi Normal         guifg=fg       guibg=bg        gui=NONE
-hi Operator       guifg=green    gui=NONE
-hi Pmenu          guifg=black    guibg=green_bg
-hi PmenuSbar      guifg=gray_4   guibg=gray_4
-hi PmenuSel       guifg=black    guibg=green_lt  gui=NONE
-hi PmenuMatchSel  guifg=white    guibg=green_dk  gui=bold
-hi PmenuThumb     guifg=green    guibg=green
-hi Search         guifg=green_dk guibg=green_bg  gui=NONE
-hi StatusLine     guifg=blue_bg  guibg=blue_dk   gui=bold
-hi StatusLineNC   guifg=gray_2   guibg=gray_5    gui=NONE
-hi StatusLineTerm guifg=white    guibg=blue      gui=NONE
-hi TabLine        guifg=gray_2   guibg=shadow_bg gui=NONE
-hi TabLineFill    guifg=black    guibg=shadow_bg gui=NONE
-hi TabLineSel     guifg=blue_bg  guibg=blue_dk   gui=bold
-hi Terminal       guifg=fg       guibg=bg
-hi User1          guifg=white    guibg=gray_4    gui=NONE
-hi User2          guifg=blue_lt  guibg=blue_dk   gui=italic
-hi VertSplit      guifg=gray_4   guibg=gray_5    gui=NONE
-hi Visual         guifg=black    guibg=blue_bg
+highlight Bold              gui=bold
+highlight CurSearch         guifg=cBlueDk  guibg=cBlueBg   gui=NONE
+highlight Cursor            guibg=black    cterm=NONE
+highlight CursorLine        guibg=cGreenBg cterm=NONE
+highlight CursorLineNr      guifg=cGray_2   guibg=cGray_5    gui=bold
+highlight Folded            guifg=cBlue     guibg=cBg        gui=NONE
+highlight IncSearch         guifg=white    guibg=cGray_0    gui=NONE
+highlight Italic            gui=italic
+highlight Label             guifg=black    gui=bold
+highlight LineNrAbove       guifg=cRed      gui=bold
+highlight LineNr            guifg=cGray_2   gui=bold
+highlight LineNrBelow       guifg=cBlue     gui=bold
+highlight MatchParen        guifg=cGreenDk guibg=cBg        gui=underline
+highlight NonText           guifg=cGray_3   guibg=cBg
+highlight Normal            guifg=cFg       guibg=cBg        gui=NONE
+highlight Operator          guifg=cGreenDk gui=NONE
+highlight Pmenu             guifg=black    guibg=cBrownBg
+highlight PmenuSbar         guifg=cGray_4   guibg=cGray_4
+highlight PmenuSel          guifg=black    guibg=cgreen  gui=NONE
+highlight PmenuMatchSel     guifg=white    guibg=cGreenDk  gui=bold
+highlight PmenuThumb        guifg=cGreenDk    guibg=cGreenDk
+highlight Search            guifg=black guibg=cBrownBg  gui=NONE
+highlight StatusLine        guifg=white  guibg=cGray_1   gui=NONE
+highlight StatusLineNC      guifg=cGray_2   guibg=cGray_5    gui=NONE
+highlight StatusLineTerm    guifg=white    guibg=cBlue      gui=NONE
+highlight TabLine           guifg=cGray_2   guibg=cShadowBg gui=NONE
+highlight TabLineFill       guifg=black    guibg=cShadowBg gui=NONE
+highlight TabLineSel        guifg=cBlueBg  guibg=cBlueDk   gui=bold
+highlight Terminal          guifg=cFg       guibg=cBg
+highlight User1             guifg=white    guibg=cGray_4    gui=NONE
+highlight User2             guifg=cBlueLt  guibg=cBlueDk   gui=italic
+highlight VertSplit         guifg=cGray_4   guibg=cGray_5    gui=NONE
+highlight Visual            guifg=black    guibg=cBlueBg
+highlight PopupNotification guifg=black guibg=cHighlight
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
-highlight! link PopupNotification StatusLine
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link WildMenu PmenuSel
@@ -85,75 +87,75 @@ highlight! link qfSeparator gui=NONE
 
 # Code
 
-hi Comment guifg=green_dk gui=NONE
-hi Conditional guifg=red  gui=NONE
-hi Constant guifg=blue
-hi Directory guifg=blue_dk gui=underline
-hi Error guifg=red_dk guibg=red_bg gui=NONE
-hi ErrorMsg guifg=red_dk guibg=red_bg gui=NONE
-hi Function guifg=blue
-hi Identifier guifg=green_dk gui=NONE
-hi Ignore guifg=gray_3 gui=italic
-hi ModeMsg guifg=black guibg=green gui=NONE
-hi Number guifg=blue
-hi PreCondit guifg=blue  gui=bold
-hi PreProc guifg=blue gui=NONE
-hi Question guifg=gray_2 guibg=bg
-hi QuickFixLine guifg=blue guibg=bg gui=bold
-hi Special guifg=blue_lt
-hi SpecialKey guifg=blue
-hi Statement guifg=blue_dk  gui=NONE
-hi StorageClass guifg=red
-hi String guifg=green_dk
-hi Structure guifg=red gui=NONE
-hi Title guifg=blue_dk  gui=bold
-hi Todo guifg=red guibg=bg gui=bold,underline
-hi Type guifg=red_dk gui=NONE
-hi WarningMsg guifg=white guibg=green_dk
-hi qfFileName guifg=blue_lt
-hi qfLineNr guifg=red
+hi Comment guifg=cBrownDk gui=NONE
+hi Conditional guifg=cRed  gui=NONE
+hi Constant guifg=cBlue
+hi Directory guifg=cBlueDk gui=underline
+hi Error guifg=cRedDk guibg=cRedBg gui=NONE
+hi ErrorMsg guifg=cRedDk guibg=cRedBg gui=NONE
+hi Function guifg=cBlue
+hi Identifier guifg=cGreenDk gui=NONE
+hi Ignore guifg=cGray_3 gui=italic
+hi ModeMsg guifg=black guibg=cBrownBg gui=NONE
+hi Number guifg=cBlue
+hi PreCondit guifg=cRedDk  gui=bold
+hi PreProc guifg=black gui=bold
+hi Question guifg=cGray_2 guibg=cBg
+hi QuickFixLine guifg=cBlue guibg=cBg gui=bold
+hi Special guifg=black
+hi SpecialKey guifg=cBlue
+hi Statement guifg=cBlueDk  gui=NONE
+hi StorageClass guifg=cRed
+hi String guifg=cBrownLt
+hi Structure guifg=cRed gui=NONE
+hi Title guifg=cBlueDk  gui=bold
+hi Todo guifg=cRed guibg=cBg gui=bold,underline
+hi Type guifg=cRedDk gui=NONE
+hi WarningMsg guifg=white guibg=cGreenDk
+hi qfFileName guifg=cBlueLt
+hi qfLineNr guifg=cRed
 
 # Filetype VIM
 
-hi vimCommentTitle guifg=blue  gui=bold
+hi vimCommentTitle guifg=cBrownDk  gui=bold
+hi vimHiKeyList    guifg=cBlue
 
 # Filetype C
 
-hi cCppOut guibg=gray_4 gui=NONE
-hi cCppOutIf guifg=gray_3 gui=italic
-hi cCppOutIf2 guifg=gray_4 gui=italic
-hi cParen guifg=gray_2
-hi cBlock guifg=gray_2
+hi cCppOut guibg=cGray_4 gui=NONE
+hi cCppOutIf guifg=cGray_3 gui=italic
+hi cCppOutIf2 guifg=cGray_4 gui=italic
+hi cParen guifg=cGray_2
+hi cBlock guifg=cGray_2
 
 # Filetype HTML
 
-hi htmlH1 guifg=blue_dk gui=bold
-hi htmlH2 guifg=blue    gui=bold
-hi htmlH3 guifg=blue    gui=NONE
-hi htmlItalic guifg=shadow_fg gui=italic
+hi htmlH1 guifg=cBlueDk gui=bold
+hi htmlH2 guifg=cBlue    gui=bold
+hi htmlH3 guifg=cBlue    gui=NONE
+hi htmlItalic guifg=cShadowFg gui=italic
 
 # Filetype Markdown
 
-hi markdownCode guifg=gray_2 guibg=gray_5
-hi markdownCodeBlock guifg=gray_2 gui=italic
+hi markdownCode guifg=cGray_2 guibg=cGray_5
+hi markdownCodeBlock guifg=cGray_2 gui=italic
 
 # Filetype ReStructuredTExt
 
-hi rstEmphasis guifg=gray_2
-hi rstStrongEmphasis guifg=gray_2  gui=bold
+hi rstEmphasis guifg=cGray_2
+hi rstStrongEmphasis guifg=cGray_2  gui=bold
 
 # Diffs
 
-hi DiffChange guifg=black guibg=blue_bg
+hi DiffChange guifg=black guibg=cBlueBg
 hi DiffText guifg=white guibg=black gui=bold
-hi DiffDelete guifg=red_dk guibg=red_bg
-hi DiffAdd guifg=black guibg=green_bg gui=bold
+hi DiffDelete guifg=cRedDk guibg=cRedBg
+hi DiffAdd guifg=black guibg=cGreenBg gui=bold
 
 # Signify
 
-hi SignifySignAdd             guifg=green
-hi SignifySignDelete          guifg=red
-hi SignifySignDeleteFirstLine guifg=red
-hi SignifySignChange          guifg=blue
-hi SignifySignChangeDelete    guifg=blue
-
+hi SignifySignAdd             guifg=cGreen
+hi SignifySignDelete          guifg=cRed
+hi SignifySignDeleteFirstLine guifg=cRed
+hi SignifySignChange          guifg=cBlue
+hi SignifySignChangeDelete    guifg=cBlue

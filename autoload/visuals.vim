@@ -35,7 +35,7 @@ function! visuals#info_hl()
     let name = synIDattr(syn_id_trans, "name")
     let fg = synIDattr(syn_id_trans, "fg")
     let bg = synIDattr(syn_id_trans, "bg")
-    echo printf("name: %s\nforeground: %s\nbackground: %s",
+    echo printf("name=%s  fg=%s  bg=%s",
           \ empty(name) ? "NONE" : name,
           \ empty(fg) ? "NONE" : fg,
           \ empty(bg) ? "NONE" : bg)

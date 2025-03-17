@@ -29,6 +29,7 @@ var cl_bg    = "#101D33"
 var blue_lt  = "#91AAFF"
 var blue     = "#718FE3"
 var blue_dk  = "#6380C0"
+var blue_bg  = "#4360A0"
 
 var yellow  = "#F8E840"
 var purple  = "#C175F1"
@@ -57,25 +58,26 @@ execute "hi Cursor" Fg(black) Bg(white) Cterm("NONE")
 execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
 execute "hi CursorLineNr" Fg(purple) Bg(cl_bg) Normal
 execute "hi Folded" Fg(fg_dk) Bg(black) Normal
-execute "hi IncSearch" Fg(black) Bg(yellow) Normal  Cterm("NONE")
+execute "hi IncSearch" Fg(black) Bg(purple) Normal  Cterm("NONE")
 execute "hi Italic" Italic
 execute "hi Label" Fg(orange) Bold
 execute "hi LineNr" Fg(fg_moredk) Normal
 execute "hi MatchParen" Fg(green) Bg("bg") Bold
 execute "hi NonText" Fg(blue) Bg(cl_bg) Normal
 execute "hi Normal" Fg(fg) Bg(bg) Normal
-execute "hi Pmenu" Fg(green) Bg(gui_bg)
+execute "hi Pmenu" Fg(yellow) Bg(gui_bghl)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(yellow)
+execute "hi PmenuMatchSel" Fg(black) Bg(purple)
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
-execute "hi PopupNotification" Fg(white) Bg(blue)
-execute "hi Search" Fg(green) Bg(gui_bg) Normal
-execute "hi StatusLine" Fg(gui_fg) Bg(gui_bg) Normal
-execute "hi StatusLineNC" Fg(gui_fg) Bg(gui_bgdk) Normal
+execute "hi PopupNotification" Fg(white) Bg(blue_bg)
+execute "hi Search" Fg(purple) Bg(gui_bg) Normal
+execute "hi StatusLine" Fg(white) Bg(gui_bghl) Normal
+execute "hi StatusLineNC" Fg(gui_fg) Bg(gui_bg) Normal
 execute "hi StatusLineTerm" Fg(black) Bg(orange) Normal
 execute "hi TabLineFill" Fg(yellow) Bg(black) Normal
 execute "hi TabLineSel" Fg(yellow) Bg(bg) Underline
-execute "hi Terminal" Fg(blue_lt) Bg(bg)
+execute "hi Terminal" Fg(green) Bg(bg)
 execute "hi User1" Fg(black) Bg(green)
 execute "hi User2" Fg(black) Bg(blue)
 execute "hi VertSplit" Fg(gui_bg) Bg(gui_bg) Normal
@@ -99,8 +101,8 @@ execute "hi Error" Fg(orange) Bg(cl_bg) Underline
 execute "hi ErrorMsg" Fg(black) Bg(red) Normal
 execute "hi Function" Fg(white)
 execute "hi Identifier" Fg(fg_dk) Normal
-execute "hi ModeMsg" Fg(black) Bg(green) Normal
-execute "hi MoreMsg" Fg(green) Bg(bg) Normal
+execute "hi ModeMsg" Fg(green) Normal
+execute "hi MoreMsg" Fg(purple) Normal
 execute "hi Number" Fg(green)
 execute "hi PreCondit" Fg(white) Bold
 execute "hi PreProc" Fg(white) Normal
@@ -126,7 +128,7 @@ execute "hi vimCommentTitle" Fg(yellow) Bold
 # Filetype C
 
 execute "hi cCppOut" Bg(blue_lt) Normal
-execute "hi cCppOutIf2" Bg(blue_lt) Normal
+execute "hi cCppOutIf2" Italic
 execute "hi cParen" Fg(blue)
 execute "hi cBlock" Fg(blue)
 
@@ -163,4 +165,3 @@ execute "hi SignifySignDelete"          Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
 execute "hi SignifySignChange"          Fg(blue)
 execute "hi SignifySignChangeDelete"    Fg(blue)
-
