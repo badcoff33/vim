@@ -15,7 +15,7 @@ def PresetWorkingDir()
   endif
 enddef
 
-def CbBranchInfo(raw_list: list<string>)
+def OnBranchInfo(raw_list: list<string>)
   var branch_name: string
   if raw_list[0] =~? 'On branch '
     branch_name = substitute(raw_list[0], 'On branch ', '', '')
@@ -55,7 +55,7 @@ export def BranchInfo()
   job_start('git status -b', {
     cwd: working_dir,
     callback: (_, data) => add(output, data),
-    exit_cb: (_, data) => CbBranchInfo(output),
+    exit_cb: (_, data) => OnBranchInfo(output),
   })
 enddef
 
@@ -65,12 +65,12 @@ export def SetLocalBranchVar()
   var key: string
   var j_new: job
 
-  def CbCapture(c: channel, d: string)
+  def OnCapture(c: channel, d: string)
     var k = split(string(c), " ")[1]
     local_branch_name[k].text = (typename(d) == "string") ? d : ""
   enddef
 
-  def CbExit(j: job, s: number)
+  def OnExitBranchVar(j: job, s: number)
     var k = split(string(job_info(j).channel), " ")[1]
     if s == 0
       setbufvar(local_branch_name[k].buf, "vcs_branch_name", "Git:" .. local_branch_name[k].text)
@@ -80,14 +80,13 @@ export def SetLocalBranchVar()
     remove(local_branch_name, k)
   enddef
 
-  if &buftype != ""
+  if (&buftype != "") || !filereadable(bufname("%"))
     return # when nofile, quickfix, help, terminal, ...
   endif
-
   j_new = job_start('git branch --show-current', {
     cwd: expand("%:p:h"),
-    callback: CbCapture,
-    exit_cb: CbExit
+    callback: OnCapture,
+    exit_cb: OnExitBranchVar
   })
 
   key = split(string(job_info(j_new).channel), " ")[1]
@@ -133,7 +132,7 @@ export def CompleteGit(arg_lead: string, cmd_line: string, cur_pos: number): lis
   return candidates
 enddef
 
-def CbDirInfo(out_list: list<string>)
+def OnExitDirInfo(out_list: list<string>)
     pop.Open(out_list, {
       close_on_key: true,
       hl: 'PopupNotification'})
@@ -151,7 +150,7 @@ export def DirInfo()
   job_start('git status -s', {
     cwd: working_dir,
     callback: (_, data) => add(output, data),
-    exit_cb: (_, data) => CbDirInfo(output),
+    exit_cb: (_, data) => OnExitDirInfo(output),
   })
 enddef
 
