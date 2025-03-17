@@ -1,25 +1,30 @@
 let g:notes_files = []
+let g:notes_file_idx = 0
 let g:notes_home = get(g:, 'notes_home', expand("~/.text"))
 
 function! s:NotesBufferSettings()
-  setfiletype markdown
-  nnoremap <buffer> <LocalLeader>+ <Cmd>call NotesBacklog(+1)<CR>
-  nnoremap <buffer> <LocalLeader>- <Cmd>call NotesBacklog(-1)<CR>
+  setfiletype rst
+  nnoremap <buffer> <LocalLeader>f <Cmd>call NotesBacklog("fw")<CR>
+  nnoremap <buffer> <LocalLeader>b <Cmd>call NotesBacklog("bw")<CR>
+endfunction
+
+function! NotesToDo(...)
+  execute "drop" strftime(g:notes_home .. "/todo.txt")
 endfunction
 
 function! NotesToday(...)
-  execute "drop" strftime(g:notes_home .. "/note-%Y-%m-%d.md")
+  execute "drop" strftime(g:notes_home .. "/note-%Y-%m-%d.txt")
   call s:NotesBufferSettings()
   let g:notes_files = NotesUpdateBacklog(60)
-  let g:notes_file_idx = 0
 endfunction
 
 function! NotesUpdateBacklog(days)
   let one_day = 86400
   let now = localtime()
   let files = []
+  let g:notes_file_idx = 0
   for day in range(0, -a:days, -1)
-    let file_candidate = expand(strftime(g:notes_home .. "/note-%Y-%m-%d.md", (now - now % one_day) + (day * one_day )))
+    let file_candidate = expand(strftime(g:notes_home .. "/note-%Y-%m-%d.txt", (now - now % one_day) + (day * one_day )))
     if bufexists(file_candidate)
       call add(files, file_candidate)
     elseif filereadable(file_candidate)
@@ -29,16 +34,22 @@ function! NotesUpdateBacklog(days)
   return files
 endfunction
 
-function! NotesBacklog(dir)
+function! NotesBacklog(direction)
   let one_day = 86400
   let now = localtime()
   let g:notes_files = NotesUpdateBacklog(60)
+  if g:notes_files == []
+    echohl WarningMsg
+    echomsg "-- empty --"
+    echohl None
+    return
+  endif
   let last_idx = len(g:notes_files) - 1
 
-  let g:notes_file_idx += a:dir
+  let g:notes_file_idx += (a:direction == "fw") ? 1 : -1
   if g:notes_file_idx <= 0
     echohl WarningMsg
-    echomsg "-- today --"
+    echomsg "-- first --"
     echohl None
     let g:notes_file_idx = 0
   elseif g:notes_file_idx >= last_idx
@@ -47,12 +58,12 @@ function! NotesBacklog(dir)
     echohl None
     let g:notes_file_idx = last_idx
   endif
-    if bufexists(g:notes_files[g:notes_file_idx])
-      execute "buffer" g:notes_files[g:notes_file_idx]
-    else
-      execute "drop" g:notes_files[g:notes_file_idx]
-    endif
-    call s:NotesBufferSettings()
+  if bufexists(g:notes_files[g:notes_file_idx])
+    execute "buffer" fnameescape(g:notes_files[g:notes_file_idx])
+  else
+    execute "drop" fnameescape(g:notes_files[g:notes_file_idx])
+  endif
+  call s:NotesBufferSettings()
 endfunction
 
 function! GetHeadlines(files)
@@ -60,7 +71,7 @@ function! GetHeadlines(files)
   let headlines = []
   for f in a:files
     for l in readfile(f, "", 10)
-      if matchstr(l, '[#A-Za-z]\+') > ""
+      if matchstr(l, '^#*\s*[A-Za-z]\+') > ""
         call add(headlines, fnamemodify(f, ":t") .. "|" .. l)
         call add(g:popup_file_list, f)
         break
@@ -77,7 +88,7 @@ function! NotesSelected(id, result)
 endfunction
 
 function! NotesList(...)
-  let current_files = globpath(g:notes_home, "*.md", v:false, v:true)
+  let current_files = globpath(g:notes_home, "*.txt", v:false, v:true)
   let headlines = GetHeadlines(reverse(sort(current_files)))
   call popup_menu(reverse(sort(headlines)), #{
         \ callback: 'NotesSelected',
@@ -86,23 +97,21 @@ function! NotesList(...)
 endfunction
 
 function! NotesFind(string)
-  execute 'vimgrep' a:string g:notes_home .. '/*.md'
+  silent execute 'vimgrep' a:string g:notes_home .. '/*.txt'
 endfunction
 
 function! NotesCmdDispatch(params)
-  let cmd = split(a:params, ' ')[0]
-  let rest = join(split(a:params, ' ')[1:], ' ')
+  let [cmd; rest] = split(a:params, " ")
   let g:notes_cmd_to_func = #{
+        \ todo: funcref('NotesToDo'),
         \ list: funcref('NotesList'),
         \ today: funcref('NotesToday'),
         \ find: funcref('NotesFind')
         \ }
-  echo '#'..rest..'#'
-  call g:notes_cmd_to_func[cmd](rest)
+  call g:notes_cmd_to_func[cmd](join(rest, " "))
 endfunction
 
 command! -complete=customlist,CustomCompleteNotes -nargs=1 Notes call NotesCmdDispatch(<q-args>)
 function! CustomCompleteNotes(ArgLead, CmdLine, CursorPos)
-  return filter(['today', 'list', 'find'], {idx, val -> val =~? a:ArgLead})
+  return filter(['todo', 'today', 'list', 'find'], {idx, val -> val =~? a:ArgLead})
 endfunction
-
