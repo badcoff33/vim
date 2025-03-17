@@ -7,7 +7,7 @@
 noremap <unique> <script> <Plug>WhitespaceMelt <SID>WhitespaceMelt
 
 " Translate SID to Vim command
-noremap <SID>WhitespaceMelt :call whitespace#WhitespaceMelt()<CR>
+noremap <SID>WhitespaceMelt :call whitespace#Melt()<CR>
 
 " Defaults: Key mappings
 if !hasmapto('<Plug>WhitespaceMelt')
@@ -15,7 +15,7 @@ if !hasmapto('<Plug>WhitespaceMelt')
   imap <C-A-BS> <Esc><C-A-BS>i
 endif
 
-command -nargs=0 WhitespaceCleanup call whitespace#WhitespaceCleanup()
+command -nargs=0 WhitespaceCleanup call whitespace#Cleanup()
 
 augroup GroupWhitespaceP
   autocmd!

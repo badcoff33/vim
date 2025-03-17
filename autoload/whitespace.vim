@@ -37,7 +37,7 @@ endfunction
 
 " Description: Shrink number of blank lines or whitespaces around current
 " cursor postion to one empty line or one whitespace.
-function! whitespace#WhitespaceMelt()
+function! whitespace#Melt()
   let col = getcurpos()[2]
   if col > 1
     call s:OneSpace(col)
@@ -50,18 +50,20 @@ endfunction
 " remove trailing Ctrl-M on each line. The amount of spaces is set by
 " 'tabstop'. This is done by :retab and option 'expandtab'. Remove blank lines
 " on head or bottom of file.
-function! whitespace#WhitespaceCleanup()
+function! whitespace#Cleanup()
+  if &modifiable == 0
+    return
+  endif
   let save_formatoptions = &formatoptions
   setlocal formatoptions=
-  if &modifiable
-    let save_line = getpos('.')[1]
-    let save_col = getpos('.')[2]
-    setlocal expandtab
-    retab
-    %s/\s\+$//e
-    %s/\r//e
-    call histdel("search", -2)
-  endif
+
+  let cur_pos = getpos(".")
+  let save_line = cur_pos[1]
+  let save_col = cur_pos[2]
+  setlocal expandtab
+  retab
+  %s/\s\+$//e
+  %s/\r//e
   while getline(1) =~ '^\s*$' && line('$') > 1
     normal 1Gdd
     if save_line > 1 | let save_line -= 1 | endif
@@ -73,9 +75,8 @@ function! whitespace#WhitespaceCleanup()
     " keep one line at EOF
     normal Go
   endif
-  let &formatoptions=save_formatoptions
-  if exists("save_line") && exists(save_col)
-    call cursor(save_line, save_col)
-  endif
-endfunction
 
+  call histdel("search", -2)
+  let &formatoptions=save_formatoptions
+  call setpos(".", cur_pos)
+endfunction
