@@ -120,7 +120,7 @@ command -nargs=0 ShowColorUnderCursor call ColorizeCodeUnderCursor()
 command -nargs=0 ExploreHere call ExploreHere()
 
 assert_true(mapcheck("<Leader>ux") == "", "mapping overwritten")
-nnoremap <Leader>ux :call g:RunTerminal()<CR>
+nnoremap <F5> :call g:RunTerminal()<CR>
 
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
