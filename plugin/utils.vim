@@ -45,20 +45,6 @@ def g:ForwardSlashToBackward()
   endif
 enddef
 
-var cwd_stored: string
-
-augroup GroupUtils
-  autocmd!
-  autocmd TerminalOpen * setlocal scrolloff=0 signcolumn=no nocursorline foldcolumn=0
-  autocmd TerminalOpen * setlocal nonumber norelativenumber
-  autocmd WinLeave     cmd.exe* wincmd c
-  # autocmd WinLeave     * {
-  #   if &buftype == 'terminal'
-  #     wincmd c
-  #   endif
-  # }
-augroup END " }}}
-
 # Description: Run a diff of current buffer content and file content.
 # Taken from Vims help file diff.txt:
 def g:ShowUnsavedChanges()
@@ -102,7 +88,36 @@ def ColorizeCodeUnderCursor()
   execute $"match Color24 /{rgb_24bit}/"
 enddef
 
+def ExploreHere()
+  var b: string
+  var t: string
+
+  b = bufname("%")
+  if filereadable(b)
+    execute "Explore" fnamemodify(b, ":p:h")
+    normal gg
+    t = fnamemodify(b, ":t")
+    search(t, "")
+    execute "match IncSearch /\\<" .. t .. "\\>/"
+    timer_start(300, (timer) => execute("match none") )
+  endif
+enddef
+
+augroup GroupUtils
+  autocmd!
+  autocmd TerminalOpen * setlocal scrolloff=0 signcolumn=no nocursorline foldcolumn=0
+  autocmd TerminalOpen * setlocal nonumber norelativenumber
+  # autocmd WinLeave cmd.exe* wincmd c
+  autocmd WinLeave     * {
+    if &buftype == 'terminal'
+      wincmd c
+    endif
+  }
+augroup END " }}}
+
+
 command -nargs=0 ShowColorUnderCursor call ColorizeCodeUnderCursor()
+command -nargs=0 ExploreHere call ExploreHere()
 
 assert_true(mapcheck("<Leader>ux") == "", "mapping overwritten")
 nnoremap <Leader>ux :call g:RunTerminal()<CR>
@@ -110,6 +125,7 @@ nnoremap <Leader>ux :call g:RunTerminal()<CR>
 nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
 nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
+nnoremap <Leader>d <Cmd>ExploreHere<CR>
 
 command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 
