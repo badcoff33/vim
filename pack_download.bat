@@ -14,9 +14,9 @@ import glob
 unpack_tuple = (
         ("opt", "https://github.com/godlygeek/tabular/archive/refs/heads/master.zip", "tabular"),
         ("opt", "https://github.com/mhinz/vim-signify/archive/refs/heads/master.zip", "signify"),
+        ("opt", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip", "easy-align"),
         ("skip", "https://github.com/preservim/tagbar/archive/refs/heads/master.zip", "tagbar"),
         ("skip", "https://github.com/liuchengxu/vista.vim/archive/refs/heads/master.zip", "vista"),
-        ("skip", "https://github.com/junegunn/vim-easy-align/archive/refs/heads/master.zip", "easy-align"),
         ("skip", "https://github.com/justinmk/vim-dirvish/archive/refs/heads/master.zip", "dirvish"),
         ("skip", "https://github.com/aklt/plantuml-syntax/archive/refs/heads/master.zip", ""),
         ("skip", "https://github.com/preservim/vim-wordy/archive/refs/heads/master.zip", ""))
