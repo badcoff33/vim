@@ -10,6 +10,10 @@ setlocal formatoptions=qln
 setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:\\&^.\\{4\\}
 setlocal comments=fb:*,fb:-,fb:+,n:> commentstring=<!--%s-->
 
+if has("conceal")
+  setlocal conceallevel=1 listchars+=conceal:$ concealcursor=
+endif
+
 " More molecular undo of text
 inoremap <buffer> , ,<C-g>u
 inoremap <buffer> . .<C-g>u
@@ -33,7 +37,7 @@ function s:InsertRstHead()
   let deco_index = index(header_deco, char)
   if deco_index >= 0
     call SaveLastSearch()
-    if getline(line('.') - 1) =~ '^[#*]\{1,\}$'
+    if getline(line('.') - 1) =~ '^[#*=\-\^]\{1,\}$'
       normal kdd
     endif
     if getline(line('.') + 1) =~ '^[#*=\-\^]\{1,\}$'

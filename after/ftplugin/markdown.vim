@@ -10,7 +10,7 @@ setlocal foldexpr=MarkdownFold()
 setlocal foldmethod=expr
 
 if has("conceal")
-  setlocal conceallevel=2 concealcursor=nc
+  setlocal conceallevel=1 listchars+=conceal:$ concealcursor= 
 endif
 
 " Toggle automatic code formatting
