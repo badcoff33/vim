@@ -31,12 +31,12 @@ function GetFontInfo(...)
 endfunction
 
 " Resize window
-nnoremap <C-ScrollWheelUp> 3<C-w>>
-nnoremap <C-ScrollWheelDown> 3<C-w><
+nnoremap <C-A-ScrollWheelUp> 3<C-w>>
+nnoremap <C-A-ScrollWheelDown> 3<C-w><
 nnoremap <C-S-ScrollWheelUp> 3<C-w>+
 nnoremap <C-S-ScrollWheelDown> 3<C-w>-
-nnoremap <expr> <C-A-ScrollWheelUp> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("+").height .. "<CR>"
-nnoremap <expr> <C-A-ScrollWheelDown> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("-").height .. "<CR>"
+nnoremap <expr> <C-ScrollWheelUp> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("+").height .. "<CR>"
+nnoremap <expr> <C-ScrollWheelDown> "<cmd>set guifont=" .. GetFontInfo().family .. ":h" .. GetFontInfo("-").height .. "<CR>"
 tnoremap <LeftMouse> <C-w>N
 tnoremap <RightMouse> <C-w>N
 
