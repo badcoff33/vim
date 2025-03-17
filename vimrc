@@ -19,6 +19,7 @@ set backspace=indent,eol,start  " backspace and cursor keys wrap to previous/nex
 set belloff=all
 set clipboard=
 set complete=.,w
+set completeopt=menuone,noinsert
 set dictionary=spell
 set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 set expandtab
@@ -81,12 +82,18 @@ set visualbell
 set whichwrap+=<,>,[,]          " specify keys that move to next/previous line
 set wildcharm=<C-n>
 set wildignore+=*.*~,*.o,TAGS
+set wildmenu wildmode=full:lastused "set nowildmenu wildmode=list:lastused,full
+set wildoptions=pum,fuzzy
 set wrapscan                    " wrap search at EOB or BOB
 
-" Command line completion with popup menu
-set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy completeopt=menu
-" Command line completion the old fashion way
-"set nowildmenu wildmode=list:lastused,full wildoptions=fuzzy  completeopt=menu
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+cnoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<C-n>"
+
+if has("win32") || has("win64")
+    " a fix for :! with redirection (see zip.vim)
+    set shellxquote=
+    set shellquote=
+endif
 
 execute 'set thesaurus=' .. $VIMHOME .. '/thesaurus/english.txt'
 
@@ -142,27 +149,24 @@ inoremap <C-BS> <C-w>
 inoremap <C-Del> <C-o>dw
 cnoremap <C-BS> <C-w>
 cnoremap <C-Del> <C-Right><C-w>
+nnoremap <C-Ins> "*yiw
+inoremap <C-Ins> <C-o>"*yiw
 
 " Type a word, press below key sequence and "Enclose" `current` (word), {bang}
 " there you go!
-inoremap <C-s>" <C-o>b"<C-o>e<Right>"
-inoremap <C-s>' <C-o>b'<C-o>e<Right>'
-inoremap <C-s>` <C-o>b`<C-o>e<Right>`
-inoremap <C-s>) <C-o>b(<C-o>e<Right>)
-inoremap <C-s>] <C-o>b[<C-o>e<Right>]
-inoremap <C-s>} <C-o>b{<C-o>e<Right>}
-nmap <C-s> i<C-s>
+inoremap <C-s>" <C-o>cb"<C-r>""
+inoremap <C-s>' <C-o>cb'<C-r>"'
+inoremap <C-s>` <C-o>cb`<C-r>"`
+inoremap <C-s>) <C-o>cb(<C-r>")
+inoremap <C-s>] <C-o>cb[<C-r>"]
+inoremap <C-s>} <C-o>cb{<C-r>"}
 
 " Leader key mappings
 let mapleader = " "
-let maplocalleader = "-"
+let maplocalleader = "s"
 
 " fast forward: it takes two
 nnoremap <expr> <Leader><Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) .. "\n"
-
-" Avoid other keyboard/terminal problems
-nnoremap + g<C-]>
-nnoremap <Leader>+ <C-t>
 
 " Substitute command
 nnoremap <Leader>s :%s/\C//cgI<C-b><Right><Right><Right>
