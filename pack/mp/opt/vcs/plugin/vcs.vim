@@ -9,7 +9,7 @@ command! -nargs=* -complete=customlist,hg.CompleteHg Hg hg.Execute(<q-args>)
 command! -nargs=* -complete=customlist,git.CompleteGit Git git.Execute(<q-args>)
 command! -nargs=0 GitShowBranch git.BranchInfo()
 command! -nargs=0 GitShowStatus git.DirInfo()
-command! -nargs=? -complete=dir GitCd git.ChangeDir()
+command! -nargs=? -complete=dir GitCd git.ChangeDir(<q-args>)
 command! -nargs=0 GitGui git.RunGui()
 
 augroup GroupVcsGitP
