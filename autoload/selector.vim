@@ -40,12 +40,21 @@ augroup GroupSelectorUse
   au DirChanged * selector_list_of_files = []
 augroup END
 
-# filter and open buffers
+# Buffers, sorted in order of last used
 export def Buffers()
+
+  def GetSortedList(): list<dict<any>>
+    var bufinfo = getbufinfo({"buflisted": 1})
+    var unsorted = mapnew(bufinfo, (_, v) => {
+      return {bufnr: v.bufnr, text: v.name ?? $'[{v.bufnr}: No Name]', time: v.lastused}
+    })
+    return sort(unsorted, (a, b) => {
+      return (a.time == b.time) ? 0 : (a.time > b.time) ? -1 : 0
+    })
+  enddef
+
   core.OpenMenu("Buffers",
-    getbufinfo({'buflisted': 1})->mapnew((_, v) => {
-      return {bufnr: v.bufnr, text: v.name ?? $'[{v.bufnr}: No Name]'}
-    }),
+    GetSortedList(),
     (res, key) => {
       if key == "\<c-t>"
         exe $":tab sb {res.bufnr}"
@@ -81,7 +90,7 @@ enddef
 
 # filter and open buffers
 export def RecentBuffers()
-  core.OpenMenu("Most recent buffers",
+  core.OpenMenu("Recent buffers",
     v:oldfiles,
     (res, key) => {
       exe $":edit {res.text}"
