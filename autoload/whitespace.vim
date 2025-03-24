@@ -1,6 +1,10 @@
 " Vim autoload file
 
-let g:whitespace_trailing_line_blank = get(g:, 'whitespace_trailing_line_blank', v:false)
+" Configure g:whitespace_trailing_line_blank
+" 0  = no trailing empty line
+" 1  = one trailing empty line
+" -1 = do not touch trailing empty lines
+let g:whitespace_trailing_line_blank = get(g:, 'whitespace_trailing_line_blank', -1)
 
 let s:LookCursor = {col -> getline(".")[col - 1]}
 let s:LookForward = {col -> getline(".")[col]}
@@ -68,15 +72,25 @@ function! whitespace#Cleanup()
     normal 1Gdd
     if save_line > 1 | let save_line -= 1 | endif
   endwhile
-  while getline('$') =~ '^\s*$' && line('$') > 1
-    normal Gdd
-  endwhile
-  if g:whitespace_trailing_line_blank == v:true
-    " keep one line at EOF
-    normal Go
+
+  if g:whitespace_trailing_line_blank > -1
+    normal G
+
+    while (getline('.') =~ '^\s*$') && (line('$') > 1)
+      normal Gdd
+    endwhile
+
+    if g:whitespace_trailing_line_blank == 1
+      normal Go
+    endif
   endif
 
   call histdel("search", -2)
   let &formatoptions=save_formatoptions
   call setpos(".", cur_pos)
 endfunction
+
+
+
+
+
