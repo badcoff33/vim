@@ -55,7 +55,7 @@ def GetJobChannel(j: job): string
   return split(string(job_getchannel(j)), "")[1]
 enddef
 
-export def ErrorCb(ch: channel,  msg: string)
+def OnError(ch: channel,  msg: string)
   var ch_nr = split(string(ch), " ")[1]
   var ch_desc = g:run_dict[ch]
 
@@ -68,7 +68,7 @@ export def ErrorCb(ch: channel,  msg: string)
   popnews.Open("Error:" .. msg, {t: 4000, hl: run_hl_error})
 enddef
 
-export def CbCloseQf(ch: channel)
+export def OnCloseQf(ch: channel)
   var Callback: func
   var ch_nr = split(string(ch), " ")[1]
   var lines = 0
@@ -129,7 +129,7 @@ export def CbCloseBuf(ch: channel)
   remove(g:run_dict, ch_nr)
 enddef
 
-export def CbChannel(ch: channel, dat: any)
+export def OnChannelData(ch: channel, dat: any)
   var ch_nr = split(string(ch), " ")[1]
   var dat_nolf = substitute(dat, '\r', '', 'g')
 
@@ -209,11 +209,11 @@ def StartQuickfix(in_desc: dict<any>): job
 
   job_opt = {
     cwd: get(in_desc, "cwd", getcwd()),
-    callback: function("CbChannel"),
-    close_cb: function("CbCloseQf"),
+    callback: function("OnChannelData"),
+    close_cb: function("OnCloseQf"),
   }
   if has_key(in_desc, "show_err") && in_desc.show_err == true
-    job_opt.err_cb = function("CbError")
+    job_opt.err_cb = function("OnError")
   endif
 
   ch_desc = {
@@ -355,4 +355,3 @@ command! -bar -nargs=0 ShowJobs ShowJobs()
 
 # Uncomment when testing
 defcompile
-
