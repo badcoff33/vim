@@ -3,6 +3,10 @@ set guioptions=!a
 set guicursor+=n:blinkon0
 set mousemodel=popup
 set nomousefocus
+if has('win32') || has('win64')
+  set renderoptions=type:directx
+endif
+
 
 augroup GroupGvimrc
     autocmd!

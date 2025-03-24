@@ -19,7 +19,7 @@ set backspace=indent,eol,start  " backspace and cursor keys wrap to previous/nex
 set belloff=all
 set clipboard=
 set complete=.,w
-set completeopt=menuone,noinsert
+set completeopt=menuone
 set dictionary=spell
 set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 set expandtab
@@ -80,14 +80,14 @@ set updatetime=500
 set virtualedit=onemore,block   " makes selecting text more consistent
 set visualbell
 set whichwrap+=<,>,[,]          " specify keys that move to next/previous line
-set wildcharm=<C-n>
 set wildignore+=*.*~,*.o,TAGS
 set wildmenu wildmode=full:lastused "set nowildmenu wildmode=list:lastused,full
 set wildoptions=pum,fuzzy
 set wrapscan                    " wrap search at EOB or BOB
 
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-cnoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<C-n>"
+set wildcharm=<Tab>
+cnoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+cnoremap <expr> <space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 if has("win32") || has("win64")
     " a fix for :! with redirection (see zip.vim)
@@ -99,6 +99,10 @@ execute 'set thesaurus=' .. $VIMHOME .. '/thesaurus/english.txt'
 
 " close special windows
 nnoremap <Esc> <Cmd>helpclose<CR><C-w>z
+
+" Do not clutter registers
+nnoremap x "_x
+nnoremap X "_X
 
 " Consistent cursor movement
 noremap! <A-Left> <Home>
@@ -144,7 +148,7 @@ nnoremap <C-k> :cprevious<CR>
 nmap <C-l> <Cmd>nohlsearch<CR><Cmd>diffupdate<CR><Cmd>redraw!<CR>:checktime<CR>
 imap <C-l> <Esc><C-l>
 
-" Survival mappings
+" CUA survival mappings
 inoremap <C-BS> <C-w>
 inoremap <C-Del> <C-o>dw
 cnoremap <C-BS> <C-w>
@@ -160,6 +164,12 @@ inoremap <C-s>` <C-o>cb`<C-r>"`
 inoremap <C-s>) <C-o>cb(<C-r>")
 inoremap <C-s>] <C-o>cb[<C-r>"]
 inoremap <C-s>} <C-o>cb{<C-r>"}
+inoremap <C-s><C-s>" <C-o>cB"<C-r>""
+inoremap <C-s><C-s>' <C-o>cB'<C-r>"'
+inoremap <C-s><C-s>` <C-o>cB`<C-r>"`
+inoremap <C-s><C-s>) <C-o>cB(<C-r>")
+inoremap <C-s><C-s>] <C-o>cB[<C-r>"]
+inoremap <C-s><C-s>} <C-o>cB{<C-r>"}
 
 " Leader key mappings
 let mapleader = " "
