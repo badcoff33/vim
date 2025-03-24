@@ -11,6 +11,7 @@ command! -nargs=0 GitShowBranch git.BranchInfo()
 command! -nargs=0 GitShowStatus git.DirInfo()
 command! -nargs=? -complete=dir GitCd git.ChangeDir(<q-args>)
 command! -nargs=0 GitGui git.RunGui()
+command! -nargs=0 GitDiff git.ShowDiff()
 
 augroup GroupVcsGitP
   autocmd!

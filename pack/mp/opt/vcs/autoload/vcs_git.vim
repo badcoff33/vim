@@ -171,6 +171,18 @@ export def RunGui()
   )
 enddef
 
+export def ShowDiff()
+  # git show HEAD~2:file/with/forward/slashes
+  vert new
+  set bt=nofile
+  nnoremap <buffer> c :bwipeout<CR>
+  execute "read ++edit !git show HEAD~1:" .. substitute(bufname('#'), "\\", "/", "g")
+  normal "0d_"
+  diffthis
+  wincmd p
+  diffthis
+enddef
+
 augroup GroupVcsGit
   autocmd!
   autocmd BufWinEnter GIT-Output setf vcs_output
