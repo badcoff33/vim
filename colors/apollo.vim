@@ -20,8 +20,8 @@ var white    = "#FFFFFF"
 var black    = "#000000"
 
 var bg0       = "#141F2C"
-var bg1       = "#263140"
-var bg2       = "#344458"
+var bg1       = "#263540"
+var bg2       = "#344A58"
 var bg3       = "#48505F"
 
 var fg0       = "#405868"
@@ -77,7 +77,7 @@ execute "hi Question" Fg(green) Bg("bg")
 execute "hi QuickFixLine" Fg(green) Bg(bg2) Normal
 execute "hi Search" Fg(amber) Bg(bg3) Normal
 execute "hi StatusLine" Fg(white) Bg(bg3) Normal Cterm("NONE")
-execute "hi StatusLineNC" Fg(white) Bg(bg1) Normal Cterm("NONE")
+execute "hi StatusLineNC" Fg(white) Bg(bg2) Normal Cterm("NONE")
 execute "hi TabLine" Fg(fg1) Bg(black) Normal
 execute "hi TabLineFill" Fg(fg2) Bg(black) Normal
 execute "hi TabLineSel" Fg(green) Bg("bg") Underline
@@ -157,4 +157,3 @@ execute "hi SignifySignDelete"          Fg(red)
 execute "hi SignifySignDeleteFirstLine" Fg(red)
 execute "hi SignifySignChange"          Fg(blue)
 execute "hi SignifySignChangeDelete"    Fg(blue)
-

@@ -1,7 +1,7 @@
 vim9script
 # Vim color theme
 #
-# Description: Four base colors in four flavours.
+# Description = Four base colors in four flavours.
 
 if exists("g:syntax_on")
   syntax reset
@@ -11,151 +11,166 @@ hi clear
 set background=light
 g:colors_name = "blaubeere"
 
-extend(v:colornames, {
-    cFg:        "#787072",
-    cBg:        "#FFFFFF",
-    cShadowBg:  "#F6F6F6",
-    cShadowFg:  "#C0C0C0",
-    cHighlight: "#FFE070",
-    cBlueDk:    "#4341AF",
-    cBlue:      "#6581BF",
-    cBlueLt:    "#C4CFFB",
-    cBlueBg:    "#D8EFFF",
-    cRedBg:     "#FBE9EB",
-    cRedLt:     "#FFCACC",
-    cRed:       "#FB8A9C",
-    cRedDk:     "#BC6D76",
-    cGreenBg:   "#DCFDE0",
-    cGreenLt:   "#C3EBCE",
-    cGreen:     "#7FCA7C",
-    cGreenDk:   "#45984F",
-    cBrownBg:   "#E7E0CF",
-    cBrownLt:   "#B36E5C",
-    cBrown:     "#A37E4C",
-    cBrownDk:   "#7E7668",
-    cGray_0:    "#2e3436",
-    cGray_1:    "#555753",
-    cGray_2:    "#888a85",
-    cGray_3:    "#babdb6",
-    cGray_4:    "#d3d7cf",
-    cGray_5:    "#eeeeec"
-})
+var foreground = "#787072"
+var Background = "#FFFFFF"
+var Black = "#000000"
+var White = "#FFFFFF"
+var ShadowBg = "#F6F6F6"
+var ShadowFg = "#C0C0C0"
+var Highlight = "#FFE070"
+
+var BlueBg = "#D8EFFF"
+var BlueLt = "#C4CFFB"
+var Blue =   "#6581BF"
+var BlueDk = "#4341AF"
+
+var RedBg = "#FBE9EB"
+var RedLt = "#FFCACC"
+var Red = "#FB8A9C"
+var RedDk = "#BC6D76"
+
+var GreenBg = "#D8F0CF"
+var GreenLt = "#C3EBCE"
+var Green = "#7FCA7C"
+var GreenDk = "#45984F"
+
+var BrownBg = "#EFEFDF"
+var BrownLt = "#B3755C"
+var Brown =   "#A3844C"
+var BrownDk = "#7E7F68"
+
+var Gray0 = "#2e3436"
+var Gray1 = "#555753"
+var Gray2 = "#888885"
+var Gray3 = "#bababa"
+var Gray4 = "#d3d7d3"
+var Gray5 = "#eeeeec"
+
+def H(n: string, d: dict<string>)
+  var fg = has_key(d, "fg") ? d.fg : "fg"
+  var bg = has_key(d, "bg") ? d.bg : "bg"
+  var gui = has_key(d, "gui") ? d.gui : "NONE"
+  var guisp = has_key(d, "guisp") ? d.gui : "NONE"
+  var cterm = has_key(d, "cterm") ? d.cterm : "NONE"
+  execute "highlight" n $"guifg={fg}" $"guibg={bg}" $"gui={gui}" $"cterm={cterm}" $"guisp={guisp}"
+enddef
 
 # Basics
-
-highlight Bold              gui=bold
-highlight CurSearch         guifg=cBlueDk  guibg=cBlueBg   gui=NONE
-highlight Cursor            guibg=black    cterm=NONE
-highlight CursorLine        guibg=cGreenBg cterm=NONE
-highlight CursorLineNr      guifg=cGray_2   guibg=cGray_5    gui=bold
-highlight Folded            guifg=cBlue     guibg=cBg        gui=NONE
-highlight IncSearch         guifg=white    guibg=cGray_0    gui=NONE
-highlight Italic            gui=italic
-highlight Label             guifg=black    gui=bold
-highlight LineNrAbove       guifg=cRed      gui=bold
-highlight LineNr            guifg=cGray_2   gui=bold
-highlight LineNrBelow       guifg=cBlue     gui=bold
-highlight MatchParen        guifg=cGreenDk guibg=cBg        gui=underline
-highlight NonText           guifg=cGray_3   guibg=cBg
-highlight Normal            guifg=cFg       guibg=cBg        gui=NONE
-highlight Operator          guifg=cGreenDk gui=NONE
-highlight Pmenu             guifg=black    guibg=cBrownBg
-highlight PmenuSbar         guifg=cGray_4   guibg=cGray_4
-highlight PmenuSel          guifg=black    guibg=cgreen  gui=NONE
-highlight PmenuMatchSel     guifg=white    guibg=cGreenDk  gui=bold
-highlight PmenuThumb        guifg=cGreenDk    guibg=cGreenDk
-highlight Search            guifg=black guibg=cBrownBg  gui=NONE
-highlight StatusLine        guifg=white  guibg=cGray_1   gui=NONE
-highlight StatusLineNC      guifg=cGray_2   guibg=cGray_5    gui=NONE
-highlight StatusLineTerm    guifg=white    guibg=cBlue      gui=NONE
-highlight TabLine           guifg=cGray_2   guibg=cShadowBg gui=NONE
-highlight TabLineFill       guifg=black    guibg=cShadowBg gui=NONE
-highlight TabLineSel        guifg=cBlueBg  guibg=cBlueDk   gui=bold
-highlight Terminal          guifg=cFg       guibg=cBg
-highlight User1             guifg=white    guibg=cGray_4    gui=NONE
-highlight User2             guifg=cBlueLt  guibg=cBlueDk   gui=italic
-highlight VertSplit         guifg=cGray_4   guibg=cGray_5    gui=NONE
-highlight Visual            guifg=black    guibg=cBlueBg
-highlight PopupNotification guifg=black guibg=cHighlight
+H("Bold", {gui: "bold"})
+H("CurSearch", {fg: BlueDk, bg: Gray5})
+H("Conceal", {fg: ShadowFg, bg: ShadowBg})
+H("CurSearch", {fg: BlueDk, bg: BlueBg })
+H("Cursor", {fg: White, bg: Black })
+H("CursorLine", {bg: ShadowBg})
+H("CursorLineNr", {fg: Gray2, bg: Gray5, gui: "bold"})
+H("Folded", {fg: Blue, bg: Background })
+H("InSearch", {fg: White, bg: Gray0 })
+H("italic", {gui: "italic"})
+H("Label", {fg: Black, gui: "bold"})
+H("LineNrAbove", {fg: Red, gui: "bold"})
+H("LineNr", {fg: Gray2, gui: "bold"})
+H("LineNrBelow", {fg: Blue, gui: "bold"})
+H("MatchParen", {fg: GreenDk, bg: Background, gui: "underline"})
+H("NonText", {fg: Gray3, bg: Background})
+H("Normal", {fg: foreground, bg: Background })
+H("Operator", {fg: GreenDk })
+H("Pmenu", {fg: Black, bg: Gray4})
+H("PmenuSbar", {fg: Gray4, bg: Gray2})
+H("PmenuSel", {fg: White, bg: Black })
+H("PmenuMatchSel", {fg: BrownLt, bg: Black, gui: "bold"})
+H("PmenuThumb", {fg: GreenDk, bg: Gray1})
+H("Search", {fg: Black, bg: BrownBg })
+H("StatusLine", {fg: BlueLt, bg: Blue })
+H("StatusLineNC", {fg: White, bg: Gray3 })
+H("StatusLineTerm", {fg: White, bg: Blue })
+H("TabLine", {fg: Gray2, bg: ShadowBg })
+H("TabLineFill", {fg: Black, bg: ShadowBg })
+H("TabLineSel", {fg: BlueBg, bg: BlueDk, gui: "bold"})
+H("Terminal", {fg: foreground, bg: Background})
+H("User1", {fg: White, bg: Gray4 })
+H("User2", {fg: BlueLt, bg: BlueDk, gui: "italic"})
+H("VertSplit", {fg: Gray4, bg: Gray5 })
+H("Visual", {fg: Black, bg: BlueBg})
+H("PopupNotification", {fg: Black, bg: Highlight})
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
 highlight! link SignColumn LineNr
 highlight! link StatusLineTermNC StatusLineNC
 highlight! link WildMenu PmenuSel
-highlight! link qfSeparator gui=NONE
+highlight! link qfSeparator Normal
 
 # Code
 
-hi Comment guifg=cBrownDk gui=NONE
-hi Conditional guifg=cRed  gui=NONE
-hi Constant guifg=cBlue
-hi Directory guifg=cBlueDk gui=underline
-hi Error guifg=cRedDk guibg=cRedBg gui=NONE
-hi ErrorMsg guifg=cRedDk guibg=cRedBg gui=NONE
-hi Function guifg=cBlue
-hi Identifier guifg=cGreenDk gui=NONE
-hi Ignore guifg=cGray_3 gui=italic
-hi ModeMsg guifg=black guibg=cBrownBg gui=NONE
-hi Number guifg=cBlue
-hi PreCondit guifg=cRedDk  gui=bold
-hi PreProc guifg=black gui=bold
-hi Question guifg=cGray_2 guibg=cBg
-hi QuickFixLine guifg=cBlue guibg=cBg gui=bold
-hi Special guifg=black
-hi SpecialKey guifg=cBlue
-hi Statement guifg=cBlueDk  gui=NONE
-hi StorageClass guifg=cRed
-hi String guifg=cBrownLt
-hi Structure guifg=cRed gui=NONE
-hi Title guifg=cBlueDk  gui=bold
-hi Todo guifg=cRed guibg=cBg gui=bold,underline
-hi Type guifg=cRedDk gui=NONE
-hi WarningMsg guifg=white guibg=cGreenDk
-hi qfFileName guifg=cBlueLt
-hi qfLineNr guifg=cRed
+H("Comment", {fg: BrownDk })
+H("Conditional", {fg: Red })
+H("Constant", {fg: Blue})
+H("Directory", {fg: BlueDk, gui: "underline"})
+H("Error", {fg: RedDk, bg: RedBg })
+H("ErrorMsg", {fg: RedDk, bg: RedBg })
+H("Function", {fg: Blue})
+H("Identifier", {fg: GreenDk })
+H("Ignore", {fg: Gray3, gui: "italic"})
+H("ModeMsg", {fg: Black, bg: BrownBg })
+H("Number", {fg: Blue})
+H("PreCondit", {fg: RedDk, gui: "bold"})
+H("PreProc", {fg: Black, gui: "bold"})
+H("Question", {fg: Gray2, bg: Background})
+H("QuickFixLine", {fg: Blue, bg: Background, gui: "bold"})
+H("Special", {fg: Black})
+H("SpecialKey", {fg: Blue})
+H("Statement", {fg: BlueDk })
+H("StorageClass", {fg: Red})
+H("String", {fg: BrownLt})
+H("Structure", {fg: Red })
+H("Title", {fg: BlueDk, gui: "bold"})
+H("Todo", {fg: Red, bg: Background, gui: "bold,underline"})
+H("Type", {fg: RedDk })
+H("WarningMsg", {fg: White, bg: GreenDk})
+H("qfFileName", {fg: BlueDk})
+H("qfLineNr", {fg: Red})
 
 # Filetype VIM
 
-hi vimCommentTitle guifg=cBrownDk  gui=bold
-hi vimHiKeyList    guifg=cBlue
+H("vimCommentTitle", {fg: BrownDk, gui: "bold"})
+H("vimHiKeyList", {fg: Blue})
 
 # Filetype C
 
-hi cCppOut guibg=cGray_4 gui=NONE
-hi cCppOutIf guifg=cGray_3 gui=italic
-hi cCppOutIf2 guifg=cGray_4 gui=italic
-hi cParen guifg=cGray_2
-hi cBlock guifg=cGray_2
+H("CppOut", {bg: Gray4 })
+H("CppOutIf", {fg: Gray3, gui: "italic"})
+H("CppOutIf2", {fg: Gray4, gui: "italic"})
+H("Paren", {fg: Gray2})
+H("Block", {fg: Gray2})
 
 # Filetype HTML
 
-hi htmlH1 guifg=cBlueDk gui=bold
-hi htmlH2 guifg=cBlue    gui=bold
-hi htmlH3 guifg=cBlue    gui=NONE
-hi htmlItalic guifg=cShadowFg gui=italic
+H("htmlH1", {fg: BlueDk, gui: "bold"})
+H("htmlH2", {fg: Blue, gui: "bold"})
+H("htmlH3", {fg: Blue })
+H("htmlitalic", {fg: ShadowFg, gui: "italic"})
 
 # Filetype Markdown
 
-hi markdownCode guifg=cGray_2 guibg=cGray_5
-hi markdownCodeBlock guifg=cGray_2 gui=italic
+H("markdownCode", {fg: Gray2, bg: Gray5})
+H("markdownCodeBlock", {fg: Gray2, gui: "italic"})
 
 # Filetype ReStructuredTExt
 
-hi rstEmphasis guifg=cGray_2
-hi rstStrongEmphasis guifg=cGray_2  gui=bold
+H("rstEmphasis", {fg: Gray2})
+H("rstStrongEmphasis", {fg: Gray2, gui: "bold"})
 
 # Diffs
 
-hi DiffChange guifg=black guibg=cBlueBg
-hi DiffText guifg=white guibg=black gui=bold
-hi DiffDelete guifg=cRedDk guibg=cRedBg
-hi DiffAdd guifg=black guibg=cGreenBg gui=bold
+H("DiffChange", {fg: Black, bg: BlueBg})
+H("DiffText", {fg: White, bg: Black, gui: "bold"})
+H("DiffDelete", {fg: RedDk, bg: RedBg})
+H("DiffAdd", {fg: Black, bg: GreenBg, gui: "bold"})
 
 # Signify
 
-hi SignifySignAdd             guifg=cGreen
-hi SignifySignDelete          guifg=cRed
-hi SignifySignDeleteFirstLine guifg=cRed
-hi SignifySignChange          guifg=cBlue
-hi SignifySignChangeDelete    guifg=cBlue
+H("SignifySignAdd", {fg: Green})
+H("SignifySignDelete", {fg: Red})
+H("SignifySignDeleteFirstLine", {fg: Red})
+H("SignifySignChange", {fg: Blue})
+H("SignifySignChangeDelete", {fg: Blue})
