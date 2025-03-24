@@ -1,19 +1,23 @@
 let g:notes_files = []
 let g:notes_file_idx = 0
-let g:notes_home = get(g:, 'notes_home', expand("~/.text"))
+let g:notes_home_dir = get(g:, 'notes_home_dir', expand("~/.text"))
 
 function! s:NotesBufferSettings()
-  setfiletype rst
+  setfiletype markdown
   nnoremap <buffer> <LocalLeader>f <Cmd>call NotesBacklog("fw")<CR>
   nnoremap <buffer> <LocalLeader>b <Cmd>call NotesBacklog("bw")<CR>
 endfunction
 
 function! NotesToDo(...)
-  execute "drop" strftime(g:notes_home .. "/todo.txt")
+  if !exists("g:notes_todo_file")
+    execute "drop" g:notes_home_dir .. "/todo.txt"
+  else
+    execute "drop" g:notes_todo_file
+  endif
 endfunction
 
 function! NotesToday(...)
-  execute "drop" strftime(g:notes_home .. "/note-%Y-%m-%d.txt")
+  execute "drop" strftime(g:notes_home_dir .. "/note-%Y-%m-%d.txt")
   call s:NotesBufferSettings()
   let g:notes_files = NotesUpdateBacklog(60)
 endfunction
@@ -24,7 +28,7 @@ function! NotesUpdateBacklog(days)
   let files = []
   let g:notes_file_idx = 0
   for day in range(0, -a:days, -1)
-    let file_candidate = expand(strftime(g:notes_home .. "/note-%Y-%m-%d.txt", (now - now % one_day) + (day * one_day )))
+    let file_candidate = expand(strftime(g:notes_home_dir .. "/note-%Y-%m-%d.txt", (now - now % one_day) + (day * one_day )))
     if bufexists(file_candidate)
       call add(files, file_candidate)
     elseif filereadable(file_candidate)
@@ -88,7 +92,7 @@ function! NotesSelected(id, result)
 endfunction
 
 function! NotesList(...)
-  let current_files = globpath(g:notes_home, "*.txt", v:false, v:true)
+  let current_files = globpath(g:notes_home_dir, "*.txt", v:false, v:true)
   let headlines = GetHeadlines(reverse(sort(current_files)))
   call popup_menu(reverse(sort(headlines)), #{
         \ callback: 'NotesSelected',
@@ -97,7 +101,7 @@ function! NotesList(...)
 endfunction
 
 function! NotesFind(string)
-  silent execute 'vimgrep' a:string g:notes_home .. '/*.txt'
+  silent execute 'vimgrep' a:string g:notes_home_dir .. '/*.txt'
 endfunction
 
 function! NotesCmdDispatch(params)
