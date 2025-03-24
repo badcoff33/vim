@@ -6,6 +6,7 @@
 let b:undo_ftplugin = "setl cinoptions< list< tw< expandtab< formatoptions< tabstop< shiftwidth< foldnestmax< foldmethod<"
 
 setlocal cinoptions=(0,W4,gN
+setlocal complete+=]
 setlocal expandtab
 setlocal foldmethod=indent
 setlocal foldnestmax=2
@@ -36,7 +37,7 @@ if match(&cpoptions, '>') < 0
 endif
 
 " open tag preview
-nnoremap <buffer> K :ptjump <C-r><C-w><CR>
+nnoremap <buffer> K g<C-]>
 nnoremap <buffer> <A-+> :tnext<CR>
 nnoremap <buffer> <A--> :tprev<CR>
 nnoremap <buffer> <LocalLeader>S <Cmd>call scope#PopupScope()<CR>
