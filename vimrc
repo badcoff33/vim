@@ -80,14 +80,12 @@ set updatetime=500
 set virtualedit=onemore,block   " makes selecting text more consistent
 set visualbell
 set whichwrap+=<,>,[,]          " specify keys that move to next/previous line
+set wildchar=<Tab>
+set wildcharm=<Tab>
 set wildignore+=*.*~,*.o,TAGS
 set wildmenu wildmode=full:lastused "set nowildmenu wildmode=list:lastused,full
 set wildoptions=pum,fuzzy
 set wrapscan                    " wrap search at EOB or BOB
-
-set wildcharm=<Tab>
-cnoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-cnoremap <expr> <space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 if has("win32") || has("win64")
     " a fix for :! with redirection (see zip.vim)
@@ -96,9 +94,6 @@ if has("win32") || has("win64")
 endif
 
 execute 'set thesaurus=' .. $VIMHOME .. '/thesaurus/english.txt'
-
-" close special windows
-nnoremap <Esc> <Cmd>helpclose<CR><C-w>z
 
 " Do not clutter registers
 nnoremap x "_x
@@ -202,15 +197,15 @@ nnoremap <Leader>p <Cmd>set paste<CR>"*P<Cmd>set nopaste<CR>
 
 " Move it!
 inoremap <S-Up>    <Esc><C-w><Up>
-inoremap <expr> <S-Down>  (winnr() == winnr('j')) ? "<Esc>:" : "<Esc><C-w><Down>"
+inoremap <S-Down>  <Esc><C-w><Down>
 inoremap <S-Left>  <Esc><C-w><Left>
 inoremap <S-Right> <Esc><C-w><Right>
 nnoremap <S-Up>    <C-w><Up>
-nnoremap <expr> <S-Down>  (winnr() == winnr('j')) ? ":" : "<C-w><Down>"
+nnoremap <S-Down>  <C-w><Down>
 nnoremap <S-Left>  <C-w><Left>
 nnoremap <S-Right> <C-w><Right>
 tnoremap <S-Up>    <C-w><Up>
-tnoremap <expr> <S-Down>  (winnr() == winnr('j')) ? "<C-w>N:" : "<C-w>N<C-w><Down>"
+tnoremap <S-Down>  <C-w><Down>
 tnoremap <S-Left>  <C-w><Left>
 tnoremap <S-Right> <C-w><Right>
 
