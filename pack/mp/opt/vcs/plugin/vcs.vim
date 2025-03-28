@@ -5,13 +5,37 @@ import autoload 'vcs_hg.vim' as hg
 
 g:git_working_dir = get(g:, "git_working_dir", ".")
 
-command! -nargs=* -complete=customlist,hg.CompleteHg Hg hg.Execute(<q-args>)
-command! -nargs=* -complete=customlist,git.CompleteGit Git git.Execute(<q-args>)
-command! -nargs=0 GitShowBranch git.BranchInfo()
-command! -nargs=0 GitShowStatus git.DirInfo()
-command! -nargs=? -complete=dir GitCd git.ChangeDir(<q-args>)
-command! -nargs=0 GitGui git.RunGui()
-command! -nargs=0 GitDiff git.ShowDiff()
+command! -nargs=* -complete=customlist,hg.CompleteHg Hg {
+  hg.Execute(<q-args>)
+}
+
+command! -nargs=? -complete=file HgDiff {
+  hg.ShowDiff(<q-args>)
+}
+
+command! -nargs=* -complete=customlist,git.CompleteGit Git {
+  git.Execute(<q-args>)
+}
+
+command! -nargs=0 GitShowBranch {
+  git.BranchInfo()
+}
+
+command! -nargs=0 GitShowStatus {
+  git.DirInfo()
+}
+
+command! -nargs=? -complete=dir GitCd {
+  git.ChangeDir(<q-args>)
+}
+
+command! -nargs=0 GitGui {
+  git.RunGui()
+}
+
+command! -nargs=? -complete=file GitDiff {
+  git.ShowDiff(<q-args>)
+}
 
 augroup GroupVcsGitP
   autocmd!

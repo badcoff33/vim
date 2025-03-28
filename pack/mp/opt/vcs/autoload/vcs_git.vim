@@ -5,6 +5,7 @@ import 'popnews.vim' as pop
 
 var local_branch_name: dict<dict<any>>
 var popup_duration = 6000
+var popup_duration_short = 2000
 var working_dir = ""
 
 g:vcs_git_changed_files = []
@@ -171,22 +172,30 @@ export def RunGui()
   )
 enddef
 
-export def ShowDiff()
+export def ShowDiff(file = "")
   # git show HEAD~2:file/with/forward/slashes
+  execute "tabedit" (file == "") ? bufname("%") : file
+  inputsave()
+  var rev = input("revision (HEAD~[1...]): ", "Head~1")
+  inputrestore()
+  diffthis
   vert new
-  set bt=nofile
-  nnoremap <buffer> c :bwipeout<CR>
-  execute "read ++edit !git show HEAD~1:" .. substitute(bufname('#'), "\\", "/", "g")
-  normal "0d_"
+  setlocal buftype=nofile nobuflisted
+  silent execute $"read ++edit !git show {rev}:{substitute(bufname('#'), '\', '/', 'g')}"
+  silent normal gg0d_
   diffthis
-  wincmd p
-  diffthis
+  nnoremap <buffer> c :bwipeout<CR>:tabclose<CR>
+  nnoremap <buffer> <C-j> ]c
+  nnoremap <buffer> <C-k> [c
 enddef
 
 augroup GroupVcsGit
   autocmd!
   autocmd BufWinEnter GIT-Output setf vcs_output
   autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
+  autocmd BufWinEnter GIT-Output nnoremap <buffer> <LocalLeader>o yiW<C-w>p:edit <C-r>0<CR>
+  autocmd BufWinEnter GIT-Output nnoremap <buffer> <LocalLeader>d :GitDiff <C-r><C-f><CR>
+  autocmd BufWinEnter GIT-Output nnoremap <buffer> <LocalLeader>a :Git add <C-r><C-f>
   autocmd CmdlineEnter : g:vcs_git_changed_files = []
   autocmd DirChanged global call ChangeDir(".")
 augroup END

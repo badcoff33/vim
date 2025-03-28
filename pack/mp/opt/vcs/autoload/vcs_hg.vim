@@ -39,6 +39,23 @@ export def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): list
   return candidates
 enddef
 
+export def ShowDiff(file = "")
+  # hg diff -c -1 file/with/slashes
+  execute "tabedit" (file == "") ? bufname("%") : file
+  inputsave()
+  var rev = input("Revision (tip, -[1...]: ", "tip")
+  inputrestore()
+  diffthis
+  vert new
+  setlocal buftype=nofile nobuflisted
+  silent execute $"read ++edit !hg cat -r {rev} {bufname('#')}"
+  silent normal gg0d_
+  diffthis
+  nnoremap <buffer> c :bwipeout<CR>:tabclose<CR>
+  nnoremap <buffer> <C-j> ]c
+  nnoremap <buffer> <C-k> [c
+enddef
+
 export def Execute(hg_command: string)
   run.RunStart({
     cmd: 'hg ' .. hg_command,
@@ -50,7 +67,9 @@ augroup GroupVcsHg
   autocmd!
   autocmd BufWinEnter HG-Output setf vcs_output
   autocmd BufWinEnter HG-Output nnoremap <buffer> <CR> :Hg<Space>
+  autocmd BufWinEnter HG-Output nnoremap <buffer> <LocalLeader>d :HgDiff <C-r><C-f><CR>
   autocmd CmdlineEnter : g:vcs_hg_changed_files = []
+augroup END
 augroup END
 
 # Uncomment when testing
