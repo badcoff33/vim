@@ -8,9 +8,10 @@ setlocal autoindent
 setlocal nocindent
 setlocal foldexpr=MarkdownFold()
 setlocal foldmethod=expr
+setlocal wrap linebreak
 
 if has("conceal")
-  setlocal conceallevel=1 listchars+=conceal:$ concealcursor= 
+  setlocal conceallevel=1 listchars+=conceal:$ concealcursor=
 endif
 
 " Toggle automatic code formatting

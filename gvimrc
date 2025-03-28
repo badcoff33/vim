@@ -4,7 +4,7 @@ set guicursor+=n:blinkon0
 set mousemodel=popup
 set nomousefocus
 if has('win32') || has('win64')
-  set renderoptions=type:directx
+  set renderoptions=
 endif
 
 

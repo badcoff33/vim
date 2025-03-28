@@ -15,10 +15,12 @@ g:colors_name = "feuerwerk"
 var black    = "#000000"
 var white    = "#FFFFFF"
 
-var fg         = "#D8D8F0"
-var fg_dk      = "#B3B3D0"
-var fg_moredk  = "#63739F"
-var bg         = "#15203A"
+var fg        = "#D8D8F0"
+var fg_dk     = "#A3A3C0"
+var fg_moredk = "#63739F"
+var bg_lt     = "#252F48"
+var bg        = "#1A253F"
+var bg_dk     = "#101E28"
 
 var gui_bgdk = "#203050"
 var gui_bg   = "#204060"
@@ -102,7 +104,7 @@ highlight! link qfSeparator Normal
 
 # Code
 
-execute "hi Comment" Fg(fg_dk) Normal
+execute "hi Comment" Fg(fg_moredk) Normal
 execute "hi Conditional" Fg(blue_lt) Normal
 execute "hi Constant" Fg(green)
 execute "hi Directory" Fg(blue) BoldUnderline

@@ -8,6 +8,7 @@ setlocal nonumber norelativenumber
 nmap <silent> <buffer> <CR> <C-]>
 " make use of K
 nnoremap <buffer> K :help <C-r><C-w><CR>
+nnoremap <buffer> c :helpclose<CR>
 
 packadd helptoc
 nnoremap <buffer> gO :HelpToc<CR>

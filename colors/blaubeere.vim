@@ -77,7 +77,7 @@ H("Operator", {fg: GreenDk })
 H("Pmenu", {fg: Black, bg: Gray4})
 H("PmenuSbar", {fg: Gray4, bg: Gray2})
 H("PmenuSel", {fg: White, bg: Black })
-H("PmenuMatchSel", {fg: BrownLt, bg: Black, gui: "bold"})
+H("PmenuMatchSel", {fg: Green, bg: Black, gui: "bold"})
 H("PmenuThumb", {fg: GreenDk, bg: Gray1})
 H("Search", {fg: Black, bg: BrownBg })
 H("StatusLine", {fg: BlueLt, bg: Blue })
@@ -90,7 +90,7 @@ H("Terminal", {fg: foreground, bg: Background})
 H("User1", {fg: White, bg: Gray4 })
 H("User2", {fg: BlueLt, bg: BlueDk, gui: "italic"})
 H("VertSplit", {fg: Gray4, bg: Gray5 })
-H("Visual", {fg: Black, bg: BlueBg})
+H("Visual", {fg: White, bg: GreenDk})
 H("PopupNotification", {fg: Black, bg: Highlight})
 
 highlight! link CursorColumn CursorLine
@@ -163,9 +163,9 @@ H("rstStrongEmphasis", {fg: Gray2, gui: "bold"})
 # Diffs
 
 H("DiffChange", {fg: Black, bg: BlueBg})
-H("DiffText", {fg: White, bg: Black, gui: "bold"})
-H("DiffDelete", {fg: RedDk, bg: RedBg})
-H("DiffAdd", {fg: Black, bg: GreenBg, gui: "bold"})
+H("DiffText", {fg: White, bg: Black})
+H("DiffDelete", {fg: RedBg, bg: RedBg})
+H("DiffAdd", {fg: Black, bg: GreenBg})
 
 # Signify
 
