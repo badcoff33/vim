@@ -9,8 +9,9 @@ var run_hl_normal = 'PopupNotification'
 var run_hl_error  = 'ErrorMsg'
 
 #var animations = ["----", "BUSY"]
-var animations = [ "BUSY", "_USY", "B_SY", "BU_Y", "BUS_" ]
+#var animations = [ "BUSY", "_USY", "B_SY", "BU_Y", "BUS_" ]
 #var animations = [ '*', '-' ]
+var animations = [ '|', '/', '-', '\' ]
 var animation_index = 0
 
 def GetAnimationStr(): string
@@ -21,34 +22,42 @@ def GetAnimationStr(): string
   return animations[animation_index]
 enddef
 
-def RunJobMonitoringCb(tid: number)
+def OnTimerRunJob(tid: number)
   var job_status: string
+  var ch_desc: dict<any>
+  var ch: string
+  var desc: dict<any>
 
-  for ch in keys(g:run_dict)
-    if g:run_dict[ch].winid > 0
-      job_status = job_status(g:run_dict[ch].job)
-      if job_status == "run"
-        if has_key(g:run_dict[ch], "timer") && g:run_dict[ch].timer == tid
-          popup_settext(g:run_dict[ch].winid,
-            ##printf("%s %s %d lines",
-            printf("%s %s",
-              g:run_dict[ch].short_cmd,
-              GetAnimationStr(),
-            ))
-          break
-        endif
-      else
-        popnews.Close(g:run_dict[ch].winid)
-        timer_stop(g:run_dict[ch].timer)
-        if job_status == "fail"
-          popnews.Open("job failed", {
-            t: 4000,
-            hl: run_hl_normal
-          })
-        endif
-      endif
-    endif
-  endfor
+  def PickChDict(timer_id: number): dict<any>
+    return filter(copy(g:run_dict), (k, v) =>
+      (g:run_dict[k].timer == timer_id) ? true : false
+    )
+  enddef
+
+  ch_desc = PickChDict(tid)
+  if len(ch_desc) != 1
+    return
+  endif
+
+  ch = keys(ch_desc)[0]
+  desc = values(ch_desc)[0]
+
+  job_status = job_status(desc.job)
+  if job_status == "run"
+    popup_settext(desc.winid,
+      printf("%s %s",
+        desc.short_cmd,
+        GetAnimationStr(),
+      ))
+  else
+    popnews.Close(desc.winid)
+    timer_stop(desc.timer)
+    remove(g:run_dict, ch)
+    popnews.Open($"job terminated with '{job_status}'", {
+      t: 4000,
+      hl: run_hl_normal
+    })
+  endif
 enddef
 
 def GetJobChannel(j: job): string
@@ -104,7 +113,7 @@ export def OnCloseQf(ch: channel)
   # silent doautocmd QuickFixCmdPost make
 enddef
 
-export def CbCloseBuf(ch: channel)
+export def OnCloseBuf(ch: channel)
   var Callback: func
   var ch_nr = split(string(ch), " ")[1]
   var lines: number
@@ -118,9 +127,9 @@ export def CbCloseBuf(ch: channel)
 
   execute $"buffer {g:run_dict[ch_nr].bufnr}"
   setlocal buftype=nofile nomodified readonly nomodifiable
-  normal G
-  search('\^^^^', 'b')
-  normal zt
+  normal Gzb
+  # search('\^^^^', 'b')
+  # normal zt
   try
     Callback = function(g:run_dict[ch_nr].callback)
     Callback()
@@ -223,7 +232,7 @@ def StartQuickfix(in_desc: dict<any>): job
       name: "quickfix",
       callback: get(in_desc, "callback", ""),
       started: localtime(),
-      timer: timer_start(500, RunJobMonitoringCb, {repeat: -1}),
+      timer: timer_start(300, OnTimerRunJob, {repeat: -1}),
       cwd: job_opt.cwd,
       winid: 0
   }
@@ -247,6 +256,7 @@ def StartQuickfix(in_desc: dict<any>): job
 
   g:run_dict[GetJobChannel(ch_desc.job)] = ch_desc
 
+  # echowin filter(copy(g:run_dict), (_, v) => (v['timer'] == ch_desc.timer))
   return ch_desc.job
 enddef
 
@@ -270,7 +280,7 @@ def StartNamedBuffer(in_desc: dict<any>): job
     short_cmd: split(in_desc.cmd, " ")[0],
     callback: get(in_desc, "callback", ""),
     started: localtime(),
-    timer: timer_start(500, RunJobMonitoringCb, {repeat: -1}),
+    timer: timer_start(500, OnTimerRunJob, {repeat: -1}),
     cwd: get(in_desc, "cwd", getcwd()),
     winid: 0
   }
@@ -281,10 +291,10 @@ def StartNamedBuffer(in_desc: dict<any>): job
     err_buf: out_buffer_nr,
     out_buf: out_buffer_nr,
     cwd: ch_desc.cwd,
-    close_cb: function("CbCloseBuf"),
+    close_cb: function("OnCloseBuf"),
   }
   if has_key(in_desc, "show_err") && in_desc.show_err == true
-    job_opt.err_cb = function("CbError")
+    job_opt.err_cb = function("OnError")
   endif
   if !(has_key(in_desc, "no_popup") && (in_desc.no_popup == true))
     ch_desc.winid = popnews.Open(
@@ -300,7 +310,7 @@ def StartNamedBuffer(in_desc: dict<any>): job
   setbufline(
     out_buffer_nr,
     "$",
-    ["", $"^^^^^^ {strftime('%T')} / {ch_desc.full_cmd} / in '{ch_desc.cwd}'"]
+    ["", $"^^^^ {strftime('%T')} / {ch_desc.full_cmd} / in '{ch_desc.cwd}'"]
   )
 
   return ch_desc.job
