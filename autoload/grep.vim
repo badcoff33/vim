@@ -99,17 +99,44 @@ export def RunCompiledCmdLine(pattern: string)
   })
 enddef
 
+var last_pattern: string
+var last_options: string
+var last_paths: string
+
 export def GrepPatternInput()
-  var pattern = input("Pattern (use '\\bPATTERN\\b' for exact matches'): ", "", "tag")
-  if pattern->len() > 0
-    var edited_options = input("Grep options: ", GrepExcludes() .. " " .. GrepIncludes())
-    var edited_paths = input("Grep path: ", utils.ToString(g:grep_paths), "dir")
-    var cmd_line = join([GrepCommand(), edited_options, pattern, edited_paths], " ")
+  var pattern: string
+  var options: string
+  var paths: string
+
+  pattern = input("Pattern (use '\\bPATTERN\\b' for exact matches'): ", last_pattern, "tag")
+
+  if pattern == ""
+
+    last_options = GrepExcludes() .. " " .. GrepIncludes()
+    last_paths = utils.ToString(g:grep_paths)
+
+  else
+
+    if last_options == ""
+      last_options = GrepExcludes() .. " " .. GrepIncludes()
+    endif
+    if last_paths == ""
+      last_paths = utils.ToString(g:grep_paths)
+    endif
+
+    options = input("Grep options: ", last_options)
+    paths = input("Grep path: ", last_paths, "dir")
+
     run.RunStart({
-      cmd: cmd_line,
+      cmd: join([GrepCommand(), options, pattern, paths], " "),
       regexp: &grepformat,
       no_popup: true
     })
+
+    last_pattern = pattern
+    last_options = options
+    last_paths = paths
+
   endif
 enddef
 
