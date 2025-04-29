@@ -7,26 +7,23 @@ g:run_be_verbose = false
 
 var run_hl_normal = 'PopupNotification'
 var run_hl_error  = 'ErrorMsg'
-
-#var animations = ["----", "BUSY"]
-#var animations = [ "BUSY", "_USY", "B_SY", "BU_Y", "BUS_" ]
-#var animations = [ '*', '-' ]
-var animations = [ '|', '/', '-', '\' ]
 var animation_index = 0
-
-def GetAnimationStr(): string
-  animation_index += 1
-  if animation_index == len(animations)
-    animation_index = 0
-  endif
-  return animations[animation_index]
-enddef
 
 def OnTimerRunJob(tid: number)
   var job_status: string
   var ch_desc: dict<any>
   var ch: string
   var desc: dict<any>
+
+  def GetAnimationStr(): string
+    #const animations = [ "BUSY", "_USY", "B_SY", "BU_Y", "BUS_" ]
+    const animations = [ '|', '/', '-', '\' ]
+    animation_index += 1
+    if animation_index == len(animations)
+      animation_index = 0
+    endif
+    return animations[animation_index]
+  enddef
 
   def PickChDict(timer_id: number): dict<any>
     return filter(copy(g:run_dict), (k, v) =>
@@ -66,15 +63,19 @@ enddef
 
 def OnError(ch: channel,  msg: string)
   var ch_nr = split(string(ch), " ")[1]
-  var ch_desc = g:run_dict[ch]
+  var desc = g:run_dict[ch_nr]
 
-  if has_key(ch_desc, "winid")
-    popnews.Close(ch_desc.winid)
+  if has_key(desc, "winid")
+    popnews.Close(desc.winid)
   endif
-  if has_key(ch_desc, "timer")
-    timer_stop(ch_desc.timer)
+  if has_key(desc, "timer")
+    timer_stop(desc.timer)
   endif
-  popnews.Open("Error:" .. msg, {t: 4000, hl: run_hl_error})
+  popnews.Open("Error:" .. msg, {
+    t: 4000,
+    hl: run_hl_error
+  })
+  remove(g:run_dict, ch_nr)
 enddef
 
 export def OnCloseQf(ch: channel)
@@ -140,13 +141,18 @@ enddef
 
 export def OnChannelData(ch: channel, dat: any)
   var ch_nr = split(string(ch), " ")[1]
+  var desc = g:run_dict[ch_nr]
   var dat_nolf = substitute(dat, '\r', '', 'g')
 
+  desc.count += 1
   setqflist([], "a", {
-    nr: g:run_dict[ch_nr].qfnr,
-    efm: g:run_dict[ch_nr].regexp,
+    nr: desc.qfnr,
+    efm: desc.regexp,
     lines: [dat_nolf]
   })
+  popup_settext(g:run_dict[ch_nr].winid,
+    printf($"running {desc.short_cmd} | {desc.count} lines"
+    ))
 enddef
 
 def ConditionalWriteAll(dict: dict<any>)
@@ -214,7 +220,7 @@ enddef
 
 def StartQuickfix(in_desc: dict<any>): job
   var job_opt = {}
-  var ch_desc = {}
+  var desc = {}
 
   job_opt = {
     cwd: get(in_desc, "cwd", getcwd()),
@@ -225,45 +231,46 @@ def StartQuickfix(in_desc: dict<any>): job
     job_opt.err_cb = function("OnError")
   endif
 
-  ch_desc = {
+  desc = {
       full_cmd: in_desc.cmd,
       short_cmd: split(in_desc.cmd, " ")[0],
       regexp: has_key(in_desc, "regexp") ? in_desc.regexp : &errorformat,
       name: "quickfix",
       callback: get(in_desc, "callback", ""),
       started: localtime(),
-      timer: timer_start(300, OnTimerRunJob, {repeat: -1}),
+      # timer: timer_start(300, OnTimerRunJob, {repeat: -1}),
       cwd: job_opt.cwd,
-      winid: 0
+      winid: 0,
+      count: 0
   }
   if !(has_key(in_desc, "no_popup") && (in_desc.no_popup == true))
-    ch_desc.winid = popnews.Open(
-      printf($"{ch_desc.short_cmd} {animations[0]}"), {
+    desc.winid = popnews.Open(
+      printf($"running {desc.short_cmd} | {desc.count} lines"), {
         no_timeout: true,
         hl: run_hl_normal
       })
   endif
 
-  ch_desc.job = job_start("cmd /C " .. in_desc.cmd, job_opt)
+  desc.job = job_start("cmd /C " .. in_desc.cmd, job_opt)
 
   setqflist([], " ", {
     nr: "$",
-    efm: ch_desc.regexp,
-    title: ch_desc.full_cmd
+    efm: desc.regexp,
+    title: desc.full_cmd
   })
-  ch_desc.qfnr = getqflist({nr: "$"}).nr
-  PushChistoryStack(ch_desc.qfnr)
+  desc.qfnr = getqflist({nr: "$"}).nr
+  PushChistoryStack(desc.qfnr)
 
-  g:run_dict[GetJobChannel(ch_desc.job)] = ch_desc
+  g:run_dict[GetJobChannel(desc.job)] = desc
 
-  # echowin filter(copy(g:run_dict), (_, v) => (v['timer'] == ch_desc.timer))
-  return ch_desc.job
+  # echowin filter(copy(g:run_dict), (_, v) => (v['timer'] == desc.timer))
+  return desc.job
 enddef
 
 def StartNamedBuffer(in_desc: dict<any>): job
   var lines: number
   var job_opt = {}
-  var ch_desc = {}
+  var desc = {}
 
   var out_buffer_nr: number
 
@@ -273,14 +280,14 @@ def StartNamedBuffer(in_desc: dict<any>): job
   setbufvar(out_buffer_nr, "&readonly", false)
   setbufvar(out_buffer_nr, "&modifiable", true)
 
-  ch_desc = {
+  desc = {
     name: in_desc.name,
     bufnr: out_buffer_nr,
     full_cmd: in_desc.cmd,
     short_cmd: split(in_desc.cmd, " ")[0],
     callback: get(in_desc, "callback", ""),
     started: localtime(),
-    timer: timer_start(500, OnTimerRunJob, {repeat: -1}),
+    # timer: timer_start(500, OnTimerRunJob, {repeat: -1}),
     cwd: get(in_desc, "cwd", getcwd()),
     winid: 0
   }
@@ -290,30 +297,30 @@ def StartNamedBuffer(in_desc: dict<any>): job
     out_io: "buffer",
     err_buf: out_buffer_nr,
     out_buf: out_buffer_nr,
-    cwd: ch_desc.cwd,
+    cwd: desc.cwd,
     close_cb: function("OnCloseBuf"),
   }
   if has_key(in_desc, "show_err") && in_desc.show_err == true
     job_opt.err_cb = function("OnError")
   endif
   if !(has_key(in_desc, "no_popup") && (in_desc.no_popup == true))
-    ch_desc.winid = popnews.Open(
-      printf($"{ch_desc.short_cmd} {animations[0]}"), {
+    desc.winid = popnews.Open(
+      printf($"{desc.short_cmd}"), {
         no_timeout: true,
         hl: run_hl_normal
       })
   endif
 
-  ch_desc.job = job_start("cmd /C " .. in_desc.cmd, job_opt)
+  desc.job = job_start("cmd /C " .. in_desc.cmd, job_opt)
 
-  g:run_dict[GetJobChannel(ch_desc.job)] = ch_desc
+  g:run_dict[GetJobChannel(desc.job)] = desc
   setbufline(
     out_buffer_nr,
     "$",
-    ["", $"^^^^ {strftime('%T')} / {ch_desc.full_cmd} / in '{ch_desc.cwd}'"]
+    ["", $"^^^^ {strftime('%T')} / {desc.full_cmd} / in '{desc.cwd}'", ""]
   )
 
-  return ch_desc.job
+  return desc.job
 enddef
 
 def PushChistoryStack(chistory_nr: number)
