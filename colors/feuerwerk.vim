@@ -165,9 +165,9 @@ execute "hi cmakeArguments" Fg(green) Bg("Bg") Normal
 
 # Diffs
 
-execute "hi DiffChange" Fg(yellow) Bg(black)
-execute "hi DiffText" Fg(blue) Bg(black)
-execute "hi DiffDelete" Fg(black) Bg(red)
+execute "hi DiffChange" Fg(blue) Bg(black)
+execute "hi DiffText" Fg(yellow) Bg(bg)
+execute "hi DiffDelete" Fg(red) Bg(red)
 execute "hi DiffAdd" Fg(blue_lt) Bg(black)
 
 # Signify

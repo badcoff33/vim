@@ -23,7 +23,7 @@ set completeopt=menuone
 set dictionary=spell
 set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
 set expandtab
-set foldcolumn=0
+set foldcolumn=1
 set foldmethod=indent
 set foldnestmax=1
 set hidden
@@ -76,7 +76,7 @@ set tagcase=match
 set termguicolors
 set undodir=$TEMP
 set undofile
-set updatetime=500
+set updatetime=2000
 set virtualedit=onemore,block   " makes selecting text more consistent
 set visualbell
 set whichwrap+=<,>,[,]          " specify keys that move to next/previous line
@@ -108,8 +108,8 @@ xnoremap <A-Left> 0
 xnoremap <A-Right> $
 
 " Context aware movement
-nnoremap <expr> <A-Down> (&diff) ? "]czt" : (&ft == "help") ? ":call search('[\\*}\|][a-zA-Z-_:]\\+[\\*\\|]', 'W')<CR>" :  ":call feedkeys(']]')<CR>"
-nnoremap <expr> <A-Up>   (&diff) ? "[czt" : (&ft == "help") ? ":call search('[\\*}\|][a-zA-Z-_:]\\+[\\*\\|]', 'bW')<CR>" : ":call feedkeys('[[')<CR>"
+nnoremap <expr> <A-Down> (&diff) ? "]czz" : (&ft == "help") ? ":call search('[\\*}\|][a-zA-Z-_:]\\+[\\*\\|]', 'W')<CR>" :  ":call feedkeys(']]')<CR>"
+nnoremap <expr> <A-Up>   (&diff) ? "[czz" : (&ft == "help") ? ":call search('[\\*}\|][a-zA-Z-_:]\\+[\\*\\|]', 'bW')<CR>" : ":call feedkeys('[[')<CR>"
 
 " By every next or prev match, expand fold
 nnoremap n nzv
@@ -137,6 +137,8 @@ vnoremap <C-k> :move '<-2<CR>==gv=gv
 " Surfing the quickfix matches
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
+" Overrule default behaviour of Ctrl-W_q (close Vim if last window)
+nnoremap <C-w>q :botright copen<CR>
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -179,14 +181,16 @@ vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left><Left><Left>
 
 " Check indents
 nnoremap <Leader><bar> <Cmd>set invcursorcolumn<CR>
+
 " Quick access on current buffer's directory
 nnoremap <Leader>e :edit <C-r>=DirName("%:h")<CR>
 cnoremap <expr> <C-r>. DirName("%:h")
+nnoremap <expr> <Leader>d ":edit " .. DirName("%:h") .. "<CR>"
+nnoremap <expr> <Leader>D ":Open " .. DirName('%:h') .. "<CR>"
 
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
-nnoremap <expr> <Leader>VD ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
-nnoremap <Leader>VV :vimgrep /<C-R><C-w>/ %
+nnoremap <expr> <Leader>* ':vimgrep /' .. expand("<cword>") .. '/ ' .. DirName("%:h") .. LsFilter(&ft)
 
 " yank/paste clipoard: b/c most laptop keyboards suck
 vnoremap <Leader>y "*y
@@ -209,9 +213,10 @@ tnoremap <S-Down>  <C-w><Down>
 tnoremap <S-Left>  <C-w><Left>
 tnoremap <S-Right> <C-w><Right>
 
-nnoremap <S-CR> :
-inoremap <S-CR> <Esc>:
-tnoremap <S-CR> <C-W>:
+" Bsic terminal mappings
+tnoremap <Esc>     <C-w>N
+tnoremap <C-Tab>   <C-w>gt
+tnoremap <C-S-Tab>   <C-w>gT
 
 command! -nargs=0 IgnoreCase    :set   ignorecase nosmartcase
 command! -nargs=0 CaseSensetive :set noignorecase nosmartcase

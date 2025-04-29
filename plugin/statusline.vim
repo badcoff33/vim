@@ -37,6 +37,14 @@ def g:GetMode(): string
   return m
 enddef
 
+def IsOption(opt: string): bool
+  if getbufvar("%", "&" .. opt) == true
+   return true
+  else
+   return false
+  endif
+enddef
+
 def g:GetScopeforSL(): string
   var scope: string
   if exists('g:scope_in_statusline') && (g:scope_in_statusline == true)
@@ -54,15 +62,16 @@ enddef
 def g:BuildStatusline(): string
     var sl: string
     if exists("g:statusline_winid") && (win_getid() == g:statusline_winid)
-        sl =  " %{GetMode()} "
+        sl = sl .. "%1* %{GetMode()} %0*"
     endif
     sl = sl .. (len(v:errors) > 0 ? ",!" : "")
-    sl = sl .. " %{get(b:\, \"vcs_branch_name\"\, \"\")}"
+    sl = sl .. " %{get(b:\, \"vcs_status\"\, \"\")}"
+    sl = sl .. "%{get(b:\, \"vcs_branch_name\"\, \"\")}"
     if v:versionlong >= 9001307
         sl = sl .. "%="
     endif
     sl = sl .. " %{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
-    sl = sl .. " %{g:GetScopeforSL()}"
+    sl = sl .. " %{GetScopeforSL()}"
     sl = sl .. " %=%Y%R%W%M"
     sl = sl .. " %l:%c "
     return sl

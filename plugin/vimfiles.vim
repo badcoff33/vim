@@ -28,4 +28,8 @@ nnoremap <silent> <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
 nnoremap <silent> <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
 nnoremap <silent> <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>
 
+# Show mappings
+nnoremap <Leader>vm :nmap <buffer> <C-v><LocalLeader><CR>
+nnoremap <expr> <Leader>vM ":nmap " .. (g:mapleader == " " ? "<C-v><Space<C-v>>" : g:mapleader)
+
 defcompile

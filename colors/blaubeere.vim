@@ -11,60 +11,64 @@ hi clear
 set background=light
 g:colors_name = "blaubeere"
 
-var foreground = "#787072"
-var Background = "#FFFFFF"
-var Black = "#000000"
-var White = "#FFFFFF"
-var ShadowBg = "#F6F6F6"
-var ShadowFg = "#C0C0C0"
-var Highlight = "#FFE070"
+const Foreground = "#303030"
+const Background = "#FFFFFF"
+const Black = "#000000"
+const White = "#FFFFFF"
+const ShadowBg = "#F6F6F6"
+const ShadowFg = "#C0C0C0"
+const Highlight = "#FFE070"
 
-var BlueBg = "#D8EFFF"
-var BlueLt = "#C4CFFB"
-var Blue =   "#6581BF"
-var BlueDk = "#4341AF"
+const BlueBg = "#D8EFFF"
+const BlueLt = "#C4CFFB"
+const Blue =   "#6581BF"
+const BlueDk = "#4341AF"
 
-var RedBg = "#FBE9EB"
-var RedLt = "#FFCACC"
-var Red = "#FB8A9C"
-var RedDk = "#BC6D76"
+const RedBg = "#FBE9EB"
+const RedLt = "#FFCACC"
+const Red = "#FB8A9C"
+const RedDk = "#BC6D76"
 
-var GreenBg = "#D8F0CF"
-var GreenLt = "#C3EBCE"
-var Green = "#7FCA7C"
-var GreenDk = "#45984F"
+const GreenBg = "#D8F0CF"
+const GreenLt = "#C3EBCE"
+const Green = "#7FCA7C"
+const GreenDk = "#45984F"
 
-var BrownBg = "#EFEFDF"
-var BrownLt = "#B3755C"
-var Brown =   "#A3844C"
-var BrownDk = "#7E7F68"
+const BrownBg = "#EFEFDF"
+const BrownLt = "#B3755C"
+const Brown =   "#A3844C"
+const BrownDk = "#7E7F68"
 
-var Gray0 = "#2e3436"
-var Gray1 = "#555753"
-var Gray2 = "#888885"
-var Gray3 = "#bababa"
-var Gray4 = "#d3d7d3"
-var Gray5 = "#eeeeec"
+const Gray0 = "#2e3436"
+const Gray1 = "#555753"
+const Gray2 = "#888885"
+const Gray3 = "#bababa"
+const Gray4 = "#d3d7d3"
+const Gray5 = "#eeeeec"
 
-def H(n: string, d: dict<string>)
-  var fg = has_key(d, "fg") ? d.fg : "fg"
-  var bg = has_key(d, "bg") ? d.bg : "bg"
-  var gui = has_key(d, "gui") ? d.gui : "NONE"
-  var guisp = has_key(d, "guisp") ? d.gui : "NONE"
-  var cterm = has_key(d, "cterm") ? d.cterm : "NONE"
-  execute "highlight" n $"guifg={fg}" $"guibg={bg}" $"gui={gui}" $"cterm={cterm}" $"guisp={guisp}"
+const None = "NONE"
+const Bold = "bold"
+const Underline = "underline"
+const BoldUnderline = "bold,underline"
+
+def H(name: string, d: dict<string>)
+  var fg =    has_key(d, "fg")    ? "guifg=" .. d.fg : ""
+  var bg =    has_key(d, "bg")    ? "guibg=" .. d.bg : ""
+  var gui =   has_key(d, "gui")   ? "gui=" .. d.gui : ""
+  var guisp = has_key(d, "guisp") ? "guisp=" .. d.gui : ""
+  var cterm = has_key(d, "cterm") ? "cterm=" .. d.cterm : ""
+  execute $"highlight {name} {fg} {bg} {gui} {cterm} {guisp}"
 enddef
 
 # Basics
 H("Bold", {gui: "bold"})
-H("CurSearch", {fg: BlueDk, bg: Gray5})
+H("CurSearch", {fg: Black, bg: Gray3, gui: BoldUnderline})
 H("Conceal", {fg: ShadowFg, bg: ShadowBg})
-H("CurSearch", {fg: BlueDk, bg: BlueBg })
 H("Cursor", {fg: White, bg: Black })
 H("CursorLine", {bg: ShadowBg})
-H("CursorLineNr", {fg: Gray2, bg: Gray5, gui: "bold"})
+H("CursorLineNr", {fg: Gray2, bg: Gray5, gui: Bold})
 H("Folded", {fg: Blue, bg: Background })
-H("InSearch", {fg: White, bg: Gray0 })
+H("IncSearch", {fg: White, bg: Gray0, gui: None })
 H("italic", {gui: "italic"})
 H("Label", {fg: Black, gui: "bold"})
 H("LineNrAbove", {fg: Red, gui: "bold"})
@@ -72,22 +76,22 @@ H("LineNr", {fg: Gray2, gui: "bold"})
 H("LineNrBelow", {fg: Blue, gui: "bold"})
 H("MatchParen", {fg: GreenDk, bg: Background, gui: "underline"})
 H("NonText", {fg: Gray3, bg: Background})
-H("Normal", {fg: foreground, bg: Background })
+H("Normal", {fg: Foreground, bg: Background })
 H("Operator", {fg: GreenDk })
 H("Pmenu", {fg: Black, bg: Gray4})
 H("PmenuSbar", {fg: Gray4, bg: Gray2})
 H("PmenuSel", {fg: White, bg: Black })
 H("PmenuMatchSel", {fg: Green, bg: Black, gui: "bold"})
 H("PmenuThumb", {fg: GreenDk, bg: Gray1})
-H("Search", {fg: Black, bg: BrownBg })
-H("StatusLine", {fg: BlueLt, bg: Blue })
-H("StatusLineNC", {fg: White, bg: Gray3 })
+H("Search", {fg: Black, bg: Gray4 })
+H("StatusLine", {fg: BlueLt, bg: Blue, gui: "NONE" })
+H("StatusLineNC", {fg: White, bg: Gray3, gui: "NONE"})
 H("StatusLineTerm", {fg: White, bg: Blue })
-H("TabLine", {fg: Gray2, bg: ShadowBg })
-H("TabLineFill", {fg: Black, bg: ShadowBg })
+H("TabLine", {fg: Gray2, bg: ShadowBg, gui: "NONE" })
+H("TabLineFill", {fg: Black, bg: ShadowBg, gui: "NONE"})
 H("TabLineSel", {fg: BlueBg, bg: BlueDk, gui: "bold"})
-H("Terminal", {fg: foreground, bg: Background})
-H("User1", {fg: White, bg: Gray4 })
+H("Terminal", {fg: Gray5, bg: Gray0})
+H("User1", {fg: White, bg: Blue })
 H("User2", {fg: BlueLt, bg: BlueDk, gui: "italic"})
 H("VertSplit", {fg: Gray4, bg: Gray5 })
 H("Visual", {fg: White, bg: GreenDk})
@@ -126,7 +130,7 @@ H("Structure", {fg: Red })
 H("Title", {fg: BlueDk, gui: "bold"})
 H("Todo", {fg: Red, bg: Background, gui: "bold,underline"})
 H("Type", {fg: RedDk })
-H("WarningMsg", {fg: White, bg: GreenDk})
+H("WarningMsg", {fg: GreenDk, bg: GreenBg})
 H("qfFileName", {fg: BlueDk})
 H("qfLineNr", {fg: Red})
 
@@ -152,8 +156,8 @@ H("htmlitalic", {fg: ShadowFg, gui: "italic"})
 
 # Filetype Markdown
 
-H("markdownCode", {fg: Gray2, bg: Gray5})
-H("markdownCodeBlock", {fg: Gray2, gui: "italic"})
+H("markdownCode", {fg: BlueDk, bg: ShadowBg})
+H("markdownCodeBlock", {fg: BlueDk, gui: None})
 
 # Filetype ReStructuredTExt
 
@@ -163,7 +167,7 @@ H("rstStrongEmphasis", {fg: Gray2, gui: "bold"})
 # Diffs
 
 H("DiffChange", {fg: Black, bg: BlueBg})
-H("DiffText", {fg: White, bg: Black})
+H("DiffText", {fg: White, bg: Blue})
 H("DiffDelete", {fg: RedBg, bg: RedBg})
 H("DiffAdd", {fg: Black, bg: GreenBg})
 

@@ -57,27 +57,40 @@ def g:ShowUnsavedChanges()
   diffthis
 enddef
 
-def g:RunTerminal()
-  var term_tbufnrs = term_list()
-  var tbufnr = 0
+def g:OpenTerminal()
+  var term_bufnr: number
+  var not_found: bool
+
+  not_found = true
+  term_bufnr = -1
+
   for b in term_list()
     if term_getstatus(b) =~ '.*running.*'
-      tbufnr = b
+      term_bufnr = b
       break
     endif
   endfor
-  if tbufnr != 0
-    var twinnr = bufwinnr(tbufnr)
-    if twinnr == -1
+
+  if term_bufnr == -1
+
+    echomsg 'No terminal running -- Open one with :terminal'
+
+  else
+
+    for t in range(1, tabpagenr("$"))
+      if match(tabpagebuflist(t), string(term_bufnr)) > -1
+        execute(":" .. string(t) .. "tabnext")
+        execute(":" .. string(bufwinnr(term_bufnr)) .. "wincmd w")
+        feedkeys((mode() == "n") ? "i" : "")
+        not_found = false
+        break
+      endif
+    endfor
+    if not_found == true
       wincmd s
       wincmd J
-      execute "buffer" tbufnr
-    else
-      execute ":" .. string(twinnr) .. "wincmd w"
+      execute "buffer" term_bufnr
     endif
-    feedkeys((mode() == "n") ? "i" : "")
-  else
-    echomsg 'No terminal running -- Open terminal with command :terminal'
   endif
 enddef
 
@@ -103,13 +116,12 @@ def ExploreHere()
   endif
 enddef
 
-augroup GroupUtils
+augroup GroupTerminal
   autocmd!
   autocmd TerminalOpen * setlocal scrolloff=0 signcolumn=no nocursorline foldcolumn=0
   autocmd TerminalOpen * setlocal nonumber norelativenumber
-  # autocmd WinLeave cmd.exe* wincmd c
   autocmd WinLeave     * {
-    if &buftype == 'terminal'
+    if &buftype == 'terminal' && winnr("$") > 1
       wincmd c
     endif
   }
@@ -119,12 +131,11 @@ augroup END " }}}
 command -nargs=0 ShowColorUnderCursor call ColorizeCodeUnderCursor()
 command -nargs=0 ExploreHere call ExploreHere()
 
-nnoremap <F5> :call RunTerminal()<CR>
+nnoremap <F5> :call OpenTerminal()<CR>
 
-nnoremap <Leader>/ :call ForwardSlashToBackward()<CR>
-nnoremap <Leader>\ :call BackwardSlashToForward()<CR>
-nnoremap <Leader>q :call quickfix#ToggleQuickfix()<CR>
-nnoremap <Leader>d <Cmd>ExploreHere<CR>
+nnoremap <Leader>x <Cmd>ExploreHere<CR>
+nnoremap <Leader>/ <Cmd>ForwardSlashToBackward()<CR>
+nnoremap <Leader>\ <Cmd>BackwardSlashToForward()<CR>
 
 command! -nargs=0 ShowUnsavedChanges g:ShowUnsavedChanges()
 
