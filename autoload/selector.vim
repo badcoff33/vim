@@ -49,7 +49,7 @@ export def Buffers()
       return {bufnr: v.bufnr, text: v.name ?? $'[{v.bufnr}: No Name]', time: v.lastused}
     })
     return sort(unsorted, (a, b) => {
-      return (a.time == b.time) ? 0 : (a.time > b.time) ? -1 : 0
+      return (a.time == b.time) ? 0 : (a.time > b.time) ? -1 : 1
     })
   enddef
 
@@ -86,15 +86,6 @@ export def Files()
       exe $":e {res.text}"
     endif
   })
-enddef
-
-# filter and open buffers
-export def RecentBuffers()
-  core.OpenMenu("Recent buffers",
-    v:oldfiles,
-    (res, key) => {
-      exe $":edit {res.text}"
-    })
 enddef
 
 defcompile
