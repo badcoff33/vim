@@ -1,16 +1,22 @@
+"    ____     ___ __    __      _____  ____  _        ___
+"   |    \   /  _]  |__|  |    |     ||    || |      /  _]
+"   |  _  | /  [_|  |  |  |    |   __| |  | | |     /  [_
+"   |  |  ||    _]  |  |  |    |  |_   |  | | |___ |    _]
+"   |  |  ||   [_|  `  '  |    |   _]  |  | |     ||   [_
+"   |  |  ||     |\      /     |  |    |  | |     ||     |
+"   |__|__||_____| \_/\_/      |__|   |____||_____||_____|
+
 " Options for the Ctags executable
 let g:ctags_options = [
       \ "-R",
       \ "--fields=+n",
-      \ "source/common",
-      \ "source/consistency",
-      \ "source/safetyLib",
-      \ "source/eval_board_support"
+      \ "Sources/main",
+      \ "Sources/lib",
       \ ]
 
 " for plugin/rg.vim
-let g:rg_paths = [ "source" ]
-let g:rg_excludes = [ "tools", ".settings"]
+let g:rg_paths = [ "Sources" ]
+let g:rg_excludes = [ "tools", "build"]
 
 " Look-up path for :find, 'gf' and friends
 set path=source/**,.,,
