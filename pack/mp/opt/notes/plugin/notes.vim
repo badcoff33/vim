@@ -1,5 +1,6 @@
 let g:notes_files = []
 let g:notes_file_idx = 0
+let g:notes_diary_file = get(g:, 'notes_diary_file', expand("~/diary"))
 let g:notes_home_dir = get(g:, 'notes_home_dir', expand("~/.text"))
 
 function! s:NotesBufferSettings()
@@ -104,13 +105,21 @@ function! NotesFind(string)
   silent execute 'vimgrep' a:string g:notes_home_dir .. '/*.txt'
 endfunction
 
+function! NotesDiary(...)
+  execute $"drop {g:notes_diary_file}"
+  normal Go
+  " https://docs.oracle.com/cd/E23389_01/doc.11116/e21038/timeformat.htm
+  call setline("$", strftime("%b %e, %Y") .. " ")
+endfunction
+
 function! NotesCmdDispatch(params)
   let [cmd; rest] = split(a:params, " ")
   let g:notes_cmd_to_func = #{
         \ todo: funcref('NotesToDo'),
         \ list: funcref('NotesList'),
         \ today: funcref('NotesToday'),
-        \ find: funcref('NotesFind')
+        \ find: funcref('NotesFind'),
+        \ diary: funcref('NotesDiary')
         \ }
   call g:notes_cmd_to_func[cmd](join(rest, " "))
 endfunction
