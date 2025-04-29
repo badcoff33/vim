@@ -10,6 +10,22 @@ var pattern = {
   '*': '\(M\|R\|A\)\s\(.*\)'
 }
 
+export def GetRootDir(dir: string): string
+  var main_dir: string
+
+  if !isdirectory(dir)
+    return ""
+  endif
+
+  main_dir = finddir(".hg", dir .. ";", 1)
+  if main_dir == ""
+    return ""
+  else
+    return fnamemodify(main_dir, ":h")
+  endif
+
+enddef
+
 def GetChangedFiles(cmd: string): list<string>
   var file: string
   var pat: string
@@ -39,21 +55,50 @@ export def CompleteHg(arg_lead: string, cmd_line: string, cur_pos: number): list
   return candidates
 enddef
 
-export def ShowDiff(file = "")
-  # hg diff -c -1 file/with/slashes
-  execute "tabedit" (file == "") ? bufname("%") : file
+export def Vimdiff(file = "")
+  var rev: string
+  var bname: string
+  var head: string
+  var tail: string
+  var save_dir: string
+
+  if file == ""
+    bname = bufname("%")
+    head = fnamemodify(bufname("%"), ":p:h")
+    tail = fnamemodify(bufname("%"), ":t")
+  else
+    bname = file
+    head = fnamemodify(file, ":p:h")
+    tail = fnamemodify(file, ":t")
+  endif
+
+  save_dir = getcwd()
+
   inputsave()
-  var rev = input("Revision (tip, -[1...]: ", "tip")
+  rev = input("Revision (tip, -[1...]: ", "tip")
   inputrestore()
+  if rev == ""
+    return
+  endif
+
+  execute $"silent tabedit {bname}"
   diffthis
+
   vert new
   setlocal buftype=nofile nobuflisted
-  silent execute $"read ++edit !hg cat -r {rev} {bufname('#')}"
+  try
+    execute $"silent noautocmd cd {head}"
+    silent execute $"read ++edit !hg cat -r {rev} {bufname('#')}"
+  catch
+    echo $"error in git show {rev}:./{tail}"
+  finally
+    execute $"silent noautocmd cd {save_dir}"
+  endtry
+
   silent normal gg0d_
   diffthis
+
   nnoremap <buffer> c :bwipeout<CR>:tabclose<CR>
-  nnoremap <buffer> <C-j> ]c
-  nnoremap <buffer> <C-k> [c
 enddef
 
 export def Execute(hg_command: string)

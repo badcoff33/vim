@@ -1,9 +1,9 @@
 vim9script
 
-import autoload 'vcs_git.vim' as git
-import autoload 'vcs_hg.vim' as hg
+import autoload 'vcs/git.vim' as git
+import autoload 'vcs/hg.vim' as hg
 
-g:git_working_dir = get(g:, "git_working_dir", ".")
+g:vcs_type = ""
 
 command! -nargs=* -complete=customlist,hg.CompleteHg Hg {
   hg.Execute(<q-args>)
@@ -17,31 +17,41 @@ command! -nargs=* -complete=customlist,git.CompleteGit Git {
   git.Execute(<q-args>)
 }
 
-command! -nargs=0 GitShowBranch {
-  git.BranchInfo()
+command! -nargs=? -complete=file VcsFileInfo {
+  if g:vcs_type == "git"
+    git.FileInfo(<q-args>)
+  endif
 }
 
-command! -nargs=0 GitShowStatus {
-  git.DirInfo()
+command! -nargs=? -complete=file VcsVimdiff {
+  if g:vcs_type == "git"
+    git.Vimdiff()
+  elseif g:vcs_type == "hg"
+    hg.Vimdiff()
+  endif
 }
 
-command! -nargs=? -complete=dir GitCd {
-  git.ChangeDir(<q-args>)
-}
-
-command! -nargs=0 GitGui {
-  git.RunGui()
-}
-
-command! -nargs=? -complete=file GitDiff {
-  git.ShowDiff(<q-args>)
-}
+def DetectVcsType()
+  if git.GetRootDir(getcwd()) != ""
+    g:vcs_type = "git"
+  elseif hg.GetRootDir(getcwd()) != ""
+    g:vcs_type = "hg"
+  else
+    g:vcs_type = ""
+  endif
+enddef
 
 augroup GroupVcsGitP
   autocmd!
-  autocmd BufEnter,BufWinEnter *.asm,*.bat,*.c,*.h,CMakeLists.txt,*.cmake git.SetLocalBranchVar()
-  autocmd FocusGained * git.SetLocalBranchVar()
+  autocmd BufEnter,BufWinEnter *.asm,*.bat,*.c,*.h,CMakeLists.txt,*.cmake git.SetLocalVar()
+  autocmd WinEnter *.asm,*.bat,*.c,*.h,CMakeLists.txt,*.cmake git.SetLocalVar()
+  autocmd BufReadPost,BufWritePost *.asm,*.bat,*.c,*.h,CMakeLists.txt,*.cmake git.SetLocalVar()
+  autocmd FocusGained * git.SetLocalVar()
+  autocmd DirChanged * vim9 DetectVcsType()
 augroup END
+
+cabbrev <expr> G (getcmdline() =~# "^G$") ? "Git" : "G"
+cabbrev <expr> H (getcmdline() =~# "^H$") ? "Hg" : "H"
 
 # Uncomment when testing
 defcompile
