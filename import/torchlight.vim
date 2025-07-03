@@ -26,7 +26,7 @@ def CreateProps()
 enddef
 
 # Run as autocommand after entering buffer
-export def TorchlightUpdate()
+export def Update()
   var qf_items = getqflist({ "nr": "$", "all": 0 }).items
 
   CreateProps()
@@ -37,7 +37,7 @@ export def TorchlightUpdate()
       prop_add(item.lnum, 0, {
         bufnr: item.bufnr,
         type: "text_prop_warning",
-        text: "> " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
+        text: "!! " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
         text_align: 'below',
         text_padding_left: 0
       })
@@ -46,7 +46,7 @@ export def TorchlightUpdate()
       prop_add(item.lnum, 0, {
         bufnr: item.bufnr,
         type: "text_prop_error",
-        text: "> " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
+        text: ">> " .. substitute(item.text, "\\s\\{2,\\}", " ", "g"),
         text_align: 'below',
         text_padding_left: 0
       })
@@ -62,8 +62,6 @@ export def TorchlightUpdate()
     endif
   endfor
 enddef
-
-command! -nargs=0 TorchlightClear Torchlight.ClearAll()
 
 # uncomment during dev
 defcompile

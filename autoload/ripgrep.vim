@@ -1,12 +1,6 @@
 vim9script
 # File plugin for C
 #
-# Description: Workbench contain things to ease working in projects. is a project
-#
-# - Automaticalls update Ctags files after a buffer write.
-# - Run Ripgrep
-# - Run Make
-#
 # Maintainer: markus prepens (markus dot prepens at gmail dot com)
 
 import "run.vim"
@@ -22,45 +16,46 @@ var grep_glob_patterns = {
   cmake:  ['*.cmake', 'CMakeLists.txt']
 }
 
-def GrepGlobSwitchExclude(anti_pattern: string): string
-  return "--exclude-dir=" .. anti_pattern
-enddef
-
-def GrepGlobSwitch(pattern: string): string
-    return "--include=" .. pattern
-enddef
-
-def GrepIncludes(): string
+def Includes(): string
+  var AddSwitch = (str) => (has("unix") ? "-g " : "--iglob ") .. str .. " "
   var include_string: string
 
   for e in grep_glob_patterns[&ft]
-    include_string = include_string .. GrepGlobSwitch(e) .. " "
+    include_string ..= AddSwitch(e)
   endfor
+
+  if include_string == ""
+    include_string = AddSwitch("*")
+  endif
 
   return include_string
 enddef
 
-def GrepExcludes(): string
+def Excludes(): string
+  var AddSwitch = (str) => (has("unix") ? "--glob !" : "--iglob !") .. str .. " "
   var exclude_string: string
 
-  for e in g:cfg.grep.exclude
-    exclude_string = exclude_string .. GrepGlobSwitchExclude(e) .. " "
+  for e in g:cfg.ripgrep.exclude
+    exclude_string ..= AddSwitch(e)
   endfor
 
   return exclude_string
 enddef
 
 export def RunCompiledCmdLine(pattern: string)
-  var cmd_line = join([
-    "grep -Hnr",
-    GrepExcludes(),
-    GrepIncludes(),
-    pattern,
-    utils.ToString(g:cfg.src_paths)],
-    " ")
+
+  var cmd_line: string
+
+  config.Update()
+
   run.RunStart({
-    cmd: cmd_line,
-    regexp: "%f:%l:%",
+    cmd: join([
+      $'rg -u --vimgrep {(&ignorecase == true) ? "-i" : ""}',
+      Excludes(),
+      Includes(),
+      pattern,
+      utils.ToString(g:cfg.src_paths)], " "),
+    regexp: "%f:%l:%c:%m",
     no_popup: true
   })
 enddef
@@ -69,7 +64,7 @@ var last_pattern: string
 var last_options: string
 var last_paths: string
 
-export def GrepPatternInput()
+export def PatternInput()
   var pattern: string
   var options: string
   var paths: string
@@ -78,13 +73,13 @@ export def GrepPatternInput()
 
   if pattern == ""
 
-    last_options = GrepExcludes() .. " " .. GrepIncludes()
+    last_options = Excludes() .. " " .. Includes()
     last_paths = utils.ToString(g:cfg.src_paths)
 
   else
 
     if last_options == ""
-      last_options = GrepExcludes() .. " " .. GrepIncludes()
+      last_options = Excludes() .. " " .. Includes()
     endif
     if last_paths == ""
       last_paths = utils.ToString(g:cfg.src_paths)
@@ -94,8 +89,12 @@ export def GrepPatternInput()
     paths = input("Grep path: ", last_paths, "dir")
 
     run.RunStart({
-      cmd: join(["grep -Hnr", options, pattern, paths], " "),
-      regexp: &grepformat,
+      cmd: join([
+        $'rg -u --vimgrep {(&ignorecase == true) ? "-i" : ""}',
+        options,
+        pattern,
+        paths], " "),
+      regexp: "%f:%l:%c:%m",
       no_popup: true
     })
 
@@ -107,4 +106,5 @@ export def GrepPatternInput()
 enddef
 
 defcompile
+
 

@@ -20,14 +20,18 @@ command! -nargs=* -complete=customlist,git.CompleteGit Git {
 command! -nargs=? -complete=file VcsFileInfo {
   if g:vcs_type == "git"
     git.FileInfo(<q-args>)
+  else
+    echo "-- cd into a Git controlled diretory --"
   endif
 }
 
 command! -nargs=? -complete=file VcsVimdiff {
   if g:vcs_type == "git"
-    git.Vimdiff()
+    git.Vimdiff('<args>')
   elseif g:vcs_type == "hg"
-    hg.Vimdiff()
+    hg.Vimdiff('<args>')
+  else
+    echo "-- cd into a VCS controlled diretory --"
   endif
 }
 

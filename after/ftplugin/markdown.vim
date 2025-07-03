@@ -11,7 +11,7 @@ setlocal foldmethod=expr
 setlocal wrap linebreak
 
 if has("conceal")
-  setlocal conceallevel=1 listchars+=conceal:$ concealcursor=
+  setlocal conceallevel=2 listchars+=conceal:$ concealcursor=nc
 endif
 
 " Toggle automatic code formatting
@@ -52,7 +52,8 @@ if match(&cpoptions, '>') < 0
   iabbrev <buffer> xlink [TEXT](LINK)<C-o>B<C-o>2w
   iabbrev <buffer> xdate <C-r>=strftime("%Y-%m-%d")<CR>
   iabbrev <buffer> xpy   ``` python<CR><CR>```<Up>
-  iabbrev <buffer> xbox  - [ ]
+  iabbrev <buffer> x+  [+]<Left>
+  iabbrev <buffer> x-  [-]<Left>
   iabbrev <buffer> xsub  <sub><C-o>mc</sub><Esc>`ci
   iabbrev <buffer> xsup  <sup><C-o>mc</sup><Esc>`ci
 endif

@@ -11,40 +11,40 @@ hi clear
 set background=light
 g:colors_name = "blaubeere"
 
-const Foreground = "#303030"
-const Background = "#FFFFFF"
-const Black = "#000000"
-const White = "#FFFFFF"
-const ShadowBg = "#F6F6F6"
-const ShadowFg = "#C0C0C0"
-const Highlight = "#FFE070"
+const foreground = "#303030"
+const background = "#FAFAFA"
+const black      = "#000000"
+const white      = "#FFFFFF"
+const shadow_bg  = "#F0F0F0"
+const shadow_fg  = "#C0C0C0"
+const highlight  = "#FFE070"
 
-const BlueBg = "#D8EFFF"
-const BlueLt = "#C4CFFB"
-const Blue =   "#6581BF"
-const BlueDk = "#4341AF"
+const blue_bg = "#D8EFFF"
+const blue_lt = "#C4CFFB"
+const blue    = "#6581BF"
+const blue_dk = "#4341AF"
 
-const RedBg = "#FBE9EB"
-const RedLt = "#FFCACC"
-const Red = "#FB8A9C"
-const RedDk = "#BC6D76"
+const red_bg = "#FBE9EB"
+const red_lt = "#FFCACC"
+const red    = "#FB8A9C"
+const red_dk = "#BC6D76"
 
-const GreenBg = "#D8F0CF"
-const GreenLt = "#C3EBCE"
-const Green = "#7FCA7C"
-const GreenDk = "#45984F"
+const green_bg = "#D8F0CF"
+const green_lt = "#C3EBCE"
+const green    = "#7FCA7C"
+const green_dk = "#45984F"
 
-const BrownBg = "#EFEFDF"
-const BrownLt = "#B3755C"
-const Brown =   "#A3844C"
-const BrownDk = "#7E7F68"
+const brown_bg = "#EFEFDF"
+const brown_lt = "#B3755C"
+const brown    = "#A3844C"
+const brown_dk = "#7E7F68"
 
-const Gray0 = "#2e3436"
-const Gray1 = "#555753"
-const Gray2 = "#888885"
-const Gray3 = "#bababa"
-const Gray4 = "#d3d7d3"
-const Gray5 = "#eeeeec"
+const gray0 = "#2e3436"
+const gray1 = "#555753"
+const gray2 = "#888885"
+const gray3 = "#bababa"
+const gray4 = "#d3d7d3"
+const gray5 = "#eeeeec"
 
 const None = "NONE"
 const Bold = "bold"
@@ -62,40 +62,40 @@ enddef
 
 # Basics
 H("Bold", {gui: "bold"})
-H("CurSearch", {fg: Black, bg: Gray3, gui: BoldUnderline})
-H("Conceal", {fg: ShadowFg, bg: ShadowBg})
-H("Cursor", {fg: White, bg: Black })
-H("CursorLine", {bg: ShadowBg})
-H("CursorLineNr", {fg: Gray2, bg: Gray5, gui: Bold})
-H("Folded", {fg: Blue, bg: Background })
-H("IncSearch", {fg: White, bg: Gray0, gui: None })
+H("CurSearch", {fg: black, bg: gray3, gui: BoldUnderline})
+H("Conceal", {fg: shadow_fg, bg: shadow_bg})
+H("Cursor", {fg: white, bg: black })
+H("CursorLine", {bg: white})
+H("CursorLineNr", {fg: gray2, bg: gray5, gui: Bold})
+H("Folded", {fg: blue, bg: background })
+H("IncSearch", {fg: white, bg: gray0, gui: None })
 H("italic", {gui: "italic"})
-H("Label", {fg: Black, gui: "bold"})
-H("LineNrAbove", {fg: Red, gui: "bold"})
-H("LineNr", {fg: Gray2, gui: "bold"})
-H("LineNrBelow", {fg: Blue, gui: "bold"})
-H("MatchParen", {fg: GreenDk, bg: Background, gui: "underline"})
-H("NonText", {fg: Gray3, bg: Background})
-H("Normal", {fg: Foreground, bg: Background })
-H("Operator", {fg: GreenDk })
-H("Pmenu", {fg: Black, bg: Gray4})
-H("PmenuSbar", {fg: Gray4, bg: Gray2})
-H("PmenuSel", {fg: White, bg: Black })
-H("PmenuMatchSel", {fg: Green, bg: Black, gui: "bold"})
-H("PmenuThumb", {fg: GreenDk, bg: Gray1})
-H("Search", {fg: Black, bg: Gray4 })
-H("StatusLine", {fg: BlueLt, bg: Blue, gui: "NONE" })
-H("StatusLineNC", {fg: White, bg: Gray3, gui: "NONE"})
-H("StatusLineTerm", {fg: White, bg: Blue })
-H("TabLine", {fg: Gray2, bg: ShadowBg, gui: "NONE" })
-H("TabLineFill", {fg: Black, bg: ShadowBg, gui: "NONE"})
-H("TabLineSel", {fg: BlueBg, bg: BlueDk, gui: "bold"})
-H("Terminal", {fg: Gray5, bg: Gray0})
-H("User1", {fg: White, bg: Blue })
-H("User2", {fg: BlueLt, bg: BlueDk, gui: "italic"})
-H("VertSplit", {fg: Gray4, bg: Gray5 })
-H("Visual", {fg: White, bg: GreenDk})
-H("PopupNotification", {fg: Black, bg: Highlight})
+H("Label", {fg: black, gui: "bold"})
+H("LineNrAbove", {fg: red, gui: "bold"})
+H("LineNr", {fg: gray2, gui: "bold"})
+H("LineNrBelow", {fg: blue, gui: "bold"})
+H("MatchParen", {fg: green_dk, bg: background, gui: "underline"})
+H("NonText", {fg: gray3, bg: background})
+H("Normal", {fg: foreground, bg: background })
+H("Operator", {fg: green_dk })
+H("Pmenu", {fg: black, bg: gray4})
+H("PmenuSbar", {fg: gray4, bg: gray2})
+H("PmenuSel", {fg: white, bg: black })
+H("PmenuMatchSel", {fg: green, bg: black, gui: "bold"})
+H("PmenuThumb", {fg: green_dk, bg: gray1})
+H("Search", {fg: black, bg: gray4 })
+H("StatusLine", {fg: white, bg: blue, gui: "NONE" })
+H("StatusLineNC", {fg: white, bg: gray3, gui: "NONE"})
+H("StatusLineTerm", {fg: white, bg: blue })
+H("TabLine", {fg: gray2, bg: shadow_bg, gui: "NONE" })
+H("TabLineFill", {fg: black, bg: shadow_bg, gui: "NONE"})
+H("TabLineSel", {fg: blue_bg, bg: blue_dk, gui: "bold"})
+H("Terminal", {fg: gray1, bg: gray5})
+H("User1", {fg: blue_lt, bg: blue })
+H("User2", {fg: blue_lt, bg: blue_dk, gui: "italic"})
+H("VertSplit", {fg: gray4, bg: gray5 })
+H("Visual", {fg: white, bg: green_dk})
+H("PopupNotification", {fg: black, bg: highlight})
 
 highlight! link CursorColumn CursorLine
 highlight! link FoldColumn LineNr
@@ -106,75 +106,83 @@ highlight! link qfSeparator Normal
 
 # Code
 
-H("Comment", {fg: BrownDk })
-H("Conditional", {fg: Red })
-H("Constant", {fg: Blue})
-H("Directory", {fg: BlueDk, gui: "underline"})
-H("Error", {fg: RedDk, bg: RedBg })
-H("ErrorMsg", {fg: RedDk, bg: RedBg })
-H("Function", {fg: Blue})
-H("Identifier", {fg: GreenDk })
-H("Ignore", {fg: Gray3, gui: "italic"})
-H("ModeMsg", {fg: Black, bg: BrownBg })
-H("Number", {fg: Blue})
-H("PreCondit", {fg: RedDk, gui: "bold"})
-H("PreProc", {fg: Black, gui: "bold"})
-H("Question", {fg: Gray2, bg: Background})
-H("QuickFixLine", {fg: Blue, bg: Background, gui: "bold"})
-H("Special", {fg: Black})
-H("SpecialKey", {fg: Blue})
-H("Statement", {fg: BlueDk })
-H("StorageClass", {fg: Red})
-H("String", {fg: BrownLt})
-H("Structure", {fg: Red })
-H("Title", {fg: BlueDk, gui: "bold"})
-H("Todo", {fg: Red, bg: Background, gui: "bold,underline"})
-H("Type", {fg: RedDk })
-H("WarningMsg", {fg: GreenDk, bg: GreenBg})
-H("qfFileName", {fg: BlueDk})
-H("qfLineNr", {fg: Red})
+H("Comment", {fg: brown_dk })
+H("Conditional", {fg: red })
+H("Constant", {fg: blue})
+H("Directory", {fg: blue_dk, gui: "underline"})
+H("Error", {fg: red_dk, bg: red_bg })
+H("ErrorMsg", {fg: red_dk, bg: red_bg })
+H("Function", {fg: blue})
+H("Identifier", {fg: green_dk })
+H("Ignore", {fg: gray3, gui: "italic"})
+H("ModeMsg", {fg: black, bg: brown_bg })
+H("Number", {fg: blue})
+H("PreCondit", {fg: red_dk, gui: "bold"})
+H("PreProc", {fg: black, gui: "bold"})
+H("Question", {fg: gray2, bg: background})
+H("QuickFixLine", {fg: blue, bg: background, gui: "bold"})
+H("Special", {fg: black})
+H("SpecialKey", {fg: blue})
+H("Statement", {fg: blue_dk })
+H("StorageClass", {fg: red})
+H("String", {fg: brown_lt})
+H("Structure", {fg: red })
+H("Title", {fg: blue_dk, gui: "bold"})
+H("Todo", {fg: red, bg: background, gui: "bold,underline"})
+H("Type", {fg: red_dk })
+H("WarningMsg", {fg: green_dk, bg: green_bg})
+H("qfFileName", {fg: blue_dk})
+H("qfLineNr", {fg: red})
 
 # Filetype VIM
 
-H("vimCommentTitle", {fg: BrownDk, gui: "bold"})
-H("vimHiKeyList", {fg: Blue})
+H("vimCommentTitle", {fg: brown_dk, gui: "bold"})
+H("vimHiKeyList", {fg: blue})
 
 # Filetype C
 
-H("CppOut", {bg: Gray4 })
-H("CppOutIf", {fg: Gray3, gui: "italic"})
-H("CppOutIf2", {fg: Gray4, gui: "italic"})
-H("Paren", {fg: Gray2})
-H("Block", {fg: Gray2})
+H("CppOut", {bg: gray4 })
+H("CppOutIf", {fg: gray3, gui: "italic"})
+H("CppOutIf2", {fg: gray4, gui: "italic"})
+H("Paren", {fg: gray2})
+H("Block", {fg: gray2})
 
 # Filetype HTML
 
-H("htmlH1", {fg: BlueDk, gui: "bold"})
-H("htmlH2", {fg: Blue, gui: "bold"})
-H("htmlH3", {fg: Blue })
-H("htmlitalic", {fg: ShadowFg, gui: "italic"})
+H("htmlH1", {fg: blue_dk, gui: "bold"})
+H("htmlH2", {fg: blue, gui: "bold"})
+H("htmlH3", {fg: blue })
+H("htmlitalic", {fg: shadow_fg, gui: "italic"})
 
 # Filetype Markdown
 
-H("markdownCode", {fg: BlueDk, bg: ShadowBg})
-H("markdownCodeBlock", {fg: BlueDk, gui: None})
+H("markdownCode", {fg: blue_dk, bg: shadow_bg})
+H("markdownCodeBlock", {fg: blue_dk, gui: None})
 
 # Filetype ReStructuredTExt
 
-H("rstEmphasis", {fg: Gray2})
-H("rstStrongEmphasis", {fg: Gray2, gui: "bold"})
+H("rstEmphasis", {fg: gray2})
+H("rstStrongEmphasis", {fg: gray2, gui: "bold"})
 
-# Diffs
+# Vim Diff
 
-H("DiffChange", {fg: Black, bg: BlueBg})
-H("DiffText", {fg: White, bg: Blue})
-H("DiffDelete", {fg: RedBg, bg: RedBg})
-H("DiffAdd", {fg: Black, bg: GreenBg})
+H("DiffChange", {fg: blue_dk, bg: blue_bg})
+H("DiffText", {fg: blue_dk, bg: blue_lt, gui: "bold"})
+H("DiffDelete", {fg: red_dk, bg: red_bg, gui: "NONE"})
+H("DiffAdd", {fg: green_dk, bg: green_bg})
 
-# Signify
+# Filetype diff
 
-H("SignifySignAdd", {fg: Green})
-H("SignifySignDelete", {fg: Red})
-H("SignifySignDeleteFirstLine", {fg: Red})
-H("SignifySignChange", {fg: Blue})
-H("SignifySignChangeDelete", {fg: Blue})
+H("diffFile", {fg: blue_dk, bg: blue_lt, gui: "bold"})
+
+highlight! link diffRemoved DiffDelete
+highlight! link diffAdded DiffAdd
+highlight! link diffChanged DiffChange
+
+# package Signify
+
+H("SignifySignAdd", {fg: green})
+H("SignifySignDelete", {fg: red})
+H("SignifySignDeleteFirstLine", {fg: red})
+H("SignifySignChange", {fg: blue})
+H("SignifySignChangeDelete", {fg: blue})

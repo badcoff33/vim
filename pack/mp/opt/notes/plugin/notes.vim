@@ -107,6 +107,8 @@ endfunction
 
 function! NotesDiary(...)
   execute $"drop {g:notes_diary_file}"
+  language time en_GB
+  setfiletype diary
   normal Go
   " https://docs.oracle.com/cd/E23389_01/doc.11116/e21038/timeformat.htm
   call setline("$", strftime("%b %e, %Y") .. " ")
@@ -124,7 +126,8 @@ function! NotesCmdDispatch(params)
   call g:notes_cmd_to_func[cmd](join(rest, " "))
 endfunction
 
-command! -complete=customlist,CustomCompleteNotes -nargs=1 Notes call NotesCmdDispatch(<q-args>)
-function! CustomCompleteNotes(ArgLead, CmdLine, CursorPos)
-  return filter(['todo', 'today', 'list', 'find'], {idx, val -> val =~? a:ArgLead})
+function! CustomCompleteNotes(arg_lead, cmd_line, position)
+  return filter(['todo', 'today', 'list', 'find', 'diary'], {idx, val -> val =~? "^" .. a:arg_lead})
 endfunction
+
+command! -complete=customlist,CustomCompleteNotes -nargs=1 Notes call NotesCmdDispatch(<q-args>)

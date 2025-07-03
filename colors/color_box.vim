@@ -10,7 +10,7 @@ endif
 hi clear
 set background=light
 
-let g:colors_name = "color_box"
+g:colors_name = "color_box"
 
 var black     = "#000000"
 var white     = "#FFFFFF"

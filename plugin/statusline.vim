@@ -17,11 +17,11 @@ g:mode_translation = {
 }
 def GetSearchMode(): string
   if &ignorecase && !&smartcase
-    return "/IC"
+    return "/ignore"
   elseif !&ignorecase && !&smartcase
-    return "/CS"
+    return "/case"
   elseif &ignorecase && &smartcase
-    return "/SC"
+    return "/smart"
   endif
   return ""
 enddef
@@ -62,18 +62,16 @@ enddef
 def g:BuildStatusline(): string
     var sl: string
     if exists("g:statusline_winid") && (win_getid() == g:statusline_winid)
-        sl = sl .. "%1* %{GetMode()} %0*"
+        sl = sl .. "%1* %{GetMode()} "
     endif
-    sl = sl .. (len(v:errors) > 0 ? ",!" : "")
-    sl = sl .. " %{get(b:\, \"vcs_status\"\, \"\")}"
-    sl = sl .. "%{get(b:\, \"vcs_branch_name\"\, \"\")}"
+    sl = sl .. "%2*" .. (len(v:errors) > 0 ? ",!" : "")
+    sl = sl .. " %{get(b:\, 'vcs_status'\, '')}%{get(b:\, 'vcs_branch_name'\, '')}"
     if v:versionlong >= 9001307
         sl = sl .. "%="
     endif
-    sl = sl .. " %{get(b:\, \"unique_name_prefix\"\, \"\")}%t"
+    sl = sl .. " %0*%{get(b:\, 'unique_name_prefix'\, '')}%t%M%R"
     sl = sl .. " %{GetScopeforSL()}"
-    sl = sl .. " %=%Y%R%W%M"
-    sl = sl .. " %l:%c "
+    sl = sl .. " %=%1*%Y%W %l:%c "
     return sl
 enddef
 
@@ -93,6 +91,5 @@ command -nargs=0 ShowScopeToggle {
     g:scope_in_statusline = true
   endif
 }
-
 
 defcompile

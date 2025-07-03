@@ -1,0 +1,12 @@
+{ 
+   "src_paths": ["."],
+   "ctags": {
+       "options": "-R"
+   },
+   "ripgrep": {
+       "options": "-u",
+       "exclude": ["*.obj", "CmakeLists.txt", "*.cmake"]
+   },
+   "vim": []
+}
+

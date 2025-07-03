@@ -13,10 +13,10 @@ def g:MarkdownMakeHTML(command: string)
   endif
 enddef
 
-command! -buffer MarkdownOpenPreview call g:MarkdownMakeHTML("preview \"" .. expand("%") .. "\"")
-command! -buffer MarkdownUpdatePreview call g:MarkdownMakeHTML("preview /U \"" .. expand("%") .. "\"")
+command! -buffer MarkdownOpenPreview call g:MarkdownMakeHTML("view_markups --view \"" .. expand("%") .. "\"")
+command! -buffer MarkdownUpdatePreview call g:MarkdownMakeHTML("view_markups \"" .. expand("%") .. "\"")
 
-autocmd FocusLost <buffer> call g:MarkdownMakeHTML("preview /U \"" .. expand("%") .. "\"")
+autocmd FocusLost <buffer> call g:MarkdownMakeHTML("view_markups \"" .. expand("%") .. "\"")
 
 nnoremap <buffer> <LocalLeader>p <Cmd>MarkdownOpenPreview<CR>
 

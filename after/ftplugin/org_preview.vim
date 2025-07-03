@@ -12,10 +12,10 @@ def g:OrgMakeHTML(command: string)
   endif
 enddef
 
-command! -buffer OrgOpenPreview call g:OrgMakeHTML("preview \"" .. expand("%") .. "\"")
-command! -buffer OrgUpdatePreview call g:OrgMakeHTML("preview /U \"" .. expand("%") .. "\"")
+command! -buffer OrgOpenPreview call g:OrgMakeHTML("view_markups --view \"" .. expand("%") .. "\"")
+command! -buffer OrgUpdatePreview call g:OrgMakeHTML("view_markups /U \"" .. expand("%") .. "\"")
 
-autocmd FocusLost <buffer> call g:OrgMakeHTML("preview /U \"" .. expand("%") .. "\"")
+autocmd FocusLost <buffer> call g:OrgMakeHTML("view_markups \"" .. expand("%") .. "\"")
 
 nnoremap <buffer> <LocalLeader>p <Cmd>OrgOpenPreview<CR>
 

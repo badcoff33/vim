@@ -47,7 +47,9 @@ def OnTimerRunJob(tid: number)
         GetAnimationStr(),
       ))
   else
-    popnews.Close(desc.winid)
+    if has_key(desc, "winid")
+      popnews.Close(desc.winid)
+    endif
     timer_stop(desc.timer)
     remove(g:run_dict, ch)
     popnews.Open($"job terminated with '{job_status}'", {
@@ -263,7 +265,6 @@ def StartQuickfix(in_desc: dict<any>): job
 
   g:run_dict[GetJobChannel(desc.job)] = desc
 
-  # echowin filter(copy(g:run_dict), (_, v) => (v['timer'] == desc.timer))
   return desc.job
 enddef
 
@@ -289,7 +290,6 @@ def StartNamedBuffer(in_desc: dict<any>): job
     started: localtime(),
     # timer: timer_start(500, OnTimerRunJob, {repeat: -1}),
     cwd: get(in_desc, "cwd", getcwd()),
-    winid: 0
   }
 
   job_opt = {

@@ -5,6 +5,7 @@ vim9script
 
 import "run.vim"
 import "utils.vim"
+import "config.vim"
 import "popnews.vim"
 import "selector_core.vim" as sc
 
@@ -13,13 +14,13 @@ var ctags_job: job
 
 ctags_tags_list = []
 
-export def CtagsUpdate(opt: dict<bool>)
+export def Update(opt: dict<bool>)
 
-  if !has_key(opt, "verbose")
+  if opt->has_key("verbose") == 0
     opt.verbose = false
   endif
 
-  if !has_key(opt, "rebuild")
+  if opt->has_key("rebuild") == 0
     opt.rebuild = false
   endif
 
@@ -31,15 +32,19 @@ export def CtagsUpdate(opt: dict<bool>)
     return
   endif
 
+  config.Update()
   ctags_job = run.RunStart({
-    cmd: g:ctags_cmd .. ' ' .. utils.ToString(g:ctags_options),
+    cmd: join(['ctags',
+      utils.ToString(g:cfg.ctags.options),
+      utils.ToString(g:cfg.src_paths)
+    ]),
     background: true
   })
 
   if job_status(ctags_job) != "run"
     popnews.Open("check ctags options", {t: 4000, hl: "ErrorMsg"})
   elseif opt.verbose == true
-    popnews.Open(g:ctags_cmd .. ' ' .. utils.ToString(g:ctags_options), {t: 3000})
+    popnews.Open('ctags_cmd ' .. utils.ToString(g:cfg.ctags.options), {t: 3000})
   endif
 enddef
 

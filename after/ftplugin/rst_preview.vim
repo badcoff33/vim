@@ -13,10 +13,10 @@ def g:RstMakeHTML(command: string)
   endif
 enddef
 
-command! -buffer RstOpenPreview call g:RstMakeHTML("preview \"" .. expand("%") .. "\"")
-command! -buffer RstUpdatePreview call g:RstMakeHTML("preview /U \"" .. expand("%") .. "\"")
+command! -buffer RstOpenPreview call g:RstMakeHTML("view_markups --view \"" .. expand("%") .. "\"")
+command! -buffer RstUpdatePreview call g:RstMakeHTML("view_markups \"" .. expand("%") .. "\"")
 
-autocmd FocusLost <buffer> call g:RstMakeHTML("preview /U \"" .. expand("%") .. "\"")
+autocmd FocusLost <buffer> call g:RstMakeHTML("view_markups /U \"" .. expand("%") .. "\"")
 
 nnoremap <buffer> <LocalLeader>p <Cmd>RstOpenPreview<CR>
 

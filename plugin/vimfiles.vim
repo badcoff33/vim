@@ -24,6 +24,8 @@ augroup GroupVimfiles
 augroup END
 
 nnoremap <silent> <Leader>vv :edit <C-r>=expand("~/vimfiles/vimrc")<CR><CR>
+nnoremap <Leader>vh :Lexplore <C-r>=expand("~/vimfiles")<CR><CR>
+nnoremap <Leader>vl :setlocal<Space>
 nnoremap <silent> <Leader>vu :edit <C-r>=g:user_vimrc<CR><CR>
 nnoremap <silent> <Leader>vf :edit <C-r>=expand("~/vimfiles/after/ftplugin/" .. &ft .. ".vim")<CR><CR>
 nnoremap <silent> <Leader>vc :edit <C-r>=expand("~/vimfiles/colors/" .. g:colors_name .. ".vim")<CR><CR>

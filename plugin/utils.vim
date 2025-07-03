@@ -94,25 +94,79 @@ def g:OpenTerminal()
   endif
 enddef
 
+def ChangeColor()
+  var rgb = expand("<cword>")
+  if len(rgb) == 7 && match(rgb, '#[0-9A-Fa-f]\{6\}') == 0
+    execute $"highlight ColorBg24 guifg=black guibg={rgb}"
+    execute $"highlight ColorFg24 guifg={rgb} guibg=black"
+    prop_type_delete("text_prop_show_color_bg")
+    prop_type_delete("text_prop_show_color_fg")
+    prop_type_add('text_prop_show_color_bg', { highlight: 'ColorBg24' })
+    prop_type_add('text_prop_show_color_fg', { highlight: 'ColorFg24' })
+    prop_add(line('.'), 0, {
+      bufnr: bufnr(),
+      type: "text_prop_show_color_bg",
+      text: "AAaa0011",
+      text_align: 'after',
+      text_padding_left: 3
+    })
+    prop_add(line('.'), 0, {
+      bufnr: bufnr(),
+      type: "text_prop_show_color_fg",
+      text: "AAaa0011",
+      text_align: 'after',
+      text_padding_left: 0
+    })
+  endif
+enddef
+
 # Description: Change background of 24bit hex-coded color under cursor,
+# Example: #445566
 def ColorizeCodeUnderCursor()
-  var rgb_24bit = expand('<cword>')
-  execute $"highlight Color24 guifg=black guibg={rgb_24bit}"
-  execute $"match Color24 /{rgb_24bit}/"
+  var a = {
+    bufnr: bufnr('%'),
+    cmd: 'ChangeColor()',
+    event: 'InsertLeave'
+  }
+  var h = {
+    bufnr: bufnr('%'),
+    cmd: 'ChangeColor()',
+    event: 'CursorHold'
+  }
+  if exists("#InsertLeave<buffer>")
+    autocmd_delete([a])
+    prop_type_delete("text_prop_show_color_bg")
+    prop_type_delete("text_prop_show_color_fg")
+  else
+    autocmd_add([a])
+  endif
+  if exists("#CursorHold#<buffer>")
+    prop_type_delete("text_prop_show_color_bg")
+    prop_type_delete("text_prop_show_color_fg")
+    autocmd_delete([h])
+  else
+    autocmd_add([h])
+  endif
 enddef
 
 def ExploreHere()
   var b: string
   var t: string
-
-  b = bufname("%")
-  if filereadable(b)
-    execute "Explore" fnamemodify(b, ":p:h")
-    normal gg
-    t = fnamemodify(b, ":t")
-    search(t, "")
-    execute "match IncSearch /\\<" .. t .. "\\>/"
-    timer_start(300, (timer) => execute("match none") )
+  var visible_bufs = map(getwininfo(), "getbufvar(v:val['bufnr'], '&ft')")
+  if index(visible_bufs, "netrw") >= 0
+    execute "Lexplore"
+  else
+    b = bufname("%")
+    if filereadable(b)
+      execute "Lexplore" fnamemodify(b, ":p:h")
+      normal gg
+      t = fnamemodify(b, ":t")
+      search(t, "")
+      execute "match IncSearch /\\<" .. t .. "\\>/"
+      timer_start(300, (timer) => execute("match none") )
+    else
+      execute "Lexplore" getcwd()
+    endif
   endif
 enddef
 
@@ -120,20 +174,19 @@ augroup GroupTerminal
   autocmd!
   autocmd TerminalOpen * setlocal scrolloff=0 signcolumn=no nocursorline foldcolumn=0
   autocmd TerminalOpen * setlocal nonumber norelativenumber
-  autocmd WinLeave     * {
-    if &buftype == 'terminal' && winnr("$") > 1
-      wincmd c
-    endif
-  }
+  # autocmd WinLeave     * {
+  #   if &buftype == 'terminal' && winnr("$") > 1
+  #     wincmd c
+  #   endif
+  # }
 augroup END " }}}
-
 
 command -nargs=0 ShowColorUnderCursor call ColorizeCodeUnderCursor()
 command -nargs=0 ExploreHere call ExploreHere()
 
 nnoremap <F5> :call OpenTerminal()<CR>
 
-nnoremap <Leader>x <Cmd>ExploreHere<CR>
+nnoremap <C-Tab> <Cmd>ExploreHere<CR>
 nnoremap <Leader>/ <Cmd>ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ <Cmd>BackwardSlashToForward()<CR>
 

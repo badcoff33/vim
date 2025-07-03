@@ -222,8 +222,8 @@ augroup GroupVcsGit
   autocmd!
   autocmd BufWinEnter GIT-Output setf vcs_output
   autocmd BufWinEnter GIT-Output nnoremap <buffer> <CR> :Git<Space>
-  autocmd BufWinEnter GIT-Output nnoremap <buffer> a :Git add <C-r><C-f><CR>
-  autocmd BufWinEnter GIT-Output nnoremap <buffer> d :Git diff <C-r>yC-f><CR>
+  autocmd BufWinEnter GIT-Output nnoremap <buffer> <expr> a $":Git add {expand('<cfile>')}<CR>"
+  autocmd BufWinEnter GIT-Output nnoremap <buffer> <expr> d $":Git diff {expand('<cfile>')}<CR>"
   autocmd CmdlineEnter : g:vcs_git_changed_files = []
 augroup END
 

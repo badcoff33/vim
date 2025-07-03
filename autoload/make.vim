@@ -4,7 +4,7 @@ import "run.vim"
 import "torchlight.vim"
 
 def MakeCallback()
-  torchlight.TorchlightUpdate()
+  torchlight.Update()
 enddef
 
 export def MakeStart(cmd: string)
@@ -15,3 +15,6 @@ export def MakeStart(cmd: string)
     callback: MakeCallback
   })
 enddef
+
+command! -nargs=0 TorchlightClear torchlight.ClearAll()
+

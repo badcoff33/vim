@@ -16,13 +16,15 @@ def CleanupWinlist(winid: number)
   var i: number
   var popup_del_line: number # line of popup to be removed
   var popup_this_line: number
+
   i = index(g:popnews_winlist, winid)
   if i >= 0
     remove(g:popnews_winlist, i)
   endif
+
   popup_del_line = popup_getpos(winid)["line"]
   for w in g:popnews_winlist
-    popup_this_line = popup_getpos(w)['line']
+    popup_this_line = popup_getpos(w)["line"]
     if popup_this_line < popup_del_line
       popup_move(w, {
         line: popup_this_line + 1,

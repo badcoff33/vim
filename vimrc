@@ -21,7 +21,10 @@ set clipboard=
 set complete=.,w
 set completeopt=menuone
 set dictionary=spell
-set diffopt=internal,algorithm:minimal,context:8,vertical,iwhite,filler,closeoff
+set diffopt=internal,algorithm:minimal,context:9999,vertical,iwhite,filler,closeoff
+if has("patch-9.1.1243")
+  set diffopt+=inline:word
+endif
 set expandtab
 set foldcolumn=1
 set foldmethod=indent
@@ -139,6 +142,7 @@ nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
 " Overrule default behaviour of Ctrl-W_q (close Vim if last window)
 nnoremap <C-w>q :botright copen<CR>
+nnoremap <C-w><C-q> :close<CR>
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -167,6 +171,12 @@ inoremap <C-s><C-s>` <C-o>cB`<C-r>"`
 inoremap <C-s><C-s>) <C-o>cB(<C-r>")
 inoremap <C-s><C-s>] <C-o>cB[<C-r>"]
 inoremap <C-s><C-s>} <C-o>cB{<C-r>"}
+" Open and close pairs
+inoremap ^" ""<Left>
+inoremap ^' ''<Left>
+inoremap ^( ()<Left>
+inoremap ^[ []<Left>
+inoremap ^{ {}<Left>
 
 " Leader key mappings
 let mapleader = " "

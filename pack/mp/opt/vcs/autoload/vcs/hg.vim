@@ -112,7 +112,7 @@ augroup GroupVcsHg
   autocmd!
   autocmd BufWinEnter HG-Output setf vcs_output
   autocmd BufWinEnter HG-Output nnoremap <buffer> <CR> :Hg<Space>
-  autocmd BufWinEnter HG-Output nnoremap <buffer> <LocalLeader>d :HgDiff <C-r><C-f><CR>
+  autocmd BufWinEnter HG-Output nnoremap <buffer> <expr> d $":Hg diff {expand('<cfile>')}<CR>"
   autocmd CmdlineEnter : g:vcs_hg_changed_files = []
 augroup END
 augroup END

@@ -12,85 +12,75 @@ set background=dark
 
 g:colors_name = "feuerwerk"
 
-var black    = "#000000"
-var white    = "#FFFFFF"
+const black    = "#000000"
+const white    = "#FFFFFF"
 
-var fg        = "#D8D8F0"
-var fg_dk     = "#A3A3C0"
-var fg_moredk = "#63739F"
-var bg_lt     = "#252F48"
-var bg        = "#1A253F"
-var bg_dk     = "#101E28"
+const fg        = "#D8D8F0"
+const fg_dk     = "#A3A3C0"
+const fg_moredk = "#63739F"
+const bg_lt     = "#252F48"
+const bg        = "#1A253F"
+const bg_dk     = "#101E28"
 
-var gui_bgdk = "#203050"
-var gui_bg   = "#204060"
-var gui_bghl = "#5060A0"
-var gui_fg   = "#BBDDFF"
-var cl_bg    = "#101D33"
+const gui_bgdk = "#203858"
+const gui_bg   = "#204060"
+const gui_bghl = "#5060A0"
+const gui_fg   = "#BBDDFF"
+const cl_bg    = "#101D33"
 
-var blue_lt  = "#91AAFF"
-var blue     = "#718FE3"
-var blue_dk  = "#6380C0"
-var blue_bg  = "#4360A0"
+const blue_lt  = "#91AAFF"
+const blue     = "#718FE3"
+const blue_dk  = "#6380C0"
+const blue_bg  = "#4360A0"
 
-var yellow  = "#F8E840"
-var purple  = "#C175F1"
-var orange  = "#E1BC16"
-var red     = "#EF4025"
-var green   = "#10DD50"
+const yellow  = "#F8F840"
+const purple  = "#C175F1"
+const orange  = "#E1BC16"
+const red     = "#EF4025"
+const green   = "#10DD50"
 
 var Fg      = (str) => empty(str) ? "" : "guifg=" .. str
 var Bg      = (str) => empty(str) ? "" : "guibg=" .. str
-var Attr    = (str) => empty(str) ? "" : "gui="   .. str
-var Cterm   = (str) => empty(str) ? "" : "cterm=" .. str
 var Special = (str) => empty(str) ? "" : "guisp=" .. str
 
-var Normal        = "gui=NONE"
-var Bold          = "gui=bold"
-var Italic        = "gui=italic"
-var Underline     = "gui=underline"
-var BoldUnderline = "gui=bold,underline"
-var BoldItalic    = "gui=bold,italic"
-
-def H(n: string, d: dict<string>)
-  var fg = has_key(d, "fg") ? d.fg : "fg"
-  var bg = has_key(d, "bg") ? d.bg : "bg"
-  var gui = has_key(d, "gui") ? d.gui : "NONE"
-  var guisp = has_key(d, "guisp") ? d.gui : "NONE"
-  var cterm = has_key(d, "cterm") ? d.cterm : "NONE"
-  execute "highlight" n $"guifg={fg}" $"guibg={bg}" $"gui={gui}" $"cterm={cterm}" $"guisp={guisp}"
-enddef
+const Normal        = "gui=NONE cterm=NONE"
+const Bold          = "gui=bold"
+const Italic        = "gui=italic"
+const Underline     = "gui=underline"
+const BoldUnderline = "gui=bold,underline"
+const BoldItalic    = "gui=bold,italic"
 
 # Basics
 
 execute "hi Bold" Bold
 execute "hi CurSearch" Fg(black) Bg(orange) Normal
-execute "hi Cursor" Fg(black) Bg(white) Cterm("NONE")
-execute "hi CursorLine" Bg(cl_bg) Cterm("NONE")
+execute "hi Cursor" Fg(black) Bg(white) Normal
+execute "hi CursorLine" Bg(cl_bg) Normal
 execute "hi CursorLineNr" Fg(purple) Bg(cl_bg) Normal
 execute "hi Folded" Fg(fg_dk) Bg(black) Normal
-execute "hi IncSearch" Fg(black) Bg(purple) Normal  Cterm("NONE")
+execute "hi IncSearch" Fg(black) Bg(purple) Normal
 execute "hi Italic" Italic
 execute "hi Label" Fg(orange) Bold
 execute "hi LineNr" Fg(fg_moredk) Normal
 execute "hi MatchParen" Fg(green) Bg("bg") Normal
-execute "hi NonText" Fg(blue) Bg(cl_bg) Normal
-execute "hi Normal" Fg(fg) Bg(bg) Normal
+execute "hi NonText" Fg(fg_moredk) Bg(cl_bg) Normal
+execute "hi Normal" Fg(fg) Bg(bg_dk) Normal
 execute "hi Pmenu" Fg(yellow) Bg(gui_bghl)
 execute "hi PmenuSbar" Fg(blue_dk) Bg(blue_dk)
 execute "hi PmenuSel" Fg(black) Bg(yellow)
-execute "hi PmenuMatchSel" Fg(black) Bg(purple)
+execute "hi PmenuMatchSel" Fg(black) Bg(yellow) Underline
 execute "hi PmenuThumb" Fg(blue_dk) Bg(blue_lt)
 execute "hi PopupNotification" Fg(white) Bg(blue_bg)
 execute "hi Search" Fg(purple) Bg(gui_bg) Normal
 execute "hi StatusLine" Fg(white) Bg(gui_bghl) Normal
 execute "hi StatusLineNC" Fg(gui_fg) Bg(gui_bg) Normal
 execute "hi StatusLineTerm" Fg(black) Bg(orange) Normal
-execute "hi TabLineFill" Fg(yellow) Bg(black) Normal
-execute "hi TabLineSel" Fg(yellow) Bg(bg) Underline
+execute "hi TabPanelSel" Fg(yellow) Bg(bg_dk) Bold
+execute "hi TabLineFill" Fg(yellow) Bg(bg) Normal
+execute "hi TabLineSel" Fg(yellow) Bg(black) Underline
 execute "hi Terminal" Fg(green) Bg(bg)
-execute "hi User1" Fg(black) Bg(green)
-execute "hi User2" Fg(black) Bg(blue)
+execute "hi User1" Fg(orange) Bg(gui_bghl) Bold
+execute "hi User2" Fg(green) Bg(gui_bghl)
 execute "hi VertSplit" Fg(gui_bg) Bg(gui_bg) Normal
 execute "hi Visual" Fg(white) Bg(blue_dk)
 
@@ -167,7 +157,7 @@ execute "hi cmakeArguments" Fg(green) Bg("Bg") Normal
 
 execute "hi DiffChange" Fg(blue) Bg(black)
 execute "hi DiffText" Fg(yellow) Bg(bg)
-execute "hi DiffDelete" Fg(red) Bg(red)
+execute "hi DiffDelete" Fg(orange) Bg(red)
 execute "hi DiffAdd" Fg(blue_lt) Bg(black)
 
 # Signify
