@@ -1,9 +1,10 @@
 vim9script
 
-# Plugin: Easy access to the most used Vim resource files
+# Plugin: Read local config in file vim.json
+# Reference File: Templates/vim.json
 
 import "config.vim"
 
-autocmd BufNewFile config.json execute ":0read " expand($VIMHOME .. "/templates/vim.json")
-autocmd BufWritePost config.json config.Update()
+autocmd BufNewFile vim.json execute ":0read " expand($VIMHOME .. "/templates/vim.json")
+autocmd BufWritePost vim.json config.Update()
 
