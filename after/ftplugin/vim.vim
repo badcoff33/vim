@@ -16,6 +16,8 @@ for p in split(&rtp, ",")
     execute "setlocal path+=" .. escape(p .. expand("/"), " \\") .. "**"
 endfor
 
+" For colorschemes: show #RRGGBB color under cursor
+nnoremap <buffer> <LocalLeader>c <Cmd>call rgb#UnderCursor()<CR>
 " source current visual region
 vnoremap <buffer> <LocalLeader><LocalLeader> :source<CR>g`>
 
@@ -26,6 +28,7 @@ else
     " source Vim file
     nnoremap <buffer> <LocalLeader><LocalLeader> :write<bar>noautocmd source%<CR>
 endif
+
 
 iabbrev <buffer> xfun function!<CR>endfunction<C-f><Up><End>
 iabbrev <buffer> xdef def<CR>enddef<Up><End>
