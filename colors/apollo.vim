@@ -65,7 +65,7 @@ execute "hi LineNrAbove" Fg(fg0) Bg("bg") Bold
 execute "hi LineNrBelow" Fg(fg1) Bg("bg") Bold
 execute "hi MatchParen" Fg(green_lt) Bg("bg") Underline
 execute "hi ModeMsg" Fg(fg1) Bg("bg")
-execute "hi NonText" Fg(green_dk) Bg(bg0)
+execute "hi NonText" Fg(fg0) Bg(bg0)
 execute "hi Normal" Fg(white) Bg(bg0) Normal
 execute "hi PopupNotification" Fg(black) Bg(green_dk) Normal
 execute "hi Pmenu" Fg(white) Bg(green_bg) Normal

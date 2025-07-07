@@ -10,12 +10,14 @@ sign_define([{name: 'changed',
 augroup GroupTracker
   au!
   au FileChangedShell,CursorHold * {
-    sign_unplace("changed")
-    for e in getchangelist(bufnr("%"))[0]
-      sign_place(0, '', 'changed', bufname('%'),
-        {lnum: e.lnum}
-      )
-    endfor
+    if &ft != 'netrw' && &bt != 'terminal'
+      sign_unplace("changed")
+      for e in getchangelist(bufnr("%"))[0]
+        sign_place(0, '', 'changed', bufname('%'),
+          {lnum: e.lnum}
+        )
+      endfor
+    endif
   }
 augroup END
 

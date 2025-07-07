@@ -77,8 +77,9 @@ set switchbuf=usetab,uselast    " Set behavior for commands ':cc', ':cn', 'cp', 
 set tabstop=4
 set tagcase=match
 set termguicolors
-set undodir=$TEMP
+set undodir=$TEMP/vim
 set undofile
+set undoreload=0
 set updatetime=2000
 set virtualedit=onemore,block   " makes selecting text more consistent
 set visualbell
@@ -140,9 +141,6 @@ vnoremap <C-k> :move '<-2<CR>==gv=gv
 " Surfing the quickfix matches
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprevious<CR>
-" Overrule default behaviour of Ctrl-W_q (close Vim if last window)
-nnoremap <C-w>q :botright copen<CR>
-nnoremap <C-w><C-q> :close<CR>
 
 " By default, <C-l> clears and redraws the screen (like :redraw!). The
 " following mapping does a little bit more to keep the screen sane.
@@ -189,14 +187,17 @@ nnoremap <expr> <Leader><Space> "/" .. nr2char(getchar()) .. nr2char(getchar()) 
 nnoremap <Leader>s :%s/\C//cgI<C-b><Right><Right><Right>
 vnoremap <Leader>s :s/\C//gI<Left><Left><Left><Left><Left><Left>
 
+" Quickfix
+nnoremap <Leader>q :botright copen<CR>
+nnoremap <Leader>Q :close<CR>
+
 " Check indents
 nnoremap <Leader><bar> <Cmd>set invcursorcolumn<CR>
 
 " Quick access on current buffer's directory
 nnoremap <Leader>e :edit <C-r>=DirName("%:h")<CR>
 cnoremap <expr> <C-r>. DirName("%:h")
-nnoremap <expr> <Leader>d ":edit " .. DirName("%:h") .. "<CR>"
-nnoremap <expr> <Leader>D ":Open " .. DirName('%:h') .. "<CR>"
+nnoremap <expr> <Leader>o ":Open " .. DirName('%:h') .. "<CR>"
 
 let g:ft_to_glob = { 'c':'*.[ch]', 'vim':'*.vim', 'py':'*.py$', 'cmake':'*cmake*' }
 let LsFilter = { ft -> has_key(g:ft_to_glob, ft) ? g:ft_to_glob[ft] : '*.*'}
@@ -225,8 +226,6 @@ tnoremap <S-Right> <C-w><Right>
 
 " Bsic terminal mappings
 tnoremap <Esc>     <C-w>N
-tnoremap <C-Tab>   <C-w>gt
-tnoremap <C-S-Tab>   <C-w>gT
 
 command! -nargs=0 IgnoreCase    :set   ignorecase nosmartcase
 command! -nargs=0 CaseSensetive :set noignorecase nosmartcase

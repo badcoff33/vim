@@ -94,25 +94,20 @@ def g:OpenTerminal()
   endif
 enddef
 
+var switch_back_bufnr: number
+
 def ExploreHere()
-  var b: string
-  var t: string
-  var visible_bufs = map(getwininfo(), "getbufvar(v:val['bufnr'], '&ft')")
-  if index(visible_bufs, "netrw") >= 0
-    execute "Lexplore"
-  else
-    b = bufname("%")
-    if filereadable(b)
-      execute "Lexplore" fnamemodify(b, ":p:h")
-      normal gg
-      t = fnamemodify(b, ":t")
-      search(t, "")
-      execute "match IncSearch /\\<" .. t .. "\\>/"
-      timer_start(300, (timer) => execute("match none") )
-    else
-      execute "Lexplore" getcwd()
-    endif
+  var b = bufname()
+  var t = fnamemodify(b, ":t")
+
+  if filereadable(b)
+    execute "edit" fnamemodify(b, ":p:h")
+    normal gg
+    search(t, "")
+    execute "match IncSearch /\\<" .. t .. "\\>/"
+    timer_start(300, (timer) => execute("match none") )
   endif
+
 enddef
 
 augroup GroupTerminal
@@ -130,7 +125,7 @@ command -nargs=0 ExploreHere call ExploreHere()
 
 nnoremap <F5> :call OpenTerminal()<CR>
 
-nnoremap <Leader>x <Cmd>ExploreHere<CR>
+nnoremap <Leader>E <Cmd>ExploreHere<CR>
 nnoremap <Leader>/ <Cmd>ForwardSlashToBackward()<CR>
 nnoremap <Leader>\ <Cmd>BackwardSlashToForward()<CR>
 

@@ -78,7 +78,7 @@ execute "hi StatusLineTerm" Fg(white) Bg(blue_dk) Bold
 execute "hi TabLine" Fg("fg") Bg(gray_bg) Gui("none")
 execute "hi TabLineFill" Fg("fg") Bg(gray_bg) Gui("none")
 execute "hi TabLineSel" Fg(white) Bg(blue) Bold
-execute "hi Terminal" Fg(gray_lt) Bg(black)
+execute "hi Terminal" Fg(gray_dk) Bg(bg)
 execute "hi User1" Fg(blue_bg) Bg(black) Normal
 execute "hi User2" Fg(red_bg) Bg(black) Normal
 execute "hi VertSplit" Fg(gray_lt) Bg(gray_bg) Normal

@@ -8,7 +8,6 @@ const local_cfg_file = "./vim.json"
 g:cfg = {}
 
 var defaults: dict<any>
-var saved_cfg_file: string
 
 if filereadable(default_cfg_file)
   defaults = js_decode(join(readfile(default_cfg_file)))
@@ -27,11 +26,22 @@ export def Update()
   endfor
 
   g:cfg["file"] = fnamemodify(local_cfg_file, ':p')
-  if g:cfg.file != saved_cfg_file
-    pop.Open($'Using {g:cfg["file"]}')
-    saved_cfg_file = g:cfg.file
-  endif
 
 enddef
 
-command -nargs=0 UpdateCfg Update()
+def UpdateCmd()
+  var prev_cfg_file: string
+
+    if g:cfg->has_key("file")
+      prev_cfg_file = g:cfg["file"]
+    endif
+    Update()
+    if prev_cfg_file == g:cfg["file"]
+      pop.Open($'Updating from file {g:cfg["file"]}')
+    else
+      pop.Open($'Reading file {g:cfg["file"]}')
+    endif
+
+enddef
+
+command -nargs=0 UpdateCfg UpdateCmd()

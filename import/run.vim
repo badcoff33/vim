@@ -1,5 +1,7 @@
 vim9script
 
+# IDEAS: What about run a make with :terminal and :cbuffer. Much simpler?
+
 import "popnews.vim"
 
 g:run_dict = {}
