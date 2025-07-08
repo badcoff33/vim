@@ -100,13 +100,11 @@ def ExploreHere()
   var b = bufname()
   var t = fnamemodify(b, ":t")
 
-  if filereadable(b)
-    execute "edit" fnamemodify(b, ":p:h")
-    normal gg
-    search(t, "")
-    execute "match IncSearch /\\<" .. t .. "\\>/"
-    timer_start(300, (timer) => execute("match none") )
-  endif
+  execute $"edit {filereadable(b) ? fnamemodify(b, ':p:h') : getcwd()}"
+  normal gg
+  search(t, "")
+  execute "match IncSearch /\\<" .. t .. "\\>/"
+  timer_start(300, (timer) => execute("match none") )
 
 enddef
 
